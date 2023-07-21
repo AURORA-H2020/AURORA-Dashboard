@@ -1,6 +1,8 @@
+import { latestMetaData } from "@/lib/transformData";
+import { MetaData } from "@/models/summary";
 import { Metric, Text, CategoryBar, Legend, Color } from "@tremor/react";
 
-const data: {
+const tempData: {
     title: string;
     metric: string;
     subCategoryValues: number[];
@@ -14,21 +16,26 @@ const data: {
     subCategoryTitles: ["Active users", "Inactive users"],
 };
 
-export default function DetailedCard() {
+export default function DetailedCard({
+    data,
+    countries,
+    measure,
+    title,
+}: {
+    data: MetaData | undefined;
+    countries: string[];
+    measure: "userCount" | "consumptionsCount" | "recurringConsumptionsCount";
+    title: string;
+}) {
+    let metricValue = 0;
+    data
+        ?.filter((entry) => countries.includes(entry.country))
+        .forEach((entry) => (metricValue += entry[measure]));
+
     return (
         <>
-            <Text>{data.title}</Text>
-            <Metric>{data.metric}</Metric>
-            <CategoryBar
-                values={data.subCategoryValues}
-                colors={data.subCategroyColors}
-                className="mt-4"
-            />
-            <Legend
-                categories={data.subCategoryTitles}
-                colors={data.subCategroyColors}
-                className="mt-3"
-            />
+            <Text>{title}</Text>
+            <Metric>{metricValue}</Metric>
         </>
     );
 }

@@ -1,10 +1,23 @@
-import { Card, Grid, Title, Text } from "@tremor/react";
-import LineChartTabs from "@/components/timeLineChart";
+import {
+    Card,
+    Grid,
+    Title,
+    Text,
+    Accordion,
+    AccordionHeader,
+    AccordionBody,
+} from "@tremor/react";
 import NavigationBar from "@/components/navigationBar";
 import PerformanceBars from "@/components/performanceBars";
 import DetailedCard from "@/components/detailedCard";
+import FilterIndex from "@/components/detailedFilteredCharts/filterIndex";
 
-export default function Home() {
+export default async function Home() {
+    const res = await fetch("http://127.0.0.1:3000/DummyData.json", {
+        next: { revalidate: 0 },
+    });
+    const data = await res.json();
+
     return (
         <main>
             <NavigationBar />
@@ -14,28 +27,18 @@ export default function Home() {
                     Here you can find the latest stats about the AURORA mobile
                     app.
                 </Text>
-                <Grid numItemsMd={2} numItemsLg={3} className="gap-6 mt-6">
-                    <Card>
-                        <DetailedCard />
-                    </Card>
-                    <Card>
-                        <DetailedCard />
-                    </Card>
-                    <Card>
-                        <DetailedCard />
-                    </Card>
-                </Grid>
                 <div className="mt-6">
-                    <Card>
-                        <LineChartTabs />
-                    </Card>
-                </div>
-                <div className="mt-6">
-                    <Card>
-                        <PerformanceBars />
-                    </Card>
+                    <FilterIndex localData={data} />
                 </div>
             </div>
+            <Accordion>
+                <AccordionHeader>Accordion 3</AccordionHeader>
+                <AccordionBody>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Phasellus tempor lorem non est congue blandit. Praesent non
+                    lorem sodales, suscipit est sed, hendrerit dolor.
+                </AccordionBody>
+            </Accordion>
         </main>
     );
 }
