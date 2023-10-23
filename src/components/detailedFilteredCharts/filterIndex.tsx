@@ -25,6 +25,7 @@ import { secondsToDateTime } from "@/lib/utilities";
 import { latestMetaData } from "@/lib/transformData";
 import DetailedCard from "@/components/detailedCard";
 import GenderCard from "../genderCard";
+import { titleCase } from "@/lib/utilities";
 
 export default function FilterIndex({ localData }: { localData: Summaries }) {
     const [dateRange, setDateRange] = useState<DateRangePickerValue>({
@@ -96,9 +97,15 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                     >
                         <TabList>
                             <Tab className="p-3">All</Tab>
-                            <Tab className="p-3">{categories[0]}</Tab>
-                            <Tab className="p-3">{categories[1]}</Tab>
-                            <Tab className="p-3">{categories[2]}</Tab>
+                            <Tab className="p-3">
+                                {titleCase(categories[0])}
+                            </Tab>
+                            <Tab className="p-3">
+                                {titleCase(categories[1])}
+                            </Tab>
+                            <Tab className="p-3">
+                                {titleCase(categories[2])}
+                            </Tab>
                         </TabList>
                     </TabGroup>
                 </Flex>
@@ -204,9 +211,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                 <Title>
                     CO<sub>2</sub> Production
                 </Title>
-                <Text>
-                    CO<sub>2</sub> Production per Country
-                </Text>
+                <Text>per Country</Text>
 
                 <LineChartTabs
                     localData={localData}
@@ -217,7 +222,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
             </Card>
             <Card className="mb-6">
                 <Title>Energy Usage</Title>
-                <Text>Energy Usage per Country</Text>
+                <Text>per Country</Text>
                 <LineChartTabs
                     localData={localData}
                     countries={selectedCountries}

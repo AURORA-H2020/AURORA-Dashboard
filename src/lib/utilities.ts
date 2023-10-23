@@ -9,6 +9,10 @@ export function secondsToDateTime(seconds: number) {
     return date;
 }
 
+export function titleCase(string) {
+    return string[0].toUpperCase() + string.slice(1).toLowerCase();
+}
+
 export function country2Name(inputID: string) {
     const countries = [
         { ID: "2E9Ejc8qBJC6HnlPPdIh", name: "Portugal", code: "PT" },
