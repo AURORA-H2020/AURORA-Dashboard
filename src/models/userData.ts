@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export interface UserData {
     data: {
         [key: string]: SingleUser;

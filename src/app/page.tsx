@@ -1,34 +1,27 @@
-import {
-    Card,
-    Grid,
-    Title,
-    Text,
-    Accordion,
-    AccordionHeader,
-    AccordionBody,
-} from "@tremor/react";
+import { Title, Text } from "@tremor/react";
 import NavigationBar from "@/components/navigationBar";
-import PerformanceBars from "@/components/performanceBars";
-import DetailedCard from "@/components/detailedCard";
 import FilterIndex from "@/components/detailedFilteredCharts/filterIndex";
 import { testTransform } from "@/lib/transformExportData";
+import { promises as fs } from "fs";
 
 export default async function Home() {
-    const res = await fetch("http://127.0.0.1:3000/data/DummyData.json", {
-        next: { revalidate: 0 },
-    });
-    const data = await res.json();
+    const file = await fs.readFile(
+        process.cwd() + "/src/data/users-1697715668.json",
+        "utf8",
+    );
+    const data = JSON.parse(file);
 
-    const resUser = await fetch(
+    /*
+    const res = await fetch(
         "http://127.0.0.1:3000/data/users-1697715668.json",
         {
             next: { revalidate: 0 },
         },
     );
-    const userData = await resUser.json();
+    const userData = await res.json();
+    */
 
-    // const stats = getUserData(userData);
-    const testData = testTransform(userData);
+    const testData = testTransform(data);
 
     return (
         <main>

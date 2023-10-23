@@ -1,5 +1,3 @@
-import { ConsumptionCategory } from "./userData";
-
 export interface DemographicCategory {
     demographicCategory: string;
     count: number; // Total users in category.

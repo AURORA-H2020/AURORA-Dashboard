@@ -1,5 +1,5 @@
 import { MetaData } from "@/models/summary";
-import { Metric, Text, CategoryBar, Legend, Color } from "@tremor/react";
+import { Metric, Text, Color } from "@tremor/react";
 
 const tempData: {
     title: string;

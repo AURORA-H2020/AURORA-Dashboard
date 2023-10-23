@@ -1,5 +1,5 @@
 import { MetaData } from "@/models/summary";
-import { Metric, Text, DonutChart, Legend, Color, Grid } from "@tremor/react";
+import { Text, DonutChart, Legend, Grid } from "@tremor/react";
 
 export default function GenderCard({
     metaData,
