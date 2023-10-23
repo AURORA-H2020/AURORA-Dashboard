@@ -5,10 +5,12 @@ import { transformSummaryData } from "@/lib/transformData";
 import { Summaries } from "@/models/summary";
 
 const dataFormatterCarbon = (number: number) =>
-    `${Intl.NumberFormat("us").format(number).toString()} \n kg CO\u00B2`;
+    `${Intl.NumberFormat("us")
+        .format(Math.round(number))
+        .toString()} \n kg CO\u00B2`;
 
 const dataFormatterEnergy = (number: number) =>
-    `${Intl.NumberFormat("us").format(number).toString()} \n kWh`;
+    `${Intl.NumberFormat("us").format(Math.round(number)).toString()} \n kWh`;
 
 export default function LineChartTabs({
     localData,
