@@ -28,23 +28,24 @@ export function transformSummaryData(
 
         entry?.countries.forEach((country) => {
             let countrySum = 0;
-            let activeUsersSum = 0;
+            let registeredUsersSum = 0;
 
             country.cities.forEach((city) => {
                 city.categories.map((item) => {
                     countrySum +=
                         mode == "carbon"
-                            ? item.carbonEmission
-                            : item.energyUsed;
-                    activeUsersSum += item.activeUsers;
+                            ? item.carbonEmissions
+                            : item.energyExpended;
                 });
+                registeredUsersSum =
+                    registeredUsersSum + (city.users.userCount || 0);
             });
-            currentData[country.countryCode] =
+            currentData[country.countryName] =
                 calculationMode == "absolute"
                     ? countrySum
-                    : countrySum / activeUsersSum;
-            legendItems.indexOf(country.countryCode) === -1
-                ? legendItems.push(country.countryCode)
+                    : countrySum / registeredUsersSum;
+            legendItems.indexOf(country.countryName) === -1
+                ? legendItems.push(country.countryName)
                 : null;
         });
         transformedData.push(currentData);
@@ -63,7 +64,7 @@ export function latestMetaData(sourceData: Summaries) {
 
     let metaData: MetaData = [];
 
-    console.log(sourceData);
+    // console.log(sourceData);
 
     latestEntry?.countries.forEach((country) => {
         let userCountSum = 0;
@@ -80,27 +81,41 @@ export function latestMetaData(sourceData: Summaries) {
             userCountSum += city.users.userCount;
             consumptionsCountSum += city.users.consumptionsCount;
             recurringConsumptionsCountSum +=
-                city.users.recurringConsumptionsCount;
-            /*
-            genderSums.female +=
-                city.users.genders.find(
-                    (e) => e.demographicCategory == "female",
-                )?.count ?? 0;
-            genderSums.male +=
-                city.users.genders.find((e) => e.demographicCategory == "male")
-                    ?.count ?? 0;
-            genderSums.nonBinary +=
-                city.users.genders.find(
-                    (e) => e.demographicCategory == "non-binary",
-                )?.count ?? 0;
-            genderSums.other +=
-                city.users.genders.find((e) => e.demographicCategory == "other")
-                    ?.count ?? 0;
-            */
+                city.users.recurringConsumptionsCount || 0;
+
+            // Female
+            let findFemale = city.users.genders.find(
+                (e) => e.demographicCategory == "female",
+            );
+            if (findFemale) {
+                genderSums.female = genderSums.female + (findFemale.count || 0);
+            }
+            // Male
+            let findMale = city.users.genders.find(
+                (e) => e.demographicCategory == "male",
+            );
+            if (findMale) {
+                genderSums.male = genderSums.male + (findMale.count || 0);
+            }
+            // Non-Binary
+            let findNonBinary = city.users.genders.find(
+                (e) => e.demographicCategory == "non-binary",
+            );
+            if (findNonBinary) {
+                genderSums.nonBinary =
+                    genderSums.nonBinary + (findNonBinary.count || 0);
+            }
+            // Other
+            let findOther = city.users.genders.find(
+                (e) => e.demographicCategory == "other",
+            );
+            if (findOther) {
+                genderSums.other = genderSums.other + (findOther.count || 0);
+            }
         });
 
         metaData.push({
-            country: country.countryCode,
+            country: country.countryName,
             userCount: userCountSum,
             consumptionsCount: consumptionsCountSum,
             recurringConsumptionsCount: recurringConsumptionsCountSum,

@@ -27,6 +27,8 @@ export default function LineChartTabs({
         calculationMode,
     );
 
+    console.log(countries);
+
     return (
         <LineChart
             className="h-80 mt-8"

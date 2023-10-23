@@ -1,4 +1,3 @@
-import { latestMetaData } from "@/lib/transformData";
 import { MetaData } from "@/models/summary";
 import { Metric, Text, CategoryBar, Legend, Color } from "@tremor/react";
 
@@ -17,18 +16,18 @@ const tempData: {
 };
 
 export default function DetailedCard({
-    data,
+    metaData,
     countries,
     measure,
     title,
 }: {
-    data: MetaData | undefined;
+    metaData: MetaData | undefined;
     countries: string[];
     measure: "userCount" | "consumptionsCount" | "recurringConsumptionsCount";
     title: string;
 }) {
     let metricValue = 0;
-    data
+    metaData
         ?.filter((entry) => countries.includes(entry.country))
         .forEach((entry) => (metricValue += entry[measure]));
 

@@ -11,12 +11,24 @@ import NavigationBar from "@/components/navigationBar";
 import PerformanceBars from "@/components/performanceBars";
 import DetailedCard from "@/components/detailedCard";
 import FilterIndex from "@/components/detailedFilteredCharts/filterIndex";
+import { testTransform } from "@/lib/transformExportData";
 
 export default async function Home() {
-    const res = await fetch("http://127.0.0.1:3000/DummyData.json", {
+    const res = await fetch("http://127.0.0.1:3000/data/DummyData.json", {
         next: { revalidate: 0 },
     });
     const data = await res.json();
+
+    const resUser = await fetch(
+        "http://127.0.0.1:3000/data/users-1697715668.json",
+        {
+            next: { revalidate: 0 },
+        },
+    );
+    const userData = await resUser.json();
+
+    // const stats = getUserData(userData);
+    const testData = testTransform(userData);
 
     return (
         <main>
@@ -28,17 +40,9 @@ export default async function Home() {
                     app.
                 </Text>
                 <div className="mt-6">
-                    <FilterIndex localData={data} />
+                    <FilterIndex localData={testData} />
                 </div>
             </div>
-            <Accordion>
-                <AccordionHeader>Accordion 3</AccordionHeader>
-                <AccordionBody>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Phasellus tempor lorem non est congue blandit. Praesent non
-                    lorem sodales, suscipit est sed, hendrerit dolor.
-                </AccordionBody>
-            </Accordion>
         </main>
     );
 }

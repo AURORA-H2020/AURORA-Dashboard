@@ -24,20 +24,22 @@ import { UserGroupIcon, UserIcon } from "@heroicons/react/outline";
 import { secondsToDateTime } from "@/lib/utilities";
 import { latestMetaData } from "@/lib/transformData";
 import DetailedCard from "@/components/detailedCard";
+import GenderCard from "../genderCard";
 
 export default function FilterIndex({ localData }: { localData: Summaries }) {
     const [dateRange, setDateRange] = useState<DateRangePickerValue>({
         selectValue: "this-year",
     });
     const countries = localData[localData.length - 1]?.countries ?? [];
-    const categories = ["Electricity", "Heating", "Transportation"];
+    const categories = ["electricity", "heating", "transportation"];
     const [selectedCountriesID, setSelectedCountries] = useState<string[]>([]);
     const [selectedCategoryID, setSelectedCategory] = useState(0);
     const [calculationMode, setCalculationMode] = useState("absolute");
     const selectedCountries =
         selectedCountriesID.length > 0
             ? selectedCountriesID
-            : countries.map((country) => country.countryCode);
+            : countries.map((country) => country.countryName);
+    console.log(selectedCountries);
     const selectedCategories =
         selectedCategoryID === 0
             ? categories
@@ -59,7 +61,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
             ...entry,
             countries: entry.countries
                 .filter((country) =>
-                    selectedCountries.includes(country.countryCode),
+                    selectedCountries.includes(country.countryName),
                 )
                 .map((country) => {
                     return {
@@ -143,9 +145,9 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                             {countries.map((country) => (
                                 <MultiSelectItem
                                     key={country.countryID}
-                                    value={country.countryCode}
+                                    value={country.countryName}
                                 >
-                                    {country.countryCode}
+                                    {country.countryName}
                                 </MultiSelectItem>
                             ))}
                         </MultiSelect>
@@ -168,7 +170,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
             <Grid numItemsMd={2} numItemsLg={3} className="gap-6 mt-6 mb-6">
                 <Card>
                     <DetailedCard
-                        data={metaData}
+                        metaData={metaData}
                         countries={selectedCountries}
                         measure="userCount"
                         title="Number of Users"
@@ -176,7 +178,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                 </Card>
                 <Card>
                     <DetailedCard
-                        data={metaData}
+                        metaData={metaData}
                         countries={selectedCountries}
                         measure="consumptionsCount"
                         title="Individual Consumptions"
@@ -184,13 +186,20 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                 </Card>
                 <Card>
                     <DetailedCard
-                        data={metaData}
+                        metaData={metaData}
                         countries={selectedCountries}
                         measure="recurringConsumptionsCount"
                         title="Recurring Consumptions"
                     />
                 </Card>
             </Grid>
+            <Card className="mb-6">
+                <GenderCard
+                    metaData={metaData}
+                    countries={selectedCountries}
+                    title="Gender Distribution"
+                />
+            </Card>
             <Card className="mb-6">
                 <Title>
                     CO<sub>2</sub> Production
