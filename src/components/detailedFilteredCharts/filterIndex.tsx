@@ -210,7 +210,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                 <TabGroup>
                     <TabList variant="solid">
                         <Tab className="p-3" icon={CloudIcon}>
-                            CO<sub>2</sub> Production
+                            CO<sub>2</sub> Emission
                         </Tab>
                         <Tab className="p-3" icon={BoltIcon}>
                             Energy Usage
@@ -234,7 +234,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                             <Text>
                                 Total{" "}
                                 <b>
-                                    CO<sub>2</sub> Production
+                                    CO<sub>2</sub> Emission
                                 </b>{" "}
                                 per country between{" "}
                                 {String(dateRange.from?.toDateString())} and{" "}
@@ -272,7 +272,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                 <TabGroup>
                     <TabList variant="solid">
                         <Tab className="p-3" icon={CloudIcon}>
-                            CO<sub>2</sub> Production
+                            CO<sub>2</sub> Emission
                         </Tab>
                         <Tab className="p-3" icon={BoltIcon}>
                             Energy Usage
@@ -296,7 +296,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                             <Text>
                                 Total{" "}
                                 <b>
-                                    CO<sub>2</sub> Production
+                                    CO<sub>2</sub> Emission
                                 </b>{" "}
                                 per country between{" "}
                                 {String(dateRange.from?.toDateString())} and{" "}
