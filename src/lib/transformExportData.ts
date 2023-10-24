@@ -3,9 +3,15 @@ import {
     SingleUser,
     SingleConsumption,
     ConsumptionCategory,
+    ConsumptionSummary,
 } from "@/models/userData";
-import { Summary } from "@/models/summary";
-import { country2Name, city2Name, hasConsumptions } from "./utilities";
+import { Summary, SummaryCity } from "@/models/summary";
+import {
+    country2Name,
+    city2Name,
+    hasConsumptions,
+    hasConsumptionSummary,
+} from "./utilities";
 
 function transformExportData(sourceData: UserData, date: number) {
     const data = sourceData.data;
@@ -58,8 +64,6 @@ function transformExportData(sourceData: UserData, date: number) {
         }
         thisGender!.count = (thisGender?.count || 0) + 1;
 
-        // console.log(thisCity);
-
         thisCity!.users.userCount = (thisCity?.users.userCount || 0) + 1;
 
         if (hasConsumptions(userData)) {
@@ -89,6 +93,8 @@ function transformExportData(sourceData: UserData, date: number) {
                     thisConsumption!.energyExpended =
                         (thisConsumption?.energyExpended || 0) +
                         (consumptionData.energyExpended || 0);
+                    thisConsumption!.consumptionsCount =
+                        (thisConsumption?.consumptionsCount || 0) + 1;
 
                     switch (consumptionData.category) {
                         case "electricity": {
@@ -183,16 +189,72 @@ function transformExportData(sourceData: UserData, date: number) {
                 },
             );
         }
+
+        if (hasConsumptionSummary(userData)) {
+            Object.keys(
+                userData.__collections__["consumption-summaries"],
+            ).forEach((consumptionSummaryYear) => {
+                let consumptionSummaryData = userData.__collections__[
+                    "consumption-summaries"
+                ][consumptionSummaryYear] as ConsumptionSummary;
+
+                consumptionSummaryData.months.forEach((month) => {
+                    month.categories.forEach((category) => {
+                        if (thisCity) {
+                            thisCity = ensureConsumptionSummary(
+                                thisCity,
+                                category.category,
+                            );
+                        }
+
+                        let thisCategory = thisCity?.categories.find(
+                            (e) => e.category === category.category,
+                        );
+                        let thisYear = thisCategory?.temporal.find(
+                            (e) => e.year === consumptionSummaryYear,
+                        );
+                        if (!thisYear) {
+                            thisCategory?.temporal.push(
+                                newSummaryYear(consumptionSummaryYear),
+                            );
+                            thisYear = thisCategory?.temporal.find(
+                                (e) => e.year === consumptionSummaryYear,
+                            );
+                        }
+                        let thisMonth = thisYear?.data.find(
+                            (e) => e.month === month.number,
+                        );
+                        if (!thisMonth) {
+                            thisYear?.data.push(newSummaryMonth(month.number));
+                            thisMonth = thisYear?.data.find(
+                                (e) => e.month === month.number,
+                            );
+                        }
+                        let monthCategory = month.categories.find(
+                            (e) => e.category === thisCategory?.category,
+                        );
+                        if (monthCategory) {
+                            thisMonth!.carbonEmissions =
+                                (thisMonth?.carbonEmissions || 0) +
+                                (monthCategory.carbonEmission.total || 0);
+                            thisMonth!.energyExpended =
+                                (thisMonth?.energyExpended || 0) +
+                                (monthCategory.energyExpended.total || 0);
+                        }
+                    });
+                });
+            });
+        }
     });
 
-    // console.log(JSON.stringify(summary, null, 2));
+    //console.log(JSON.stringify(summary, null, 2));
     return summary;
 }
 
 export function testTransform(sourceData: UserData) {
     return [
-        transformExportData(sourceData, 1672617600),
         transformExportData(sourceData, 1672704000),
+        transformExportData(sourceData, 1672617600),
     ];
 }
 
@@ -231,8 +293,10 @@ function newConsumptionSummary(inputCategory: ConsumptionCategory) {
         category: inputCategory,
         carbonEmissions: 0,
         energyExpended: 0,
+        consumptionsCount: 0,
         // activeUsers: undefined,
         sourceData: [],
+        temporal: [],
     };
 }
 
@@ -242,5 +306,34 @@ function newConsumptionSource(inputSource: string) {
         carbonEmissions: 0,
         energyExpended: 0,
         value: 0,
+    };
+}
+
+function ensureConsumptionSummary(
+    currentCity: SummaryCity,
+    category: ConsumptionCategory,
+) {
+    let thisConsumptionSummary = currentCity.categories.find(
+        (consumptionSummary) => consumptionSummary.category === category,
+    );
+    if (!thisConsumptionSummary) {
+        currentCity.categories.push(newConsumptionSummary(category));
+    }
+
+    return currentCity;
+}
+
+function newSummaryYear(currentYear: string) {
+    return {
+        year: currentYear,
+        data: [],
+    };
+}
+
+function newSummaryMonth(currentMonth: number) {
+    return {
+        month: currentMonth,
+        carbonEmissions: 0,
+        energyExpended: 0,
     };
 }

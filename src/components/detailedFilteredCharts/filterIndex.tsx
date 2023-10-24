@@ -1,6 +1,7 @@
 "use client";
 
 import LineChartTabs from "@/components/detailedFilteredCharts/timeLineChart";
+import LineChartTabsV2 from "./timeLineChartv2";
 import { Summaries } from "@/models/summary";
 import {
     DateRangePicker,
@@ -31,8 +32,10 @@ import {
 import { secondsToDateTime } from "@/lib/utilities";
 import { latestMetaData } from "@/lib/transformData";
 import DetailedCard from "@/components/detailedCard";
-import GenderCard from "../genderCard";
 import { titleCase } from "@/lib/utilities";
+import GenderCardCountry from "../genderCardCountry";
+import GenderCardSummary from "../genderCardSummary";
+import ConsumptionCardSummary from "../consumptionCardSummary";
 
 export default function FilterIndex({ localData }: { localData: Summaries }) {
     const [dateRange, setDateRange] = useState<DateRangePickerValue>({
@@ -40,7 +43,12 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
         from: new Date(new Date().getFullYear(), 0, 1),
         to: new Date(new Date().getFullYear(), 11, 31),
     });
-    const countries = localData[localData.length - 1]?.countries ?? [];
+    const countries =
+        localData[localData.length - 1]?.countries.sort(function (a, b) {
+            var textA = a.countryName.toUpperCase();
+            var textB = b.countryName.toUpperCase();
+            return textA < textB ? -1 : textA > textB ? 1 : 0;
+        }) ?? [];
     const categories = ["electricity", "heating", "transportation"];
     const [selectedCountriesID, setSelectedCountries] = useState<string[]>([]);
     const [selectedCategoryID, setSelectedCategory] = useState(0);
@@ -49,7 +57,6 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
         selectedCountriesID.length > 0
             ? selectedCountriesID
             : countries.map((country) => country.countryName);
-    console.log(selectedCountries);
     const selectedCategories =
         selectedCategoryID === 0
             ? categories
@@ -179,6 +186,10 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                         title="Number of Users"
                         icon={UserGroupIcon}
                     />
+                    <GenderCardSummary
+                        metaData={metaData}
+                        countries={selectedCountries}
+                    />
                 </Card>
                 <Card>
                     <DetailedCard
@@ -187,6 +198,10 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                         measure="consumptionsCount"
                         title="Individual Consumptions"
                         icon={Squares2X2Icon}
+                    />
+                    <ConsumptionCardSummary
+                        metaData={metaData}
+                        countries={selectedCountries}
                     />
                 </Card>
             </Grid>
@@ -254,7 +269,69 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                 </TabGroup>
             </Card>
             <Card className="mb-6">
-                <GenderCard
+                <TabGroup>
+                    <TabList variant="solid">
+                        <Tab className="p-3" icon={CloudIcon}>
+                            CO<sub>2</sub> Production
+                        </Tab>
+                        <Tab className="p-3" icon={BoltIcon}>
+                            Energy Usage
+                        </Tab>
+                    </TabList>
+                    <Select
+                        value={calculationMode}
+                        onValueChange={setCalculationMode}
+                        className="mt-2 mb-2 max-w-xs"
+                    >
+                        <SelectItem value="absolute" icon={UserGroupIcon}>
+                            Absolute
+                        </SelectItem>
+                        <SelectItem value="average" icon={UserIcon}>
+                            Average per User
+                        </SelectItem>
+                    </Select>
+
+                    <TabPanels>
+                        <TabPanel>
+                            <Text>
+                                Total{" "}
+                                <b>
+                                    CO<sub>2</sub> Production
+                                </b>{" "}
+                                per country between{" "}
+                                {String(dateRange.from?.toDateString())} and{" "}
+                                {String(dateRange.to?.toDateString())}.
+                            </Text>
+
+                            <LineChartTabsV2
+                                localData={localData}
+                                countries={selectedCountries}
+                                mode="carbon"
+                                calculationMode={
+                                    calculationMode as "absolute" | "average"
+                                }
+                            />
+                        </TabPanel>
+                        <TabPanel>
+                            <Text>
+                                Total <b>Energy Usage</b> per country between{" "}
+                                {String(dateRange.from?.toDateString())} and{" "}
+                                {String(dateRange.to?.toDateString())}.
+                            </Text>
+                            <LineChartTabsV2
+                                localData={localData}
+                                countries={selectedCountries}
+                                mode="energy"
+                                calculationMode={
+                                    calculationMode as "absolute" | "average"
+                                }
+                            />
+                        </TabPanel>
+                    </TabPanels>
+                </TabGroup>
+            </Card>
+            <Card className="mb-6">
+                <GenderCardCountry
                     metaData={metaData}
                     countries={selectedCountries}
                     title="Gender Distribution"

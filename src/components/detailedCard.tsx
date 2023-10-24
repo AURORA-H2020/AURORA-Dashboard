@@ -30,9 +30,21 @@ export default function DetailedCard({
     icon?: ElementType<any>;
 }) {
     let metricValue = 0;
-    metaData
-        ?.filter((entry) => countries.includes(entry.country))
-        .forEach((entry) => (metricValue += entry[measure]));
+    if (measure != "consumptionsCount") {
+        metaData
+            ?.filter((entry) => countries.includes(entry.country))
+            .forEach((entry) => (metricValue += entry[measure]));
+    } else {
+        metaData
+            ?.filter((entry) => countries.includes(entry.country))
+            .forEach(
+                (entry) =>
+                    (metricValue +=
+                        entry.consumptionsCount.electricity +
+                        entry.consumptionsCount.heating +
+                        entry.consumptionsCount.transportation),
+            );
+    }
 
     return (
         <Flex className="space-x-6" justifyContent="start">

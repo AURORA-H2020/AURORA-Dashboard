@@ -17,33 +17,48 @@ export interface Summary {
         countryID: string;
         countryCode: string;
         countryName: string;
-        cities: {
-            cityID: string | undefined;
-            cityName: string | undefined;
-            categories: {
-                category: string; // Consumption category.
-                carbonEmissions: number; // Total carbon emission in period.
-                energyExpended: number; // Total energy used in period.
-                activeUsers?: number; // Number of users included in period.
-                sourceData: CategoryData[];
-            }[];
-            users: {
-                userCount: number; // Total users for the city at that time.
-                consumptionsCount: number; // Total consumptions for the city at that time.
-                recurringConsumptionsCount?: number; // Total recurring consumptions for the city at that time.
-                genders: DemographicCategory[]; // Array of genders for the city at that time.
-            };
-        }[];
+        cities: SummaryCity[];
     }[];
 }
 [];
+
+export interface SummaryCity {
+    cityID: string | undefined;
+    cityName: string | undefined;
+    categories: {
+        category: string; // Consumption category.
+        carbonEmissions: number; // Total carbon emission in period.
+        energyExpended: number; // Total energy used in period.
+        consumptionsCount: number; // Number of consumptions
+        activeUsers?: number; // Number of users included in period.
+        sourceData: CategoryData[];
+        temporal: {
+            year: string;
+            data: {
+                month: number;
+                carbonEmissions: number;
+                energyExpended: number;
+            }[];
+        }[];
+    }[];
+    users: {
+        userCount: number; // Total users for the city at that time.
+        consumptionsCount: number; // Total consumptions for the city at that time.
+        recurringConsumptionsCount?: number; // Total recurring consumptions for the city at that time.
+        genders: DemographicCategory[]; // Array of genders for the city at that time.
+    };
+}
 
 export interface Summaries extends Array<Summary | undefined> {}
 
 export type MetaData = {
     country: string;
     userCount: number;
-    consumptionsCount: number;
+    consumptionsCount: {
+        electricity: number;
+        heating: number;
+        transportation: number;
+    };
     recurringConsumptionsCount: number;
     genders: {
         male: number;

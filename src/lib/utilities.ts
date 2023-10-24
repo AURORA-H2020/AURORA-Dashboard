@@ -50,3 +50,21 @@ export function hasConsumptions(user: SingleUser) {
         return true;
     } else return false;
 }
+
+export function hasConsumptionSummary(user: SingleUser) {
+    if (
+        user.__collections__["consumption-summaries"] &&
+        Object.keys(user.__collections__["consumption-summaries"]).length > 0
+    ) {
+        return true;
+    } else return false;
+}
+
+export function getMonthShortName(monthNumber) {
+    const date = new Date();
+    date.setMonth(monthNumber - 1);
+
+    return date.toLocaleString("en-GB", {
+        month: "short",
+    });
+}

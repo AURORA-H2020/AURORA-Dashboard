@@ -1,5 +1,5 @@
 import { Summaries, MetaData } from "@/models/summary";
-import { secondsToDateTime } from "./utilities";
+import { getMonthShortName, secondsToDateTime } from "./utilities";
 
 type TimelineData = {
     Date?: string;
@@ -51,6 +51,81 @@ export function transformSummaryData(
         transformedData.push(currentData);
     });
 
+    transformedData.sort(function (a, b) {
+        var keyA = new Date(Date.parse(a.Date!)),
+            keyB = new Date(Date.parse(b.Date!));
+        // Compare the 2 dates
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+    });
+
+    return transformedData;
+}
+
+export function latestTemporalData(
+    sourceData: Summaries,
+    mode: "carbon" | "energy",
+    calculationMode: "absolute" | "average",
+) {
+    if (sourceData.length == 0) {
+        return;
+    }
+
+    const latestDate = Math.max(...sourceData.map((e) => e?.date ?? 0));
+    const latestEntry = sourceData.find((e) => e?.date === latestDate);
+
+    let transformedData: TimelineData[] = [];
+    /*
+    const dateDay = secondsToDateTime(latestEntry.date).getDate();
+    const dateMonth = secondsToDateTime(entry?.date).getMonth() + 1;
+    const dateYear = secondsToDateTime(entry?.date).getFullYear();
+    
+    currentData.Date = `${dateDay}.${dateMonth}.${dateYear}`;
+    */
+
+    latestEntry?.countries.forEach((country) => {
+        country.cities.forEach((city) =>
+            city.categories.forEach((category) => {
+                category.temporal.forEach((year) => {
+                    year.data.forEach((month) => {
+                        const dateMonth = getMonthShortName(month.month);
+                        let currentDate = `${dateMonth} ${year.year}`;
+                        let thisDate = transformedData.find(
+                            (e) => e.Date === currentDate,
+                        );
+                        if (!thisDate) {
+                            transformedData.push({
+                                Date: currentDate,
+                            });
+                            thisDate = transformedData.find(
+                                (e) => e.Date === currentDate,
+                            );
+                        }
+                        thisDate![country.countryName] =
+                            mode == "carbon"
+                                ? month.carbonEmissions /
+                                  (calculationMode == "absolute"
+                                      ? 1
+                                      : city.users.userCount)
+                                : month.energyExpended /
+                                  (calculationMode == "absolute"
+                                      ? 1
+                                      : city.users.userCount);
+                    });
+                });
+            }),
+        );
+    });
+
+    transformedData.sort(function (a, b) {
+        var keyA = new Date(Date.parse(a.Date!)),
+            keyB = new Date(Date.parse(b.Date!));
+        // Compare the 2 dates
+        if (keyA < keyB) return -1;
+        if (keyA > keyB) return 1;
+        return 0;
+    });
     return transformedData;
 }
 
@@ -64,24 +139,57 @@ export function latestMetaData(sourceData: Summaries) {
 
     let metaData: MetaData = [];
 
-    // console.log(sourceData);
-
     latestEntry?.countries.forEach((country) => {
         let userCountSum = 0;
-        let consumptionsCountSum = 0;
+        let consumptionsCountSum = {
+            electricity: 0,
+            heating: 0,
+            transportation: 0,
+        };
         let recurringConsumptionsCountSum = 0;
         let genderSums = {
             male: 0,
             female: 0,
             nonBinary: 0,
             other: 0,
+            notSpecified: 0,
         };
 
         country.cities.forEach((city) => {
             userCountSum += city.users.userCount;
-            consumptionsCountSum += city.users.consumptionsCount;
-            recurringConsumptionsCountSum +=
-                city.users.recurringConsumptionsCount || 0;
+
+            // Electricity
+            let findElectricity = city.categories.find(
+                (e) => e.category == "electricity",
+            );
+            if (findElectricity) {
+                consumptionsCountSum.electricity =
+                    consumptionsCountSum.electricity +
+                    (findElectricity.consumptionsCount || 0);
+            }
+
+            // Heating
+            let findHeating = city.categories.find(
+                (e) => e.category == "heating",
+            );
+            if (findHeating) {
+                consumptionsCountSum.heating =
+                    consumptionsCountSum.heating +
+                    (findHeating.consumptionsCount || 0);
+            }
+
+            // Transportation
+            let findTransportation = city.categories.find(
+                (e) => e.category == "transportation",
+            );
+            if (findTransportation) {
+                consumptionsCountSum.transportation =
+                    consumptionsCountSum.transportation +
+                    (findTransportation.consumptionsCount || 0);
+            }
+
+            /*recurringConsumptionsCountSum +=
+                city.users.recurringConsumptionsCount || 0;*/
 
             // Female
             let findFemale = city.users.genders.find(
@@ -126,6 +234,12 @@ export function latestMetaData(sourceData: Summaries) {
                 other: genderSums.other,
             },
         });
+    });
+
+    metaData.sort(function (a, b) {
+        var textA = a.country.toUpperCase();
+        var textB = b.country.toUpperCase();
+        return textA < textB ? -1 : textA > textB ? 1 : 0;
     });
 
     return metaData;

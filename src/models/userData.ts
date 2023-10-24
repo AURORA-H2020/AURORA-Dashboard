@@ -11,15 +11,7 @@ export interface SingleUser {
     yearOfBirth: string;
     __collections__: {
         "consumption-summaries": {
-            [key: string]: {
-                carbonEmissions: UsageStats;
-                energyExpended: UsageStats;
-                categories: {
-                    category: string;
-                    carbonEmissions: UsageStats;
-                    energyExpended: UsageStats;
-                }[];
-            };
+            [key: string]: ConsumptionSummary;
         }[];
         consumptions: {
             [key: string]: SingleConsumption;
@@ -52,6 +44,36 @@ interface UsageStats {
     label: string;
     percentage?: number;
     total: number;
+}
+
+export interface ConsumptionSummary {
+    carbonEmissions: UsageStats;
+    energyExpended: UsageStats;
+    categories: {
+        category: string;
+        carbonEmissions: UsageStats;
+        energyExpended: UsageStats;
+    }[];
+    months: {
+        categories: {
+            carbonEmission: {
+                percentage: number;
+                total: number;
+            };
+            category: ConsumptionCategory;
+            energyExpended: {
+                percentage: number;
+                total: number;
+            };
+        }[];
+        carbonEmission: {
+            total: number;
+        };
+        energyExpended: {
+            total: number;
+        };
+        number: number;
+    }[];
 }
 
 export type ConsumptionCategory = "heating" | "electricity" | "transportation";
