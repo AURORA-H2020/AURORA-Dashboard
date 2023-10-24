@@ -4,6 +4,8 @@ import Link from "next/link";
 import Image from "next/image";
 import ThemeToggle from "./themeToggle";
 import { useTheme } from "next-themes";
+import { Button } from "@tremor/react";
+import { DevicePhoneMobileIcon } from "@heroicons/react/24/outline";
 
 export default function NavigationBar() {
     const { theme } = useTheme();
@@ -71,6 +73,15 @@ export default function NavigationBar() {
                         </li>
                     </ul>
                 </div>
+                <Link href={"https://aurora-h2020.eu/ourapp"}>
+                    <Button
+                        size="md"
+                        color="emerald"
+                        icon={DevicePhoneMobileIcon}
+                    >
+                        Download App
+                    </Button>
+                </Link>
                 <ThemeToggle />
             </div>
         </nav>

@@ -12,15 +12,22 @@ import {
     Tab,
     TabGroup,
     TabList,
-    Title,
     Text,
     Card,
     Select,
     SelectItem,
     Grid,
+    TabPanel,
+    TabPanels,
 } from "@tremor/react";
 import { useState } from "react";
-import { UserGroupIcon, UserIcon } from "@heroicons/react/outline";
+import {
+    UserGroupIcon,
+    UserIcon,
+    BoltIcon,
+    CloudIcon,
+    Squares2X2Icon,
+} from "@heroicons/react/24/outline";
 import { secondsToDateTime } from "@/lib/utilities";
 import { latestMetaData } from "@/lib/transformData";
 import DetailedCard from "@/components/detailedCard";
@@ -30,6 +37,8 @@ import { titleCase } from "@/lib/utilities";
 export default function FilterIndex({ localData }: { localData: Summaries }) {
     const [dateRange, setDateRange] = useState<DateRangePickerValue>({
         selectValue: "this-year",
+        from: new Date(new Date().getFullYear(), 0, 1),
+        to: new Date(new Date().getFullYear(), 11, 31),
     });
     const countries = localData[localData.length - 1]?.countries ?? [];
     const categories = ["electricity", "heating", "transportation"];
@@ -95,7 +104,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                         }
                         index={selectedCategoryID}
                     >
-                        <TabList>
+                        <TabList variant="solid">
                             <Tab className="p-3">All</Tab>
                             <Tab className="p-3">
                                 {titleCase(categories[0])}
@@ -109,7 +118,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                         </TabList>
                     </TabGroup>
                 </Flex>
-                <Flex justifyContent="start" className="space-x-4">
+                <Flex justifyContent="between" className="space-x-4">
                     <div>
                         <DateRangePicker
                             className="max-w-md mx-auto"
@@ -147,7 +156,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                         <MultiSelect
                             onValueChange={setSelectedCountries}
                             placeholder="Select Countries..."
-                            className="max-w-xs"
+                            className="max-w-md"
                         >
                             {countries.map((country) => (
                                 <MultiSelectItem
@@ -159,28 +168,16 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                             ))}
                         </MultiSelect>
                     </div>
-                    <div>
-                        <Select
-                            value={calculationMode}
-                            onValueChange={setCalculationMode}
-                        >
-                            <SelectItem value="absolute" icon={UserGroupIcon}>
-                                Absolute
-                            </SelectItem>
-                            <SelectItem value="average" icon={UserIcon}>
-                                Average per User
-                            </SelectItem>
-                        </Select>
-                    </div>
                 </Flex>
             </Card>
-            <Grid numItemsMd={2} numItemsLg={3} className="gap-6 mt-6 mb-6">
+            <Grid numItemsMd={2} numItemsLg={2} className="gap-6 mt-6 mb-6">
                 <Card>
                     <DetailedCard
                         metaData={metaData}
                         countries={selectedCountries}
                         measure="userCount"
                         title="Number of Users"
+                        icon={UserGroupIcon}
                     />
                 </Card>
                 <Card>
@@ -189,45 +186,78 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                         countries={selectedCountries}
                         measure="consumptionsCount"
                         title="Individual Consumptions"
-                    />
-                </Card>
-                <Card>
-                    <DetailedCard
-                        metaData={metaData}
-                        countries={selectedCountries}
-                        measure="recurringConsumptionsCount"
-                        title="Recurring Consumptions"
+                        icon={Squares2X2Icon}
                     />
                 </Card>
             </Grid>
+
+            <Card className="mb-6">
+                <TabGroup>
+                    <TabList variant="solid">
+                        <Tab className="p-3" icon={CloudIcon}>
+                            CO<sub>2</sub> Production
+                        </Tab>
+                        <Tab className="p-3" icon={BoltIcon}>
+                            Energy Usage
+                        </Tab>
+                    </TabList>
+                    <Select
+                        value={calculationMode}
+                        onValueChange={setCalculationMode}
+                        className="mt-2 mb-2 max-w-xs"
+                    >
+                        <SelectItem value="absolute" icon={UserGroupIcon}>
+                            Absolute
+                        </SelectItem>
+                        <SelectItem value="average" icon={UserIcon}>
+                            Average per User
+                        </SelectItem>
+                    </Select>
+
+                    <TabPanels>
+                        <TabPanel>
+                            <Text>
+                                Total{" "}
+                                <b>
+                                    CO<sub>2</sub> Production
+                                </b>{" "}
+                                per country between{" "}
+                                {String(dateRange.from?.toDateString())} and{" "}
+                                {String(dateRange.to?.toDateString())}.
+                            </Text>
+
+                            <LineChartTabs
+                                localData={localData}
+                                countries={selectedCountries}
+                                mode="carbon"
+                                calculationMode={
+                                    calculationMode as "absolute" | "average"
+                                }
+                            />
+                        </TabPanel>
+                        <TabPanel>
+                            <Text>
+                                Total <b>Energy Usage</b> per country between{" "}
+                                {String(dateRange.from?.toDateString())} and{" "}
+                                {String(dateRange.to?.toDateString())}.
+                            </Text>
+                            <LineChartTabs
+                                localData={localData}
+                                countries={selectedCountries}
+                                mode="energy"
+                                calculationMode={
+                                    calculationMode as "absolute" | "average"
+                                }
+                            />
+                        </TabPanel>
+                    </TabPanels>
+                </TabGroup>
+            </Card>
             <Card className="mb-6">
                 <GenderCard
                     metaData={metaData}
                     countries={selectedCountries}
                     title="Gender Distribution"
-                />
-            </Card>
-            <Card className="mb-6">
-                <Title>
-                    CO<sub>2</sub> Production
-                </Title>
-                <Text>per Country</Text>
-
-                <LineChartTabs
-                    localData={localData}
-                    countries={selectedCountries}
-                    mode="carbon"
-                    calculationMode={calculationMode as "absolute" | "average"}
-                />
-            </Card>
-            <Card className="mb-6">
-                <Title>Energy Usage</Title>
-                <Text>per Country</Text>
-                <LineChartTabs
-                    localData={localData}
-                    countries={selectedCountries}
-                    mode="energy"
-                    calculationMode={calculationMode as "absolute" | "average"}
                 />
             </Card>
         </>

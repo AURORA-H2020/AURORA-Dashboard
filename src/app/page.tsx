@@ -29,8 +29,8 @@ export default async function Home() {
             <div className="p-24">
                 <Title>Welcome to the AURORA Dashboard!</Title>
                 <Text>
-                    Here you can find the latest stats about the AURORA mobile
-                    app.
+                    Here you can find the latest stats about the AURORA Energy
+                    Tracker mobile app.
                 </Text>
                 <div className="mt-6">
                     <FilterIndex localData={testData} />

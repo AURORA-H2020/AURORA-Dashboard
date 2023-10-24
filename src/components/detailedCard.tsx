@@ -1,5 +1,6 @@
 import { MetaData } from "@/models/summary";
-import { Metric, Text, Color } from "@tremor/react";
+import { Metric, Text, Color, Icon, Flex } from "@tremor/react";
+import { ElementType } from "react";
 
 const tempData: {
     title: string;
@@ -20,11 +21,13 @@ export default function DetailedCard({
     countries,
     measure,
     title,
+    icon,
 }: {
     metaData: MetaData | undefined;
     countries: string[];
     measure: "userCount" | "consumptionsCount" | "recurringConsumptionsCount";
     title: string;
+    icon?: ElementType<any>;
 }) {
     let metricValue = 0;
     metaData
@@ -32,9 +35,13 @@ export default function DetailedCard({
         .forEach((entry) => (metricValue += entry[measure]));
 
     return (
-        <>
-            <Text>{title}</Text>
-            <Metric>{metricValue}</Metric>
-        </>
+        <Flex className="space-x-6" justifyContent="start">
+            {icon ? <Icon icon={icon} size="lg" /> : <></>}
+
+            <div>
+                <Text>{title}</Text>
+                <Metric>{metricValue}</Metric>
+            </div>
+        </Flex>
     );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { Title, Text, LineChart } from "@tremor/react";
+import { LineChart } from "@tremor/react";
 import { transformSummaryData } from "@/lib/transformData";
 import { Summaries } from "@/models/summary";
 

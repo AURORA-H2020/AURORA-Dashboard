@@ -1,5 +1,5 @@
 import { MetaData } from "@/models/summary";
-import { Text, DonutChart, Legend, Grid } from "@tremor/react";
+import { DonutChart, Legend, Grid, Title } from "@tremor/react";
 
 export default function GenderCard({
     metaData,
@@ -14,7 +14,7 @@ export default function GenderCard({
 
     return (
         <>
-            <Text>{title}</Text>
+            <Title>{title}</Title>
             <Grid numItemsMd={3} numItemsLg={6} className="gap-6 mt-6 mb-6">
                 {metaData?.map((country) => {
                     console.log(country);
