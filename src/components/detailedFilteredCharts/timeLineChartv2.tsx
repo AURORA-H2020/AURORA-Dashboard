@@ -1,7 +1,7 @@
 "use client";
 
 import { LineChart } from "@tremor/react";
-import { latestTemporalData, transformSummaryData } from "@/lib/transformData";
+import { latestTemporalData } from "@/lib/transformData";
 import { Summaries } from "@/models/summary";
 
 const dataFormatterCarbon = (number: number) =>

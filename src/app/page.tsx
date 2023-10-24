@@ -1,5 +1,4 @@
 import { Title, Text } from "@tremor/react";
-import NavigationBar from "@/components/navigationBar";
 import FilterIndex from "@/components/detailedFilteredCharts/filterIndex";
 import { testTransform } from "@/lib/transformExportData";
 import { promises as fs } from "fs";

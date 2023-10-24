@@ -4,7 +4,6 @@ import { CountryData } from "@/models/countryData";
 import {
     Card,
     Text,
-    Metric,
     TabGroup,
     TabList,
     Tab,
@@ -21,16 +20,6 @@ export default async function Home() {
         "utf8",
     );
     const data = JSON.parse(file) as CountryData;
-
-    /*
-    const res = await fetch(
-        "http://127.0.0.1:3000/data/users-1697715668.json",
-        {
-            next: { revalidate: 0 },
-        },
-    );
-    const userData = await res.json();
-    */
 
     const countries = [
         { ID: "2E9Ejc8qBJC6HnlPPdIh", name: "Portugal", code: "PT" },
