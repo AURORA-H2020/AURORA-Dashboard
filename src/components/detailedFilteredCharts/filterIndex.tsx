@@ -20,6 +20,7 @@ import {
     Grid,
     TabPanel,
     TabPanels,
+    Col,
 } from "@tremor/react";
 import { useState } from "react";
 import {
@@ -125,10 +126,10 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                         </TabList>
                     </TabGroup>
                 </Flex>
-                <Flex justifyContent="between" className="space-x-4">
-                    <div>
+                <Grid numItemsMd={2} numItemsSm={1} className="md:space-x-4">
+                    <Col numColSpan={1}>
                         <DateRangePicker
-                            className="max-w-md mx-auto"
+                            className="min-w-full max-md:mb-4"
                             value={dateRange}
                             onValueChange={setDateRange}
                             selectPlaceholder="Select"
@@ -158,12 +159,12 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                                 Last year
                             </DateRangePickerItem>
                         </DateRangePicker>
-                    </div>
-                    <div>
+                    </Col>
+                    <Col numColSpan={1} className="ml-0">
                         <MultiSelect
                             onValueChange={setSelectedCountries}
-                            placeholder="Select Countries..."
-                            className="max-w-md"
+                            placeholder="Select Countries"
+                            className="p2"
                         >
                             {countries.map((country) => (
                                 <MultiSelectItem
@@ -174,8 +175,8 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                                 </MultiSelectItem>
                             ))}
                         </MultiSelect>
-                    </div>
-                </Flex>
+                    </Col>
+                </Grid>
             </Card>
             <Grid numItemsMd={2} numItemsLg={2} className="gap-6 mt-6 mb-6">
                 <Card>

@@ -1,5 +1,5 @@
 import { MetaData } from "@/models/summary";
-import { Text, DonutChart, Legend, Grid } from "@tremor/react";
+import { Text, DonutChart, Legend, Grid, Title } from "@tremor/react";
 
 export default function GenderCardCountry({
     metaData,
@@ -14,8 +14,13 @@ export default function GenderCardCountry({
 
     return (
         <>
-            <Text>{title}</Text>
-            <Grid numItemsMd={3} numItemsLg={6} className="gap-6 mt-6 mb-6">
+            <Title>{title}</Title>
+            <Grid
+                numItems={2}
+                numItemsSm={2}
+                numItemsMd={3}
+                className="gap-6 mt-6 mb-6"
+            >
                 {metaData?.map((country) => {
                     let total =
                         (country.genders.female || 0) +
@@ -47,7 +52,7 @@ export default function GenderCardCountry({
                     return (
                         <DonutChart
                             key={country.country}
-                            className="mt-6"
+                            className="min-w-full"
                             data={dataSet}
                             showAnimation={true}
                             category="count"
