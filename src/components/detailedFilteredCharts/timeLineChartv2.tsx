@@ -3,6 +3,7 @@
 import { LineChart } from "@tremor/react";
 import { latestTemporalData } from "@/lib/transformData";
 import { Summaries } from "@/models/summary";
+import { countryColors } from "@/lib/constants";
 
 const dataFormatterCarbon = (number: number) =>
     `${Intl.NumberFormat("us")
@@ -35,7 +36,7 @@ export default function LineChartTabsV2({
             data={transformedData!}
             index="Date"
             categories={countries}
-            colors={["blue", "emerald", "yellow", "orange", "rose"]}
+            colors={countryColors}
             valueFormatter={
                 mode == "carbon" ? dataFormatterCarbon : dataFormatterEnergy
             }

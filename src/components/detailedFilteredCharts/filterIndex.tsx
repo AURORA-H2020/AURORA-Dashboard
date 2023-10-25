@@ -32,11 +32,14 @@ import {
 } from "@heroicons/react/24/outline";
 import { secondsToDateTime } from "@/lib/utilities";
 import { latestMetaData } from "@/lib/transformData";
+import { categories } from "@/lib/constants";
 import DetailedCard from "@/components/detailedCard";
 import { titleCase } from "@/lib/utilities";
 import GenderCardCountry from "../genderCardCountry";
 import GenderCardSummary from "../genderCardSummary";
 import ConsumptionCardSummary from "../consumptionCardSummary";
+import ConsumptionCardSummaryCategory from "../consumptionCardSummaryCategory";
+import { ConsumptionCategory } from "@/models/userData";
 
 export default function FilterIndex({ localData }: { localData: Summaries }) {
     const [dateRange, setDateRange] = useState<DateRangePickerValue>({
@@ -50,7 +53,6 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
             var textB = b.countryName.toUpperCase();
             return textA < textB ? -1 : textA > textB ? 1 : 0;
         }) ?? [];
-    const categories = ["electricity", "heating", "transportation"];
     const [selectedCountriesID, setSelectedCountries] = useState<string[]>([]);
     const [selectedCategoryID, setSelectedCategory] = useState(0);
     const [calculationMode, setCalculationMode] = useState("absolute");
@@ -89,7 +91,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                                 ...city,
                                 categories: city.categories.filter((category) =>
                                     selectedCategories.includes(
-                                        category.category,
+                                        category.category as ConsumptionCategory,
                                     ),
                                 ),
                             };
@@ -200,16 +202,27 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                         title="Individual Consumptions"
                         icon={Squares2X2Icon}
                     />
-                    <ConsumptionCardSummary
-                        metaData={metaData}
-                        countries={selectedCountries}
-                    />
+
+                    {selectedCategories.length > 1 ? (
+                        <ConsumptionCardSummary
+                            metaData={metaData}
+                            countries={selectedCountries}
+                        />
+                    ) : (
+                        <ConsumptionCardSummaryCategory
+                            metaData={metaData}
+                            countries={selectedCountries}
+                            category={
+                                selectedCategories[0] as ConsumptionCategory
+                            }
+                        />
+                    )}
                 </Card>
             </Grid>
 
             <Card className="mb-6">
                 <TabGroup>
-                    <TabList variant="solid">
+                    <TabList variant="solid" className="mb-3">
                         <Tab className="p-3" icon={CloudIcon}>
                             CO<sub>2</sub> Emission
                         </Tab>
@@ -220,7 +233,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                     <Select
                         value={calculationMode}
                         onValueChange={setCalculationMode}
-                        className="mt-2 mb-2 max-w-xs"
+                        className="mb-3 max-w-xs"
                     >
                         <SelectItem value="absolute" icon={UserGroupIcon}>
                             Absolute
@@ -271,7 +284,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
             </Card>
             <Card className="mb-6">
                 <TabGroup>
-                    <TabList variant="solid">
+                    <TabList variant="solid" className="mb-3">
                         <Tab className="p-3" icon={CloudIcon}>
                             CO<sub>2</sub> Emission
                         </Tab>
@@ -282,7 +295,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                     <Select
                         value={calculationMode}
                         onValueChange={setCalculationMode}
-                        className="mt-2 mb-2 max-w-xs"
+                        className="mb-3 max-w-xs"
                     >
                         <SelectItem value="absolute" icon={UserGroupIcon}>
                             Absolute

@@ -1,4 +1,5 @@
 import { SingleUser } from "@/models/userData";
+import { cities, countries } from "./constants";
 
 export function secondsToDateTime(seconds: number) {
     const date = new Date(1970, 0, 1); // Epoch
@@ -14,14 +15,6 @@ export function titleCase(string) {
 }
 
 export function country2Name(inputID: string) {
-    const countries = [
-        { ID: "2E9Ejc8qBJC6HnlPPdIh", name: "Portugal", code: "PT" },
-        { ID: "4sq82jNQm3x3bH9Fkijm", name: "Spain", code: "ES" },
-        { ID: "8mgi5IR4xn9Yca4zDLtU", name: "United Kingdom", code: "UK" },
-        { ID: "KhUolhyvcbdEsPyREqOZ", name: "Slovenia", code: "SI" },
-        { ID: "sPXh74wjZf14Jtmkaas6", name: "Europe (Other)", code: "EU" },
-        { ID: "udn3GiM30aqviGBkswpl", name: "Denmark", code: "DK" },
-    ];
     return {
         code: countries.find((country) => country.ID == inputID)?.code || "00",
         name:
@@ -31,14 +24,6 @@ export function country2Name(inputID: string) {
 }
 
 export function city2Name(inputID: string) {
-    const cities = [
-        { ID: "YIyf65PquFxluWhAAo5C", name: "Évora" },
-        { ID: "1VSD4m6qVbOZLot7SFoQ", name: "Madrid" },
-        { ID: "OAiIuFNocG4c0kOBtBvr", name: "Forest of Dean" },
-        { ID: "FJyeCLprBuOqacpvu3LJ", name: "Ljubljana" },
-        { ID: "Au1oUV9pAEtSCu04cfCX", name: "Aarhus" },
-    ];
-
     return cities.find((city) => city.ID == inputID)?.name || "Other";
 }
 
@@ -67,4 +52,9 @@ export function getMonthShortName(monthNumber) {
     return date.toLocaleString("en-GB", {
         month: "short",
     });
+}
+
+export function camelCaseToWords(s: string) {
+    const result = s.replace(/([A-Z])/g, " $1");
+    return result.charAt(0).toUpperCase() + result.slice(1);
 }

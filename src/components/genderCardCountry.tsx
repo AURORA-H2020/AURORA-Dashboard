@@ -1,5 +1,6 @@
+import { genderColors, genders } from "@/lib/constants";
 import { MetaData } from "@/models/summary";
-import { Text, DonutChart, Legend, Grid, Title } from "@tremor/react";
+import { DonutChart, Legend, Grid, Title } from "@tremor/react";
 
 export default function GenderCardCountry({
     metaData,
@@ -58,16 +59,15 @@ export default function GenderCardCountry({
                             category="count"
                             index="gender"
                             label={country.country}
-                            // valueFormatter={valueFormatter}
-                            colors={["amber", "teal", "indigo", "gray"]}
+                            colors={genderColors}
                         />
                     );
                 })}
             </Grid>
             <Legend
                 className="mt-3"
-                categories={["Female", "Male", "Non-Binary", "Other"]}
-                colors={["amber", "teal", "indigo", "gray"]}
+                categories={genders}
+                colors={genderColors}
             />
         </>
     );

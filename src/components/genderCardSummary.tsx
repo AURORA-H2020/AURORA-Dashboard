@@ -1,3 +1,4 @@
+import { genderColors, genders } from "@/lib/constants";
 import { MetaData } from "@/models/summary";
 import { DonutChart, Legend } from "@tremor/react";
 
@@ -50,13 +51,12 @@ export default function GenderCardSummary({
                 showAnimation={true}
                 category="count"
                 index="gender"
-                label={"test"}
-                colors={["amber", "teal", "indigo", "gray"]}
+                colors={genderColors}
             />
             <Legend
                 className="mt-3"
-                categories={["Female", "Male", "Non-Binary", "Other"]}
-                colors={["amber", "teal", "indigo", "gray"]}
+                categories={genders}
+                colors={genderColors}
             />
         </>
     );

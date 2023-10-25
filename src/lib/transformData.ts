@@ -1,5 +1,9 @@
-import { Summaries, MetaData } from "@/models/summary";
-import { getMonthShortName, secondsToDateTime } from "./utilities";
+import { Summaries, MetaData, ConsumptionsCount } from "@/models/summary";
+import {
+    camelCaseToWords,
+    getMonthShortName,
+    secondsToDateTime,
+} from "./utilities";
 
 type TimelineData = {
     Date?: string;
@@ -76,13 +80,6 @@ export function latestTemporalData(
     const latestEntry = sourceData.find((e) => e?.date === latestDate);
 
     let transformedData: TimelineData[] = [];
-    /*
-    const dateDay = secondsToDateTime(latestEntry.date).getDate();
-    const dateMonth = secondsToDateTime(entry?.date).getMonth() + 1;
-    const dateYear = secondsToDateTime(entry?.date).getFullYear();
-    
-    currentData.Date = `${dateDay}.${dateMonth}.${dateYear}`;
-    */
 
     latestEntry?.countries.forEach((country) => {
         country.cities.forEach((city) =>
@@ -121,7 +118,7 @@ export function latestTemporalData(
     transformedData.sort(function (a, b) {
         var keyA = new Date(Date.parse(a.Date!)),
             keyB = new Date(Date.parse(b.Date!));
-        // Compare the 2 dates
+
         if (keyA < keyB) return -1;
         if (keyA > keyB) return 1;
         return 0;
@@ -141,10 +138,10 @@ export function latestMetaData(sourceData: Summaries) {
 
     latestEntry?.countries.forEach((country) => {
         let userCountSum = 0;
-        let consumptionsCountSum = {
-            electricity: 0,
-            heating: 0,
-            transportation: 0,
+        let consumptionsCountSum: ConsumptionsCount = {
+            electricity: { total: 0, sources: [] },
+            heating: { total: 0, sources: [] },
+            transportation: { total: 0, sources: [] },
         };
         let recurringConsumptionsCountSum = 0;
         let genderSums = {
@@ -163,9 +160,29 @@ export function latestMetaData(sourceData: Summaries) {
                 (e) => e.category == "electricity",
             );
             if (findElectricity) {
-                consumptionsCountSum.electricity =
-                    consumptionsCountSum.electricity +
+                consumptionsCountSum.electricity.total =
+                    consumptionsCountSum.electricity.total +
                     (findElectricity.consumptionsCount || 0);
+
+                findElectricity.sourceData.forEach((source) => {
+                    let thisConsumptionSource =
+                        consumptionsCountSum.electricity.sources.find(
+                            (e) => e.source == source.source,
+                        );
+                    if (!thisConsumptionSource) {
+                        consumptionsCountSum.electricity.sources.push({
+                            source: source.source,
+                            sourceName: camelCaseToWords(source.source),
+                            count: 0,
+                        });
+                        thisConsumptionSource =
+                            consumptionsCountSum.electricity.sources.find(
+                                (e) => e.source == source.source,
+                            );
+                    }
+                    thisConsumptionSource!.count =
+                        (thisConsumptionSource?.count || 0) + 1;
+                });
             }
 
             // Heating
@@ -173,9 +190,29 @@ export function latestMetaData(sourceData: Summaries) {
                 (e) => e.category == "heating",
             );
             if (findHeating) {
-                consumptionsCountSum.heating =
-                    consumptionsCountSum.heating +
+                consumptionsCountSum.heating.total =
+                    consumptionsCountSum.heating.total +
                     (findHeating.consumptionsCount || 0);
+
+                findHeating.sourceData.forEach((source) => {
+                    let thisConsumptionSource =
+                        consumptionsCountSum.heating.sources.find(
+                            (e) => e.source == source.source,
+                        );
+                    if (!thisConsumptionSource) {
+                        consumptionsCountSum.heating.sources.push({
+                            source: source.source,
+                            sourceName: camelCaseToWords(source.source),
+                            count: 0,
+                        });
+                        thisConsumptionSource =
+                            consumptionsCountSum.heating.sources.find(
+                                (e) => e.source == source.source,
+                            );
+                    }
+                    thisConsumptionSource!.count =
+                        (thisConsumptionSource?.count || 0) + 1;
+                });
             }
 
             // Transportation
@@ -183,9 +220,29 @@ export function latestMetaData(sourceData: Summaries) {
                 (e) => e.category == "transportation",
             );
             if (findTransportation) {
-                consumptionsCountSum.transportation =
-                    consumptionsCountSum.transportation +
+                consumptionsCountSum.transportation.total =
+                    consumptionsCountSum.transportation.total +
                     (findTransportation.consumptionsCount || 0);
+
+                findTransportation.sourceData.forEach((source) => {
+                    let thisConsumptionSource =
+                        consumptionsCountSum.transportation.sources.find(
+                            (e) => e.source == source.source,
+                        );
+                    if (!thisConsumptionSource) {
+                        consumptionsCountSum.transportation.sources.push({
+                            source: source.source,
+                            sourceName: camelCaseToWords(source.source),
+                            count: 0,
+                        });
+                        thisConsumptionSource =
+                            consumptionsCountSum.transportation.sources.find(
+                                (e) => e.source == source.source,
+                            );
+                    }
+                    thisConsumptionSource!.count =
+                        (thisConsumptionSource?.count || 0) + 1;
+                });
             }
 
             /*recurringConsumptionsCountSum +=

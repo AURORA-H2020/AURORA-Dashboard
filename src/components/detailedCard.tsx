@@ -2,20 +2,6 @@ import { MetaData } from "@/models/summary";
 import { Metric, Text, Color, Icon, Flex } from "@tremor/react";
 import { ElementType } from "react";
 
-const tempData: {
-    title: string;
-    metric: string;
-    subCategoryValues: number[];
-    subCategroyColors: Color[];
-    subCategoryTitles: string[];
-} = {
-    title: "Total users",
-    metric: "10,345",
-    subCategoryValues: [30, 70],
-    subCategroyColors: ["emerald", "red"],
-    subCategoryTitles: ["Active users", "Inactive users"],
-};
-
 export default function DetailedCard({
     metaData,
     countries,
@@ -40,9 +26,9 @@ export default function DetailedCard({
             .forEach(
                 (entry) =>
                     (metricValue +=
-                        entry.consumptionsCount.electricity +
-                        entry.consumptionsCount.heating +
-                        entry.consumptionsCount.transportation),
+                        entry.consumptionsCount.electricity.total +
+                        entry.consumptionsCount.heating.total +
+                        entry.consumptionsCount.transportation.total),
             );
     }
 
