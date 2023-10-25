@@ -41,8 +41,6 @@ export default function GenderCardSummary({
         },
     ];
 
-    console.log(dataSet);
-
     return (
         <>
             <DonutChart

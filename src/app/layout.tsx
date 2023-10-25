@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import NavigationBar from "@/components/navigationBar";
 import Footer from "@/components/footer";
+import Script from "next/script";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,13 +46,24 @@ export default function RootLayout({
                 />
                 <meta name="msapplication-TileColor" content="#da532c" />
                 <meta name="theme-color" content="#ffffff" />
+                <link
+                    rel="stylesheet"
+                    href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css"
+                />
             </head>
             <body className={inter.className}>
                 <Providers attribute="class" defaultTheme="system" enableSystem>
-                    <NavigationBar />
-                    <div className="p-24">{children}</div>
-                    <Footer />
+                    <header className="p-4">
+                        <NavigationBar />
+                    </header>
+                    <div className="max-w-screen-xl items-center justify-between mx-auto p-4">
+                        <div>{children}</div>
+                    </div>
+                    <div className="max-w-screen-xl items-center justify-between mx-auto p-4">
+                        <Footer />
+                    </div>
                 </Providers>
+                <Script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></Script>
             </body>
         </html>
     );

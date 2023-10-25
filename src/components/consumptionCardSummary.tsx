@@ -41,8 +41,6 @@ export default function ConsumptionCardSummary({
         },
     ];
 
-    console.log(dataSet);
-
     return (
         <>
             <DonutChart
