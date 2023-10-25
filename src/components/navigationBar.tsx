@@ -2,14 +2,11 @@
 
 import Link from "next/link";
 import ThemeToggle from "./themeToggle";
-import { useTheme } from "next-themes";
 import { Button, Card } from "@tremor/react";
 import { DevicePhoneMobileIcon } from "@heroicons/react/24/outline";
 import Logo from "./logo";
 
 export default function NavigationBar() {
-    const { theme } = useTheme();
-    console.log(theme);
     return (
         <nav>
             <Card className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
@@ -45,9 +42,9 @@ export default function NavigationBar() {
                         >
                             <path
                                 stroke="currentColor"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                strokeWidth="2"
                                 d="M1 1h15M1 7h15M1 13h15"
                             />
                         </svg>

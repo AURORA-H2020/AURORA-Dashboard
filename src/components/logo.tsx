@@ -24,8 +24,6 @@ export default function Logo() {
         );
     }
 
-    console.log(theme);
-
     return (
         <Image
             src={
