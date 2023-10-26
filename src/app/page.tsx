@@ -3,22 +3,22 @@ import FilterIndex from "@/components/detailedFilteredCharts/filterIndex";
 import { testTransform } from "@/lib/transformExportData";
 import { promises as fs } from "fs";
 
-export default async function Home() {
-    const file = await fs.readFile(
-        process.cwd() + "/src/data/users-1697715668.json",
-        "utf8",
-    );
-    const data = JSON.parse(file);
+import firebase_app from "@/firebase/config";
+import { UserData } from "@/models/userData";
+import { getUserFiles } from "@/lib/firebaseUtils";
 
-    /*
-    const res = await fetch(
-        "http://127.0.0.1:3000/data/users-1697715668.json",
-        {
-            next: { revalidate: 0 },
-        },
-    );
-    const userData = await res.json();
-    */
+export default async function Home() {
+    let data: UserData[] = [];
+
+    if (process.env.TEST_MODE && process.env.TEST_MODE == "true") {
+        const file = await fs.readFile(
+            process.cwd() + "/src/data/users-1697715668-testing.json",
+            "utf8",
+        );
+        data = [JSON.parse(file)];
+    } else if (firebase_app && process.env.FIREBASE_STORAGE_USER_PATH) {
+        data = await getUserFiles(process.env.FIREBASE_STORAGE_USER_PATH);
+    }
 
     const testData = testTransform(data);
 

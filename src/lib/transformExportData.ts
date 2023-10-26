@@ -12,17 +12,23 @@ import {
     hasConsumptions,
     hasConsumptionSummary,
 } from "./utilities";
+import { userIdBlacklist } from "./constants";
 
-function transformExportData(sourceData: UserData, date: number) {
+function transformExportData(sourceData: UserData) {
     const data = sourceData.data;
 
     let summary: Summary = {
-        date: date,
+        date: sourceData.meta.creationTime,
         daysPeriod: 1,
         countries: [],
     };
 
     Object.keys(data).forEach((userID) => {
+        if (userIdBlacklist.includes(userID)) {
+            // Do nothing for blacklisted users
+            return;
+        }
+
         let userData = data[userID] as SingleUser;
         let thisCountry = summary.countries.find(
             (e) => e.countryID === (userData.country || "otherCountry"),
@@ -251,11 +257,13 @@ function transformExportData(sourceData: UserData, date: number) {
     return summary;
 }
 
-export function testTransform(sourceData: UserData) {
-    return [
-        transformExportData(sourceData, 1672704000),
-        transformExportData(sourceData, 1672617600),
-    ];
+export function testTransform(sourceData: UserData[]) {
+    let dataSet: Summary[] = [];
+
+    sourceData.forEach((e) => {
+        dataSet.push(transformExportData(e));
+    });
+    return dataSet;
 }
 
 function newCountry(countryID: string) {

@@ -1,4 +1,7 @@
 export interface UserData {
+    meta: {
+        creationTime: number;
+    };
     data: {
         [key: string]: SingleUser;
     }[];

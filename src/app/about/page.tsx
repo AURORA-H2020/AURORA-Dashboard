@@ -13,22 +13,24 @@ import {
     Grid,
     Col,
 } from "@tremor/react";
+import { countries } from "@/lib/constants";
+import firebase_app from "@/firebase/config";
+import { getLatestCountryFile } from "@/lib/firebaseUtils";
 
 export default async function Home() {
-    const file = await fs.readFile(
-        process.cwd() + "/src/data/countries-1697714246.json",
-        "utf8",
-    );
-    const data = JSON.parse(file) as CountryData;
+    let data: CountryData;
 
-    const countries = [
-        { ID: "2E9Ejc8qBJC6HnlPPdIh", name: "Portugal", code: "PT" },
-        { ID: "4sq82jNQm3x3bH9Fkijm", name: "Spain", code: "ES" },
-        { ID: "8mgi5IR4xn9Yca4zDLtU", name: "United Kingdom", code: "UK" },
-        { ID: "KhUolhyvcbdEsPyREqOZ", name: "Slovenia", code: "SI" },
-        { ID: "sPXh74wjZf14Jtmkaas6", name: "Europe (Other)", code: "EU" },
-        { ID: "udn3GiM30aqviGBkswpl", name: "Denmark", code: "DK" },
-    ];
+    if (process.env.TEST_MODE && process.env.TEST_MODE == "true") {
+        const file = await fs.readFile(
+            process.cwd() + "/src/data/countries-1697714246-testing.json",
+            "utf8",
+        );
+        data = JSON.parse(file) as CountryData;
+    } else if (firebase_app && process.env.FIREBASE_STORAGE_COUNTRY_PATH) {
+        data = await getLatestCountryFile(
+            process.env.FIREBASE_STORAGE_COUNTRY_PATH,
+        );
+    }
 
     return (
         <Card>
