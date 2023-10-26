@@ -1,7 +1,6 @@
 import { UserData } from "@/models/userData";
 import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
 import firebase_app from "@/firebase/config";
-import { CountryData } from "@/models/countryData";
 
 const downloadFile = async (path: string) => {
     const firebaseStorage = getStorage(firebase_app);

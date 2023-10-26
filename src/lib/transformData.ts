@@ -58,7 +58,6 @@ export function transformSummaryData(
     transformedData.sort(function (a, b) {
         var keyA = new Date(Date.parse(a.Date!)),
             keyB = new Date(Date.parse(b.Date!));
-        // Compare the 2 dates
         if (keyA < keyB) return -1;
         if (keyA > keyB) return 1;
         return 0;
@@ -244,9 +243,6 @@ export function latestMetaData(sourceData: Summaries) {
                         (thisConsumptionSource?.count || 0) + 1;
                 });
             }
-
-            /*recurringConsumptionsCountSum +=
-                city.users.recurringConsumptionsCount || 0;*/
 
             // Female
             let findFemale = city.users.genders.find(
