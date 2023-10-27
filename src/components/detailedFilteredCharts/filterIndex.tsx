@@ -115,18 +115,20 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                         }
                         index={selectedCategoryID}
                     >
-                        <TabList variant="solid">
-                            <Tab className="p-3">All</Tab>
-                            <Tab className="p-3">
-                                {titleCase(categories[0])}
-                            </Tab>
-                            <Tab className="p-3">
-                                {titleCase(categories[1])}
-                            </Tab>
-                            <Tab className="p-3">
-                                {titleCase(categories[2])}
-                            </Tab>
-                        </TabList>
+                        <div className="overflow-x-scroll">
+                            <TabList variant="solid">
+                                <Tab className="p-3">All</Tab>
+                                <Tab className="p-3">
+                                    {titleCase(categories[0])}
+                                </Tab>
+                                <Tab className="p-3">
+                                    {titleCase(categories[1])}
+                                </Tab>
+                                <Tab className="p-3">
+                                    {titleCase(categories[2])}
+                                </Tab>
+                            </TabList>
+                        </div>
                     </TabGroup>
                 </Flex>
                 <Grid numItemsMd={2} numItemsSm={1} className="md:space-x-4">
@@ -223,14 +225,16 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
 
             <Card className="mb-6">
                 <TabGroup>
-                    <TabList variant="solid" className="mb-3">
-                        <Tab className="p-3" icon={CloudIcon}>
-                            CO<sub>2</sub> Emission
-                        </Tab>
-                        <Tab className="p-3" icon={BoltIcon}>
-                            Energy Usage
-                        </Tab>
-                    </TabList>
+                    <div className="overflow-x-scroll">
+                        <TabList variant="solid" className="mb-3">
+                            <Tab className="p-3" icon={CloudIcon}>
+                                CO<sub>2</sub> Emission
+                            </Tab>
+                            <Tab className="p-3" icon={BoltIcon}>
+                                Energy Usage
+                            </Tab>
+                        </TabList>
+                    </div>
                     <Select
                         value={calculationMode}
                         onValueChange={setCalculationMode}
@@ -285,14 +289,16 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
             </Card>
             <Card className="mb-6">
                 <TabGroup>
-                    <TabList variant="solid" className="mb-3">
-                        <Tab className="p-3" icon={CloudIcon}>
-                            CO<sub>2</sub> Emission
-                        </Tab>
-                        <Tab className="p-3" icon={BoltIcon}>
-                            Energy Usage
-                        </Tab>
-                    </TabList>
+                    <div className="overflow-x-scroll">
+                        <TabList variant="solid" className="mb-3">
+                            <Tab className="p-3" icon={CloudIcon}>
+                                CO<sub>2</sub> Emission
+                            </Tab>
+                            <Tab className="p-3" icon={BoltIcon}>
+                                Energy Usage
+                            </Tab>
+                        </TabList>
+                    </div>
                     <Select
                         value={calculationMode}
                         onValueChange={setCalculationMode}

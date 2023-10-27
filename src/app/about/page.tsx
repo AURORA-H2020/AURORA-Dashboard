@@ -41,15 +41,20 @@ export default async function Home() {
                 <b>Carbon Emissions</b>, <b>Energy Usage</b> and <b>Labels</b>.
             </Text>
             <TabGroup>
-                <TabList className="mt-8 mb-8" variant="solid">
-                    {countries.map((country) => {
-                        return (
-                            <Tab key={country.ID} className="p-3">
-                                {country.name}
-                            </Tab>
-                        );
-                    })}
-                </TabList>
+                <div className="overflow-x-scroll">
+                    <TabList className="mt-8" variant="solid">
+                        {countries.map((country) => {
+                            return (
+                                <Tab
+                                    key={country.ID}
+                                    className="p-3 flex whitespace-nowrap"
+                                >
+                                    {country.name}
+                                </Tab>
+                            );
+                        })}
+                    </TabList>
+                </div>
 
                 <TabPanels>
                     {countries.map((country) => {

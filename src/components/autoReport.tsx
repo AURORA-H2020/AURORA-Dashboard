@@ -4,9 +4,6 @@ import {
     AccordionBody,
     AccordionHeader,
     AccordionList,
-    DonutChart,
-    Legend,
-    List,
     Text,
     Title,
 } from "@tremor/react";
