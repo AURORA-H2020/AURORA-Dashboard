@@ -55,9 +55,17 @@ export default async function Home() {
                     {countries.map((country) => {
                         return (
                             <TabPanel key={country.ID}>
-                                <Grid numItems={2} className="gap-2">
+                                <Grid
+                                    numItems={1}
+                                    numItemsMd={3}
+                                    className="gap-2 md:space-x-4 max-md:space-y-4"
+                                >
                                     <Col>
-                                        <Title>Carbon Emission Metrics</Title>
+                                        <Title>Carbon Emission Labels</Title>
+                                        <Text className="h-20">
+                                            The data we use to calculate the
+                                            label for carbon emissions.
+                                        </Text>
                                         <AboutJson
                                             data={
                                                 data.data[country.ID].labels
@@ -66,11 +74,30 @@ export default async function Home() {
                                         />
                                     </Col>
                                     <Col>
-                                        <Title>Energy Expended Metrics</Title>
+                                        <Title>Energy Expended Labels</Title>
+                                        <Text className="h-20">
+                                            The data we use to calculate the
+                                            label for energy usage.
+                                        </Text>
                                         <AboutJson
                                             data={
                                                 data.data[country.ID].labels
                                                     .energyExpended
+                                            }
+                                        />
+                                    </Col>
+                                    <Col>
+                                        <Title>Metrics</Title>
+                                        <Text className="h-20">
+                                            The data we use to calculate carbon
+                                            emissions and energy usage based on
+                                            user data.
+                                        </Text>
+                                        <AboutJson
+                                            data={
+                                                data.data[country.ID][
+                                                    "__collections__"
+                                                ].metrics["1.0.0"]
                                             }
                                         />
                                     </Col>

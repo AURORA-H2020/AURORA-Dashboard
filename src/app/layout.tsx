@@ -53,7 +53,7 @@ export default function RootLayout({
             </head>
             <body className={inter.className}>
                 <Providers attribute="class" defaultTheme="system" enableSystem>
-                    <header className="p-4">
+                    <header className="max-w-screen-xl items-center justify-between mx-auto p-4">
                         <NavigationBar />
                     </header>
                     <div className="max-w-screen-xl items-center justify-between mx-auto p-4">

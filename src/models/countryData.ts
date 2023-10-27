@@ -7,8 +7,20 @@ export interface CountryData {
                 carbonEmission: LabelCategories;
                 ernergyExpended: LabelCategories;
             };
+            __collections__: {
+                cities: {}[];
+                metrics: {
+                    [key: string]: CountryMetric;
+                }[];
+            };
         };
     }[];
+}
+
+interface CountryMetric {
+    electricity: {};
+    heating: {};
+    transportation: {};
 }
 
 interface LabelCategories {
