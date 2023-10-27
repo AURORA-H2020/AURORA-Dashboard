@@ -54,7 +54,7 @@ export interface Summaries extends Array<Summary | undefined> {}
 export type MetaData = {
     country: string;
     userCount: number;
-    consumptionsCount: ConsumptionsCount;
+    consumptions: ConsumptionsDetail;
     recurringConsumptionsCount: number;
     genders: {
         male: number;
@@ -64,13 +64,15 @@ export type MetaData = {
     };
 }[];
 
-export interface ConsumptionsCount {
-    electricity: CategorySourceCount;
-    heating: CategorySourceCount;
-    transportation: CategorySourceCount;
+export interface ConsumptionsDetail {
+    electricity: CategorySourceDetail;
+    heating: CategorySourceDetail;
+    transportation: CategorySourceDetail;
 }
 
-export interface CategorySourceCount {
-    total: number;
+export interface CategorySourceDetail {
+    count: number;
+    carbonEmissions: number;
+    energyExpended: number;
     sources: { source: string; sourceName: string; count: number }[];
 }

@@ -16,15 +16,14 @@ export default function ConsumptionCardSummary({
 
     metaData?.forEach(
         (country) =>
-            (countElectricity += country.consumptionsCount.electricity.total),
+            (countElectricity += country.consumptions.electricity.count),
     );
     metaData?.forEach(
-        (country) => (countHeating += country.consumptionsCount.heating.total),
+        (country) => (countHeating += country.consumptions.heating.count),
     );
     metaData?.forEach(
         (country) =>
-            (countTransportation +=
-                country.consumptionsCount.transportation.total),
+            (countTransportation += country.consumptions.transportation.count),
     );
 
     let dataSet = [

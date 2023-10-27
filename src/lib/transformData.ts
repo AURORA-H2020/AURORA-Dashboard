@@ -1,4 +1,4 @@
-import { Summaries, MetaData, ConsumptionsCount } from "@/models/summary";
+import { Summaries, MetaData, ConsumptionsDetail } from "@/models/summary";
 import {
     camelCaseToWords,
     getMonthShortName,
@@ -137,10 +137,25 @@ export function latestMetaData(sourceData: Summaries) {
 
     latestEntry?.countries.forEach((country) => {
         let userCountSum = 0;
-        let consumptionsCountSum: ConsumptionsCount = {
-            electricity: { total: 0, sources: [] },
-            heating: { total: 0, sources: [] },
-            transportation: { total: 0, sources: [] },
+        let consumptionsSummary: ConsumptionsDetail = {
+            electricity: {
+                count: 0,
+                carbonEmissions: 0,
+                energyExpended: 0,
+                sources: [],
+            },
+            heating: {
+                count: 0,
+                carbonEmissions: 0,
+                energyExpended: 0,
+                sources: [],
+            },
+            transportation: {
+                count: 0,
+                carbonEmissions: 0,
+                energyExpended: 0,
+                sources: [],
+            },
         };
         let recurringConsumptionsCountSum = 0;
         let genderSums = {
@@ -159,23 +174,31 @@ export function latestMetaData(sourceData: Summaries) {
                 (e) => e.category == "electricity",
             );
             if (findElectricity) {
-                consumptionsCountSum.electricity.total =
-                    consumptionsCountSum.electricity.total +
+                consumptionsSummary.electricity.count =
+                    consumptionsSummary.electricity.count +
                     (findElectricity.consumptionsCount || 0);
+
+                consumptionsSummary.electricity.carbonEmissions =
+                    consumptionsSummary.electricity.carbonEmissions +
+                    (findElectricity.carbonEmissions || 0);
+
+                consumptionsSummary.electricity.energyExpended =
+                    consumptionsSummary.electricity.energyExpended +
+                    (findElectricity.energyExpended || 0);
 
                 findElectricity.sourceData.forEach((source) => {
                     let thisConsumptionSource =
-                        consumptionsCountSum.electricity.sources.find(
+                        consumptionsSummary.electricity.sources.find(
                             (e) => e.source == source.source,
                         );
                     if (!thisConsumptionSource) {
-                        consumptionsCountSum.electricity.sources.push({
+                        consumptionsSummary.electricity.sources.push({
                             source: source.source,
                             sourceName: camelCaseToWords(source.source),
                             count: 0,
                         });
                         thisConsumptionSource =
-                            consumptionsCountSum.electricity.sources.find(
+                            consumptionsSummary.electricity.sources.find(
                                 (e) => e.source == source.source,
                             );
                     }
@@ -189,23 +212,31 @@ export function latestMetaData(sourceData: Summaries) {
                 (e) => e.category == "heating",
             );
             if (findHeating) {
-                consumptionsCountSum.heating.total =
-                    consumptionsCountSum.heating.total +
+                consumptionsSummary.heating.count =
+                    consumptionsSummary.heating.count +
                     (findHeating.consumptionsCount || 0);
+
+                consumptionsSummary.heating.carbonEmissions =
+                    consumptionsSummary.heating.carbonEmissions +
+                    (findHeating.carbonEmissions || 0);
+
+                consumptionsSummary.heating.energyExpended =
+                    consumptionsSummary.heating.energyExpended +
+                    (findHeating.energyExpended || 0);
 
                 findHeating.sourceData.forEach((source) => {
                     let thisConsumptionSource =
-                        consumptionsCountSum.heating.sources.find(
+                        consumptionsSummary.heating.sources.find(
                             (e) => e.source == source.source,
                         );
                     if (!thisConsumptionSource) {
-                        consumptionsCountSum.heating.sources.push({
+                        consumptionsSummary.heating.sources.push({
                             source: source.source,
                             sourceName: camelCaseToWords(source.source),
                             count: 0,
                         });
                         thisConsumptionSource =
-                            consumptionsCountSum.heating.sources.find(
+                            consumptionsSummary.heating.sources.find(
                                 (e) => e.source == source.source,
                             );
                     }
@@ -219,23 +250,31 @@ export function latestMetaData(sourceData: Summaries) {
                 (e) => e.category == "transportation",
             );
             if (findTransportation) {
-                consumptionsCountSum.transportation.total =
-                    consumptionsCountSum.transportation.total +
+                consumptionsSummary.transportation.count =
+                    consumptionsSummary.transportation.count +
                     (findTransportation.consumptionsCount || 0);
+
+                consumptionsSummary.transportation.carbonEmissions =
+                    consumptionsSummary.transportation.carbonEmissions +
+                    (findTransportation.carbonEmissions || 0);
+
+                consumptionsSummary.transportation.energyExpended =
+                    consumptionsSummary.transportation.energyExpended +
+                    (findTransportation.energyExpended || 0);
 
                 findTransportation.sourceData.forEach((source) => {
                     let thisConsumptionSource =
-                        consumptionsCountSum.transportation.sources.find(
+                        consumptionsSummary.transportation.sources.find(
                             (e) => e.source == source.source,
                         );
                     if (!thisConsumptionSource) {
-                        consumptionsCountSum.transportation.sources.push({
+                        consumptionsSummary.transportation.sources.push({
                             source: source.source,
                             sourceName: camelCaseToWords(source.source),
                             count: 0,
                         });
                         thisConsumptionSource =
-                            consumptionsCountSum.transportation.sources.find(
+                            consumptionsSummary.transportation.sources.find(
                                 (e) => e.source == source.source,
                             );
                     }
@@ -278,7 +317,7 @@ export function latestMetaData(sourceData: Summaries) {
         metaData.push({
             country: country.countryName,
             userCount: userCountSum,
-            consumptionsCount: consumptionsCountSum,
+            consumptions: consumptionsSummary,
             recurringConsumptionsCount: recurringConsumptionsCountSum,
             genders: {
                 male: genderSums.male,

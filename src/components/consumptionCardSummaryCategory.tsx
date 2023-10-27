@@ -17,7 +17,7 @@ export default function ConsumptionCardSummaryCategory({
     let dataSet: { source: string; sourceName: string; count: number }[] = [];
 
     metaData?.forEach((e) => {
-        e.consumptionsCount[category].sources.forEach((source) => {
+        e.consumptions[category].sources.forEach((source) => {
             let thisSource = dataSet.find((e) => e.source == source.source);
             if (!thisSource) {
                 dataSet.push({

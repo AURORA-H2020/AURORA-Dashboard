@@ -26,9 +26,9 @@ export default function DetailedCard({
             .forEach(
                 (entry) =>
                     (metricValue +=
-                        entry.consumptionsCount.electricity.total +
-                        entry.consumptionsCount.heating.total +
-                        entry.consumptionsCount.transportation.total),
+                        entry.consumptions.electricity.count +
+                        entry.consumptions.heating.count +
+                        entry.consumptions.transportation.count),
             );
     }
 

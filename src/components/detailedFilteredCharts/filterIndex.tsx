@@ -40,6 +40,7 @@ import GenderCardSummary from "../genderCardSummary";
 import ConsumptionCardSummary from "../consumptionCardSummary";
 import ConsumptionCardSummaryCategory from "../consumptionCardSummaryCategory";
 import { ConsumptionCategory } from "@/models/userData";
+import AutoReport from "../autoReport";
 
 export default function FilterIndex({ localData }: { localData: Summaries }) {
     const [dateRange, setDateRange] = useState<DateRangePickerValue>({
@@ -350,6 +351,11 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                     countries={selectedCountries}
                     title="Gender Distribution"
                 />
+            </Card>
+            <Card>
+                <div className="max-w-3xl mx-auto">
+                    <AutoReport metaData={metaData} />
+                </div>
             </Card>
         </>
     );
