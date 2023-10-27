@@ -41,7 +41,7 @@ export default async function Home() {
                 <b>Carbon Emissions</b>, <b>Energy Usage</b> and <b>Labels</b>.
             </Text>
             <TabGroup>
-                <div className="overflow-x-scroll">
+                <div className="overflow-x-auto">
                     <TabList className="mt-8" variant="solid">
                         {countries.map((country) => {
                             return (
@@ -63,7 +63,7 @@ export default async function Home() {
                                 <Grid
                                     numItems={1}
                                     numItemsMd={3}
-                                    className="gap-2 md:space-x-4 max-md:space-y-4"
+                                    className="gap-2 md:space-x-4 max-md:space-y-4 mt-8"
                                 >
                                     <Col>
                                         <Title>Carbon Emission Labels</Title>

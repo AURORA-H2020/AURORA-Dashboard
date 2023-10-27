@@ -115,7 +115,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
                         }
                         index={selectedCategoryID}
                     >
-                        <div className="overflow-x-scroll">
+                        <div className="overflow-x-auto">
                             <TabList variant="solid">
                                 <Tab className="p-3">All</Tab>
                                 <Tab className="p-3">
@@ -225,7 +225,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
 
             <Card className="mb-6">
                 <TabGroup>
-                    <div className="overflow-x-scroll">
+                    <div className="overflow-x-auto">
                         <TabList variant="solid" className="mb-3">
                             <Tab className="p-3" icon={CloudIcon}>
                                 CO<sub>2</sub> Emission
@@ -289,7 +289,7 @@ export default function FilterIndex({ localData }: { localData: Summaries }) {
             </Card>
             <Card className="mb-6">
                 <TabGroup>
-                    <div className="overflow-x-scroll">
+                    <div className="overflow-x-auto">
                         <TabList variant="solid" className="mb-3">
                             <Tab className="p-3" icon={CloudIcon}>
                                 CO<sub>2</sub> Emission
