@@ -82,38 +82,48 @@ export default function AutoReport({
             summedMetaData.consumptions.electricity.count +
                 summedMetaData.consumptions.heating.count +
                 summedMetaData.consumptions.transportation.count,
-        );
+        ).toLocaleString();
 
         const summedMetaDataTotalCarbonEmissions = Math.round(
             summedMetaData.consumptions.electricity.carbonEmissions +
                 summedMetaData.consumptions.heating.carbonEmissions +
                 summedMetaData.consumptions.transportation.carbonEmissions,
-        );
+        ).toLocaleString();
 
         const summedMetaDataTotalEnergyExpended = Math.round(
             summedMetaData.consumptions.electricity.energyExpended +
                 summedMetaData.consumptions.heating.energyExpended +
                 summedMetaData.consumptions.transportation.energyExpended,
-        );
+        ).toLocaleString();
 
         return (
             <>
                 <Title>Report</Title>
                 <Text className="text-md mb-4">
-                    Overall, <b>{summedMetaData.userCount} accounts</b> have
-                    been created. Of those users,{" "}
-                    <b>{summedMetaData.genders.female}</b> identify as female,{" "}
-                    <b>{summedMetaData.genders.male}</b> as male,{" "}
-                    <b>{summedMetaData.genders.nonBinary}</b> as non-binary, and{" "}
-                    <b>{summedMetaData.genders.other}</b> as other. In total,
-                    those users created{" "}
+                    Overall,{" "}
+                    <b>{summedMetaData.userCount.toLocaleString()} accounts</b>{" "}
+                    have been created. Of those users,{" "}
+                    <b>{summedMetaData.genders.female.toLocaleString()}</b>{" "}
+                    identify as female,{" "}
+                    <b>{summedMetaData.genders.male.toLocaleString()}</b> as
+                    male,{" "}
+                    <b>{summedMetaData.genders.nonBinary.toLocaleString()}</b>{" "}
+                    as non-binary, and{" "}
+                    <b>{summedMetaData.genders.other.toLocaleString()}</b> as
+                    other. In total, those users created{" "}
                     <b>{summedMetaDataTotalConsumptionsCount} consumptions</b>.{" "}
-                    <b>{summedMetaData.consumptions.transportation.count}</b>{" "}
+                    <b>
+                        {summedMetaData.consumptions.transportation.count.toLocaleString()}
+                    </b>{" "}
                     are related to transportation,{" "}
-                    <b>{summedMetaData.consumptions.electricity.count}</b> to
-                    electricity, and{" "}
-                    <b>{summedMetaData.consumptions.heating.count}</b> to
-                    heating. This amounts to a total of{" "}
+                    <b>
+                        {summedMetaData.consumptions.electricity.count.toLocaleString()}
+                    </b>{" "}
+                    to electricity, and{" "}
+                    <b>
+                        {summedMetaData.consumptions.heating.count.toLocaleString()}
+                    </b>{" "}
+                    to heating. This amounts to a total of{" "}
                     <b>
                         {summedMetaDataTotalCarbonEmissions} kg CO
                         <sub>2</sub>
@@ -127,7 +137,7 @@ export default function AutoReport({
                         {Math.round(
                             summedMetaData.consumptions.transportation
                                 .carbonEmissions,
-                        )}{" "}
+                        ).toLocaleString()}{" "}
                         kg CO<sub>2</sub>
                     </b>{" "}
                     are from transportation (
@@ -135,7 +145,7 @@ export default function AutoReport({
                         {Math.round(
                             summedMetaData.consumptions.transportation
                                 .energyExpended,
-                        )}{" "}
+                        ).toLocaleString()}{" "}
                         kWh
                     </b>
                     ),{" "}
@@ -143,7 +153,7 @@ export default function AutoReport({
                         {Math.round(
                             summedMetaData.consumptions.electricity
                                 .carbonEmissions,
-                        )}{" "}
+                        ).toLocaleString()}{" "}
                         kg CO<sub>2</sub>
                     </b>{" "}
                     from electricity (
@@ -151,21 +161,21 @@ export default function AutoReport({
                         {Math.round(
                             summedMetaData.consumptions.electricity
                                 .energyExpended,
-                        )}{" "}
+                        ).toLocaleString()}{" "}
                         kWh
                     </b>
                     ), and{" "}
                     <b>
                         {Math.round(
                             summedMetaData.consumptions.heating.carbonEmissions,
-                        )}{" "}
+                        ).toLocaleString()}{" "}
                         kg CO<sub>2</sub>
                     </b>{" "}
                     from heating (
                     <b>
                         {Math.round(
                             summedMetaData.consumptions.heating.energyExpended,
-                        )}{" "}
+                        ).toLocaleString()}{" "}
                         kWh
                     </b>
                     ).
@@ -176,21 +186,21 @@ export default function AutoReport({
                             country.consumptions.electricity.count +
                                 country.consumptions.heating.count +
                                 country.consumptions.transportation.count,
-                        );
+                        ).toLocaleString();
 
                         const totalCarbonEmissions = Math.round(
                             country.consumptions.electricity.carbonEmissions +
                                 country.consumptions.heating.carbonEmissions +
                                 country.consumptions.transportation
                                     .carbonEmissions,
-                        );
+                        ).toLocaleString();
 
                         const totalEnergyExpended = Math.round(
                             country.consumptions.electricity.energyExpended +
                                 country.consumptions.heating.energyExpended +
                                 country.consumptions.transportation
                                     .energyExpended,
-                        );
+                        ).toLocaleString();
 
                         return (
                             <Accordion key={country.country}>
@@ -200,35 +210,42 @@ export default function AutoReport({
                                 <AccordionBody>
                                     <Text className="text-md mb-4">
                                         For <b>{country.country}</b>,{" "}
-                                        <b>{country.userCount} accounts</b> have
-                                        been created. Of those users,{" "}
-                                        <b>{country.genders.female}</b> identify
-                                        as female, <b>{country.genders.male}</b>{" "}
-                                        as male,{" "}
-                                        <b>{country.genders.nonBinary}</b> as
-                                        non-binary, and{" "}
-                                        <b>{country.genders.other}</b> as other.
-                                        In total, those users created{" "}
                                         <b>
-                                            {totalConsumptionCount} consumptions
+                                            {country.userCount.toLocaleString()}{" "}
+                                            accounts
+                                        </b>{" "}
+                                        have been created. Of those users,{" "}
+                                        <b>
+                                            {country.genders.female.toLocaleString()}
+                                        </b>{" "}
+                                        identify as female,{" "}
+                                        <b>
+                                            {country.genders.male.toLocaleString()}
+                                        </b>{" "}
+                                        as male,{" "}
+                                        <b>
+                                            {country.genders.nonBinary.toLocaleString()}
+                                        </b>{" "}
+                                        as non-binary, and{" "}
+                                        <b>
+                                            {country.genders.other.toLocaleString()}
+                                        </b>{" "}
+                                        as other. In total, those users created{" "}
+                                        <b>
+                                            {totalConsumptionCount.toLocaleString()}{" "}
+                                            consumptions
                                         </b>
                                         .{" "}
                                         <b>
-                                            {
-                                                country.consumptions
-                                                    .transportation.count
-                                            }
+                                            {country.consumptions.transportation.count.toLocaleString()}
                                         </b>{" "}
                                         are related to transportation,{" "}
                                         <b>
-                                            {
-                                                country.consumptions.electricity
-                                                    .count
-                                            }
+                                            {country.consumptions.electricity.count.toLocaleString()}
                                         </b>{" "}
                                         to electricity, and{" "}
                                         <b>
-                                            {country.consumptions.heating.count}
+                                            {country.consumptions.heating.count.toLocaleString()}
                                         </b>{" "}
                                         to heating. This amounts to a total of{" "}
                                         <b>
@@ -243,7 +260,7 @@ export default function AutoReport({
                                                 country.consumptions
                                                     .transportation
                                                     .carbonEmissions,
-                                            )}{" "}
+                                            ).toLocaleString()}{" "}
                                             kg CO<sub>2</sub>
                                         </b>{" "}
                                         are from transportation (
@@ -252,7 +269,7 @@ export default function AutoReport({
                                                 country.consumptions
                                                     .transportation
                                                     .energyExpended,
-                                            )}{" "}
+                                            ).toLocaleString()}{" "}
                                             kWh
                                         </b>
                                         ),{" "}
@@ -260,7 +277,7 @@ export default function AutoReport({
                                             {Math.round(
                                                 country.consumptions.electricity
                                                     .carbonEmissions,
-                                            )}{" "}
+                                            ).toLocaleString()}{" "}
                                             kg CO<sub>2</sub>
                                         </b>{" "}
                                         from electricity (
@@ -268,7 +285,7 @@ export default function AutoReport({
                                             {Math.round(
                                                 country.consumptions.electricity
                                                     .energyExpended,
-                                            )}{" "}
+                                            ).toLocaleString()}{" "}
                                             kWh
                                         </b>
                                         ), and{" "}
@@ -276,7 +293,7 @@ export default function AutoReport({
                                             {Math.round(
                                                 country.consumptions.heating
                                                     .carbonEmissions,
-                                            )}{" "}
+                                            ).toLocaleString()}{" "}
                                             kg CO<sub>2</sub>
                                         </b>{" "}
                                         from heating (
@@ -284,7 +301,7 @@ export default function AutoReport({
                                             {Math.round(
                                                 country.consumptions.heating
                                                     .energyExpended,
-                                            )}{" "}
+                                            ).toLocaleString()}{" "}
                                             kWh
                                         </b>
                                         ).
