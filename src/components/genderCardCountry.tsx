@@ -20,7 +20,9 @@ export default function GenderCardCountry({
     countries: string[];
     title: string;
 }) {
-    metaData?.filter((entry) => countries.includes(entry.country));
+    const filteredMetaData = metaData?.filter((entry) =>
+        countries.includes(entry.country),
+    );
 
     return (
         <>
@@ -31,7 +33,7 @@ export default function GenderCardCountry({
                 numItemsMd={3}
                 className="gap-6 mt-6 mb-6"
             >
-                {metaData?.map((country) => {
+                {filteredMetaData?.map((country) => {
                     let total =
                         (country.genders.female || 0) +
                         (country.genders.male || 0) +

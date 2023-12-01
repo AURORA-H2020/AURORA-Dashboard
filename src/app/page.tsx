@@ -2,6 +2,7 @@ import { Title, Text } from "@tremor/react";
 import FilterIndex from "@/components/detailedFilteredCharts/filterIndex";
 import { testTransform } from "@/lib/transformExportData";
 import { promises as fs } from "fs";
+import path from "path";
 
 import firebase_app from "@/firebase/config";
 import { UserData } from "@/models/userData";
@@ -15,9 +16,9 @@ import { getUserFiles } from "@/lib/firebaseUtils";
 export default async function Home(): Promise<JSX.Element> {
     let data: UserData[] = [];
 
-    if (process.env.TEST_MODE && process.env.TEST_MODE == "true") {
+    if (process.env.TEST_MODE === "true") {
         const file = await fs.readFile(
-            process.cwd() + "/src/data/users-1697715668-testing.json",
+            path.join(process.cwd(), "src/data/users-1697715668-testing.json"),
             "utf8",
         );
         data = [JSON.parse(file)];

@@ -1,8 +1,6 @@
 import { SingleUser } from "@/models/userData";
 import { cities, countries } from "./constants";
 
-export function secondsToDateTime(seconds: number) {
-    const date = new Date(1970, 0, 1); // Epoch
 /**
  * Converts a number of seconds to a Date object representing the corresponding date and time.
  *
@@ -10,15 +8,12 @@ export function secondsToDateTime(seconds: number) {
  * @return {Date} The Date object representing the corresponding date and time.
  */
 export function secondsToDateTime(seconds: number): Date {
+    const date = new Date(0);
     date.setSeconds(seconds);
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0);
+    date.setHours(0, 0, 0, 0);
     return date;
 }
 
-export function titleCase(string) {
-    return string[0].toUpperCase() + string.slice(1).toLowerCase();
 /**
  * Capitalizes the first letter of a string and converts the rest of the string to lowercase.
  *
@@ -26,6 +21,11 @@ export function titleCase(string) {
  * @return {string} - The converted string with the first letter capitalized and the rest in lowercase.
  */
 export function titleCase(string: string): string {
+    const words = string.toLowerCase().split(" ");
+    const titleCaseWords = words.map((word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    });
+    return titleCaseWords.join(" ");
 }
 
 /**
@@ -35,12 +35,10 @@ export function titleCase(string: string): string {
  * @returns {object} An object containing the country code and name.
  */
 export function country2Name(inputID: string) {
-    return {
-        code: countries.find((country) => country.ID == inputID)?.code || "00",
-        name:
-            countries.find((country) => country.ID == inputID)?.name ||
-            "unknown",
-    };
+    const country = countries.find((country) => country.ID === inputID);
+    const code = country?.code || "00";
+    const name = country?.name || "unknown";
+    return { code, name };
 }
 
 /**
@@ -50,7 +48,8 @@ export function country2Name(inputID: string) {
  * @return {string} The name of the city if found, otherwise "Other".
  */
 export function city2Name(inputID: string) {
-    return cities.find((city) => city.ID == inputID)?.name || "Other";
+    const city = cities.find((city) => city.ID == inputID);
+    return city ? city.name : "Other";
 }
 
 /**
@@ -60,12 +59,10 @@ export function city2Name(inputID: string) {
  * @return {boolean} Returns true if the user has consumptions, false otherwise.
  */
 export function hasConsumptions(user: SingleUser) {
-    if (
+    const hasConsumptions =
         user.__collections__.consumptions &&
-        Object.keys(user.__collections__.consumptions).length > 0
-    ) {
-        return true;
-    } else return false;
+        Object.keys(user.__collections__.consumptions).length > 0;
+    return hasConsumptions;
 }
 
 /**
@@ -75,27 +72,24 @@ export function hasConsumptions(user: SingleUser) {
  * @return {boolean} - Returns true if the user has a consumption summary, otherwise false.
  */
 export function hasConsumptionSummary(user: SingleUser) {
-    if (
+    const hasSummaries =
         user.__collections__["consumption-summaries"] &&
-        Object.keys(user.__collections__["consumption-summaries"]).length > 0
-    ) {
-        return true;
-    } else return false;
+        Object.keys(user.__collections__["consumption-summaries"]).length > 0;
+    return hasSummaries;
 }
 
-export function getMonthShortName(monthNumber) {
 /**
  * Returns the short name of a month given its number.
  *
  * @param {number} monthNumber - The number of the month.
  * @returns {string} The short name of the month.
  */
+export function getMonthShortName(monthNumber: number): string {
     const date = new Date();
     date.setMonth(monthNumber - 1);
 
-    return date.toLocaleString("en-GB", {
-        month: "short",
-    });
+    const options: Intl.DateTimeFormatOptions = { month: "short" };
+    return date.toLocaleString("en-GB", options);
 }
 
 /**

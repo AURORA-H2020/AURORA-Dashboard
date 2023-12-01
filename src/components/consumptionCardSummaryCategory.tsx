@@ -21,20 +21,26 @@ export default function ConsumptionCardSummaryCategory({
     countries: string[];
     category: ConsumptionCategory;
 }) {
-    metaData?.filter((entry) => countries.includes(entry.country));
+    const filteredMetaData = metaData?.filter((entry) =>
+        countries.includes(entry.country),
+    );
 
-    let dataSet: { source: string; sourceName: string; count: number }[] = [];
+    const dataSet: {
+        source: string;
+        sourceName: string;
+        count: number;
+    }[] = [];
 
-    metaData?.forEach((e) => {
+    filteredMetaData?.forEach((e) => {
         e.consumptions[category].sources.forEach((source) => {
-            let thisSource = dataSet.find((e) => e.source == source.source);
+            let thisSource = dataSet.find((e) => e.source === source.source);
             if (!thisSource) {
                 dataSet.push({
                     source: source.source,
                     sourceName: source.sourceName,
                     count: 0,
                 });
-                thisSource = dataSet.find((e) => e.source == source.source);
+                thisSource = dataSet.find((e) => e.source === source.source);
             }
 
             thisSource!.count = (thisSource?.count || 0) + source.count;

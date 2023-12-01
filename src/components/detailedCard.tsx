@@ -27,25 +27,23 @@ export default function DetailedCard({
     icon?: ElementType<any>;
 }) {
     let metricValue = 0;
-    if (measure != "consumptionsCount") {
-        metaData
-            ?.filter((entry) => countries.includes(entry.country))
-            .forEach((entry) => (metricValue += entry[measure]));
-    } else {
-        metaData
-            ?.filter((entry) => countries.includes(entry.country))
-            .forEach(
-                (entry) =>
-                    (metricValue +=
-                        entry.consumptions.electricity.count +
-                        entry.consumptions.heating.count +
-                        entry.consumptions.transportation.count),
-            );
-    }
+
+    metaData?.forEach((entry) => {
+        if (countries.includes(entry.country)) {
+            if (measure === "consumptionsCount") {
+                metricValue +=
+                    entry.consumptions.electricity.count +
+                    entry.consumptions.heating.count +
+                    entry.consumptions.transportation.count;
+            } else {
+                metricValue += entry[measure];
+            }
+        }
+    });
 
     return (
         <Flex className="space-x-6" justifyContent="start">
-            {icon ? <Icon icon={icon} size="lg" /> : <></>}
+            {icon && <Icon icon={icon} size="lg" />}
 
             <div>
                 <Text>{title}</Text>

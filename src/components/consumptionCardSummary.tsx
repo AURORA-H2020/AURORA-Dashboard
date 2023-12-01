@@ -8,36 +8,37 @@ export default function ConsumptionCardSummary({
     metaData: MetaData | undefined;
     countries: string[];
 }) {
-    metaData?.filter((entry) => countries.includes(entry.country));
-
-    let countElectricity = 0;
-    let countHeating = 0;
-    let countTransportation = 0;
-
-    metaData?.forEach(
-        (country) =>
-            (countElectricity += country.consumptions.electricity.count),
-    );
-    metaData?.forEach(
-        (country) => (countHeating += country.consumptions.heating.count),
-    );
-    metaData?.forEach(
-        (country) =>
-            (countTransportation += country.consumptions.transportation.count),
+    const filteredMetaData = metaData?.filter((entry) =>
+        countries.includes(entry.country),
     );
 
-    let dataSet = [
+    const countElectricity = filteredMetaData?.reduce(
+        (count, country) => count + country.consumptions.electricity.count,
+        0,
+    );
+
+    const countHeating = filteredMetaData?.reduce(
+        (count, country) => count + country.consumptions.heating.count,
+        0,
+    );
+
+    const countTransportation = filteredMetaData?.reduce(
+        (count, country) => count + country.consumptions.transportation.count,
+        0,
+    );
+
+    const dataSet = [
         {
             category: "Electricity",
-            count: countElectricity,
+            count: countElectricity || 0,
         },
         {
             category: "Heating",
-            count: countHeating,
+            count: countHeating || 0,
         },
         {
             category: "Transportation",
-            count: countTransportation,
+            count: countTransportation || 0,
         },
     ];
 

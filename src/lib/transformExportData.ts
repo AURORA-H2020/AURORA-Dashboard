@@ -259,7 +259,6 @@ function transformExportData(sourceData: UserData) {
         }
     });
 
-    //console.log(JSON.stringify(summary, null, 2));
     return summary;
 }
 
