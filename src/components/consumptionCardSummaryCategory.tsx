@@ -3,6 +3,15 @@ import { MetaData } from "@/models/summary";
 import { ConsumptionCategory } from "@/models/userData";
 import { DonutChart, Legend } from "@tremor/react";
 
+/**
+ * Generates a summary of consumption by category for a given set of countries.
+ *
+ * @param {Object} props - The props object containing the required parameters.
+ * @param {MetaData | undefined} props.metaData - The metadata for the consumption data.
+ * @param {string[]} props.countries - The list of countries to filter the data by.
+ * @param {ConsumptionCategory} props.category - The category of consumption to summarize.
+ * @return {ReactNode} - The JSX element representing the consumption card summary category.
+ */
 export default function ConsumptionCardSummaryCategory({
     metaData,
     countries,

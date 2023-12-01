@@ -93,14 +93,32 @@ const cities: AssetData[] = [
     },
 ];
 
+/**
+ * Formats a number as a currency value.
+ *
+ * @param {number} number - The number to format as currency.
+ * @return {string} The formatted currency value.
+ */
 const valueFormatter = (number: number) =>
     `${Intl.NumberFormat("us").format(number).toString()} $`;
 
+/**
+ * Filters the given array of AssetData by industry.
+ *
+ * @param {string} industry - The industry to filter by.
+ * @param {AssetData[]} data - The array of AssetData to filter.
+ * @return {AssetData[]} The filtered array of AssetData.
+ */
 const filterByindustry = (industry: string, data: AssetData[]) =>
     industry === "all"
         ? data
         : data.filter((city) => city.industry === industry);
 
+/**
+ * Renders the PerformanceBars component.
+ *
+ * @return {JSX.Element} The rendered PerformanceBars component.
+ */
 export default function PerformanceBars() {
     const [selectedindustry, setSelectedindustry] = useState("all");
     const [filteredData, setFilteredData] = useState(cities);

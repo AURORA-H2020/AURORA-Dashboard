@@ -2,6 +2,15 @@ import { genderColors, genders } from "@/lib/constants";
 import { MetaData } from "@/models/summary";
 import { DonutChart, Legend, Grid, Title } from "@tremor/react";
 
+/**
+ * Generate the GenderCardCountry component.
+ *
+ * @param {Object} props - The props object.
+ * @param {MetaData | undefined} props.metaData - The metadata object, which may be undefined.
+ * @param {string[]} props.countries - The list of countries.
+ * @param {string} props.title - The title of the component.
+ * @return {JSX.Element} The rendered component.
+ */
 export default function GenderCardCountry({
     metaData,
     countries,

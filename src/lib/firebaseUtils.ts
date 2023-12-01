@@ -2,7 +2,13 @@ import { UserData } from "@/models/userData";
 import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
 import firebase_app from "@/firebase/config";
 
-const downloadFile = async (path: string) => {
+/**
+ * Downloads a file from Firebase Storage.
+ *
+ * @param {string} path - The path of the file to download.
+ * @return {Promise<any>} A promise that resolves to the downloaded file.
+ */
+const downloadFile = async (path: string): Promise<any> => {
     const firebaseStorage = getStorage(firebase_app);
     const storageRef = ref(firebaseStorage, path);
 
@@ -12,7 +18,13 @@ const downloadFile = async (path: string) => {
     return out;
 };
 
-export const getUserFiles = async (path: string) => {
+/**
+ * Retrieves a list of user files from the specified path in Firebase Storage.
+ *
+ * @param {string} path - The path to the directory in Firebase Storage.
+ * @return {Promise<UserData[]>} A promise that resolves to an array of UserData objects representing the downloaded files.
+ */
+export const getUserFiles = async (path: string): Promise<UserData[]> => {
     const firebaseStorage = getStorage(firebase_app);
     const storageRef = ref(firebaseStorage, path);
     let fileList: UserData[] = [];
@@ -29,7 +41,13 @@ export const getUserFiles = async (path: string) => {
     }
 };
 
-export const getLatestCountryFile = async (path: string) => {
+/**
+ * Retrieves the latest country file from the specified path in the Firebase storage.
+ *
+ * @param {string} path - The path to the directory in the Firebase storage.
+ * @return {Promise<string>} A promise that resolves to the contents of the latest country file as a string.
+ */
+export const getLatestCountryFile = async (path: string): Promise<string> => {
     const firebaseStorage = getStorage(firebase_app);
     const storageRef = ref(firebaseStorage, path);
     let fileNameList: string[] = [];

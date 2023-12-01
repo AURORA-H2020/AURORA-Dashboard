@@ -42,7 +42,17 @@ import ConsumptionCardSummaryCategory from "../consumptionCardSummaryCategory";
 import { ConsumptionCategory } from "@/models/userData";
 import AutoReport from "../autoReport";
 
-export default function FilterIndex({ localData }: { localData: Summaries }) {
+/**
+ * Renders the FilterIndex component.
+ *
+ * @param {object} localData - The localData object containing the summaries.
+ * @return {JSX.Element} The JSX element representing the FilterIndex component.
+ */
+export default function FilterIndex({
+    localData,
+}: {
+    localData: Summaries;
+}): JSX.Element {
     const [dateRange, setDateRange] = useState<DateRangePickerValue>({
         selectValue: "this-year",
         from: new Date(new Date().getFullYear(), 0, 1),

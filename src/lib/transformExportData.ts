@@ -14,6 +14,12 @@ import {
 } from "./utilities";
 import { userIdBlacklist } from "./constants";
 
+/**
+ * Transforms the provided export data into a summary object.
+ *
+ * @param {UserData} sourceData - The source data to transform.
+ * @returns {Summary} The transformed summary object.
+ */
 function transformExportData(sourceData: UserData) {
     const data = sourceData.data;
 
@@ -257,6 +263,12 @@ function transformExportData(sourceData: UserData) {
     return summary;
 }
 
+/**
+ * Generate the function comment for the given function body.
+ *
+ * @param {UserData[]} sourceData - the source data array
+ * @return {Summary[]} the transformed data array
+ */
 export function testTransform(sourceData: UserData[]) {
     let dataSet: Summary[] = [];
 
@@ -266,6 +278,12 @@ export function testTransform(sourceData: UserData[]) {
     return dataSet;
 }
 
+/**
+ * Creates a new country object with the given country ID.
+ *
+ * @param {string} countryID - The ID of the country.
+ * @return {object} - The newly created country object.
+ */
 function newCountry(countryID: string) {
     return {
         countryID: countryID,
@@ -275,6 +293,12 @@ function newCountry(countryID: string) {
     };
 }
 
+/**
+ * Creates a new city object with the given city ID.
+ *
+ * @param {string} cityID - The ID of the city.
+ * @return {object} - The newly created city object.
+ */
 function newCity(cityID: string) {
     return {
         cityID: cityID,
@@ -289,6 +313,12 @@ function newCity(cityID: string) {
     };
 }
 
+/**
+ * Creates a new gender object with the given gender name.
+ *
+ * @param {string} genderName - The name of the gender.
+ * @return {object} - The new gender object.
+ */
 function newGender(genderName: string) {
     return {
         demographicCategory: genderName,
@@ -296,6 +326,12 @@ function newGender(genderName: string) {
     };
 }
 
+/**
+ * Creates a new consumption summary object.
+ *
+ * @param {ConsumptionCategory} inputCategory - The category of the consumption.
+ * @return {object} - The new consumption summary object.
+ */
 function newConsumptionSummary(inputCategory: ConsumptionCategory) {
     return {
         category: inputCategory,
@@ -308,6 +344,12 @@ function newConsumptionSummary(inputCategory: ConsumptionCategory) {
     };
 }
 
+/**
+ * Creates a new consumption source object.
+ *
+ * @param {string} inputSource - The input source for the consumption.
+ * @return {object} - The newly created consumption source object.
+ */
 function newConsumptionSource(inputSource: string) {
     return {
         source: inputSource,
@@ -317,13 +359,21 @@ function newConsumptionSource(inputSource: string) {
     };
 }
 
+/**
+ * Ensures that a consumption summary exists for the given category in the current city.
+ *
+ * @param {SummaryCity} currentCity - The current city object.
+ * @param {ConsumptionCategory} category - The consumption category to ensure a summary for.
+ * @return {SummaryCity} - The updated city object with the consumption summary.
+ */
 function ensureConsumptionSummary(
     currentCity: SummaryCity,
     category: ConsumptionCategory,
-) {
+): SummaryCity {
     let thisConsumptionSummary = currentCity.categories.find(
         (consumptionSummary) => consumptionSummary.category === category,
     );
+
     if (!thisConsumptionSummary) {
         currentCity.categories.push(newConsumptionSummary(category));
     }
@@ -331,6 +381,12 @@ function ensureConsumptionSummary(
     return currentCity;
 }
 
+/**
+ * Creates a new summary year object with the given current year.
+ *
+ * @param {string} currentYear - The current year.
+ * @return {object} - The new summary year object.
+ */
 function newSummaryYear(currentYear: string) {
     return {
         year: currentYear,
@@ -338,6 +394,12 @@ function newSummaryYear(currentYear: string) {
     };
 }
 
+/**
+ * Creates a new summary month object with default values for carbon emissions and energy expended.
+ *
+ * @param {number} currentMonth - The current month.
+ * @return {Object} - The new summary month object.
+ */
 function newSummaryMonth(currentMonth: number) {
     return {
         month: currentMonth,

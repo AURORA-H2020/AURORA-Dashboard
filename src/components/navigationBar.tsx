@@ -7,6 +7,11 @@ import { DevicePhoneMobileIcon } from "@heroicons/react/24/outline";
 import Logo from "./logo";
 import { usePathname } from "next/navigation";
 
+/**
+ * Renders the navigation bar component.
+ *
+ * @return {ReactElement} The rendered navigation bar.
+ */
 export default function NavigationBar() {
     const pathname = usePathname();
     const navActive =

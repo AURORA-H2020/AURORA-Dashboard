@@ -4,6 +4,11 @@ import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import Image from "next/image";
 
+/**
+ * Renders the logo component.
+ *
+ * @return {JSX.Element} The logo component.
+ */
 export default function Logo() {
     const [mounted, setMounted] = useState(false);
     const { theme } = useTheme();

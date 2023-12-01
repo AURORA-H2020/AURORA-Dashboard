@@ -2,6 +2,17 @@ import { MetaData } from "@/models/summary";
 import { Metric, Text, Color, Icon, Flex } from "@tremor/react";
 import { ElementType } from "react";
 
+/**
+ * Renders a detailed card component with the given data.
+ *
+ * @param {Object} props - The props object containing the following properties:
+ *   - metaData: (MetaData | undefined) The meta data object.
+ *   - countries: (string[]) An array of country names.
+ *   - measure: ("userCount" | "consumptionsCount" | "recurringConsumptionsCount") The measure value.
+ *   - title: (string) The title of the card.
+ *   - icon: (ElementType<any>) The icon element type (optional).
+ * @return {JSX.Element} The rendered detailed card component.
+ */
 export default function DetailedCard({
     metaData,
     countries,

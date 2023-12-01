@@ -13,11 +13,18 @@ export const metadata: Metadata = {
     description: "Latest AURORA Energy Tracker Data",
 };
 
+/**
+ * Renders the root layout of the application.
+ *
+ * @param {Object} props - The props object containing the children component.
+ * @param {React.ReactNode} props.children - The children component to be rendered.
+ * @return {React.ReactNode} The root layout component.
+ */
 export default function RootLayout({
     children,
 }: {
     children: React.ReactNode;
-}) {
+}): React.ReactNode {
     return (
         <html lang="en">
             <head>

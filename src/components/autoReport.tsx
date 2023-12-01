@@ -8,6 +8,13 @@ import {
     Title,
 } from "@tremor/react";
 
+/**
+ * Renders an auto-generated report based on the provided metaData.
+ *
+ * @param {Object} props - The props object.
+ * @param {MetaData | undefined} props.metaData - The metaData object containing the data for the report.
+ * @return {JSX.Element} - The rendered report component.
+ */
 export default function AutoReport({
     metaData,
 }: {

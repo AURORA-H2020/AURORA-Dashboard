@@ -7,7 +7,12 @@ import firebase_app from "@/firebase/config";
 import { UserData } from "@/models/userData";
 import { getUserFiles } from "@/lib/firebaseUtils";
 
-export default async function Home() {
+/**
+ * Asynchronous function that represents the Home component.
+ *
+ * @return {Promise<JSX.Element>} The JSX element representing the Home component.
+ */
+export default async function Home(): Promise<JSX.Element> {
     let data: UserData[] = [];
 
     if (process.env.TEST_MODE && process.env.TEST_MODE == "true") {

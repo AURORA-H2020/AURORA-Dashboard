@@ -3,6 +3,11 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 
+/**
+ * Renders a theme toggle button.
+ *
+ * @return {JSX.Element} The theme toggle button.
+ */
 export default function ThemeToggle() {
     const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();

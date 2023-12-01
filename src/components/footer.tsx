@@ -4,6 +4,11 @@ import { Card } from "@tremor/react";
 import Link from "next/link";
 import Logo from "./logo";
 
+/**
+ * Renders the footer component.
+ *
+ * @return {JSX.Element} The rendered footer component.
+ */
 export default function Footer() {
     return (
         <footer className="bg-white rounded-lg shadow dark:bg-gray-900">

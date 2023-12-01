@@ -17,7 +17,12 @@ import { countries } from "@/lib/constants";
 import firebase_app from "@/firebase/config";
 import { getLatestCountryFile } from "@/lib/firebaseUtils";
 
-export default async function Home() {
+/**
+ * Renders the Home component.
+ *
+ * @returns {Promise<JSX.Element>} A promise that resolves to the rendered Home component.
+ */
+export default async function Home(): Promise<JSX.Element> {
     let data: CountryData;
 
     if (process.env.TEST_MODE && process.env.TEST_MODE == "true") {
