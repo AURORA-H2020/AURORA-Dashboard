@@ -46,18 +46,21 @@ export const getUserFiles = async (path: string): Promise<UserData[]> => {
  * Retrieves the latest country file from the specified path in the Firebase storage.
  *
  * @param {string} path - The path to the directory in the Firebase storage.
- * @return {Promise<string>} A promise that resolves to the contents of the latest country file as a string.
+ * @return {Promise<CountryData>} A promise that resolves to the contents of the latest country file as a string.
  */
-export const getLatestCountryFile = async (path: string): Promise<string> => {
+export const getLatestCountryFile = async (
+    path: string,
+): Promise<CountryData> => {
+    try {
     const firebaseStorage = getStorage(firebase_app);
     const storageRef = ref(firebaseStorage, path);
 
-    try {
-        const { items } = await listAll(storageRef);
-        const fileNameList = items.map((itemRef) => itemRef.fullPath);
+        const res = await listAll(storageRef);
+        const fileNameList = res.items.map((itemRef) => itemRef.fullPath);
+
         return await downloadFile(fileNameList[fileNameList.length - 1]);
     } catch (error) {
         console.error(error);
-        return "";
+        return {} as CountryData;
     }
 };
