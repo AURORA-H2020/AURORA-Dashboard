@@ -1,6 +1,7 @@
 import { UserData } from "@/models/userData";
 import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
 import firebase_app from "@/firebase/config";
+import { CountryData } from "@/models/countryData";
 
 /**
  * Downloads a file from Firebase Storage.
@@ -52,8 +53,8 @@ export const getLatestCountryFile = async (
     path: string,
 ): Promise<CountryData> => {
     try {
-    const firebaseStorage = getStorage(firebase_app);
-    const storageRef = ref(firebaseStorage, path);
+        const firebaseStorage = getStorage(firebase_app);
+        const storageRef = ref(firebaseStorage, path);
 
         const res = await listAll(storageRef);
         const fileNameList = res.items.map((itemRef) => itemRef.fullPath);
