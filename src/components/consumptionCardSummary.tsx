@@ -55,7 +55,7 @@ export default function ConsumptionCardSummary({
             />
             <Legend
                 className="mt-3"
-                categories={["Electricty", "Heating", "Transportation"]}
+                categories={["Electricity", "Heating", "Transportation"]}
                 colors={["yellow", "red", "blue"]}
             />
         </>

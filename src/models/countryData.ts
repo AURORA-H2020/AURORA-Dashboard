@@ -5,7 +5,7 @@ export interface CountryData {
             currencyCode: string;
             labels: {
                 carbonEmission: LabelCategories;
-                ernergyExpended: LabelCategories;
+                energyExpended: LabelCategories;
             };
             __collections__: {
                 cities: {}[];

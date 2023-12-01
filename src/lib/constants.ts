@@ -68,4 +68,8 @@ export const userIdBlacklist: string[] = [
     "jmGIDNjI25TXREjwoj0E51nDfQy2",
     "vJP4AvLeVicdmvtYFhHRkNJOrm53",
     "h702sviZFDh9Vc7q2Y3LZR9o9KE3",
+    // Identified as excessive consumptions. Unblock once more sophisticated checks are in place.
+    "kMinkCzpJaMMnZwEL3XQ4kLTLHg1",
+    "YnLScLYQMgPNyRDj3RiRFaom4eH2",
+    "GXTS3kX82CXtdS0qHsX3djnB7aj1",
 ];
