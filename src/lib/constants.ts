@@ -7,6 +7,8 @@ export const categories: ConsumptionCategory[] = [
     "transportation",
 ];
 
+export const categoryColors: Color[] = ["yellow", "red", "blue"];
+
 export const allTremorColours: Color[] = [
     "red",
     "orange",

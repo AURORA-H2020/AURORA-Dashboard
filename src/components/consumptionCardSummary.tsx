@@ -1,3 +1,4 @@
+import { categories, categoryColors } from "@/lib/constants";
 import { MetaData } from "@/models/summary";
 import { DonutChart, Legend } from "@tremor/react";
 
@@ -51,12 +52,12 @@ export default function ConsumptionCardSummary({
                 showAnimation={true}
                 category="count"
                 index="category"
-                colors={["yellow", "red", "blue"]}
+                colors={categoryColors}
             />
             <Legend
                 className="mt-3"
-                categories={["Electricity", "Heating", "Transportation"]}
-                colors={["yellow", "red", "blue"]}
+                categories={categories}
+                colors={categoryColors}
             />
         </>
     );

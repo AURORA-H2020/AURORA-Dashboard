@@ -90,6 +90,18 @@ export default function NavigationBar() {
                                 About
                             </Link>
                         </li>
+                        <li>
+                            <Link
+                                href="/signin"
+                                className={
+                                    pathname === "/signin"
+                                        ? navActive
+                                        : navInactive
+                                }
+                            >
+                                Login
+                            </Link>
+                        </li>
                     </ul>
                 </div>
             </Card>
