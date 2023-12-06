@@ -69,9 +69,11 @@ export default function ConsumptionPreview({
                     <Col>
                         <Title>{titleCase(consumption.category)}</Title>
                         <Text>
-                            {new Date(
-                                consumption.updatedAt.nanoseconds,
-                            ).toDateString()}
+                            {consumption.updatedAt?.nanoseconds
+                                ? new Date(
+                                      consumption.updatedAt.nanoseconds,
+                                  ).toDateString()
+                                : ""}
                         </Text>
                     </Col>
                     <Col>

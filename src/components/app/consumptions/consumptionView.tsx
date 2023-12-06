@@ -66,17 +66,21 @@ export default function ConsumptionView({
                 <ListItem>
                     <span>Created At</span>
                     <span>
-                        {new Date(
-                            consumption.createdAt.nanoseconds,
-                        ).toDateString()}
+                        {consumption.createdAt?.nanoseconds
+                            ? new Date(
+                                  consumption.createdAt.nanoseconds,
+                              ).toDateString()
+                            : ""}
                     </span>
                 </ListItem>
                 <ListItem>
                     <span>Updated At</span>
                     <span>
-                        {new Date(
-                            consumption.updatedAt.nanoseconds,
-                        ).toDateString()}
+                        {consumption.updatedAt?.nanoseconds
+                            ? new Date(
+                                  consumption.updatedAt.nanoseconds,
+                              ).toDateString()
+                            : ""}
                     </span>
                 </ListItem>
                 <Text>
