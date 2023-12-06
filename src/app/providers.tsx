@@ -3,6 +3,7 @@
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ThemeProviderProps } from "next-themes/dist/types";
+import { AuthContextProvider } from "@/context/AuthContext";
 
 /**
  * Renders the Providers component.
@@ -15,5 +16,9 @@ export function Providers({
     children,
     ...props
 }: ThemeProviderProps): React.ReactElement {
-    return <NextThemesProvider {...props}>{children}</NextThemesProvider>;
+    return (
+        <AuthContextProvider>
+            <NextThemesProvider {...props}>{children}</NextThemesProvider>
+        </AuthContextProvider>
+    );
 }
