@@ -13,6 +13,14 @@ import { Heading, Text } from "@radix-ui/themes";
 
 const firestore = getFirestore(firebase_app);
 
+/**
+ * Renders the account page for authenticated users, displaying user details
+ * and a list of their consumptions. Redirects to the home page if the user
+ * is not authenticated. It fetches user consumption data from Firestore.
+ *
+ * @return {JSX.Element} The account page component with user information and
+ *                       a list of Consumption components.
+ */
 function AccountPage(): JSX.Element {
     const { user } = useAuthContext() as { user: User };
     const router = useRouter();
@@ -27,7 +35,7 @@ function AccountPage(): JSX.Element {
             setIsAuthenticated(true);
         }
 
-        // Define an async function to fetch the data within useEffect
+        // Async function to fetch the data within useEffect
         const fetchUserConsumptions = async () => {
             try {
                 // Reference to the collection where user documents are stored

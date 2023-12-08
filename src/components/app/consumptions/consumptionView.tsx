@@ -1,9 +1,17 @@
 import { getConsumptionAttributes } from "@/lib/utilities";
 import { Consumption } from "@/models/extensions";
 
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { Table, TableBody, TableCaption } from "@/components/ui/table";
 import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
+import ConsumptionTableRow from "./consumptionTableRow";
 
+/**
+ * Renders a view displaying various attributes of a user's consumption
+ * data in table rows, such as carbon emissions, costs, and dates.
+ *
+ * @param {Consumption} consumption - The consumption data to display
+ * @return {JSX.Element} A React component that renders consumption data
+ */
 export default function ConsumptionView({
     consumption,
 }: {
@@ -18,29 +26,29 @@ export default function ConsumptionView({
                     <ConsumptionTableRow label={consumptionAttributes.label}>
                         {consumption.carbonEmissions ? (
                             <>
-                            {consumption.value
+                                {consumption.value
                                     ? Math.round(
                                           consumption.energyExpended || 0,
                                       ) +
-                                  " " +
-                                  String(consumptionAttributes.unit)
-                                : ""}
+                                      " " +
+                                      String(consumptionAttributes.unit)
+                                    : ""}
                             </>
                         ) : (
                             "Calculating..."
                         )}{" "}
                     </ConsumptionTableRow>
                     <ConsumptionTableRow label="CO2-Emissions">
-                            {consumption.carbonEmissions ? (
-                                <>
-                                    {kiloGramNumberFormatter.format(
-                                        consumption.carbonEmissions,
-                                    )}
-                                    {carbonUnit}
-                                </>
-                            ) : (
-                                "Calculating..."
-                            )}{" "}
+                        {consumption.carbonEmissions ? (
+                            <>
+                                {kiloGramNumberFormatter.format(
+                                    consumption.carbonEmissions,
+                                )}
+                                {carbonUnit}
+                            </>
+                        ) : (
+                            "Calculating..."
+                        )}{" "}
                     </ConsumptionTableRow>
 
                     <ConsumptionTableRow label="Created At">
@@ -77,8 +85,8 @@ export default function ConsumptionView({
                                 ?.toDate()
                                 .toDateString()}
                         </ConsumptionTableRow>
-                </TableBody>
-            </Table>
+                    </TableBody>
+                </Table>
             ) : null}
 
             {consumption.heating ? (

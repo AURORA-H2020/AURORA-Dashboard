@@ -10,9 +10,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 /**
- * Renders the Home component.
+ * Renders the home page component with country-specific data.
  *
- * @returns {Promise<JSX.Element>} A promise that resolves to the rendered Home component.
+ * Fetches country data from a local JSON file in test mode or from
+ * Firebase in production. Displays app metrics, carbon emissions,
+ * energy usage, and labels for each country in a tabbed interface.
+ *
+ * @return {Promise<JSX.Element>} A promise that resolves with the
+ *                                rendered home page component.
  */
 export default async function Home(): Promise<JSX.Element> {
     let data: CountryData;
@@ -39,7 +44,7 @@ export default async function Home(): Promise<JSX.Element> {
                     <Strong>Carbon Emissions</Strong>,{" "}
                     <Strong>Energy Usage</Strong> and <Strong>Labels</Strong>.
                 </Text>
-                <Tabs>
+                <Tabs defaultValue={countries[0].code}>
                     <div className="overflow-x-auto">
                         <TabsList className="mt-8 h-[50px]">
                             {countries.map((country) => {
@@ -70,9 +75,10 @@ export default async function Home(): Promise<JSX.Element> {
                                         <Heading>
                                             Carbon Emission Labels
                                         </Heading>
-                                        <Text className="h-20">
+                                        <Text className="h-24">
                                             The data we use to calculate the
-                                            label for carbon emissions.
+                                            label for carbon emissions in{" "}
+                                            {country.name}.
                                         </Text>
                                         <AboutJson
                                             data={
@@ -85,9 +91,10 @@ export default async function Home(): Promise<JSX.Element> {
                                         <Heading>
                                             Energy Expended Labels
                                         </Heading>
-                                        <Text className="h-20">
+                                        <Text className="h-24">
                                             The data we use to calculate the
-                                            label for energy usage.
+                                            label for energy usage in{" "}
+                                            {country.name}.
                                         </Text>
                                         <AboutJson
                                             data={
@@ -98,10 +105,10 @@ export default async function Home(): Promise<JSX.Element> {
                                     </Flex>
                                     <Flex direction={"column"}>
                                         <Heading>Metrics</Heading>
-                                        <Text className="h-20">
+                                        <Text className="h-24">
                                             The data we use to calculate carbon
                                             emissions and energy usage based on
-                                            user data.
+                                            user data in {country.name}.
                                         </Text>
                                         <AboutJson
                                             data={

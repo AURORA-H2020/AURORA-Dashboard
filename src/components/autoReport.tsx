@@ -7,7 +7,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { Text, Heading } from "@radix-ui/themes";
+import { Text, Heading, Strong } from "@radix-ui/themes";
 
 /**
  * Renders an auto-generated report based on the provided metaData.
@@ -109,83 +109,96 @@ export default function AutoReport({
                 <Heading>Report</Heading>
                 <Text className="text-md mb-4">
                     Overall,{" "}
-                    <b>{summedMetaData.userCount.toLocaleString()} accounts</b>{" "}
+                    <Strong>
+                        {summedMetaData.userCount.toLocaleString()} accounts
+                    </Strong>{" "}
                     have been created. Of those users,{" "}
-                    <b>{summedMetaData.genders.female.toLocaleString()}</b>{" "}
+                    <Strong>
+                        {summedMetaData.genders.female.toLocaleString()}
+                    </Strong>{" "}
                     identify as female,{" "}
-                    <b>{summedMetaData.genders.male.toLocaleString()}</b> as
-                    male,{" "}
-                    <b>{summedMetaData.genders.nonBinary.toLocaleString()}</b>{" "}
+                    <Strong>
+                        {summedMetaData.genders.male.toLocaleString()}
+                    </Strong>{" "}
+                    as male,{" "}
+                    <Strong>
+                        {summedMetaData.genders.nonBinary.toLocaleString()}
+                    </Strong>{" "}
                     as non-binary, and{" "}
-                    <b>{summedMetaData.genders.other.toLocaleString()}</b> as
-                    other. In total, those users created{" "}
-                    <b>{summedMetaDataTotalConsumptionsCount} consumptions</b>.{" "}
-                    <b>
+                    <Strong>
+                        {summedMetaData.genders.other.toLocaleString()}
+                    </Strong>{" "}
+                    as other. In total, those users created{" "}
+                    <Strong>
+                        {summedMetaDataTotalConsumptionsCount} consumptions
+                    </Strong>
+                    .{" "}
+                    <Strong>
                         {summedMetaData.consumptions.transportation.count.toLocaleString()}
-                    </b>{" "}
+                    </Strong>{" "}
                     are related to transportation,{" "}
-                    <b>
+                    <Strong>
                         {summedMetaData.consumptions.electricity.count.toLocaleString()}
-                    </b>{" "}
+                    </Strong>{" "}
                     to electricity, and{" "}
-                    <b>
+                    <Strong>
                         {summedMetaData.consumptions.heating.count.toLocaleString()}
-                    </b>{" "}
+                    </Strong>{" "}
                     to heating. This amounts to a total of{" "}
-                    <b>
+                    <Strong>
                         {summedMetaDataTotalCarbonEmissions} kg CO
                         <sub>2</sub>
-                    </b>{" "}
+                    </Strong>{" "}
                     emissions or{" "}
-                    <b>
+                    <Strong>
                         {summedMetaDataTotalEnergyExpended} kWh of energy used
-                    </b>
+                    </Strong>
                     .{" "}
-                    <b>
+                    <Strong>
                         {Math.round(
                             summedMetaData.consumptions.transportation
                                 .carbonEmissions,
                         ).toLocaleString()}{" "}
                         kg CO<sub>2</sub>
-                    </b>{" "}
+                    </Strong>{" "}
                     are from transportation (
-                    <b>
+                    <Strong>
                         {Math.round(
                             summedMetaData.consumptions.transportation
                                 .energyExpended,
                         ).toLocaleString()}{" "}
                         kWh
-                    </b>
+                    </Strong>
                     ),{" "}
-                    <b>
+                    <Strong>
                         {Math.round(
                             summedMetaData.consumptions.electricity
                                 .carbonEmissions,
                         ).toLocaleString()}{" "}
                         kg CO<sub>2</sub>
-                    </b>{" "}
+                    </Strong>{" "}
                     from electricity (
-                    <b>
+                    <Strong>
                         {Math.round(
                             summedMetaData.consumptions.electricity
                                 .energyExpended,
                         ).toLocaleString()}{" "}
                         kWh
-                    </b>
+                    </Strong>
                     ), and{" "}
-                    <b>
+                    <Strong>
                         {Math.round(
                             summedMetaData.consumptions.heating.carbonEmissions,
                         ).toLocaleString()}{" "}
                         kg CO<sub>2</sub>
-                    </b>{" "}
+                    </Strong>{" "}
                     from heating (
-                    <b>
+                    <Strong>
                         {Math.round(
                             summedMetaData.consumptions.heating.energyExpended,
                         ).toLocaleString()}{" "}
                         kWh
-                    </b>
+                    </Strong>
                     ).
                 </Text>
                 <Accordion type="multiple">
@@ -220,101 +233,103 @@ export default function AutoReport({
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <Text className="text-md mb-4">
-                                        For <b>{country.country}</b>,{" "}
-                                        <b>
+                                        For <Strong>{country.country}</Strong>,{" "}
+                                        <Strong>
                                             {country.userCount.toLocaleString()}{" "}
                                             accounts
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         have been created. Of those users,{" "}
-                                        <b>
+                                        <Strong>
                                             {country.genders.female.toLocaleString()}
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         identify as female,{" "}
-                                        <b>
+                                        <Strong>
                                             {country.genders.male.toLocaleString()}
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         as male,{" "}
-                                        <b>
+                                        <Strong>
                                             {country.genders.nonBinary.toLocaleString()}
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         as non-binary, and{" "}
-                                        <b>
+                                        <Strong>
                                             {country.genders.other.toLocaleString()}
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         as other. In total, those users created{" "}
-                                        <b>
+                                        <Strong>
                                             {totalConsumptionCount.toLocaleString()}{" "}
                                             consumptions
-                                        </b>
+                                        </Strong>
                                         .{" "}
-                                        <b>
+                                        <Strong>
                                             {country.consumptions.transportation.count.toLocaleString()}
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         are related to transportation,{" "}
-                                        <b>
+                                        <Strong>
                                             {country.consumptions.electricity.count.toLocaleString()}
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         to electricity, and{" "}
-                                        <b>
+                                        <Strong>
                                             {country.consumptions.heating.count.toLocaleString()}
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         to heating. This amounts to a total of{" "}
-                                        <b>
+                                        <Strong>
                                             {totalCarbonEmissions} kg CO
                                             <sub>2</sub>
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         emissions or{" "}
-                                        <b>{totalEnergyExpended} kWh</b> of
-                                        energy used.{" "}
-                                        <b>
+                                        <Strong>
+                                            {totalEnergyExpended} kWh
+                                        </Strong>{" "}
+                                        of energy used.{" "}
+                                        <Strong>
                                             {Math.round(
                                                 country.consumptions
                                                     .transportation
                                                     .carbonEmissions,
                                             ).toLocaleString()}{" "}
                                             kg CO<sub>2</sub>
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         are from transportation (
-                                        <b>
+                                        <Strong>
                                             {Math.round(
                                                 country.consumptions
                                                     .transportation
                                                     .energyExpended,
                                             ).toLocaleString()}{" "}
                                             kWh
-                                        </b>
+                                        </Strong>
                                         ),{" "}
-                                        <b>
+                                        <Strong>
                                             {Math.round(
                                                 country.consumptions.electricity
                                                     .carbonEmissions,
                                             ).toLocaleString()}{" "}
                                             kg CO<sub>2</sub>
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         from electricity (
-                                        <b>
+                                        <Strong>
                                             {Math.round(
                                                 country.consumptions.electricity
                                                     .energyExpended,
                                             ).toLocaleString()}{" "}
                                             kWh
-                                        </b>
+                                        </Strong>
                                         ), and{" "}
-                                        <b>
+                                        <Strong>
                                             {Math.round(
                                                 country.consumptions.heating
                                                     .carbonEmissions,
                                             ).toLocaleString()}{" "}
                                             kg CO<sub>2</sub>
-                                        </b>{" "}
+                                        </Strong>{" "}
                                         from heating (
-                                        <b>
+                                        <Strong>
                                             {Math.round(
                                                 country.consumptions.heating
                                                     .energyExpended,
                                             ).toLocaleString()}{" "}
                                             kWh
-                                        </b>
+                                        </Strong>
                                         ).
                                     </Text>
                                 </AccordionContent>

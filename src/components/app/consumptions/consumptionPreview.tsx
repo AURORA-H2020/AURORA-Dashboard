@@ -4,7 +4,7 @@ import { useState } from "react";
 import ConsumptionView from "./consumptionView";
 
 import { Button } from "@/components/ui/button";
-import { Heading, Text, Flex, Grid } from "@radix-ui/themes";
+import { Heading, Text, Flex } from "@radix-ui/themes";
 import { Card, CardContent } from "@/components/ui/card";
 
 import {
@@ -27,11 +27,20 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { useToast } from "@/components/ui/use-toast";
+
+/**
+ * Renders a preview of a consumption object with interactive
+ * elements such as modals for viewing, editing, and deleting.
+ *
+ * @param {Consumption} consumption - The consumption data to display.
+ * @return {JSX.Element} A JSX element that includes the consumption
+ * card with modals for detailed view and deletion confirmation.
+ */
 export default function ConsumptionPreview({
     consumption,
 }: {
     consumption: Consumption;
-}) {
+}): JSX.Element {
     const consumptionAttributes = getConsumptionAttributes(consumption);
     const { toast } = useToast();
 
@@ -159,7 +168,7 @@ export default function ConsumptionPreview({
                             Delete
                         </Button>
                         <Flex className="space-x-2">
-                        <Button type="submit">Edit</Button>
+                            <Button type="submit">Edit</Button>
                             <Button type="submit">Duplicate</Button>
                         </Flex>
                     </DialogFooter>
