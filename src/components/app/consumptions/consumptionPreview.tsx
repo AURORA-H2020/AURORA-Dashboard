@@ -18,15 +18,28 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
 
+import {
+    AlertDialog,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { useToast } from "@/components/ui/use-toast";
 export default function ConsumptionPreview({
     consumption,
 }: {
     consumption: Consumption;
 }) {
     const consumptionAttributes = getConsumptionAttributes(consumption);
+    const { toast } = useToast();
 
     // State to manage the visibility of the modal
     const [isModalOpen, setModalOpen] = useState(false);
+
+    // State to manage the visibility of the delete confirmation
+    const [isAlertOpen, setAlertOpen] = useState(false);
 
     // Function to handle modal open
     const openModal = () => {
@@ -46,6 +59,25 @@ export default function ConsumptionPreview({
         setModalOpen(false);
     };
 
+    const acceptDelete = () => {
+        setAlertOpen(false);
+        setModalOpen(false);
+
+        // Wait .5 seconds before deleting
+        setTimeout(() => {
+            toast({
+                title: "Consumption deleted",
+                description: "The consumption has been deleted.",
+            });
+        }, 500);
+
+        // TODO: Delete action
+    };
+
+    const cancelDelete = () => {
+        setAlertOpen(false);
+    };
+
     return (
         <>
             <Card>
@@ -54,7 +86,7 @@ export default function ConsumptionPreview({
                         justify="between"
                         align={"center"}
                         className="cursor-pointer"
-                        onClick={(e) => {
+                        onClick={() => {
                             openModal();
                         }}
                     >
@@ -115,12 +147,43 @@ export default function ConsumptionPreview({
                             <ConsumptionView consumption={consumption} />
                         </DialogDescription>
                     </DialogHeader>
-                    <DialogFooter>
-                        {/* TODO: Add edit functionality */}
+                    <DialogFooter className="flex sm:justify-between">
+                        {/* TODO: Add button functionality */}
+
+                        <Button
+                            className="self-left"
+                            variant={"destructive"}
+                            type="submit"
+                            onClick={() => setAlertOpen(true)}
+                        >
+                            Delete
+                        </Button>
+                        <Flex className="space-x-2">
                         <Button type="submit">Edit</Button>
+                            <Button type="submit">Duplicate</Button>
+                        </Flex>
                     </DialogFooter>
                 </DialogContent>
             </Dialog>
+
+            <AlertDialog open={isAlertOpen}>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>
+                            Are you absolutely sure?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                            Are your sure you want to delete the entry?
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <Button onClick={cancelDelete}>Cancel</Button>
+                        <Button variant="destructive" onClick={acceptDelete}>
+                            Delete
+                        </Button>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </>
     );
 }
