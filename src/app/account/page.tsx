@@ -8,10 +8,12 @@ import firebase_app from "@/firebase/config";
 import { getFirestore } from "firebase/firestore";
 import { Consumption } from "@/models/extensions";
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
+import LoadingSpinner from "@/components/ui/loading";
+import { Heading, Text } from "@radix-ui/themes";
 
 const firestore = getFirestore(firebase_app);
 
-function Page(): JSX.Element {
+function AccountPage(): JSX.Element {
     const { user } = useAuthContext() as { user: User };
     const router = useRouter();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -57,20 +59,18 @@ function Page(): JSX.Element {
         fetchUserConsumptions();
     }, [user, router]);
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated && user === null) {
         // Render nothing or a loading indicator until the auth check is complete
-        return <>Loading...</>; // or <div>Loading...</div>
+        return <LoadingSpinner />;
     }
 
     // Authenticated user content
     return (
         <>
-            <h1>Only logged-in users can view this page</h1>
-            <p>Welcome, {user.displayName}</p>
-            <p>This is the account page</p>
-            <p>Your UID: {user.uid}</p>
+            <Heading>Welcome, {user?.displayName}</Heading>
+            <Text>Your UID: {user?.uid}</Text>
             <div>
-                <h1>User Documents</h1>
+                <Heading as="h2">Your Consumptions</Heading>
                 {userConsumptions.map((consumption) => (
                     <div className="mb-4" key={consumption.id}>
                         <ConsumptionPreview consumption={consumption} />
@@ -81,4 +81,4 @@ function Page(): JSX.Element {
     );
 }
 
-export default Page;
+export default AccountPage;

@@ -1,5 +1,21 @@
 import { SingleUser } from "@/models/userData";
-import { cities, countries } from "./constants";
+import { cities, countries, consumptionMapping } from "./constants";
+
+import { type ClassValue, clsx } from "clsx";
+import { twMerge } from "tailwind-merge";
+import { Consumption } from "@/models/extensions";
+import { ConsumptionAttributes } from "@/models/metaData";
+
+/**
+ * Automatically added by shadcn/ui
+ * Combines class names, dedupes, and returns the result.
+ *
+ * @param {ClassValue[]} inputs - An array of class values to merge.
+ * @return {string} The merged class names as a single string.
+ */
+export function cn(...inputs: ClassValue[]) {
+    return twMerge(clsx(inputs));
+}
 
 /**
  * Converts a number of seconds to a Date object representing the corresponding date and time.
@@ -101,4 +117,14 @@ export function getMonthShortName(monthNumber: number): string {
 export function camelCaseToWords(s: string) {
     const result = s.replace(/([A-Z])/g, " $1");
     return result.charAt(0).toUpperCase() + result.slice(1);
+}
+
+export function getConsumptionAttributes(
+    consumption: Consumption,
+): ConsumptionAttributes {
+    const consumptionCategory = Object.keys(consumptionMapping).find(
+        (key) => key in consumption,
+    );
+
+    return consumptionCategory ? consumptionMapping[consumptionCategory] : {};
 }

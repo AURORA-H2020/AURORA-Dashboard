@@ -1,19 +1,58 @@
 "use client";
 import signIn from "@/firebase/auth/signIn";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 import { useRouter } from "next/navigation";
+
+import { Button } from "@/components/ui/button";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
 import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import { Flex, Strong } from "@radix-ui/themes";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import Link from "next/link";
+import { useToast } from "@/components/ui/use-toast";
 
-function Page(): JSX.Element {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+const formSchema = z.object({
+    email: z.string().min(2).max(50),
+    password: z.string().min(2).max(50),
+});
+
+function SignInForm() {
     const router = useRouter();
+    const { toast } = useToast();
 
-    // Handle form submission
-    const handleForm = async (event: { preventDefault: () => void }) => {
-        event.preventDefault();
+    const [showPassword, setShowPassword] = useState(false);
 
+    // 1. Define your form.
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            email: "",
+            password: "",
+        },
+    });
+
+    // 2. Define a submit handler.
+    async function onSubmit(values: z.infer<typeof formSchema>) {
         // Attempt to sign in with provided email and password
-        const { result, error } = await signIn(email, password);
+        const { result, error } = await signIn(values.email, values.password);
 
         if (error) {
             // Display and log any sign-in errors
@@ -21,71 +60,103 @@ function Page(): JSX.Element {
             return;
         }
 
-        // Sign in successful
-        console.log(result);
+        toast({
+            title: "Successfully signed in",
+            description: "Welcome back!",
+        });
 
-        // Redirect to the admin page
-        // Typically you would want to redirect them to a protected page an add a check to see if they are admin or
-        // create a new page for admin
+        // Redirect to the account page
         router.push("/account");
-    };
+    }
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
-            <div className="w-full max-w-xs">
-                <form
-                    onSubmit={handleForm}
-                    className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-                >
-                    <h1 className="text-3xl font-bold mb-6 text-black">
-                        Sign In
-                    </h1>
-                    <div className="mb-4">
-                        <label
-                            htmlFor="email"
-                            className="block text-gray-700 text-sm font-bold mb-2"
+        <Flex justify={"center"}>
+            <Card className="max-w-md">
+                <CardHeader>
+                    <CardTitle>Sign in</CardTitle>
+                    <CardDescription>
+                        Sign in to your AURORA Energy Tracker account.
+                        <br />
+                        Don&apos;t have an account yet? Register{" "}
+                        <Link href="/signup">
+                            <Strong>here</Strong>.
+                        </Link>
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Form {...form}>
+                        <form
+                            onSubmit={form.handleSubmit(onSubmit)}
+                            className="space-y-8"
                         >
-                            Email
-                        </label>
-                        <input
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            type="email"
-                            name="email"
-                            id="email"
-                            placeholder="example@mail.com"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        />
-                    </div>
-                    <div className="mb-6">
-                        <label
-                            htmlFor="password"
-                            className="block text-gray-700 text-sm font-bold mb-2"
-                        >
-                            Password
-                        </label>
-                        <input
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            type="password"
-                            name="password"
-                            id="password"
-                            placeholder="password"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                        />
-                    </div>
-                    <div className="flex items-center justify-between">
-                        <button
-                            type="submit"
-                            className="w-full bg-blue-500 text-white font-semibold py-2 rounded"
-                        >
-                            Sign In
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            <Strong>Email</Strong>
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="email"
+                                                placeholder="Email"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            <Strong>Password</Strong>
+                                        </FormLabel>
+                                        <FormControl>
+                                            <div className="relative">
+                                                <Input
+                                                    type={
+                                                        showPassword
+                                                            ? "text"
+                                                            : "password"
+                                                    }
+                                                    placeholder="Password"
+                                                    {...field}
+                                                />
+                                                <div className="absolute inset-y-0 right-0 pr-0 flex items-center cursor-pointer">
+                                                    <Button
+                                                        className="h-full w-12 p-1 rounded-l-none"
+                                                        variant={"outline"}
+                                                        onClick={() =>
+                                                            setShowPassword(
+                                                                !showPassword,
+                                                            )
+                                                        }
+                                                    >
+                                                        {showPassword ? (
+                                                            <EyeOff />
+                                                        ) : (
+                                                            <Eye />
+                                                        )}
+                                                    </Button>
+                                                </div>
+                                            </div>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button type="submit">Sign in</Button>
+                        </form>
+                    </Form>
+                </CardContent>
+            </Card>
+        </Flex>
     );
 }
 
-export default Page;
+export default SignInForm;

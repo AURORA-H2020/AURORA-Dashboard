@@ -5,6 +5,8 @@ import { Providers } from "./providers";
 import NavigationBar from "@/components/navigationBar";
 import Footer from "@/components/footer";
 import Script from "next/script";
+import "@radix-ui/themes/styles.css";
+import { cn } from "@/lib/utilities";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -53,22 +55,18 @@ export default function RootLayout({
                 />
                 <meta name="msapplication-TileColor" content="#da532c" />
                 <meta name="theme-color" content="#ffffff" />
-                <link
-                    rel="stylesheet"
-                    href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css"
-                />
             </head>
-            <body className={inter.className}>
+            <body className={cn(inter.className, "")}>
                 <Providers attribute="class" defaultTheme="system" enableSystem>
                     <header className="max-w-screen-xl items-center justify-between mx-auto p-4">
                         <NavigationBar />
                     </header>
-                    <div className="max-w-screen-xl items-center justify-between mx-auto p-4">
+                    <main className="max-w-screen-xl items-center justify-between mx-auto p-4">
                         <div>{children}</div>
-                    </div>
-                    <div className="max-w-screen-xl items-center justify-between mx-auto p-4">
+                    </main>
+                    <footer className="max-w-screen-xl items-center justify-between mx-auto p-4 self-end">
                         <Footer />
-                    </div>
+                    </footer>
                 </Providers>
                 <Script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></Script>
             </body>

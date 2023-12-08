@@ -1,82 +1,130 @@
 "use client";
-import signUp from "@/firebase/auth/signUp";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 
-function Page(): JSX.Element {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+import { useRouter } from "next/navigation";
+
+import { Button } from "@/components/ui/button";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Flex, Strong } from "@radix-ui/themes";
+import {
+    Card,
+    CardContent,
+    CardDescription,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
+import Link from "next/link";
+import signUp from "@/firebase/auth/signUp";
+
+const formSchema = z.object({
+    email: z.string().min(2).max(50),
+    password: z.string().min(2).max(50),
+});
+
+function SignUpForm(): JSX.Element {
     const router = useRouter();
 
-    // Handle form submission
-    const handleForm = async (event: { preventDefault: () => void }) => {
-        event.preventDefault();
+    // 1. Define your form.
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            email: "",
+            password: "",
+        },
+    });
 
-        // Attempt to sign up with provided email and password
-        const { result, error } = await signUp(email, password);
+    // 2. Define a submit handler.
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        // Attempt to sign in with provided email and password
+        const { result, error } = await signUp(values.email, values.password);
 
         if (error) {
-            // Display and log any sign-up errors
+            // Display and log any sign-in errors
             console.log(error);
             return;
         }
 
-        // Sign up successful
-        console.log(result);
-
-        // Redirect to the admin page
-        router.push("/admin");
-    };
+        // Redirect to the account page
+        router.push("/account");
+    }
 
     return (
-        <div className="flex justify-center items-center h-screen text-black">
-            <div className="w-96 bg-white rounded shadow p-6">
-                <h1 className="text-3xl font-bold mb-6">Registration</h1>
-                <form onSubmit={handleForm} className="space-y-4">
-                    <div>
-                        <label
-                            htmlFor="email"
-                            className="block mb-1 font-medium"
+        <Flex justify={"center"}>
+            <Card className="max-w-md">
+                <CardHeader>
+                    <CardTitle>Sign up</CardTitle>
+                    <CardDescription>
+                        Create your AURORA Energy Tracker account.
+                        <br />
+                        Already have an account? Sign in{" "}
+                        <Link href="/signin">
+                            <Strong>here</Strong>.
+                        </Link>
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <Form {...form}>
+                        <form
+                            onSubmit={form.handleSubmit(onSubmit)}
+                            className="space-y-8"
                         >
-                            Email
-                        </label>
-                        <input
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                            type="email"
-                            name="email"
-                            id="email"
-                            placeholder="example@mail.com"
-                            className="w-full border border-gray-300 rounded px-3 py-2"
-                        />
-                    </div>
-                    <div>
-                        <label
-                            htmlFor="password"
-                            className="block mb-1 font-medium"
-                        >
-                            Password
-                        </label>
-                        <input
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            type="password"
-                            name="password"
-                            id="password"
-                            placeholder="password"
-                            className="w-full border border-gray-300 rounded px-3 py-2"
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-blue-500 text-white font-semibold py-2 rounded"
-                    >
-                        Sign up
-                    </button>
-                </form>
-            </div>
-        </div>
+                            <FormField
+                                control={form.control}
+                                name="email"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            <Strong>Email</Strong>
+                                        </FormLabel>
+                                        <FormControl>
+                                            <Input
+                                                type="email"
+                                                placeholder="Email"
+                                                {...field}
+                                            />
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <FormField
+                                control={form.control}
+                                name="password"
+                                render={({ field }) => (
+                                    <FormItem>
+                                        <FormLabel>
+                                            <Strong>Password</Strong>
+                                        </FormLabel>
+                                        <FormControl>
+                                            <div className="relative">
+                                                <Input
+                                                    type={"password"}
+                                                    placeholder="Password"
+                                                    {...field}
+                                                />
+                                            </div>
+                                        </FormControl>
+                                        <FormMessage />
+                                    </FormItem>
+                                )}
+                            />
+                            <Button type="submit">Sign up</Button>
+                        </form>
+                    </Form>
+                </CardContent>
+            </Card>
+        </Flex>
     );
 }
 
-export default Page;
+export default SignUpForm;

@@ -3,44 +3,43 @@
 import LineChartTabs from "@/components/detailedFilteredCharts/timeLineChart";
 import LineChartTabsV2 from "./timeLineChartv2";
 import { Summaries } from "@/models/summary";
-import {
-    DateRangePicker,
-    DateRangePickerItem,
-    DateRangePickerValue,
-    Flex,
-    MultiSelect,
-    MultiSelectItem,
-    Tab,
-    TabGroup,
-    TabList,
-    Text,
-    Card,
-    Select,
-    SelectItem,
-    Grid,
-    TabPanel,
-    TabPanels,
-    Col,
-} from "@tremor/react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useState } from "react";
-import {
-    UserGroupIcon,
-    UserIcon,
-    BoltIcon,
-    CloudIcon,
-    Squares2X2Icon,
-} from "@heroicons/react/24/outline";
+import { UsersIcon, BlocksIcon } from "lucide-react";
 import { secondsToDateTime } from "@/lib/utilities";
 import { latestMetaData } from "@/lib/transformData";
 import { categories } from "@/lib/constants";
 import DetailedCard from "@/components/detailedCard";
-import { titleCase } from "@/lib/utilities";
 import GenderCardCountry from "../genderCardCountry";
 import GenderCardSummary from "../genderCardSummary";
 import ConsumptionCardSummary from "../consumptionCardSummary";
 import ConsumptionCardSummaryCategory from "../consumptionCardSummaryCategory";
 import { ConsumptionCategory } from "@/models/userData";
 import AutoReport from "../autoReport";
+
+import { DateRange } from "react-day-picker";
+import { format } from "date-fns";
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Calendar as CalendarIcon } from "lucide-react";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
+
+import { Card, CardContent } from "../ui/card";
+import { Grid, Flex, Text } from "@radix-ui/themes";
+
+import { MultiSelect, OptionType } from "../ui/multiselect";
+
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 /**
  * Renders the FilterIndex component.
@@ -53,8 +52,7 @@ export default function FilterIndex({
 }: {
     localData: Summaries;
 }): JSX.Element {
-    const [dateRange, setDateRange] = useState<DateRangePickerValue>({
-        selectValue: "this-year",
+    const [dateRange, setDateRange] = useState<DateRange | undefined>({
         from: new Date(new Date().getFullYear(), 0, 1),
         to: new Date(new Date().getFullYear(), 11, 31),
     });
@@ -64,24 +62,27 @@ export default function FilterIndex({
             var textB = b.countryName.toUpperCase();
             return textA < textB ? -1 : textA > textB ? 1 : 0;
         }) ?? [];
-    const [selectedCountriesID, setSelectedCountries] = useState<string[]>([]);
-    const [selectedCategoryID, setSelectedCategory] = useState(0);
+
     const [calculationMode, setCalculationMode] = useState("absolute");
-    const selectedCountries =
-        selectedCountriesID.length > 0
-            ? selectedCountriesID
-            : countries.map((country) => country.countryName);
+    const [categoryTabValue, setCategoryTabValue] = useState("all");
     const selectedCategories =
-        selectedCategoryID === 0
-            ? categories
-            : [categories[selectedCategoryID - 1]];
+        categoryTabValue === "all" ? categories : [categoryTabValue];
+
+    // Options available for country multiselect
+    const options: OptionType[] = countries.map((country) => ({
+        value: country.countryID,
+        label: country.countryName,
+    }));
+
+    // State to keep track of country multiselect
+    const [selectedCountries, setSelectedCountries] =
+        useState<OptionType[]>(options);
 
     localData = localData.map((entry) => {
         if (!entry) {
             return;
         }
-
-        if (dateRange.to && dateRange.from) {
+        if (dateRange?.to && dateRange?.from) {
             const entryDate = secondsToDateTime(entry.date);
             if (entryDate >= dateRange.to || entryDate <= dateRange.from) {
                 return;
@@ -91,8 +92,11 @@ export default function FilterIndex({
         return {
             ...entry,
             countries: entry.countries
-                .filter((country) =>
-                    selectedCountries.includes(country.countryName),
+                .filter(
+                    (country) =>
+                        selectedCountries.filter(
+                            (e) => e.label === country.countryName,
+                        ).length > 0,
                 )
                 .map((country) => {
                     return {
@@ -117,261 +121,343 @@ export default function FilterIndex({
     return (
         <>
             <Card className="mb-6">
-                <Flex className="mb-6">
-                    <TabGroup
-                        className=""
-                        onIndexChange={(categoryValue) =>
-                            setSelectedCategory(categoryValue)
-                        }
-                        index={selectedCategoryID}
-                    >
-                        <div className="overflow-x-auto">
-                            <TabList variant="solid">
-                                <Tab className="p-3">All</Tab>
-                                <Tab className="p-3">
-                                    {titleCase(categories[0])}
-                                </Tab>
-                                <Tab className="p-3">
-                                    {titleCase(categories[1])}
-                                </Tab>
-                                <Tab className="p-3">
-                                    {titleCase(categories[2])}
-                                </Tab>
-                            </TabList>
-                        </div>
-                    </TabGroup>
-                </Flex>
-                <Grid numItemsMd={2} numItemsSm={1} className="md:space-x-4">
-                    <Col numColSpan={1}>
-                        <DateRangePicker
-                            className="min-w-full max-md:mb-4"
-                            value={dateRange}
-                            onValueChange={setDateRange}
-                            selectPlaceholder="Select"
+                <CardContent className="p-6">
+                    <Flex className="mb-6">
+                        <Tabs
+                            className="w-full"
+                            defaultValue="all"
+                            onValueChange={(value) =>
+                                setCategoryTabValue(value)
+                            }
                         >
-                            <DateRangePickerItem
-                                key="this-year"
-                                value="this-year"
-                                from={new Date(new Date().getFullYear(), 0, 1)}
-                                to={new Date(new Date().getFullYear(), 11, 31)}
-                            >
-                                This year
-                            </DateRangePickerItem>
-                            <DateRangePickerItem
-                                key="last-year"
-                                value="last-year"
-                                from={
-                                    new Date(new Date().getFullYear() - 1, 0, 1)
-                                }
-                                to={
-                                    new Date(
-                                        new Date().getFullYear() - 1,
-                                        11,
-                                        31,
-                                    )
-                                }
-                            >
-                                Last year
-                            </DateRangePickerItem>
-                        </DateRangePicker>
-                    </Col>
-                    <Col numColSpan={1} className="ml-0">
-                        <MultiSelect
-                            onValueChange={setSelectedCountries}
-                            placeholder="Select Countries"
-                            className="p2"
-                        >
-                            {countries.map((country) => (
-                                <MultiSelectItem
-                                    key={country.countryID}
-                                    value={country.countryName}
+                            <div className="overflow-x-auto">
+                                <TabsList className="h-[50px]">
+                                    <TabsTrigger className="h-full" value="all">
+                                        All
+                                    </TabsTrigger>
+                                    <TabsTrigger
+                                        className="h-full"
+                                        value="electricity"
+                                    >
+                                        Electricity
+                                    </TabsTrigger>
+                                    <TabsTrigger
+                                        className="h-full"
+                                        value="heating"
+                                    >
+                                        Heating
+                                    </TabsTrigger>
+                                    <TabsTrigger
+                                        className="h-full"
+                                        value="transportation"
+                                    >
+                                        Transportation
+                                    </TabsTrigger>
+                                </TabsList>
+                            </div>
+                        </Tabs>
+                    </Flex>
+
+                    {/** TODO: Turn date picker into a component */}
+                    <Flex justify={"between"} gap={"4"}>
+                        <div className="grid gap-2">
+                            <Popover>
+                                <PopoverTrigger asChild>
+                                    <Button
+                                        id="date"
+                                        variant={"outline"}
+                                        className="w-full justify-start text-left font-normal"
+                                    >
+                                        <CalendarIcon className="mr-2 h-4 w-4" />
+                                        {dateRange?.from ? (
+                                            dateRange.to ? (
+                                                <>
+                                                    {format(
+                                                        dateRange.from,
+                                                        "LLL dd, y",
+                                                    )}{" "}
+                                                    -{" "}
+                                                    {format(
+                                                        dateRange.to,
+                                                        "LLL dd, y",
+                                                    )}
+                                                </>
+                                            ) : (
+                                                format(
+                                                    dateRange.from,
+                                                    "LLL dd, y",
+                                                )
+                                            )
+                                        ) : (
+                                            <span>Select a date range</span>
+                                        )}
+                                    </Button>
+                                </PopoverTrigger>
+                                <PopoverContent
+                                    className="w-auto p-0"
+                                    align="start"
                                 >
-                                    {country.countryName}
-                                </MultiSelectItem>
-                            ))}
-                        </MultiSelect>
-                    </Col>
-                </Grid>
+                                    <Calendar
+                                        initialFocus
+                                        mode="range"
+                                        defaultMonth={dateRange?.from}
+                                        selected={dateRange}
+                                        onSelect={setDateRange}
+                                        numberOfMonths={2}
+                                    />
+                                </PopoverContent>
+                            </Popover>
+                        </div>
+
+                        <MultiSelect
+                            options={options}
+                            selected={selectedCountries}
+                            onChange={setSelectedCountries}
+                            placeholder="Select options"
+                            className="flex-1 w-full"
+                        />
+                    </Flex>
+                </CardContent>
             </Card>
-            <Grid numItemsMd={2} numItemsLg={2} className="gap-6 mt-6 mb-6">
+            <Grid
+                columns={{
+                    initial: "1",
+                    sm: "2",
+                }}
+                className="gap-6 mt-6 mb-6"
+            >
                 <Card>
-                    <DetailedCard
-                        metaData={metaData}
-                        countries={selectedCountries}
-                        measure="userCount"
-                        title="Number of Users"
-                        icon={UserGroupIcon}
-                    />
-                    <GenderCardSummary
-                        metaData={metaData}
-                        countries={selectedCountries}
-                    />
+                    <CardContent className="p-6">
+                        <DetailedCard
+                            metaData={metaData}
+                            countries={selectedCountries.map(
+                                (entry) => entry.label,
+                            )}
+                            measure="userCount"
+                            title="Number of Users"
+                            icon={UsersIcon}
+                        />
+                        <GenderCardSummary
+                            metaData={metaData}
+                            countries={selectedCountries.map(
+                                (entry) => entry.label,
+                            )}
+                        />
+                    </CardContent>
                 </Card>
                 <Card>
-                    <DetailedCard
-                        metaData={metaData}
-                        countries={selectedCountries}
-                        measure="consumptionsCount"
-                        title="Individual Consumptions"
-                        icon={Squares2X2Icon}
-                    />
+                    <CardContent className="p-6">
+                        <DetailedCard
+                            metaData={metaData}
+                            countries={selectedCountries.map(
+                                (entry) => entry.label,
+                            )}
+                            measure="consumptionsCount"
+                            title="Individual Consumptions"
+                            icon={BlocksIcon}
+                        />
 
-                    {selectedCategories.length > 1 ? (
-                        <ConsumptionCardSummary
-                            metaData={metaData}
-                            countries={selectedCountries}
-                        />
-                    ) : (
-                        <ConsumptionCardSummaryCategory
-                            metaData={metaData}
-                            countries={selectedCountries}
-                            category={
-                                selectedCategories[0] as ConsumptionCategory
-                            }
-                        />
-                    )}
+                        {selectedCategories.length > 1 ? (
+                            <ConsumptionCardSummary
+                                metaData={metaData}
+                                countries={selectedCountries.map(
+                                    (entry) => entry.label,
+                                )}
+                            />
+                        ) : (
+                            <ConsumptionCardSummaryCategory
+                                metaData={metaData}
+                                countries={selectedCountries.map(
+                                    (entry) => entry.label,
+                                )}
+                                category={
+                                    selectedCategories[0] as ConsumptionCategory
+                                }
+                            />
+                        )}
+                    </CardContent>
                 </Card>
             </Grid>
 
             <Card className="mb-6">
-                <TabGroup>
-                    <div className="overflow-x-auto">
-                        <TabList variant="solid" className="mb-3">
-                            <Tab className="p-3" icon={CloudIcon}>
-                                CO<sub>2</sub> Emission
-                            </Tab>
-                            <Tab className="p-3" icon={BoltIcon}>
-                                Energy Usage
-                            </Tab>
-                        </TabList>
-                    </div>
-                    <Select
-                        value={calculationMode}
-                        onValueChange={setCalculationMode}
-                        className="mb-3 max-w-xs"
-                    >
-                        <SelectItem value="absolute" icon={UserGroupIcon}>
-                            Absolute
-                        </SelectItem>
-                        <SelectItem value="average" icon={UserIcon}>
-                            Average per User
-                        </SelectItem>
-                    </Select>
+                <CardContent className="p-6">
+                    <Tabs defaultValue="carbon">
+                        <div className="overflow-x-auto">
+                            <Flex justify={"between"}>
+                                <TabsList>
+                                    <TabsTrigger value="carbon">
+                                        CO<sub>2</sub> Emission
+                                    </TabsTrigger>
+                                    <TabsTrigger value="energy">
+                                        Energy Usage
+                                    </TabsTrigger>
+                                </TabsList>
 
-                    <TabPanels>
-                        <TabPanel>
-                            <Text>
-                                Total{" "}
-                                <b>
-                                    CO<sub>2</sub> Emission
-                                </b>{" "}
-                                per country between{" "}
-                                {String(dateRange.from?.toDateString())} and{" "}
-                                {String(dateRange.to?.toDateString())}.
-                            </Text>
+                                <Select
+                                    value={calculationMode}
+                                    onValueChange={setCalculationMode}
+                                >
+                                    <SelectTrigger className="w-[180px]">
+                                        <SelectValue defaultValue="absolute" />
+                                    </SelectTrigger>
 
-                            <LineChartTabs
-                                localData={localData}
-                                countries={selectedCountries}
-                                mode="carbon"
-                                calculationMode={
-                                    calculationMode as "absolute" | "average"
-                                }
-                            />
-                        </TabPanel>
-                        <TabPanel>
-                            <Text>
-                                Total <b>Energy Usage</b> per country between{" "}
-                                {String(dateRange.from?.toDateString())} and{" "}
-                                {String(dateRange.to?.toDateString())}.
-                            </Text>
-                            <LineChartTabs
-                                localData={localData}
-                                countries={selectedCountries}
-                                mode="energy"
-                                calculationMode={
-                                    calculationMode as "absolute" | "average"
-                                }
-                            />
-                        </TabPanel>
-                    </TabPanels>
-                </TabGroup>
+                                    <SelectContent>
+                                        <SelectItem value="absolute">
+                                            Absolute
+                                        </SelectItem>
+                                        <SelectItem value="average">
+                                            Average per User
+                                        </SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </Flex>
+
+                            <TabsContent value="carbon">
+                                <Text>
+                                    Total{" "}
+                                    <b>
+                                        CO<sub>2</sub> Emission
+                                    </b>{" "}
+                                    per country between{" "}
+                                    {String(dateRange?.from?.toDateString())}{" "}
+                                    and {String(dateRange?.to?.toDateString())}.
+                                </Text>
+
+                                <LineChartTabs
+                                    localData={localData}
+                                    countries={selectedCountries.map(
+                                        (entry) => entry.label,
+                                    )}
+                                    mode="carbon"
+                                    calculationMode={
+                                        calculationMode as
+                                            | "absolute"
+                                            | "average"
+                                    }
+                                />
+                            </TabsContent>
+                            <TabsContent value="energy">
+                                <Text>
+                                    Total <b>Energy Usage</b> per country
+                                    between{" "}
+                                    {String(dateRange?.from?.toDateString())}{" "}
+                                    and {String(dateRange?.to?.toDateString())}.
+                                </Text>
+                                <LineChartTabs
+                                    localData={localData}
+                                    countries={selectedCountries.map(
+                                        (entry) => entry.label,
+                                    )}
+                                    mode="energy"
+                                    calculationMode={
+                                        calculationMode as
+                                            | "absolute"
+                                            | "average"
+                                    }
+                                />
+                            </TabsContent>
+                        </div>
+                    </Tabs>
+                </CardContent>
             </Card>
             <Card className="mb-6">
-                <TabGroup>
-                    <div className="overflow-x-auto">
-                        <TabList variant="solid" className="mb-3">
-                            <Tab className="p-3" icon={CloudIcon}>
-                                CO<sub>2</sub> Emission
-                            </Tab>
-                            <Tab className="p-3" icon={BoltIcon}>
-                                Energy Usage
-                            </Tab>
-                        </TabList>
-                    </div>
-                    <Select
-                        value={calculationMode}
-                        onValueChange={setCalculationMode}
-                        className="mb-3 max-w-xs"
-                    >
-                        <SelectItem value="absolute" icon={UserGroupIcon}>
-                            Absolute
-                        </SelectItem>
-                        <SelectItem value="average" icon={UserIcon}>
-                            Average per User
-                        </SelectItem>
-                    </Select>
+                <CardContent className="p-6">
+                    <Tabs defaultValue="carbon">
+                        <div className="overflow-x-auto">
+                            <Flex justify={"between"}>
+                                <TabsList>
+                                    <TabsTrigger value="carbon">
+                                        CO<sub>2</sub> Emission
+                                    </TabsTrigger>
+                                    <TabsTrigger value="energy">
+                                        Energy Usage
+                                    </TabsTrigger>
+                                </TabsList>
 
-                    <TabPanels>
-                        <TabPanel>
-                            <Text>
-                                Total{" "}
-                                <b>
-                                    CO<sub>2</sub> Emission
-                                </b>{" "}
-                                per country between{" "}
-                                {String(dateRange.from?.toDateString())} and{" "}
-                                {String(dateRange.to?.toDateString())}.
-                            </Text>
+                                <Select
+                                    value={calculationMode}
+                                    onValueChange={setCalculationMode}
+                                >
+                                    <SelectTrigger className="w-[180px]">
+                                        <SelectValue defaultValue="absolute" />
+                                    </SelectTrigger>
 
-                            <LineChartTabsV2
-                                localData={localData}
-                                countries={selectedCountries}
-                                mode="carbon"
-                                calculationMode={
-                                    calculationMode as "absolute" | "average"
-                                }
-                            />
-                        </TabPanel>
-                        <TabPanel>
-                            <Text>
-                                Total <b>Energy Usage</b> per country between{" "}
-                                {String(dateRange.from?.toDateString())} and{" "}
-                                {String(dateRange.to?.toDateString())}.
-                            </Text>
-                            <LineChartTabsV2
-                                localData={localData}
-                                countries={selectedCountries}
-                                mode="energy"
-                                calculationMode={
-                                    calculationMode as "absolute" | "average"
-                                }
-                            />
-                        </TabPanel>
-                    </TabPanels>
-                </TabGroup>
+                                    <SelectContent>
+                                        <SelectItem value="absolute">
+                                            Absolute
+                                        </SelectItem>
+                                        <SelectItem value="average">
+                                            Average per User
+                                        </SelectItem>
+                                    </SelectContent>
+                                </Select>
+                            </Flex>
+
+                            <TabsContent value="carbon">
+                                <Text>
+                                    Total{" "}
+                                    <b>
+                                        CO<sub>2</sub> Emission
+                                    </b>{" "}
+                                    per country between{" "}
+                                    {String(dateRange?.from?.toDateString())}{" "}
+                                    and {String(dateRange?.to?.toDateString())}.
+                                </Text>
+
+                                <LineChartTabsV2
+                                    localData={localData}
+                                    countries={selectedCountries.map(
+                                        (entry) => entry.label,
+                                    )}
+                                    mode="carbon"
+                                    calculationMode={
+                                        calculationMode as
+                                            | "absolute"
+                                            | "average"
+                                    }
+                                />
+                            </TabsContent>
+                            <TabsContent value="energy">
+                                <Text>
+                                    Total <b>Energy Usage</b> per country
+                                    between{" "}
+                                    {String(dateRange?.from?.toDateString())}{" "}
+                                    and {String(dateRange?.to?.toDateString())}.
+                                </Text>
+                                <LineChartTabsV2
+                                    localData={localData}
+                                    countries={selectedCountries.map(
+                                        (entry) => entry.label,
+                                    )}
+                                    mode="energy"
+                                    calculationMode={
+                                        calculationMode as
+                                            | "absolute"
+                                            | "average"
+                                    }
+                                />
+                            </TabsContent>
+                        </div>
+                    </Tabs>
+                </CardContent>
             </Card>
             <Card className="mb-6">
-                <GenderCardCountry
-                    metaData={metaData}
-                    countries={selectedCountries}
-                    title="Gender Distribution"
-                />
+                <CardContent className="p-6">
+                    <GenderCardCountry
+                        metaData={metaData}
+                        countries={selectedCountries.map(
+                            (entry) => entry.label,
+                        )}
+                        title="Gender Distribution"
+                    />
+                </CardContent>
             </Card>
             <Card>
-                <div className="max-w-3xl mx-auto">
-                    <AutoReport metaData={metaData} />
-                </div>
+                <CardContent className="p-6">
+                    <div className="max-w-3xl mx-auto">
+                        <AutoReport metaData={metaData} />
+                    </div>
+                </CardContent>
             </Card>
         </>
     );

@@ -1,5 +1,8 @@
+import { ConsumptionAttributes } from "@/models/metaData";
 import { ConsumptionCategory } from "@/models/userData";
 import { Color } from "@tremor/react";
+import { CarFront, Zap, ThermometerSnowflake } from "lucide-react";
+import React from "react";
 
 export const categories: ConsumptionCategory[] = [
     "electricity",
@@ -75,3 +78,44 @@ export const userIdBlacklist: string[] = [
     "YnLScLYQMgPNyRDj3RiRFaom4eH2",
     "GXTS3kX82CXtdS0qHsX3djnB7aj1",
 ];
+
+export const consumptionMapping: Record<
+    ConsumptionCategory,
+    ConsumptionAttributes
+> = {
+    electricity: {
+        icon: <Zap />,
+        type: "electricity",
+        unit: "kWh",
+        color: "yellow",
+        label: "Energy Usage",
+    },
+    transportation: {
+        icon: <CarFront />,
+        type: "transportation",
+        unit: "km",
+        color: "blue",
+        label: "Distance",
+    },
+    heating: {
+        icon: <ThermometerSnowflake />,
+        type: "heating",
+        unit: "kWh",
+        color: "red",
+        label: "Energy Usage",
+    },
+};
+
+export const carbonUnit = (
+    <>
+        {" "}
+        CO<sub>2</sub>
+    </>
+);
+
+export const kiloGramNumberFormatter = Intl.NumberFormat("en", {
+    notation: "compact",
+    style: "unit",
+    unit: "kilogram",
+    unitDisplay: "short",
+});

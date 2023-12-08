@@ -1,12 +1,13 @@
 import { MetaData } from "@/models/summary";
+
 import {
     Accordion,
-    AccordionBody,
-    AccordionHeader,
-    AccordionList,
-    Text,
-    Title,
-} from "@tremor/react";
+    AccordionContent,
+    AccordionItem,
+    AccordionTrigger,
+} from "@/components/ui/accordion";
+
+import { Text, Heading } from "@radix-ui/themes";
 
 /**
  * Renders an auto-generated report based on the provided metaData.
@@ -105,7 +106,7 @@ export default function AutoReport({
 
         return (
             <>
-                <Title>Report</Title>
+                <Heading>Report</Heading>
                 <Text className="text-md mb-4">
                     Overall,{" "}
                     <b>{summedMetaData.userCount.toLocaleString()} accounts</b>{" "}
@@ -187,7 +188,7 @@ export default function AutoReport({
                     </b>
                     ).
                 </Text>
-                <AccordionList>
+                <Accordion type="multiple">
                     {metaData?.map((country) => {
                         const totalConsumptionCount = Math.round(
                             country.consumptions.electricity.count +
@@ -210,11 +211,14 @@ export default function AutoReport({
                         ).toLocaleString();
 
                         return (
-                            <Accordion key={country.country}>
-                                <AccordionHeader>
+                            <AccordionItem
+                                value={country.country}
+                                key={country.country}
+                            >
+                                <AccordionTrigger>
                                     {country.country}
-                                </AccordionHeader>
-                                <AccordionBody>
+                                </AccordionTrigger>
+                                <AccordionContent>
                                     <Text className="text-md mb-4">
                                         For <b>{country.country}</b>,{" "}
                                         <b>
@@ -313,11 +317,11 @@ export default function AutoReport({
                                         </b>
                                         ).
                                     </Text>
-                                </AccordionBody>
-                            </Accordion>
+                                </AccordionContent>
+                            </AccordionItem>
                         );
                     })}
-                </AccordionList>
+                </Accordion>
             </>
         );
     } else return <Text>Not Data</Text>;

@@ -1,21 +1,13 @@
 import { promises as fs } from "fs";
 import AboutJson from "@/components/aboutPage/jsonView";
 import { CountryData } from "@/models/countryData";
-import {
-    Card,
-    Text,
-    TabGroup,
-    TabList,
-    Tab,
-    TabPanels,
-    TabPanel,
-    Title,
-    Grid,
-    Col,
-} from "@tremor/react";
 import { countries } from "@/lib/constants";
 import firebase_app from "@/firebase/config";
 import { getLatestCountryFile } from "@/lib/firebaseUtils";
+
+import { Flex, Heading, Text, Grid, Strong } from "@radix-ui/themes";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 /**
  * Renders the Home component.
@@ -39,39 +31,45 @@ export default async function Home(): Promise<JSX.Element> {
 
     return (
         <Card>
-            <Title>App Metrics</Title>
-            <Text>
-                As we believe in Open Science, we fully disclose the metrics
-                that the AURORA Energy Tracker uses to calculate{" "}
-                <b>Carbon Emissions</b>, <b>Energy Usage</b> and <b>Labels</b>.
-            </Text>
-            <TabGroup>
-                <div className="overflow-x-auto">
-                    <TabList className="mt-8" variant="solid">
-                        {countries.map((country) => {
-                            return (
-                                <Tab
-                                    key={country.ID}
-                                    className="p-3 flex whitespace-nowrap"
-                                >
-                                    {country.name}
-                                </Tab>
-                            );
-                        })}
-                    </TabList>
-                </div>
+            <CardContent className="p-6">
+                <Heading>App Metrics</Heading>
+                <Text>
+                    As we strongly believe in Open Science, we fully disclose
+                    the metrics that the AURORA Energy Tracker uses to calculate{" "}
+                    <Strong>Carbon Emissions</Strong>,{" "}
+                    <Strong>Energy Usage</Strong> and <Strong>Labels</Strong>.
+                </Text>
+                <Tabs>
+                    <div className="overflow-x-auto">
+                        <TabsList className="mt-8 h-[50px]">
+                            {countries.map((country) => {
+                                return (
+                                    <TabsTrigger
+                                        key={country.code}
+                                        value={country.code}
+                                        className="flex whitespace-nowrap h-full"
+                                    >
+                                        {country.name}
+                                    </TabsTrigger>
+                                );
+                            })}
+                        </TabsList>
+                    </div>
 
-                <TabPanels>
                     {countries.map((country) => {
                         return (
-                            <TabPanel key={country.ID}>
+                            <TabsContent
+                                value={country.code}
+                                key={country.code}
+                            >
                                 <Grid
-                                    numItems={1}
-                                    numItemsMd={3}
+                                    columns={{ initial: "1", md: "3" }}
                                     className="gap-2 md:space-x-4 max-md:space-y-4 mt-8"
                                 >
-                                    <Col>
-                                        <Title>Carbon Emission Labels</Title>
+                                    <Flex direction={"column"}>
+                                        <Heading>
+                                            Carbon Emission Labels
+                                        </Heading>
                                         <Text className="h-20">
                                             The data we use to calculate the
                                             label for carbon emissions.
@@ -82,9 +80,11 @@ export default async function Home(): Promise<JSX.Element> {
                                                     .carbonEmission
                                             }
                                         />
-                                    </Col>
-                                    <Col>
-                                        <Title>Energy Expended Labels</Title>
+                                    </Flex>
+                                    <Flex direction={"column"}>
+                                        <Heading>
+                                            Energy Expended Labels
+                                        </Heading>
                                         <Text className="h-20">
                                             The data we use to calculate the
                                             label for energy usage.
@@ -95,9 +95,9 @@ export default async function Home(): Promise<JSX.Element> {
                                                     .energyExpended
                                             }
                                         />
-                                    </Col>
-                                    <Col>
-                                        <Title>Metrics</Title>
+                                    </Flex>
+                                    <Flex direction={"column"}>
+                                        <Heading>Metrics</Heading>
                                         <Text className="h-20">
                                             The data we use to calculate carbon
                                             emissions and energy usage based on
@@ -110,13 +110,13 @@ export default async function Home(): Promise<JSX.Element> {
                                                 ].metrics["1.0.0"]
                                             }
                                         />
-                                    </Col>
+                                    </Flex>
                                 </Grid>
-                            </TabPanel>
+                            </TabsContent>
                         );
                     })}
-                </TabPanels>
-            </TabGroup>
+                </Tabs>
+            </CardContent>
         </Card>
     );
 }

@@ -1,5 +1,6 @@
-import { Title, Text } from "@tremor/react";
+import { Heading, Text } from "@radix-ui/themes";
 import FilterIndex from "@/components/detailedFilteredCharts/filterIndex";
+
 import { testTransform } from "@/lib/transformExportData";
 import { promises as fs } from "fs";
 import path from "path";
@@ -30,7 +31,7 @@ export default async function Home(): Promise<JSX.Element> {
 
     return (
         <main>
-            <Title>Welcome to the AURORA Dashboard!</Title>
+            <Heading as="h1">Welcome to the AURORA Dashboard!</Heading>
             <Text>
                 Here you can find the latest stats about the AURORA Energy
                 Tracker mobile app.

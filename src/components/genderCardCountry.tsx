@@ -1,6 +1,8 @@
 import { genderColors, genders } from "@/lib/constants";
 import { MetaData } from "@/models/summary";
-import { DonutChart, Legend, Grid, Title } from "@tremor/react";
+import { DonutChart, Legend } from "@tremor/react";
+
+import { Heading, Grid } from "@radix-ui/themes";
 
 /**
  * Generate the GenderCardCountry component.
@@ -26,11 +28,9 @@ export default function GenderCardCountry({
 
     return (
         <>
-            <Title>{title}</Title>
+            <Heading>{title}</Heading>
             <Grid
-                numItems={2}
-                numItemsSm={2}
-                numItemsMd={3}
+                columns={{ initial: "2", md: "3" }}
                 className="gap-6 mt-6 mb-6"
             >
                 {filteredMetaData?.map((country) => {

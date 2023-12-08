@@ -1,6 +1,8 @@
 import { MetaData } from "@/models/summary";
-import { Metric, Text, Color, Icon, Flex } from "@tremor/react";
+import { Metric, Icon } from "@tremor/react";
 import { ElementType } from "react";
+
+import { Text, Flex } from "@radix-ui/themes";
 
 /**
  * Renders a detailed card component with the given data.
@@ -42,7 +44,7 @@ export default function DetailedCard({
     });
 
     return (
-        <Flex className="space-x-6" justifyContent="start">
+        <Flex className="space-x-6" justify="start">
             {icon && <Icon icon={icon} size="lg" />}
 
             <div>
