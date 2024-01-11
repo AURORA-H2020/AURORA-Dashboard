@@ -10,6 +10,8 @@ import { Consumption } from "@/models/extensions";
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
 import LoadingSpinner from "@/components/ui/loading";
 import { Heading, Text } from "@radix-ui/themes";
+import { Button } from "@/components/ui/button";
+import { downloadUserData } from "@/firebase/firestore/downloadUserData";
 
 const firestore = getFirestore(firebase_app);
 
@@ -22,17 +24,20 @@ const firestore = getFirestore(firebase_app);
  *                       a list of Consumption components.
  */
 function AccountPage(): JSX.Element {
-    const { user } = useAuthContext() as { user: User };
+    const { user, loading } = useAuthContext() as {
+        user: User;
+        loading: boolean;
+    };
     const router = useRouter();
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     const [userConsumptions, setUserConsumptions] = useState<Consumption[]>([]);
 
     useEffect(() => {
-        if (user === null) {
+        if (loading) return;
+
+        if (!user) {
             router.replace("/");
-        } else {
-            setIsAuthenticated(true);
+            return;
         }
 
         // Async function to fetch the data within useEffect
@@ -65,10 +70,10 @@ function AccountPage(): JSX.Element {
         };
 
         fetchUserConsumptions();
-    }, [user, router]);
+    }, [user, router, loading]);
 
-    if (!isAuthenticated && user === null) {
-        // Render nothing or a loading indicator until the auth check is complete
+    if (!user && loading) {
+        // Render loading indicator until the auth check is complete
         return <LoadingSpinner />;
     }
 
@@ -79,6 +84,9 @@ function AccountPage(): JSX.Element {
             <Text>Your UID: {user?.uid}</Text>
             <div>
                 <Heading as="h2">Your Consumptions</Heading>
+                <Button onClick={() => router.push("/account/settings")}>
+                    Settings
+                </Button>
                 {userConsumptions.map((consumption) => (
                     <div className="mb-4" key={consumption.id}>
                         <ConsumptionPreview consumption={consumption} />
