@@ -49,6 +49,8 @@ export function AuthContextProvider({
 
     // Provide the authentication context to child components
     return (
-        <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+        <AuthContext.Provider value={{ user, loading }}>
+            {children}
+        </AuthContext.Provider>
     );
 }
