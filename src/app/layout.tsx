@@ -4,7 +4,6 @@ import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 import NavigationBar from "@/components/navigationBar";
 import Footer from "@/components/footer";
-import Script from "next/script";
 import "@radix-ui/themes/styles.css";
 import { cn } from "@/lib/utilities";
 

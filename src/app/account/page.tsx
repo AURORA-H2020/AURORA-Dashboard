@@ -11,7 +11,7 @@ import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview
 import LoadingSpinner from "@/components/ui/loading";
 import { Heading, Text } from "@radix-ui/themes";
 import { Button } from "@/components/ui/button";
-import { downloadUserData } from "@/firebase/firestore/downloadUserData";
+import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";
 
 const firestore = getFirestore(firebase_app);
 
@@ -82,6 +82,7 @@ function AccountPage(): JSX.Element {
         <>
             <Heading>Welcome, {user?.displayName}</Heading>
             <Text>Your UID: {user?.uid}</Text>
+            <ConsumptionSummaryChart />
             <div>
                 <Heading as="h2">Your Consumptions</Heading>
                 <Button onClick={() => router.push("/account/settings")}>

@@ -8,9 +8,9 @@ import { User as FirebaseUser } from "@/models/firestore/user/user";
 import firebase_app from "@/firebase/config";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import LoadingSpinner from "@/components/ui/loading";
-import { Flex, Grid, Strong } from "@radix-ui/themes";
+import { Flex, Grid } from "@radix-ui/themes";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { Table, TableBody } from "@/components/ui/table";
 import ConsumptionTableRow from "@/components/app/consumptions/consumptionTableRow";
 import { city2Name, country2Name, titleCase } from "@/lib/utilities";
 import { Button } from "@/components/ui/button";
@@ -20,7 +20,6 @@ import { toast } from "sonner";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
@@ -35,7 +34,6 @@ import {
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
-    AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 
 const firestore = getFirestore(firebase_app);
