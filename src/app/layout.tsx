@@ -57,7 +57,12 @@ export default function RootLayout({
                 <meta name="theme-color" content="#ffffff" />
             </head>
             <body className={cn(inter.className, "")}>
-                <Providers attribute="class" defaultTheme="system" enableSystem>
+                <Providers
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
                     <header className="max-w-screen-xl items-center justify-between mx-auto p-4">
                         <NavigationBar />
                     </header>
@@ -68,7 +73,6 @@ export default function RootLayout({
                         <Footer />
                     </footer>
                 </Providers>
-                <Script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></Script>
             </body>
         </html>
     );

@@ -1,6 +1,6 @@
 "use client";
 
-import { Flex, Strong } from "@radix-ui/themes";
+import { Flex, Strong, Text } from "@radix-ui/themes";
 import {
     Card,
     CardContent,
@@ -8,19 +8,33 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
 import SignInWithEmail from "@/components/auth/signInWithEmail";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Separator } from "@/components/ui/separator";
 import SignUpWithEmail from "@/components/auth/signUpWithEmail";
 import AuthenticateWithGoogle from "@/components/auth/authenticateWithGoogle";
 import AuthenticateWithApple from "@/components/auth/authenticateWithApple";
+import React from "react";
 
 /**
  * Renders a sign-in form and handles sign-in through email, Google,
  * or Apple. On successful sign-in, displays a success toast and
  * redirects to the account page.
  */
-function SignInForm() {
+
+const AuthenticationOptions = ({ isSignIn }: { isSignIn: boolean }) => {
+    return (
+        <>
+            <Flex direction={"column"}>
+                <Separator className="my-6" />
+                <AuthenticateWithGoogle isSignIn={isSignIn} />
+                <AuthenticateWithApple isSignIn={isSignIn} />
+            </Flex>
+        </>
+    );
+};
+
+const SignInForm = () => {
     return (
         <Flex justify={"center"}>
             <Card className="w-[400px]">
@@ -42,8 +56,7 @@ function SignInForm() {
                         </CardHeader>
                         <CardContent>
                             <SignInWithEmail />
-                            <AuthenticateWithGoogle isSingIn={true} />
-                            <AuthenticateWithApple isSingIn={true} />
+                            <AuthenticationOptions isSignIn={true} />
                         </CardContent>
                     </TabsContent>
 
@@ -56,14 +69,13 @@ function SignInForm() {
                         </CardHeader>
                         <CardContent>
                             <SignUpWithEmail />
-                            <AuthenticateWithGoogle isSingIn={false} />
-                            <AuthenticateWithApple isSingIn={false} />
+                            <AuthenticationOptions isSignIn={false} />
                         </CardContent>
                     </TabsContent>
                 </Tabs>
             </Card>
         </Flex>
     );
-}
+};
 
 export default SignInForm;

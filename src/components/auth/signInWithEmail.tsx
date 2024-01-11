@@ -19,7 +19,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { Strong } from "@radix-ui/themes";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 const formSchema = z.object({
     email: z.string().min(2).max(50),
@@ -33,7 +33,6 @@ const formSchema = z.object({
  */
 function SignInWithEmail() {
     const router = useRouter();
-    const { toast } = useToast();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -46,10 +45,7 @@ function SignInWithEmail() {
     });
 
     const postSignIn = () => {
-        toast({
-            title: "Successfully signed in",
-            description: "Welcome back!",
-        });
+        toast.success("Welcome to AURORA!");
         router.push("/account");
     };
 
@@ -114,6 +110,7 @@ function SignInWithEmail() {
                                     <div className="absolute inset-y-0 right-0 pr-0 flex items-center cursor-pointer">
                                         <Button
                                             className="h-full w-12 p-1 rounded-l-none"
+                                            type="button"
                                             variant={"outline"}
                                             onClick={() =>
                                                 setShowPassword(!showPassword)

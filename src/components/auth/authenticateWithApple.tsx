@@ -2,22 +2,21 @@
 import signIn from "@/firebase/auth/authentication";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import { AppleLoginButton } from "react-social-login-buttons";
+import { toast } from "sonner";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faApple } from "@fortawesome/free-brands-svg-icons";
+
 /**
  * Renders a sign-in form and handles sign-in through email, Google,
  * or Apple. On successful sign-in, displays a success toast and
  * redirects to the account page.
  */
-function AuthenticateWithApple({ isSingIn = true }: { isSingIn?: boolean }) {
+function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
     const router = useRouter();
-    const { toast } = useToast();
 
     const postSignIn = () => {
-        toast({
-            title: "Successfully signed in",
-            description: "Welcome back!",
-        });
+        toast.success("Welcome to AURORA!");
         router.push("/account");
     };
 
@@ -38,10 +37,14 @@ function AuthenticateWithApple({ isSingIn = true }: { isSingIn?: boolean }) {
     }
 
     return (
-        <AppleLoginButton onClick={() => handleAuthenticateWithApple()}>
-            {isSingIn ? "Sign in " : "Sign up "}
+        <Button
+            className="w-full my-1"
+            onClick={() => handleAuthenticateWithApple()}
+        >
+            <FontAwesomeIcon icon={faApple} className="mr-2" />
+            {isSignIn ? "Sign in " : "Sign up "}
             with Apple
-        </AppleLoginButton>
+        </Button>
     );
 }
 

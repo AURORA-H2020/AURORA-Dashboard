@@ -17,7 +17,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Strong } from "@radix-ui/themes";
 import signUp from "@/firebase/auth/authentication";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 const formSchema = z.object({
     email: z.string().min(2).max(50),
@@ -26,7 +26,6 @@ const formSchema = z.object({
 
 function SignUpWithEmail(): JSX.Element {
     const router = useRouter();
-    const { toast } = useToast();
 
     /* TODO: Add Password confirmation and validation (password strength) */
     const form = useForm<z.infer<typeof formSchema>>({
@@ -38,10 +37,7 @@ function SignUpWithEmail(): JSX.Element {
     });
 
     const postSignUp = () => {
-        toast({
-            title: "Account created",
-            description: "Welcome!",
-        });
+        toast.success("Welcome to AURORA!");
         router.push("/account");
     };
 

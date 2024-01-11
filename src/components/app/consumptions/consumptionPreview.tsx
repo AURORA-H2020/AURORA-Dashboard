@@ -26,7 +26,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { useToast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 /**
  * Renders a preview of a consumption object with interactive
@@ -42,7 +42,6 @@ export default function ConsumptionPreview({
     consumption: Consumption;
 }): JSX.Element {
     const consumptionAttributes = getConsumptionAttributes(consumption);
-    const { toast } = useToast();
 
     // State to manage the visibility of the modal
     const [isModalOpen, setModalOpen] = useState(false);
@@ -74,8 +73,7 @@ export default function ConsumptionPreview({
 
         // Wait .5 seconds before deleting
         setTimeout(() => {
-            toast({
-                title: "Consumption deleted",
+            toast.success("Consumption deleted", {
                 description: "The consumption has been deleted.",
             });
         }, 500);
