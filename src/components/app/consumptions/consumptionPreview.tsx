@@ -166,8 +166,12 @@ export default function ConsumptionPreview({
                             Delete
                         </Button>
                         <Flex className="space-x-2">
-                            <Button type="submit">Edit</Button>
-                            <Button type="submit">Duplicate</Button>
+                            <Button variant={"outline"} type="submit">
+                                Edit
+                            </Button>
+                            <Button variant={"outline"} type="submit">
+                                Duplicate
+                            </Button>
                         </Flex>
                     </DialogFooter>
                 </DialogContent>

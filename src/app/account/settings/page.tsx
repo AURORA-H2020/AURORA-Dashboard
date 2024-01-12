@@ -173,6 +173,7 @@ function UserSettings(): JSX.Element {
                         <CardContent>
                             <Flex direction={"column"} className="gap-2">
                                 <Button
+                                    variant={"outline"}
                                     onClick={() =>
                                         setModalChangeEmailOpen(true)
                                     }
@@ -180,6 +181,7 @@ function UserSettings(): JSX.Element {
                                     Change email
                                 </Button>
                                 <Button
+                                    variant={"outline"}
                                     onClick={() =>
                                         setModalChangePasswordOpen(true)
                                     }
@@ -187,6 +189,7 @@ function UserSettings(): JSX.Element {
                                     Change password
                                 </Button>
                                 <Button
+                                    variant={"outline"}
                                     onClick={downloadUserDataWrapper}
                                     disabled={downloading}
                                 >
@@ -209,8 +212,10 @@ function UserSettings(): JSX.Element {
                         </CardHeader>
                         <CardContent>
                             <Flex direction={"column"} className="gap-2">
-                                <Button>Get the app</Button>
-                                <Button>Contact support</Button>
+                                <Button variant={"outline"}>Get the app</Button>
+                                <Button variant={"outline"}>
+                                    Contact support
+                                </Button>
                             </Flex>
                         </CardContent>
                     </Card>
@@ -220,9 +225,13 @@ function UserSettings(): JSX.Element {
                         </CardHeader>
                         <CardContent>
                             <Flex direction={"column"} className="gap-2">
-                                <Button>Imprint</Button>
-                                <Button>Privacy Policy</Button>
-                                <Button>Terms of Service</Button>
+                                <Button variant={"outline"}>Imprint</Button>
+                                <Button variant={"outline"}>
+                                    Privacy Policy
+                                </Button>
+                                <Button variant={"outline"}>
+                                    Terms of Service
+                                </Button>
                             </Flex>
                         </CardContent>
                     </Card>

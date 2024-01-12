@@ -17,18 +17,22 @@ import { useAuthContext } from "@/context/AuthContext";
 import { User } from "@/models/firestore/user/user";
 
 const MenuItems = ({ items, pathname }) => {
-    return items.map((item, idx) => (
-        <li key={idx}>
-            <Button
-                className="w-full"
-                variant={pathname === item.path ? "default" : "outline"}
-            >
-                <Link href={item.path}>
-                    {item.title} {/* Make sure Link has an anchor tag */}
-                </Link>
-            </Button>
-        </li>
-    ));
+    return items.map((item, idx) => {
+        // Check if the current pathname is exactly "/account" or starts with "/account/".
+        const isActive =
+            pathname === item.path || pathname.startsWith(`${item.path}/`);
+
+        return (
+            <li key={idx}>
+                <Button
+                    className="w-full"
+                    variant={isActive ? "default" : "outline"}
+                >
+                    <Link href={item.path}>{item.title}</Link>
+                </Button>
+            </li>
+        );
+    });
 };
 
 // Then, in your JSX:

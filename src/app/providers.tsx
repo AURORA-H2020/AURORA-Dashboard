@@ -3,6 +3,7 @@
 import * as React from "react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ThemeProviderProps } from "next-themes/dist/types";
+import { Theme } from "@radix-ui/themes";
 import { AuthContextProvider } from "@/context/AuthContext";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -19,10 +20,12 @@ export function Providers({
 }: ThemeProviderProps): React.ReactElement {
     return (
         <AuthContextProvider>
-            <NextThemesProvider {...props}>
-                {children}
-                <Toaster richColors />
-            </NextThemesProvider>
+            <Theme>
+                <NextThemesProvider {...props}>
+                    {children}
+                    <Toaster richColors />
+                </NextThemesProvider>
+            </Theme>
         </AuthContextProvider>
     );
 }

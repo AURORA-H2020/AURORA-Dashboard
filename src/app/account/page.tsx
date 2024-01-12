@@ -10,7 +10,6 @@ import { Consumption } from "@/models/extensions";
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
 import LoadingSpinner from "@/components/ui/loading";
 import { Heading, Text } from "@radix-ui/themes";
-import { Button } from "@/components/ui/button";
 import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";
 
 const firestore = getFirestore(firebase_app);
@@ -80,14 +79,11 @@ function AccountPage(): JSX.Element {
     // Authenticated user content
     return (
         <>
-            <Heading>Welcome, {user?.displayName}</Heading>
-            <Text>Your UID: {user?.uid}</Text>
             <ConsumptionSummaryChart />
             <div>
-                <Heading as="h2">Your Consumptions</Heading>
-                <Button onClick={() => router.push("/account/settings")}>
-                    Settings
-                </Button>
+                <div className="mb-4 mt-8">
+                    <Heading weight="bold">Your Consumptions</Heading>
+                </div>
                 {userConsumptions.map((consumption) => (
                     <div className="mb-4" key={consumption.id}>
                         <ConsumptionPreview consumption={consumption} />
