@@ -11,7 +11,7 @@ import { Separator } from "./ui/separator";
  *
  * @return {JSX.Element} The rendered footer component.
  */
-export default function Footer() {
+export default function Footer(): JSX.Element {
     return (
         <Card className="items-center p-4 mx-auto md:px-8">
             <div className="sm:flex sm:items-center sm:justify-between">

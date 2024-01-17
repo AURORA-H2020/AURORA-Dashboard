@@ -1,4 +1,4 @@
-import { MetaData } from "@/models/summary";
+import { MetaData } from "@/models/dashboard-data";
 
 import {
     Accordion,
@@ -20,7 +20,7 @@ export default function AutoReport({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}) {
+}): JSX.Element {
     if (metaData) {
         const initialValue = {
             country: "",

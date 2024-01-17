@@ -1,5 +1,5 @@
 import { genderColors, genders } from "@/lib/constants";
-import { MetaData } from "@/models/summary";
+import { MetaData } from "@/models/dashboard-data";
 import { DonutChart, Legend } from "@tremor/react";
 
 /**
@@ -16,7 +16,7 @@ export default function GenderCardSummary({
 }: {
     metaData: MetaData | undefined;
     countries: string[];
-}) {
+}): JSX.Element {
     metaData?.filter((entry) => countries.includes(entry.country));
 
     let countFemale = 0;

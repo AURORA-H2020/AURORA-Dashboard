@@ -1,13 +1,12 @@
 import { Heading, Text } from "@radix-ui/themes";
 import FilterIndex from "@/components/detailedFilteredCharts/filterIndex";
 
-import { testTransform } from "@/lib/transformExportData";
 import { promises as fs } from "fs";
 import path from "path";
 
 import firebase_app from "@/firebase/config";
-import { UserData } from "@/models/userData";
 import { getUserFiles } from "@/lib/firebaseUtils";
+import { Summaries } from "@/models/dashboard-data";
 
 /**
  * Asynchronous function that represents the Home component.
@@ -15,7 +14,7 @@ import { getUserFiles } from "@/lib/firebaseUtils";
  * @return {Promise<JSX.Element>} The JSX element representing the Home component.
  */
 export default async function Home(): Promise<JSX.Element> {
-    let data: UserData[] = [];
+    let data: Summaries = [];
 
     if (process.env.TEST_MODE === "true") {
         const file = await fs.readFile(
@@ -27,8 +26,6 @@ export default async function Home(): Promise<JSX.Element> {
         data = await getUserFiles(process.env.FIREBASE_STORAGE_USER_PATH);
     }
 
-    const testData = testTransform(data);
-
     return (
         <main>
             <Heading as="h1">Welcome to the AURORA Dashboard!</Heading>
@@ -37,7 +34,7 @@ export default async function Home(): Promise<JSX.Element> {
                 Tracker mobile app.
             </Text>
             <div className="mt-6">
-                <FilterIndex localData={testData} />
+                <FilterIndex localData={data} />
             </div>
         </main>
     );

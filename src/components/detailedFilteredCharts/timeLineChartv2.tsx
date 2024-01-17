@@ -2,8 +2,8 @@
 
 import { LineChart } from "@tremor/react";
 import { latestTemporalData } from "@/lib/transformData";
-import { Summaries } from "@/models/summary";
 import { countryColors } from "@/lib/constants";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 
 /**
  * Formats a number as a string with thousands separators and units for carbon dioxide.
@@ -41,7 +41,7 @@ export default function LineChartTabsV2({
     mode,
     calculationMode,
 }: {
-    localData: Summaries;
+    localData: GlobalSummary[];
     countries: string[];
     mode: "carbon" | "energy";
     calculationMode: "absolute" | "average";

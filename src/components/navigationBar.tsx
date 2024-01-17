@@ -6,7 +6,7 @@ import Logo from "./logo";
 import { usePathname } from "next/navigation";
 
 import { Button } from "./ui/button";
-import { Card, CardContent } from "./ui/card";
+import { Card } from "./ui/card";
 import { ReactElement, useState } from "react";
 import { Menu } from "lucide-react";
 import { Flex } from "@radix-ui/themes";

@@ -1,7 +1,7 @@
 import { promises as fs } from "fs";
 import AboutJson from "@/components/aboutPage/jsonView";
 import { CountryData } from "@/models/countryData";
-import { countries } from "@/lib/constants";
+import { countriesMapping } from "@/lib/constants";
 import firebase_app from "@/firebase/config";
 import { getLatestCountryFile } from "@/lib/firebaseUtils";
 
@@ -44,10 +44,10 @@ export default async function Home(): Promise<JSX.Element> {
                     <Strong>Carbon Emissions</Strong>,{" "}
                     <Strong>Energy Usage</Strong> and <Strong>Labels</Strong>.
                 </Text>
-                <Tabs defaultValue={countries[0].code}>
+                <Tabs defaultValue={countriesMapping[0].code}>
                     <div className="overflow-x-auto">
                         <TabsList className="mt-8 h-[50px]">
-                            {countries.map((country) => {
+                            {countriesMapping.map((country) => {
                                 return (
                                     <TabsTrigger
                                         key={country.code}
@@ -61,7 +61,7 @@ export default async function Home(): Promise<JSX.Element> {
                         </TabsList>
                     </div>
 
-                    {countries.map((country) => {
+                    {countriesMapping.map((country) => {
                         return (
                             <TabsContent
                                 value={country.code}

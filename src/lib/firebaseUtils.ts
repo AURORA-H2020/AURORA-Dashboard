@@ -2,6 +2,7 @@ import { UserData } from "@/models/userData";
 import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
 import firebase_app from "@/firebase/config";
 import { CountryData } from "@/models/countryData";
+import { Summaries } from "@/models/dashboard-data";
 
 /**
  * Downloads a file from Firebase Storage.
@@ -26,10 +27,10 @@ const downloadFile = async (path: string): Promise<any> => {
  * @param {string} path - The path to the directory in Firebase Storage.
  * @return {Promise<UserData[]>} A promise that resolves to an array of UserData objects representing the downloaded files.
  */
-export const getUserFiles = async (path: string): Promise<UserData[]> => {
+export const getUserFiles = async (path: string): Promise<Summaries> => {
     const firebaseStorage = getStorage(firebase_app);
     const storageRef = ref(firebaseStorage, path);
-    let fileList: UserData[] = [];
+    let fileList: Summaries = [];
 
     try {
         const res = await listAll(storageRef);

@@ -1,15 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import {
-    NavigationMenu,
-    NavigationMenuContent,
-    NavigationMenuItem,
-    NavigationMenuLink,
-    NavigationMenuList,
-    NavigationMenuTrigger,
-    navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
 import { Flex } from "@radix-ui/themes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

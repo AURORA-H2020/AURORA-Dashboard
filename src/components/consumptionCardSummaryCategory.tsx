@@ -1,7 +1,8 @@
 import { allTremorColours } from "@/lib/constants";
-import { MetaData } from "@/models/summary";
-import { ConsumptionCategory } from "@/models/userData";
+import { MetaData } from "@/models/dashboard-data";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { DonutChart, Legend } from "@tremor/react";
+import { ReactNode } from "react";
 
 /**
  * Generates a summary of consumption by category for a given set of countries.
@@ -20,7 +21,7 @@ export default function ConsumptionCardSummaryCategory({
     metaData: MetaData | undefined;
     countries: string[];
     category: ConsumptionCategory;
-}) {
+}): ReactNode {
     const filteredMetaData = metaData?.filter((entry) =>
         countries.includes(entry.country),
     );

@@ -1,6 +1,6 @@
 "use client";
 
-import { Flex, Strong, Text } from "@radix-ui/themes";
+import { Flex } from "@radix-ui/themes";
 import {
     Card,
     CardContent,
@@ -10,11 +10,9 @@ import {
 } from "@/components/ui/card";
 import SignInWithEmail from "@/components/auth/signInWithEmail";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Separator } from "@/components/ui/separator";
 import SignUpWithEmail from "@/components/auth/signUpWithEmail";
 import AuthenticateWithGoogle from "@/components/auth/authenticateWithGoogle";
 import AuthenticateWithApple from "@/components/auth/authenticateWithApple";
-import React from "react";
 
 /**
  * Renders a sign-in form and handles sign-in through email, Google,

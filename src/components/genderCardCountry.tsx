@@ -1,5 +1,5 @@
 import { genderColors, genders } from "@/lib/constants";
-import { MetaData } from "@/models/summary";
+import { MetaData } from "@/models/dashboard-data";
 import { DonutChart, Legend } from "@tremor/react";
 
 import { Heading, Grid } from "@radix-ui/themes";
@@ -21,7 +21,7 @@ export default function GenderCardCountry({
     metaData: MetaData | undefined;
     countries: string[];
     title: string;
-}) {
+}): JSX.Element {
     const filteredMetaData = metaData?.filter((entry) =>
         countries.includes(entry.country),
     );

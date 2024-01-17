@@ -1,9 +1,11 @@
-import { Summaries, MetaData, ConsumptionsDetail } from "@/models/summary";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { ConsumptionsDetail, MetaData } from "@/models/dashboard-data";
 import {
     camelCaseToWords,
     getMonthShortName,
     secondsToDateTime,
 } from "./utilities";
+import { genderMappings } from "./constants";
 
 type TimelineData = {
     Date?: string;
@@ -11,7 +13,7 @@ type TimelineData = {
 };
 
 export function transformSummaryData(
-    sourceData: Summaries,
+    sourceData: GlobalSummary[],
     mode: "carbon" | "energy",
     calculationMode: "absolute" | "average",
 ) {
@@ -72,7 +74,7 @@ export function transformSummaryData(
 }
 
 export function latestTemporalData(
-    sourceData: Summaries,
+    sourceData: GlobalSummary[],
     mode: "carbon" | "energy",
     calculationMode: "absolute" | "average",
 ) {
@@ -130,8 +132,8 @@ export function latestTemporalData(
     return transformedData;
 }
 
-export function latestMetaData(sourceData: Summaries) {
-    if (sourceData.length == 0) {
+export function latestMetaData(sourceData: GlobalSummary[] | undefined) {
+    if (sourceData?.length == 0 || !sourceData) {
         return;
     }
 
@@ -184,7 +186,7 @@ export function latestMetaData(sourceData: Summaries) {
                     summaryCategory.energyExpended +=
                         category.energyExpended ?? 0;
 
-                    for (const source of category.sourceData) {
+                    for (const source of category.categorySource) {
                         let currentSource = summaryCategory.sources.find(
                             (e) => e.source === source.source,
                         );
@@ -201,14 +203,7 @@ export function latestMetaData(sourceData: Summaries) {
                 }
             }
 
-            const genderCategories = {
-                female: "Female",
-                male: "Male",
-                "non-binary": "Non-Binary",
-                other: "Other",
-            };
-
-            Object.keys(genderCategories).forEach((category) => {
+            Object.keys(genderMappings).forEach((category) => {
                 const findCategory = city.users.genders.find(
                     (e) => e.demographicCategory === category,
                 );

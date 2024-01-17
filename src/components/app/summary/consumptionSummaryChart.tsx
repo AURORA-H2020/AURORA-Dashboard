@@ -161,7 +161,6 @@ export default function ConsumptionSummaryChart() {
             }, baseSummaryData);
 
             setCurrentSummary(transformedData);
-            console.log(transformedData);
         } else {
             // If no data is found for the selected year, use the base summary with zeroes
             setCurrentSummary(baseSummaryData);

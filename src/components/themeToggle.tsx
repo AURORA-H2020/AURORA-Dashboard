@@ -3,14 +3,13 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
-import { cn } from "@/lib/utilities";
 
 /**
  * Renders a theme toggle button.
  *
  * @return {JSX.Element} The theme toggle button.
  */
-export default function ThemeToggle() {
+export default function ThemeToggle(): JSX.Element {
     const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();
 

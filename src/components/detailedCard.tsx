@@ -1,4 +1,4 @@
-import { MetaData } from "@/models/summary";
+import { MetaData } from "@/models/dashboard-data";
 import { Metric, Icon } from "@tremor/react";
 import { ElementType } from "react";
 
@@ -27,7 +27,7 @@ export default function DetailedCard({
     measure: "userCount" | "consumptionsCount" | "recurringConsumptionsCount";
     title: string;
     icon?: ElementType<any>;
-}) {
+}): JSX.Element {
     let metricValue = 0;
 
     metaData?.forEach((entry) => {

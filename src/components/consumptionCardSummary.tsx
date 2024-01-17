@@ -1,5 +1,5 @@
 import { categories, categoryColors } from "@/lib/constants";
-import { MetaData } from "@/models/summary";
+import { MetaData } from "@/models/dashboard-data";
 import { DonutChart, Legend } from "@tremor/react";
 
 export default function ConsumptionCardSummary({

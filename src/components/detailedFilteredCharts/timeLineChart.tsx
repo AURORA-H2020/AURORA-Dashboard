@@ -2,8 +2,8 @@
 
 import { LineChart } from "@tremor/react";
 import { transformSummaryData } from "@/lib/transformData";
-import { Summaries } from "@/models/summary";
 import { countryColors } from "@/lib/constants";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 
 /**
  * Formats a given number as a string with comma separators and appends a unit of measurement.
@@ -41,11 +41,11 @@ export default function LineChartTabs({
     mode,
     calculationMode,
 }: {
-    localData: Summaries;
+    localData: GlobalSummary[];
     countries: string[];
     mode: "carbon" | "energy";
     calculationMode: "absolute" | "average";
-}) {
+}): JSX.Element {
     const transformedData = transformSummaryData(
         localData,
         mode,

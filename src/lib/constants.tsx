@@ -1,5 +1,5 @@
-import { ConsumptionAttributes } from "@/models/metaData";
-import { ConsumptionCategory } from "@/models/userData";
+import { ConsumptionAttributes } from "@/models/meta-data";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { Color } from "@tremor/react";
 import { CarFront, Zap, ThermometerSnowflake } from "lucide-react";
 import React from "react";
@@ -32,7 +32,7 @@ export const allTremorColours: Color[] = [
     "rose",
 ];
 
-export const countries = [
+export const countriesMapping = [
     { ID: "udn3GiM30aqviGBkswpl", name: "Denmark", code: "DK" },
     { ID: "sPXh74wjZf14Jtmkaas6", name: "Europe (Other)", code: "EU" },
     { ID: "2E9Ejc8qBJC6HnlPPdIh", name: "Portugal", code: "PT" },
@@ -49,13 +49,20 @@ export const countryColors: Color[] = [
     "blue",
 ];
 
-export const cities = [
+export const citiesMapping = [
     { ID: "YIyf65PquFxluWhAAo5C", name: "Évora" },
     { ID: "1VSD4m6qVbOZLot7SFoQ", name: "Madrid" },
     { ID: "OAiIuFNocG4c0kOBtBvr", name: "Forest of Dean" },
     { ID: "FJyeCLprBuOqacpvu3LJ", name: "Ljubljana" },
     { ID: "Au1oUV9pAEtSCu04cfCX", name: "Aarhus" },
 ];
+
+export const genderMappings = {
+    female: "Female",
+    male: "Male",
+    "non-binary": "Non-Binary",
+    other: "Other",
+};
 
 export const genders = ["Female", "Male", "Non-Binary", "Other"];
 export const genderColors: Color[] = ["amber", "teal", "indigo", "gray"];

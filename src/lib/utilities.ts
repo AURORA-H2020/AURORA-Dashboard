@@ -1,10 +1,13 @@
-import { SingleUser } from "@/models/userData";
-import { cities, countries, consumptionMapping } from "./constants";
+import {
+    citiesMapping,
+    countriesMapping,
+    consumptionMapping,
+} from "./constants";
 
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Consumption } from "@/models/extensions";
-import { ConsumptionAttributes } from "@/models/metaData";
+import { ConsumptionAttributes } from "@/models/meta-data";
 
 /**
  * Automatically added by shadcn/ui
@@ -51,7 +54,7 @@ export function titleCase(string: string): string {
  * @returns {object} An object containing the country code and name.
  */
 export function country2Name(inputID: string) {
-    const country = countries.find((country) => country.ID === inputID);
+    const country = countriesMapping.find((country) => country.ID === inputID);
     const code = country?.code || "00";
     const name = country?.name || "unknown";
     return { code, name };
@@ -64,34 +67,8 @@ export function country2Name(inputID: string) {
  * @return {string} The name of the city if found, otherwise "Other".
  */
 export function city2Name(inputID: string) {
-    const city = cities.find((city) => city.ID == inputID);
+    const city = citiesMapping.find((city) => city.ID == inputID);
     return city ? city.name : "Other";
-}
-
-/**
- * Checks if the user has any consumptions.
- *
- * @param {SingleUser} user - The user object to check.
- * @return {boolean} Returns true if the user has consumptions, false otherwise.
- */
-export function hasConsumptions(user: SingleUser) {
-    const hasConsumptions =
-        user.__collections__.consumptions &&
-        Object.keys(user.__collections__.consumptions).length > 0;
-    return hasConsumptions;
-}
-
-/**
- * Checks if the user has a consumption summary.
- *
- * @param {SingleUser} user - The user object.
- * @return {boolean} - Returns true if the user has a consumption summary, otherwise false.
- */
-export function hasConsumptionSummary(user: SingleUser) {
-    const hasSummaries =
-        user.__collections__["consumption-summaries"] &&
-        Object.keys(user.__collections__["consumption-summaries"]).length > 0;
-    return hasSummaries;
 }
 
 /**
