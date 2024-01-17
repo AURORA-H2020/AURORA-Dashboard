@@ -57,11 +57,13 @@ export default function FilterIndex({
         to: new Date(new Date().getFullYear(), 11, 31),
     });
     const countries =
-        localData[localData.length - 1]?.countries.sort(function (a, b) {
-            var textA = a.countryName.toUpperCase();
-            var textB = b.countryName.toUpperCase();
-            return textA < textB ? -1 : textA > textB ? 1 : 0;
-        }) ?? [];
+        localData.length > 0
+            ? localData[localData.length - 1].countries.sort(function (a, b) {
+                  var textA = a.countryName.toUpperCase();
+                  var textB = b.countryName.toUpperCase();
+                  return textA < textB ? -1 : textA > textB ? 1 : 0;
+              })
+            : [];
 
     const [calculationMode, setCalculationMode] = useState("absolute");
     const [categoryTabValue, setCategoryTabValue] = useState("all");

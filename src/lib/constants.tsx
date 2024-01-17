@@ -30,6 +30,10 @@ export const allTremorColours: Color[] = [
     "fuchsia",
     "pink",
     "rose",
+    "rose",
+    "rose",
+    "rose",
+    "rose",
 ];
 
 export const countriesMapping = [
