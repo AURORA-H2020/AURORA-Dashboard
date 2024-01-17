@@ -6,7 +6,7 @@ import path from "path";
 
 import firebase_app from "@/firebase/config";
 import { getUserFiles } from "@/lib/firebaseUtils";
-import { Summaries } from "@/models/dashboard-data";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 
 /**
  * Asynchronous function that represents the Home component.
@@ -14,7 +14,7 @@ import { Summaries } from "@/models/dashboard-data";
  * @return {Promise<JSX.Element>} The JSX element representing the Home component.
  */
 export default async function Home(): Promise<JSX.Element> {
-    let data: Summaries = [];
+    let data: GlobalSummary[] = [];
 
     if (process.env.TEST_MODE === "true") {
         const file = await fs.readFile(
