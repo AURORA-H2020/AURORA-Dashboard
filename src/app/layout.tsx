@@ -6,6 +6,7 @@ import NavigationBar from "@/components/navigationBar";
 import Footer from "@/components/footer";
 import "@radix-ui/themes/styles.css";
 import { cn } from "@/lib/utilities";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -72,6 +73,7 @@ export default function RootLayout({
                         <Footer />
                     </footer>
                 </Providers>
+                <Analytics />
             </body>
         </html>
     );
