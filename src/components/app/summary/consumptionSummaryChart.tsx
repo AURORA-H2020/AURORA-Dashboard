@@ -72,7 +72,13 @@ export default function ConsumptionSummaryChart() {
         }));
     };
 
-    const valueFormatter = (number) => {
+    /**
+     * Formats a number value based on the current measure.
+     *
+     * @param {number} number - The number to be formatted.
+     * @return {string} - The formatted number with the appropriate unit.
+     */
+    const valueFormatter = (number: number): string => {
         if (currentMeasure === "carbonEmission") {
             return (
                 Intl.NumberFormat("us").format(Math.round(number)).toString() +
@@ -178,7 +184,10 @@ export default function ConsumptionSummaryChart() {
                 <CardTitle>Summary</CardTitle>
             </CardHeader>
             <CardContent>
-                <Flex justify={"start"} className="gap-2">
+                <Flex
+                    direction={{ initial: "column", xs: "row" }}
+                    className="gap-6 mt-6 mb-6"
+                >
                     <Tabs
                         defaultValue="carbonEmission"
                         onValueChange={(value) => {

@@ -37,20 +37,27 @@ export const allTremorColours: Color[] = [
 ];
 
 export const countriesMapping = [
-    { ID: "udn3GiM30aqviGBkswpl", name: "Denmark", code: "DK" },
-    { ID: "sPXh74wjZf14Jtmkaas6", name: "Europe (Other)", code: "EU" },
-    { ID: "2E9Ejc8qBJC6HnlPPdIh", name: "Portugal", code: "PT" },
-    { ID: "KhUolhyvcbdEsPyREqOZ", name: "Slovenia", code: "SI" },
-    { ID: "4sq82jNQm3x3bH9Fkijm", name: "Spain", code: "ES" },
-    { ID: "8mgi5IR4xn9Yca4zDLtU", name: "United Kingdom", code: "UK" },
-];
-export const countryColors: Color[] = [
-    "red",
-    "teal",
-    "green",
-    "sky",
-    "yellow",
-    "blue",
+    { ID: "udn3GiM30aqviGBkswpl", name: "Denmark", code: "DK", color: "red" },
+    {
+        ID: "sPXh74wjZf14Jtmkaas6",
+        name: "Europe (Other)",
+        code: "EU",
+        color: "teal",
+    },
+    {
+        ID: "2E9Ejc8qBJC6HnlPPdIh",
+        name: "Portugal",
+        code: "PT",
+        color: "green",
+    },
+    { ID: "KhUolhyvcbdEsPyREqOZ", name: "Slovenia", code: "SI", color: "sky" },
+    { ID: "4sq82jNQm3x3bH9Fkijm", name: "Spain", code: "ES", color: "yellow" },
+    {
+        ID: "8mgi5IR4xn9Yca4zDLtU",
+        name: "United Kingdom",
+        code: "UK",
+        color: "blue",
+    },
 ];
 
 export const citiesMapping = [
@@ -61,15 +68,12 @@ export const citiesMapping = [
     { ID: "Au1oUV9pAEtSCu04cfCX", name: "Aarhus" },
 ];
 
-export const genderMappings = {
-    female: "Female",
-    male: "Male",
-    "non-binary": "Non-Binary",
-    other: "Other",
-};
-
-export const genders = ["Female", "Male", "Non-Binary", "Other"];
-export const genderColors: Color[] = ["amber", "teal", "indigo", "gray"];
+export const genderMappings: { key: string; label: string; color: Color }[] = [
+    { key: "female", label: "Female", color: "amber" },
+    { key: "male", label: "Male", color: "teal" },
+    { key: "nonBinary", label: "Non-Binary", color: "indigo" },
+    { key: "other", label: "Other", color: "gray" },
+];
 
 export const userIdBlacklist: string[] = [
     "yUjuXoJfwlWkSkZvS5PMhrtYteC3",

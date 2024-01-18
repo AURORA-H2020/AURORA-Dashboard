@@ -225,15 +225,16 @@ export default function AutoReport({
 
                         return (
                             <AccordionItem
-                                value={country.country}
-                                key={country.country}
+                                value={country.countryName}
+                                key={country.countryID}
                             >
                                 <AccordionTrigger>
-                                    {country.country}
+                                    {country.countryName}
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <Text className="text-md mb-4">
-                                        For <Strong>{country.country}</Strong>,{" "}
+                                        For{" "}
+                                        <Strong>{country.countryName}</Strong>,{" "}
                                         <Strong>
                                             {country.userCount.toLocaleString()}{" "}
                                             accounts

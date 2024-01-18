@@ -2,7 +2,7 @@
 
 import { LineChart } from "@tremor/react";
 import { transformSummaryData } from "@/lib/transformData";
-import { countryColors } from "@/lib/constants";
+import { countriesMapping } from "@/lib/constants";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 
 /**
@@ -58,7 +58,7 @@ export default function LineChartTabs({
             data={transformedData}
             index="Date"
             categories={countries}
-            colors={countryColors}
+            colors={countriesMapping.map((country) => country.color)}
             valueFormatter={
                 mode == "carbon" ? dataFormatterCarbon : dataFormatterEnergy
             }

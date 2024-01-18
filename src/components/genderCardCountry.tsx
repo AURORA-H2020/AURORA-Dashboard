@@ -1,8 +1,10 @@
-import { genderColors, genders } from "@/lib/constants";
+import { genderMappings } from "@/lib/constants";
 import { MetaData } from "@/models/dashboard-data";
-import { DonutChart, Legend } from "@tremor/react";
+import { BarChart, Legend } from "@tremor/react";
 
-import { Heading, Grid } from "@radix-ui/themes";
+import { Heading } from "@radix-ui/themes";
+import { useEffect, useState } from "react";
+import { MetaDataGenders } from "@/models/dashboard-data";
 
 /**
  * Generate the GenderCardCountry component.
@@ -13,72 +15,54 @@ import { Heading, Grid } from "@radix-ui/themes";
  * @param {string} props.title - The title of the component.
  * @return {JSX.Element} The rendered component.
  */
+
+interface ExtendedDemographic extends MetaDataGenders {
+    country: string;
+}
+
+let data: ExtendedDemographic[] | undefined;
+
+const valueFormatter = (number) =>
+    Intl.NumberFormat("us").format(number).toString();
+
 export default function GenderCardCountry({
     metaData,
-    countries,
     title,
 }: {
     metaData: MetaData | undefined;
-    countries: string[];
     title: string;
 }): JSX.Element {
-    const filteredMetaData = metaData?.filter((entry) =>
-        countries.includes(entry.country),
-    );
+    const [data, setData] = useState<ExtendedDemographic[] | undefined>();
+
+    useEffect(() => {
+        const updatedData = metaData?.map((country) => ({
+            country: country.countryName,
+            male: country.genders.male,
+            female: country.genders.female,
+            nonBinary: country.genders.nonBinary,
+            other: country.genders.other,
+        }));
+
+        setData(updatedData);
+    }, [metaData]);
 
     return (
         <>
             <Heading>{title}</Heading>
-            <Grid
-                columns={{ initial: "2", md: "3" }}
-                className="gap-6 mt-6 mb-6"
-            >
-                {filteredMetaData?.map((country) => {
-                    let total =
-                        (country.genders.female || 0) +
-                        (country.genders.male || 0) +
-                        (country.genders.nonBinary || 0) +
-                        (country.genders.other || 0);
-                    let dataSet = [
-                        {
-                            gender: "Female",
-                            count: country.genders.female,
-                            percentage: country.genders.female / total,
-                        },
-                        {
-                            gender: "Male",
-                            count: country.genders.male,
-                            percentage: country.genders.male / total,
-                        },
-                        {
-                            gender: "Non-Binary",
-                            count: country.genders.nonBinary,
-                            percentage: country.genders.nonBinary / total,
-                        },
-                        {
-                            gender: "Other",
-                            count: country.genders.other,
-                            percentage: country.genders.other / total,
-                        },
-                    ];
-                    return (
-                        <DonutChart
-                            key={country.country}
-                            className="min-w-full"
-                            data={dataSet}
-                            showAnimation={true}
-                            category="count"
-                            index="gender"
-                            label={country.country}
-                            colors={genderColors}
-                        />
-                    );
-                })}
-            </Grid>
+            <BarChart
+                className="mt-4 h-80"
+                data={data ?? []}
+                index="country"
+                categories={genderMappings.map((gender) => gender.key)}
+                colors={genderMappings.map((gender) => gender.color)}
+                valueFormatter={valueFormatter}
+                stack={true}
+                layout="vertical"
+            />
             <Legend
                 className="mt-3"
-                categories={genders}
-                colors={genderColors}
+                categories={genderMappings.map((gender) => gender.label)}
+                colors={genderMappings.map((gender) => gender.color)}
             />
         </>
     );

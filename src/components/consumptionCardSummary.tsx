@@ -10,7 +10,7 @@ export default function ConsumptionCardSummary({
     countries: string[];
 }) {
     const filteredMetaData = metaData?.filter((entry) =>
-        countries.includes(entry.country),
+        countries.includes(entry.countryName),
     );
 
     const countElectricity = filteredMetaData?.reduce(

@@ -15,25 +15,22 @@ import { ReactNode } from "react";
  */
 export default function ConsumptionCardSummaryCategory({
     metaData,
-    countries,
     category,
 }: {
     metaData: MetaData | undefined;
-    countries: string[];
     category: ConsumptionCategory;
 }): ReactNode {
-    const filteredMetaData = metaData?.filter((entry) =>
-        countries.includes(entry.country),
-    );
-
     const dataSet: {
         source: string;
         sourceName: string;
         count: number;
     }[] = [];
 
-    filteredMetaData?.forEach((e) => {
-        e.consumptions[category].sources.forEach((source) => {
+    metaData?.forEach((country) => {
+        if (!country.consumptions[category]) {
+            return;
+        }
+        country.consumptions[category].sources.forEach((source) => {
             let thisSource = dataSet.find((e) => e.source === source.source);
             if (!thisSource) {
                 dataSet.push({
@@ -45,8 +42,11 @@ export default function ConsumptionCardSummaryCategory({
             }
 
             thisSource!.count = (thisSource?.count || 0) + source.count;
+            console.log("thisSource", thisSource);
         });
     });
+
+    console.log(metaData);
 
     return (
         <>

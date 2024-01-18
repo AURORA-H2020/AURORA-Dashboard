@@ -1,16 +1,17 @@
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { ConsumptionsDetail, MetaData } from "@/models/dashboard-data";
+import {
+    ConsumptionsDetail,
+    MetaData,
+    TimelineData,
+} from "@/models/dashboard-data";
 import {
     camelCaseToWords,
     getMonthShortName,
     secondsToDateTime,
 } from "./utilities";
 import { genderMappings } from "./constants";
-
-type TimelineData = {
-    Date?: string;
-    [key: string]: any;
-};
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { DateRange } from "react-day-picker";
 
 export function transformSummaryData(
     sourceData: GlobalSummary[],
@@ -74,34 +75,50 @@ export function transformSummaryData(
 }
 
 export function latestTemporalData(
-    sourceData: GlobalSummary[],
+    latestData: GlobalSummary,
     mode: "carbon" | "energy",
+    categories: ConsumptionCategory[],
+    dateRange: DateRange | undefined,
     calculationMode: "absolute" | "average",
-) {
-    if (sourceData.length == 0) {
-        return;
+): TimelineData[] {
+    if (!latestData || !dateRange) {
+        return [];
     }
 
-    const latestDate = Math.max(...sourceData.map((e) => e?.date ?? 0));
-    const latestEntry = sourceData.find((e) => e?.date === latestDate);
+    if (!dateRange.from) {
+        dateRange.from = new Date();
+    }
+    if (!dateRange.to) {
+        dateRange.to = new Date();
+    }
 
-    let transformedData: TimelineData[] = [];
+    let temporalData: TimelineData[] = [];
 
-    latestEntry?.countries.forEach((country) => {
+    latestData?.countries.forEach((country) => {
         country.cities.forEach((city) =>
             city.categories.forEach((category) => {
+                if (!categories.includes(category.category)) {
+                    return;
+                }
                 category.temporal.forEach((year) => {
                     year.data.forEach((month) => {
                         const dateMonth = getMonthShortName(month.month);
                         let currentDate = `${dateMonth} ${year.year}`;
-                        let thisDate = transformedData.find(
+                        if (dateRange.from! > new Date(currentDate)) {
+                            return;
+                        }
+                        if (dateRange.to! < new Date(currentDate)) {
+                            return;
+                        }
+
+                        let thisDate = temporalData.find(
                             (e) => e.Date === currentDate,
                         );
                         if (!thisDate) {
-                            transformedData.push({
+                            temporalData.push({
                                 Date: currentDate,
                             });
-                            thisDate = transformedData.find(
+                            thisDate = temporalData.find(
                                 (e) => e.Date === currentDate,
                             );
                         }
@@ -121,7 +138,7 @@ export function latestTemporalData(
         );
     });
 
-    transformedData.sort(function (a, b) {
+    temporalData.sort(function (a, b) {
         var keyA = new Date(Date.parse(a.Date!)),
             keyB = new Date(Date.parse(b.Date!));
 
@@ -129,20 +146,17 @@ export function latestTemporalData(
         if (keyA > keyB) return 1;
         return 0;
     });
-    return transformedData;
+    return temporalData;
 }
 
-export function latestMetaData(sourceData: GlobalSummary[] | undefined) {
-    if (sourceData?.length == 0 || !sourceData) {
+export function latestMetaData(latestData: GlobalSummary | undefined) {
+    if (!latestData) {
         return;
     }
 
-    const latestDate = Math.max(...sourceData.map((e) => e?.date ?? 0));
-    const latestEntry = sourceData.find((e) => e?.date === latestDate);
-
     let metaData: MetaData = [];
 
-    latestEntry?.countries.forEach((country) => {
+    latestData?.countries.forEach((country) => {
         let userCountSum = 0;
         let consumptionsSummary: ConsumptionsDetail = {
             electricity: {
@@ -198,23 +212,24 @@ export function latestMetaData(sourceData: GlobalSummary[] | undefined) {
                             };
                             summaryCategory.sources.push(currentSource);
                         }
-                        currentSource.count++;
+                        currentSource.count += source.count ?? 0;
                     }
                 }
             }
 
-            Object.keys(genderMappings).forEach((category) => {
+            genderMappings.forEach((gender) => {
                 const findCategory = city.users.genders.find(
-                    (e) => e.demographicCategory === category,
+                    (e) => e.demographicCategory === gender.key,
                 );
                 if (findCategory) {
-                    genderSums[category] += findCategory.count || 0;
+                    genderSums[gender.key] += findCategory.count || 0;
                 }
             });
         });
 
         metaData.push({
-            country: country.countryName,
+            countryName: country.countryName,
+            countryID: country.countryID,
             userCount: userCountSum,
             consumptions: consumptionsSummary,
             recurringConsumptionsCount: recurringConsumptionsCountSum,
@@ -228,8 +243,8 @@ export function latestMetaData(sourceData: GlobalSummary[] | undefined) {
     });
 
     metaData.sort(function (a, b) {
-        var textA = a.country.toUpperCase();
-        var textB = b.country.toUpperCase();
+        var textA = a.countryName.toUpperCase();
+        var textB = b.countryName.toUpperCase();
         return textA < textB ? -1 : textA > textB ? 1 : 0;
     });
 

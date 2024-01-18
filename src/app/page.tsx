@@ -34,7 +34,8 @@ export default async function Home(): Promise<JSX.Element> {
                 Tracker mobile app.
             </Text>
             <div className="mt-6">
-                <FilterIndex localData={data} />
+                {/** TODO: Get the latest document from Cloud Bucket directly */}
+                <FilterIndex latestData={data[0]} />
             </div>
         </main>
     );

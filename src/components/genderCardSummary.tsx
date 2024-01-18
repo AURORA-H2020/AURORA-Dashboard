@@ -1,4 +1,4 @@
-import { genderColors, genders } from "@/lib/constants";
+import { genderMappings } from "@/lib/constants";
 import { MetaData } from "@/models/dashboard-data";
 import { DonutChart, Legend } from "@tremor/react";
 
@@ -17,7 +17,7 @@ export default function GenderCardSummary({
     metaData: MetaData | undefined;
     countries: string[];
 }): JSX.Element {
-    metaData?.filter((entry) => countries.includes(entry.country));
+    metaData?.filter((entry) => countries.includes(entry.countryName));
 
     let countFemale = 0;
     let countMale = 0;
@@ -59,12 +59,12 @@ export default function GenderCardSummary({
                 showAnimation={true}
                 category="count"
                 index="gender"
-                colors={genderColors}
+                colors={genderMappings.map((gender) => gender.color)}
             />
             <Legend
                 className="mt-3"
-                categories={genders}
-                colors={genderColors}
+                categories={genderMappings.map((gender) => gender.label)}
+                colors={genderMappings.map((gender) => gender.color)}
             />
         </>
     );

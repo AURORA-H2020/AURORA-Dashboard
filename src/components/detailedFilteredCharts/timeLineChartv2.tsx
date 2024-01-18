@@ -2,8 +2,12 @@
 
 import { LineChart } from "@tremor/react";
 import { latestTemporalData } from "@/lib/transformData";
-import { countryColors } from "@/lib/constants";
+import { countriesMapping } from "@/lib/constants";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { useEffect, useState } from "react";
+import { TimelineData } from "@/models/dashboard-data";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { DateRange } from "react-day-picker";
 
 /**
  * Formats a number as a string with thousands separators and units for carbon dioxide.
@@ -36,29 +40,40 @@ const dataFormatterEnergy = (number: number): string =>
  * @return {JSX.Element} The rendered line chart.
  */
 export default function LineChartTabsV2({
-    localData,
+    latestData,
     countries,
+    categories,
+    dateRange,
     mode,
     calculationMode,
 }: {
-    localData: GlobalSummary[];
+    latestData: GlobalSummary;
     countries: string[];
+    categories: ConsumptionCategory[];
+    dateRange: DateRange | undefined;
     mode: "carbon" | "energy";
     calculationMode: "absolute" | "average";
 }): JSX.Element {
-    const transformedData = latestTemporalData(
-        localData,
-        mode,
-        calculationMode,
-    );
+    const [transformedData, setTransformedData] = useState<TimelineData[]>([]);
+
+    useEffect(() => {
+        const updatedTransformedData = latestTemporalData(
+            latestData,
+            mode,
+            categories,
+            dateRange,
+            calculationMode,
+        );
+        setTransformedData(updatedTransformedData);
+    }, [latestData, mode, categories, calculationMode, dateRange]);
 
     return (
         <LineChart
             className="h-80 mt-8"
-            data={transformedData!}
+            data={transformedData}
             index="Date"
             categories={countries}
-            colors={countryColors}
+            colors={countriesMapping.map((country) => country.color)}
             valueFormatter={
                 mode == "carbon" ? dataFormatterCarbon : dataFormatterEnergy
             }

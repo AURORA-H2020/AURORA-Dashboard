@@ -1,13 +1,11 @@
 "use client";
 
-import LineChartTabs from "@/components/detailedFilteredCharts/timeLineChart";
 import LineChartTabsV2 from "./timeLineChartv2";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { UsersIcon, BlocksIcon } from "lucide-react";
-import { secondsToDateTime } from "@/lib/utilities";
 import { latestMetaData } from "@/lib/transformData";
-import { categories } from "@/lib/constants";
+import { categories, countriesMapping } from "@/lib/constants";
 import DetailedCard from "@/components/detailedCard";
 import GenderCardCountry from "../genderCardCountry";
 import GenderCardSummary from "../genderCardSummary";
@@ -40,6 +38,39 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { MetaData } from "@/models/dashboard-data";
+
+function filterLatestData(
+    latestData,
+    selectedCountries,
+    selectedCategories,
+): GlobalSummary | undefined {
+    return {
+        ...latestData,
+        countries: latestData.countries
+            .filter(
+                (country) =>
+                    selectedCountries.filter(
+                        (e) => e.label === country.countryName,
+                    ).length > 0,
+            )
+            .map((country) => {
+                return {
+                    ...country,
+                    cities: country.cities.map((city) => {
+                        return {
+                            ...city,
+                            categories: city.categories.filter((category) =>
+                                selectedCategories.includes(
+                                    category.category as ConsumptionCategory,
+                                ),
+                            ),
+                        };
+                    }),
+                };
+            }),
+    };
+}
 
 /**
  * Renders the FilterIndex component.
@@ -48,77 +79,74 @@ import { GlobalSummary } from "@/models/firestore/global-summary/global-summary"
  * @return {JSX.Element} The JSX element representing the FilterIndex component.
  */
 export default function FilterIndex({
-    localData,
+    latestData,
 }: {
-    localData: GlobalSummary[];
+    latestData: GlobalSummary;
 }): JSX.Element {
-    const [dateRange, setDateRange] = useState<DateRange | undefined>({
-        from: new Date(new Date().getFullYear(), 0, 1),
-        to: new Date(new Date().getFullYear(), 11, 31),
-    });
-    const countries =
-        localData.length > 0
-            ? localData[localData.length - 1].countries.sort(function (a, b) {
-                  var textA = a.countryName.toUpperCase();
-                  var textB = b.countryName.toUpperCase();
-                  return textA < textB ? -1 : textA > textB ? 1 : 0;
-              })
-            : [];
-
-    const [calculationMode, setCalculationMode] = useState("absolute");
-    const [categoryTabValue, setCategoryTabValue] = useState("all");
-    const selectedCategories =
-        categoryTabValue === "all" ? categories : [categoryTabValue];
-
     // Options available for country multiselect
-    const options: OptionType[] = countries.map((country) => ({
-        value: country.countryID,
-        label: country.countryName,
+    const options: OptionType[] = countriesMapping.map((country) => ({
+        value: country.ID,
+        label: country.name,
     }));
 
     // State to keep track of country multiselect
     const [selectedCountries, setSelectedCountries] =
         useState<OptionType[]>(options);
 
-    const filteredLocalData = localData.map((entry) => {
-        if (!entry) {
-            return;
-        }
-        if (dateRange?.to && dateRange?.from) {
-            const entryDate = secondsToDateTime(entry.date);
-            if (entryDate >= dateRange.to || entryDate <= dateRange.from) {
-                return;
-            }
-        }
+    const [dateRange, setDateRange] = useState<DateRange | undefined>({
+        from: new Date(new Date().getFullYear(), 0, 1),
+        to: new Date(new Date().getFullYear(), 11, 31),
+    });
 
-        return {
-            ...entry,
-            countries: entry.countries
-                .filter(
-                    (country) =>
-                        selectedCountries.filter(
-                            (e) => e.label === country.countryName,
-                        ).length > 0,
-                )
-                .map((country) => {
-                    return {
-                        ...country,
-                        cities: country.cities.map((city) => {
-                            return {
-                                ...city,
-                                categories: city.categories.filter((category) =>
-                                    selectedCategories.includes(
-                                        category.category as ConsumptionCategory,
-                                    ),
-                                ),
-                            };
-                        }),
-                    };
-                }),
-        };
-    }) as GlobalSummary[] | undefined;
+    const [calculationMode, setCalculationMode] = useState("absolute");
+    const [categoryTabValue, setCategoryTabValue] = useState("all");
+    const [selectedCategories, setSelectedCategories] = useState<
+        ConsumptionCategory[]
+    >([]);
 
-    const metaData = latestMetaData(filteredLocalData);
+    const [filteredLatestData, setFilteredLatestData] = useState<
+        GlobalSummary | undefined
+    >(filterLatestData(latestData, selectedCountries, selectedCategories));
+
+    useEffect(() => {
+        setSelectedCategories(
+            categoryTabValue === "all"
+                ? categories
+                : [categoryTabValue as ConsumptionCategory],
+        );
+    }, [categoryTabValue]);
+
+    const [metaData, setMetaData] = useState<MetaData | undefined>();
+
+    useEffect(() => {
+        const updatedFilteredLatestData = filterLatestData(
+            latestData,
+            selectedCountries,
+            selectedCategories,
+        );
+        setFilteredLatestData(updatedFilteredLatestData);
+
+        // Start with the latest data before filtering
+        const updatedMetaData = latestMetaData(latestData)?.filter((entry) =>
+            selectedCountries
+                .map((country) => country.value)
+                .includes(entry.countryID),
+        );
+
+        // Update the state with the filtered data
+        setMetaData(updatedMetaData);
+    }, [selectedCountries, latestData, selectedCategories]);
+
+    const data = metaData?.map((country) => ({
+        country: country.countryName,
+        male: country.genders.male,
+        female: country.genders.female,
+        nonBinary: country.genders.nonBinary,
+        other: country.genders.other,
+    }));
+
+    console.log(metaData);
+    console.log("selected Countries:", selectedCountries);
 
     return (
         <>
@@ -224,6 +252,7 @@ export default function FilterIndex({
                     </Grid>
                 </CardContent>
             </Card>
+
             <Grid
                 columns={{
                     initial: "1",
@@ -235,10 +264,8 @@ export default function FilterIndex({
                     <CardContent className="p-6">
                         <DetailedCard
                             metaData={metaData}
-                            countries={selectedCountries.map(
-                                (entry) => entry.label,
-                            )}
                             measure="userCount"
+                            categories={selectedCategories}
                             title="Number of Users"
                             icon={UsersIcon}
                         />
@@ -254,10 +281,8 @@ export default function FilterIndex({
                     <CardContent className="p-6">
                         <DetailedCard
                             metaData={metaData}
-                            countries={selectedCountries.map(
-                                (entry) => entry.label,
-                            )}
                             measure="consumptionsCount"
+                            categories={selectedCategories}
                             title="Individual Consumptions"
                             icon={BlocksIcon}
                         />
@@ -272,12 +297,7 @@ export default function FilterIndex({
                         ) : (
                             <ConsumptionCardSummaryCategory
                                 metaData={metaData}
-                                countries={selectedCountries.map(
-                                    (entry) => entry.label,
-                                )}
-                                category={
-                                    selectedCategories[0] as ConsumptionCategory
-                                }
+                                category={selectedCategories[0]}
                             />
                         )}
                     </CardContent>
@@ -288,86 +308,7 @@ export default function FilterIndex({
                 <CardContent className="p-6">
                     <Tabs defaultValue="carbon">
                         <Flex
-                            direction={{ initial: "column", md: "row" }}
-                            className="gap-6 mt-6 mb-6"
-                        >
-                            <div className="overflow-x-auto">
-                                <TabsList>
-                                    <TabsTrigger value="carbon">
-                                        CO<sub>2</sub> Emission
-                                    </TabsTrigger>
-                                    <TabsTrigger value="energy">
-                                        Energy Usage
-                                    </TabsTrigger>
-                                </TabsList>
-                            </div>
-
-                            <Select
-                                value={calculationMode}
-                                onValueChange={setCalculationMode}
-                            >
-                                <SelectTrigger className="w-[180px]">
-                                    <SelectValue defaultValue="absolute" />
-                                </SelectTrigger>
-
-                                <SelectContent>
-                                    <SelectItem value="absolute">
-                                        Absolute
-                                    </SelectItem>
-                                    <SelectItem value="average">
-                                        Average per User
-                                    </SelectItem>
-                                </SelectContent>
-                            </Select>
-                        </Flex>
-
-                        <TabsContent value="carbon">
-                            <Text>
-                                Total{" "}
-                                <b>
-                                    CO<sub>2</sub> Emission
-                                </b>{" "}
-                                per country between{" "}
-                                {String(dateRange?.from?.toDateString())} and{" "}
-                                {String(dateRange?.to?.toDateString())}.
-                            </Text>
-
-                            <LineChartTabs
-                                localData={localData}
-                                countries={selectedCountries.map(
-                                    (entry) => entry.label,
-                                )}
-                                mode="carbon"
-                                calculationMode={
-                                    calculationMode as "absolute" | "average"
-                                }
-                            />
-                        </TabsContent>
-                        <TabsContent value="energy">
-                            <Text>
-                                Total <b>Energy Usage</b> per country between{" "}
-                                {String(dateRange?.from?.toDateString())} and{" "}
-                                {String(dateRange?.to?.toDateString())}.
-                            </Text>
-                            <LineChartTabs
-                                localData={localData}
-                                countries={selectedCountries.map(
-                                    (entry) => entry.label,
-                                )}
-                                mode="energy"
-                                calculationMode={
-                                    calculationMode as "absolute" | "average"
-                                }
-                            />
-                        </TabsContent>
-                    </Tabs>
-                </CardContent>
-            </Card>
-            <Card className="mb-6">
-                <CardContent className="p-6">
-                    <Tabs defaultValue="carbon">
-                        <Flex
-                            direction={{ initial: "column", md: "row" }}
+                            direction={{ initial: "column", xs: "row" }}
                             className="gap-6 mt-6 mb-6"
                         >
                             <div className="overflow-x-auto">
@@ -412,10 +353,12 @@ export default function FilterIndex({
                             </Text>
 
                             <LineChartTabsV2
-                                localData={localData}
+                                latestData={latestData}
                                 countries={selectedCountries.map(
                                     (entry) => entry.label,
                                 )}
+                                categories={selectedCategories}
+                                dateRange={dateRange}
                                 mode="carbon"
                                 calculationMode={
                                     calculationMode as "absolute" | "average"
@@ -429,10 +372,12 @@ export default function FilterIndex({
                                 {String(dateRange?.to?.toDateString())}.
                             </Text>
                             <LineChartTabsV2
-                                localData={localData}
+                                latestData={latestData}
                                 countries={selectedCountries.map(
                                     (entry) => entry.label,
                                 )}
+                                categories={selectedCategories}
+                                dateRange={dateRange}
                                 mode="energy"
                                 calculationMode={
                                     calculationMode as "absolute" | "average"
@@ -442,17 +387,16 @@ export default function FilterIndex({
                     </Tabs>
                 </CardContent>
             </Card>
+
             <Card className="mb-6">
                 <CardContent className="p-6">
                     <GenderCardCountry
                         metaData={metaData}
-                        countries={selectedCountries.map(
-                            (entry) => entry.label,
-                        )}
                         title="Gender Distribution"
                     />
                 </CardContent>
             </Card>
+
             <Card>
                 <CardContent className="p-6">
                     <div className="max-w-3xl mx-auto">
