@@ -1,15 +1,18 @@
 export type MetaData = {
-    country: string;
+    countryName: string;
+    countryID: string;
     userCount: number;
     consumptions: ConsumptionsDetail;
     recurringConsumptionsCount: number;
-    genders: {
-        male: number;
-        female: number;
-        nonBinary: number;
-        other: number;
-    };
+    genders: MetaDataGenders;
 }[];
+
+export interface MetaDataGenders {
+    male: number;
+    female: number;
+    nonBinary: number;
+    other: number;
+}
 
 export interface ConsumptionsDetail {
     electricity: CategorySourceDetail;
@@ -22,4 +25,9 @@ export interface CategorySourceDetail {
     carbonEmissions: number;
     energyExpended: number;
     sources: { source: string; sourceName: string; count: number }[];
+}
+
+export interface TimelineData {
+    Date?: string;
+    [key: string]: any;
 }
