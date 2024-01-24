@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/popover";
 
 import { Card, CardContent } from "../ui/card";
-import { Grid, Flex, Text } from "@radix-ui/themes";
+import { Grid, Flex, Text, Heading } from "@radix-ui/themes";
 
 import { MultiSelect, OptionType } from "../ui/multiselect";
 
@@ -39,6 +39,7 @@ import {
 } from "@/components/ui/select";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { MetaData } from "@/models/dashboard-data";
+import { LanguageSwitcher, useTranslation } from "next-export-i18n";
 
 function filterLatestData(
     latestData,
@@ -83,6 +84,8 @@ export default function FilterIndex({
 }: {
     latestData: GlobalSummary;
 }): JSX.Element {
+    const { t } = useTranslation();
+
     // Options available for country multiselect
     const options: OptionType[] = countriesMapping.map((country) => ({
         value: country.ID,
@@ -145,11 +148,11 @@ export default function FilterIndex({
         other: country.genders.other,
     }));
 
-    console.log(metaData);
-    console.log("selected Countries:", selectedCountries);
-
     return (
         <>
+            <Heading as="h1">{t("dashboard.main.title")}</Heading>
+
+            <Text>{t("dashboard.main.description")}</Text>
             <Card className="mb-6">
                 <CardContent className="p-6">
                     <Flex className="mb-6">

@@ -42,11 +42,8 @@ export default function ConsumptionCardSummaryCategory({
             }
 
             thisSource!.count = (thisSource?.count || 0) + source.count;
-            console.log("thisSource", thisSource);
         });
     });
-
-    console.log(metaData);
 
     return (
         <>

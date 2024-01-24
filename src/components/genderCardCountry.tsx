@@ -58,6 +58,7 @@ export default function GenderCardCountry({
                 valueFormatter={valueFormatter}
                 stack={true}
                 layout="vertical"
+                showLegend={false}
             />
             <Legend
                 className="mt-3"

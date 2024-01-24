@@ -4,6 +4,21 @@ import { Color } from "@tremor/react";
 import { CarFront, Zap, ThermometerSnowflake } from "lucide-react";
 import React from "react";
 
+/* i18next-parser helper
+t("language.english")
+t("language.german")
+*/
+export const supportedLocales = [
+    {
+        code: "en",
+        name: "language.english",
+    },
+    {
+        code: "de",
+        name: "language.german",
+    },
+];
+
 export const categories: ConsumptionCategory[] = [
     "electricity",
     "heating",

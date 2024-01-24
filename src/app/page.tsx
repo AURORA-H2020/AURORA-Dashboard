@@ -1,4 +1,3 @@
-import { Heading, Text } from "@radix-ui/themes";
 import FilterIndex from "@/components/detailedFilteredCharts/filterIndex";
 
 import { promises as fs } from "fs";
@@ -28,11 +27,6 @@ export default async function Home(): Promise<JSX.Element> {
 
     return (
         <main>
-            <Heading as="h1">Welcome to the AURORA Dashboard!</Heading>
-            <Text>
-                Here you can find the latest stats about the AURORA Energy
-                Tracker mobile app.
-            </Text>
             <div className="mt-6">
                 {/** TODO: Get the latest document from Cloud Bucket directly */}
                 <FilterIndex latestData={data[0]} />

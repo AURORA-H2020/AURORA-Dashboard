@@ -2,7 +2,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
-import NavigationBar from "@/components/navigationBar";
+import NavigationBar from "@/components/navigation/navigationBar";
 import Footer from "@/components/footer";
 import "@radix-ui/themes/styles.css";
 import { cn } from "@/lib/utilities";

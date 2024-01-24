@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Logo from "./logo";
+import Logo from "./navigation/logo";
 
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";

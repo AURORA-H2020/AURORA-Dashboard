@@ -1,0 +1,23 @@
+{
+    "dashboard": {
+        "main": {
+            "title": "AURORA Energy Tracker Dashboard",
+            "description": "Here you can find the latest stats about the AURORA Energy Tracker mobile app."
+        }
+    },
+    "navigation": {
+        "languageSwitcher": {
+            "selectLanguage": "Select Language"
+        },
+        "menu": {
+            "dashboard": "Dashboard",
+            "about": "About",
+            "account": "Account",
+            "logout": "Logout"
+        }
+    },
+    "language": {
+        "english": "English",
+        "german": "German"
+    }
+}
