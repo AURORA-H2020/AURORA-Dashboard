@@ -66,7 +66,7 @@ export function country2Name(inputID: string) {
  * @param {string} inputID - The ID of the city to find the name for.
  * @return {string} The name of the city if found, otherwise "Other".
  */
-export function city2Name(inputID: string) {
+export function city2Name(inputID: string): string {
     const city = citiesMapping.find((city) => city.ID == inputID);
     return city ? city.name : "Other";
 }
@@ -91,11 +91,17 @@ export function getMonthShortName(monthNumber: number): string {
  * @param {string} s - The input string in camel case.
  * @return {string} The converted string with spaces between words.
  */
-export function camelCaseToWords(s: string) {
+export function camelCaseToWords(s: string): string {
     const result = s.replace(/([A-Z])/g, " $1");
     return result.charAt(0).toUpperCase() + result.slice(1);
 }
 
+/**
+ * Retrieves the consumption attributes based on the provided consumption object.
+ *
+ * @param {Consumption} consumption - The consumption object to retrieve attributes for.
+ * @return {ConsumptionAttributes} The attributes associated with the consumption.
+ */
 export function getConsumptionAttributes(
     consumption: Consumption,
 ): ConsumptionAttributes {
@@ -105,3 +111,44 @@ export function getConsumptionAttributes(
 
     return consumptionCategory ? consumptionMapping[consumptionCategory] : {};
 }
+
+/**
+ * Formats a number as a string with thousands separators and units for carbon dioxide.
+ *
+ * @param {number} number - The number to be formatted.
+ * @return {string} The formatted number with the unit "kg CO₂".
+ */
+export const valueFormatterCarbon = (number: number): string =>
+    `${Intl.NumberFormat("us")
+        .format(Math.round(number))
+        .toString()} \n kg CO\u00B2`;
+
+/**
+ * Formats the given number as a string representing energy in kilowatt-hours.
+ *
+ * @param {number} number - The number to format.
+ * @return {string} The formatted energy value as a string.
+ */
+export const valueFormatterEnergy = (number: number): string =>
+    `${Intl.NumberFormat("us").format(Math.round(number)).toString()} \n kWh`;
+
+/**
+ * Formats the absolute value of a number using the US number format.
+ *
+ * @param {number} number - the number to be formatted
+ * @return {string} the formatted absolute value as a string
+ */
+export const valueFormatterAbsolute = (number: number): string =>
+    Intl.NumberFormat("us").format(number).toString();
+
+/**
+ * Formats a number as a percentage value with one decimal place.
+ *
+ * @param {number} number - the number to be formatted
+ * @return {string} the formatted percentage value
+ */
+export const valueFormatterPercentage = (number: number): string =>
+    Intl.NumberFormat("us", {
+        style: "percent",
+        maximumFractionDigits: 1,
+    }).format(number);

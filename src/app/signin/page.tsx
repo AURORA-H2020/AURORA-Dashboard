@@ -15,11 +15,11 @@ import AuthenticateWithGoogle from "@/components/auth/authenticateWithGoogle";
 import AuthenticateWithApple from "@/components/auth/authenticateWithApple";
 
 /**
- * Renders a sign-in form and handles sign-in through email, Google,
- * or Apple. On successful sign-in, displays a success toast and
- * redirects to the account page.
+ * Renders the authentication options based on the sign-in state.
+ *
+ * @param {boolean} isSignIn - Indicates whether the user is signing in.
+ * @return {JSX.Element} The rendered authentication options component.
  */
-
 const AuthenticationOptions = ({ isSignIn }: { isSignIn: boolean }) => {
     return (
         <>
@@ -41,6 +41,11 @@ const AuthenticationOptions = ({ isSignIn }: { isSignIn: boolean }) => {
     );
 };
 
+/**
+ * Renders a sign-in form with tabs for email sign-in and sign-up options.
+ *
+ * @return {JSX.Element} The sign-in form component
+ */
 const SignInForm = () => {
     return (
         <Flex justify={"center"}>

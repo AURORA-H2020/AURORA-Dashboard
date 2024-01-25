@@ -1,6 +1,11 @@
 import { getAuth, deleteUser } from "firebase/auth";
 import firebase_app from "@/firebase/config";
 
+/**
+ * Deletes the current user account if it exists, and handles success and error cases.
+ *
+ * @return {Promise<void>} A promise that resolves once the account is deleted, or rejects with an error.
+ */
 export const deleteAccount = async () => {
     const auth = getAuth(firebase_app);
     const user = auth.currentUser;

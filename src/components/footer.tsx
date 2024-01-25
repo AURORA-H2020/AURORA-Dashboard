@@ -5,6 +5,7 @@ import Logo from "./navigation/logo";
 
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
+import { useTranslation } from "next-export-i18n";
 
 /**
  * Renders the footer component.
@@ -12,6 +13,7 @@ import { Separator } from "./ui/separator";
  * @return {JSX.Element} The rendered footer component.
  */
 export default function Footer(): JSX.Element {
+    const { t } = useTranslation();
     return (
         <Card className="items-center p-4 mx-auto md:px-8">
             <div className="sm:flex sm:items-center sm:justify-between">
@@ -31,11 +33,7 @@ export default function Footer(): JSX.Element {
             </div>
             <Separator className="my-6" />
             <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400 flex justify-center">
-                <span className="max-w-md">
-                    This project has received funding from the European Union’s
-                    Horizon 2020 research and innovation programme under grant
-                    agreement No. 101036418.
-                </span>
+                <span className="max-w-md">{t("footer.fundingNotice")}</span>
             </span>
         </Card>
     );

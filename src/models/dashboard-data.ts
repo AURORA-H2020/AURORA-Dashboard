@@ -31,3 +31,7 @@ export interface TimelineData {
     Date?: string;
     [key: string]: any;
 }
+
+export type EnergyMode = "carbon" | "energy";
+
+export type CalculationMode = "absolute" | "average";

@@ -1,6 +1,11 @@
 import { getFunctions, httpsCallable } from "firebase/functions";
 import firebase_app from "@/firebase/config";
 
+/**
+ * Downloads user data from the specified region and initiates the download process.
+ *
+ * @return {Promise<void>} A promise that resolves after the download process is completed.
+ */
 export const downloadUserData = async () => {
     try {
         // Specify the region where the function is deployed

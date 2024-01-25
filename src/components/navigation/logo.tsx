@@ -9,7 +9,7 @@ import Image from "next/image";
  *
  * @return {JSX.Element} The logo component.
  */
-export default function Logo() {
+export default function Logo(): JSX.Element {
     const [mounted, setMounted] = useState(false);
     const { theme } = useTheme();
 

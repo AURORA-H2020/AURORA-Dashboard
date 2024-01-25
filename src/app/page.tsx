@@ -1,10 +1,10 @@
-import FilterIndex from "@/components/detailedFilteredCharts/filterIndex";
+import { Dashboard } from "@/app/dashboard";
 
 import { promises as fs } from "fs";
 import path from "path";
 
 import firebase_app from "@/firebase/config";
-import { getUserFiles } from "@/lib/firebaseUtils";
+import { getLatestSummaryFile } from "@/lib/firebaseUtils";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 
 /**
@@ -13,24 +13,28 @@ import { GlobalSummary } from "@/models/firestore/global-summary/global-summary"
  * @return {Promise<JSX.Element>} The JSX element representing the Home component.
  */
 export default async function Home(): Promise<JSX.Element> {
-    let data: GlobalSummary[] = [];
+    let globalSummaryData: GlobalSummary | null;
 
     if (process.env.TEST_MODE === "true") {
         const file = await fs.readFile(
-            path.join(process.cwd(), "src/data/users-1697715668-testing.json"),
+            path.join(
+                process.cwd(),
+                "src/data/users-export-1706199556428.json",
+            ),
             "utf8",
         );
-        data = [JSON.parse(file)];
+        globalSummaryData = JSON.parse(file);
     } else if (firebase_app && process.env.FIREBASE_STORAGE_USER_PATH) {
-        data = await getUserFiles(process.env.FIREBASE_STORAGE_USER_PATH);
+        globalSummaryData = await getLatestSummaryFile(
+            process.env.FIREBASE_STORAGE_USER_PATH,
+        );
+    } else {
+        globalSummaryData = null;
     }
 
-    return (
-        <main>
-            <div className="mt-6">
-                {/** TODO: Get the latest document from Cloud Bucket directly */}
-                <FilterIndex latestData={data[0]} />
-            </div>
-        </main>
-    );
+    if (globalSummaryData) {
+        return <Dashboard globalSummaryData={globalSummaryData} />;
+    } else {
+        return <>Not found</>;
+    }
 }

@@ -1,9 +1,24 @@
 {
+    "about": {
+        "title": "",
+        "description": ""
+    },
     "dashboard": {
         "main": {
             "title": "AURORA Energy Tracker Dashboard",
             "description": "Hier finden Sie die neuesten Statistiken über die AURORA Energy Tracker Mobile App."
+        },
+        "filter": {
+            "allCategories": ""
+        },
+        "card": {
+            "userCount": "",
+            "individualConsumptions": "",
+            "pleaseSelectDateRange": ""
         }
+    },
+    "footer": {
+        "fundingNotice": ""
     },
     "navigation": {
         "languageSwitcher": {
@@ -14,6 +29,11 @@
             "about": "Über",
             "account": "Account",
             "logout": "Abmelden"
+        }
+    },
+    "ui": {
+        "datePicker": {
+            "selectDateRange": ""
         }
     },
     "language": {

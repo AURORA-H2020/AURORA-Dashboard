@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "next-themes";
 import { Sun, Moon } from "lucide-react";
+import { Button } from "../ui/button";
 
 /**
  * Renders a theme toggle button.
@@ -19,26 +20,19 @@ export default function ThemeToggle(): JSX.Element {
 
     if (!mounted) {
         return (
-            <button
-                className={
-                    "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
-                }
-            >
+            <Button variant="ghost" size="icon">
                 <Moon />
-            </button>
+            </Button>
         );
     }
 
     return (
-        <button
-            id="theme-toggle"
-            type="button"
-            className={
-                "text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
-            }
+        <Button
+            variant="ghost"
+            size="icon"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
         >
             {theme === "light" ? <Moon /> : <Sun />}
-        </button>
+        </Button>
     );
 }

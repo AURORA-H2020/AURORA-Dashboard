@@ -3,6 +3,7 @@ import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-
 import { Color } from "@tremor/react";
 import { CarFront, Zap, ThermometerSnowflake } from "lucide-react";
 import React from "react";
+import { CalculationMode, EnergyMode } from "@/models/dashboard-data";
 
 /* i18next-parser helper
 t("language.english")
@@ -17,12 +18,6 @@ export const supportedLocales = [
         code: "de",
         name: "language.german",
     },
-];
-
-export const categories: ConsumptionCategory[] = [
-    "electricity",
-    "heating",
-    "transportation",
 ];
 
 export const categoryColors: Color[] = ["yellow", "red", "blue"];
@@ -117,31 +112,36 @@ export const consumptionMapping: Record<
         icon: <Zap />,
         type: "electricity",
         unit: "kWh",
-        color: "yellow",
+        color: "#FDDD09",
         label: "Energy Usage",
+        colorMuted: "#534918",
     },
     transportation: {
         icon: <CarFront />,
         type: "transportation",
         unit: "km",
-        color: "blue",
+        color: "#1E84FD",
         label: "Distance",
+        colorMuted: "#173555",
     },
     heating: {
         icon: <ThermometerSnowflake />,
         type: "heating",
         unit: "kWh",
-        color: "red",
+        color: "#F5473D",
         label: "Energy Usage",
+        colorMuted: "#492322",
     },
 };
 
-export const carbonUnit = (
-    <>
-        {" "}
-        CO<sub>2</sub>
-    </>
-);
+export const categories: ConsumptionCategory[] = Object.keys(
+    consumptionMapping,
+) as ConsumptionCategory[];
+
+export const energyModes: EnergyMode[] = ["carbon", "energy"];
+export const calculationModes: CalculationMode[] = ["absolute", "average"];
+
+export const carbonUnit = " kg CO\u00B2";
 
 export const kiloGramNumberFormatter = Intl.NumberFormat("en", {
     notation: "compact",

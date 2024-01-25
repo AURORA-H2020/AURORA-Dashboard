@@ -1,4 +1,5 @@
 "use client";
+
 import authenticate from "@/firebase/auth/authentication";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";

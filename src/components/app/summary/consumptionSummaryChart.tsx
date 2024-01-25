@@ -12,7 +12,11 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuthContext } from "@/context/AuthContext";
 import firebase_app from "@/firebase/config";
 import { categories, categoryColors } from "@/lib/constants";
-import { getMonthShortName } from "@/lib/utilities";
+import {
+    getMonthShortName,
+    valueFormatterCarbon,
+    valueFormatterEnergy,
+} from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
@@ -70,26 +74,6 @@ export default function ConsumptionSummaryChart() {
             electricity: 0,
             transportation: 0,
         }));
-    };
-
-    /**
-     * Formats a number value based on the current measure.
-     *
-     * @param {number} number - The number to be formatted.
-     * @return {string} - The formatted number with the appropriate unit.
-     */
-    const valueFormatter = (number: number): string => {
-        if (currentMeasure === "carbonEmission") {
-            return (
-                Intl.NumberFormat("us").format(Math.round(number)).toString() +
-                " kg CO2"
-            );
-        } else {
-            return (
-                Intl.NumberFormat("us").format(Math.round(number)).toString() +
-                " kWh"
-            );
-        }
     };
 
     useEffect(() => {
@@ -243,7 +227,11 @@ export default function ConsumptionSummaryChart() {
                     index="monthName"
                     categories={categories}
                     colors={categoryColors}
-                    valueFormatter={valueFormatter}
+                    valueFormatter={
+                        currentMeasure === "carbonEmission"
+                            ? valueFormatterCarbon
+                            : valueFormatterEnergy
+                    }
                     stack={true}
                 />
             </CardContent>

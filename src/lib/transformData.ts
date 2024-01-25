@@ -4,84 +4,29 @@ import {
     MetaData,
     TimelineData,
 } from "@/models/dashboard-data";
-import {
-    camelCaseToWords,
-    getMonthShortName,
-    secondsToDateTime,
-} from "./utilities";
+import { camelCaseToWords, getMonthShortName } from "./utilities";
 import { genderMappings } from "./constants";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { DateRange } from "react-day-picker";
 
-export function transformSummaryData(
-    sourceData: GlobalSummary[],
-    mode: "carbon" | "energy",
-    calculationMode: "absolute" | "average",
-) {
-    const transformedData: TimelineData[] = [];
-    const legendItems: string[] = [];
-
-    sourceData.forEach((entry) => {
-        if (!entry) {
-            return;
-        }
-
-        const currentData: TimelineData = {};
-
-        const date = secondsToDateTime(entry?.date);
-        const formattedDate = `${date.getDate()}.${
-            date.getMonth() + 1
-        }.${date.getFullYear()}`;
-        currentData.Date = formattedDate;
-
-        entry?.countries.forEach((country) => {
-            let countrySum = 0;
-            let registeredUsersSum = 0;
-
-            country.cities.forEach((city) => {
-                city.categories.forEach((item) => {
-                    countrySum +=
-                        mode === "carbon"
-                            ? item.carbonEmissions
-                            : item.energyExpended;
-                });
-                registeredUsersSum += city.users.userCount || 0;
-            });
-
-            const countryData =
-                calculationMode === "absolute"
-                    ? countrySum
-                    : countrySum / registeredUsersSum;
-
-            if (!legendItems.includes(country.countryName)) {
-                legendItems.push(country.countryName);
-            }
-
-            currentData[country.countryName] = countryData;
-        });
-
-        transformedData.push(currentData);
-    });
-
-    transformedData.sort(function (a, b) {
-        var keyA = new Date(Date.parse(a.Date!)),
-            keyB = new Date(Date.parse(b.Date!));
-        if (keyA < keyB) return -1;
-        if (keyA > keyB) return 1;
-        return 0;
-    });
-
-    return transformedData;
-}
-
-export function latestTemporalData(
-    latestData: GlobalSummary,
+/**
+ * Retrieves temporal data based on the provided parameters.
+ *
+ * @param {GlobalSummary} globalSummaryData - The global summary data.
+ * @param {"carbon" | "energy"} mode - The mode of data (carbon or energy).
+ * @param {ConsumptionCategory[]} categories - The consumption categories to filter by.
+ * @param {DateRange | undefined} dateRange - The date range for the temporal data.
+ * @param {"absolute" | "average"} calculationMode - The calculation mode (absolute or average).
+ * @return {TimelineData[]} The retrieved temporal data.
+ */
+export function temporalData(
+    globalSummaryData: GlobalSummary,
     mode: "carbon" | "energy",
     categories: ConsumptionCategory[],
     dateRange: DateRange | undefined,
     calculationMode: "absolute" | "average",
 ): TimelineData[] {
-    if (!latestData || !dateRange) {
+    if (!globalSummaryData || !dateRange) {
         return [];
     }
 
@@ -94,7 +39,7 @@ export function latestTemporalData(
 
     let temporalData: TimelineData[] = [];
 
-    latestData?.countries.forEach((country) => {
+    globalSummaryData?.countries.forEach((country) => {
         country.cities.forEach((city) =>
             city.categories.forEach((category) => {
                 if (!categories.includes(category.category)) {
@@ -149,14 +94,20 @@ export function latestTemporalData(
     return temporalData;
 }
 
-export function latestMetaData(latestData: GlobalSummary | undefined) {
-    if (!latestData) {
+/**
+ * Retrieves metadata from the global summary data.
+ *
+ * @param {GlobalSummary | undefined} globalSummaryData - the global summary data
+ * @return {MetaData[]} the metadata retrieved from the global summary data
+ */
+export function getMetaData(globalSummaryData: GlobalSummary | undefined) {
+    if (!globalSummaryData) {
         return;
     }
 
     let metaData: MetaData = [];
 
-    latestData?.countries.forEach((country) => {
+    globalSummaryData?.countries.forEach((country) => {
         let userCountSum = 0;
         let consumptionsSummary: ConsumptionsDetail = {
             electricity: {

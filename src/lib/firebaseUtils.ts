@@ -44,6 +44,37 @@ export const getUserFiles = async (path: string): Promise<GlobalSummary[]> => {
 };
 
 /**
+ * Retrieves the latest summary file from the specified path in Firebase storage.
+ *
+ * @param {string} path - The path of the storage location to retrieve the summary file from.
+ * @return {Promise<GlobalSummary | null>} The latest summary file, or null if there are no summary files.
+ */
+export const getLatestSummaryFile = async (
+    path: string,
+): Promise<GlobalSummary | null> => {
+    const firebaseStorage = getStorage(firebase_app);
+    const storageRef = ref(firebaseStorage, path);
+
+    try {
+        const res = await listAll(storageRef);
+        const summaryFiles = res.items
+            .filter((itemRef) => itemRef.name.startsWith("users-export"))
+            .sort((a, b) => a.name.localeCompare(b.name)); // Alphabetical sort
+
+        // The latest file will be the last one after sorting
+        if (summaryFiles.length > 0) {
+            return await downloadFile(
+                summaryFiles[summaryFiles.length - 1].fullPath,
+            );
+        }
+        return null; // If there are no summary files, return null
+    } catch (error) {
+        console.error(error);
+        return null; // In case of error, return null
+    }
+};
+
+/**
  * Retrieves the latest country file from the specified path in the Firebase storage.
  *
  * @param {string} path - The path to the directory in the Firebase storage.
@@ -51,17 +82,25 @@ export const getUserFiles = async (path: string): Promise<GlobalSummary[]> => {
  */
 export const getLatestCountryFile = async (
     path: string,
-): Promise<CountryData> => {
+): Promise<CountryData | null> => {
+    const firebaseStorage = getStorage(firebase_app);
+    const storageRef = ref(firebaseStorage, path);
+
     try {
-        const firebaseStorage = getStorage(firebase_app);
-        const storageRef = ref(firebaseStorage, path);
-
         const res = await listAll(storageRef);
-        const fileNameList = res.items.map((itemRef) => itemRef.fullPath);
+        const summaryFiles = res.items
+            .filter((itemRef) => itemRef.name.startsWith("countries"))
+            .sort((a, b) => a.name.localeCompare(b.name)); // Alphabetical sort
 
-        return await downloadFile(fileNameList[fileNameList.length - 1]);
+        // The latest file will be the last one after sorting
+        if (summaryFiles.length > 0) {
+            return await downloadFile(
+                summaryFiles[summaryFiles.length - 1].fullPath,
+            );
+        }
+        return null; // If there are no summary files, return null
     } catch (error) {
         console.error(error);
-        return {} as CountryData;
+        return null; // In case of error, return null
     }
 };

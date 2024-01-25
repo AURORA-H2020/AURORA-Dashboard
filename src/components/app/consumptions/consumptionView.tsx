@@ -16,7 +16,7 @@ export default function ConsumptionView({
     consumption,
 }: {
     consumption: Consumption;
-}) {
+}): JSX.Element {
     const consumptionAttributes = getConsumptionAttributes(consumption);
 
     return (

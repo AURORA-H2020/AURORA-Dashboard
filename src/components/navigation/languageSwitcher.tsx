@@ -30,8 +30,6 @@ type I18N = {
 
 /**
  * Updates the router with the currently selected language
- *
- * @param {string} lang - the selected language
  * @return {JSX.Element} the language switcher component
  */
 const LanguageSwitcher = (): JSX.Element => {
@@ -78,7 +76,9 @@ const LanguageSwitcher = (): JSX.Element => {
     } else if (
         languageDataStore === (LanguageDataStore.LOCAL_STORAGE as string)
     ) {
-        lang = window.localStorage.getItem("next-export-i18n-lang");
+        lang =
+            window.localStorage.getItem("next-export-i18n-lang") ||
+            i18nObj.defaultLang;
     } else {
         lang = i18nObj.defaultLang;
     }

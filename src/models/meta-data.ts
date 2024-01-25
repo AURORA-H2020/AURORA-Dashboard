@@ -6,4 +6,5 @@ export interface ConsumptionAttributes {
     unit: string;
     color: string;
     label: string;
+    colorMuted: string;
 }

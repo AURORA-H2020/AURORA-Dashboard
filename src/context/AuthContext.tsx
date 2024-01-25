@@ -22,6 +22,12 @@ interface AuthContextProviderProps {
     children: ReactNode;
 }
 
+/**
+ * AuthContextProvider component to provide authentication context to child components.
+ *
+ * @param {AuthContextProviderProps} children - The child components to provide authentication context.
+ * @return {JSX.Element} The authentication context provided to child components.
+ */
 export function AuthContextProvider({
     children,
 }: AuthContextProviderProps): JSX.Element {
