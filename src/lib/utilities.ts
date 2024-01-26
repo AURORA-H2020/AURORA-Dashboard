@@ -8,6 +8,7 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Consumption } from "@/models/extensions";
 import { ConsumptionAttributes } from "@/models/meta-data";
+import { useTranslations } from "next-intl";
 
 /**
  * Automatically added by shadcn/ui
@@ -152,3 +153,22 @@ export const valueFormatterPercentage = (number: number): string =>
         style: "percent",
         maximumFractionDigits: 1,
     }).format(number);
+
+/**
+ * Returns a custom translation function that falls back to the key if the translation is an empty string.
+ *
+ * @return {Function} The custom translation function.
+ 
+export default function useCustomTranslations() {
+    const t = useTranslations();
+
+    // Provide a default value for options
+    const customT = (key, options = {}) => {
+        const translation = t(key, options);
+        // If translation is an empty string, return the key instead
+        return translation === "" ? key : translation;
+    };
+
+    return customT;
+}
+*/

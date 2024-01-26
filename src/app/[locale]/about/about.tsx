@@ -7,7 +7,7 @@ import { countriesMapping } from "@/lib/constants";
 import { Flex, Heading, Text, Grid } from "@radix-ui/themes";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useTranslation } from "next-export-i18n";
+import { useTranslations } from "next-intl";
 
 /**
  * Renders a JSON view of the provided data.
@@ -15,12 +15,12 @@ import { useTranslation } from "next-export-i18n";
  * @param {Object} data - The data to be displayed in the JSON view.
  * @return {JSX.Element} - The JSON view component.
  */
-export default function AboutPage({
+export default function AboutContent({
     countryData,
 }: {
     countryData: CountryData | undefined;
 }) {
-    const { t } = useTranslation();
+    const t = useTranslations();
     return (
         <Card>
             <CardContent className="p-6">

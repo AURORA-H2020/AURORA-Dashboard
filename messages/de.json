@@ -17,18 +17,33 @@
             "pleaseSelectDateRange": ""
         }
     },
+    "title": "",
+    "metadata": {
+        "title": "",
+        "description": ""
+    },
+    "description": "",
     "footer": {
         "fundingNotice": ""
     },
     "navigation": {
-        "languageSwitcher": {
-            "selectLanguage": "Sprache wählen"
-        },
         "menu": {
             "dashboard": "Dashboard",
             "about": "Über",
             "account": "Account",
             "logout": "Abmelden"
+        }
+    },
+    "links": {
+        "docs": {
+            "description": "",
+            "href": "",
+            "title": ""
+        },
+        "source": {
+            "description": "",
+            "href": "",
+            "title": ""
         }
     },
     "ui": {
@@ -37,7 +52,7 @@
         }
     },
     "language": {
-        "english": "",
-        "german": ""
+        "english": "Englisch",
+        "german": "Deutsch"
     }
 }

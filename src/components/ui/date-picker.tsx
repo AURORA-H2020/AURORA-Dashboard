@@ -3,7 +3,7 @@ import { Button } from "./button";
 import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
 import { Calendar } from "./calendar";
-import { useTranslation } from "next-export-i18n";
+import { useTranslations } from "next-intl";
 import { SetStateAction } from "react";
 import { DateRange } from "react-day-picker";
 
@@ -12,7 +12,7 @@ const DatePicker = ({ dateRange, onChange }) => {
         onChange(dateRange);
     };
 
-    const { t } = useTranslation();
+    const t = useTranslations();
 
     return (
         <div className="grid gap-2">

@@ -17,18 +17,33 @@
             "pleaseSelectDateRange": "Please select a date range"
         }
     },
+    "title": "",
+    "metadata": {
+        "title": "AURORA Energy Tracker Dashboard",
+        "description": "Here you can find the latest stats about the AURORA Energy Tracker mobile app."
+    },
+    "description": "",
     "footer": {
         "fundingNotice": "This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No. 101036418."
     },
     "navigation": {
-        "languageSwitcher": {
-            "selectLanguage": "Select Language"
-        },
         "menu": {
             "dashboard": "Dashboard",
             "about": "About",
             "account": "Account",
             "logout": "Logout"
+        }
+    },
+    "links": {
+        "docs": {
+            "description": "",
+            "href": "",
+            "title": ""
+        },
+        "source": {
+            "description": "",
+            "href": "",
+            "title": ""
         }
     },
     "ui": {

@@ -5,7 +5,7 @@ import Logo from "./navigation/logo";
 
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
-import { useTranslation } from "next-export-i18n";
+import { useTranslations } from "next-intl";
 
 /**
  * Renders the footer component.
@@ -13,7 +13,7 @@ import { useTranslation } from "next-export-i18n";
  * @return {JSX.Element} The rendered footer component.
  */
 export default function Footer(): JSX.Element {
-    const { t } = useTranslation();
+    const t = useTranslations();
     return (
         <Card className="items-center p-4 mx-auto md:px-8">
             <div className="sm:flex sm:items-center sm:justify-between">

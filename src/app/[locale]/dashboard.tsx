@@ -1,25 +1,25 @@
 "use client";
 
-import { ConsumptionTimelineChart } from "../components/dashboard/consumptionTimelineChart";
+import { ConsumptionTimelineChart } from "../../components/dashboard/consumptionTimelineChart";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SetStateAction, useEffect, useState } from "react";
 import { UsersIcon, BlocksIcon } from "lucide-react";
 import { getMetaData } from "@/lib/transformData";
 import { categories, countriesMapping, energyModes } from "@/lib/constants";
 import DetailedCard from "@/components/dashboard/detailedCard";
-import { GenderByCountryChart } from "../components/dashboard/genderByCountryChart";
-import GenderCardSummary from "../components/dashboard/genderCardSummary";
-import ConsumptionCardSummary from "../components/dashboard/consumptionCardSummary";
-import ConsumptionCardSummaryCategory from "../components/dashboard/consumptionCardSummaryCategory";
+import { GenderByCountryChart } from "../../components/dashboard/genderByCountryChart";
+import GenderCardSummary from "../../components/dashboard/genderCardSummary";
+import ConsumptionCardSummary from "../../components/dashboard/consumptionCardSummary";
+import ConsumptionCardSummaryCategory from "../../components/dashboard/consumptionCardSummaryCategory";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import AutoReport from "../components/dashboard/autoReport";
+import AutoReport from "../../components/dashboard/autoReport";
 
 import { DateRange } from "react-day-picker";
 
-import { Card, CardContent } from "../components/ui/card";
+import { Card, CardContent } from "../../components/ui/card";
 import { Grid, Flex, Text, Heading } from "@radix-ui/themes";
 
-import { MultiSelect, OptionType } from "../components/ui/multiselect";
+import { MultiSelect, OptionType } from "../../components/ui/multiselect";
 
 import {
     Select,
@@ -30,8 +30,8 @@ import {
 } from "@/components/ui/select";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { CalculationMode, MetaData } from "@/models/dashboard-data";
-import { useTranslation } from "next-export-i18n";
-import DatePicker from "../components/ui/date-picker";
+import { useTranslations } from "next-intl";
+import DatePicker from "../../components/ui/date-picker";
 
 /**
  * Renders the FilterIndex component.
@@ -44,7 +44,7 @@ export function Dashboard({
 }: {
     globalSummaryData: GlobalSummary;
 }): JSX.Element {
-    const { t } = useTranslation();
+    const t = useTranslations();
 
     // Options available for country multiselect
     const options: OptionType[] = countriesMapping.map((country) => ({

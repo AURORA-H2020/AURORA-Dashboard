@@ -15,11 +15,11 @@ import { logout } from "@/firebase/auth/logout";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/AuthContext";
 import { User } from "@/models/firestore/user/user";
-import { useTranslation } from "next-export-i18n";
-import LanguageSwitcher from "./languageSwitcher";
+import { useTranslations } from "next-intl";
+import LocaleSwitcher from "./localeSwitcher";
 
 const MenuItems = ({ items, pathname }) => {
-    const { t } = useTranslation();
+    const t = useTranslations();
 
     return items.map((item, idx) => {
         // Check if the current pathname is active.
@@ -45,7 +45,7 @@ const MenuItems = ({ items, pathname }) => {
  * @return {ReactElement} The rendered navigation bar component
  */
 export default function NavigationBar(): ReactElement {
-    const { t } = useTranslation();
+    const t = useTranslations();
 
     const pathname = usePathname();
 
@@ -83,7 +83,7 @@ export default function NavigationBar(): ReactElement {
                             <Logo />
                         </Link>
                         <ThemeToggle />
-                        <LanguageSwitcher />
+                        <LocaleSwitcher />
                     </Flex>
 
                     <div className="md:hidden">

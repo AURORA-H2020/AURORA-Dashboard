@@ -37,3 +37,6 @@ next-env.d.ts
 
 # testingdata
 /src/data/
+
+# translation backup messages
+messages/*_old.json

@@ -3,10 +3,10 @@ import { CountryData } from "@/models/countryData";
 import firebase_app from "@/firebase/config";
 import { getLatestCountryFile } from "@/lib/firebaseUtils";
 
-import AboutPage from "./about";
+import AboutContent from "./about";
 
 /**
- * Renders the home page component with country-specific data.
+ * Renders the about page component with country-specific data.
  *
  * Fetches country data from a local JSON file in test mode or from
  * Firebase in production. Displays app metrics, carbon emissions,
@@ -15,7 +15,7 @@ import AboutPage from "./about";
  * @return {Promise<JSX.Element>} A promise that resolves with the
  *                                rendered home page component.
  */
-export default async function Home(): Promise<JSX.Element> {
+export default async function About(): Promise<JSX.Element> {
     let countryData: CountryData | null;
 
     if (process.env.TEST_MODE && process.env.TEST_MODE == "true") {
@@ -33,7 +33,7 @@ export default async function Home(): Promise<JSX.Element> {
     }
 
     if (countryData) {
-        return <AboutPage countryData={countryData} />;
+        return <AboutContent countryData={countryData} />;
     } else {
         return <>Not found</>;
     }

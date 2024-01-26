@@ -10,7 +10,7 @@ const i18nextParserConfig = {
     defaultNamespace: "translations",
     // Default namespace used in your i18next config
 
-    defaultValue: "",
+    defaultValue: (locale, namespace, key, value) => (value ? value : ""),
     // Default value to give to keys with no value
     // You may also specify a function accepting the locale, namespace, key, and value as arguments
 
@@ -50,11 +50,11 @@ const i18nextParserConfig = {
     locales: ["en", "de"],
     // An array of the locales in your applications
 
-    namespaceSeparator: ":",
+    namespaceSeparator: false,
     // Namespace separator used in your translation keys
     // If you want to use plain english keys, separators such as `.` and `:` will conflict. You might want to set `keySeparator: false` and `namespaceSeparator: false`. That way, `t('Status: Loading...')` will not think that there are a namespace and three separator dots for instance.
 
-    output: "i18n/$LOCALE/$NAMESPACE.json",
+    output: "messages/$LOCALE.json",
     // Supports $LOCALE and $NAMESPACE injection
     // Supports JSON (.json) and YAML (.yml) file formats
     // Where to write the locale files relative to process.cwd()

@@ -5,6 +5,7 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ThemeProviderProps } from "next-themes/dist/types";
 import { Theme } from "@radix-ui/themes";
 import { AuthContextProvider } from "@/context/AuthContext";
+import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { Toaster } from "@/components/ui/sonner";
 
 /**
@@ -16,16 +17,21 @@ import { Toaster } from "@/components/ui/sonner";
  */
 export function Providers({
     children,
+    params: { messages, locale },
     ...props
-}: ThemeProviderProps): React.ReactElement {
+}: {
+    params: { messages: AbstractIntlMessages; locale: string };
+} & ThemeProviderProps): React.ReactElement {
     return (
-        <AuthContextProvider>
-            <Theme>
-                <NextThemesProvider {...props}>
-                    {children}
-                    <Toaster richColors />
-                </NextThemesProvider>
-            </Theme>
-        </AuthContextProvider>
+        <NextIntlClientProvider locale={locale} messages={messages}>
+            <AuthContextProvider>
+                <Theme>
+                    <NextThemesProvider {...props}>
+                        {children}
+                        <Toaster richColors />
+                    </NextThemesProvider>
+                </Theme>
+            </AuthContextProvider>
+        </NextIntlClientProvider>
     );
 }

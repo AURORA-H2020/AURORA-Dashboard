@@ -1,4 +1,4 @@
-import { Dashboard } from "@/app/dashboard";
+import { Dashboard } from "@/app/[locale]/dashboard";
 
 import { promises as fs } from "fs";
 import path from "path";
