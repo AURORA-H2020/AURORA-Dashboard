@@ -1,4 +1,3 @@
-import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
@@ -8,8 +7,6 @@ type Props = {
 };
 
 export default function PageLayout({ children, title }: Props) {
-    const t = useTranslations("PageLayout");
-
     return (
         <Card>
             <CardHeader>

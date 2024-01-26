@@ -6,7 +6,7 @@ import "@radix-ui/themes/styles.css";
 import { cn } from "@/lib/utilities";
 import { Analytics } from "@vercel/analytics/react";
 
-import { getTranslations } from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { locales } from "../../config";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
@@ -37,6 +37,8 @@ export default async function RootLayout({
     children,
     params: { locale },
 }: Props) {
+    unstable_setRequestLocale(locale);
+
     let messages;
     try {
         messages = (await import(`../../../messages/${locale}.json`)).default;
