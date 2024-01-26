@@ -17,12 +17,17 @@
             "pleaseSelectDateRange": ""
         }
     },
-    "title": "",
+    "error": {
+        "title": "",
+        "notFound": {
+            "title": "",
+            "description": ""
+        }
+    },
     "metadata": {
         "title": "",
         "description": ""
     },
-    "description": "",
     "footer": {
         "fundingNotice": ""
     },
@@ -32,18 +37,6 @@
             "about": "Über",
             "account": "Account",
             "logout": "Abmelden"
-        }
-    },
-    "links": {
-        "docs": {
-            "description": "",
-            "href": "",
-            "title": ""
-        },
-        "source": {
-            "description": "",
-            "href": "",
-            "title": ""
         }
     },
     "ui": {
