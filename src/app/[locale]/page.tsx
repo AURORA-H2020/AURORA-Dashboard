@@ -6,14 +6,21 @@ import firebase_app from "@/firebase/config";
 import { getLatestSummaryFile } from "@/lib/firebaseUtils";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Heading, Text } from "@radix-ui/themes";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+
+type Props = {
+    params: { locale: string };
+};
 
 /**
  * Asynchronous function that represents the Home component.
  *
  * @return {Promise<JSX.Element>} The JSX element representing the Home component.
  */
-export default async function Home(): Promise<JSX.Element> {
+export default async function Home({
+    params: { locale },
+}: Props): Promise<JSX.Element> {
+    unstable_setRequestLocale(locale);
     const t = await getTranslations();
 
     let globalSummaryData: GlobalSummary | undefined;

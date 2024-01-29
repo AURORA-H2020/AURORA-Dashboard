@@ -9,9 +9,13 @@ import {
 import AboutContent from "./about";
 import { Card, CardContent } from "@/components/ui/card";
 import { Heading, Text } from "@radix-ui/themes";
-import { getTranslations } from "next-intl/server";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import DataDownloads from "./dataDownloads";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+
+type Props = {
+    params: { locale: string };
+};
 
 /**
  * Renders the about page component with country-specific data.
@@ -23,7 +27,10 @@ import { GlobalSummary } from "@/models/firestore/global-summary/global-summary"
  * @return {Promise<JSX.Element>} A promise that resolves with the
  *                                rendered home page component.
  */
-export default async function About(): Promise<JSX.Element> {
+export default async function About({
+    params: { locale },
+}: Props): Promise<JSX.Element> {
+    unstable_setRequestLocale(locale);
     const t = await getTranslations();
 
     let countryData: CountryData | null;
