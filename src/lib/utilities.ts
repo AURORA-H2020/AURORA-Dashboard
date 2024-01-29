@@ -8,7 +8,6 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { Consumption } from "@/models/extensions";
 import { ConsumptionAttributes } from "@/models/meta-data";
-import { useTranslations } from "next-intl";
 
 /**
  * Automatically added by shadcn/ui
@@ -148,27 +147,28 @@ export const valueFormatterAbsolute = (number: number): string =>
  * @param {number} number - the number to be formatted
  * @return {string} the formatted percentage value
  */
-export const valueFormatterPercentage = (number: number): string =>
-    Intl.NumberFormat("us", {
-        style: "percent",
-        maximumFractionDigits: 1,
-    }).format(number);
+export const valueFormatterPercentage = (number: number): string => {
+    if (isNaN(number)) {
+        return "N/A";
+    } else
+        return Intl.NumberFormat("us", {
+            style: "percent",
+            maximumFractionDigits: 1,
+        }).format(number);
+};
 
-/**
- * Returns a custom translation function that falls back to the key if the translation is an empty string.
- *
- * @return {Function} The custom translation function.
- 
-export default function useCustomTranslations() {
-    const t = useTranslations();
+export const downloadJsonAsFile = async (object, fileName) => {
+    const dataStr = JSON.stringify(object);
+    const blob = new Blob([dataStr], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
 
-    // Provide a default value for options
-    const customT = (key, options = {}) => {
-        const translation = t(key, options);
-        // If translation is an empty string, return the key instead
-        return translation === "" ? key : translation;
-    };
+    // Create a link element, click it, and remove it to start the download
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${fileName}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
 
-    return customT;
-}
-*/
+    URL.revokeObjectURL(url);
+};

@@ -1,11 +1,15 @@
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import {
+    CalculationMode,
     ConsumptionsDetail,
+    EnergyMode,
+    LabelEntries,
     MetaData,
     TimelineData,
+    TimelineLabelData,
 } from "@/models/dashboard-data";
 import { camelCaseToWords, getMonthShortName } from "./utilities";
-import { genderMappings } from "./constants";
+import { genderMappings, labelMappings } from "./constants";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { DateRange } from "react-day-picker";
 
@@ -20,11 +24,11 @@ import { DateRange } from "react-day-picker";
  * @return {TimelineData[]} The retrieved temporal data.
  */
 export function temporalData(
-    globalSummaryData: GlobalSummary,
-    mode: "carbon" | "energy",
+    globalSummaryData: GlobalSummary | undefined,
+    mode: EnergyMode,
     categories: ConsumptionCategory[],
     dateRange: DateRange | undefined,
-    calculationMode: "absolute" | "average",
+    calculationMode: CalculationMode,
 ): TimelineData[] {
     if (!globalSummaryData || !dateRange) {
         return [];
@@ -45,8 +49,11 @@ export function temporalData(
                 if (!categories.includes(category.category)) {
                     return;
                 }
+
                 category.temporal.forEach((year) => {
                     year.data.forEach((month) => {
+                        let monthActiveUsersCount = 0;
+
                         const dateMonth = getMonthShortName(month.month);
                         let currentDate = `${dateMonth} ${year.year}`;
                         if (dateRange.from! > new Date(currentDate)) {
@@ -67,21 +74,24 @@ export function temporalData(
                                 (e) => e.Date === currentDate,
                             );
                         }
+
+                        const valueToAdd =
+                            (mode == "carbon"
+                                ? month.carbonEmissions
+                                : month.energyExpended) /
+                            (calculationMode == "absolute"
+                                ? 1
+                                : month.activeUsers);
+
                         thisDate![country.countryName] =
-                            mode == "carbon"
-                                ? month.carbonEmissions /
-                                  (calculationMode == "absolute"
-                                      ? 1
-                                      : city.users.userCount)
-                                : month.energyExpended /
-                                  (calculationMode == "absolute"
-                                      ? 1
-                                      : city.users.userCount);
+                            (thisDate![country.countryName] || 0) + valueToAdd;
                     });
                 });
             }),
         );
     });
+
+    console.log(temporalData);
 
     temporalData.sort(function (a, b) {
         var keyA = new Date(Date.parse(a.Date!)),
@@ -95,14 +105,88 @@ export function temporalData(
 }
 
 /**
+ * Calculates the annual label data based on the global summary data, energy mode,
+ * categories, and selected year.
+ *
+ * @param {GlobalSummary | undefined} globalSummaryData - The global summary data
+ * @param {EnergyMode} mode - The energy mode
+ * @param {ConsumptionCategory[]} categories - The consumption categories
+ * @param {string | undefined} selectedYear - The selected year
+ * @return {TimelineLabelData[] | undefined} The annual label data or undefined
+ */
+export function annualLabelData(
+    globalSummaryData: GlobalSummary | undefined,
+    mode: EnergyMode,
+    categories: ConsumptionCategory[],
+    selectedYear: string | undefined,
+): TimelineLabelData[] | undefined {
+    if (!globalSummaryData || !selectedYear) {
+        return undefined;
+    }
+
+    let temporalData: TimelineLabelData[] = [];
+
+    globalSummaryData?.countries.forEach((country) => {
+        const energyLabels = labelMappings.map((label) => label.label);
+
+        let labelSums: LabelEntries = {
+            "A+": 0,
+            A: 0,
+            B: 0,
+            C: 0,
+            D: 0,
+            E: 0,
+            F: 0,
+            G: 0,
+        };
+
+        country.cities.forEach((city) => {
+            for (const category of city.categories) {
+                const thisYear = category.temporal.filter(
+                    (year) => year.year === selectedYear,
+                )[0];
+
+                if (!thisYear) {
+                    continue;
+                }
+
+                const thisCategoryLabels = thisYear.categoryLabels;
+
+                energyLabels.forEach((label) => {
+                    const findLabel = thisCategoryLabels.find(
+                        (e) => e.label === label,
+                    );
+                    if (findLabel && categories.includes(category.category)) {
+                        labelSums[label] +=
+                            mode == "carbon"
+                                ? findLabel.carbonEmissions
+                                : findLabel.energyExpended;
+                    }
+                });
+            }
+        });
+
+        temporalData.push({
+            countryName: country.countryName,
+            countryID: country.countryID,
+            labels: labelSums,
+        });
+    });
+
+    return temporalData;
+}
+
+/**
  * Retrieves metadata from the global summary data.
  *
  * @param {GlobalSummary | undefined} globalSummaryData - the global summary data
- * @return {MetaData[]} the metadata retrieved from the global summary data
+ * @return {MetaData} the metadata retrieved from the global summary data
  */
-export function getMetaData(globalSummaryData: GlobalSummary | undefined) {
+export function getMetaData(
+    globalSummaryData: GlobalSummary | undefined,
+): MetaData | undefined {
     if (!globalSummaryData) {
-        return;
+        return undefined;
     }
 
     let metaData: MetaData = [];

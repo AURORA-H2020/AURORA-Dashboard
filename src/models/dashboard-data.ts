@@ -32,6 +32,23 @@ export interface TimelineData {
     [key: string]: any;
 }
 
+export interface LabelEntries {
+    "A+": number;
+    A: number;
+    B: number;
+    C: number;
+    D: number;
+    E: number;
+    F: number;
+    G: number;
+}
+
+export interface TimelineLabelData {
+    countryName: string;
+    countryID: string;
+    labels: LabelEntries;
+}
+
 export type EnergyMode = "carbon" | "energy";
 
 export type CalculationMode = "absolute" | "average";

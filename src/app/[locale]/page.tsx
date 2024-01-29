@@ -1,11 +1,12 @@
 import { Dashboard } from "@/app/[locale]/dashboard";
 
 import { promises as fs } from "fs";
-import path from "path";
 
 import firebase_app from "@/firebase/config";
 import { getLatestSummaryFile } from "@/lib/firebaseUtils";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { Heading, Text } from "@radix-ui/themes";
+import { getTranslations } from "next-intl/server";
 
 /**
  * Asynchronous function that represents the Home component.
@@ -13,14 +14,13 @@ import { GlobalSummary } from "@/models/firestore/global-summary/global-summary"
  * @return {Promise<JSX.Element>} The JSX element representing the Home component.
  */
 export default async function Home(): Promise<JSX.Element> {
-    let globalSummaryData: GlobalSummary | null;
+    const t = await getTranslations();
+
+    let globalSummaryData: GlobalSummary | undefined;
 
     if (process.env.TEST_MODE === "true") {
         const file = await fs.readFile(
-            path.join(
-                process.cwd(),
-                "src/data/users-export-1706199556428.json",
-            ),
+            process.cwd() + "/src/data/users-export.json",
             "utf8",
         );
         globalSummaryData = JSON.parse(file);
@@ -29,11 +29,18 @@ export default async function Home(): Promise<JSX.Element> {
             process.env.FIREBASE_STORAGE_USER_PATH,
         );
     } else {
-        globalSummaryData = null;
+        globalSummaryData = undefined;
     }
 
     if (globalSummaryData) {
-        return <Dashboard globalSummaryData={globalSummaryData} />;
+        return (
+            <>
+                <Heading as="h1">{t("dashboard.main.title")}</Heading>
+
+                <Text>{t("dashboard.main.description")}</Text>
+                <Dashboard globalSummaryData={globalSummaryData} />
+            </>
+        );
     } else {
         return <>Not found</>;
     }

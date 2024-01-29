@@ -4,6 +4,7 @@ import { Color } from "@tremor/react";
 import { CarFront, Zap, ThermometerSnowflake } from "lucide-react";
 import React from "react";
 import { CalculationMode, EnergyMode } from "@/models/dashboard-data";
+import { Label } from "@/models/firestore/global-summary/label/consumption-type-labels";
 
 /* i18next-parser helper
 t("language.english")
@@ -83,6 +84,20 @@ export const genderMappings: { key: string; label: string; color: Color }[] = [
     { key: "male", label: "Male", color: "teal" },
     { key: "nonBinary", label: "Non-Binary", color: "indigo" },
     { key: "other", label: "Other", color: "gray" },
+];
+
+export const labelMappings: {
+    label: Label;
+    color: Color;
+}[] = [
+    { label: "A+", color: "green" },
+    { label: "A", color: "yellow" },
+    { label: "B", color: "red" },
+    { label: "C", color: "red" },
+    { label: "D", color: "red" },
+    { label: "E", color: "red" },
+    { label: "F", color: "red" },
+    { label: "G", color: "red" },
 ];
 
 export const userIdBlacklist: string[] = [

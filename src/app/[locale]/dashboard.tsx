@@ -1,11 +1,10 @@
 "use client";
 
 import { ConsumptionTimelineChart } from "../../components/dashboard/consumptionTimelineChart";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { UsersIcon, BlocksIcon } from "lucide-react";
 import { getMetaData } from "@/lib/transformData";
-import { categories, countriesMapping, energyModes } from "@/lib/constants";
+import { categories, countriesMapping } from "@/lib/constants";
 import DetailedCard from "@/components/dashboard/detailedCard";
 import { GenderByCountryChart } from "../../components/dashboard/genderByCountryChart";
 import GenderCardSummary from "../../components/dashboard/genderCardSummary";
@@ -13,8 +12,6 @@ import ConsumptionCardSummary from "../../components/dashboard/consumptionCardSu
 import ConsumptionCardSummaryCategory from "../../components/dashboard/consumptionCardSummaryCategory";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import AutoReport from "../../components/dashboard/autoReport";
-
-import { DateRange } from "react-day-picker";
 
 import { Card, CardContent } from "../../components/ui/card";
 import { Grid, Flex, Text, Heading } from "@radix-ui/themes";
@@ -29,20 +26,20 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { CalculationMode, MetaData } from "@/models/dashboard-data";
+import { MetaData } from "@/models/dashboard-data";
 import { useTranslations } from "next-intl";
-import DatePicker from "../../components/ui/date-picker";
+import { LabelSummary } from "@/components/dashboard/labelSummary";
 
 /**
- * Renders the FilterIndex component.
+ * Renders the Dashboard component.
  *
  * @param {object} localData - The localData object containing the summaries.
- * @return {JSX.Element} The JSX element representing the FilterIndex component.
+ * @return {JSX.Element} The JSX element representing the Dashboard component.
  */
 export function Dashboard({
     globalSummaryData,
 }: {
-    globalSummaryData: GlobalSummary;
+    globalSummaryData: GlobalSummary | undefined;
 }): JSX.Element {
     const t = useTranslations();
 
@@ -56,24 +53,6 @@ export function Dashboard({
     const [selectedCountries, setSelectedCountries] =
         useState<OptionType[]>(options);
 
-    const [dateRange, setDateRange] = useState<DateRange | undefined>({
-        from: new Date(new Date().getFullYear(), 0, 1),
-        to: new Date(new Date().getFullYear(), 11, 31),
-    });
-
-    const handleDateChange = (
-        dateRange: SetStateAction<DateRange | undefined>,
-    ) => {
-        setDateRange(dateRange);
-    };
-
-    const [calculationMode, setCalculationMode] =
-        useState<CalculationMode>("absolute");
-
-    const handleCalculationModeChange = (calculationMode: CalculationMode) => {
-        setCalculationMode(calculationMode);
-    };
-
     const [selectedCategories, setSelectedCategories] =
         useState<ConsumptionCategory[]>(categories);
 
@@ -86,8 +65,28 @@ export function Dashboard({
     };
 
     const [metaData, setMetaData] = useState<MetaData | undefined>();
+    const [filteredGlobalSummaryData, setFilteredGlobalSummaryData] = useState<
+        GlobalSummary | undefined
+    >();
 
     useEffect(() => {
+        if (!globalSummaryData) {
+            return;
+        }
+
+        const filteredCountries = globalSummaryData.countries.filter(
+            (country) =>
+                selectedCountries
+                    .map((country) => country.value)
+                    .includes(country.countryID),
+        );
+
+        const updatedGlobalSummaryData = {
+            ...globalSummaryData,
+            countries: filteredCountries,
+        };
+        setFilteredGlobalSummaryData(updatedGlobalSummaryData);
+
         const updatedMetaData = getMetaData(globalSummaryData)?.filter(
             (entry) =>
                 selectedCountries
@@ -101,9 +100,6 @@ export function Dashboard({
 
     return (
         <>
-            <Heading as="h1">{t("dashboard.main.title")}</Heading>
-
-            <Text>{t("dashboard.main.description")}</Text>
             <Card className="mb-6">
                 <CardContent className="p-6">
                     <Flex
@@ -187,87 +183,22 @@ export function Dashboard({
 
             <Card className="mb-6">
                 <CardContent className="p-6">
-                    <Tabs defaultValue="carbon">
-                        <Flex
-                            direction={{ initial: "column", xs: "row" }}
-                            className="gap-6 mt-6 mb-6"
-                        >
-                            <div className="overflow-x-auto">
-                                <TabsList>
-                                    <TabsTrigger value="carbon">
-                                        CO<sub>2</sub> Emission
-                                    </TabsTrigger>
-                                    <TabsTrigger value="energy">
-                                        Energy Usage
-                                    </TabsTrigger>
-                                </TabsList>
-                            </div>
+                    <ConsumptionTimelineChart
+                        globalSummaryData={filteredGlobalSummaryData}
+                        categories={selectedCategories}
+                        title="Consumption Timeline"
+                    />
+                </CardContent>
+            </Card>
 
-                            <Select
-                                value={calculationMode}
-                                onValueChange={handleCalculationModeChange}
-                            >
-                                <SelectTrigger className="w-[180px]">
-                                    <SelectValue defaultValue="absolute" />
-                                </SelectTrigger>
-
-                                <SelectContent>
-                                    <SelectItem value="absolute">
-                                        Absolute
-                                    </SelectItem>
-                                    <SelectItem value="average">
-                                        Average per User
-                                    </SelectItem>
-                                </SelectContent>
-                            </Select>
-                            <DatePicker
-                                dateRange={dateRange}
-                                onChange={handleDateChange}
-                            />
-                        </Flex>
-
-                        {energyModes.map((energyMode) => (
-                            <TabsContent value={energyMode} key={energyMode}>
-                                {dateRange?.from && dateRange?.to ? (
-                                    <Text>
-                                        Total{" "}
-                                        <b>
-                                            {energyMode === "carbon" ? (
-                                                <>
-                                                    CO<sub>2</sub> Emission
-                                                </>
-                                            ) : (
-                                                <>Energy Usage</>
-                                            )}
-                                        </b>{" "}
-                                        per country between{" "}
-                                        {String(
-                                            dateRange?.from?.toDateString(),
-                                        )}{" "}
-                                        and{" "}
-                                        {String(dateRange?.to?.toDateString())}.
-                                    </Text>
-                                ) : (
-                                    <Text>
-                                        {t(
-                                            "dashboard.card.pleaseSelectDateRange",
-                                        )}
-                                    </Text>
-                                )}
-
-                                <ConsumptionTimelineChart
-                                    globalSummaryData={globalSummaryData}
-                                    countries={selectedCountries.map(
-                                        (entry) => entry.label,
-                                    )}
-                                    categories={selectedCategories}
-                                    dateRange={dateRange}
-                                    mode={energyMode}
-                                    calculationMode={calculationMode}
-                                />
-                            </TabsContent>
-                        ))}
-                    </Tabs>
+            <Card className="mb-6">
+                <CardContent className="p-6">
+                    <LabelSummary
+                        globalSummaryData={filteredGlobalSummaryData}
+                        categories={selectedCategories}
+                        title="Energy Label Summary"
+                        description="This is a summary of the labels users of the AURORA Energy Tracker have obtained each year."
+                    />
                 </CardContent>
             </Card>
 

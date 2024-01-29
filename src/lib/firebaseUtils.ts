@@ -51,7 +51,7 @@ export const getUserFiles = async (path: string): Promise<GlobalSummary[]> => {
  */
 export const getLatestSummaryFile = async (
     path: string,
-): Promise<GlobalSummary | null> => {
+): Promise<GlobalSummary | undefined> => {
     const firebaseStorage = getStorage(firebase_app);
     const storageRef = ref(firebaseStorage, path);
 
@@ -67,10 +67,10 @@ export const getLatestSummaryFile = async (
                 summaryFiles[summaryFiles.length - 1].fullPath,
             );
         }
-        return null; // If there are no summary files, return null
+        return undefined; // If there are no summary files, return undefined
     } catch (error) {
         console.error(error);
-        return null; // In case of error, return null
+        return undefined; // In case of error, return undefined
     }
 };
 

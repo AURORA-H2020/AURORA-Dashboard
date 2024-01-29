@@ -77,14 +77,13 @@ export function GenderByCountryChart({
         <>
             <Flex justify="between">
                 <Heading>{title}</Heading>
+
                 <div className="flex items-center space-x-2">
                     <Switch
                         id="percentage-switch"
                         onCheckedChange={setUseAbsoluteValues}
                     />
-                    <Label htmlFor="percentage-switch">
-                        Show absolute values
-                    </Label>
+                    <Label htmlFor="percentage-switch">Absolute values</Label>
                 </div>
             </Flex>
             <BarChart
