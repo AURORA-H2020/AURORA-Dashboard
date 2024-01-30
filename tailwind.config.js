@@ -195,6 +195,32 @@ export const safelist = [
         pattern:
             /^(fill-(?:slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|cyan|sky|blue|indigo|violet|purple|fuchsia|pink|rose)-(?:50|100|200|300|400|500|600|700|800|900|950))$/,
     },
+    ...[
+        "[#306EBA]", // A+
+        "[#42944A]", // A
+        "[#6AAC46]", // B
+        "[#CAD444]", // C
+        "[#FCED4F]", // D
+        "[#F1BD40]", // E
+        "[#DC6E2D]", // F
+        "[#D02E26]", // G
+        "[#FDDD09]", // electricity
+        "[#1E84FD]", // transportation
+        "[#F5473D]", // heating
+    ].flatMap((customColor) => [
+        `bg-${customColor}`,
+        `border-${customColor}`,
+        `hover:bg-${customColor}`,
+        `hover:border-${customColor}`,
+        `hover:text-${customColor}`,
+        `fill-${customColor}`,
+        `ring-${customColor}`,
+        `stroke-${customColor}`,
+        `text-${customColor}`,
+        `ui-selected:bg-${customColor}`,
+        `ui-selected:border-${customColor}`,
+        `ui-selected:text-${customColor}`,
+    ]),
 ];
 export const plugins = [
     // Shadcn UI requirement
