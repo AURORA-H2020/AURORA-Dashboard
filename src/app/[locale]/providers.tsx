@@ -23,7 +23,11 @@ export function Providers({
     params: { messages: AbstractIntlMessages; locale: string };
 } & ThemeProviderProps): React.ReactElement {
     return (
-        <NextIntlClientProvider locale={locale} messages={messages}>
+        <NextIntlClientProvider
+            locale={locale}
+            messages={messages}
+            timeZone="Europe/Berlin"
+        >
             <AuthContextProvider>
                 <Theme>
                     <NextThemesProvider {...props}>

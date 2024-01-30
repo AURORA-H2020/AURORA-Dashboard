@@ -7,6 +7,7 @@ export default getRequestConfig(async ({ locale }) => {
     if (!locales.includes(locale as any)) notFound();
 
     return {
+        timeZone: "Europe/Berlin",
         messages: (await import(`../messages/${locale}.json`)).default,
     };
 });
