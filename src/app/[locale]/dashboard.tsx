@@ -150,89 +150,89 @@ export function Dashboard({
                 </Alert>
             ) : (
                 <>
-            <Grid
-                columns={{
-                    initial: "1",
-                    sm: "2",
-                }}
-                className="gap-6 mt-6 mb-6"
-            >
-                <Card>
-                    <CardContent className="p-6">
-                        <DetailedCard
-                            metaData={metaData}
-                            measure="userCount"
-                            categories={selectedCategories}
-                            title={t("dashboard.card.userCount")}
-                            icon={UsersIcon}
-                        />
+                    <Grid
+                        columns={{
+                            initial: "1",
+                            sm: "2",
+                        }}
+                        className="gap-6 mt-6 mb-6"
+                    >
+                        <Card>
+                            <CardContent className="p-6">
+                                <DetailedCard
+                                    metaData={metaData}
+                                    measure="userCount"
+                                    categories={selectedCategories}
+                                    title={t("dashboard.card.userCount")}
+                                    icon={UsersIcon}
+                                />
                                 <CountryUsersPieChart metaData={metaData} />
-                    </CardContent>
-                </Card>
-                <Card>
-                    <CardContent className="p-6">
-                        <DetailedCard
-                            metaData={metaData}
-                            measure="consumptionsCount"
-                            categories={selectedCategories}
+                            </CardContent>
+                        </Card>
+                        <Card>
+                            <CardContent className="p-6">
+                                <DetailedCard
+                                    metaData={metaData}
+                                    measure="consumptionsCount"
+                                    categories={selectedCategories}
                                     title={t(
                                         "dashboard.card.individualConsumptions",
                                     )}
-                            icon={BlocksIcon}
-                        />
+                                    icon={BlocksIcon}
+                                />
 
-                        {selectedCategories.length > 1 ? (
+                                {selectedCategories.length > 1 ? (
                                     <ConsumptionCardSummary
                                         metaData={metaData}
                                     />
-                        ) : (
-                            <ConsumptionCardSummaryCategory
-                                metaData={metaData}
-                                category={selectedCategories[0]}
+                                ) : (
+                                    <ConsumptionCardSummaryCategory
+                                        metaData={metaData}
+                                        category={selectedCategories[0]}
+                                    />
+                                )}
+                            </CardContent>
+                        </Card>
+                    </Grid>
+
+                    <Card className="mb-6">
+                        <CardContent className="p-6">
+                            <ConsumptionTimelineChart
+                                globalSummaryData={filteredGlobalSummaryData}
+                                categories={selectedCategories}
+                                title="Consumption Timeline"
                             />
-                        )}
-                    </CardContent>
-                </Card>
-            </Grid>
+                        </CardContent>
+                    </Card>
 
-            <Card className="mb-6">
-                <CardContent className="p-6">
-                    <ConsumptionTimelineChart
-                        globalSummaryData={filteredGlobalSummaryData}
-                        categories={selectedCategories}
-                        title="Consumption Timeline"
-                    />
-                </CardContent>
-            </Card>
+                    <Card className="mb-6">
+                        <CardContent className="p-6">
+                            <LabelSummary
+                                globalSummaryData={filteredGlobalSummaryData}
+                                categories={selectedCategories}
+                                title="Energy Label Summary"
+                                description="This is a summary of the labels users of the AURORA Energy Tracker have obtained each year."
+                            />
+                        </CardContent>
+                    </Card>
 
-            <Card className="mb-6">
-                <CardContent className="p-6">
-                    <LabelSummary
-                        globalSummaryData={filteredGlobalSummaryData}
-                        categories={selectedCategories}
-                        title="Energy Label Summary"
-                        description="This is a summary of the labels users of the AURORA Energy Tracker have obtained each year."
-                    />
-                </CardContent>
-            </Card>
+                    <Card className="mb-6">
+                        <CardContent className="p-6">
+                            <GenderByCountryChart
+                                metaData={metaData}
+                                title="Gender Distribution"
+                            />
+                        </CardContent>
+                    </Card>
 
-            <Card className="mb-6">
-                <CardContent className="p-6">
-                    <GenderByCountryChart
-                        metaData={metaData}
-                        title="Gender Distribution"
-                    />
-                </CardContent>
-            </Card>
-
-            <Card>
-                <CardContent className="p-6">
-                    <div className="max-w-3xl mx-auto">
-                        <AutoReport metaData={metaData} />
-                    </div>
-                </CardContent>
-            </Card>
-        </>
+                    <Card>
+                        <CardContent className="p-6">
+                            <div className="max-w-3xl mx-auto">
+                                <AutoReport metaData={metaData} />
+                            </div>
+                        </CardContent>
+                    </Card>
+                </>
             )}
         </>
     );

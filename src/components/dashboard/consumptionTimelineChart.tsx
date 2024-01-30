@@ -146,42 +146,42 @@ export function ConsumptionTimelineChart({
             dateRange?.to &&
             dateRange.from < dateRange.to ? (
                 <>
-                <Text>
-                    Total{" "}
-                    <b>
-                        {selectedEnergyMode === "carbon" ? (
-                            <>
-                                CO<sub>2</sub> Emission
-                            </>
-                        ) : (
-                            <>Energy Usage</>
-                        )}
-                    </b>{" "}
-                    per country between{" "}
-                    {String(dateRange?.from?.toDateString())} and{" "}
-                    {String(dateRange?.to?.toDateString())}.
-                </Text>
-            <LineChart
-                className="h-80 mt-8"
-                data={transformedData}
-                index="Date"
-                categories={
-                    globalSummaryData?.countries.map(
-                        (country) => country.countryName,
-                    ) ?? []
-                }
+                    <Text>
+                        Total{" "}
+                        <b>
+                            {selectedEnergyMode === "carbon" ? (
+                                <>
+                                    CO<sub>2</sub> Emission
+                                </>
+                            ) : (
+                                <>Energy Usage</>
+                            )}
+                        </b>{" "}
+                        per country between{" "}
+                        {String(dateRange?.from?.toDateString())} and{" "}
+                        {String(dateRange?.to?.toDateString())}.
+                    </Text>
+                    <LineChart
+                        className="h-80 mt-8"
+                        data={transformedData}
+                        index="Date"
+                        categories={
+                            globalSummaryData?.countries.map(
+                                (country) => country.countryName,
+                            ) ?? []
+                        }
                         colors={countriesMapping.map(
                             (country) => country.color,
                         )}
-                valueFormatter={
-                    selectedEnergyMode == "carbon"
-                        ? valueFormatterCarbon
-                        : valueFormatterEnergy
-                }
-                showLegend={true}
-                yAxisWidth={60}
-            />
-        </>
+                        valueFormatter={
+                            selectedEnergyMode == "carbon"
+                                ? valueFormatterCarbon
+                                : valueFormatterEnergy
+                        }
+                        showLegend={true}
+                        yAxisWidth={60}
+                    />
+                </>
             ) : (
                 <Alert variant={"destructive"}>
                     <Info className="h-4 w-4" />

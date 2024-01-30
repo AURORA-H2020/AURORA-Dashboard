@@ -52,8 +52,6 @@ export function temporalData(
 
                 category.temporal.forEach((year) => {
                     year.data.forEach((month) => {
-                        let monthActiveUsersCount = 0;
-
                         const dateMonth = getMonthShortName(month.month);
                         let currentDate = `${dateMonth} ${year.year}`;
                         if (dateRange.from! > new Date(currentDate)) {
