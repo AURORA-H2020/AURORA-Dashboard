@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
+import { ConsumptionCategory } from "./firestore/consumption/consumption-category";
 
 export interface ConsumptionAttributes {
     icon: ReactElement;
-    type: string;
+    category: ConsumptionCategory;
     unit: string;
-    color: string;
-    label: string;
-    colorMuted: string;
+    colorPrimary: string;
+    unitLabel: string;
 }

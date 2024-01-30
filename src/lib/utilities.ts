@@ -6,8 +6,8 @@ import {
 
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { Consumption } from "@/models/extensions";
 import { ConsumptionAttributes } from "@/models/meta-data";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 
 /**
  * Automatically added by shadcn/ui
@@ -97,19 +97,19 @@ export function camelCaseToWords(s: string): string {
 }
 
 /**
- * Retrieves the consumption attributes based on the provided consumption object.
+ * Retrieves the consumption attributes for the given consumption category.
  *
- * @param {Consumption} consumption - The consumption object to retrieve attributes for.
- * @return {ConsumptionAttributes} The attributes associated with the consumption.
+ * @param {ConsumptionCategory} ConsumptionCategory - The consumption category to retrieve attributes for
+ * @return {ConsumptionAttributes | undefined} The consumption attributes for the given category, or undefined if not found
  */
 export function getConsumptionAttributes(
-    consumption: Consumption,
-): ConsumptionAttributes {
-    const consumptionCategory = Object.keys(consumptionMapping).find(
-        (key) => key in consumption,
+    ConsumptionCategory: ConsumptionCategory,
+): ConsumptionAttributes | undefined {
+    const consumptionAttributes = consumptionMapping.find(
+        (c) => c.category == ConsumptionCategory,
     );
 
-    return consumptionCategory ? consumptionMapping[consumptionCategory] : {};
+    return consumptionAttributes || undefined;
 }
 
 /**

@@ -1,8 +1,11 @@
-import { getConsumptionAttributes } from "@/lib/utilities";
 import { Consumption } from "@/models/extensions";
 
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
-import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
+import {
+    carbonUnit,
+    consumptionMapping,
+    kiloGramNumberFormatter,
+} from "@/lib/constants";
 import ConsumptionTableRow from "./consumptionTableRow";
 
 /**
@@ -17,13 +20,17 @@ export default function ConsumptionView({
 }: {
     consumption: Consumption;
 }): JSX.Element {
-    const consumptionAttributes = getConsumptionAttributes(consumption);
+    const consumptionAttributes = consumptionMapping.find(
+        (c) => c.category == consumption.category,
+    );
 
     return (
         <>
             <Table className="mt-4 table-fixed">
                 <TableBody>
-                    <ConsumptionTableRow label={consumptionAttributes.label}>
+                    <ConsumptionTableRow
+                        label={consumptionAttributes?.unitLabel ?? ""}
+                    >
                         {consumption.carbonEmissions ? (
                             <>
                                 {consumption.value
@@ -31,7 +38,7 @@ export default function ConsumptionView({
                                           consumption.energyExpended || 0,
                                       ) +
                                       " " +
-                                      String(consumptionAttributes.unit)
+                                      String(consumptionAttributes?.unit)
                                     : ""}
                             </>
                         ) : (

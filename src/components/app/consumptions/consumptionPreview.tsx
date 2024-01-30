@@ -16,7 +16,11 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
+import {
+    carbonUnit,
+    consumptionMapping,
+    kiloGramNumberFormatter,
+} from "@/lib/constants";
 
 import {
     AlertDialog,
@@ -41,7 +45,9 @@ export default function ConsumptionPreview({
 }: {
     consumption: Consumption;
 }): JSX.Element {
-    const consumptionAttributes = getConsumptionAttributes(consumption);
+    const consumptionAttributes = getConsumptionAttributes(
+        consumption.category,
+    );
 
     // State to manage the visibility of the modal
     const [isModalOpen, setModalOpen] = useState(false);
@@ -99,9 +105,9 @@ export default function ConsumptionPreview({
                     >
                         <Flex direction={"column"}>
                             <div
-                                className={`bg-${consumptionAttributes.color}-500 rounded-full flex items-center justify-center w-12 h-12 text-white`} // Example with w-12 h-12; adjust as necessary
+                                className={`bg-[${consumptionAttributes?.colorPrimary}] bg-opacity-20 rounded-full flex items-center justify-center w-12 h-12 text-[${consumptionAttributes?.colorPrimary}]`}
                             >
-                                {consumptionAttributes.icon}
+                                {consumptionAttributes?.icon}
                             </div>
                         </Flex>
                         <Flex direction={"column"}>
@@ -121,7 +127,7 @@ export default function ConsumptionPreview({
                                 {consumption.value
                                     ? Math.round(consumption.value) +
                                       " " +
-                                      String(consumptionAttributes.unit)
+                                      String(consumptionAttributes?.unit)
                                     : ""}
                             </Text>
                             <Separator className="my-1 w-[50%] self-center" />

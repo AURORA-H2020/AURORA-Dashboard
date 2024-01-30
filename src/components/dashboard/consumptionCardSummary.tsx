@@ -1,8 +1,9 @@
-import { categories, consumptionMapping } from "@/lib/constants";
+import { categories } from "@/lib/constants";
 import { MetaData } from "@/models/dashboard-data";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Strong } from "@radix-ui/themes";
 import React from "react";
+import { getConsumptionAttributes } from "@/lib/utilities";
 
 export default function ConsumptionCardSummary({
     metaData,
@@ -11,7 +12,7 @@ export default function ConsumptionCardSummary({
 }) {
     const dataSet = categories.map((category) => {
         const count = metaData?.reduce(
-            (count, country) => count + country.consumptions[category].count,
+            (count, country) => count + country.consumptions[category]?.count,
             0,
         );
         return { category: category, count: count };
@@ -19,33 +20,31 @@ export default function ConsumptionCardSummary({
 
     return (
         <>
-            {dataSet.map((data) => (
-                <Alert
-                    key={data.category}
-                    style={{
-                        backgroundColor:
-                            consumptionMapping[data.category].colorMuted,
-                    }}
-                    className="my-1"
-                >
-                    {React.cloneElement(
-                        consumptionMapping[data.category].icon,
-                        {
-                            style: {
-                                color: consumptionMapping[data.category].color,
-                            },
-                        },
-                    )}
-                    <AlertTitle
-                        style={{
-                            color: consumptionMapping[data.category].color,
-                        }}
+            {dataSet.map((data) => {
+                const consumptionAttributes = getConsumptionAttributes(
+                    data.category,
+                );
+
+                return (
+                    <Alert
+                        key={data.category}
+                        className={`my-1 bg-opacity-20 bg-[${consumptionAttributes?.colorPrimary}] border-[${consumptionAttributes?.colorPrimary}] text-[${consumptionAttributes?.colorPrimary}]`}
                     >
-                        {data.category}: <Strong>{data.count}</Strong>
-                    </AlertTitle>
-                    <AlertDescription></AlertDescription>
-                </Alert>
-            ))}
+                        {React.cloneElement(
+                            consumptionAttributes?.icon ?? <></>,
+                            {
+                                style: {
+                                    color: consumptionAttributes?.colorPrimary,
+                                },
+                            },
+                        )}
+                        <AlertTitle>
+                            {data.category}: <Strong>{data.count}</Strong>
+                        </AlertTitle>
+                        <AlertDescription></AlertDescription>
+                    </Alert>
+                );
+            })}
         </>
     );
 }

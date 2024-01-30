@@ -34,7 +34,7 @@ export default function DetailedCard({
     metaData?.forEach((entry) => {
         if (measure === "consumptionsCount") {
             categories.forEach((category) => {
-                metricValue += entry.consumptions[category].count;
+                metricValue += entry.consumptions[category]?.count;
             });
         } else {
             metricValue += entry[measure];

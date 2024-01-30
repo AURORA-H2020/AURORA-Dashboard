@@ -174,7 +174,7 @@ export function LabelSummary({
                 data={transformedData ?? []}
                 index="country"
                 categories={labelMappings.map((label) => label.label)}
-                // colors={genderMappings.map((gender) => gender.color)}
+                colors={labelMappings.map((label) => label.color)}
                 valueFormatter={
                     useAbsoluteValues
                         ? valueFormatterAbsolute

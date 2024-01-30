@@ -6,6 +6,10 @@ import React from "react";
 import { CalculationMode, EnergyMode } from "@/models/dashboard-data";
 import { Label } from "@/models/firestore/global-summary/label/consumption-type-labels";
 
+const t = (translationKey: string) => {
+    return translationKey;
+};
+
 /* i18next-parser helper
 t("language.english")
 t("language.german")
@@ -88,16 +92,16 @@ export const genderMappings: { key: string; label: string; color: Color }[] = [
 
 export const labelMappings: {
     label: Label;
-    color: Color;
+    color: string;
 }[] = [
-    { label: "A+", color: "green" },
-    { label: "A", color: "yellow" },
-    { label: "B", color: "red" },
-    { label: "C", color: "red" },
-    { label: "D", color: "red" },
-    { label: "E", color: "red" },
-    { label: "F", color: "red" },
-    { label: "G", color: "red" },
+    { label: "A+", color: "#306EBA" },
+    { label: "A", color: "#42944A" },
+    { label: "B", color: "#6AAC46" },
+    { label: "C", color: "#CAD444" },
+    { label: "D", color: "#FCED4F" },
+    { label: "E", color: "#F1BD40" },
+    { label: "F", color: "#DC6E2D" },
+    { label: "G", color: "#D02E26" },
 ];
 
 export const userIdBlacklist: string[] = [
@@ -119,39 +123,33 @@ export const userIdBlacklist: string[] = [
     "GXTS3kX82CXtdS0qHsX3djnB7aj1",
 ];
 
-export const consumptionMapping: Record<
-    ConsumptionCategory,
-    ConsumptionAttributes
-> = {
-    electricity: {
+export const consumptionMapping: ConsumptionAttributes[] = [
+    {
         icon: <Zap />,
-        type: "electricity",
+        category: "electricity",
         unit: "kWh",
-        color: "#FDDD09",
-        label: "Energy Usage",
-        colorMuted: "#534918",
+        colorPrimary: "#FDDD09",
+        unitLabel: t("unitLabel.eneryUsage"),
     },
-    transportation: {
+    {
         icon: <CarFront />,
-        type: "transportation",
+        category: "transportation",
         unit: "km",
-        color: "#1E84FD",
-        label: "Distance",
-        colorMuted: "#173555",
+        colorPrimary: "#1E84FD",
+        unitLabel: t("unitLabel.distance"),
     },
-    heating: {
+    {
         icon: <ThermometerSnowflake />,
-        type: "heating",
+        category: "heating",
         unit: "kWh",
-        color: "#F5473D",
-        label: "Energy Usage",
-        colorMuted: "#492322",
+        colorPrimary: "#F5473D",
+        unitLabel: t("unitLabel.eneryUsage"),
     },
-};
+];
 
-export const categories: ConsumptionCategory[] = Object.keys(
-    consumptionMapping,
-) as ConsumptionCategory[];
+export const categories: ConsumptionCategory[] = consumptionMapping.map(
+    (c) => c.category,
+);
 
 export const energyModes: EnergyMode[] = ["carbon", "energy"];
 export const calculationModes: CalculationMode[] = ["absolute", "average"];
