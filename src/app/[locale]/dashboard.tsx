@@ -1,23 +1,24 @@
 "use client";
 
-import { ConsumptionTimelineChart } from "../../components/dashboard/consumptionTimelineChart";
-import { useEffect, useState } from "react";
-import { UsersIcon, BlocksIcon } from "lucide-react";
-import { getMetaData } from "@/lib/transformData";
-import { categories, countriesMapping } from "@/lib/constants";
 import DetailedCard from "@/components/dashboard/detailedCard";
-import { GenderByCountryChart } from "../../components/dashboard/genderByCountryChart";
-import GenderCardSummary from "../../components/dashboard/genderCardSummary";
+import { categories, countriesMapping } from "@/lib/constants";
+import { getMetaData } from "@/lib/transformData";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { BlocksIcon, UsersIcon } from "lucide-react";
+import { useEffect, useState } from "react";
+import AutoReport from "../../components/dashboard/autoReport";
 import ConsumptionCardSummary from "../../components/dashboard/consumptionCardSummary";
 import ConsumptionCardSummaryCategory from "../../components/dashboard/consumptionCardSummaryCategory";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import AutoReport from "../../components/dashboard/autoReport";
+import { ConsumptionTimelineChart } from "../../components/dashboard/consumptionTimelineChart";
+import { GenderByCountryChart } from "../../components/dashboard/genderByCountryChart";
+import GenderCardSummary from "../../components/dashboard/genderCardSummary";
 
+import { Flex, Grid } from "@radix-ui/themes";
 import { Card, CardContent } from "../../components/ui/card";
-import { Grid, Flex, Text, Heading } from "@radix-ui/themes";
 
 import { MultiSelect, OptionType } from "../../components/ui/multiselect";
 
+import { LabelSummary } from "@/components/dashboard/labelSummary";
 import {
     Select,
     SelectContent,
@@ -25,10 +26,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { MetaData } from "@/models/dashboard-data";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { useTranslations } from "next-intl";
-import { LabelSummary } from "@/components/dashboard/labelSummary";
 
 /**
  * Renders the Dashboard component.
@@ -46,7 +46,7 @@ export function Dashboard({
     // Options available for country multiselect
     const options: OptionType[] = countriesMapping.map((country) => ({
         value: country.ID,
-        label: country.name,
+        label: t(country.name),
     }));
 
     // State to keep track of country multiselect
@@ -56,6 +56,12 @@ export function Dashboard({
     const [selectedCategories, setSelectedCategories] =
         useState<ConsumptionCategory[]>(categories);
 
+    /**
+     * Handles the change of the selected category.
+     *
+     * @param {type} selectedCategory - description of parameter
+     * @return {type} description of return value
+     */
     const handleCategoryChange = (selectedCategory) => {
         if (selectedCategory === "all") {
             setSelectedCategories(categories);

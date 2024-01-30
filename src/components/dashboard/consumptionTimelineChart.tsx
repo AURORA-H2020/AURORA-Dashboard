@@ -1,21 +1,21 @@
 "use client";
 
-import { LineChart } from "@tremor/react";
-import { temporalData } from "@/lib/transformData";
 import { countriesMapping } from "@/lib/constants";
-import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { SetStateAction, useEffect, useState } from "react";
+import { temporalData } from "@/lib/transformData";
+import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
 import {
     CalculationMode,
     EnergyMode,
     TimelineData,
 } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { DateRange } from "react-day-picker";
-import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
-import DatePicker from "../ui/date-picker";
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Flex, Heading, Text } from "@radix-ui/themes";
+import { LineChart } from "@tremor/react";
+import { useTranslations } from "next-intl";
+import { SetStateAction, useEffect, useState } from "react";
+import { DateRange } from "react-day-picker";
+import DatePicker from "../ui/date-picker";
 import {
     Select,
     SelectContent,
@@ -23,17 +23,14 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../ui/select";
-import { useTranslations } from "next-intl";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
 /**
- * Renders a consumption timeline chart based on the provided data.
+ * Renders a Consumption Timeline Chart with various controls for energy mode, calculation mode, and date range.
  *
- * @param {GlobalSummary} globalSummaryData - The global summary data.
- * @param {string[]} countries - The list of countries.
- * @param {ConsumptionCategory[]} categories - The list of consumption categories.
- * @param {DateRange | undefined} dateRange - The date range.
- * @param {EnergyMode} mode - The energy mode.
- * @param {CalculationMode} calculationMode - The calculation mode.
+ * @param {GlobalSummary | undefined} globalSummaryData - The global summary data.
+ * @param {ConsumptionCategory[]} categories - The consumption categories.
+ * @param {string} title - The title of the chart.
  * @return {JSX.Element} The rendered consumption timeline chart.
  */
 export function ConsumptionTimelineChart({

@@ -2,15 +2,15 @@ import { genderMappings } from "@/lib/constants";
 import { MetaData } from "@/models/dashboard-data";
 import { BarChart, Legend } from "@tremor/react";
 
-import { Flex, Heading } from "@radix-ui/themes";
-import { useEffect, useState } from "react";
-import { MetaDataGenders } from "@/models/dashboard-data";
-import { Switch } from "../ui/switch";
-import { Label } from "../ui/label";
 import {
     valueFormatterAbsolute,
     valueFormatterPercentage,
 } from "@/lib/utilities";
+import { MetaDataGenders } from "@/models/dashboard-data";
+import { Flex, Heading } from "@radix-ui/themes";
+import { useEffect, useState } from "react";
+import { Label } from "../ui/label";
+import { Switch } from "../ui/switch";
 
 /**
  * Generate the GenderCardCountry component.
@@ -25,8 +25,6 @@ import {
 interface ExtendedDemographic extends MetaDataGenders {
     country: string;
 }
-
-let data: ExtendedDemographic[] | undefined;
 
 export function GenderByCountryChart({
     metaData,

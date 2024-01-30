@@ -1,22 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import ThemeToggle from "./themeToggle";
-import Logo from "./logo";
 import { usePathname } from "next/navigation";
+import Logo from "./logo";
+import ThemeToggle from "./themeToggle";
 
+import { Flex } from "@radix-ui/themes";
+import { Menu } from "lucide-react";
+import { ReactElement, useState } from "react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
-import { ReactElement, useState } from "react";
-import { Menu } from "lucide-react";
-import { Flex } from "@radix-ui/themes";
 
-import { logout } from "@/firebase/auth/logout";
-import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/context/AuthContext";
+import { logout } from "@/firebase/auth/logout";
 import { User } from "@/models/firestore/user/user";
 import { useTranslations } from "next-intl";
-import LocaleSwitcher from "./localeSwitcher";
+import { useRouter } from "next/navigation";
 
 const MenuItems = ({ items, pathname }) => {
     const t = useTranslations();
@@ -83,7 +82,6 @@ export default function NavigationBar(): ReactElement {
                             <Logo />
                         </Link>
                         <ThemeToggle />
-                        <LocaleSwitcher />
                     </Flex>
 
                     <div className="md:hidden">

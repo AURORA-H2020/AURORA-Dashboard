@@ -2,14 +2,21 @@
 
 import { CountryData } from "@/models/countryData";
 
+import { Button } from "@/components/ui/button";
+import { downloadJsonAsFile } from "@/lib/utilities";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import { downloadJsonAsFile } from "@/lib/utilities";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Flex } from "@radix-ui/themes";
-import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 
+/**
+ * Function for handling data downloads.
+ *
+ * @param {Object} countryData - The country data for download
+ * @param {Object} globalSummaryData - The global summary data for download
+ * @return {void} No return value
+ */
 export default function DataDownloads({
     countryData,
     globalSummaryData,
@@ -24,11 +31,11 @@ export default function DataDownloads({
         setDownloading(true);
         try {
             await downloadJsonAsFile(data, fileName);
-            toast.success("Your data was successfully downloaded");
+            toast.success(t("toast.dataDownload.success"));
         } catch (error) {
             // Handle the error
             console.error("Error downloading data:", error);
-            toast.error("Your data could not be downloaded");
+            toast.error(t("toast.dataDownload.error"));
         } finally {
             setDownloading(false);
         }
@@ -43,7 +50,9 @@ export default function DataDownloads({
                 }
                 disabled={downloading}
             >
-                {downloading ? "Downloading..." : "Download metrics"}
+                {downloading
+                    ? t("button.downloadPending")
+                    : t("about.downloadMetrics")}
             </Button>
             <Button
                 variant={"outline"}
@@ -55,7 +64,9 @@ export default function DataDownloads({
                 }
                 disabled={downloading}
             >
-                {downloading ? "Downloading..." : "Download dataset"}
+                {downloading
+                    ? t("button.downloadPending")
+                    : t("about.downloadDataset")}
             </Button>
         </Flex>
     );

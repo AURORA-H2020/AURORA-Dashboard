@@ -1,11 +1,10 @@
-"use client";
+import { Button } from "@/components/ui/button";
 import signIn from "@/firebase/auth/authentication";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 /**
  * Renders a sign-in form and handles sign-in through email, Google,
@@ -15,14 +14,22 @@ import { faApple } from "@fortawesome/free-brands-svg-icons";
 function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
     const router = useRouter();
 
+    /**
+     * Function to handle post sign in actions.
+     */
     const postSignIn = () => {
         toast.success("Welcome to AURORA!");
         router.push("/account");
     };
 
+    /**
+     * Handles the authentication process with Apple.
+     *
+     * @return {Promise<void>} A promise representing the completion of the authentication process.
+     */
     async function handleAuthenticateWithApple() {
         try {
-            const { result, error } = await signIn("apple");
+            const { error } = await signIn("apple");
             if (error) {
                 // Handle the error appropriately
                 console.error(error);

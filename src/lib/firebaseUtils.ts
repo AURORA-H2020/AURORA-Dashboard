@@ -1,7 +1,7 @@
-import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
 import firebase_app from "@/firebase/config";
 import { CountryData } from "@/models/countryData";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 
 /**
  * Downloads a file from Firebase Storage.

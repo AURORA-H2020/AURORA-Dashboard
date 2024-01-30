@@ -1,4 +1,4 @@
-import { signOut, getAuth } from "firebase/auth";
+import { getAuth, signOut } from "firebase/auth";
 import firebase_app from "../config";
 
 // Get the authentication instance using the Firebase app

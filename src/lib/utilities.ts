@@ -1,13 +1,13 @@
 import {
     citiesMapping,
-    countriesMapping,
     consumptionMapping,
+    countriesMapping,
 } from "./constants";
 
-import { type ClassValue, clsx } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { ConsumptionAttributes } from "@/models/meta-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { ConsumptionAttributes } from "@/models/meta-data";
+import { clsx, type ClassValue } from "clsx";
+import { twMerge } from "tailwind-merge";
 
 /**
  * Automatically added by shadcn/ui

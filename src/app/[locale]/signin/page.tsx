@@ -1,6 +1,9 @@
 "use client";
 
-import { Flex } from "@radix-ui/themes";
+import AuthenticateWithApple from "@/components/auth/authenticateWithApple";
+import AuthenticateWithGoogle from "@/components/auth/authenticateWithGoogle";
+import SignInWithEmail from "@/components/auth/signInWithEmail";
+import SignUpWithEmail from "@/components/auth/signUpWithEmail";
 import {
     Card,
     CardContent,
@@ -8,11 +11,8 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import SignInWithEmail from "@/components/auth/signInWithEmail";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import SignUpWithEmail from "@/components/auth/signUpWithEmail";
-import AuthenticateWithGoogle from "@/components/auth/authenticateWithGoogle";
-import AuthenticateWithApple from "@/components/auth/authenticateWithApple";
+import { Flex } from "@radix-ui/themes";
 
 /**
  * Renders the authentication options based on the sign-in state.
@@ -20,7 +20,11 @@ import AuthenticateWithApple from "@/components/auth/authenticateWithApple";
  * @param {boolean} isSignIn - Indicates whether the user is signing in.
  * @return {JSX.Element} The rendered authentication options component.
  */
-const AuthenticationOptions = ({ isSignIn }: { isSignIn: boolean }) => {
+const AuthenticationOptions = ({
+    isSignIn,
+}: {
+    isSignIn: boolean;
+}): JSX.Element => {
     return (
         <>
             <Flex direction={"column"}>

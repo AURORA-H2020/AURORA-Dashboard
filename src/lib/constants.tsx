@@ -1,31 +1,24 @@
-import { ConsumptionAttributes } from "@/models/meta-data";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { Color } from "@tremor/react";
-import { CarFront, Zap, ThermometerSnowflake } from "lucide-react";
-import React from "react";
 import { CalculationMode, EnergyMode } from "@/models/dashboard-data";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { Label } from "@/models/firestore/global-summary/label/consumption-type-labels";
+import { ConsumptionAttributes } from "@/models/meta-data";
+import { Color } from "@tremor/react";
+import { CarFront, ThermometerSnowflake, Zap } from "lucide-react";
 
 const t = (translationKey: string) => {
     return translationKey;
 };
 
-/* i18next-parser helper
-t("language.english")
-t("language.german")
-*/
 export const supportedLocales = [
     {
         code: "en",
-        name: "language.english",
+        name: t("language.english"),
     },
     {
         code: "de",
-        name: "language.german",
+        name: t("language.german"),
     },
 ];
-
-export const categoryColors: Color[] = ["yellow", "red", "blue"];
 
 export const allTremorColours: Color[] = [
     "red",
@@ -52,24 +45,39 @@ export const allTremorColours: Color[] = [
 ];
 
 export const countriesMapping = [
-    { ID: "udn3GiM30aqviGBkswpl", name: "Denmark", code: "DK", color: "red" },
+    {
+        ID: "udn3GiM30aqviGBkswpl",
+        name: t("country.denmark"),
+        code: "DK",
+        color: "red",
+    },
     {
         ID: "sPXh74wjZf14Jtmkaas6",
-        name: "Europe (Other)",
+        name: t("country.europeOther"),
         code: "EU",
         color: "teal",
     },
     {
         ID: "2E9Ejc8qBJC6HnlPPdIh",
-        name: "Portugal",
+        name: t("country.portugal"),
         code: "PT",
         color: "green",
     },
-    { ID: "KhUolhyvcbdEsPyREqOZ", name: "Slovenia", code: "SI", color: "sky" },
-    { ID: "4sq82jNQm3x3bH9Fkijm", name: "Spain", code: "ES", color: "yellow" },
+    {
+        ID: "KhUolhyvcbdEsPyREqOZ",
+        name: t("country.slovenia"),
+        code: "SI",
+        color: "sky",
+    },
+    {
+        ID: "4sq82jNQm3x3bH9Fkijm",
+        name: t("country.spain"),
+        code: "ES",
+        color: "yellow",
+    },
     {
         ID: "8mgi5IR4xn9Yca4zDLtU",
-        name: "United Kingdom",
+        name: t("country.unitedKingdom"),
         code: "UK",
         color: "blue",
     },

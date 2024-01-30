@@ -1,12 +1,12 @@
 "use client";
 
-import * as React from "react";
+import { Toaster } from "@/components/ui/sonner";
+import { AuthContextProvider } from "@/context/AuthContext";
+import { Theme } from "@radix-ui/themes";
+import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ThemeProviderProps } from "next-themes/dist/types";
-import { Theme } from "@radix-ui/themes";
-import { AuthContextProvider } from "@/context/AuthContext";
-import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
-import { Toaster } from "@/components/ui/sonner";
+import * as React from "react";
 
 /**
  * Renders the Providers component.

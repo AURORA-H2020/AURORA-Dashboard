@@ -1,6 +1,6 @@
-import { getFunctions, httpsCallable } from "firebase/functions";
 import firebase_app from "@/firebase/config";
 import { downloadJsonAsFile } from "@/lib/utilities";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 /**
  * Downloads user data from the specified region and initiates the download process.

@@ -7,7 +7,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { Text, Heading, Strong } from "@radix-ui/themes";
+import { Heading, Strong, Text } from "@radix-ui/themes";
 
 /**
  * Renders an auto-generated report based on the provided metaData.

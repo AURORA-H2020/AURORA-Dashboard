@@ -1,15 +1,21 @@
 import { categories } from "@/lib/constants";
+import { getConsumptionAttributes } from "@/lib/utilities";
 import { MetaData } from "@/models/dashboard-data";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 import { Strong } from "@radix-ui/themes";
 import React from "react";
-import { getConsumptionAttributes } from "@/lib/utilities";
+import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
 
+/**
+ * Renders a summary of consumption card data based on the provided metaData.
+ *
+ * @param {{ metaData: MetaData | undefined }} - Object containing metaData
+ * @return {JSX.Element} - The rendered consumption card summary
+ */
 export default function ConsumptionCardSummary({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}) {
+}): JSX.Element {
     const dataSet = categories.map((category) => {
         const count = metaData?.reduce(
             (count, country) => count + country.consumptions[category]?.count,

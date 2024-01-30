@@ -1,5 +1,3 @@
-"use client";
-
 import authenticate from "@/firebase/auth/authentication";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -16,14 +14,24 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 function AuthenticateWithGoogle({ isSignIn = true }: { isSignIn?: boolean }) {
     const router = useRouter();
 
+    /**
+     * Function to handle post sign-in actions.
+     *
+     * @return {void} No return value
+     */
     const postSignIn = () => {
         toast.success("Welcome to AURORA!");
         router.push("/account");
     };
 
+    /**
+     * Asynchronously handles authentication with Google.
+     *
+     * @return {void}
+     */
     const handleAuthenticateWithGoogle = async () => {
         try {
-            const { result, error } = await authenticate("google");
+            const { error } = await authenticate("google");
             if (error) {
                 // Handle the error appropriately
                 console.error(error);

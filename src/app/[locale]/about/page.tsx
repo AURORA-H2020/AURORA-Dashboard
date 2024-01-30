@@ -1,17 +1,17 @@
-import { promises as fs } from "fs";
-import { CountryData } from "@/models/countryData";
 import firebase_app from "@/firebase/config";
 import {
     getLatestCountryFile,
     getLatestSummaryFile,
 } from "@/lib/firebaseUtils";
+import { CountryData } from "@/models/countryData";
+import { promises as fs } from "fs";
 
-import AboutContent from "./about";
 import { Card, CardContent } from "@/components/ui/card";
-import { Heading, Text } from "@radix-ui/themes";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
-import DataDownloads from "./dataDownloads";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { Heading, Strong, Text } from "@radix-ui/themes";
+import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import AboutContent from "./about";
+import DataDownloads from "./dataDownloads";
 
 type Props = {
     params: { locale: string };
@@ -69,8 +69,12 @@ export default async function About({
         <>
             <Card>
                 <CardContent className="p-6">
-                    <Heading>{t("about.metrics.title")}</Heading>
-                    <Text>{t("about.metrics.description")}</Text>
+                    <Heading>{t("about.countryData.title")}</Heading>
+                    <Text>
+                        {t.rich("about.countryData.description", {
+                            Strong: (chunks) => <Strong>{chunks}</Strong>,
+                        })}
+                    </Text>
                     {countryData && <AboutContent countryData={countryData} />}
                 </CardContent>
             </Card>

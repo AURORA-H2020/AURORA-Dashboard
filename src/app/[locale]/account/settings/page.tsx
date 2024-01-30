@@ -1,30 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { useAuthContext } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
-import { User } from "firebase/auth";
-import { User as FirebaseUser } from "@/models/firestore/user/user";
-import firebase_app from "@/firebase/config";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
-import LoadingSpinner from "@/components/ui/loading";
-import { Flex, Grid } from "@radix-ui/themes";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Table, TableBody } from "@/components/ui/table";
 import ConsumptionTableRow from "@/components/app/consumptions/consumptionTableRow";
-import { city2Name, country2Name, titleCase } from "@/lib/utilities";
-import { Button } from "@/components/ui/button";
-import { downloadUserData } from "@/firebase/firestore/downloadUserData";
-import { deleteAccount } from "@/firebase/firestore/deleteAccount";
-import { toast } from "sonner";
-import {
-    Dialog,
-    DialogContent,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -35,10 +11,42 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+    Dialog,
+    DialogContent,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import LoadingSpinner from "@/components/ui/loading";
+import { Table, TableBody } from "@/components/ui/table";
+import { useAuthContext } from "@/context/AuthContext";
+import firebase_app from "@/firebase/config";
+import { deleteAccount } from "@/firebase/firestore/deleteAccount";
+import { downloadUserData } from "@/firebase/firestore/downloadUserData";
+import { city2Name, country2Name, titleCase } from "@/lib/utilities";
+import { User as FirebaseUser } from "@/models/firestore/user/user";
+import { Flex, Grid } from "@radix-ui/themes";
+import { User } from "firebase/auth";
+import { doc, getDoc, getFirestore } from "firebase/firestore";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 const firestore = getFirestore(firebase_app);
 
+/**
+ * Renders the user settings page with profile and account information.
+ *
+ * @return {JSX.Element} The user settings page component
+ */
 function UserSettings(): JSX.Element {
+    const t = useTranslations();
+
     const { user, loading } = useAuthContext() as {
         user: User;
         loading: boolean;
@@ -52,6 +60,9 @@ function UserSettings(): JSX.Element {
     const [isModalChangePasswordOpen, setModalChangePasswordOpen] =
         useState(false);
 
+    /**
+     * Closes the modal for changing email and password.
+     */
     const closeModal = () => {
         setModalChangeEmailOpen(false);
         setModalChangePasswordOpen(false);
@@ -78,6 +89,11 @@ function UserSettings(): JSX.Element {
     };
 
     const [downloading, setDownloading] = useState(false);
+    /**
+     * Wrapper function to handle downloading user data.
+     *
+     * @return {Promise<void>} Resolves when user data is downloaded successfully
+     */
     const downloadUserDataWrapper = async () => {
         setDownloading(true);
         try {
@@ -151,11 +167,11 @@ function UserSettings(): JSX.Element {
                                         )}
                                     </ConsumptionTableRow>
                                     <ConsumptionTableRow label="Country">
-                                        {
+                                        {t(
                                             country2Name(
                                                 userData?.country || "",
-                                            ).name
-                                        }
+                                            ).name,
+                                        )}
                                     </ConsumptionTableRow>
                                     <ConsumptionTableRow label="City">
                                         {city2Name(userData?.city || "")}

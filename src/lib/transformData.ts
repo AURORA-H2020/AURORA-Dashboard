@@ -1,4 +1,3 @@
-import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import {
     CalculationMode,
     ConsumptionsDetail,
@@ -8,10 +7,11 @@ import {
     TimelineData,
     TimelineLabelData,
 } from "@/models/dashboard-data";
-import { camelCaseToWords, getMonthShortName } from "./utilities";
-import { genderMappings, labelMappings } from "./constants";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { DateRange } from "react-day-picker";
+import { genderMappings, labelMappings } from "./constants";
+import { camelCaseToWords, getMonthShortName } from "./utilities";
 
 /**
  * Retrieves temporal data based on the provided parameters.

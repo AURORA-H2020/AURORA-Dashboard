@@ -11,7 +11,7 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuthContext } from "@/context/AuthContext";
 import firebase_app from "@/firebase/config";
-import { categories, categoryColors } from "@/lib/constants";
+import { categories, consumptionMapping } from "@/lib/constants";
 import {
     getMonthShortName,
     valueFormatterCarbon,
@@ -226,7 +226,7 @@ export default function ConsumptionSummaryChart() {
                     data={currentSummary}
                     index="monthName"
                     categories={categories}
-                    colors={categoryColors}
+                    colors={consumptionMapping.map((c) => c.colorPrimary)}
                     valueFormatter={
                         currentMeasure === "carbonEmission"
                             ? valueFormatterCarbon

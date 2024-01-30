@@ -1,4 +1,3 @@
-"use client";
 import authenticate from "@/firebase/auth/authentication";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -44,14 +43,23 @@ function SignInWithEmail() {
         },
     });
 
+    /**
+     * Function for handling post sign-in actions.
+     */
     const postSignIn = () => {
         toast.success("Welcome to AURORA!");
         router.push("/account");
     };
 
+    /**
+     * Attempt to sign in with provided email and password
+     *
+     * @param {z.infer<typeof formSchema>} values - input values for email and password
+     * @return {Promise<void>}
+     */
     async function handleSignInWithEmail(values: z.infer<typeof formSchema>) {
         // Attempt to sign in with provided email and password
-        const { result, error } = await authenticate(
+        const { error } = await authenticate(
             "email-signin",
             values.email,
             values.password,

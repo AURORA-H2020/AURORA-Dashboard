@@ -1,18 +1,17 @@
 "use client";
 
-import { BarChart } from "@tremor/react";
-import { annualLabelData } from "@/lib/transformData";
 import { labelMappings } from "@/lib/constants";
-import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { useEffect, useState } from "react";
-import { EnergyMode, LabelEntries } from "@/models/dashboard-data";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { annualLabelData } from "@/lib/transformData";
 import {
     valueFormatterAbsolute,
     valueFormatterPercentage,
 } from "@/lib/utilities";
+import { EnergyMode, LabelEntries } from "@/models/dashboard-data";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Flex, Heading, Text } from "@radix-ui/themes";
-import { Switch } from "../ui/switch";
+import { BarChart } from "@tremor/react";
+import { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import {
     Select,
@@ -21,6 +20,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../ui/select";
+import { Switch } from "../ui/switch";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface LabelChartData extends LabelEntries {

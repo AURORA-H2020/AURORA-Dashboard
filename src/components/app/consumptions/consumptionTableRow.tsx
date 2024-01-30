@@ -1,7 +1,6 @@
-import React from "react";
-import { TableRow, TableCell } from "@/components/ui/table";
-import { getTranslations } from "next-intl/server";
+import { TableCell, TableRow } from "@/components/ui/table";
 import { useTranslations } from "next-intl";
+import React from "react";
 
 // Props when `merged` is not provided or false.
 interface ConsumptionTableRowPropsWithoutMerged {
@@ -30,7 +29,9 @@ type ConsumptionTableRowProps =
  * @return {JSX.Element} A table row element for consumption
  * data.
  */
-export default function ConsumptionTableRow(props: ConsumptionTableRowProps) {
+export default function ConsumptionTableRow(
+    props: ConsumptionTableRowProps,
+): JSX.Element {
     const { children, merged } = props;
     const label = merged ? null : props.label; // label is ignored if merged is true
 

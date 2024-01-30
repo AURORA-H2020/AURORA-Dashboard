@@ -4,8 +4,8 @@ import { useState } from "react";
 import ConsumptionView from "./consumptionView";
 
 import { Button } from "@/components/ui/button";
-import { Heading, Text, Flex } from "@radix-ui/themes";
 import { Card, CardContent } from "@/components/ui/card";
+import { Flex, Heading, Text } from "@radix-ui/themes";
 
 import {
     Dialog,
@@ -16,11 +16,7 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
-import {
-    carbonUnit,
-    consumptionMapping,
-    kiloGramNumberFormatter,
-} from "@/lib/constants";
+import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
 
 import {
     AlertDialog,

@@ -1,13 +1,35 @@
 {
     "about": {
+        "carbonEmissionLabels": {
+            "title": "",
+            "description": ""
+        },
+        "energyExpendedLabels": {
+            "title": "",
+            "description": ""
+        },
         "metrics": {
             "title": "",
             "description": ""
+        },
+        "downloadMetrics": "",
+        "downloadDataset": "",
+        "countryData": {
+            "title": ""
         },
         "downloads": {
             "title": "",
             "description": ""
         }
+    },
+    "toast": {
+        "dataDownload": {
+            "success": "",
+            "error": ""
+        }
+    },
+    "button": {
+        "downloadPending": ""
     },
     "dashboard": {
         "filter": {
@@ -35,6 +57,7 @@
         "description": ""
     },
     "footer": {
+        "auroraWebsite": "",
         "fundingNotice": ""
     },
     "navigation": {
@@ -53,6 +76,14 @@
     "language": {
         "english": "Englisch",
         "german": "Deutsch"
+    },
+    "country": {
+        "denmark": "",
+        "europeOther": "",
+        "portugal": "",
+        "slovenia": "",
+        "spain": "",
+        "unitedKingdom": ""
     },
     "unitLabel": {
         "eneryUsage": "",

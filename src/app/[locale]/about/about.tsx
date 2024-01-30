@@ -1,11 +1,11 @@
 "use client";
 
 import AboutJson from "@/components/aboutPage/jsonView";
-import { CountryData } from "@/models/countryData";
 import { countriesMapping } from "@/lib/constants";
+import { CountryData } from "@/models/countryData";
 
-import { Flex, Heading, Text, Grid } from "@radix-ui/themes";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 
 /**
@@ -18,8 +18,9 @@ export default function AboutContent({
     countryData,
 }: {
     countryData: CountryData | undefined;
-}) {
+}): JSX.Element {
     const t = useTranslations();
+
     return (
         <Tabs defaultValue={countriesMapping[0].code}>
             <div className="overflow-x-auto">
@@ -31,7 +32,7 @@ export default function AboutContent({
                                 value={country.code}
                                 className="flex whitespace-nowrap h-full"
                             >
-                                {country.name}
+                                {t(country.name)}
                             </TabsTrigger>
                         );
                     })}
@@ -47,10 +48,16 @@ export default function AboutContent({
                                 className="gap-2 md:space-x-4 max-md:space-y-4 mt-8"
                             >
                                 <Flex direction={"column"}>
-                                    <Heading>Carbon Emission Labels</Heading>
+                                    <Heading>
+                                        {t("about.carbonEmissionLabels.title")}
+                                    </Heading>
                                     <Text className="h-24">
-                                        The data we use to calculate the label
-                                        for carbon emissions in {country.name}.
+                                        {t(
+                                            "about.carbonEmissionLabels.description",
+                                            {
+                                                countryName: t(country.name),
+                                            },
+                                        )}
                                     </Text>
 
                                     <AboutJson
@@ -61,10 +68,16 @@ export default function AboutContent({
                                     />
                                 </Flex>
                                 <Flex direction={"column"}>
-                                    <Heading>Energy Expended Labels</Heading>
+                                    <Heading>
+                                        {t("about.energyExpendedLabels.title")}
+                                    </Heading>
                                     <Text className="h-24">
-                                        The data we use to calculate the label
-                                        for energy usage in {country.name}.
+                                        {t(
+                                            "about.energyExpendedLabels.description",
+                                            {
+                                                countryName: t(country.name),
+                                            },
+                                        )}
                                     </Text>
                                     <AboutJson
                                         data={
@@ -74,11 +87,13 @@ export default function AboutContent({
                                     />
                                 </Flex>
                                 <Flex direction={"column"}>
-                                    <Heading>Metrics</Heading>
+                                    <Heading>
+                                        {t("about.metrics.title")}
+                                    </Heading>
                                     <Text className="h-24">
-                                        The data we use to calculate carbon
-                                        emissions and energy usage based on user
-                                        data in {country.name}.
+                                        {t("about.metrics.description", {
+                                            countryName: t(country.name),
+                                        })}
                                     </Text>
                                     <AboutJson
                                         data={

@@ -1,9 +1,7 @@
-"use client";
-
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useRouter } from "next/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,8 +13,8 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Strong } from "@radix-ui/themes";
 import signUp from "@/firebase/auth/authentication";
+import { Strong } from "@radix-ui/themes";
 import { toast } from "sonner";
 
 const formSchema = z.object({
@@ -24,6 +22,12 @@ const formSchema = z.object({
     password: z.string().min(2).max(50),
 });
 
+/**
+ * Function for signing up with email.
+ *
+ * @param {z.infer<typeof formSchema>} values - the form values
+ * @return {JSX.Element} the sign up form
+ */
 function SignUpWithEmail(): JSX.Element {
     const router = useRouter();
 
@@ -36,14 +40,23 @@ function SignUpWithEmail(): JSX.Element {
         },
     });
 
+    /**
+     * Function for handling user sign-up.
+     */
     const postSignUp = () => {
         toast.success("Welcome to AURORA!");
         router.push("/account");
     };
 
+    /**
+     * Handle sign up with email and password.
+     *
+     * @param {type} values - description of parameter
+     * @return {type} undefined
+     */
     async function handleSignUpWithEmail(values: z.infer<typeof formSchema>) {
         // Attempt to sign in with provided email and password
-        const { result, error } = await signUp(
+        const { error } = await signUp(
             "email-signup",
             values.email,
             values.password,

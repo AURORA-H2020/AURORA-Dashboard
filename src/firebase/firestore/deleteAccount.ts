@@ -1,5 +1,5 @@
-import { getAuth, deleteUser } from "firebase/auth";
 import firebase_app from "@/firebase/config";
+import { deleteUser, getAuth } from "firebase/auth";
 
 /**
  * Deletes the current user account if it exists, and handles success and error cases.
