@@ -4,14 +4,13 @@ import DetailedCard from "@/components/dashboard/detailedCard";
 import { categories, countriesMapping } from "@/lib/constants";
 import { getMetaData } from "@/lib/transformData";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { BlocksIcon, UsersIcon } from "lucide-react";
+import { BlocksIcon, Info, UsersIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import AutoReport from "../../components/dashboard/autoReport";
 import ConsumptionCardSummary from "../../components/dashboard/consumptionCardSummary";
 import ConsumptionCardSummaryCategory from "../../components/dashboard/consumptionCardSummaryCategory";
 import { ConsumptionTimelineChart } from "../../components/dashboard/consumptionTimelineChart";
 import { GenderByCountryChart } from "../../components/dashboard/genderByCountryChart";
-import GenderCardSummary from "../../components/dashboard/genderCardSummary";
 
 import { Flex, Grid } from "@radix-ui/themes";
 import { Card, CardContent } from "../../components/ui/card";
@@ -20,6 +19,7 @@ import { MultiSelect, OptionType } from "../../components/ui/multiselect";
 
 import CountryUsersPieChart from "@/components/dashboard/countryUsersPieChart";
 import { LabelSummary } from "@/components/dashboard/labelSummary";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 import {
     Select,
     SelectContent,
@@ -142,6 +142,14 @@ export function Dashboard({
                 </CardContent>
             </Card>
 
+            {filteredGlobalSummaryData &&
+            filteredGlobalSummaryData?.countries.length === 0 ? (
+                <Alert variant={"destructive"}>
+                    <Info className="h-4 w-4" />
+                    <AlertTitle>{t("dashboard.filter.invalidData")}</AlertTitle>
+                </Alert>
+            ) : (
+                <>
             <Grid
                 columns={{
                     initial: "1",
@@ -174,7 +182,9 @@ export function Dashboard({
                         />
 
                         {selectedCategories.length > 1 ? (
-                            <ConsumptionCardSummary metaData={metaData} />
+                                    <ConsumptionCardSummary
+                                        metaData={metaData}
+                                    />
                         ) : (
                             <ConsumptionCardSummaryCategory
                                 metaData={metaData}
@@ -222,6 +232,8 @@ export function Dashboard({
                     </div>
                 </CardContent>
             </Card>
+        </>
+            )}
         </>
     );
 }
