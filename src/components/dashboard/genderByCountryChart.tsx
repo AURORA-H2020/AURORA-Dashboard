@@ -84,7 +84,7 @@ export function GenderByCountryChart({
                         id="percentage-switch"
                         onCheckedChange={setUseAbsoluteValues}
                     />
-                    <Label htmlFor="percentage-switch">Absolute values</Label>
+                    <Label htmlFor="percentage-switch">{t("filter.toggle.absoluteValues")}</Label>
                 </div>
             </Flex>
             <BarChart

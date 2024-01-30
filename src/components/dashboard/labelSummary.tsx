@@ -23,6 +23,7 @@ import {
 } from "../ui/select";
 import { Switch } from "../ui/switch";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { useTranslations } from "next-intl";
 
 interface LabelChartData extends LabelEntries {
     country: string;
@@ -39,6 +40,8 @@ export function LabelSummary({
     title: string;
     description: string;
 }): JSX.Element {
+    const t = useTranslations();
+
     const [transformedData, setTransformedData] = useState<
         LabelChartData[] | undefined
     >([]);
@@ -108,7 +111,9 @@ export function LabelSummary({
                         id="percentage-switch"
                         onCheckedChange={setUseAbsoluteValues}
                     />
-                    <Label htmlFor="percentage-switch">Absolute values</Label>
+                    <Label htmlFor="percentage-switch">
+                        {t("filter.toggle.absoluteValues")}
+                    </Label>
                 </div>
             </Flex>
             <Flex
@@ -122,10 +127,15 @@ export function LabelSummary({
                     <div className="overflow-x-auto">
                         <TabsList>
                             <TabsTrigger value="carbon">
-                                CO<sub>2</sub> Emission
+                                {
+                                    // t("common.co2emission")
+                                    t.rich("common.co2emission", {
+                                        sub: (chunks) => <sub>{chunks}</sub>,
+                                    })
+                                }
                             </TabsTrigger>
                             <TabsTrigger value="energy">
-                                Energy Usage
+                                {t("common.energyUsage")}
                             </TabsTrigger>
                         </TabsList>
                     </div>

@@ -26,6 +26,7 @@ export default function Error({ error, reset }: Props) {
     return (
         <PageLayout title={t("error.title")}>
             <div>
+                {/**  t("error.description") */}
                 {t.rich("error.description", {
                     p: (chunks) => <p className="mt-4">{chunks}</p>,
                     retry: (chunks) => (

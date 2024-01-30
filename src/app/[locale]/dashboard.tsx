@@ -1,7 +1,11 @@
 "use client";
 
 import DetailedCard from "@/components/dashboard/detailedCard";
-import { categories, countriesMapping } from "@/lib/constants";
+import {
+    categories,
+    consumptionMapping,
+    countriesMapping,
+} from "@/lib/constants";
 import { getMetaData } from "@/lib/transformData";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { BlocksIcon, Info, UsersIcon } from "lucide-react";
@@ -124,9 +128,12 @@ export function Dashboard({
                                 <SelectItem value="all">
                                     {t("dashboard.filter.allCategories")}
                                 </SelectItem>
-                                {categories.map((category) => (
-                                    <SelectItem key={category} value={category}>
-                                        {category}
+                                {consumptionMapping.map((e) => (
+                                    <SelectItem
+                                        key={e.category}
+                                        value={e.category}
+                                    >
+                                        {t(e.label)}
                                     </SelectItem>
                                 ))}
                             </SelectContent>
@@ -200,7 +207,7 @@ export function Dashboard({
                             <ConsumptionTimelineChart
                                 globalSummaryData={filteredGlobalSummaryData}
                                 categories={selectedCategories}
-                                title="Consumption Timeline"
+                                title={t("dashboard.consumptionTimeline.title")}
                             />
                         </CardContent>
                     </Card>
@@ -210,8 +217,10 @@ export function Dashboard({
                             <LabelSummary
                                 globalSummaryData={filteredGlobalSummaryData}
                                 categories={selectedCategories}
-                                title="Energy Label Summary"
-                                description="This is a summary of the labels users of the AURORA Energy Tracker have obtained each year."
+                                title={t("dashboard.energylabels.title")}
+                                description={t(
+                                    "dashboard.energylabels.description",
+                                )}
                             />
                         </CardContent>
                     </Card>
@@ -220,7 +229,7 @@ export function Dashboard({
                         <CardContent className="p-6">
                             <GenderByCountryChart
                                 metaData={metaData}
-                                title="Gender Distribution"
+                                title={t("dashboard.genderDistribution.title")}
                             />
                         </CardContent>
                     </Card>

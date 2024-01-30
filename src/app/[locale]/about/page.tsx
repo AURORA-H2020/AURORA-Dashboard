@@ -71,9 +71,12 @@ export default async function About({
                 <CardContent className="p-6">
                     <Heading>{t("about.countryData.title")}</Heading>
                     <Text>
-                        {t.rich("about.countryData.description", {
-                            Strong: (chunks) => <Strong>{chunks}</Strong>,
-                        })}
+                        {
+                            // t("about.countryData.description")
+                            t.rich("about.countryData.description", {
+                                Strong: (chunks) => <Strong>{chunks}</Strong>,
+                            })
+                        }
                     </Text>
                     {countryData && <AboutContent countryData={countryData} />}
                 </CardContent>

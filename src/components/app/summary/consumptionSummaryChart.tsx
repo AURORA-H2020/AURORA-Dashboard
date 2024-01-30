@@ -24,6 +24,7 @@ import { Flex } from "@radix-ui/themes";
 import { BarChart } from "@tremor/react";
 import { User } from "firebase/auth";
 import { collection, getDocs, getFirestore, query } from "firebase/firestore";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 const firestore = getFirestore(firebase_app);
@@ -49,6 +50,8 @@ const findValueByCategory = (
 };
 
 export default function ConsumptionSummaryChart() {
+    const t = useTranslations();
+
     const { user, loading } = useAuthContext() as {
         user: User;
         loading: boolean;
@@ -193,10 +196,17 @@ export default function ConsumptionSummaryChart() {
                         <div className="overflow-x-auto">
                             <TabsList>
                                 <TabsTrigger value="carbonEmission">
-                                    CO<sub>2</sub> Emission
+                                    {
+                                        // t("common.co2emission")
+                                        t.rich("common.co2emission", {
+                                            sub: (chunks) => (
+                                                <sub>{chunks}</sub>
+                                            ),
+                                        })
+                                    }
                                 </TabsTrigger>
                                 <TabsTrigger value="energyExpended">
-                                    Energy Usage
+                                    {t("common.energyUsage")}
                                 </TabsTrigger>
                             </TabsList>
                         </div>

@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Flex } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 
 /**
  * Renders the authentication options based on the sign-in state.
@@ -25,6 +26,8 @@ const AuthenticationOptions = ({
 }: {
     isSignIn: boolean;
 }): JSX.Element => {
+    const t = useTranslations();
+
     return (
         <>
             <Flex direction={"column"}>
@@ -34,7 +37,7 @@ const AuthenticationOptions = ({
                     </div>
                     <div className="relative flex justify-center text-xs uppercase">
                         <span className="bg-card px-2 text-muted-foreground">
-                            Or continue with
+                            {t("ui.auth.orContinueWith")}
                         </span>
                     </div>
                 </div>
@@ -51,23 +54,25 @@ const AuthenticationOptions = ({
  * @return {JSX.Element} The sign-in form component
  */
 const SignInForm = () => {
+    const t = useTranslations();
+
     return (
         <Flex justify={"center"}>
             <Card className="w-[400px]">
                 <Tabs defaultValue="email-signin">
                     <TabsList className="w-full">
                         <TabsTrigger value="email-signin" className="w-1/2">
-                            Sign In
+                            {t("ui.auth.signIn")}
                         </TabsTrigger>
                         <TabsTrigger value="email-signup" className="w-1/2">
-                            Sign Up
+                            {t("ui.auth.signUp")}
                         </TabsTrigger>
                     </TabsList>
                     <TabsContent value="email-signin">
                         <CardHeader>
-                            <CardTitle>Sign In</CardTitle>
+                            <CardTitle>{t("ui.auth.signIn")}</CardTitle>
                             <CardDescription>
-                                Sign in to your AURORA Energy Tracker account.
+                                {t("ui.auth.signInPrompt")}
                             </CardDescription>
                         </CardHeader>
                         <CardContent>
@@ -78,9 +83,9 @@ const SignInForm = () => {
 
                     <TabsContent value="email-signup">
                         <CardHeader>
-                            <CardTitle>Sign Up</CardTitle>
+                            <CardTitle>{t("ui.auth.signUp")}</CardTitle>
                             <CardDescription>
-                                Sign up to the AURORA Energy Tracker.
+                                {t("ui.auth.signUpPrompt")}
                             </CardDescription>
                         </CardHeader>
                         <CardContent>

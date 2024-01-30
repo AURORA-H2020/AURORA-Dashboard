@@ -15,7 +15,8 @@
         "downloadMetrics": "Download metrics",
         "downloadDataset": "Download dataset",
         "countryData": {
-            "title": "App Metrics and Label Data"
+            "title": "App Metrics and Label Data",
+            "description": "As we strongly believe in Open Science, we fully disclose the metrics that the AURORA Energy Tracker uses to calculate <Strong>Carbon Emissions</Strong>, <Strong>Energy Usage</Strong> and <Strong>Labels</Strong>."
         },
         "downloads": {
             "title": "Download our data",
@@ -35,12 +36,24 @@
         "filter": {
             "allCategories": "All categories",
             "selectCountries": "Select countries",
-            "invalidData": "No data matches the selected filters."
+            "invalidData": "No data matches the selected filters.",
+            "absolute": "Absolute",
+            "averagePerUser": "Average per user"
         },
         "card": {
             "userCount": "Number of Users",
             "individualConsumptions": "Individual Consumptions",
             "invalidDateRange": "Please select a valid date range"
+        },
+        "consumptionTimeline": {
+            "title": "Consumption Timeline"
+        },
+        "energylabels": {
+            "title": "Energy Label Summary",
+            "description": "This is a summary of the labels users of the AURORA Energy Tracker have obtained each year."
+        },
+        "genderDistribution": {
+            "title": "Gender Distribution"
         },
         "main": {
             "title": "AURORA Energy Tracker Dashboard",
@@ -58,6 +71,31 @@
         "title": "AURORA Energy Tracker Dashboard",
         "description": "Here you can find the latest stats about the AURORA Energy Tracker mobile app."
     },
+    "ui": {
+        "auth": {
+            "orContinueWith": "Or continue with",
+            "signIn": "Sign in",
+            "signUp": "Sign up",
+            "signInPrompt": "Sign in to your AURORA Energy Tracker account.",
+            "signUpPrompt": "Sign up to the AURORA Energy Tracker."
+        },
+        "datePicker": {
+            "selectDateRange": "Select a valid date range"
+        },
+        "monthPicker": {
+            "start": "Start",
+            "end": "End"
+        }
+    },
+    "common": {
+        "co2emission": "CO<sub>2</sub> Emission",
+        "energyUsage": "Energy Usage"
+    },
+    "filter": {
+        "toggle": {
+            "absoluteValues": "Absolute Values"
+        }
+    },
     "footer": {
         "auroraWebsite": "AURORA Website",
         "fundingNotice": "This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No. 101036418."
@@ -68,15 +106,6 @@
             "about": "About",
             "account": "Account",
             "logout": "Logout"
-        }
-    },
-    "ui": {
-        "datePicker": {
-            "selectDateRange": "Select a valid date range"
-        },
-        "monthPicker": {
-            "start": "Start",
-            "end": "End"
         }
     },
     "language": {
