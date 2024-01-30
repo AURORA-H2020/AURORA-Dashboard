@@ -4,6 +4,7 @@ import { ConsumptionCategory } from "./firestore/consumption/consumption-categor
 export interface ConsumptionAttributes {
     icon: ReactElement;
     category: ConsumptionCategory;
+    label: string;
     unit: string;
     colorPrimary: string;
     unitLabel: string;

@@ -1,6 +1,7 @@
 import { genderMappings } from "@/lib/constants";
 import { MetaData } from "@/models/dashboard-data";
 import { DonutChart, Legend } from "@tremor/react";
+import { useTranslations } from "next-intl";
 
 /**
  * Renders a GenderCardSummary component.
@@ -12,12 +13,10 @@ import { DonutChart, Legend } from "@tremor/react";
  */
 export default function GenderCardSummary({
     metaData,
-    countries,
 }: {
     metaData: MetaData | undefined;
-    countries: string[];
 }): JSX.Element {
-    metaData?.filter((entry) => countries.includes(entry.countryName));
+    const t = useTranslations();
 
     let countFemale = 0;
     let countMale = 0;
@@ -63,7 +62,7 @@ export default function GenderCardSummary({
             />
             <Legend
                 className="mt-3"
-                categories={genderMappings.map((gender) => gender.label)}
+                categories={genderMappings.map((gender) => t(gender.label))}
                 colors={genderMappings.map((gender) => gender.color)}
             />
         </>

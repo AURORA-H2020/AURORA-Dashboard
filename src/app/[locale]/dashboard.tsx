@@ -106,11 +106,11 @@ export function Dashboard({
 
     return (
         <>
-            <Card className="mb-6">
+            <Card className="mb-6 mt-6">
                 <CardContent className="p-6">
                     <Flex
                         direction={{ initial: "column", xs: "row" }}
-                        className="gap-6 mt-6 mb-6"
+                        className="gap-6"
                     >
                         <Select
                             onValueChange={handleCategoryChange}
@@ -134,7 +134,7 @@ export function Dashboard({
                             options={options}
                             selected={selectedCountries}
                             onChange={setSelectedCountries}
-                            placeholder="Select options"
+                            placeholder={t("dashboard.filter.selectCountries")}
                             className="flex-1 w-full"
                         />
                     </Flex>
@@ -171,7 +171,9 @@ export function Dashboard({
                             metaData={metaData}
                             measure="consumptionsCount"
                             categories={selectedCategories}
-                            title={t("dashboard.card.individualConsumptions")}
+                                    title={t(
+                                        "dashboard.card.individualConsumptions",
+                                    )}
                             icon={BlocksIcon}
                         />
 

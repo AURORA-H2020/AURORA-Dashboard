@@ -11,6 +11,7 @@ import { Flex, Heading } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import { Switch } from "../ui/switch";
+import { useTranslations } from "next-intl";
 
 /**
  * Generate the GenderCardCountry component.
@@ -33,6 +34,8 @@ export function GenderByCountryChart({
     metaData: MetaData | undefined;
     title: string;
 }): JSX.Element {
+    const t = useTranslations();
+
     const [genderData, setGenderData] = useState<
         ExtendedDemographic[] | undefined
     >();
@@ -103,7 +106,7 @@ export function GenderByCountryChart({
             />
             <Legend
                 className="mt-3"
-                categories={genderMappings.map((gender) => gender.label)}
+                categories={genderMappings.map((gender) => t(gender.label))}
                 colors={genderMappings.map((gender) => gender.color)}
             />
         </>

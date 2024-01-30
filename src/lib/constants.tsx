@@ -135,6 +135,7 @@ export const consumptionMapping: ConsumptionAttributes[] = [
     {
         icon: <Zap />,
         category: "electricity",
+        label: t("category.electricity"),
         unit: "kWh",
         colorPrimary: "#FDDD09",
         unitLabel: t("unitLabel.eneryUsage"),
@@ -142,6 +143,7 @@ export const consumptionMapping: ConsumptionAttributes[] = [
     {
         icon: <CarFront />,
         category: "transportation",
+        label: t("category.transportation"),
         unit: "km",
         colorPrimary: "#1E84FD",
         unitLabel: t("unitLabel.distance"),
@@ -149,6 +151,7 @@ export const consumptionMapping: ConsumptionAttributes[] = [
     {
         icon: <ThermometerSnowflake />,
         category: "heating",
+        label: t("category.heating"),
         unit: "kWh",
         colorPrimary: "#F5473D",
         unitLabel: t("unitLabel.eneryUsage"),
