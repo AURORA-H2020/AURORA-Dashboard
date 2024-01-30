@@ -1,13 +1,15 @@
 {
     "about": {
-        "title": "App Metrics",
-        "description": "As we strongly believe in Open Science, we fully disclose the metrics that the AURORA Energy Tracker uses to calculate <Strong>Carbon Emissions</Strong>, <Strong>Energy Usage</Strong> and <Strong>Labels</Strong>."
+        "metrics": {
+            "title": "",
+            "description": ""
+        },
+        "downloads": {
+            "title": "",
+            "description": ""
+        }
     },
     "dashboard": {
-        "main": {
-            "title": "AURORA Energy Tracker Dashboard",
-            "description": "Here you can find the latest stats about the AURORA Energy Tracker mobile app."
-        },
         "filter": {
             "allCategories": "All categories"
         },
@@ -15,6 +17,10 @@
             "userCount": "Number of Users",
             "individualConsumptions": "Individual Consumptions",
             "pleaseSelectDateRange": "Please select a date range"
+        },
+        "main": {
+            "title": "AURORA Energy Tracker Dashboard",
+            "description": "Here you can find the latest stats about the AURORA Energy Tracker mobile app."
         }
     },
     "error": {
@@ -47,5 +53,9 @@
     "language": {
         "english": "English",
         "german": "German"
+    },
+    "unitLabel": {
+        "eneryUsage": "Energy Usage",
+        "distance": "Distance"
     }
 }

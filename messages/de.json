@@ -1,13 +1,15 @@
 {
     "about": {
-        "title": "",
-        "description": ""
+        "metrics": {
+            "title": "",
+            "description": ""
+        },
+        "downloads": {
+            "title": "",
+            "description": ""
+        }
     },
     "dashboard": {
-        "main": {
-            "title": "AURORA Energy Tracker Dashboard",
-            "description": "Hier finden Sie die neuesten Statistiken über die AURORA Energy Tracker Mobile App."
-        },
         "filter": {
             "allCategories": ""
         },
@@ -15,6 +17,10 @@
             "userCount": "",
             "individualConsumptions": "",
             "pleaseSelectDateRange": ""
+        },
+        "main": {
+            "title": "AURORA Energy Tracker Dashboard",
+            "description": "Hier finden Sie die neuesten Statistiken über die AURORA Energy Tracker Mobile App."
         }
     },
     "error": {
@@ -47,5 +53,9 @@
     "language": {
         "english": "Englisch",
         "german": "Deutsch"
+    },
+    "unitLabel": {
+        "eneryUsage": "",
+        "distance": ""
     }
 }
