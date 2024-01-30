@@ -33,12 +33,14 @@
     },
     "dashboard": {
         "filter": {
-            "allCategories": ""
+            "allCategories": "",
+            "selectCountries": "",
+            "invalidData": ""
         },
         "card": {
             "userCount": "",
             "individualConsumptions": "",
-            "pleaseSelectDateRange": ""
+            "invalidDateRange": ""
         },
         "main": {
             "title": "AURORA Energy Tracker Dashboard",
@@ -71,6 +73,10 @@
     "ui": {
         "datePicker": {
             "selectDateRange": ""
+        },
+        "monthPicker": {
+            "start": "",
+            "end": ""
         }
     },
     "language": {
@@ -85,8 +91,33 @@
         "spain": "",
         "unitedKingdom": ""
     },
+    "gender": {
+        "female": "",
+        "male": "",
+        "nonBinary": "",
+        "other": ""
+    },
+    "category": {
+        "electricity": "",
+        "transportation": "",
+        "heating": ""
+    },
     "unitLabel": {
         "eneryUsage": "",
         "distance": ""
+    },
+    "month": {
+        "january": "",
+        "february": "",
+        "march": "",
+        "april": "",
+        "may": "",
+        "june": "",
+        "july": "",
+        "august": "",
+        "september": "",
+        "october": "",
+        "november": "",
+        "december": ""
     }
 }
