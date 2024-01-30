@@ -3,6 +3,7 @@
 import { labelMappings } from "@/lib/constants";
 import { annualLabelData } from "@/lib/transformData";
 import {
+    getYearsInSummary,
     valueFormatterAbsolute,
     valueFormatterPercentage,
 } from "@/lib/utilities";
@@ -25,32 +26,6 @@ import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface LabelChartData extends LabelEntries {
     country: string;
-}
-
-/**
- * Extracts unique years from the global summary data.
- *
- * @param {GlobalSummary | undefined} globalSummaryData - the global summary data
- * @return {string[]} an array of unique years
- */
-function extractYears(globalSummaryData: GlobalSummary | undefined): string[] {
-    // Use a Set to store unique years without duplicates
-    const yearsSet = new Set<string>();
-
-    // Traverse the structure to reach the GlobalSummaryCategoryTemporalYear level
-    globalSummaryData?.countries.forEach((country) => {
-        country.cities.forEach((city) => {
-            city.categories.forEach((category) => {
-                category.temporal.forEach((temporalYear) => {
-                    // Add the year to the Set
-                    yearsSet.add(temporalYear.year);
-                });
-            });
-        });
-    });
-
-    // Convert the Set to an Array to return the years
-    return Array.from(yearsSet);
 }
 
 export function LabelSummary({
@@ -161,7 +136,7 @@ export function LabelSummary({
                     </SelectTrigger>
 
                     <SelectContent>
-                        {extractYears(globalSummaryData).map((year) => (
+                        {getYearsInSummary(globalSummaryData).map((year) => (
                             <SelectItem key={year} value={year}>
                                 {year}
                             </SelectItem>

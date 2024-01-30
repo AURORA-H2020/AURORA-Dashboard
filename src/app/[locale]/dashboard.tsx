@@ -18,6 +18,7 @@ import { Card, CardContent } from "../../components/ui/card";
 
 import { MultiSelect, OptionType } from "../../components/ui/multiselect";
 
+import CountryUsersPieChart from "@/components/dashboard/countryUsersPieChart";
 import { LabelSummary } from "@/components/dashboard/labelSummary";
 import {
     Select,
@@ -157,12 +158,7 @@ export function Dashboard({
                             title={t("dashboard.card.userCount")}
                             icon={UsersIcon}
                         />
-                        <GenderCardSummary
-                            metaData={metaData}
-                            countries={selectedCountries.map(
-                                (entry) => entry.label,
-                            )}
-                        />
+                                <CountryUsersPieChart metaData={metaData} />
                     </CardContent>
                 </Card>
                 <Card>

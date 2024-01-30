@@ -1,3 +1,4 @@
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import {
     citiesMapping,
     consumptionMapping,
@@ -157,6 +158,13 @@ export const valueFormatterPercentage = (number: number): string => {
         }).format(number);
 };
 
+/**
+ * Downloads the given object as a JSON file with the specified file name.
+ *
+ * @param {any} object - the object to be converted to JSON and downloaded
+ * @param {string} fileName - the name of the file to be downloaded
+ * @return {void}
+ */
 export const downloadJsonAsFile = async (object, fileName) => {
     const dataStr = JSON.stringify(object);
     const blob = new Blob([dataStr], { type: "application/json" });
@@ -172,3 +180,31 @@ export const downloadJsonAsFile = async (object, fileName) => {
 
     URL.revokeObjectURL(url);
 };
+
+/**
+ * Extracts unique years from the global summary data.
+ *
+ * @param {GlobalSummary | undefined} globalSummaryData - the global summary data
+ * @return {string[]} an array of unique years
+ */
+export function getYearsInSummary(
+    globalSummaryData: GlobalSummary | undefined,
+): string[] {
+    // Use a Set to store unique years without duplicates
+    const yearsSet = new Set<string>();
+
+    // Traverse the structure to reach the GlobalSummaryCategoryTemporalYear level
+    globalSummaryData?.countries.forEach((country) => {
+        country.cities.forEach((city) => {
+            city.categories.forEach((category) => {
+                category.temporal.forEach((temporalYear) => {
+                    // Add the year to the Set
+                    yearsSet.add(temporalYear.year);
+                });
+            });
+        });
+    });
+
+    // Convert the Set to an Array to return the years
+    return Array.from(yearsSet);
+}

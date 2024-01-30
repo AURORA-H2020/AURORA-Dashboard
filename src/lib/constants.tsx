@@ -5,6 +5,9 @@ import { ConsumptionAttributes } from "@/models/meta-data";
 import { Color } from "@tremor/react";
 import { CarFront, ThermometerSnowflake, Zap } from "lucide-react";
 
+/**
+ * Simple wrapper function to get translations with i18n-parser
+ */
 const t = (translationKey: string) => {
     return translationKey;
 };
@@ -92,10 +95,10 @@ export const citiesMapping = [
 ];
 
 export const genderMappings: { key: string; label: string; color: Color }[] = [
-    { key: "female", label: "Female", color: "amber" },
-    { key: "male", label: "Male", color: "teal" },
-    { key: "nonBinary", label: "Non-Binary", color: "indigo" },
-    { key: "other", label: "Other", color: "gray" },
+    { key: "female", label: t("gender.female"), color: "amber" },
+    { key: "male", label: t("gender.male"), color: "teal" },
+    { key: "nonBinary", label: t("gender.nonBinary"), color: "indigo" },
+    { key: "other", label: t("gender.other"), color: "gray" },
 ];
 
 export const labelMappings: {
@@ -173,3 +176,18 @@ export const kiloGramNumberFormatter = Intl.NumberFormat("en", {
     unit: "kilogram",
     unitDisplay: "short",
 });
+
+export const monthNames = [
+    t("month.january"),
+    t("month.february"),
+    t("month.march"),
+    t("month.april"),
+    t("month.may"),
+    t("month.june"),
+    t("month.july"),
+    t("month.august"),
+    t("month.september"),
+    t("month.october"),
+    t("month.november"),
+    t("month.december"),
+];

@@ -2,7 +2,11 @@
 
 import { countriesMapping } from "@/lib/constants";
 import { temporalData } from "@/lib/transformData";
-import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
+import {
+    getYearsInSummary,
+    valueFormatterCarbon,
+    valueFormatterEnergy,
+} from "@/lib/utilities";
 import {
     CalculationMode,
     EnergyMode,
@@ -15,7 +19,7 @@ import { LineChart } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { SetStateAction, useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
-import DatePicker from "../ui/date-picker";
+import MonthPicker from "../ui/month-picker";
 import {
     Select,
     SelectContent,
@@ -113,7 +117,11 @@ export function ConsumptionTimelineChart({
                     </div>
                 </Tabs>
 
-                <DatePicker dateRange={dateRange} onChange={handleDateChange} />
+                <MonthPicker
+                    dateRange={dateRange}
+                    validYears={getYearsInSummary(globalSummaryData)}
+                    onChange={handleDateChange}
+                />
 
                 <Select
                     value={calculationMode}
