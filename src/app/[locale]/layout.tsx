@@ -1,15 +1,15 @@
+import Footer from "@/components/footer";
+import NavigationBar from "@/components/navigation/navigationBar";
+import { cn } from "@/lib/utilities";
+import "@radix-ui/themes/styles.css";
+import { Analytics } from "@vercel/analytics/react";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
-import NavigationBar from "@/components/navigation/navigationBar";
-import Footer from "@/components/footer";
-import "@radix-ui/themes/styles.css";
-import { cn } from "@/lib/utilities";
-import { Analytics } from "@vercel/analytics/react";
 
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
-import { locales } from "../../config";
-import { ReactNode } from "react";
 import { notFound } from "next/navigation";
+import { ReactNode } from "react";
+import { locales } from "../../config";
 
 const inter = Inter({ subsets: ["latin"] });
 

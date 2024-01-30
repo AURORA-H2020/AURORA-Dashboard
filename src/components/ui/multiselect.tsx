@@ -1,6 +1,6 @@
-import * as React from "react";
 import { cn } from "@/lib/utilities";
 import { Check, ChevronsUpDown, X } from "lucide-react";
+import * as React from "react";
 
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
@@ -8,7 +8,7 @@ import {
     Command,
     CommandEmpty,
     CommandGroup,
-    CommandInput,
+    // CommandInput,
     CommandItem,
     CommandList,
 } from "../ui/command";

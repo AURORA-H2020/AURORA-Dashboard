@@ -1,5 +1,5 @@
-import { useTranslations } from "next-intl";
 import PageLayout from "@/components/pageLayout";
+import { useTranslations } from "next-intl";
 
 // Note that `app/[locale]/[...rest]/page.tsx`
 // is necessary for this page to render.

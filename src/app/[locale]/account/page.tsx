@@ -1,16 +1,15 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useAuthContext } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
-import { User } from "firebase/auth";
-import { collection, query, getDocs } from "firebase/firestore";
-import firebase_app from "@/firebase/config";
-import { getFirestore } from "firebase/firestore";
-import { Consumption } from "@/models/extensions";
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
-import LoadingSpinner from "@/components/ui/loading";
-import { Heading, Text } from "@radix-ui/themes";
 import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";
+import LoadingSpinner from "@/components/ui/loading";
+import { useAuthContext } from "@/context/AuthContext";
+import firebase_app from "@/firebase/config";
+import { Consumption } from "@/models/extensions";
+import { Heading } from "@radix-ui/themes";
+import { User } from "firebase/auth";
+import { collection, getDocs, getFirestore, query } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const firestore = getFirestore(firebase_app);
 
