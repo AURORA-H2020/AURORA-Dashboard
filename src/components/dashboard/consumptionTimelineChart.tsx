@@ -28,6 +28,8 @@ import {
     SelectValue,
 } from "../ui/select";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { Alert, AlertTitle } from "../ui/alert";
+import { Info } from "lucide-react";
 
 /**
  * Renders a Consumption Timeline Chart with various controls for energy mode, calculation mode, and date range.
@@ -140,7 +142,10 @@ export function ConsumptionTimelineChart({
                 </Select>
             </Flex>
 
-            {dateRange?.from && dateRange?.to ? (
+            {dateRange?.from &&
+            dateRange?.to &&
+            dateRange.from < dateRange.to ? (
+                <>
                 <Text>
                     Total{" "}
                     <b>
@@ -156,10 +161,6 @@ export function ConsumptionTimelineChart({
                     {String(dateRange?.from?.toDateString())} and{" "}
                     {String(dateRange?.to?.toDateString())}.
                 </Text>
-            ) : (
-                <Text>{t("dashboard.card.pleaseSelectDateRange")}</Text>
-            )}
-
             <LineChart
                 className="h-80 mt-8"
                 data={transformedData}
@@ -169,7 +170,9 @@ export function ConsumptionTimelineChart({
                         (country) => country.countryName,
                     ) ?? []
                 }
-                colors={countriesMapping.map((country) => country.color)}
+                        colors={countriesMapping.map(
+                            (country) => country.color,
+                        )}
                 valueFormatter={
                     selectedEnergyMode == "carbon"
                         ? valueFormatterCarbon
@@ -178,6 +181,15 @@ export function ConsumptionTimelineChart({
                 showLegend={true}
                 yAxisWidth={60}
             />
+        </>
+            ) : (
+                <Alert variant={"destructive"}>
+                    <Info className="h-4 w-4" />
+                    <AlertTitle>
+                        {t("dashboard.card.invalidDateRange")}
+                    </AlertTitle>
+                </Alert>
+            )}
         </>
     );
 }
