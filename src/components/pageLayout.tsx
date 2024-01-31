@@ -6,6 +6,13 @@ type Props = {
     title: ReactNode;
 };
 
+/**
+ * Renders a page layout with a title and content.
+ *
+ * @param {Object} children - the content to display in the layout
+ * @param {string} title - the title of the page
+ * @return {JSX.Element} the rendered page layout
+ */
 export default function PageLayout({ children, title }: Props) {
     return (
         <Card>

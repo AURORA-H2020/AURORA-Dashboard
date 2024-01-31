@@ -14,6 +14,14 @@ import {
     SelectValue,
 } from "./select";
 
+/**
+ * Renders a MonthPicker component with the given date range and years, and triggers the onChange callback when the date range is changed.
+ *
+ * @param {Object} dateRange - the date range object containing from and to dates
+ * @param {Array} validYears - the array of valid years for selection
+ * @param {Function} onChange - the callback function triggered when the date range is changed
+ * @return {JSX.Element} the MonthPicker component
+ */
 const MonthPicker = ({ dateRange, validYears, onChange }) => {
     const [startMonth, setStartMonth] = useState(
         monthNames[dateRange.from.getMonth()],
@@ -28,6 +36,12 @@ const MonthPicker = ({ dateRange, validYears, onChange }) => {
         dateRange.to.getFullYear().toString(),
     );
 
+    /**
+     * Function to handle the change of range.
+     *
+     * @param {void}
+     * @return {void}
+     */
     const handleRangeChange = () => {
         onChange({
             from: new Date(Number(startYear), monthNames.indexOf(startMonth)),

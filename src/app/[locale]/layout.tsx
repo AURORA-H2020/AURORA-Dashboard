@@ -18,10 +18,21 @@ type Props = {
     params: { locale: string };
 };
 
+/**
+ * Generates static parameters based on locales.
+ *
+ * @return {Array} an array of objects containing the locale
+ */
 export function generateStaticParams() {
     return locales.map((locale) => ({ locale }));
 }
 
+/**
+ * Generate metadata based on the provided locale.
+ *
+ * @param {Omit<Props, "children">} params - Object containing the locale parameter
+ * @return {Promise<{ title: string, description: string }>} Object with title and description metadata
+ */
 export async function generateMetadata({
     params: { locale },
 }: Omit<Props, "children">) {
@@ -33,6 +44,13 @@ export async function generateMetadata({
     };
 }
 
+/**
+ * RootLayout function to render the entire layout.
+ *
+ * @param {Props} children - the child components to be rendered
+ * @param {string} locale - the locale parameter
+ * @return {JSX.Element} the rendered HTML layout
+ */
 export default async function RootLayout({
     children,
     params: { locale },

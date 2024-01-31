@@ -4,6 +4,11 @@ import { useTranslations } from "next-intl";
 // Note that `app/[locale]/[...rest]/page.tsx`
 // is necessary for this page to render.
 
+/**
+ * Renders the NotFoundPage component.
+ *
+ * @return {JSX.Element} The rendered NotFoundPage component.
+ */
 export default function NotFoundPage() {
     const t = useTranslations();
 

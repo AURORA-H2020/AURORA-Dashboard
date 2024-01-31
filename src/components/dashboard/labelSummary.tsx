@@ -12,6 +12,7 @@ import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Flex, Heading, Text } from "@radix-ui/themes";
 import { BarChart } from "@tremor/react";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { Label } from "../ui/label";
 import {
@@ -23,12 +24,20 @@ import {
 } from "../ui/select";
 import { Switch } from "../ui/switch";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
-import { useTranslations } from "next-intl";
 
 interface LabelChartData extends LabelEntries {
     country: string;
 }
 
+/**
+ * Renders a label summary with options to toggle absolute/percentage values and switch between energy modes.
+ *
+ * @param {GlobalSummary | undefined} globalSummaryData - the global summary data
+ * @param {ConsumptionCategory[]} categories - the consumption categories
+ * @param {string} title - the title of the label summary
+ * @param {string} description - the description of the label summary
+ * @return {JSX.Element} The rendered label summary component
+ */
 export function LabelSummary({
     globalSummaryData,
     categories,
@@ -55,6 +64,12 @@ export function LabelSummary({
         new Date().getFullYear().toString(),
     );
 
+    /**
+     * Updates the selected energy mode.
+     *
+     * @param {string} selectedEnergyMode - the selected energy mode to be updated
+     * @return {void}
+     */
     const handleEnergyModeChange = (selectedEnergyMode: string) => {
         setSelectedEnergyMode(selectedEnergyMode as EnergyMode);
     };

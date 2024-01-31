@@ -6,7 +6,7 @@ import { Color } from "@tremor/react";
 import { CarFront, ThermometerSnowflake, Zap } from "lucide-react";
 
 /**
- * Simple wrapper function to get translations with i18n-parser
+ * Simple wrapper function to get translatable strings picked up by i18n-parser
  */
 const t = (translationKey: string) => {
     return translationKey;

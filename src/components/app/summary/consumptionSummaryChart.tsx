@@ -36,6 +36,14 @@ interface CurrentSummary {
     transportation: number;
 }
 
+/**
+ * Finds and returns the total carbon emission or energy expended for a given category.
+ *
+ * @param {Array<{ category: ConsumptionCategory; carbonEmission: ConsumptionSummaryLabeledConsumption; energyExpended: ConsumptionSummaryLabeledConsumption }>} categories - The array of categories with their corresponding carbon emission and energy expended.
+ * @param {ConsumptionCategory} categoryToFind - The category to find.
+ * @param {"carbonEmission" | "energyExpended"} measure - The measure to retrieve, either "carbonEmission" or "energyExpended".
+ * @return {number} The total carbon emission or energy expended for the given category, or 0 if the category is not found.
+ */
 const findValueByCategory = (
     categories: {
         category: ConsumptionCategory;
@@ -49,6 +57,9 @@ const findValueByCategory = (
     return category ? category[measure].total : 0;
 };
 
+/**
+ * React component for displaying consumption summary chart.
+ */
 export default function ConsumptionSummaryChart() {
     const t = useTranslations();
 
@@ -69,6 +80,11 @@ export default function ConsumptionSummaryChart() {
         "carbonEmission" | "energyExpended"
     >("carbonEmission");
 
+    /**
+     * Initializes summary data for 12 months with default values.
+     *
+     * @return {Array} Array of summary data for each month
+     */
     const initializeSummaryData = () => {
         return Array.from({ length: 12 }, (_, index) => ({
             month: index + 1,
@@ -82,6 +98,12 @@ export default function ConsumptionSummaryChart() {
     useEffect(() => {
         if (loading || !user) return;
 
+        /**
+         * Fetches the user consumption summaries from the database and updates the state with the fetched data.
+         *
+         * @param None
+         * @return {Promise<void>} A promise that resolves when the consumption summaries are fetched and the state is updated.
+         */
         const fetchUserConsumptionSummaries = async () => {
             try {
                 const userConsumptionsRef = collection(
