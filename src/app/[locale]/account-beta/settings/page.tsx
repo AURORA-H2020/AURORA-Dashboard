@@ -33,7 +33,7 @@ import { Flex, Grid } from "@radix-ui/themes";
 import { User } from "firebase/auth";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
