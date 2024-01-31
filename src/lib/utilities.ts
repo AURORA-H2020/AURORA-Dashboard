@@ -79,8 +79,7 @@ export function city2Name(inputID: string): string {
  * @returns {string} The short name of the month.
  */
 export function getMonthShortName(monthNumber: number): string {
-    const date = new Date();
-    date.setMonth(monthNumber - 1);
+    const date = new Date(2000, monthNumber - 1, 15);
 
     const options: Intl.DateTimeFormatOptions = { month: "short" };
     return date.toLocaleString("en-GB", options);

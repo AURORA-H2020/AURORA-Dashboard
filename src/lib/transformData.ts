@@ -53,11 +53,19 @@ export function temporalData(
                 category.temporal.forEach((year) => {
                     year.data.forEach((month) => {
                         const dateMonth = getMonthShortName(month.month);
+
                         let currentDate = `${dateMonth} ${year.year}`;
-                        if (dateRange.from! > new Date(currentDate)) {
+
+                        if (
+                            dateRange.from! >
+                            new Date(parseInt(year.year), month.month - 1)
+                        ) {
                             return;
                         }
-                        if (dateRange.to! < new Date(currentDate)) {
+                        if (
+                            dateRange.to! <
+                            new Date(parseInt(year.year), month.month - 1)
+                        ) {
                             return;
                         }
 
@@ -88,8 +96,6 @@ export function temporalData(
             }),
         );
     });
-
-    console.log(temporalData);
 
     temporalData.sort(function (a, b) {
         var keyA = new Date(Date.parse(a.Date!)),
