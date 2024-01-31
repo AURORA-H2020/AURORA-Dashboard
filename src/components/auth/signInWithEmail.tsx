@@ -3,7 +3,7 @@ import authenticate from "@/firebase/auth/authentication";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 
 import { Button } from "@/components/ui/button";
 import {

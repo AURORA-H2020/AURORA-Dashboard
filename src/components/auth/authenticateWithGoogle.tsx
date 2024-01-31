@@ -1,5 +1,5 @@
 import authenticate from "@/firebase/auth/authentication";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 

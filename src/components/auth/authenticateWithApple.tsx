@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import signIn from "@/firebase/auth/authentication";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/navigation";
 import { toast } from "sonner";
 
 import { faApple } from "@fortawesome/free-brands-svg-icons";

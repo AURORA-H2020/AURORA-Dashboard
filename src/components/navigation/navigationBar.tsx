@@ -1,7 +1,7 @@
 "use client";
 
+import { usePathname, useRouter } from "@/navigation";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Logo from "./logo";
 import ThemeToggle from "./themeToggle";
 
@@ -15,7 +15,6 @@ import { useAuthContext } from "@/context/AuthContext";
 import { logout } from "@/firebase/auth/logout";
 import { User } from "@/models/firestore/user/user";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
 
 const MenuItems = ({ items, pathname }) => {
     const t = useTranslations();
