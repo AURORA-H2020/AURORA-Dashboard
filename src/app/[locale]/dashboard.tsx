@@ -113,7 +113,7 @@ export function Dashboard({
             <Card className="mb-6 mt-6">
                 <CardContent className="p-6">
                     <Flex
-                        direction={{ initial: "column", xs: "row" }}
+                        direction={{ initial: "column", sm: "row" }}
                         className="gap-6"
                     >
                         <Select
@@ -181,6 +181,7 @@ export function Dashboard({
                         <Card>
                             <CardContent className="p-6">
                                 <DetailedCard
+                                    className="mb-6"
                                     metaData={metaData}
                                     measure="consumptionsCount"
                                     categories={selectedCategories}

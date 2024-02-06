@@ -224,7 +224,9 @@ export default function ConsumptionSummaryChart() {
                                         // t("common.co2emission")
                                         t.rich("common.co2emission", {
                                             sub: (chunks) => (
-                                                <sub>{chunks}</sub>
+                                                <sub className="mr-1">
+                                                    {chunks}
+                                                </sub>
                                             ),
                                         })
                                     }
@@ -257,6 +259,7 @@ export default function ConsumptionSummaryChart() {
                 </Flex>
                 <BarChart
                     className="mt-4"
+                    yAxisWidth={80}
                     data={currentSummary}
                     index="monthName"
                     categories={categories}

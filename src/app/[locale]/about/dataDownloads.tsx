@@ -42,7 +42,7 @@ export default function DataDownloads({
     };
 
     return (
-        <Flex>
+        <Flex className="gap-2 mt-4">
             <Button
                 variant={"outline"}
                 onClick={() =>

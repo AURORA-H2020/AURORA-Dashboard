@@ -37,7 +37,7 @@ export default function ConsumptionCardSummary({
                 return (
                     <Alert
                         key={data.category}
-                        className={`my-1 bg-opacity-20 bg-[${consumptionAttributes?.colorPrimary}] border-[${consumptionAttributes?.colorPrimary}] text-[${consumptionAttributes?.colorPrimary}]`}
+                        className={`my-2 bg-opacity-20 bg-[${consumptionAttributes?.colorPrimary}] border-[${consumptionAttributes?.colorPrimary}] text-[${consumptionAttributes?.colorPrimary}]`}
                     >
                         {React.cloneElement(
                             consumptionAttributes?.icon ?? <></>,

@@ -145,7 +145,9 @@ export function LabelSummary({
                                 {
                                     // t("common.co2emission")
                                     t.rich("common.co2emission", {
-                                        sub: (chunks) => <sub>{chunks}</sub>,
+                                        sub: (chunks) => (
+                                            <sub className="mr-1">{chunks}</sub>
+                                        ),
                                     })
                                 }
                             </TabsTrigger>
@@ -170,7 +172,9 @@ export function LabelSummary({
                 </Select>
             </Flex>
             <BarChart
-                className="mt-4 h-80"
+                className="mt-4"
+                yAxisWidth={80}
+                showAnimation={true}
                 data={transformedData ?? []}
                 index="country"
                 categories={labelMappings.map((label) => label.label)}

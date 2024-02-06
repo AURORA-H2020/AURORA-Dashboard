@@ -4,6 +4,7 @@ import { ElementType } from "react";
 
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { Flex, Text } from "@radix-ui/themes";
+import { cn } from "@/lib/utilities";
 
 /**
  * Generates a detailed card component with specified metadata, measure, categories, title, and optional icon.
@@ -22,12 +23,14 @@ export default function DetailedCard({
     categories,
     title,
     icon,
+    className = "",
 }: {
     metaData: MetaData | undefined;
     measure: "userCount" | "consumptionsCount" | "recurringConsumptionsCount";
     categories: ConsumptionCategory[];
     title: string;
     icon?: ElementType<any>;
+    className?: string;
 }): JSX.Element {
     let metricValue = 0;
 
@@ -42,7 +45,7 @@ export default function DetailedCard({
     });
 
     return (
-        <Flex className="space-x-6" justify="start">
+        <Flex className={cn(className, "space-x-6")} justify="start">
             {icon && <Icon icon={icon} size="lg" />}
 
             <div>
