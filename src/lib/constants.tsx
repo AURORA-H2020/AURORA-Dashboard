@@ -115,25 +115,6 @@ export const labelMappings: {
     { label: "G", color: "#D02E26" },
 ];
 
-export const userIdBlacklist: string[] = [
-    "yUjuXoJfwlWkSkZvS5PMhrtYteC3",
-    "uw6h1wRVOvbEg4xKW2lx6nFqueA3",
-    "zIjpAMidtfXQgLkHdR83I8MGJ1G2",
-    "OneDK28UPZeBGWRNrndGSNMaspF2",
-    "KU68hUUVhIhRYjViottyV4ARXal1",
-    "xk0gKqnpdFPKEFUXoWYOHZtlOIH2",
-    "P2rEws5pYKVMy59dlYLwCIJLmpm2",
-    "TEb4TxP2g7X0usCSJLVVgzWYN8Z2",
-    "hnmWGkAkLjTEAxDRd6CKAnzejtG3",
-    "jmGIDNjI25TXREjwoj0E51nDfQy2",
-    "vJP4AvLeVicdmvtYFhHRkNJOrm53",
-    "h702sviZFDh9Vc7q2Y3LZR9o9KE3",
-    // Identified as excessive consumptions. Unblock once more sophisticated checks are in place.
-    "kMinkCzpJaMMnZwEL3XQ4kLTLHg1",
-    "YnLScLYQMgPNyRDj3RiRFaom4eH2",
-    "GXTS3kX82CXtdS0qHsX3djnB7aj1",
-];
-
 export const consumptionMapping: ConsumptionAttributes[] = [
     {
         icon: <Zap />,
