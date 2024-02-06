@@ -20,7 +20,7 @@ import { camelCaseToWords, getMonthShortName } from "./utilities";
  * @param {"carbon" | "energy"} mode - The mode of data (carbon or energy).
  * @param {ConsumptionCategory[]} categories - The consumption categories to filter by.
  * @param {DateRange | undefined} dateRange - The date range for the temporal data.
- * @param {"absolute" | "average"} calculationMode - The calculation mode (absolute or average).
+ * @param {"absolute" | "relative"} calculationMode - The calculation mode (absolute or relative).
  * @return {TimelineData[]} The retrieved temporal data.
  */
 export function temporalData(
@@ -29,6 +29,7 @@ export function temporalData(
     categories: ConsumptionCategory[],
     dateRange: DateRange | undefined,
     calculationMode: CalculationMode,
+    countryNames: { id: string; name: string }[],
 ): TimelineData[] {
     if (!globalSummaryData || !dateRange) {
         return [];
@@ -89,8 +90,12 @@ export function temporalData(
                                 ? 1
                                 : month.activeUsers);
 
-                        thisDate![country.countryID] =
-                            (thisDate![country.countryID] || 0) + valueToAdd;
+                        const countryName =
+                            countryNames.find((e) => e.id === country.countryID)
+                                ?.name || country.countryID;
+
+                        thisDate![countryName] =
+                            (thisDate![countryName] || 0) + valueToAdd;
                     });
                 });
             }),
@@ -171,7 +176,6 @@ export function annualLabelData(
         });
 
         temporalData.push({
-            countryName: country.countryID,
             countryID: country.countryID,
             labels: labelSums,
         });
@@ -267,7 +271,6 @@ export function getMetaData(
         });
 
         metaData.push({
-            countryName: country.countryID,
             countryID: country.countryID,
             userCount: userCountSum,
             consumptions: consumptionsSummary,
@@ -279,12 +282,6 @@ export function getMetaData(
                 other: genderSums.other,
             },
         });
-    });
-
-    metaData.sort(function (a, b) {
-        var textA = a.countryName.toUpperCase();
-        var textB = b.countryName.toUpperCase();
-        return textA < textB ? -1 : textA > textB ? 1 : 0;
     });
 
     return metaData;

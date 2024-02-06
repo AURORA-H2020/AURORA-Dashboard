@@ -52,39 +52,39 @@ export const countriesMapping = [
         ID: "udn3GiM30aqviGBkswpl",
         name: t("country.denmark"),
         code: "DK",
-        color: "red",
-    },
-    {
-        ID: "sPXh74wjZf14Jtmkaas6",
-        name: t("country.europeOther"),
-        code: "EU",
-        color: "teal",
+        color: "emerald-400",
     },
     {
         ID: "2E9Ejc8qBJC6HnlPPdIh",
         name: t("country.portugal"),
         code: "PT",
-        color: "green",
+        color: "cyan-400",
     },
     {
         ID: "KhUolhyvcbdEsPyREqOZ",
         name: t("country.slovenia"),
         code: "SI",
-        color: "sky",
+        color: "pink-400",
     },
     {
         ID: "4sq82jNQm3x3bH9Fkijm",
         name: t("country.spain"),
         code: "ES",
-        color: "yellow",
+        color: "rose-400",
     },
     {
         ID: "8mgi5IR4xn9Yca4zDLtU",
         name: t("country.unitedKingdom"),
         code: "UK",
-        color: "blue",
+        color: "orange-400",
     },
-];
+    {
+        ID: "sPXh74wjZf14Jtmkaas6",
+        name: t("country.zeuropeOther"),
+        code: "EU",
+        color: "stone-300",
+    },
+].sort((a, b) => a.name.localeCompare(b.name));
 
 export const citiesMapping = [
     { ID: "YIyf65PquFxluWhAAo5C", name: "Évora" },
@@ -94,11 +94,11 @@ export const citiesMapping = [
     { ID: "Au1oUV9pAEtSCu04cfCX", name: "Aarhus" },
 ];
 
-export const genderMappings: { key: string; label: string; color: Color }[] = [
-    { key: "female", label: t("gender.female"), color: "amber" },
-    { key: "male", label: t("gender.male"), color: "teal" },
-    { key: "nonBinary", label: t("gender.nonBinary"), color: "indigo" },
-    { key: "other", label: t("gender.other"), color: "gray" },
+export const genderMappings: { key: string; label: string; color: string }[] = [
+    { key: "female", label: t("gender.female"), color: "slate-400" },
+    { key: "male", label: t("gender.male"), color: "slate-500" },
+    { key: "nonBinary", label: t("gender.nonBinary"), color: "slate-600" },
+    { key: "other", label: t("gender.other"), color: "slate-700" },
 ];
 
 export const labelMappings: {
@@ -147,7 +147,7 @@ export const categories: ConsumptionCategory[] = consumptionMapping.map(
 );
 
 export const energyModes: EnergyMode[] = ["carbon", "energy"];
-export const calculationModes: CalculationMode[] = ["absolute", "average"];
+export const calculationModes: CalculationMode[] = ["absolute", "relative"];
 
 export const carbonUnit = " kg CO\u00B2";
 

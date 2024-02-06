@@ -207,3 +207,26 @@ export function getYearsInSummary(
     // Convert the Set to an Array to return the years
     return Array.from(yearsSet);
 }
+
+export function getSortedCountryLabels(countryIds: string[] | undefined) {
+    if (!countryIds) {
+        return { names: [], colors: [] };
+    }
+
+    const countryLabels = countryIds.map((countryID) => ({
+        name:
+            countriesMapping.find((country) => country.ID === countryID)
+                ?.name || countryID,
+        id: countryID,
+        color:
+            countriesMapping.find((country) => country.ID === countryID)
+                ?.color || "#000000",
+    }));
+
+    countryLabels.sort((a, b) => a.name.localeCompare(b.name));
+
+    return {
+        names: countryLabels.map((country) => country.name),
+        colors: countryLabels.map((country) => country.color),
+    };
+}

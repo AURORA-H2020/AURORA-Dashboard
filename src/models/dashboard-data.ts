@@ -1,5 +1,4 @@
 export type MetaData = {
-    countryName: string;
     countryID: string;
     userCount: number;
     consumptions: ConsumptionsDetail;
@@ -44,11 +43,10 @@ export interface LabelEntries {
 }
 
 export interface TimelineLabelData {
-    countryName: string;
     countryID: string;
     labels: LabelEntries;
 }
 
 export type EnergyMode = "carbon" | "energy";
 
-export type CalculationMode = "absolute" | "average";
+export type CalculationMode = "absolute" | "relative";

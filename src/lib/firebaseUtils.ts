@@ -1,7 +1,13 @@
 import firebase_app from "@/firebase/config";
 import { CountryData } from "@/models/countryData";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
+import {
+    // StorageReference,
+    getDownloadURL,
+    getStorage,
+    listAll,
+    ref,
+} from "firebase/storage";
 
 /**
  * Downloads a file from Firebase Storage.
@@ -50,15 +56,19 @@ export const getUserFiles = async (path: string): Promise<GlobalSummary[]> => {
  * @return {Promise<GlobalSummary | null>} The latest summary file, or null if there are no summary files.
  */
 export const getLatestSummaryFile = async (
-    path: string,
+    path: string | undefined,
 ): Promise<GlobalSummary | undefined> => {
+    if (!path) {
+        return undefined;
+    }
+
     const firebaseStorage = getStorage(firebase_app);
     const storageRef = ref(firebaseStorage, path);
 
     try {
         const res = await listAll(storageRef);
         const summaryFiles = res.items
-            .filter((itemRef) => itemRef.name.startsWith("users-export"))
+            .filter((itemRef) => itemRef.name.startsWith("summarised-export"))
             .sort((a, b) => a.name.localeCompare(b.name)); // Alphabetical sort
 
         // The latest file will be the last one after sorting
@@ -72,6 +82,32 @@ export const getLatestSummaryFile = async (
         console.error(error);
         return undefined; // In case of error, return undefined
     }
+};
+
+export const firebaseStorageListDashboardFiles = async (
+    path: string | undefined,
+): Promise<string[] | undefined> => {
+    const firebaseStorage = getStorage(firebase_app);
+    const storageRef = ref(firebaseStorage, path);
+
+    try {
+        const res = await listAll(storageRef);
+        const summaryFiles = res.items
+            .filter((itemRef) => itemRef.name.startsWith("summarised-export"))
+            .sort((a, b) => a.name.localeCompare(b.name)); // Alphabetical sort
+
+        return summaryFiles.map((itemRef) => itemRef.name);
+    } catch (error) {
+        console.error(error);
+        return undefined; // In case of error, return undefined
+    }
+};
+
+export const firebaseStorageDownloadFile = async (
+    fileName: string,
+    path: string,
+) => {
+    return await downloadFile(`${path}/${fileName}`);
 };
 
 /**

@@ -2,14 +2,20 @@ import { Dashboard } from "@/app/[locale]/dashboard";
 
 import { promises as fs } from "fs";
 
+import { SelectDashboardSource } from "@/components/dashboard/selectDashboardSource";
 import firebase_app from "@/firebase/config";
-import { getLatestSummaryFile } from "@/lib/firebaseUtils";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
+import {
+    firebaseStorageDownloadFile,
+    firebaseStorageListDashboardFiles,
+} from "@/lib/firebaseUtils";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { Heading, Text } from "@radix-ui/themes";
+import { Heading } from "@radix-ui/themes";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
 type Props = {
-    params: { locale: string };
+    params: { locale: string; searchParams?: URLSearchParams };
+    searchParams: { [key: string]: string | string[] | undefined };
 };
 
 /**
@@ -19,33 +25,49 @@ type Props = {
  */
 export default async function Home({
     params: { locale },
+    searchParams,
 }: Props): Promise<JSX.Element> {
     unstable_setRequestLocale(locale);
     const t = await getTranslations();
 
     let globalSummaryData: GlobalSummary | undefined;
+    let fileList: string[] | undefined;
 
     if (process.env.TEST_MODE === "true") {
         const file = await fs.readFile(
-            process.cwd() + "/src/data/users-export.json",
+            process.cwd() + "/src/data/summarised-export.json",
             "utf8",
         );
         globalSummaryData = JSON.parse(file);
-    } else if (firebase_app && process.env.FIREBASE_STORAGE_USER_PATH) {
-        globalSummaryData = await getLatestSummaryFile(
-            process.env.FIREBASE_STORAGE_USER_PATH,
-        );
-    } else {
-        globalSummaryData = undefined;
+    } else if (firebase_app) {
+        fileList =
+            (await firebaseStorageListDashboardFiles(
+                FirebaseConstants.buckets.auroraDashboard.folders.dashboardData
+                    .name,
+            )) || [];
+
+        const currentFile: string =
+            searchParams?.file?.toString() || fileList[fileList.length - 1];
+
+        if (fileList.includes(currentFile)) {
+            globalSummaryData = (await firebaseStorageDownloadFile(
+                currentFile,
+                FirebaseConstants.buckets.auroraDashboard.folders.dashboardData
+                    .name || "",
+            )) as GlobalSummary;
+        }
     }
 
-    if (globalSummaryData) {
+    if (globalSummaryData && fileList) {
         return (
             <>
                 <Heading as="h1">{t("dashboard.main.title")}</Heading>
 
-                <Text>{t("dashboard.main.description")}</Text>
                 <Dashboard globalSummaryData={globalSummaryData} />
+                <SelectDashboardSource
+                    files={fileList}
+                    currentFileDate={globalSummaryData?.date}
+                />
             </>
         );
     } else {

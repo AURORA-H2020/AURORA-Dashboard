@@ -1,6 +1,7 @@
 import { countriesMapping } from "@/lib/constants";
 import { MetaData } from "@/models/dashboard-data";
 import { DonutChart, Legend } from "@tremor/react";
+import { useTranslations } from "next-intl";
 
 /**
  * Renders a GenderCardSummary component.
@@ -15,14 +16,23 @@ export default function CountryUsersPieChart({
 }: {
     metaData: MetaData | undefined;
 }): JSX.Element {
-    let dataSet = metaData?.map((country) => {
+    const t = useTranslations();
+
+    const dataSet = metaData?.map((country) => {
+        const countryName =
+            countriesMapping.find((e) => e.ID === country.countryID)?.name ||
+            country.countryID;
+
         return {
-            country: country.countryName,
+            country: t(countryName),
+            key: countryName,
             count: country.userCount,
             color: countriesMapping.find((e) => e.ID === country.countryID)
                 ?.color,
         };
     });
+
+    dataSet?.sort((a, b) => a.key.localeCompare(b.key));
 
     return (
         <>
@@ -33,7 +43,7 @@ export default function CountryUsersPieChart({
                 showAnimation={true}
                 category="count"
                 index="country"
-                colors={countriesMapping.map((country) => country.color)}
+                colors={dataSet?.map((e) => e.color ?? "") ?? []}
             />
             <Legend
                 className="mt-3"

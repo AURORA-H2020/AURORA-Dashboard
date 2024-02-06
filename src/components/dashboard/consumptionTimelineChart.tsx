@@ -3,12 +3,13 @@
 import { countriesMapping } from "@/lib/constants";
 import { temporalData } from "@/lib/transformData";
 import {
+    getSortedCountryLabels,
     getYearsInSummary,
     valueFormatterCarbon,
     valueFormatterEnergy,
 } from "@/lib/utilities";
 import {
-    CalculationMode,
+    // CalculationMode,
     EnergyMode,
     TimelineData,
 } from "@/models/dashboard-data";
@@ -16,10 +17,13 @@ import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Flex, Heading } from "@radix-ui/themes";
 import { LineChart } from "@tremor/react";
+import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SetStateAction, useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
+import { Alert, AlertTitle } from "../ui/alert";
 import MonthPicker from "../ui/month-picker";
+/*
 import {
     Select,
     SelectContent,
@@ -27,9 +31,9 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../ui/select";
+*/
+
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
-import { Alert, AlertTitle } from "../ui/alert";
-import { Info } from "lucide-react";
 
 /**
  * Renders a Consumption Timeline Chart with various controls for energy mode, calculation mode, and date range.
@@ -63,12 +67,13 @@ export function ConsumptionTimelineChart({
         setDateRange(dateRange);
     };
 
+    /*
     const [calculationMode, setCalculationMode] =
-        useState<CalculationMode>("absolute");
+        useState<CalculationMode>("relative");
 
     const handleCalculationModeChange = (calculationMode: CalculationMode) => {
         setCalculationMode(calculationMode);
-    };
+    };*/
 
     const [selectedEnergyMode, setSelectedEnergyMode] =
         useState<EnergyMode>("carbon");
@@ -78,21 +83,27 @@ export function ConsumptionTimelineChart({
     };
 
     useEffect(() => {
+        const countryNames = countriesMapping.map((country) => ({
+            id: country.ID,
+            name: t(country.name),
+        }));
         const updatedTemporalData = temporalData(
             globalSummaryData,
             selectedEnergyMode,
             categories,
             dateRange,
-            calculationMode,
+            "relative",
+            countryNames,
         );
+
+        console.log(updatedTemporalData);
+
         setTransformedData(updatedTemporalData);
-    }, [
-        globalSummaryData,
-        selectedEnergyMode,
-        categories,
-        calculationMode,
-        dateRange,
-    ]);
+    }, [globalSummaryData, selectedEnergyMode, categories, dateRange, t]);
+
+    const includedCountryIds = globalSummaryData?.countries.map(
+        (country) => country.countryID,
+    );
 
     return (
         <>
@@ -113,7 +124,13 @@ export function ConsumptionTimelineChart({
                                 {
                                     // t("common.co2emission")
                                     t.rich("common.co2emission", {
-                                        sub: (chunks) => <sub>{chunks}</sub>,
+                                        sub: (chunks) => (
+                                            <>
+                                                <sub className="mr-1">
+                                                    {chunks}
+                                                </sub>
+                                            </>
+                                        ),
                                     })
                                 }
                             </TabsTrigger>
@@ -130,23 +147,27 @@ export function ConsumptionTimelineChart({
                     onChange={handleDateChange}
                 />
 
+                {/** }
                 <Select
                     value={calculationMode}
                     onValueChange={handleCalculationModeChange}
                 >
+                    
                     <SelectTrigger className="w-[180px]">
-                        <SelectValue defaultValue="absolute" />
+                        <SelectValue defaultValue="relative" />
                     </SelectTrigger>
+
 
                     <SelectContent>
                         <SelectItem value="absolute">
                             {t("dashboard.filter.absolute")}
                         </SelectItem>
-                        <SelectItem value="average">
+                        <SelectItem value="relative">
                             {t("dashboard.filter.averagePerUser")}
                         </SelectItem>
                     </SelectContent>
                 </Select>
+                {*/}
             </Flex>
 
             {dateRange?.from &&
@@ -154,14 +175,13 @@ export function ConsumptionTimelineChart({
             dateRange.from < dateRange.to ? (
                 <LineChart
                     className="h-80 mt-8"
+                    showAnimation={true}
                     data={transformedData}
                     index="Date"
-                    categories={
-                        globalSummaryData?.countries.map(
-                            (country) => country.countryID,
-                        ) ?? []
-                    }
-                    colors={countriesMapping.map((country) => country.color)}
+                    categories={getSortedCountryLabels(
+                        includedCountryIds,
+                    ).names.map((name) => t(name))}
+                    colors={getSortedCountryLabels(includedCountryIds).colors}
                     valueFormatter={
                         selectedEnergyMode == "carbon"
                             ? valueFormatterCarbon

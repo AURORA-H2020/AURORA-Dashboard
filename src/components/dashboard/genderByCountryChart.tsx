@@ -1,17 +1,21 @@
-import { genderMappings } from "@/lib/constants";
-import { MetaData } from "@/models/dashboard-data";
-import { BarChart, Legend } from "@tremor/react";
+import { countriesMapping, genderMappings } from "@/lib/constants";
+import { CalculationMode, MetaData } from "@/models/dashboard-data";
+import { BarChart } from "@tremor/react";
 
 import {
     valueFormatterAbsolute,
     valueFormatterPercentage,
 } from "@/lib/utilities";
-import { MetaDataGenders } from "@/models/dashboard-data";
 import { Flex, Heading } from "@radix-ui/themes";
-import { useEffect, useState } from "react";
-import { Label } from "../ui/label";
-import { Switch } from "../ui/switch";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "../ui/select";
 
 /**
  * Generate the GenderCardCountry component.
@@ -23,8 +27,9 @@ import { useTranslations } from "next-intl";
  * @return {JSX.Element} The rendered component.
  */
 
-interface ExtendedDemographic extends MetaDataGenders {
+interface ExtendedDemographic {
     country: string;
+    [key: string]: string;
 }
 
 export function GenderByCountryChart({
@@ -40,13 +45,14 @@ export function GenderByCountryChart({
         ExtendedDemographic[] | undefined
     >();
 
-    const [useAbsoluteValues, setUseAbsoluteValues] = useState<boolean>(false);
+    const [calculationMode, setCalculationMode] =
+        useState<CalculationMode>("absolute");
 
     useEffect(() => {
         const updatedData = metaData?.map((country) => {
             // Calculate the total count of all genders if percentages are needed
             let total = 0;
-            if (!useAbsoluteValues) {
+            if (calculationMode === "relative") {
                 total =
                     country.genders.male +
                     country.genders.female +
@@ -56,58 +62,80 @@ export function GenderByCountryChart({
 
             // Function to calculate the output based on the boolean flag
             const calculateOutput = (count) => {
-                if (!useAbsoluteValues) {
+                if (calculationMode === "relative") {
                     return total !== 0 ? count / total : 0;
                 }
                 return count;
             };
 
+            const countryName =
+                countriesMapping.find((e) => e.ID === country.countryID)
+                    ?.name || country.countryID;
+
             return {
-                country: country.countryName,
-                male: calculateOutput(country.genders.male),
-                female: calculateOutput(country.genders.female),
-                nonBinary: calculateOutput(country.genders.nonBinary),
-                other: calculateOutput(country.genders.other),
+                country: t(countryName),
+                key: countryName,
+                [t(genderMappings.find((e) => e.key === "male")?.label)]:
+                    calculateOutput(country.genders.male),
+                [t(genderMappings.find((e) => e.key === "female")?.label)]:
+                    calculateOutput(country.genders.female),
+                [t(genderMappings.find((e) => e.key === "nonBinary")?.label)]:
+                    calculateOutput(country.genders.nonBinary),
+                [t(genderMappings.find((e) => e.key === "other")?.label)]:
+                    calculateOutput(country.genders.other),
             };
         });
 
+        updatedData?.sort((a, b) => a.key.localeCompare(b.key));
+
         setGenderData(updatedData);
-    }, [metaData, useAbsoluteValues]);
+    }, [metaData, calculationMode, t]);
 
     return (
         <>
-            <Flex justify="between">
-                <Heading>{title}</Heading>
+            <Heading>{title}</Heading>
 
-                <div className="flex items-center space-x-2">
-                    <Switch
-                        id="percentage-switch"
-                        onCheckedChange={setUseAbsoluteValues}
-                    />
-                    <Label htmlFor="percentage-switch">{t("filter.toggle.absoluteValues")}</Label>
-                </div>
+            <Flex
+                direction={{ initial: "column", xs: "row" }}
+                className="gap-6 mt-6 mb-6"
+            >
+                <Select
+                    value={calculationMode}
+                    onValueChange={(value) =>
+                        setCalculationMode(value as CalculationMode)
+                    }
+                >
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Theme" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="absolute">
+                            {t("dashboard.filter.absolute")}
+                        </SelectItem>
+                        <SelectItem value="relative">
+                            {t("dashboard.filter.relative")}
+                        </SelectItem>
+                    </SelectContent>
+                </Select>
             </Flex>
             <BarChart
-                className="mt-4 h-80"
+                className="mt-4"
+                yAxisWidth={80}
+                showAnimation={true}
                 data={genderData ?? []}
                 index="country"
-                categories={genderMappings.map((gender) => gender.key)}
+                categories={genderMappings.map((gender) => t(gender.label))}
                 colors={genderMappings.map((gender) => gender.color)}
                 valueFormatter={
-                    useAbsoluteValues
+                    calculationMode === "absolute"
                         ? valueFormatterAbsolute
                         : valueFormatterPercentage
                 }
-                maxValue={useAbsoluteValues ? undefined : 1}
+                maxValue={calculationMode === "absolute" ? undefined : 1}
                 stack={true}
                 relative={true}
                 layout="vertical"
-                showLegend={false}
-            />
-            <Legend
-                className="mt-3"
-                categories={genderMappings.map((gender) => t(gender.label))}
-                colors={genderMappings.map((gender) => gender.color)}
+                showLegend={true}
             />
         </>
     );

@@ -1,20 +1,23 @@
 "use client";
 
-import { labelMappings } from "@/lib/constants";
+import { countriesMapping, labelMappings } from "@/lib/constants";
 import { annualLabelData } from "@/lib/transformData";
 import {
     getYearsInSummary,
     valueFormatterAbsolute,
     valueFormatterPercentage,
 } from "@/lib/utilities";
-import { EnergyMode, LabelEntries } from "@/models/dashboard-data";
+import {
+    CalculationMode,
+    EnergyMode,
+    LabelEntries,
+} from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { Flex, Heading, Text } from "@radix-ui/themes";
+import { Flex, Heading } from "@radix-ui/themes";
 import { BarChart } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { Label } from "../ui/label";
 import {
     Select,
     SelectContent,
@@ -22,11 +25,11 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../ui/select";
-import { Switch } from "../ui/switch";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface LabelChartData extends LabelEntries {
     country: string;
+    key: string;
 }
 
 /**
@@ -42,12 +45,10 @@ export function LabelSummary({
     globalSummaryData,
     categories,
     title,
-    description,
 }: {
     globalSummaryData: GlobalSummary | undefined;
     categories: ConsumptionCategory[];
     title: string;
-    description: string;
 }): JSX.Element {
     const t = useTranslations();
 
@@ -55,7 +56,7 @@ export function LabelSummary({
         LabelChartData[] | undefined
     >([]);
 
-    const [useAbsoluteValues, setUseAbsoluteValues] = useState<boolean>(false);
+    const [calculationMode, setCalculationMode] = useState<string>("absolute");
 
     const [selectedEnergyMode, setSelectedEnergyMode] =
         useState<EnergyMode>("carbon");
@@ -93,19 +94,27 @@ export function LabelSummary({
                 // Divide the values by total if useAbsoluteValues is false, otherwise use the value as is
                 const processedData = Object.keys(categoryData).reduce(
                     (acc, key) => {
-                        acc[key] = useAbsoluteValues
-                            ? categoryData[key]
-                            : categoryData[key] / total;
+                        acc[key] =
+                            calculationMode === "absolute"
+                                ? categoryData[key]
+                                : categoryData[key] / total;
                         return acc;
                     },
                     {} as typeof categoryData,
                 );
 
+                const countryName =
+                    countriesMapping.find((e) => e.ID === data.countryID)
+                        ?.name || data.countryID;
+
                 return {
                     ...processedData,
-                    country: data.countryName,
+                    country: t(countryName),
+                    key: countryName,
                 };
             });
+
+        finalData?.sort((a, b) => a.key.localeCompare(b.key));
 
         setTransformedData(finalData);
     }, [
@@ -113,23 +122,14 @@ export function LabelSummary({
         selectedEnergyMode,
         categories,
         selectedYear,
-        useAbsoluteValues,
+        calculationMode,
+        t,
     ]);
 
     return (
         <>
             <Flex justify="between">
                 <Heading>{title}</Heading>
-
-                <div className="flex items-center space-x-2">
-                    <Switch
-                        id="percentage-switch"
-                        onCheckedChange={setUseAbsoluteValues}
-                    />
-                    <Label htmlFor="percentage-switch">
-                        {t("filter.toggle.absoluteValues")}
-                    </Label>
-                </div>
             </Flex>
             <Flex
                 direction={{ initial: "column", xs: "row" }}
@@ -170,6 +170,24 @@ export function LabelSummary({
                         ))}
                     </SelectContent>
                 </Select>
+                <Select
+                    value={calculationMode}
+                    onValueChange={(value) =>
+                        setCalculationMode(value as CalculationMode)
+                    }
+                >
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Theme" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="absolute">
+                            {t("dashboard.filter.absolute")}
+                        </SelectItem>
+                        <SelectItem value="relative">
+                            {t("dashboard.filter.relative")}
+                        </SelectItem>
+                    </SelectContent>
+                </Select>
             </Flex>
             <BarChart
                 className="mt-4"
@@ -180,17 +198,16 @@ export function LabelSummary({
                 categories={labelMappings.map((label) => label.label)}
                 colors={labelMappings.map((label) => label.color)}
                 valueFormatter={
-                    useAbsoluteValues
+                    calculationMode === "absolute"
                         ? valueFormatterAbsolute
                         : valueFormatterPercentage
                 }
-                maxValue={useAbsoluteValues ? undefined : 1}
+                maxValue={calculationMode === "absolute" ? undefined : 1}
                 stack={true}
                 relative={true}
                 layout="vertical"
                 showLegend={true}
             />
-            <Text>{description}</Text>
         </>
     );
 }

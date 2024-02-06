@@ -8,6 +8,8 @@ import {
 } from "@/components/ui/accordion";
 
 import { Heading, Strong, Text } from "@radix-ui/themes";
+import { countriesMapping } from "@/lib/constants";
+import { useTranslations } from "next-intl";
 
 /**
  * Renders an auto-generated report based on the provided metaData.
@@ -21,6 +23,19 @@ export default function AutoReport({
 }: {
     metaData: MetaData | undefined;
 }): JSX.Element {
+    const t = useTranslations();
+
+    metaData?.sort((a, b) => {
+        const aCountry =
+            countriesMapping.find((e) => e.ID === a.countryID)?.name ||
+            a.countryID;
+        const bCountry =
+            countriesMapping.find((e) => e.ID === b.countryID)?.name ||
+            b.countryID;
+
+        return aCountry.localeCompare(bCountry);
+    });
+
     if (metaData) {
         const initialValue = {
             country: "",
@@ -225,16 +240,29 @@ export default function AutoReport({
 
                         return (
                             <AccordionItem
-                                value={country.countryName}
+                                value={country.countryID}
                                 key={country.countryID}
                             >
                                 <AccordionTrigger>
-                                    {country.countryName}
+                                    {t(
+                                        countriesMapping.find(
+                                            (e) => e.ID === country.countryID,
+                                        )?.name,
+                                    )}
                                 </AccordionTrigger>
                                 <AccordionContent>
                                     <Text className="text-md mb-4">
                                         For{" "}
-                                        <Strong>{country.countryName}</Strong>,{" "}
+                                        <Strong>
+                                            {t(
+                                                countriesMapping.find(
+                                                    (e) =>
+                                                        e.ID ===
+                                                        country.countryID,
+                                                )?.name,
+                                            )}
+                                        </Strong>
+                                        ,{" "}
                                         <Strong>
                                             {country.userCount.toLocaleString()}{" "}
                                             accounts
