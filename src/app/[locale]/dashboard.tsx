@@ -221,9 +221,6 @@ export function Dashboard({
                                 globalSummaryData={filteredGlobalSummaryData}
                                 categories={selectedCategories}
                                 title={t("dashboard.energylabels.title")}
-                                description={t(
-                                    "dashboard.energylabels.description",
-                                )}
                             />
                         </CardContent>
                     </Card>

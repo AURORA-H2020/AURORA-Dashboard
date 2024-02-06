@@ -128,7 +128,7 @@ export default function AutoReport({
                     <Strong>
                         {summedMetaData.genders.other.toLocaleString()}
                     </Strong>{" "}
-                    as other. In total, those users created{" "}
+                    as other. In total, those users have created{" "}
                     <Strong>
                         {summedMetaDataTotalConsumptionsCount} consumptions
                     </Strong>
@@ -255,7 +255,8 @@ export default function AutoReport({
                                         <Strong>
                                             {country.genders.other.toLocaleString()}
                                         </Strong>{" "}
-                                        as other. In total, those users created{" "}
+                                        as other. In total, those users have
+                                        created{" "}
                                         <Strong>
                                             {totalConsumptionCount.toLocaleString()}{" "}
                                             consumptions

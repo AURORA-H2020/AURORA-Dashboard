@@ -1,7 +1,7 @@
 {
     "about": {
         "carbonEmissionLabels": {
-            "title": "Carbon Emission Labels",
+            "title": "Carbon Emissions Labels",
             "description": "The data we use to calculate the label for carbon emissions in {countryName}."
         },
         "energyExpendedLabels": {
@@ -16,7 +16,7 @@
         "downloadDataset": "Download dataset",
         "countryData": {
             "title": "App Metrics and Label Data",
-            "description": "As we strongly believe in Open Science, we fully disclose the metrics that the AURORA Energy Tracker uses to calculate <Strong>Carbon Emissions</Strong>, <Strong>Energy Usage</Strong> and <Strong>Labels</Strong>."
+            "description": "In support of Open Science, AURORA hereby discloses the metrics used by the Energy Tracker to calculate <Strong>carbon emissions</Strong>, <Strong>energy usage</Strong> and the <Strong>Labels</Strong>."
         },
         "downloads": {
             "title": "Download our data",
@@ -38,26 +38,24 @@
             "selectCountries": "Select countries",
             "invalidData": "No data matches the selected filters.",
             "absolute": "Absolute",
-            "averagePerUser": "Average per user"
+            "relative": "Relative"
         },
         "card": {
-            "userCount": "Number of Users",
-            "individualConsumptions": "Individual Consumptions",
+            "userCount": "Total Number of App Users",
+            "individualConsumptions": "Total Number of Individual Consumptions",
             "invalidDateRange": "Please select a valid date range"
         },
         "consumptionTimeline": {
-            "title": "Consumption Timeline"
+            "title": "Consumption Timeline: Average per User"
         },
         "energylabels": {
-            "title": "Energy Label Summary",
-            "description": "This is a summary of the labels users of the AURORA Energy Tracker have obtained each year."
+            "title": "Energy Labels"
         },
         "genderDistribution": {
             "title": "Gender Distribution"
         },
         "main": {
-            "title": "AURORA Energy Tracker Dashboard",
-            "description": "Here you can find the latest stats about the AURORA Energy Tracker mobile app."
+            "title": "Energy Tracker: Dashboard"
         }
     },
     "error": {
@@ -83,18 +81,13 @@
             "selectDateRange": "Select a valid date range"
         },
         "monthPicker": {
-            "start": "Start",
+            "start": "Beginning",
             "end": "End"
         }
     },
     "common": {
-        "co2emission": "CO<sub>2</sub> Emission",
+        "co2emission": "CO<sub>2</sub> Emissions",
         "energyUsage": "Energy Usage"
-    },
-    "filter": {
-        "toggle": {
-            "absoluteValues": "Absolute Values"
-        }
     },
     "footer": {
         "auroraWebsite": "AURORA Website",
@@ -114,11 +107,11 @@
     },
     "country": {
         "denmark": "Denmark",
-        "europeOther": "Europe (Other)",
         "portugal": "Portugal",
         "slovenia": "Slovenia",
         "spain": "Spain",
-        "unitedKingdom": "United Kingdom"
+        "unitedKingdom": "United Kingdom",
+        "zeuropeOther": "Others in the EU"
     },
     "gender": {
         "female": "Female",

@@ -1,152 +1,145 @@
 {
-  "about": {
-    "carbonEmissionLabels": {
-      "title": "Abzeichen für Kohlenstoffemission",
-      "description": "Die Daten, die wir zur Berechnung des Labels für Kohlenstoffemissionen in {countryName} verwenden."
+    "about": {
+        "carbonEmissionLabels": {
+            "title": "Abzeichen für Kohlenstoffemission",
+            "description": "Die Daten, die wir zur Berechnung des Labels für Kohlenstoffemissionen in {countryName} verwenden."
+        },
+        "energyExpendedLabels": {
+            "title": "Abzeichen für Energienutzung",
+            "description": "Die Daten, die wir zur Berechnung des Labels für den Energieverbrauch in {countryName} verwenden."
+        },
+        "metrics": {
+            "title": "Metriken",
+            "description": "Die Daten, die wir zur Berechnung der Kohlenstoffemissionen und des Energieverbrauchs auf der Grundlage der Nutzerdaten in {countryName} verwenden."
+        },
+        "downloadMetrics": "Metriken herunterladen",
+        "downloadDataset": "Datensatz herunterladen",
+        "countryData": {
+            "title": "App-Metriken und Abzeichendaten",
+            "description": "Da wir fest an Open Science glauben, legen wir die Metriken, die der AURORA Energy Tracker zur Berechnung der <Strong>Kohlenstoffemissionen</Strong>, des <Strong>Energieverbrauchs</Strong> und der <Strong>Labels</Strong> verwendet, vollständig offen."
+        },
+        "downloads": {
+            "title": "Laden Sie unsere Daten herunter",
+            "description": "Wir bieten die oben genannten Metriken und Etikettendaten sowie unseren konsolidierten Datensatz zum Download an."
+        }
     },
-    "energyExpendedLabels": {
-      "title": "Abzeichen für Energienutzung",
-      "description": "Die Daten, die wir zur Berechnung des Labels für den Energieverbrauch in {countryName} verwenden."
+    "toast": {
+        "dataDownload": {
+            "success": "Ihre Daten wurden erfolgreich heruntergeladen",
+            "error": "Ihre Daten konnten nicht heruntergeladen werden"
+        }
     },
-    "metrics": {
-      "title": "Metriken",
-      "description": "Die Daten, die wir zur Berechnung der Kohlenstoffemissionen und des Energieverbrauchs auf der Grundlage der Nutzerdaten in {countryName} verwenden."
+    "button": {
+        "downloadPending": "Herunterladen..."
     },
-    "downloadMetrics": "Metriken herunterladen",
-    "downloadDataset": "Datensatz herunterladen",
-    "countryData": {
-      "title": "App-Metriken und Abzeichendaten",
-      "description": "Da wir fest an Open Science glauben, legen wir die Metriken, die der AURORA Energy Tracker zur Berechnung der <Strong>Kohlenstoffemissionen</Strong>, des <Strong>Energieverbrauchs</Strong> und der <Strong>Labels</Strong> verwendet, vollständig offen."
+    "dashboard": {
+        "filter": {
+            "allCategories": "Alle Kategorien",
+            "selectCountries": "Länder auswählen",
+            "invalidData": "Keine Daten entsprechen den ausgewählten Filtern.",
+            "absolute": "Absolut",
+            "relative": ""
+        },
+        "card": {
+            "userCount": "Anzahl der Nutzer",
+            "individualConsumptions": "Einzelne Verbräuche",
+            "invalidDateRange": "Bitte wählen Sie einen gültigen Datumsbereich"
+        },
+        "consumptionTimeline": {
+            "title": "Verbräuche über Zeit"
+        },
+        "energylabels": {
+            "title": "Energieabzeichen Zusammenfassung"
+        },
+        "genderDistribution": {
+            "title": "Geschlechterverteilung"
+        },
+        "main": {
+            "title": "Energy Tracker: Dashboard"
+        }
     },
-    "downloads": {
-      "title": "Laden Sie unsere Daten herunter",
-      "description": "Wir bieten die oben genannten Metriken und Etikettendaten sowie unseren konsolidierten Datensatz zum Download an."
+    "error": {
+        "title": "Ein Fehler ist aufgetreten",
+        "notFound": {
+            "title": "Nicht gefunden",
+            "description": "Die von Ihnen gesuchte Seite konnte nicht gefunden werden."
+        }
+    },
+    "metadata": {
+        "title": "AURORA Energy Tracker Dashboard",
+        "description": "Hier finden Sie die neuesten Statistiken über die AURORA Energy Tracker Mobile App."
+    },
+    "ui": {
+        "auth": {
+            "orContinueWith": "Oder weiter mit",
+            "signIn": "Einloggen",
+            "signUp": "Anmelden",
+            "signInPrompt": "Loggen Sie sich in Ihrem AURORA Energy Tracker Account ein.",
+            "signUpPrompt": "Melden Sie sich für den AURORA Energy Tracker an."
+        },
+        "datePicker": {
+            "selectDateRange": "Wählen Sie einen gültigen Datumsbereich"
+        },
+        "monthPicker": {
+            "start": "Start",
+            "end": "Ende"
+        }
+    },
+    "common": {
+        "co2emission": "CO<sub>2</sub> Emissionen",
+        "energyUsage": "Energieverbrauch"
+    },
+    "footer": {
+        "auroraWebsite": "AURORA Webseite",
+        "fundingNotice": "Dieses Projekt wurde durch das Forschungs- und Innovationsprogramm Horizont 2020 der Europäischen Union unter der Fördervereinbarung Nr. 101036418 gefördert."
+    },
+    "navigation": {
+        "menu": {
+            "dashboard": "Dashboard",
+            "about": "Über",
+            "account": "Account",
+            "logout": "Abmeldung"
+        }
+    },
+    "language": {
+        "english": "Englisch",
+        "german": "Deutsch"
+    },
+    "country": {
+        "denmark": "Dänemark",
+        "portugal": "Portugal",
+        "slovenia": "Slowenien",
+        "spain": "Spanien",
+        "unitedKingdom": "Vereinigtes Königreich",
+        "zeuropeOther": "Europa (Sonstige)"
+    },
+    "gender": {
+        "female": "Weiblich",
+        "male": "Männlich",
+        "nonBinary": "Nicht binär",
+        "other": "Andere"
+    },
+    "category": {
+        "electricity": "Elektrizität",
+        "transportation": "Transport",
+        "heating": "Heizen"
+    },
+    "unitLabel": {
+        "eneryUsage": "Energieverbrauch",
+        "distance": "Entfernung"
+    },
+    "month": {
+        "january": "Januar",
+        "february": "Februar",
+        "march": "März",
+        "april": "April",
+        "may": "Mai",
+        "june": "Juni",
+        "july": "Juli",
+        "august": "August",
+        "september": "September",
+        "october": "Oktober",
+        "november": "November",
+        "december": "Dezember"
     }
-  },
-  "toast": {
-    "dataDownload": {
-      "success": "Ihre Daten wurden erfolgreich heruntergeladen",
-      "error": "Ihre Daten konnten nicht heruntergeladen werden"
-    }
-  },
-  "button": {
-    "downloadPending": "Herunterladen..."
-  },
-  "dashboard": {
-    "filter": {
-      "allCategories": "Alle Kategorien",
-      "selectCountries": "Länder auswählen",
-      "invalidData": "Keine Daten entsprechen den ausgewählten Filtern.",
-      "absolute": "Absolut",
-      "averagePerUser": "Durchschnitt pro Nutzer"
-    },
-    "card": {
-      "userCount": "Anzahl der Nutzer",
-      "individualConsumptions": "Einzelne Verbräuche",
-      "invalidDateRange": "Bitte wählen Sie einen gültigen Datumsbereich"
-    },
-    "consumptionTimeline": {
-      "title": "Verbräuche über Zeit"
-    },
-    "energylabels": {
-      "title": "Energieabzeichen Zusammenfassung",
-      "description": "Dies ist eine Zusammenfassung der Abzeichen, die Nutzer des AURORA Energy Trackers jedes Jahr erhalten haben."
-    },
-    "genderDistribution": {
-      "title": "Geschlechterverteilung"
-    },
-    "main": {
-      "title": "AURORA Energy Tracker Dashboard",
-      "description": "Hier finden Sie die neuesten Statistiken über die AURORA Energy Tracker Mobile App."
-    }
-  },
-  "error": {
-    "title": "Ein Fehler ist aufgetreten",
-    "notFound": {
-      "title": "Nicht gefunden",
-      "description": "Die von Ihnen gesuchte Seite konnte nicht gefunden werden."
-    }
-  },
-  "metadata": {
-    "title": "AURORA Energy Tracker Dashboard",
-    "description": "Hier finden Sie die neuesten Statistiken über die AURORA Energy Tracker Mobile App."
-  },
-  "ui": {
-    "auth": {
-      "orContinueWith": "Oder weiter mit",
-      "signIn": "Einloggen",
-      "signUp": "Anmelden",
-      "signInPrompt": "Loggen Sie sich in Ihrem AURORA Energy Tracker Account ein.",
-      "signUpPrompt": "Melden Sie sich für den AURORA Energy Tracker an."
-    },
-    "datePicker": {
-      "selectDateRange": "Wählen Sie einen gültigen Datumsbereich"
-    },
-    "monthPicker": {
-      "start": "Start",
-      "end": "Ende"
-    }
-  },
-  "common": {
-    "co2emission": "CO<sub>2</sub>-Emissionen",
-    "energyUsage": "Energieverbrauch"
-  },
-  "filter": {
-    "toggle": {
-      "absoluteValues": "Absolute Werte"
-    }
-  },
-  "footer": {
-    "auroraWebsite": "AURORA Webseite",
-    "fundingNotice": "Dieses Projekt wurde durch das Forschungs- und Innovationsprogramm Horizont 2020 der Europäischen Union unter der Fördervereinbarung Nr. 101036418 gefördert."
-  },
-  "navigation": {
-    "menu": {
-      "dashboard": "Dashboard",
-      "about": "Über",
-      "account": "Account",
-      "logout": "Abmeldung"
-    }
-  },
-  "language": {
-    "english": "Englisch",
-    "german": "Deutsch"
-  },
-  "country": {
-    "denmark": "Dänemark",
-    "europeOther": "Europa (Sonstige)",
-    "portugal": "Portugal",
-    "slovenia": "Slowenien",
-    "spain": "Spanien",
-    "unitedKingdom": "Vereinigtes Königreich"
-  },
-  "gender": {
-    "female": "Weiblich",
-    "male": "Männlich",
-    "nonBinary": "Nicht binär",
-    "other": "Andere"
-  },
-  "category": {
-    "electricity": "Elektrizität",
-    "transportation": "Transport",
-    "heating": "Heizen"
-  },
-  "unitLabel": {
-    "eneryUsage": "Energieverbrauch",
-    "distance": "Entfernung"
-  },
-  "month": {
-    "january": "Januar",
-    "february": "Februar",
-    "march": "März",
-    "april": "April",
-    "may": "Mai",
-    "june": "Juni",
-    "july": "Juli",
-    "august": "August",
-    "september": "September",
-    "october": "Oktober",
-    "november": "November",
-    "december": "Dezember"
-  }
 }
