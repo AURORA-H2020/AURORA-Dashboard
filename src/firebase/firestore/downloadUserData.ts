@@ -1,6 +1,7 @@
 import firebase_app from "@/firebase/config";
 import { downloadJsonAsFile } from "@/lib/utilities";
 import { getFunctions, httpsCallable } from "firebase/functions";
+import { FirebaseConstants } from "../firebase-constants";
 
 /**
  * Downloads user data from the specified region and initiates the download process.
@@ -10,7 +11,10 @@ import { getFunctions, httpsCallable } from "firebase/functions";
 export const downloadUserData = async () => {
     try {
         // Specify the region where the function is deployed
-        const functions = getFunctions(firebase_app, "europe-west3");
+        const functions = getFunctions(
+            firebase_app,
+            FirebaseConstants.preferredCloudFunctionRegion,
+        );
         const downloadUserData = httpsCallable(functions, "downloadUserData");
 
         const result = await downloadUserData();

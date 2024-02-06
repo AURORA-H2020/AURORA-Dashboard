@@ -12,6 +12,7 @@ import { Heading, Strong, Text } from "@radix-ui/themes";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import AboutContent from "./about";
 import DataDownloads from "./dataDownloads";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 
 type Props = {
     params: { locale: string };
@@ -41,9 +42,9 @@ export default async function About({
             "utf8",
         );
         countryData = JSON.parse(file) as CountryData;
-    } else if (firebase_app && process.env.FIREBASE_STORAGE_COUNTRY_PATH) {
+    } else if (firebase_app) {
         countryData = await getLatestCountryFile(
-            process.env.FIREBASE_STORAGE_COUNTRY_PATH,
+            FirebaseConstants.buckets.auroraDashboard.folders.countryData.name,
         );
     } else {
         countryData = null;
@@ -57,9 +58,10 @@ export default async function About({
             "utf8",
         );
         globalSummaryData = JSON.parse(file);
-    } else if (firebase_app && process.env.FIREBASE_STORAGE_USER_PATH) {
+    } else if (firebase_app) {
         globalSummaryData = await getLatestSummaryFile(
-            process.env.FIREBASE_STORAGE_USER_PATH,
+            FirebaseConstants.buckets.auroraDashboard.folders.dashboardData
+                .name,
         );
     } else {
         globalSummaryData = undefined;

@@ -11,6 +11,7 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuthContext } from "@/context/AuthContext";
 import firebase_app from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { categories, consumptionMapping } from "@/lib/constants";
 import {
     getMonthShortName,
@@ -108,9 +109,10 @@ export default function ConsumptionSummaryChart() {
             try {
                 const userConsumptionsRef = collection(
                     firestore,
-                    "users",
+                    FirebaseConstants.collections.users.name,
                     user.uid,
-                    "consumption-summaries",
+                    FirebaseConstants.collections.users.consumptionSummaries
+                        .name,
                 );
 
                 const q = query(userConsumptionsRef);

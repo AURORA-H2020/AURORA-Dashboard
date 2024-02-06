@@ -158,7 +158,7 @@ export function ConsumptionTimelineChart({
                     index="Date"
                     categories={
                         globalSummaryData?.countries.map(
-                            (country) => country.countryName,
+                            (country) => country.countryID,
                         ) ?? []
                     }
                     colors={countriesMapping.map((country) => country.color)}

@@ -89,8 +89,8 @@ export function temporalData(
                                 ? 1
                                 : month.activeUsers);
 
-                        thisDate![country.countryName] =
-                            (thisDate![country.countryName] || 0) + valueToAdd;
+                        thisDate![country.countryID] =
+                            (thisDate![country.countryID] || 0) + valueToAdd;
                     });
                 });
             }),
@@ -171,7 +171,7 @@ export function annualLabelData(
         });
 
         temporalData.push({
-            countryName: country.countryName,
+            countryName: country.countryID,
             countryID: country.countryID,
             labels: labelSums,
         });
@@ -267,7 +267,7 @@ export function getMetaData(
         });
 
         metaData.push({
-            countryName: country.countryName,
+            countryName: country.countryID,
             countryID: country.countryID,
             userCount: userCountSum,
             consumptions: consumptionsSummary,

@@ -10,6 +10,7 @@ import { User } from "firebase/auth";
 import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 import { useRouter } from "@/navigation";
 import { useEffect, useState } from "react";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 
 const firestore = getFirestore(firebase_app);
 
@@ -44,9 +45,9 @@ function AccountPage(): JSX.Element {
                 // Reference to the collection where user documents are stored
                 const userConsumptionsRef = collection(
                     firestore,
-                    "users",
+                    FirebaseConstants.collections.users.name,
                     user.uid,
-                    "consumptions",
+                    FirebaseConstants.collections.users.consumptions.name,
                 );
 
                 // Create a query against the collection, filtering by user ID

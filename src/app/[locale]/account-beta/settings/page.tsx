@@ -36,6 +36,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 
 const firestore = getFirestore(firebase_app);
 
@@ -72,7 +73,11 @@ function UserSettings(): JSX.Element {
 
     // Fetch the user document from Firestore
     const fetchDocumentById = async (documentId: string) => {
-        const docRef = doc(firestore, "users", documentId);
+        const docRef = doc(
+            firestore,
+            FirebaseConstants.collections.users.name,
+            documentId,
+        );
         try {
             const docSnapshot = await getDoc(docRef);
 

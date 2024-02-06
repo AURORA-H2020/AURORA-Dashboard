@@ -3,7 +3,6 @@ import { GlobalSummaryDemographicCategory } from "./demographic-category/global-
 
 export interface GlobalSummaryCity {
   cityID: string | undefined;
-  cityName: string | undefined;
   categories: GlobalSummaryCategory[];
   users: {
     userCount: number; // Total users for the city at that time.
