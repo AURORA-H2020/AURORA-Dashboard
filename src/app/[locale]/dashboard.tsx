@@ -19,11 +19,10 @@ import { GenderByCountryChart } from "../../components/dashboard/genderByCountry
 import { Flex, Grid } from "@radix-ui/themes";
 import { Card, CardContent } from "../../components/ui/card";
 
-import { MultiSelect, OptionType } from "../../components/ui/multiselect";
-
 import CountryUsersPieChart from "@/components/dashboard/countryUsersPieChart";
 import { LabelSummary } from "@/components/dashboard/labelSummary";
 import { Alert, AlertTitle } from "@/components/ui/alert";
+import MultipleSelector, { Option } from "@/components/ui/multiple-selector";
 import {
     Select,
     SelectContent,
@@ -49,14 +48,14 @@ export function Dashboard({
     const t = useTranslations();
 
     // Options available for country multiselect
-    const options: OptionType[] = countriesMapping.map((country) => ({
+    const options: Option[] = countriesMapping.map((country) => ({
         value: country.ID,
         label: t(country.name),
     }));
 
     // State to keep track of country multiselect
     const [selectedCountries, setSelectedCountries] =
-        useState<OptionType[]>(options);
+        useState<Option[]>(options);
 
     const [selectedCategories, setSelectedCategories] =
         useState<ConsumptionCategory[]>(categories);
@@ -138,12 +137,15 @@ export function Dashboard({
                                 ))}
                             </SelectContent>
                         </Select>
-                        <MultiSelect
-                            options={options}
-                            selected={selectedCountries}
+
+                        <MultipleSelector
+                            defaultOptions={options}
+                            value={selectedCountries}
                             onChange={setSelectedCountries}
+                            hidePlaceholderWhenSelected={true}
+                            className="bg-background w-full"
+                            badgeClassName="bg-secondary text-secondary-foreground"
                             placeholder={t("dashboard.filter.selectCountries")}
-                            className="flex-1 w-full"
                         />
                     </Flex>
                 </CardContent>
