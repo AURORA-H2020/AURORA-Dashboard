@@ -54,7 +54,7 @@ export default async function About({
 
     if (process.env.TEST_MODE === "true") {
         const file = await fs.readFile(
-            process.cwd() + "/src/data/users-export.json",
+            process.cwd() + "/src/data/summarised-export.json",
             "utf8",
         );
         globalSummaryData = JSON.parse(file);
