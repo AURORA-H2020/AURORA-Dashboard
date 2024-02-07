@@ -3,6 +3,7 @@ import NavigationBar from "@/components/navigation/navigationBar";
 import { cn } from "@/lib/utilities";
 import "@radix-ui/themes/styles.css";
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
 import { Providers } from "./providers";
 
@@ -112,6 +113,7 @@ export default async function RootLayout({
                     </footer>
                 </Providers>
                 <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
