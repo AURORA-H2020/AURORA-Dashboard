@@ -55,7 +55,9 @@ export default function AboutContent({
                                         {t(
                                             "about.carbonEmissionLabels.description",
                                             {
-                                                countryName: t(country.name),
+                                                countryName: t(
+                                                    country.nameSpecial,
+                                                ),
                                             },
                                         )}
                                     </Text>
@@ -75,7 +77,9 @@ export default function AboutContent({
                                         {t(
                                             "about.energyExpendedLabels.description",
                                             {
-                                                countryName: t(country.name),
+                                                countryName: t(
+                                                    country.nameSpecial,
+                                                ),
                                             },
                                         )}
                                     </Text>
@@ -92,7 +96,7 @@ export default function AboutContent({
                                     </Heading>
                                     <Text className="h-24">
                                         {t("about.metrics.description", {
-                                            countryName: t(country.name),
+                                            countryName: t(country.nameSpecial),
                                         })}
                                     </Text>
                                     <AboutJson

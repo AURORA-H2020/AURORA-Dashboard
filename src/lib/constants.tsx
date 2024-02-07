@@ -51,36 +51,42 @@ export const countriesMapping = [
     {
         ID: "udn3GiM30aqviGBkswpl",
         name: t("country.denmark"),
+        nameSpecial: t("country.denmark"),
         code: "DK",
         color: "emerald-400",
     },
     {
         ID: "2E9Ejc8qBJC6HnlPPdIh",
         name: t("country.portugal"),
+        nameSpecial: t("country.portugal"),
         code: "PT",
         color: "cyan-400",
     },
     {
         ID: "KhUolhyvcbdEsPyREqOZ",
         name: t("country.slovenia"),
+        nameSpecial: t("country.slovenia"),
         code: "SI",
         color: "pink-400",
     },
     {
         ID: "4sq82jNQm3x3bH9Fkijm",
         name: t("country.spain"),
+        nameSpecial: t("country.spain"),
         code: "ES",
         color: "rose-400",
     },
     {
         ID: "8mgi5IR4xn9Yca4zDLtU",
         name: t("country.unitedKingdom"),
+        nameSpecial: t("countrySpecial.unitedKingdom"),
         code: "UK",
         color: "orange-400",
     },
     {
         ID: "sPXh74wjZf14Jtmkaas6",
         name: t("country.zeuropeOther"),
+        nameSpecial: t("countrySpecial.zeuropeOther"),
         code: "EU",
         color: "stone-300",
     },
@@ -151,7 +157,7 @@ export const calculationModes: CalculationMode[] = ["absolute", "relative"];
 
 export const carbonUnit = " kg CO\u00B2";
 
-export const kiloGramNumberFormatter = Intl.NumberFormat("en", {
+export const kiloGramNumberFormatter = Intl.NumberFormat("en-GB", {
     notation: "compact",
     style: "unit",
     unit: "kilogram",
