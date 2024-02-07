@@ -69,8 +69,8 @@
     },
     "snapshots": {
       "lastUpdated": "Die angezeigten Daten wurden zuletzt aktualisiert am",
-      "selectSnapshot": "Wählen Sie einen anderen Schnappschuss",
-      "downloadSnapshot": "Diesen Schnappschuss herunterladen"
+      "selectSnapshot": "Anderen Snapshot wählen",
+      "downloadSnapshot": "Diesen Snapshot herunterladen"
     }
   },
   "error": {
