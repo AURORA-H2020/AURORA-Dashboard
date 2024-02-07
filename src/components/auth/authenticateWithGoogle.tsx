@@ -5,6 +5,7 @@ import { toast } from "sonner";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { useTranslations } from "next-intl";
 
 /**
  * Renders a sign-in form and handles sign-in through email, Google,
@@ -13,6 +14,7 @@ import { faGoogle } from "@fortawesome/free-brands-svg-icons";
  */
 function AuthenticateWithGoogle({ isSignIn = true }: { isSignIn?: boolean }) {
     const router = useRouter();
+    const t = useTranslations();
 
     /**
      * Function to handle post sign-in actions.
@@ -51,8 +53,9 @@ function AuthenticateWithGoogle({ isSignIn = true }: { isSignIn?: boolean }) {
             onClick={() => handleAuthenticateWithGoogle()}
         >
             <FontAwesomeIcon icon={faGoogle} className="mr-2" />
-            {isSignIn ? "Sign in " : "Sign up "}
-            with Google
+            {isSignIn
+                ? t("ui.auth.signInWithGoogle")
+                : t("ui.auth.signUpWithGoogle")}
         </Button>
     );
 }

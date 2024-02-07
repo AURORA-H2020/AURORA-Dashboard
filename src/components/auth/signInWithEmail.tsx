@@ -19,6 +19,7 @@ import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import { Strong } from "@radix-ui/themes";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
     email: z.string().min(2).max(50),
@@ -32,6 +33,7 @@ const formSchema = z.object({
  */
 function SignInWithEmail() {
     const router = useRouter();
+    const t = useTranslations();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -85,12 +87,12 @@ function SignInWithEmail() {
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>
-                                <Strong>Email</Strong>
+                                <Strong>{t("ui.auth.email")}</Strong>
                             </FormLabel>
                             <FormControl>
                                 <Input
                                     type="email"
-                                    placeholder="Email"
+                                    placeholder={t("ui.auth.email")}
                                     {...field}
                                 />
                             </FormControl>
@@ -104,7 +106,7 @@ function SignInWithEmail() {
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>
-                                <Strong>Password</Strong>
+                                <Strong>{t("ui.auth.password")}</Strong>
                             </FormLabel>
                             <FormControl>
                                 <div className="relative">
@@ -112,7 +114,7 @@ function SignInWithEmail() {
                                         type={
                                             showPassword ? "text" : "password"
                                         }
-                                        placeholder="Password"
+                                        placeholder={t("ui.auth.password")}
                                         {...field}
                                     />
                                     <div className="absolute inset-y-0 right-0 pr-0 flex items-center cursor-pointer">
@@ -137,7 +139,7 @@ function SignInWithEmail() {
                         </FormItem>
                     )}
                 />
-                <Button type="submit">Sign in</Button>
+                <Button type="submit">{t("ui.auth.signIn")}</Button>
             </form>
         </Form>
     );

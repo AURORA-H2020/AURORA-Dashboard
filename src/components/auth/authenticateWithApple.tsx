@@ -5,6 +5,7 @@ import { toast } from "sonner";
 
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useTranslations } from "next-intl";
 
 /**
  * Renders a sign-in form and handles sign-in through email, Google,
@@ -13,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
  */
 function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
     const router = useRouter();
+    const t = useTranslations();
 
     /**
      * Function to handle post sign in actions.
@@ -49,8 +51,9 @@ function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
             onClick={() => handleAuthenticateWithApple()}
         >
             <FontAwesomeIcon icon={faApple} className="mr-2" />
-            {isSignIn ? "Sign in " : "Sign up "}
-            with Apple
+            {isSignIn
+                ? t("ui.auth.signInWithApple")
+                : t("ui.auth.signUpWithApple")}
         </Button>
     );
 }
