@@ -119,17 +119,17 @@ export const SelectDashboardSource = ({
                     </Text>
 
                     <Flex
-                        className="gap-x-4"
+                        className="gap-2 gap-x-4"
                         justify="between"
-                        align="center"
-                        direction={{ initial: "column", xs: "row" }}
+                        align={{ initial: "center", sm: "end" }}
+                        direction={{ initial: "column", md: "row" }}
                     >
                         <Popover>
                             <PopoverTrigger asChild>
                                 <Button
                                     variant={"outline"}
                                     className={cn(
-                                        "w-[240px] pl-3 text-left font-normal",
+                                        "",
                                         !date && "text-muted-foreground",
                                     )}
                                 >
