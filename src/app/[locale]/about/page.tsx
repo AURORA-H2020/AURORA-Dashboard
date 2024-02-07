@@ -1,18 +1,14 @@
 import firebase_app from "@/firebase/config";
-import {
-    getLatestCountryFile,
-    getLatestSummaryFile,
-} from "@/lib/firebaseUtils";
+import { getLatestCountryFile } from "@/lib/firebaseUtils";
 import { CountryData } from "@/models/countryData";
 import { promises as fs } from "fs";
 
 import { Card, CardContent } from "@/components/ui/card";
-import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { Heading, Strong, Text } from "@radix-ui/themes";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import AboutContent from "./about";
 import DataDownloads from "./dataDownloads";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
 
 type Props = {
     params: { locale: string };
@@ -48,23 +44,6 @@ export default async function About({
         );
     } else {
         countryData = null;
-    }
-
-    let globalSummaryData: GlobalSummary | undefined;
-
-    if (process.env.TEST_MODE === "true") {
-        const file = await fs.readFile(
-            process.cwd() + "/src/data/summarised-export.json",
-            "utf8",
-        );
-        globalSummaryData = JSON.parse(file);
-    } else if (firebase_app) {
-        globalSummaryData = await getLatestSummaryFile(
-            FirebaseConstants.buckets.auroraDashboard.folders.dashboardData
-                .name,
-        );
-    } else {
-        globalSummaryData = undefined;
     }
 
     return (
