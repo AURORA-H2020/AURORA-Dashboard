@@ -16,10 +16,12 @@ jobs:
             - name: Checkout Code
               uses: actions/checkout@v2
 
+            - uses: actions/setup-ruby
+              with:
+                  ruby-version: "2.x"
+
             - name: Install LingoHub CLI
-              run: |
-                  gem install --user-install lingohub
-                  echo "export PATH=\$PATH:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin" >> $GITHUB_ENV
+              run: gem install lingohub
 
             - name: Login to LingoHub
               run: |
