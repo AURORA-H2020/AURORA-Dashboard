@@ -1,0 +1,44 @@
+name: Import Localizations from LingoHub
+
+on:
+    workflow_dispatch:
+
+concurrency:
+    group: ${{ github.workflow }}-${{ github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    upload:
+        name: Import Localizations from LingoHub
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+
+            - uses: ruby/setup-ruby@v1
+              with:
+                  ruby-version: "3.3"
+
+            - name: Install LingoHub CLI
+              run: gem install lingohub
+
+            - name: Login to LingoHub
+              run: |
+                  mkdir -p ~/.lingohub/
+                  echo "$LINGO_HUB_CREDENTIALS" > ~/.lingohub/credentials
+              env:
+                  LINGO_HUB_CREDENTIALS: ${{ secrets.LINGO_HUB_CREDENTIALS }}
+
+            - name: Download Localizations from LingoHub
+              run: mkdir -p ./.lingohub && lingohub resource:down --all --directory '/.lingohub' --project AURORA-Dashboard
+            - name: Import Localizations
+              run: |
+                  cp -r ./.lingohub/*.json ./messages
+
+            - name: Push changes
+              run: |
+                  git config --global user.name "github-actions[AURORA-App-Bot]"
+                  git config --global user.email "app.developer@inscico.eu"
+                  git add -A
+                  git commit -m "Imported localizations from LingoHub"
+                  git push
