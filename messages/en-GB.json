@@ -79,7 +79,7 @@
             "title": "Not Found",
             "description": "The page you are looking for could not be found."
         },
-        "noData": "No data"
+        "noData": "No data available"
     },
     "metadata": {
         "title": "AURORA Energy Tracker: Dashboard",

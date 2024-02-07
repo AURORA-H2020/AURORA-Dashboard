@@ -7,6 +7,8 @@ on:
         paths:
             - "messages/*.json"
 
+    workflow_dispatch:
+
 jobs:
     upload-translations:
         runs-on: ubuntu-latest
