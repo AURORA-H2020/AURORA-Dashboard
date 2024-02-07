@@ -56,6 +56,9 @@
         },
         "main": {
             "title": "Energy Tracker: Dashboard"
+        },
+        "autoReport": {
+            "title": "Report"
         }
     },
     "error": {
@@ -66,8 +69,8 @@
         }
     },
     "metadata": {
-        "title": "AURORA Energy Tracker Dashboard",
-        "description": "Here you can find the latest stats about the AURORA Energy Tracker mobile app."
+        "title": "AURORA Energy Tracker: Dashboard",
+        "description": "Explore the latest stats of the AURORA Energy Tracker mobile app."
     },
     "ui": {
         "auth": {
@@ -87,7 +90,8 @@
     },
     "common": {
         "co2emission": "CO<sub>2</sub> Emissions",
-        "energyUsage": "Energy Usage"
+        "energyUsage": "Energy Usage",
+        "and": "and"
     },
     "footer": {
         "auroraWebsite": "AURORA Website",

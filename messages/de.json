@@ -56,6 +56,9 @@
         },
         "main": {
             "title": "Energy Tracker: Dashboard"
+        },
+        "autoReport": {
+            "title": ""
         }
     },
     "error": {
@@ -87,7 +90,8 @@
     },
     "common": {
         "co2emission": "CO<sub>2</sub> Emissionen",
-        "energyUsage": "Energieverbrauch"
+        "energyUsage": "Energieverbrauch",
+        "and": ""
     },
     "footer": {
         "auroraWebsite": "AURORA Webseite",
