@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/accordion";
 
 import { carbonUnit, countriesMapping } from "@/lib/constants";
-import { Heading, Strong, Text } from "@radix-ui/themes";
+import { Heading, Text } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
 
 /**
@@ -133,7 +133,7 @@ export default function AutoReport({
         );
 
         if (!reportData) {
-            return <Text>No Data</Text>;
+            return <Text>{t("error.noData")}</Text>;
         }
 
         const concatenatedCountries = (countries: string[]): string => {
@@ -158,92 +158,68 @@ export default function AutoReport({
 
         return (
             <Text className="text-md mb-4">
-                For {concatenatedCountries(countries)}{" "}
-                <Strong>{format.number(reportData.userCount)} accounts</Strong>{" "}
-                have been created. Of those users,{" "}
-                <Strong>{format.number(reportData.genders.female)}</Strong>{" "}
-                identify as female,{" "}
-                <Strong>{format.number(reportData.genders.male)}</Strong> as
-                male,{" "}
-                <Strong>{format.number(reportData.genders.nonBinary)}</Strong>{" "}
-                as non-binary, and{" "}
-                <Strong>{format.number(reportData.genders.other)}</Strong> as
-                other. In total, those users have created{" "}
-                <Strong>
-                    {format.number(reportData.consumptions.total.count)}{" "}
-                    consumptions
-                </Strong>
-                .{" "}
-                <Strong>
-                    {format.number(
+                {t("dashboard.autoReport.reportSnippets.accountsCreated", {
+                    countries: concatenatedCountries(countries),
+                    userCount: format.number(reportData.userCount),
+                })}{" "}
+                {t("dashboard.autoReport.reportSnippets.genderDistribution", {
+                    femaleCount: format.number(reportData.genders.female),
+                    maleCount: format.number(reportData.genders.male),
+                    nonBinaryCount: format.number(reportData.genders.nonBinary),
+                    otherCount: format.number(reportData.genders.other),
+                })}{" "}
+                {t("dashboard.autoReport.reportSnippets.totalConsumptions", {
+                    totalConsumptions: format.number(
+                        reportData.consumptions.total.count,
+                    ),
+                })}{" "}
+                {t("dashboard.autoReport.reportSnippets.consumptionBreakdown", {
+                    transportationCount: format.number(
                         reportData.consumptions.transportation.count,
-                    )}
-                </Strong>{" "}
-                are related to transportation,{" "}
-                <Strong>
-                    {format.number(reportData.consumptions.electricity.count)}
-                </Strong>{" "}
-                to electricity, and{" "}
-                <Strong>
-                    {format.number(reportData.consumptions.heating.count)}
-                </Strong>{" "}
-                to heating. This amounts to a total of{" "}
-                <Strong>
-                    {format.number(
+                    ),
+                    electricityCount: format.number(
+                        reportData.consumptions.electricity.count,
+                    ),
+                    heatingCount: format.number(
+                        reportData.consumptions.heating.count,
+                    ),
+                })}{" "}
+                {t("dashboard.autoReport.reportSnippets.totalEmissions", {
+                    totalEmissions: format.number(
                         reportData.consumptions.total.carbonEmissions,
-                    )}
-                    {carbonUnit}
-                </Strong>{" "}
-                emissions or{" "}
-                <Strong>
-                    {format.number(
+                    ),
+                    unit: carbonUnit,
+                    totalEnergy: format.number(
                         reportData.consumptions.total.energyExpended,
-                    )}{" "}
-                    kWh of energy used
-                </Strong>
-                .{" "}
-                <Strong>
-                    {format.number(
+                    ),
+                })}{" "}
+                {t("dashboard.autoReport.reportSnippets.emissionsByCategory", {
+                    transportationEmissions: format.number(
                         reportData.consumptions.transportation.carbonEmissions,
-                    )}
-                    {carbonUnit}
-                </Strong>{" "}
-                are from transportation (
-                <Strong>
-                    {format.number(
+                    ),
+
+                    transportationEnergy: format.number(
                         reportData.consumptions.transportation.energyExpended,
-                    )}{" "}
-                    kWh
-                </Strong>
-                ),{" "}
-                <Strong>
-                    {format.number(
+                    ),
+
+                    electricityEmissions: format.number(
                         reportData.consumptions.electricity.carbonEmissions,
-                    )}
-                    {carbonUnit}
-                </Strong>{" "}
-                from electricity (
-                <Strong>
-                    {format.number(
+                    ),
+
+                    electricityEnergy: format.number(
                         reportData.consumptions.electricity.energyExpended,
-                    )}{" "}
-                    kWh
-                </Strong>
-                ), and{" "}
-                <Strong>
-                    {format.number(
+                    ),
+
+                    heatingEmissions: format.number(
                         reportData.consumptions.heating.carbonEmissions,
-                    )}
-                    {carbonUnit}
-                </Strong>{" "}
-                from heating (
-                <Strong>
-                    {format.number(
+                    ),
+
+                    heatingEnergy: format.number(
                         reportData.consumptions.heating.energyExpended,
-                    )}{" "}
-                    kWh
-                </Strong>
-                ).
+                    ),
+
+                    unit: carbonUnit,
+                })}
             </Text>
         );
     };
