@@ -2,9 +2,9 @@ import { categories } from "@/lib/constants";
 import { getConsumptionAttributes } from "@/lib/utilities";
 import { MetaData } from "@/models/dashboard-data";
 import { Strong } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 import React from "react";
 import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
-import { useTranslations } from "next-intl";
 
 /**
  * Renders a summary of consumption card data based on the provided metaData.

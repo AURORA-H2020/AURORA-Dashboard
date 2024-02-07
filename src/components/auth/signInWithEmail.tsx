@@ -1,9 +1,9 @@
 import authenticate from "@/firebase/auth/authentication";
 
+import { useRouter } from "@/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
-import { useRouter } from "@/navigation";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -15,11 +15,11 @@ import {
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useState } from "react";
-import { Eye, EyeOff } from "lucide-react";
 import { Strong } from "@radix-ui/themes";
-import { toast } from "sonner";
+import { Eye, EyeOff } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+import { toast } from "sonner";
 
 const formSchema = z.object({
     email: z.string().min(2).max(50),

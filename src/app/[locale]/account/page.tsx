@@ -16,9 +16,9 @@ import LoadingSpinner from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { deleteAccount } from "@/firebase/firestore/deleteAccount";
 import { downloadUserData } from "@/firebase/firestore/downloadUserData";
+import { useRouter } from "@/navigation";
 import { Flex, Grid } from "@radix-ui/themes";
 import { User } from "firebase/auth";
-import { useRouter } from "@/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 

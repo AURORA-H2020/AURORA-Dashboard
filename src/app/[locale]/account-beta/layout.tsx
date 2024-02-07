@@ -1,9 +1,9 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { usePathname } from "@/navigation";
 import { Flex } from "@radix-ui/themes";
 import Link from "next/link";
-import { usePathname } from "@/navigation";
 
 /**
  * Renders the AccountLayout component.

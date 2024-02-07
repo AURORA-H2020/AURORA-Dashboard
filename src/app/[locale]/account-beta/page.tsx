@@ -4,13 +4,13 @@ import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummary
 import LoadingSpinner from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import firebase_app from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { Consumption } from "@/models/extensions";
+import { useRouter } from "@/navigation";
 import { Heading } from "@radix-ui/themes";
 import { User } from "firebase/auth";
 import { collection, getDocs, getFirestore, query } from "firebase/firestore";
-import { useRouter } from "@/navigation";
 import { useEffect, useState } from "react";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
 
 const firestore = getFirestore(firebase_app);
 

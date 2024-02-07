@@ -25,18 +25,18 @@ import LoadingSpinner from "@/components/ui/loading";
 import { Table, TableBody } from "@/components/ui/table";
 import { useAuthContext } from "@/context/AuthContext";
 import firebase_app from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { deleteAccount } from "@/firebase/firestore/deleteAccount";
 import { downloadUserData } from "@/firebase/firestore/downloadUserData";
 import { city2Name, country2Name, titleCase } from "@/lib/utilities";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
+import { useRouter } from "@/navigation";
 import { Flex, Grid } from "@radix-ui/themes";
 import { User } from "firebase/auth";
 import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useTranslations } from "next-intl";
-import { useRouter } from "@/navigation";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
 
 const firestore = getFirestore(firebase_app);
 

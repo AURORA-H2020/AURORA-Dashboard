@@ -3,12 +3,12 @@
 import Link from "next/link";
 import Logo from "./navigation/logo";
 
+import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
+import LocaleSwitcher from "./navigation/localeSwitcher";
+import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
-import LocaleSwitcher from "./navigation/localeSwitcher";
-import { Flex } from "@radix-ui/themes";
-import { Button } from "./ui/button";
 
 /**
  * Renders the footer component.

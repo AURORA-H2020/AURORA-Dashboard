@@ -1,10 +1,10 @@
+import { Button } from "@/components/ui/button";
 import authenticate from "@/firebase/auth/authentication";
 import { useRouter } from "@/navigation";
-import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 
 /**
