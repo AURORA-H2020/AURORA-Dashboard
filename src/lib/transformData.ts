@@ -30,6 +30,7 @@ export function temporalData(
     dateRange: DateRange | undefined,
     calculationMode: CalculationMode,
     countryNames: { id: string; name: string }[],
+    locale: string,
 ): TimelineData[] {
     if (!globalSummaryData || !dateRange) {
         return [];
@@ -53,7 +54,10 @@ export function temporalData(
 
                 category.temporal.forEach((year) => {
                     year.data.forEach((month) => {
-                        const dateMonth = getMonthShortName(month.month);
+                        const dateMonth = getMonthShortName(
+                            month.month,
+                            locale,
+                        );
 
                         let currentDate = `${dateMonth} ${year.year}`;
 

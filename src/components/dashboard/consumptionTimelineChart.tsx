@@ -18,7 +18,7 @@ import { GlobalSummary } from "@/models/firestore/global-summary/global-summary"
 import { Flex, Heading } from "@radix-ui/themes";
 import { LineChart } from "@tremor/react";
 import { Info } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { SetStateAction, useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { Alert, AlertTitle } from "../ui/alert";
@@ -53,6 +53,7 @@ export function ConsumptionTimelineChart({
     title: string;
 }): JSX.Element {
     const t = useTranslations();
+    const locale = useLocale();
 
     const [dateRange, setDateRange] = useState<DateRange | undefined>({
         from: new Date(new Date().getFullYear() - 1, 0, 1),
@@ -94,6 +95,7 @@ export function ConsumptionTimelineChart({
             dateRange,
             "relative",
             countryNames,
+            locale,
         );
 
         console.log(updatedTemporalData);
