@@ -6,7 +6,6 @@ on:
             - develop
         paths:
             - "messages/*.json"
-
     workflow_dispatch:
 
 jobs:
@@ -17,17 +16,15 @@ jobs:
             - name: Checkout Code
               uses: actions/checkout@v2
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v1
-              with:
-                  node-version: "20"
-
             - name: Install LingoHub CLI
-              run: gem install lingohub
+              run: |
+                  gem install --user-install lingohub
+                  echo 'export PATH="$PATH:$(ruby -r rubygems -e "puts Gem.user_dir")/bin"' >> $GITHUB_ENV
 
             - name: Login to LingoHub
-              run: mkdir ~/.lingohub/ && echo "$LINGO_HUB_CREDENTIALS" >> ~/.lingohub/credentials
-              shell: bash
+              run: |
+                  mkdir -p ~/.lingohub/
+                  echo "$LINGO_HUB_CREDENTIALS" > ~/.lingohub/credentials
               env:
                   LINGO_HUB_CREDENTIALS: ${{ secrets.LINGO_HUB_CREDENTIALS }}
 
