@@ -19,7 +19,7 @@ jobs:
             - name: Install LingoHub CLI
               run: |
                   gem install --user-install lingohub
-                  echo 'export PATH="$PATH:/home/runner/.local/share/gem/ruby/3.0.0/bin"' >> $GITHUB_ENV
+                  echo "export PATH=\$PATH:$(ruby -r rubygems -e 'puts Gem.user_dir')/bin" >> $GITHUB_ENV
 
             - name: Login to LingoHub
               run: |
