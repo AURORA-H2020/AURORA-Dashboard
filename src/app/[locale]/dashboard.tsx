@@ -114,7 +114,7 @@ export function Dashboard({
                 <CardContent className="p-6">
                     <Flex
                         direction={{ initial: "column", sm: "row" }}
-                        className="gap-6"
+                        className="gap-2 gap-x-4"
                     >
                         <Select
                             onValueChange={handleCategoryChange}

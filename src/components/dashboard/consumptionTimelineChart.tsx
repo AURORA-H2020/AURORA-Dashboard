@@ -101,7 +101,14 @@ export function ConsumptionTimelineChart({
         console.log(updatedTemporalData);
 
         setTransformedData(updatedTemporalData);
-    }, [globalSummaryData, selectedEnergyMode, categories, dateRange, t]);
+    }, [
+        globalSummaryData,
+        selectedEnergyMode,
+        categories,
+        dateRange,
+        t,
+        locale,
+    ]);
 
     const includedCountryIds = globalSummaryData?.countries.map(
         (country) => country.countryID,
@@ -113,16 +120,16 @@ export function ConsumptionTimelineChart({
                 <Heading>{title}</Heading>
             </Flex>
             <Flex
-                direction={{ initial: "column", xs: "row" }}
-                className="gap-6 mt-6 mb-6"
+                direction={{ initial: "column", sm: "row" }}
+                className="gap-2 gap-x-4 mt-6"
             >
                 <Tabs
                     value={selectedEnergyMode}
                     onValueChange={handleEnergyModeChange}
                 >
                     <div className="overflow-x-auto">
-                        <TabsList>
-                            <TabsTrigger value="carbon">
+                        <TabsList className="w-full">
+                            <TabsTrigger value="carbon" className="w-full">
                                 {
                                     // t("common.co2emission")
                                     t.rich("common.co2emission", {
@@ -136,7 +143,7 @@ export function ConsumptionTimelineChart({
                                     })
                                 }
                             </TabsTrigger>
-                            <TabsTrigger value="energy">
+                            <TabsTrigger value="energy" className="w-full">
                                 {t("common.energyUsage")}
                             </TabsTrigger>
                         </TabsList>

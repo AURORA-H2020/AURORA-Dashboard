@@ -128,20 +128,19 @@ export function LabelSummary({
 
     return (
         <>
-            <Flex justify="between">
-                <Heading>{title}</Heading>
-            </Flex>
+            <Heading>{title}</Heading>
+
             <Flex
-                direction={{ initial: "column", xs: "row" }}
-                className="gap-6 mt-6 mb-6"
+                direction={{ initial: "column", sm: "row" }}
+                className="gap-2 gap-x-4 mt-6"
             >
                 <Tabs
                     value={selectedEnergyMode}
                     onValueChange={handleEnergyModeChange}
                 >
                     <div className="overflow-x-auto">
-                        <TabsList>
-                            <TabsTrigger value="carbon">
+                        <TabsList className="w-full">
+                            <TabsTrigger value="carbon" className="w-full">
                                 {
                                     // t("common.co2emission")
                                     t.rich("common.co2emission", {
@@ -151,43 +150,54 @@ export function LabelSummary({
                                     })
                                 }
                             </TabsTrigger>
-                            <TabsTrigger value="energy">
+                            <TabsTrigger value="energy" className="w-full">
                                 {t("common.energyUsage")}
                             </TabsTrigger>
                         </TabsList>
                     </div>
                 </Tabs>
-                <Select value={selectedYear} onValueChange={setSelectedYear}>
-                    <SelectTrigger className="w-[180px]">
-                        <SelectValue defaultValue={selectedYear} />
-                    </SelectTrigger>
+                <Flex direction={{ initial: "row" }} className="gap-2 gap-x-4">
+                    <Select
+                        value={selectedYear}
+                        onValueChange={setSelectedYear}
+                    >
+                        <SelectTrigger className="w-half md:w-[180px]">
+                            <SelectValue defaultValue={selectedYear} />
+                        </SelectTrigger>
 
-                    <SelectContent>
-                        {getYearsInSummary(globalSummaryData).map((year) => (
-                            <SelectItem key={year} value={year}>
-                                {year}
+                        <SelectContent>
+                            {getYearsInSummary(globalSummaryData).map(
+                                (year) => (
+                                    <SelectItem key={year} value={year}>
+                                        {year}
+                                    </SelectItem>
+                                ),
+                            )}
+                        </SelectContent>
+                    </Select>
+                    <Select
+                        value={calculationMode}
+                        onValueChange={(value) =>
+                            setCalculationMode(value as CalculationMode)
+                        }
+                    >
+                        <SelectTrigger className="w-half md:w-[180px]">
+                            <SelectValue
+                                placeholder={t(
+                                    "common.placeholder.selectValue",
+                                )}
+                            />
+                        </SelectTrigger>
+                        <SelectContent>
+                            <SelectItem value="absolute">
+                                {t("dashboard.filter.absolute")}
                             </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-                <Select
-                    value={calculationMode}
-                    onValueChange={(value) =>
-                        setCalculationMode(value as CalculationMode)
-                    }
-                >
-                    <SelectTrigger className="w-[180px]">
-                        <SelectValue placeholder="Theme" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="absolute">
-                            {t("dashboard.filter.absolute")}
-                        </SelectItem>
-                        <SelectItem value="relative">
-                            {t("dashboard.filter.relative")}
-                        </SelectItem>
-                    </SelectContent>
-                </Select>
+                            <SelectItem value="relative">
+                                {t("dashboard.filter.relative")}
+                            </SelectItem>
+                        </SelectContent>
+                    </Select>
+                </Flex>
             </Flex>
             <BarChart
                 className="mt-4"

@@ -67,6 +67,7 @@ export default async function Home({
                 <SelectDashboardSource
                     files={fileList}
                     currentFileDate={globalSummaryData?.date}
+                    globalSummaryData={globalSummaryData}
                 />
             </>
         );
