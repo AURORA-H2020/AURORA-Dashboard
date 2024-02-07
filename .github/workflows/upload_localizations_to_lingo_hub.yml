@@ -1,0 +1,33 @@
+name: Upload Translations to LingoHub
+
+on:
+    push:
+        branches:
+            - develop
+        paths:
+            - "messages/*.json"
+
+jobs:
+    upload-translations:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout Code
+              uses: actions/checkout@v2
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v1
+              with:
+                  node-version: "20"
+
+            - name: Install LingoHub CLI
+              run: gem install lingohub
+
+            - name: Login to LingoHub
+              run: mkdir ~/.lingohub/ && echo "$LINGO_HUB_CREDENTIALS" >> ~/.lingohub/credentials
+              shell: bash
+              env:
+                  LINGO_HUB_CREDENTIALS: ${{ secrets.LINGO_HUB_CREDENTIALS }}
+
+            - name: Upload translations to LingoHub
+              run: lingohub resource:up './messages/en-GB.json' --locale en-GB --project AURORA-Dashboard
