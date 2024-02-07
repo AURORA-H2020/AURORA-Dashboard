@@ -4,7 +4,6 @@ import { CountryData } from "@/models/countryData";
 
 import { Button } from "@/components/ui/button";
 import { downloadJsonAsFile } from "@/lib/utilities";
-import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
@@ -19,10 +18,8 @@ import { toast } from "sonner";
  */
 export default function DataDownloads({
     countryData,
-    globalSummaryData,
 }: {
     countryData: CountryData | undefined;
-    globalSummaryData: GlobalSummary | undefined;
 }) {
     const t = useTranslations();
 
@@ -53,20 +50,6 @@ export default function DataDownloads({
                 {downloading
                     ? t("button.downloadPending")
                     : t("about.downloadMetrics")}
-            </Button>
-            <Button
-                variant={"outline"}
-                onClick={() =>
-                    downloadWrapper(
-                        globalSummaryData as Object,
-                        "AURORA_dataset",
-                    )
-                }
-                disabled={downloading}
-            >
-                {downloading
-                    ? t("button.downloadPending")
-                    : t("about.downloadDataset")}
             </Button>
         </Flex>
     );

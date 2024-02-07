@@ -87,12 +87,7 @@ export default async function About({
                 <CardContent className="p-6">
                     <Heading>{t("about.downloads.title")}</Heading>
                     <Text>{t("about.downloads.description")}</Text>
-                    {countryData && (
-                        <DataDownloads
-                            countryData={countryData}
-                            globalSummaryData={globalSummaryData}
-                        />
-                    )}
+                    {countryData && <DataDownloads countryData={countryData} />}
                 </CardContent>
             </Card>
         </>
