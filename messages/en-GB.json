@@ -15,7 +15,7 @@
         "downloadMetrics": "Download metrics",
         "countryData": {
             "title": "App Metrics and Label Data",
-            "description": "In support of Open Science, AURORA hereby discloses the metrics used by the Energy Tracker to calculate <Strong>carbon emissions</Strong>, <Strong>energy usage</Strong> and the <Strong>Labels</Strong>."
+            "description": "In support of Open Science, AURORA hereby discloses the metrics used by the Energy Tracker to calculate <Strong>carbon emissions</Strong>, <Strong>energy usage</Strong> and the <Strong>labels</Strong>."
         },
         "downloads": {
             "title": "Download our data",
@@ -57,6 +57,14 @@
             "title": "Energy Tracker: Dashboard"
         },
         "autoReport": {
+            "reportSnippets": {
+                "accountsCreated": "For {countries} {userCount} accounts have been created.",
+                "genderDistribution": "Of those users, {femaleCount} identify as female, {maleCount} as male, {nonBinaryCount} as non-binary, and {otherCount} as other.",
+                "totalConsumptions": "In total, those users have created {totalConsumptions} consumptions.",
+                "consumptionBreakdown": "{transportationCount} are related to transportation, {electricityCount} to electricity, and {heatingCount} to heating.",
+                "totalEmissions": "This amounts to a total of {totalEmissions}{unit} emissions or {totalEnergy} kWh of energy used.",
+                "emissionsByCategory": "{transportationEmissions}{unit} are from transportation ({transportationEnergy} kWh), {electricityEmissions}{unit} from electricity ({electricityEnergy} kWh), and {heatingEmissions}{unit} from heating ({heatingEnergy} kWh)."
+            },
             "title": "Report"
         },
         "snapshots": {
@@ -70,7 +78,8 @@
         "notFound": {
             "title": "Not Found",
             "description": "The page you are looking for could not be found."
-        }
+        },
+        "noData": "No data"
     },
     "metadata": {
         "title": "AURORA Energy Tracker: Dashboard",
@@ -82,7 +91,13 @@
             "signIn": "Sign in",
             "signUp": "Sign up",
             "signInPrompt": "Sign in to your AURORA Energy Tracker account.",
-            "signUpPrompt": "Sign up to the AURORA Energy Tracker."
+            "signUpPrompt": "Sign up to the AURORA Energy Tracker.",
+            "signInWithApple": "Sign in with Apple",
+            "signUpWithApple": "Sign up with Apple",
+            "signInWithGoogle": "Sign in with Google",
+            "signUpWithGoogle": "Sign up with Google",
+            "email": "Email",
+            "password": "Password"
         },
         "datePicker": {
             "selectDateRange": "Select a valid date range"

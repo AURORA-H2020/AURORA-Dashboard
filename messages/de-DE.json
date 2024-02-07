@@ -57,6 +57,14 @@
             "title": "Energy Tracker: Dashboard"
         },
         "autoReport": {
+            "reportSnippets": {
+                "accountsCreated": "",
+                "genderDistribution": "",
+                "totalConsumptions": "",
+                "consumptionBreakdown": "",
+                "totalEmissions": "",
+                "emissionsByCategory": ""
+            },
             "title": ""
         },
         "snapshots": {
@@ -70,7 +78,8 @@
         "notFound": {
             "title": "Nicht gefunden",
             "description": "Die von Ihnen gesuchte Seite konnte nicht gefunden werden."
-        }
+        },
+        "noData": ""
     },
     "metadata": {
         "title": "AURORA Energy Tracker Dashboard",
@@ -82,7 +91,13 @@
             "signIn": "Einloggen",
             "signUp": "Anmelden",
             "signInPrompt": "Loggen Sie sich in Ihrem AURORA Energy Tracker Account ein.",
-            "signUpPrompt": "Melden Sie sich für den AURORA Energy Tracker an."
+            "signUpPrompt": "Melden Sie sich für den AURORA Energy Tracker an.",
+            "signInWithApple": "",
+            "signUpWithApple": "",
+            "signInWithGoogle": "",
+            "signUpWithGoogle": "",
+            "email": "",
+            "password": ""
         },
         "datePicker": {
             "selectDateRange": "Wählen Sie einen gültigen Datumsbereich"
