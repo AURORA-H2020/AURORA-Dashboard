@@ -1,8 +1,7 @@
 import { monthNames } from "@/lib/constants";
 import { Flex, Text } from "@radix-ui/themes";
-import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { Button } from "./button";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
@@ -50,6 +49,7 @@ const MonthPicker = ({ dateRange, validYears, onChange }) => {
     };
 
     const t = useTranslations();
+    const format = useFormatter();
 
     return (
         <div className="grid gap-2">
@@ -64,11 +64,21 @@ const MonthPicker = ({ dateRange, validYears, onChange }) => {
                         {dateRange?.from ? (
                             dateRange.to ? (
                                 <>
-                                    {format(dateRange.from, "LLL y")} -{" "}
-                                    {format(dateRange.to, "LLL y")}
+                                    {format.dateTime(dateRange.from, {
+                                        year: "numeric",
+                                        month: "short",
+                                    })}{" "}
+                                    -{" "}
+                                    {format.dateTime(dateRange.to, {
+                                        year: "numeric",
+                                        month: "short",
+                                    })}
                                 </>
                             ) : (
-                                format(dateRange.from, "LLL dd, y")
+                                format.dateTime(dateRange.from, {
+                                    year: "numeric",
+                                    month: "short",
+                                })
                             )
                         ) : (
                             <span>{t("ui.datePicker.selectDateRange")}</span>
