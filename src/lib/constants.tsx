@@ -14,11 +14,11 @@ const t = (translationKey: string) => {
 
 export const supportedLocales = [
     {
-        code: "en",
+        code: "en-GB",
         name: t("language.english"),
     },
     {
-        code: "de",
+        code: "de-DE",
         name: t("language.german"),
     },
 ];

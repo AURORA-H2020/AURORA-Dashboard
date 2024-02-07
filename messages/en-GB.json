@@ -13,14 +13,13 @@
             "description": "The data we use to calculate carbon emissions and energy usage based on user data in {countryName}."
         },
         "downloadMetrics": "Download metrics",
-        "downloadDataset": "Download dataset",
         "countryData": {
             "title": "App Metrics and Label Data",
             "description": "In support of Open Science, AURORA hereby discloses the metrics used by the Energy Tracker to calculate <Strong>carbon emissions</Strong>, <Strong>energy usage</Strong> and the <Strong>Labels</Strong>."
         },
         "downloads": {
             "title": "Download our data",
-            "description": "We offer the above metrics and label data, as well as our consolidated dataset for download."
+            "description": "We offer the above metrics and label data for download."
         }
     },
     "toast": {
@@ -59,6 +58,11 @@
         },
         "autoReport": {
             "title": "Report"
+        },
+        "snapshots": {
+            "lastUpdated": "The data displayed was last updated on",
+            "selectSnapshot": "Select a different snapshot",
+            "downloadSnapshot": "Download this snapshot"
         }
     },
     "error": {
@@ -91,10 +95,15 @@
     "common": {
         "co2emission": "CO<sub>2</sub> Emissions",
         "energyUsage": "Energy Usage",
-        "and": "and"
+        "and": "and",
+        "placeholder": {
+            "selectValue": "Select a value"
+        }
     },
     "footer": {
         "auroraWebsite": "AURORA Website",
+        "iosApp": "iOS App",
+        "androidApp": "Android App",
         "fundingNotice": "This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No. 101036418."
     },
     "navigation": {
@@ -116,6 +125,10 @@
         "spain": "Spain",
         "unitedKingdom": "United Kingdom",
         "zeuropeOther": "Others in the EU"
+    },
+    "countrySpecial": {
+        "unitedKingdom": "the United Kingdom",
+        "zeuropeOther": "others in the EU"
     },
     "gender": {
         "female": "Female",
