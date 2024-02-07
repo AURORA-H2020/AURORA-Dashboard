@@ -7,8 +7,8 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { Heading, Strong, Text } from "@radix-ui/themes";
 import { countriesMapping } from "@/lib/constants";
+import { Heading, Strong, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 
 /**
@@ -18,12 +18,17 @@ import { useTranslations } from "next-intl";
  * @param {MetaData | undefined} props.metaData - The metaData object containing the data for the report.
  * @return {JSX.Element} - The rendered report component.
  */
+
 export default function AutoReport({
     metaData,
 }: {
     metaData: MetaData | undefined;
 }): JSX.Element {
     const t = useTranslations();
+
+    if (!metaData) {
+        return <Text>No Data</Text>;
+    }
 
     metaData?.sort((a, b) => {
         const aCountry =
@@ -36,28 +41,32 @@ export default function AutoReport({
         return aCountry.localeCompare(bCountry);
     });
 
-    if (metaData) {
+    const report = (countries: string[]) => {
+        const filteredMetaData = metaData.filter((country) =>
+            countries.includes(country.countryID),
+        );
         const initialValue = {
-            country: "",
             userCount: 0,
             consumptions: {
                 electricity: {
                     count: 0,
                     carbonEmissions: 0,
                     energyExpended: 0,
-                    sources: [],
                 },
                 heating: {
                     count: 0,
                     carbonEmissions: 0,
                     energyExpended: 0,
-                    sources: [],
                 },
                 transportation: {
                     count: 0,
                     carbonEmissions: 0,
                     energyExpended: 0,
-                    sources: [],
+                },
+                total: {
+                    count: 0,
+                    carbonEmissions: 0,
+                    energyExpended: 0,
                 },
             },
             recurringConsumptionsCount: 0,
@@ -69,305 +78,190 @@ export default function AutoReport({
             },
         };
 
-        const summedMetaData = metaData.reduce((accumulator, currentObject) => {
-            // Add values from the current object to the accumulator
-            accumulator.userCount += currentObject.userCount;
-            accumulator.recurringConsumptionsCount +=
-                currentObject.recurringConsumptionsCount;
+        const reportData = filteredMetaData.reduce(
+            (accumulator, currentCountry) => {
+                console.log(currentCountry);
+                // Add values from the current country to the accumulator
+                accumulator.userCount += currentCountry.userCount;
+                accumulator.recurringConsumptionsCount +=
+                    currentCountry.recurringConsumptionsCount;
 
-            // Loop through the genders object
-            for (const gender in accumulator.genders) {
-                accumulator.genders[gender] += currentObject.genders[gender];
-            }
+                // Loop through the genders object
+                for (const gender in accumulator.genders) {
+                    accumulator.genders[gender] +=
+                        currentCountry.genders[gender];
+                }
 
-            // Loop through the consumptions object
-            for (const category in accumulator.consumptions) {
-                const currentCategory = accumulator.consumptions[category];
-                const currentObjectCategory =
-                    currentObject.consumptions[category];
+                // Loop through the consumptions object
+                for (const category in currentCountry.consumptions) {
+                    const currentCategory = accumulator.consumptions[category];
+                    const currentObjectCategory =
+                        currentCountry.consumptions[category];
 
-                currentCategory.count += currentObjectCategory.count;
-                currentCategory.carbonEmissions +=
-                    currentObjectCategory.carbonEmissions;
-                currentCategory.energyExpended +=
-                    currentObjectCategory.energyExpended;
+                    currentCategory.count += currentObjectCategory.count;
+                    currentCategory.carbonEmissions +=
+                        currentObjectCategory.carbonEmissions;
+                    currentCategory.energyExpended +=
+                        currentObjectCategory.energyExpended;
+                }
 
-                // Merge sources arrays by concatenating them
-                currentCategory.sources = currentCategory.sources.concat(
-                    currentObjectCategory.sources,
-                );
-            }
+                // Add totals across consumptions
+                accumulator.consumptions["total"].count +=
+                    currentCountry.consumptions.electricity.count +
+                    currentCountry.consumptions.heating.count +
+                    currentCountry.consumptions.transportation.count;
+                accumulator.consumptions["total"].carbonEmissions +=
+                    currentCountry.consumptions.electricity.carbonEmissions +
+                    currentCountry.consumptions.heating.carbonEmissions +
+                    currentCountry.consumptions.transportation.carbonEmissions;
+                accumulator.consumptions["total"].energyExpended +=
+                    currentCountry.consumptions.electricity.energyExpended +
+                    currentCountry.consumptions.heating.energyExpended +
+                    currentCountry.consumptions.transportation.energyExpended;
 
-            return accumulator;
-        }, initialValue);
+                return accumulator;
+            },
+            initialValue,
+        );
 
-        const summedMetaDataTotalConsumptionsCount = Math.round(
-            summedMetaData.consumptions.electricity.count +
-                summedMetaData.consumptions.heating.count +
-                summedMetaData.consumptions.transportation.count,
-        ).toLocaleString();
+        if (!reportData) {
+            return <Text>No Data</Text>;
+        }
 
-        const summedMetaDataTotalCarbonEmissions = Math.round(
-            summedMetaData.consumptions.electricity.carbonEmissions +
-                summedMetaData.consumptions.heating.carbonEmissions +
-                summedMetaData.consumptions.transportation.carbonEmissions,
-        ).toLocaleString();
+        const concatenatedCountries = (countries: string[]): string => {
+            countries = countries.map(
+                (countryID) =>
+                    t(
+                        countriesMapping.find(
+                            (country) => country.ID === countryID,
+                        )?.name,
+                    ) || countryID,
+            );
 
-        const summedMetaDataTotalEnergyExpended = Math.round(
-            summedMetaData.consumptions.electricity.energyExpended +
-                summedMetaData.consumptions.heating.energyExpended +
-                summedMetaData.consumptions.transportation.energyExpended,
-        ).toLocaleString();
+            if (countries.length === 0) return "";
+            if (countries.length === 1) return countries[0];
+
+            const lastCountry = countries.pop();
+
+            return (
+                countries.join(", ") + " " + t("common.and") + " " + lastCountry
+            );
+        };
 
         return (
-            <>
-                <Heading>Report</Heading>
-                <Text className="text-md mb-4">
-                    Overall,{" "}
-                    <Strong>
-                        {summedMetaData.userCount.toLocaleString()} accounts
-                    </Strong>{" "}
-                    have been created. Of those users,{" "}
-                    <Strong>
-                        {summedMetaData.genders.female.toLocaleString()}
-                    </Strong>{" "}
-                    identify as female,{" "}
-                    <Strong>
-                        {summedMetaData.genders.male.toLocaleString()}
-                    </Strong>{" "}
-                    as male,{" "}
-                    <Strong>
-                        {summedMetaData.genders.nonBinary.toLocaleString()}
-                    </Strong>{" "}
-                    as non-binary, and{" "}
-                    <Strong>
-                        {summedMetaData.genders.other.toLocaleString()}
-                    </Strong>{" "}
-                    as other. In total, those users have created{" "}
-                    <Strong>
-                        {summedMetaDataTotalConsumptionsCount} consumptions
-                    </Strong>
-                    .{" "}
-                    <Strong>
-                        {summedMetaData.consumptions.transportation.count.toLocaleString()}
-                    </Strong>{" "}
-                    are related to transportation,{" "}
-                    <Strong>
-                        {summedMetaData.consumptions.electricity.count.toLocaleString()}
-                    </Strong>{" "}
-                    to electricity, and{" "}
-                    <Strong>
-                        {summedMetaData.consumptions.heating.count.toLocaleString()}
-                    </Strong>{" "}
-                    to heating. This amounts to a total of{" "}
-                    <Strong>
-                        {summedMetaDataTotalCarbonEmissions} kg CO
-                        <sub>2</sub>
-                    </Strong>{" "}
-                    emissions or{" "}
-                    <Strong>
-                        {summedMetaDataTotalEnergyExpended} kWh of energy used
-                    </Strong>
-                    .{" "}
-                    <Strong>
-                        {Math.round(
-                            summedMetaData.consumptions.transportation
-                                .carbonEmissions,
-                        ).toLocaleString()}{" "}
-                        kg CO<sub>2</sub>
-                    </Strong>{" "}
-                    are from transportation (
-                    <Strong>
-                        {Math.round(
-                            summedMetaData.consumptions.transportation
-                                .energyExpended,
-                        ).toLocaleString()}{" "}
-                        kWh
-                    </Strong>
-                    ),{" "}
-                    <Strong>
-                        {Math.round(
-                            summedMetaData.consumptions.electricity
-                                .carbonEmissions,
-                        ).toLocaleString()}{" "}
-                        kg CO<sub>2</sub>
-                    </Strong>{" "}
-                    from electricity (
-                    <Strong>
-                        {Math.round(
-                            summedMetaData.consumptions.electricity
-                                .energyExpended,
-                        ).toLocaleString()}{" "}
-                        kWh
-                    </Strong>
-                    ), and{" "}
-                    <Strong>
-                        {Math.round(
-                            summedMetaData.consumptions.heating.carbonEmissions,
-                        ).toLocaleString()}{" "}
-                        kg CO<sub>2</sub>
-                    </Strong>{" "}
-                    from heating (
-                    <Strong>
-                        {Math.round(
-                            summedMetaData.consumptions.heating.energyExpended,
-                        ).toLocaleString()}{" "}
-                        kWh
-                    </Strong>
-                    ).
-                </Text>
-                <Accordion type="multiple">
-                    {metaData?.map((country) => {
-                        const totalConsumptionCount = Math.round(
-                            country.consumptions.electricity.count +
-                                country.consumptions.heating.count +
-                                country.consumptions.transportation.count,
-                        ).toLocaleString();
-
-                        const totalCarbonEmissions = Math.round(
-                            country.consumptions.electricity.carbonEmissions +
-                                country.consumptions.heating.carbonEmissions +
-                                country.consumptions.transportation
-                                    .carbonEmissions,
-                        ).toLocaleString();
-
-                        const totalEnergyExpended = Math.round(
-                            country.consumptions.electricity.energyExpended +
-                                country.consumptions.heating.energyExpended +
-                                country.consumptions.transportation
-                                    .energyExpended,
-                        ).toLocaleString();
-
-                        return (
-                            <AccordionItem
-                                value={country.countryID}
-                                key={country.countryID}
-                            >
-                                <AccordionTrigger>
-                                    {t(
-                                        countriesMapping.find(
-                                            (e) => e.ID === country.countryID,
-                                        )?.name,
-                                    )}
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <Text className="text-md mb-4">
-                                        For{" "}
-                                        <Strong>
-                                            {t(
-                                                countriesMapping.find(
-                                                    (e) =>
-                                                        e.ID ===
-                                                        country.countryID,
-                                                )?.name,
-                                            )}
-                                        </Strong>
-                                        ,{" "}
-                                        <Strong>
-                                            {country.userCount.toLocaleString()}{" "}
-                                            accounts
-                                        </Strong>{" "}
-                                        have been created. Of those users,{" "}
-                                        <Strong>
-                                            {country.genders.female.toLocaleString()}
-                                        </Strong>{" "}
-                                        identify as female,{" "}
-                                        <Strong>
-                                            {country.genders.male.toLocaleString()}
-                                        </Strong>{" "}
-                                        as male,{" "}
-                                        <Strong>
-                                            {country.genders.nonBinary.toLocaleString()}
-                                        </Strong>{" "}
-                                        as non-binary, and{" "}
-                                        <Strong>
-                                            {country.genders.other.toLocaleString()}
-                                        </Strong>{" "}
-                                        as other. In total, those users have
-                                        created{" "}
-                                        <Strong>
-                                            {totalConsumptionCount.toLocaleString()}{" "}
-                                            consumptions
-                                        </Strong>
-                                        .{" "}
-                                        <Strong>
-                                            {country.consumptions.transportation.count.toLocaleString()}
-                                        </Strong>{" "}
-                                        are related to transportation,{" "}
-                                        <Strong>
-                                            {country.consumptions.electricity.count.toLocaleString()}
-                                        </Strong>{" "}
-                                        to electricity, and{" "}
-                                        <Strong>
-                                            {country.consumptions.heating.count.toLocaleString()}
-                                        </Strong>{" "}
-                                        to heating. This amounts to a total of{" "}
-                                        <Strong>
-                                            {totalCarbonEmissions} kg CO
-                                            <sub>2</sub>
-                                        </Strong>{" "}
-                                        emissions or{" "}
-                                        <Strong>
-                                            {totalEnergyExpended} kWh
-                                        </Strong>{" "}
-                                        of energy used.{" "}
-                                        <Strong>
-                                            {Math.round(
-                                                country.consumptions
-                                                    .transportation
-                                                    .carbonEmissions,
-                                            ).toLocaleString()}{" "}
-                                            kg CO<sub>2</sub>
-                                        </Strong>{" "}
-                                        are from transportation (
-                                        <Strong>
-                                            {Math.round(
-                                                country.consumptions
-                                                    .transportation
-                                                    .energyExpended,
-                                            ).toLocaleString()}{" "}
-                                            kWh
-                                        </Strong>
-                                        ),{" "}
-                                        <Strong>
-                                            {Math.round(
-                                                country.consumptions.electricity
-                                                    .carbonEmissions,
-                                            ).toLocaleString()}{" "}
-                                            kg CO<sub>2</sub>
-                                        </Strong>{" "}
-                                        from electricity (
-                                        <Strong>
-                                            {Math.round(
-                                                country.consumptions.electricity
-                                                    .energyExpended,
-                                            ).toLocaleString()}{" "}
-                                            kWh
-                                        </Strong>
-                                        ), and{" "}
-                                        <Strong>
-                                            {Math.round(
-                                                country.consumptions.heating
-                                                    .carbonEmissions,
-                                            ).toLocaleString()}{" "}
-                                            kg CO<sub>2</sub>
-                                        </Strong>{" "}
-                                        from heating (
-                                        <Strong>
-                                            {Math.round(
-                                                country.consumptions.heating
-                                                    .energyExpended,
-                                            ).toLocaleString()}{" "}
-                                            kWh
-                                        </Strong>
-                                        ).
-                                    </Text>
-                                </AccordionContent>
-                            </AccordionItem>
-                        );
-                    })}
-                </Accordion>
-            </>
+            <Text className="text-md mb-4">
+                For {concatenatedCountries(countries)}{" "}
+                <Strong>
+                    {reportData.userCount.toLocaleString()} accounts
+                </Strong>{" "}
+                have been created. Of those users,{" "}
+                <Strong>{reportData.genders.female.toLocaleString()}</Strong>{" "}
+                identify as female,{" "}
+                <Strong>{reportData.genders.male.toLocaleString()}</Strong> as
+                male,{" "}
+                <Strong>{reportData.genders.nonBinary.toLocaleString()}</Strong>{" "}
+                as non-binary, and{" "}
+                <Strong>{reportData.genders.other.toLocaleString()}</Strong> as
+                other. In total, those users have created{" "}
+                <Strong>
+                    {reportData.consumptions.total.count.toLocaleString()}{" "}
+                    consumptions
+                </Strong>
+                .{" "}
+                <Strong>
+                    {reportData.consumptions.transportation.count.toLocaleString()}
+                </Strong>{" "}
+                are related to transportation,{" "}
+                <Strong>
+                    {reportData.consumptions.electricity.count.toLocaleString()}
+                </Strong>{" "}
+                to electricity, and{" "}
+                <Strong>
+                    {reportData.consumptions.heating.count.toLocaleString()}
+                </Strong>{" "}
+                to heating. This amounts to a total of{" "}
+                <Strong>
+                    {reportData.consumptions.total.carbonEmissions.toLocaleString()}{" "}
+                    kg CO
+                    <sub>2</sub>
+                </Strong>{" "}
+                emissions or{" "}
+                <Strong>
+                    {reportData.consumptions.total.energyExpended.toLocaleString()}{" "}
+                    kWh of energy used
+                </Strong>
+                .{" "}
+                <Strong>
+                    {Math.round(
+                        reportData.consumptions.transportation.carbonEmissions,
+                    ).toLocaleString()}{" "}
+                    kg CO<sub>2</sub>
+                </Strong>{" "}
+                are from transportation (
+                <Strong>
+                    {Math.round(
+                        reportData.consumptions.transportation.energyExpended,
+                    ).toLocaleString()}{" "}
+                    kWh
+                </Strong>
+                ),{" "}
+                <Strong>
+                    {Math.round(
+                        reportData.consumptions.electricity.carbonEmissions,
+                    ).toLocaleString()}{" "}
+                    kg CO<sub>2</sub>
+                </Strong>{" "}
+                from electricity (
+                <Strong>
+                    {Math.round(
+                        reportData.consumptions.electricity.energyExpended,
+                    ).toLocaleString()}{" "}
+                    kWh
+                </Strong>
+                ), and{" "}
+                <Strong>
+                    {Math.round(
+                        reportData.consumptions.heating.carbonEmissions,
+                    ).toLocaleString()}{" "}
+                    kg CO<sub>2</sub>
+                </Strong>{" "}
+                from heating (
+                <Strong>
+                    {Math.round(
+                        reportData.consumptions.heating.energyExpended,
+                    ).toLocaleString()}{" "}
+                    kWh
+                </Strong>
+                ).
+            </Text>
         );
-    } else return <Text>Not Data</Text>;
+    };
+
+    const selectedCountryIds = metaData.map((country) => country.countryID);
+
+    return (
+        <>
+            <Heading>{t("dashboard.autoReport.title")}</Heading>
+            {report(selectedCountryIds)}
+
+            {selectedCountryIds.length > 1 && (
+                <Accordion type="multiple">
+                    {selectedCountryIds.map((countryID) => (
+                        <AccordionItem key={countryID} value={countryID}>
+                            <AccordionTrigger>
+                                {t(
+                                    countriesMapping.find(
+                                        (e) => e.ID === countryID,
+                                    )?.name,
+                                )}
+                            </AccordionTrigger>
+                            <AccordionContent>
+                                {report([countryID])}
+                            </AccordionContent>
+                        </AccordionItem>
+                    ))}
+                </Accordion>
+            )}
+        </>
+    );
 }
