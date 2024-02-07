@@ -4,9 +4,11 @@ import Link from "next/link";
 import Logo from "./navigation/logo";
 
 import { useTranslations } from "next-intl";
-import { Card } from "./ui/card";
+import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
 import LocaleSwitcher from "./navigation/localeSwitcher";
+import { Flex } from "@radix-ui/themes";
+import { Button } from "./ui/button";
 
 /**
  * Renders the footer component.
@@ -16,28 +18,57 @@ import LocaleSwitcher from "./navigation/localeSwitcher";
 export default function Footer(): JSX.Element {
     const t = useTranslations();
     return (
-        <Card className="items-center p-4 mx-auto md:px-8">
-            <div className="sm:flex sm:items-center sm:justify-between">
-                <Link href="/" className="flex items-center mb-4 sm:mb-0">
-                    <Logo />
-                </Link>
+        <Card className="items-center">
+            <CardContent>
+                <Flex
+                    direction={{ initial: "column", sm: "row" }}
+                    justify="between"
+                    align="center"
+                    className="gap-2 gap-x-4 mt-6"
+                >
+                    <Link href="/" className="flex items-center mb-4 sm:mb-0">
+                        <Logo />
+                    </Link>
+                    <Flex
+                        direction={{ initial: "column", sm: "row" }}
+                        justify="between"
+                        align="center"
+                        className=""
+                    >
+                        <Button variant="link">
+                            <Link href="https://aurora-h2020.eu">
+                                {t("footer.auroraWebsite")}
+                            </Link>
+                        </Button>
+                        <Separator
+                            orientation="vertical"
+                            className="h-5 hidden md:block"
+                        />
+                        <Button variant="link">
+                            <Link href="https://apps.apple.com/us/app/aurora-energy-tracker/id1668801198">
+                                {t("footer.iosApp")}
+                            </Link>
+                        </Button>
+                        <Separator
+                            orientation="vertical"
+                            className="h-5 hidden md:block"
+                        />
+                        <Button variant="link">
+                            <Link href="https://play.google.com/store/apps/details?id=eu.inscico.aurora_app">
+                                {t("footer.androidApp")}
+                            </Link>
+                        </Button>
+                    </Flex>
 
-                <ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
-                    <li>
-                        <Link
-                            href="https://aurora-h2020.eu"
-                            className="mr-4 hover:underline md:mr-6 "
-                        >
-                            {t("footer.auroraWebsite")}
-                        </Link>
-                    </li>
-                </ul>
-                <LocaleSwitcher />
-            </div>
-            <Separator className="my-6" />
-            <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400 flex justify-center">
-                <span className="max-w-md">{t("footer.fundingNotice")}</span>
-            </span>
+                    <LocaleSwitcher />
+                </Flex>
+                <Separator className="my-6" />
+                <span className="text-sm text-gray-500 text-center dark:text-gray-400 flex justify-center">
+                    <span className="max-w-md">
+                        {t("footer.fundingNotice")}
+                    </span>
+                </span>
+            </CardContent>
         </Card>
     );
 }
