@@ -5,6 +5,7 @@ import { ElementType } from "react";
 import { cn } from "@/lib/utilities";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { Flex, Text } from "@radix-ui/themes";
+import { useFormatter } from "next-intl";
 
 /**
  * Generates a detailed card component with specified metadata, measure, categories, title, and optional icon.
@@ -32,6 +33,8 @@ export default function DetailedCard({
     icon?: ElementType<any>;
     className?: string;
 }): JSX.Element {
+    const format = useFormatter();
+
     let metricValue = 0;
 
     metaData?.forEach((entry) => {
@@ -50,7 +53,7 @@ export default function DetailedCard({
 
             <div>
                 <Text>{title}</Text>
-                <Metric>{metricValue}</Metric>
+                <Metric>{format.number(metricValue)}</Metric>
             </div>
         </Flex>
     );
