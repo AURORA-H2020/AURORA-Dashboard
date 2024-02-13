@@ -50,3 +50,36 @@ export interface TimelineLabelData {
 export type EnergyMode = "carbon" | "energy";
 
 export type CalculationMode = "absolute" | "relative";
+
+export interface MetaDataSummary {
+    userCount: number;
+    consumptions: {
+        electricity: {
+            count: number;
+            carbonEmissions: number;
+            energyExpended: number;
+        };
+        heating: {
+            count: number;
+            carbonEmissions: number;
+            energyExpended: number;
+        };
+        transportation: {
+            count: number;
+            carbonEmissions: number;
+            energyExpended: number;
+        };
+        total: {
+            count: number;
+            carbonEmissions: number;
+            energyExpended: number;
+        };
+    };
+    recurringConsumptionsCount: number;
+    genders: {
+        male: number;
+        female: number;
+        nonBinary: number;
+        other: number;
+    };
+}

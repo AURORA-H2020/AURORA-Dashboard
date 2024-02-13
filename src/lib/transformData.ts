@@ -4,6 +4,7 @@ import {
     EnergyMode,
     LabelEntries,
     MetaData,
+    MetaDataSummary,
     TimelineData,
     TimelineLabelData,
 } from "@/models/dashboard-data";
@@ -289,4 +290,98 @@ export function getMetaData(
     });
 
     return metaData;
+}
+
+/**
+ * Returns a summary of meta data.
+ *
+ * @param {MetaData | undefined} metaData - the meta data to summarize
+ * @return {MetaDataSummary | undefined} the summarized meta data
+ */
+export function getMetaDataSummary(
+    metaData: MetaData | undefined,
+): MetaDataSummary | undefined {
+    if (!metaData) {
+        return undefined;
+    }
+
+    const initialValue: MetaDataSummary = {
+        userCount: 0,
+        consumptions: {
+            electricity: {
+                count: 0,
+                carbonEmissions: 0,
+                energyExpended: 0,
+            },
+            heating: {
+                count: 0,
+                carbonEmissions: 0,
+                energyExpended: 0,
+            },
+            transportation: {
+                count: 0,
+                carbonEmissions: 0,
+                energyExpended: 0,
+            },
+            total: {
+                count: 0,
+                carbonEmissions: 0,
+                energyExpended: 0,
+            },
+        },
+        recurringConsumptionsCount: 0,
+        genders: {
+            male: 0,
+            female: 0,
+            nonBinary: 0,
+            other: 0,
+        },
+    };
+
+    const reportData = metaData.reduce((accumulator, currentCountry) => {
+        // Add values from the current country to the accumulator
+        accumulator.userCount += currentCountry.userCount;
+        accumulator.recurringConsumptionsCount +=
+            currentCountry.recurringConsumptionsCount;
+
+        // Loop through the genders object
+        for (const gender in accumulator.genders) {
+            accumulator.genders[gender] += currentCountry.genders[gender];
+        }
+
+        // Loop through the consumptions object
+        for (const category in currentCountry.consumptions) {
+            const currentCategory = accumulator.consumptions[category];
+            const currentObjectCategory = currentCountry.consumptions[category];
+
+            currentCategory.count += currentObjectCategory.count;
+            currentCategory.carbonEmissions += Math.round(
+                currentObjectCategory.carbonEmissions,
+            );
+            currentCategory.energyExpended += Math.round(
+                currentObjectCategory.energyExpended,
+            );
+        }
+
+        // Add totals across consumptions
+        accumulator.consumptions["total"].count += Math.round(
+            currentCountry.consumptions.electricity.count +
+                currentCountry.consumptions.heating.count +
+                currentCountry.consumptions.transportation.count,
+        );
+        accumulator.consumptions["total"].carbonEmissions += Math.round(
+            currentCountry.consumptions.electricity.carbonEmissions +
+                currentCountry.consumptions.heating.carbonEmissions +
+                currentCountry.consumptions.transportation.carbonEmissions,
+        );
+        accumulator.consumptions["total"].energyExpended += Math.round(
+            currentCountry.consumptions.electricity.energyExpended +
+                currentCountry.consumptions.heating.energyExpended +
+                currentCountry.consumptions.transportation.energyExpended,
+        );
+
+        return accumulator;
+    }, initialValue);
+
+    return reportData;
 }
