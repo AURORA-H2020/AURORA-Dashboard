@@ -64,11 +64,7 @@ const SignInForm = () => {
                         <TabsTrigger value="email-signin" className="w-1/2">
                             {t("ui.auth.signIn")}
                         </TabsTrigger>
-                        <TabsTrigger
-                            value="email-signup"
-                            className="w-1/2"
-                            disabled={true}
-                        >
+                        <TabsTrigger value="email-signup" className="w-1/2">
                             {t("ui.auth.signUp")}
                         </TabsTrigger>
                     </TabsList>

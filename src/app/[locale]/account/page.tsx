@@ -1,69 +1,74 @@
 "use client";
-
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
+import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";
 import LoadingSpinner from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
-import { deleteAccount } from "@/firebase/firestore/deleteAccount";
-import { downloadUserData } from "@/firebase/firestore/downloadUserData";
+import firebase_app from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { Consumption } from "@/models/extensions";
 import { useRouter } from "@/navigation";
-import { Flex, Grid } from "@radix-ui/themes";
+import { Heading } from "@radix-ui/themes";
 import { User } from "firebase/auth";
+import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
-import { toast } from "sonner";
+
+const firestore = getFirestore(firebase_app);
 
 /**
- * Renders the user settings page with profile and account information.
+ * Renders the account page for authenticated users, displaying user details
+ * and a list of their consumptions. Redirects to the home page if the user
+ * is not authenticated. It fetches user consumption data from Firestore.
  *
- * @return {JSX.Element} The user settings page component
+ * @return {JSX.Element} The account page component with user information and
+ *                       a list of Consumption components.
  */
-function UserSettings(): JSX.Element {
+function AccountPage(): JSX.Element {
     const { user, loading } = useAuthContext() as {
         user: User;
         loading: boolean;
     };
     const router = useRouter();
 
-    const [isDeleteAlertOpen, setDeleteAlertOpen] = useState(false);
-
-    const [downloading, setDownloading] = useState(false);
-    /**
-     * Wrapper function to handle downloading user data.
-     *
-     * @return {Promise<void>} Resolves when user data is downloaded successfully
-     */
-    const downloadUserDataWrapper = async () => {
-        setDownloading(true);
-        try {
-            await downloadUserData();
-            toast.success("Your data was successfully downloaded");
-        } catch (error) {
-            // Handle the error
-            console.error("Error downloading user data:", error);
-            toast.error("Your data could not be downloaded");
-        } finally {
-            setDownloading(false);
-        }
-    };
+    const [userConsumptions, setUserConsumptions] = useState<Consumption[]>([]);
 
     useEffect(() => {
         if (loading) return;
 
-        // Redirect to the home page if no user is authenticated
         if (!user) {
             router.replace("/");
             return;
         }
+
+        // Async function to fetch the data within useEffect
+        const fetchUserConsumptions = async () => {
+            try {
+                // Reference to the collection where user documents are stored
+                const userConsumptionsRef = collection(
+                    firestore,
+                    FirebaseConstants.collections.users.name,
+                    user.uid,
+                    FirebaseConstants.collections.users.consumptions.name,
+                );
+
+                // Create a query against the collection, filtering by user ID
+                const q = query(userConsumptionsRef);
+
+                // Execute the query
+                const querySnapshot = await getDocs(q);
+
+                // Map through the documents and set the state
+                const docs: Consumption[] = querySnapshot.docs.map((doc) => ({
+                    ...(doc.data() as Consumption),
+                    id: doc.id,
+                }));
+                setUserConsumptions(docs);
+            } catch (error) {
+                console.error("Error fetching user documents: ", error);
+                // Handle any errors, such as showing an error message to the user
+            }
+        };
+
+        fetchUserConsumptions();
     }, [user, router, loading]);
 
     if (!user && loading) {
@@ -74,65 +79,19 @@ function UserSettings(): JSX.Element {
     // Authenticated user content
     return (
         <>
-            <Grid
-                columns={{
-                    initial: "1",
-                    sm: "2",
-                }}
-                className="gap-6 mt-6 mb-6"
-            >
-                <Card>
-                    <CardContent className="p-6">
-                        <Flex direction={"column"} className="gap-2">
-                            <Button
-                                variant={"outline"}
-                                onClick={downloadUserDataWrapper}
-                                disabled={downloading}
-                            >
-                                {downloading
-                                    ? "Downloading..."
-                                    : "Download my data"}
-                            </Button>
-                            <Button
-                                variant="destructive"
-                                onClick={() => setDeleteAlertOpen(true)}
-                            >
-                                Delete my account
-                            </Button>
-                        </Flex>
-                    </CardContent>
-                </Card>
-            </Grid>
-
-            <AlertDialog open={isDeleteAlertOpen}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>
-                            Are you sure you want to delete your account?
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
-                            This action cannot be undone. This will permanently
-                            delete your account and remove your data from our
-                            servers.
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogCancel
-                            onClick={() => setDeleteAlertOpen(false)}
-                        >
-                            Cancel
-                        </AlertDialogCancel>
-                        <AlertDialogAction
-                            variant="destructive"
-                            onClick={deleteAccount}
-                        >
-                            Delete Account
-                        </AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
+            <ConsumptionSummaryChart />
+            <div>
+                <div className="mb-4 mt-8">
+                    <Heading weight="bold">Your Consumptions</Heading>
+                </div>
+                {userConsumptions.map((consumption) => (
+                    <div className="mb-4" key={consumption.id}>
+                        <ConsumptionPreview consumption={consumption} />
+                    </div>
+                ))}
+            </div>
         </>
     );
 }
 
-export default UserSettings;
+export default AccountPage;

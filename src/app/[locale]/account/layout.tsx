@@ -1,4 +1,9 @@
-import { Heading, Text } from "@radix-ui/themes";
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { usePathname } from "@/navigation";
+import { Flex } from "@radix-ui/themes";
+import Link from "next/link";
 
 /**
  * Renders the AccountLayout component.
@@ -12,13 +17,24 @@ export default function AccountLayout({
 }: {
     children: React.ReactNode;
 }): React.ReactNode {
+    const pathname = usePathname();
+
     return (
         <>
-            <Heading>My Account</Heading>
-            <Text>
-                Download your data or delete your account. We are working on
-                implementing more features in the future.
-            </Text>
+            <Flex className="gap-2 justify-center">
+                <Button
+                    variant={pathname === "/account" ? "default" : "outline"}
+                >
+                    <Link href={"/account"}>Home</Link>
+                </Button>
+                <Button
+                    variant={
+                        pathname === "/account/settings" ? "default" : "outline"
+                    }
+                >
+                    <Link href={"/account/settings"}>Settings</Link>
+                </Button>
+            </Flex>
             <div>{children}</div>
         </>
     );
