@@ -31,4 +31,4 @@ jobs:
                   LINGO_HUB_CREDENTIALS: ${{ secrets.LINGO_HUB_CREDENTIALS }}
 
             - name: Upload translations to LingoHub
-              run: lingohub resource:up './messages/en-GB.json' --locale en-GB --project AURORA-Dashboard
+              run: lingohub resource:up './messages/en-GB.json' --locale en --project AURORA-Dashboard
