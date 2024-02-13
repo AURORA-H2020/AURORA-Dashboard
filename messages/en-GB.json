@@ -151,6 +151,16 @@
     "nonBinary": "Non-Binary",
     "other": "Other"
   },
+    "label": {
+        "aPlus": "Accomplisher",
+        "a": "Ambassador",
+        "b": "Big Achiever",
+        "c": "Champion",
+        "d": "Driver",
+        "e": "Explorer",
+        "f": "First Mover",
+        "g": "Ground Breaker"
+    },
   "category": {
     "electricity": "Electricity",
     "transportation": "Transportation",

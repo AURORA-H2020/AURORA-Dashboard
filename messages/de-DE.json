@@ -151,6 +151,16 @@
     "nonBinary": "Nicht binär",
     "other": "Andere"
   },
+    "label": {
+        "aPlus": "",
+        "a": "",
+        "b": "",
+        "c": "",
+        "d": "",
+        "e": "",
+        "f": "",
+        "g": ""
+    },
   "category": {
     "electricity": "Elektrizität",
     "transportation": "Transport",

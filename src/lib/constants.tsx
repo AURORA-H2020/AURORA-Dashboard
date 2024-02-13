@@ -110,15 +110,16 @@ export const genderMappings: { key: string; label: string; color: string }[] = [
 export const labelMappings: {
     label: Label;
     color: string;
+    name: string;
 }[] = [
-    { label: "A+", color: "#306EBA" },
-    { label: "A", color: "#42944A" },
-    { label: "B", color: "#6AAC46" },
-    { label: "C", color: "#CAD444" },
-    { label: "D", color: "#FCED4F" },
-    { label: "E", color: "#F1BD40" },
-    { label: "F", color: "#DC6E2D" },
-    { label: "G", color: "#D02E26" },
+    { label: "A+", color: "#306EBA", name: t("label.aPlus") },
+    { label: "A", color: "#42944A", name: t("label.a") },
+    { label: "B", color: "#6AAC46", name: t("label.b") },
+    { label: "C", color: "#CAD444", name: t("label.c") },
+    { label: "D", color: "#FCED4F", name: t("label.d") },
+    { label: "E", color: "#F1BD40", name: t("label.e") },
+    { label: "F", color: "#DC6E2D", name: t("label.f") },
+    { label: "G", color: "#D02E26", name: t("label.g") },
 ];
 
 export const consumptionMapping: ConsumptionAttributes[] = [
