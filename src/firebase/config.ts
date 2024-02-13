@@ -1,4 +1,6 @@
-import { getApps, initializeApp } from "firebase/app";
+import { initializeApp, getApps, getApp } from "firebase/app";
+import { getFirestore, connectFirestoreEmulator } from "firebase/firestore";
+import { getAuth, connectAuthEmulator } from "firebase/auth";
 import { FirebaseConstants } from "./firebase-constants";
 
 // Firebase configuration
@@ -12,7 +14,22 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-let firebase_app =
-    getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+let firebaseApp;
+if (!getApps().length) {
+    firebaseApp = initializeApp(firebaseConfig);
+} else {
+    firebaseApp = getApp();
+}
 
-export default firebase_app;
+// Check if we are in development and if so, connect to Firebase emulators
+if (process.env.NEXT_PUBLIC_TEST_MODE === "true") {
+    // Firestore Emulator
+    const firestore = getFirestore(firebaseApp);
+    connectFirestoreEmulator(firestore, "localhost", 8080);
+
+    // Authentication Emulator
+    const auth = getAuth(firebaseApp);
+    connectAuthEmulator(auth, "http://localhost:9099");
+}
+
+export default firebaseApp;
