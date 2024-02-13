@@ -19,6 +19,7 @@ import { GenderByCountryChart } from "../../components/dashboard/genderByCountry
 import { Flex, Grid } from "@radix-ui/themes";
 import { Card, CardContent } from "../../components/ui/card";
 
+import { ConsumptionAverageCompare } from "@/components/dashboard/consumptionAverageCompare";
 import CountryUsersPieChart from "@/components/dashboard/countryUsersPieChart";
 import { LabelSummary } from "@/components/dashboard/labelSummary";
 import { Alert, AlertTitle } from "@/components/ui/alert";
@@ -230,6 +231,19 @@ export function Dashboard({
                             <GenderByCountryChart
                                 metaData={metaData}
                                 title={t("dashboard.genderDistribution.title")}
+                            />
+                        </CardContent>
+                    </Card>
+
+                    <Card className="mb-6">
+                        <CardContent className="p-6">
+                            <ConsumptionAverageCompare
+                                metaData={metaData}
+                                categories={selectedCategories}
+                                countries={selectedCountries.map(
+                                    (country) => country.value,
+                                )}
+                                title={t("dashboard.averageCompare.title")}
                             />
                         </CardContent>
                     </Card>
