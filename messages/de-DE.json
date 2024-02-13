@@ -54,6 +54,9 @@
         "genderDistribution": {
             "title": "Geschlechterverteilung"
         },
+        "averageCompare": {
+            "title": ""
+        },
         "main": {
             "title": "Energy Tracker: Dashboard"
         },
@@ -116,6 +119,15 @@
             "selectValue": "Wählen Sie einen Wert"
         }
     },
+    "country": {
+        "allSelectedCountries": "",
+        "denmark": "Dänemark",
+        "portugal": "Portugal",
+        "slovenia": "Slowenien",
+        "spain": "Spanien",
+        "unitedKingdom": "Vereinigtes Königreich",
+        "zeuropeOther": "Andere in der EU"
+    },
     "footer": {
         "auroraWebsite": "AURORA Webseite",
         "iosApp": "iOS-App",
@@ -133,14 +145,6 @@
     "language": {
         "english": "Englisch",
         "german": "Deutsch"
-    },
-    "country": {
-        "denmark": "Dänemark",
-        "portugal": "Portugal",
-        "slovenia": "Slowenien",
-        "spain": "Spanien",
-        "unitedKingdom": "Vereinigtes Königreich",
-        "zeuropeOther": "Andere in der EU"
     },
     "countrySpecial": {
         "unitedKingdom": "das Vereinigte Königreich",
