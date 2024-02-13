@@ -16,8 +16,19 @@ import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Flex, Heading } from "@radix-ui/themes";
 import { BarChart } from "@tremor/react";
+import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+} from "../ui/dialog";
 import {
     Select,
     SelectContent,
@@ -25,6 +36,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from "../ui/select";
+import { Table, TableBody, TableCell, TableRow } from "../ui/table";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface LabelChartData extends LabelEntries {
@@ -128,7 +140,48 @@ export function LabelSummary({
 
     return (
         <>
-            <Heading>{title}</Heading>
+            <Flex
+                direction={{ initial: "row" }}
+                className="gap-2 gap-x-4"
+                align="center"
+            >
+                <Heading>{title}</Heading>
+                <Dialog>
+                    <DialogTrigger asChild>
+                        <Button variant="ghost" size="icon">
+                            <Info />
+                        </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                        <DialogHeader>
+                            <DialogTitle>
+                                {t("dashboard.energylabels.title")}
+                            </DialogTitle>
+                            <DialogDescription>
+                                {t("dashboard.energylabels.description")}
+                                <Table className="mt-6">
+                                    <TableBody>
+                                        {labelMappings.map((label) => (
+                                            <TableRow key={label.label}>
+                                                <TableCell className="font-medium">
+                                                    <Badge
+                                                        className={`bg-[${label.color}] hover:bg-[${label.color}] text-white`}
+                                                    >
+                                                        {label.label}
+                                                    </Badge>
+                                                </TableCell>
+                                                <TableCell>
+                                                    {t(label.name)}
+                                                </TableCell>
+                                            </TableRow>
+                                        ))}
+                                    </TableBody>
+                                </Table>
+                            </DialogDescription>
+                        </DialogHeader>
+                    </DialogContent>
+                </Dialog>
+            </Flex>
 
             <Flex
                 direction={{ initial: "column", sm: "row" }}
