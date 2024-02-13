@@ -211,6 +211,12 @@ export function getYearsInSummary(
     return Array.from(yearsSet);
 }
 
+/**
+ * Function to get sorted country labels.
+ *
+ * @param {string[] | undefined} countryIds - The array of country IDs
+ * @return {{ names: string[]; colors: string[]; }} An object with names and colors of the countries
+ */
 export function getSortedCountryLabels(countryIds: string[] | undefined) {
     if (!countryIds) {
         return { names: [], colors: [] };
