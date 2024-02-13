@@ -2,7 +2,7 @@ import { categories } from "@/lib/constants";
 import { getConsumptionAttributes } from "@/lib/utilities";
 import { MetaData } from "@/models/dashboard-data";
 import { Strong } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import React from "react";
 import { Alert, AlertTitle } from "../ui/alert";
 
@@ -18,6 +18,7 @@ export default function ConsumptionCardSummary({
     metaData: MetaData | undefined;
 }): JSX.Element {
     const t = useTranslations();
+    const format = useFormatter();
 
     const dataSet = categories.map((category) => {
         const count = metaData?.reduce(
@@ -49,7 +50,7 @@ export default function ConsumptionCardSummary({
                         )}
                         <AlertTitle>
                             {t(consumptionAttributes?.label)}:{" "}
-                            <Strong>{data.count}</Strong>
+                            <Strong>{format.number(data.count ?? 0)}</Strong>
                         </AlertTitle>
                     </Alert>
                 );
