@@ -81,7 +81,6 @@ export default function AutoReport({
 
         const reportData = filteredMetaData.reduce(
             (accumulator, currentCountry) => {
-                console.log(currentCountry);
                 // Add values from the current country to the accumulator
                 accumulator.userCount += currentCountry.userCount;
                 accumulator.recurringConsumptionsCount +=

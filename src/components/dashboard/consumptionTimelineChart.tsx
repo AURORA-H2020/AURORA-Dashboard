@@ -98,8 +98,6 @@ export function ConsumptionTimelineChart({
             locale,
         );
 
-        console.log(updatedTemporalData);
-
         setTransformedData(updatedTemporalData);
     }, [
         globalSummaryData,
