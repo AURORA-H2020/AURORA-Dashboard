@@ -4,7 +4,7 @@ import { MetaData } from "@/models/dashboard-data";
 import { Strong } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import React from "react";
-import { Alert, AlertDescription, AlertTitle } from "../ui/alert";
+import { Alert, AlertTitle } from "../ui/alert";
 
 /**
  * Renders a summary of consumption card data based on the provided metaData.
@@ -51,7 +51,6 @@ export default function ConsumptionCardSummary({
                             {t(consumptionAttributes?.label)}:{" "}
                             <Strong>{data.count}</Strong>
                         </AlertTitle>
-                        <AlertDescription></AlertDescription>
                     </Alert>
                 );
             })}
