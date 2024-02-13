@@ -48,10 +48,14 @@
       "title": "Verbräuche über Zeit: Durchschnitt pro Nutzer"
     },
     "energylabels": {
-      "title": "Energieabzeichen"
+      "title": "Energieabzeichen",
+      "description": "Dies ist eine Zusammenfassung der Abzeichen, die Nutzer des AURORA Energy Trackers jedes Jahr erhalten haben."
     },
     "genderDistribution": {
       "title": "Geschlechterverteilung"
+    },
+    "averageCompare": {
+      "title": "Durchschnittlicher Verbrauch pro Nutzer"
     },
     "main": {
       "title": "Energy Tracker: Dashboard"
@@ -115,6 +119,15 @@
       "selectValue": "Wählen Sie einen Wert"
     }
   },
+  "country": {
+    "allSelectedCountries": "Alle ausgewählten Länder",
+    "denmark": "Dänemark",
+    "portugal": "Portugal",
+    "slovenia": "Slowenien",
+    "spain": "Spanien",
+    "unitedKingdom": "Vereinigtes Königreich",
+    "zeuropeOther": "Andere in der EU"
+  },
   "footer": {
     "auroraWebsite": "AURORA Webseite",
     "iosApp": "iOS-App",
@@ -133,14 +146,6 @@
     "english": "Englisch",
     "german": "Deutsch"
   },
-  "country": {
-    "denmark": "Dänemark",
-    "portugal": "Portugal",
-    "slovenia": "Slowenien",
-    "spain": "Spanien",
-    "unitedKingdom": "Vereinigtes Königreich",
-    "zeuropeOther": "Andere in der EU"
-  },
   "countrySpecial": {
     "unitedKingdom": "das Vereinigte Königreich",
     "zeuropeOther": "andere in der EU"
@@ -150,6 +155,16 @@
     "male": "Männlich",
     "nonBinary": "Nicht binär",
     "other": "Andere"
+  },
+  "label": {
+    "aPlus": "Ausgezeichnet",
+    "a": "Anführer*in",
+    "b": "Berühmtheit",
+    "c": "Champion",
+    "d": "Durchstarter*in",
+    "e": "Entdecker*in",
+    "f": "Favorit*in",
+    "g": "Grenzgänger*in"
   },
   "category": {
     "electricity": "Elektrizität",

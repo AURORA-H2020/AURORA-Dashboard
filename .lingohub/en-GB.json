@@ -48,10 +48,14 @@
       "title": "Consumption Timeline: Average per User"
     },
     "energylabels": {
-      "title": "Energy Labels"
+      "title": "Energy Labels",
+      "description": "The AURORA project has designed a set of labels, which give citizens a clear understanding of their current energy profile. A separate set of labels is assigned for Energy Consumption and Carbon Emissions."
     },
     "genderDistribution": {
       "title": "Gender Distribution"
+    },
+    "averageCompare": {
+      "title": "Average Consumption per User"
     },
     "main": {
       "title": "Energy Tracker: Dashboard"
@@ -115,6 +119,15 @@
       "selectValue": "Select a value"
     }
   },
+  "country": {
+    "allSelectedCountries": "All selected countries",
+    "denmark": "Denmark",
+    "portugal": "Portugal",
+    "slovenia": "Slovenia",
+    "spain": "Spain",
+    "unitedKingdom": "United Kingdom",
+    "zeuropeOther": "Others in the EU"
+  },
   "footer": {
     "auroraWebsite": "AURORA Website",
     "iosApp": "iOS App",
@@ -133,14 +146,6 @@
     "english": "English",
     "german": "German"
   },
-  "country": {
-    "denmark": "Denmark",
-    "portugal": "Portugal",
-    "slovenia": "Slovenia",
-    "spain": "Spain",
-    "unitedKingdom": "United Kingdom",
-    "zeuropeOther": "Others in the EU"
-  },
   "countrySpecial": {
     "unitedKingdom": "the United Kingdom",
     "zeuropeOther": "others in the EU"
@@ -150,6 +155,16 @@
     "male": "Male",
     "nonBinary": "Non-Binary",
     "other": "Other"
+  },
+  "label": {
+    "aPlus": "Accomplisher",
+    "a": "Ambassador",
+    "b": "Big Achiever",
+    "c": "Champion",
+    "d": "Driver",
+    "e": "Explorer",
+    "f": "First Mover",
+    "g": "Ground Breaker"
   },
   "category": {
     "electricity": "Electricity",
