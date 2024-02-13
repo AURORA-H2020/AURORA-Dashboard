@@ -156,7 +156,7 @@ export const categories: ConsumptionCategory[] = consumptionMapping.map(
 export const energyModes: EnergyMode[] = ["carbon", "energy"];
 export const calculationModes: CalculationMode[] = ["absolute", "relative"];
 
-export const carbonUnit = " kg CO\u00B2";
+export const carbonUnit = " kg CO\u2082";
 
 export const kiloGramNumberFormatter = Intl.NumberFormat("en-GB", {
     notation: "compact",

@@ -124,7 +124,7 @@ export function getConsumptionAttributes(
 export const valueFormatterCarbon = (number: number): string =>
     `${Intl.NumberFormat("us")
         .format(Math.round(number))
-        .toString()} \n kg CO\u00B2`;
+        .toString()} \n kg CO\u2082`;
 
 /**
  * Formats the given number as a string representing energy in kilowatt-hours.
