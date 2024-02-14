@@ -3,16 +3,12 @@ import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview
 import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";
 import LoadingSpinner from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
-import firebase_app from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { fetchUserConsumptions } from "@/lib/firebaseUtils";
 import { Consumption } from "@/models/extensions";
 import { useRouter } from "@/navigation";
 import { Heading } from "@radix-ui/themes";
 import { User } from "firebase/auth";
-import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 import { useEffect, useState } from "react";
-
-const firestore = getFirestore(firebase_app);
 
 /**
  * Renders the account page for authenticated users, displaying user details
@@ -29,7 +25,9 @@ function AccountPage(): JSX.Element {
     };
     const router = useRouter();
 
-    const [userConsumptions, setUserConsumptions] = useState<Consumption[]>([]);
+    const [userConsumptions, setUserConsumptions] = useState<
+        Consumption[] | null
+    >([]);
 
     useEffect(() => {
         if (loading) return;
@@ -39,36 +37,12 @@ function AccountPage(): JSX.Element {
             return;
         }
 
-        // Async function to fetch the data within useEffect
-        const fetchUserConsumptions = async () => {
-            try {
-                // Reference to the collection where user documents are stored
-                const userConsumptionsRef = collection(
-                    firestore,
-                    FirebaseConstants.collections.users.name,
-                    user.uid,
-                    FirebaseConstants.collections.users.consumptions.name,
-                );
-
-                // Create a query against the collection, filtering by user ID
-                const q = query(userConsumptionsRef);
-
-                // Execute the query
-                const querySnapshot = await getDocs(q);
-
-                // Map through the documents and set the state
-                const docs: Consumption[] = querySnapshot.docs.map((doc) => ({
-                    ...(doc.data() as Consumption),
-                    id: doc.id,
-                }));
-                setUserConsumptions(docs);
-            } catch (error) {
-                console.error("Error fetching user documents: ", error);
-                // Handle any errors, such as showing an error message to the user
-            }
+        const fetchUC = async () => {
+            const userConsumptions = await fetchUserConsumptions(user.uid);
+            setUserConsumptions(userConsumptions);
         };
 
-        fetchUserConsumptions();
+        fetchUC();
     }, [user, router, loading]);
 
     if (!user && loading) {
@@ -84,7 +58,8 @@ function AccountPage(): JSX.Element {
                 <div className="mb-4 mt-8">
                     <Heading weight="bold">Your Consumptions</Heading>
                 </div>
-                {userConsumptions.map((consumption) => (
+                {userConsumptions &&
+                    userConsumptions.map((consumption) => (
                     <div className="mb-4" key={consumption.id}>
                         <ConsumptionPreview consumption={consumption} />
                     </div>

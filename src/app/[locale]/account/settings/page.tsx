@@ -24,21 +24,17 @@ import { Input } from "@/components/ui/input";
 import LoadingSpinner from "@/components/ui/loading";
 import { Table, TableBody } from "@/components/ui/table";
 import { useAuthContext } from "@/context/AuthContext";
-import firebase_app from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { deleteAccount } from "@/firebase/firestore/deleteAccount";
 import { downloadUserData } from "@/firebase/firestore/downloadUserData";
+import { fetchUserById } from "@/lib/firebaseUtils";
 import { city2Name, country2Name, titleCase } from "@/lib/utilities";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { useRouter } from "@/navigation";
 import { Flex, Grid } from "@radix-ui/themes";
 import { User } from "firebase/auth";
-import { doc, getDoc, getFirestore } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
-
-const firestore = getFirestore(firebase_app);
 
 /**
  * Renders the user settings page with profile and account information.
@@ -71,28 +67,6 @@ function UserSettings(): JSX.Element {
 
     const [isDeleteAlertOpen, setDeleteAlertOpen] = useState(false);
 
-    // Fetch the user document from Firestore
-    const fetchDocumentById = async (documentId: string) => {
-        const docRef = doc(
-            firestore,
-            FirebaseConstants.collections.users.name,
-            documentId,
-        );
-        try {
-            const docSnapshot = await getDoc(docRef);
-
-            if (docSnapshot.exists()) {
-                console.log("Document data:", docSnapshot.data());
-                setUserData(docSnapshot.data() as FirebaseUser);
-            } else {
-                console.log("No such document!");
-                setUserData(null);
-            }
-        } catch (error) {
-            console.error("Error getting document:", error);
-        }
-    };
-
     const [downloading, setDownloading] = useState(false);
     /**
      * Wrapper function to handle downloading user data.
@@ -122,8 +96,12 @@ function UserSettings(): JSX.Element {
             return;
         }
 
-        // If there's a user, fetch the document by user ID
-        fetchDocumentById(user.uid);
+        const fetchUserData = async () => {
+            const userData = await fetchUserById(user.uid);
+            setUserData(userData);
+        };
+
+        fetchUserData();
     }, [user, router, loading]);
 
     if (!user && loading) {
@@ -180,6 +158,9 @@ function UserSettings(): JSX.Element {
                                     </ConsumptionTableRow>
                                     <ConsumptionTableRow label="City">
                                         {city2Name(userData?.city || "")}
+                                    </ConsumptionTableRow>
+                                    <ConsumptionTableRow label="User ID">
+                                        {user.uid}
                                     </ConsumptionTableRow>
                                 </TableBody>
                             </Table>
