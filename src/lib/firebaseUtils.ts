@@ -1,6 +1,17 @@
 import firebase_app from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { CountryData } from "@/models/countryData";
+import { Consumption } from "@/models/extensions";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { User as FirebaseUser } from "@/models/firestore/user/user";
+import {
+    collection,
+    doc,
+    getDoc,
+    getDocs,
+    getFirestore,
+    query,
+} from "firebase/firestore";
 import {
     // StorageReference,
     getDownloadURL,
@@ -8,6 +19,8 @@ import {
     listAll,
     ref,
 } from "firebase/storage";
+
+const firestore = getFirestore(firebase_app);
 
 /**
  * Downloads a file from Firebase Storage.
@@ -138,5 +151,84 @@ export const getLatestCountryFile = async (
     } catch (error) {
         console.error(error);
         return null; // In case of error, return null
+    }
+};
+
+// Fetch the user document from Firestore
+export const fetchUserById = async (userId: string) => {
+    const docRef = doc(
+        firestore,
+        FirebaseConstants.collections.users.name,
+        userId,
+    );
+    try {
+        const docSnapshot = await getDoc(docRef);
+
+        if (docSnapshot.exists()) {
+            console.log("Document data:", docSnapshot.data());
+            return docSnapshot.data() as FirebaseUser;
+        } else {
+            console.log("No such document!");
+            return null;
+        }
+    } catch (error) {
+        console.error("Error getting document:", error);
+        return null;
+    }
+};
+
+export const fetchConsumptionById = async (
+    userId: string,
+    consumptionId: string,
+) => {
+    const docRef = doc(
+        firestore,
+        FirebaseConstants.collections.users.name,
+        userId,
+        FirebaseConstants.collections.users.consumptions.name,
+        consumptionId,
+    );
+    try {
+        const docSnapshot = await getDoc(docRef);
+
+        if (docSnapshot.exists()) {
+            console.log("Document data:", docSnapshot.data());
+            return docSnapshot.data() as Consumption;
+        } else {
+            console.log("No such document!");
+            return null;
+        }
+    } catch (error) {
+        console.error("Error getting document:", error);
+        return null;
+    }
+};
+
+export const fetchUserConsumptions = async (userId: string) => {
+    // Reference to the collection where user documents are stored
+    const userConsumptionsRef = collection(
+        firestore,
+        FirebaseConstants.collections.users.name,
+        userId,
+        FirebaseConstants.collections.users.consumptions.name,
+    );
+    try {
+        // Create a query against the collection, filtering by user ID
+        const q = query(userConsumptionsRef);
+
+        // Execute the query
+        const querySnapshot = await getDocs(q);
+
+        // Map through the documents and set the state
+        const docs: Consumption[] = querySnapshot.docs.map((doc) => ({
+            ...(doc.data() as Consumption),
+            id: doc.id,
+        }));
+
+        return docs;
+    } catch (error) {
+        console.error("Error fetching user documents: ", error);
+        // Handle any errors, such as showing an error message to the user
+        return null;
     }
 };
