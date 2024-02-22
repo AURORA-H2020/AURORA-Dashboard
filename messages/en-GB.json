@@ -1,213 +1,213 @@
 {
-    "about": {
-        "carbonEmissionLabels": {
-            "title": "Carbon Emissions Labels",
-            "description": "The data we use to calculate the label for carbon emissions in {countryName}."
-        },
-        "energyExpendedLabels": {
-            "title": "Energy Expended Labels",
-            "description": "The data we use to calculate the label for energy usage in {countryName}."
-        },
-        "metrics": {
-            "title": "Metrics",
-            "description": "The data we use to calculate carbon emissions and energy usage based on user data in {countryName}."
-        },
-        "downloadMetrics": "Download metrics",
-        "countryData": {
-            "title": "App Metrics and Label Data",
-            "description": "In support of Open Science, AURORA hereby discloses the metrics used by the Energy Tracker to calculate <Strong>carbon emissions</Strong>, <Strong>energy usage</Strong> and the <Strong>labels</Strong>."
-        },
-        "downloads": {
-            "title": "Download our data",
-            "description": "We offer the above metrics and label data for download."
-        }
+  "about": {
+    "carbonEmissionLabels": {
+      "title": "Carbon Emissions Labels",
+      "description": "The data we use to calculate the label for carbon emissions in {countryName}."
     },
-    "toast": {
-        "dataDownload": {
-            "success": "Your data was successfully downloaded",
-            "error": "Your data could not be downloaded"
-        },
-        "auth": {
-            "success": "Welcome to AURORA!",
-            "error": "An error occured. Please check your credentials."
-        }
+    "energyExpendedLabels": {
+      "title": "Energy Expended Labels",
+      "description": "The data we use to calculate the label for energy usage in {countryName}."
     },
-    "button": {
-        "downloadPending": "Downloading..."
+    "metrics": {
+      "title": "Metrics",
+      "description": "The data we use to calculate carbon emissions and energy usage based on user data in {countryName}."
     },
-    "dashboard": {
-        "filter": {
-            "allCategories": "All categories",
-            "selectCountries": "Select countries",
-            "invalidData": "No data matches the selected filters.",
-            "absolute": "Absolute",
-            "relative": "Relative"
-        },
-        "card": {
-            "userCount": "Total Number of App Users",
-            "individualConsumptions": "Total Number of Individual Consumptions",
-            "invalidDateRange": "Please select a valid date range"
-        },
-        "consumptionTimeline": {
-            "title": "Consumption Timeline: Average per User"
-        },
-        "energylabels": {
-            "title": "Energy Labels",
-            "description": "The AURORA project has designed a set of labels, which give citizens a clear understanding of their current energy profile. A separate set of labels is assigned for Energy Consumption and Carbon Emissions."
-        },
-        "genderDistribution": {
-            "title": "Gender Distribution"
-        },
-        "averageCompare": {
-            "title": "Average Consumption per User"
-        },
-        "main": {
-            "title": "Energy Tracker: Dashboard"
-        },
-        "autoReport": {
-            "reportSnippets": {
-                "accountsCreated": "For {countries} {userCount} accounts have been created.",
-                "genderDistribution": "Of those users, {femaleCount} identify as female, {maleCount} as male, {nonBinaryCount} as non-binary, and {otherCount} as other.",
-                "totalConsumptions": "In total, those users have created {totalConsumptions} consumptions.",
-                "consumptionBreakdown": "{transportationCount} are related to transportation, {electricityCount} to electricity, and {heatingCount} to heating.",
-                "totalEmissions": "This amounts to a total of {totalEmissions}{unit} emissions or {totalEnergy} kWh of energy used.",
-                "emissionsByCategory": "{transportationEmissions}{unit} are from transportation ({transportationEnergy} kWh), {electricityEmissions}{unit} from electricity ({electricityEnergy} kWh), and {heatingEmissions}{unit} from heating ({heatingEnergy} kWh)."
-            },
-            "title": "Report"
-        },
-        "snapshots": {
-            "lastUpdated": "The data displayed was last updated on",
-            "selectSnapshot": "Select a different snapshot",
-            "downloadSnapshot": "Download this snapshot"
-        }
+    "downloadMetrics": "Download metrics",
+    "countryData": {
+      "title": "App Metrics and Label Data",
+      "description": "In support of Open Science, AURORA hereby discloses the metrics used by the Energy Tracker to calculate <Strong>carbon emissions</Strong>, <Strong>energy usage</Strong> and the <Strong>labels</Strong>."
     },
-    "error": {
-        "title": "An Error Occurred",
-        "notFound": {
-            "title": "Not Found",
-            "description": "The page you are looking for could not be found."
-        },
-        "noData": "No data available"
-    },
-    "metadata": {
-        "title": "AURORA Energy Tracker: Dashboard",
-        "description": "Explore the latest stats of the AURORA Energy Tracker mobile app."
-    },
-    "ui": {
-        "auth": {
-            "orContinueWith": "Or continue with",
-            "signIn": "Sign in",
-            "signUp": "Sign up",
-            "signInPrompt": "Sign in to your AURORA Energy Tracker account.",
-            "signUpPrompt": "Sign up to the AURORA Energy Tracker.",
-            "signInWithApple": "Sign in with Apple",
-            "signUpWithApple": "Sign up with Apple",
-            "signInWithGoogle": "Sign in with Google",
-            "signUpWithGoogle": "Sign up with Google",
-            "email": "Email",
-            "password": "Password"
-        },
-        "datePicker": {
-            "selectDateRange": "Select a valid date range"
-        },
-        "monthPicker": {
-            "start": "Beginning",
-            "end": "End"
-        }
-    },
-    "common": {
-        "co2emission": "CO<sub>2</sub> Emissions",
-        "energyUsage": "Energy Usage",
-        "and": "and",
-        "placeholder": {
-            "selectValue": "Select a value"
-        }
-    },
-    "country": {
-        "allSelectedCountries": "All selected countries",
-        "denmark": "Denmark",
-        "portugal": "Portugal",
-        "slovenia": "Slovenia",
-        "spain": "Spain",
-        "unitedKingdom": "United Kingdom",
-        "zeuropeOther": "Others in the EU"
-    },
-    "footer": {
-        "auroraWebsite": "AURORA Website",
-        "iosApp": "iOS App",
-        "androidApp": "Android App",
-        "fundingNotice": "This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No. 101036418."
-    },
-    "navigation": {
-        "menu": {
-            "dashboard": "Dashboard",
-            "about": "About",
-            "account": "Account",
-            "logout": "Logout"
-        }
-    },
-    "language": {
-        "english": "English",
-        "german": "German",
-        "danish": "Danish",
-        "portuguese": "Portuguese",
-        "slovenian": "Slovenian",
-        "spanish": "Spanish"
-    },
-    "countrySpecial": {
-        "unitedKingdom": "the United Kingdom",
-        "zeuropeOther": "others in the EU"
-    },
-    "gender": {
-        "female": "Female",
-        "male": "Male",
-        "nonBinary": "Non-Binary",
-        "other": "Other"
-    },
-    "label": {
-        "aPlus": "Accomplisher",
-        "a": "Ambassador",
-        "b": "Big Achiever",
-        "c": "Champion",
-        "d": "Driver",
-        "e": "Explorer",
-        "f": "First Mover",
-        "g": "Ground Breaker"
-    },
-    "category": {
-        "electricity": "Electricity",
-        "transportation": "Transportation",
-        "heating": "Heating"
-    },
-    "unitLabel": {
-        "eneryUsage": "Energy Usage",
-        "distance": "Distance"
-    },
-    "month": {
-        "january": "January",
-        "february": "February",
-        "march": "March",
-        "april": "April",
-        "may": "May",
-        "june": "June",
-        "july": "July",
-        "august": "August",
-        "september": "September",
-        "october": "October",
-        "november": "November",
-        "december": "December"
-    },
-    "app": {
-        "account": {
-            "comingSoon": "Download your data or delete your account. We are working on implementing more features in the future.",
-            "myAccount": "My Account",
-            "downloadMyData": "Download my data",
-            "deleteAccount": {
-                "button": "Delete my account",
-                "title": "Are you sure you want to delete your account?",
-                "description": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
-                "confirm": "Delete account"
-            }
-        }
+    "downloads": {
+      "title": "Download our data",
+      "description": "We offer the above metrics and label data for download."
     }
+  },
+  "toast": {
+    "dataDownload": {
+      "success": "Your data was successfully downloaded",
+      "error": "Your data could not be downloaded"
+    },
+    "auth": {
+      "success": "Welcome to AURORA!",
+      "error": "An error occured. Please check your credentials."
+    }
+  },
+  "button": {
+    "downloadPending": "Downloading..."
+  },
+  "dashboard": {
+    "filter": {
+      "allCategories": "All categories",
+      "selectCountries": "Select countries",
+      "invalidData": "No data matches the selected filters.",
+      "absolute": "Absolute",
+      "relative": "Relative"
+    },
+    "card": {
+      "userCount": "Total Number of App Users",
+      "individualConsumptions": "Total Number of Individual Consumptions",
+      "invalidDateRange": "Please select a valid date range"
+    },
+    "consumptionTimeline": {
+      "title": "Consumption Timeline: Average per User"
+    },
+    "energylabels": {
+      "title": "Energy Labels",
+      "description": "The AURORA project has designed a set of labels, which give citizens a clear understanding of their current energy profile. A separate set of labels is assigned for Energy Consumption and Carbon Emissions."
+    },
+    "genderDistribution": {
+      "title": "Gender Distribution"
+    },
+    "averageCompare": {
+      "title": "Average Consumption per User"
+    },
+    "main": {
+      "title": "Energy Tracker: Dashboard"
+    },
+    "autoReport": {
+      "reportSnippets": {
+        "accountsCreated": "For {countries} {userCount} accounts have been created.",
+        "genderDistribution": "Of those users, {femaleCount} identify as female, {maleCount} as male, {nonBinaryCount} as non-binary, and {otherCount} as other.",
+        "totalConsumptions": "In total, those users have created {totalConsumptions} consumptions.",
+        "consumptionBreakdown": "{transportationCount} are related to transportation, {electricityCount} to electricity, and {heatingCount} to heating.",
+        "totalEmissions": "This amounts to a total of {totalEmissions}{unit} emissions or {totalEnergy} kWh of energy used.",
+        "emissionsByCategory": "{transportationEmissions}{unit} are from transportation ({transportationEnergy} kWh), {electricityEmissions}{unit} from electricity ({electricityEnergy} kWh), and {heatingEmissions}{unit} from heating ({heatingEnergy} kWh)."
+      },
+      "title": "Report"
+    },
+    "snapshots": {
+      "lastUpdated": "The data displayed was last updated on",
+      "selectSnapshot": "Select a different snapshot",
+      "downloadSnapshot": "Download this snapshot"
+    }
+  },
+  "error": {
+    "title": "An Error Occurred",
+    "notFound": {
+      "title": "Not Found",
+      "description": "The page you are looking for could not be found."
+    },
+    "noData": "No data available"
+  },
+  "metadata": {
+    "title": "AURORA Energy Tracker: Dashboard",
+    "description": "Explore the latest stats of the AURORA Energy Tracker mobile app."
+  },
+  "ui": {
+    "auth": {
+      "orContinueWith": "Or continue with",
+      "signIn": "Sign in",
+      "signUp": "Sign up",
+      "signInPrompt": "Sign in to your AURORA Energy Tracker account.",
+      "signUpPrompt": "Sign up to the AURORA Energy Tracker.",
+      "signInWithApple": "Sign in with Apple",
+      "signUpWithApple": "Sign up with Apple",
+      "signInWithGoogle": "Sign in with Google",
+      "signUpWithGoogle": "Sign up with Google",
+      "email": "Email",
+      "password": "Password"
+    },
+    "datePicker": {
+      "selectDateRange": "Select a valid date range"
+    },
+    "monthPicker": {
+      "start": "Beginning",
+      "end": "End"
+    }
+  },
+  "common": {
+    "co2emission": "CO<sub>2</sub> Emissions",
+    "energyUsage": "Energy Usage",
+    "and": "and",
+    "placeholder": {
+      "selectValue": "Select a value"
+    }
+  },
+  "country": {
+    "allSelectedCountries": "All selected countries",
+    "denmark": "Denmark",
+    "portugal": "Portugal",
+    "slovenia": "Slovenia",
+    "spain": "Spain",
+    "unitedKingdom": "United Kingdom",
+    "zeuropeOther": "Others in the EU"
+  },
+  "footer": {
+    "auroraWebsite": "AURORA Website",
+    "iosApp": "iOS App",
+    "androidApp": "Android App",
+    "fundingNotice": "This project has received funding from the European Union's Horizon 2020 research and innovation programme under grant agreement No. 101036418."
+  },
+  "navigation": {
+    "menu": {
+      "dashboard": "Dashboard",
+      "about": "About",
+      "account": "Account",
+      "logout": "Logout"
+    }
+  },
+  "language": {
+    "english": "English",
+    "german": "German",
+    "danish": "Danish",
+    "portuguese": "Portuguese",
+    "slovenian": "Slovenian",
+    "spanish": "Spanish"
+  },
+  "countrySpecial": {
+    "unitedKingdom": "the United Kingdom",
+    "zeuropeOther": "others in the EU"
+  },
+  "gender": {
+    "female": "Female",
+    "male": "Male",
+    "nonBinary": "Non-Binary",
+    "other": "Other"
+  },
+  "label": {
+    "aPlus": "Accomplisher",
+    "a": "Ambassador",
+    "b": "Big Achiever",
+    "c": "Champion",
+    "d": "Driver",
+    "e": "Explorer",
+    "f": "First Mover",
+    "g": "Ground Breaker"
+  },
+  "category": {
+    "electricity": "Electricity",
+    "transportation": "Transportation",
+    "heating": "Heating"
+  },
+  "unitLabel": {
+    "eneryUsage": "Energy Usage",
+    "distance": "Distance"
+  },
+  "month": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+  "app": {
+    "account": {
+      "comingSoon": "Download your data or delete your account. We are working on implementing more features in the future.",
+      "myAccount": "My Account",
+      "downloadMyData": "Download my data",
+      "deleteAccount": {
+        "button": "Delete my account",
+        "title": "Are you sure you want to delete your account?",
+        "description": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+        "confirm": "Delete account"
+      }
+    }
+  }
 }

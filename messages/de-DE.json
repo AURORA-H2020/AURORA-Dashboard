@@ -26,6 +26,10 @@
     "dataDownload": {
       "success": "Ihre Daten wurden erfolgreich heruntergeladen",
       "error": "Ihre Daten konnten nicht heruntergeladen werden"
+    },
+    "auth": {
+      "success": "Willkommen bei AURORA!",
+      "error": "Es ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Anmeldedaten."
     }
   },
   "button": {
@@ -49,7 +53,7 @@
     },
     "energylabels": {
       "title": "Energieabzeichen",
-      "description": "Dies ist eine Zusammenfassung der Abzeichen, die Nutzer des AURORA Energy Trackers jedes Jahr erhalten haben."
+      "description": "Im Rahmen des AURORA-Projekts wurde eine Reihe von Abzeichen entwickelt, die den Bürgern ein klares Verständnis ihres aktuellen Energieprofils vermitteln. Für den Energieverbrauch und die Kohlenstoffemissionen wird ein separater Satz von Etiketten vergeben."
     },
     "genderDistribution": {
       "title": "Geschlechterverteilung"
@@ -144,7 +148,11 @@
   },
   "language": {
     "english": "Englisch",
-    "german": "Deutsch"
+    "german": "Deutsch",
+    "danish": "Dänisch",
+    "portuguese": "Portugiesisch",
+    "slovenian": "Slowenisch",
+    "spanish": "Spanisch"
   },
   "countrySpecial": {
     "unitedKingdom": "das Vereinigte Königreich",
@@ -188,5 +196,18 @@
     "october": "Oktober",
     "november": "November",
     "december": "Dezember"
+  },
+  "app": {
+    "account": {
+      "comingSoon": "Laden Sie Ihre Daten herunter oder löschen Sie Ihr Konto. Wir arbeiten daran, in Zukunft weitere Funktionen zu implementieren.",
+      "myAccount": "Mein Account",
+      "downloadMyData": "Meine Daten herunterladen",
+      "deleteAccount": {
+        "button": "Meinen Account löschen",
+        "title": "Sind Sie sicher, dass Sie Ihren Account löschen möchten?",
+        "description": "Diese Aktion kann nicht rückgängig gemacht werden. Dadurch wird Ihr Konto dauerhaft gelöscht und Ihre Daten werden von unseren Servern entfernt.",
+        "confirm": "Account löschen"
+      }
+    }
   }
 }

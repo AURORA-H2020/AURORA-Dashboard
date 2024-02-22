@@ -1,1 +1,213 @@
-{}
+{
+  "about": {
+    "carbonEmissionLabels": {
+      "title": "",
+      "description": ""
+    },
+    "energyExpendedLabels": {
+      "title": "",
+      "description": ""
+    },
+    "metrics": {
+      "title": "",
+      "description": ""
+    },
+    "downloadMetrics": "",
+    "countryData": {
+      "title": "",
+      "description": ""
+    },
+    "downloads": {
+      "title": "",
+      "description": ""
+    }
+  },
+  "toast": {
+    "dataDownload": {
+      "success": "",
+      "error": ""
+    },
+    "auth": {
+      "success": "",
+      "error": ""
+    }
+  },
+  "button": {
+    "downloadPending": ""
+  },
+  "dashboard": {
+    "filter": {
+      "allCategories": "",
+      "selectCountries": "",
+      "invalidData": "",
+      "absolute": "",
+      "relative": ""
+    },
+    "card": {
+      "userCount": "",
+      "individualConsumptions": "",
+      "invalidDateRange": ""
+    },
+    "consumptionTimeline": {
+      "title": ""
+    },
+    "energylabels": {
+      "title": "",
+      "description": ""
+    },
+    "genderDistribution": {
+      "title": ""
+    },
+    "averageCompare": {
+      "title": ""
+    },
+    "main": {
+      "title": ""
+    },
+    "autoReport": {
+      "reportSnippets": {
+        "accountsCreated": "",
+        "genderDistribution": "",
+        "totalConsumptions": "",
+        "consumptionBreakdown": "",
+        "totalEmissions": "",
+        "emissionsByCategory": ""
+      },
+      "title": ""
+    },
+    "snapshots": {
+      "lastUpdated": "",
+      "selectSnapshot": "",
+      "downloadSnapshot": ""
+    }
+  },
+  "error": {
+    "title": "",
+    "notFound": {
+      "title": "",
+      "description": ""
+    },
+    "noData": ""
+  },
+  "metadata": {
+    "title": "",
+    "description": ""
+  },
+  "ui": {
+    "auth": {
+      "orContinueWith": "",
+      "signIn": "",
+      "signUp": "",
+      "signInPrompt": "",
+      "signUpPrompt": "",
+      "signInWithApple": "",
+      "signUpWithApple": "",
+      "signInWithGoogle": "",
+      "signUpWithGoogle": "",
+      "email": "",
+      "password": ""
+    },
+    "datePicker": {
+      "selectDateRange": ""
+    },
+    "monthPicker": {
+      "start": "",
+      "end": ""
+    }
+  },
+  "common": {
+    "co2emission": "",
+    "energyUsage": "",
+    "and": "",
+    "placeholder": {
+      "selectValue": ""
+    }
+  },
+  "country": {
+    "allSelectedCountries": "",
+    "denmark": "Dinamarca",
+    "portugal": "Portugal",
+    "slovenia": "Eslovenia",
+    "spain": "",
+    "unitedKingdom": "Reino Unido",
+    "zeuropeOther": ""
+  },
+  "footer": {
+    "auroraWebsite": "",
+    "iosApp": "",
+    "androidApp": "",
+    "fundingNotice": ""
+  },
+  "navigation": {
+    "menu": {
+      "dashboard": "",
+      "about": "",
+      "account": "",
+      "logout": ""
+    }
+  },
+  "language": {
+    "english": "",
+    "german": "",
+    "danish": "",
+    "portuguese": "",
+    "slovenian": "",
+    "spanish": ""
+  },
+  "countrySpecial": {
+    "unitedKingdom": "",
+    "zeuropeOther": ""
+  },
+  "gender": {
+    "female": "Mujer",
+    "male": "Hombre",
+    "nonBinary": "No binario",
+    "other": "Otro"
+  },
+  "label": {
+    "aPlus": "Activista",
+    "a": "Adepto",
+    "b": "Buen trabajador",
+    "c": "Colaborador",
+    "d": "Dinamizador",
+    "e": "Explorador",
+    "f": "Facilitador",
+    "g": "Guía"
+  },
+  "category": {
+    "electricity": "Electricidad",
+    "transportation": "Medios de transporte",
+    "heating": "Calefacción"
+  },
+  "unitLabel": {
+    "eneryUsage": "",
+    "distance": "Distancia"
+  },
+  "month": {
+    "january": "",
+    "february": "",
+    "march": "",
+    "april": "",
+    "may": "",
+    "june": "",
+    "july": "",
+    "august": "",
+    "september": "",
+    "october": "",
+    "november": "",
+    "december": ""
+  },
+  "app": {
+    "account": {
+      "comingSoon": "",
+      "myAccount": "",
+      "downloadMyData": "",
+      "deleteAccount": {
+        "button": "",
+        "title": "",
+        "description": "",
+        "confirm": ""
+      }
+    }
+  }
+}
