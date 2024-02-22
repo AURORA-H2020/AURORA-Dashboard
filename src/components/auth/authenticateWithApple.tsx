@@ -20,7 +20,7 @@ function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
      * Function to handle post sign in actions.
      */
     const postSignIn = () => {
-        toast.success("Welcome to AURORA!");
+        toast.success(t("toast.auth.success"));
         router.push("/account");
     };
 
@@ -42,6 +42,7 @@ function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
         } catch (e) {
             // Handle or log the exception
             console.error("Error during Apple sign-in:", e);
+            toast.error(t("toast.auth.error"));
         }
     }
 

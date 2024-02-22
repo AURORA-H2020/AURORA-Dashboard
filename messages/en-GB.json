@@ -26,6 +26,10 @@
     "dataDownload": {
       "success": "Your data was successfully downloaded",
       "error": "Your data could not be downloaded"
+    },
+    "auth": {
+      "success": "Welcome to AURORA!",
+      "error": "An error occured. Please check your credentials."
     }
   },
   "button": {
@@ -149,7 +153,11 @@
   },
   "language": {
     "english": "English",
-    "german": "German"
+    "german": "German",
+    "danish": "Danish",
+    "portuguese": "Portuguese",
+    "slovenian": "Slovenian",
+    "spanish": "Spanish"
   },
   "countrySpecial": {
     "unitedKingdom": "the United Kingdom",
