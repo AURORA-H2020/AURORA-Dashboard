@@ -1,4 +1,5 @@
 import { Heading, Text } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 
 /**
  * Renders the AccountLayout component.
@@ -12,13 +13,12 @@ export default function AccountLayout({
 }: {
     children: React.ReactNode;
 }): React.ReactNode {
+    const t = useTranslations();
+
     return (
         <>
-            <Heading>My Account</Heading>
-            <Text>
-                Download your data or delete your account. We are working on
-                implementing more features in the future.
-            </Text>
+            <Heading>{t("app.account.myAccount")}</Heading>
+            <Text>{t("app.account.comingSoon")}</Text>
             <div>{children}</div>
         </>
     );

@@ -196,5 +196,19 @@
     "october": "October",
     "november": "November",
     "december": "December"
+  },
+  "app": {
+    "account": {
+      "comingSoon": "Download your data or delete your account. We are working on implementing more features in the future.",
+      "myAccount": "My Account",
+      "downloadMyData": "Download my data",
+      "deleteMyAccount": "Delete my account",
+      "deleteAccount": {
+        "button": "Delete my account",
+        "title": "Are you sure you want to delete your account?",
+        "description": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+        "confirm": "Delete account"
+      }
+    }
   }
 }

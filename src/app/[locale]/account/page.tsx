@@ -19,6 +19,7 @@ import { downloadUserData } from "@/firebase/firestore/downloadUserData";
 import { useRouter } from "@/navigation";
 import { Flex, Grid } from "@radix-ui/themes";
 import { User } from "firebase/auth";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
@@ -28,6 +29,8 @@ import { toast } from "sonner";
  * @return {JSX.Element} The user settings page component
  */
 function UserSettings(): JSX.Element {
+    const t = useTranslations();
+
     const { user, loading } = useAuthContext() as {
         user: User;
         loading: boolean;
@@ -46,11 +49,11 @@ function UserSettings(): JSX.Element {
         setDownloading(true);
         try {
             await downloadUserData();
-            toast.success("Your data was successfully downloaded");
+            toast.success(t("toast.dataDownload.success"));
         } catch (error) {
             // Handle the error
             console.error("Error downloading user data:", error);
-            toast.error("Your data could not be downloaded");
+            toast.error(t("toast.dataDownload.error"));
         } finally {
             setDownloading(false);
         }
@@ -90,14 +93,14 @@ function UserSettings(): JSX.Element {
                                 disabled={downloading}
                             >
                                 {downloading
-                                    ? "Downloading..."
-                                    : "Download my data"}
+                                    ? t("button.downloadPending")
+                                    : t("app.account.downloadMyData")}
                             </Button>
                             <Button
                                 variant="destructive"
                                 onClick={() => setDeleteAlertOpen(true)}
                             >
-                                Delete my account
+                                {t("app.account.deleteAccount.button")}
                             </Button>
                         </Flex>
                     </CardContent>
@@ -108,25 +111,23 @@ function UserSettings(): JSX.Element {
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
-                            Are you sure you want to delete your account?
+                            {t("app.account.deleteAccount.title")}
                         </AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone. This will permanently
-                            delete your account and remove your data from our
-                            servers.
+                            {t("app.account.deleteAccount.description")}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel
                             onClick={() => setDeleteAlertOpen(false)}
                         >
-                            Cancel
+                            {t("common.cancel")}
                         </AlertDialogCancel>
                         <AlertDialogAction
                             variant="destructive"
                             onClick={deleteAccount}
                         >
-                            Delete Account
+                            {t("app.account.deleteAccount.confirm")}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
