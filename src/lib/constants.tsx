@@ -19,8 +19,24 @@ export const supportedLocales = [
         name: t("language.english"),
     },
     {
+        code: "da-DK",
+        name: t("language.danish"),
+    },
+    {
         code: "de-DE",
         name: t("language.german"),
+    },
+    {
+        code: "pt-PT",
+        name: t("language.portuguese"),
+    },
+    {
+        code: "sl-SI",
+        name: t("language.slovenian"),
+    },
+    {
+        code: "es-ES",
+        name: t("language.spanish"),
     },
 ];
 
