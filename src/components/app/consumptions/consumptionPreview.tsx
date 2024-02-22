@@ -27,6 +27,7 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
+import AddEditConsumptionModal from "./addEdit/addEditConsumptionModal";
 
 /**
  * Renders a preview of a consumption object with interactive
@@ -168,12 +169,10 @@ export default function ConsumptionPreview({
                             Delete
                         </Button>
                         <Flex className="space-x-2">
-                            <Button variant={"outline"} type="submit">
-                                Edit
-                            </Button>
-                            <Button variant={"outline"} type="submit">
-                                Duplicate
-                            </Button>
+                            <AddEditConsumptionModal consumption={consumption}>
+                                <Button variant="outline">Edit</Button>
+                            </AddEditConsumptionModal>
+                            <Button variant="outline">Duplicate</Button>
                         </Flex>
                     </DialogFooter>
                 </DialogContent>
