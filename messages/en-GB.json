@@ -111,6 +111,11 @@
       "end": "End"
     }
   },
+  "app": {
+    "addConsumption": "Add Consumption",
+    "updateConsumption": "Edit Consumption",
+    "yourConsumptions": "Your Consumptions"
+  },
   "common": {
     "co2emission": "CO<sub>2</sub> Emissions",
     "energyUsage": "Energy Usage",
@@ -169,7 +174,11 @@
   "category": {
     "electricity": "Electricity",
     "transportation": "Transportation",
-    "heating": "Heating"
+    "heating": "Heating",
+    "sources": {
+      "default": "Default",
+      "homePhotovoltaics": "Home Photovoltaics"
+    }
   },
   "unitLabel": {
     "eneryUsage": "Energy Usage",
