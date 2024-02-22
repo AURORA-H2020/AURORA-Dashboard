@@ -16,6 +16,7 @@ import { Input } from "@/components/ui/input";
 import signUp from "@/firebase/auth/authentication";
 import { Strong } from "@radix-ui/themes";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 const formSchema = z.object({
     email: z.string().min(2).max(50),
@@ -29,6 +30,7 @@ const formSchema = z.object({
  * @return {JSX.Element} the sign up form
  */
 function SignUpWithEmail(): JSX.Element {
+    const t = useTranslations();
     const router = useRouter();
 
     /* TODO: Add Password confirmation and validation (password strength) */
@@ -44,7 +46,7 @@ function SignUpWithEmail(): JSX.Element {
      * Function for handling user sign-up.
      */
     const postSignUp = () => {
-        toast.success("Welcome to AURORA!");
+        toast.success(t("toast.auth.success"));
         router.push("/account");
     };
 
@@ -65,6 +67,7 @@ function SignUpWithEmail(): JSX.Element {
         if (error) {
             // Display and log any sign-in errors
             console.log(error);
+            toast.error(t("toast.auth.error"));
         } else {
             postSignUp();
         }

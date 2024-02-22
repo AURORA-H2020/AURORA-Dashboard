@@ -49,7 +49,7 @@ function SignInWithEmail() {
      * Function for handling post sign-in actions.
      */
     const postSignIn = () => {
-        toast.success("Welcome to AURORA!");
+        toast.success(t("toast.auth.success"));
         router.push("/account");
     };
 
@@ -70,6 +70,7 @@ function SignInWithEmail() {
         if (error) {
             // Display and log any sign-in errors
             console.log(error);
+            toast.error(t("toast.auth.error"));
         } else {
             postSignIn();
         }
