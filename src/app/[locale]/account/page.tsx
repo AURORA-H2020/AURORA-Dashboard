@@ -4,7 +4,7 @@ import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummary
 import LoadingSpinner from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { fetchUserConsumptions } from "@/lib/firebaseUtils";
-import { Consumption } from "@/models/extensions";
+import { ConsumptionWithID } from "@/models/extensions";
 import { useRouter } from "@/navigation";
 import { Heading } from "@radix-ui/themes";
 import { User } from "firebase/auth";
@@ -26,7 +26,7 @@ function AccountPage(): JSX.Element {
     const router = useRouter();
 
     const [userConsumptions, setUserConsumptions] = useState<
-        Consumption[] | null
+        ConsumptionWithID[] | null
     >([]);
 
     useEffect(() => {

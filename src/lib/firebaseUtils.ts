@@ -1,7 +1,8 @@
 import firebase_app from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { CountryData } from "@/models/countryData";
-import { Consumption } from "@/models/extensions";
+import { ConsumptionWithID } from "@/models/extensions";
+import { Consumption } from "@/models/firestore/consumption/consumption";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import {
@@ -193,7 +194,7 @@ export const fetchConsumptionById = async (
 
         if (docSnapshot.exists()) {
             console.log("Document data:", docSnapshot.data());
-            return docSnapshot.data() as Consumption;
+            return docSnapshot.data() as ConsumptionWithID;
         } else {
             console.log("No such document!");
             return null;
@@ -220,7 +221,7 @@ export const fetchUserConsumptions = async (userId: string) => {
         const querySnapshot = await getDocs(q);
 
         // Map through the documents and set the state
-        const docs: Consumption[] = querySnapshot.docs.map((doc) => ({
+        const docs: ConsumptionWithID[] = querySnapshot.docs.map((doc) => ({
             ...(doc.data() as Consumption),
             id: doc.id,
         }));

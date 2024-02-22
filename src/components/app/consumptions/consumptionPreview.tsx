@@ -1,5 +1,5 @@
 import { getConsumptionAttributes, titleCase } from "@/lib/utilities";
-import { Consumption } from "@/models/extensions";
+import { ConsumptionWithID } from "@/models/extensions";
 import { useState } from "react";
 import ConsumptionView from "./consumptionView";
 
@@ -39,7 +39,7 @@ import { toast } from "sonner";
 export default function ConsumptionPreview({
     consumption,
 }: {
-    consumption: Consumption;
+    consumption: ConsumptionWithID;
 }): JSX.Element {
     const consumptionAttributes = getConsumptionAttributes(
         consumption.category,
