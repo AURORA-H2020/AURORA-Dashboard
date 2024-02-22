@@ -1,5 +1,11 @@
 import { Heading, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
+import { unstable_setRequestLocale } from "next-intl/server";
+
+type Props = {
+    children: React.ReactNode;
+    params: { locale: string };
+};
 
 /**
  * Renders the AccountLayout component.
@@ -10,9 +16,9 @@ import { useTranslations } from "next-intl";
  */
 export default function AccountLayout({
     children,
-}: {
-    children: React.ReactNode;
-}): React.ReactNode {
+    params: { locale },
+}: Props): React.ReactNode {
+    unstable_setRequestLocale(locale);
     const t = useTranslations();
 
     return (
