@@ -1,12 +1,15 @@
 "use client";
-import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
+import AddEditConsumptionModal from "@/components/app/consumptions/addEdit/addEditConsumptionModal";
+import ConsumptionList from "@/components/app/consumptions/consumptionList";
 import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";
+import InitialRegistrationForm from "@/components/app/user/initialRegistrationForm";
+import { Button } from "@/components/ui/button";
 import LoadingSpinner from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { fetchUserConsumptions } from "@/lib/firebaseUtils";
 import { ConsumptionWithID } from "@/models/extensions";
 import { useRouter } from "@/navigation";
-import { Heading } from "@radix-ui/themes";
+import { Flex } from "@radix-ui/themes";
 import { User } from "firebase/auth";
 import { useEffect, useState } from "react";
 
@@ -53,18 +56,16 @@ function AccountPage(): JSX.Element {
     // Authenticated user content
     return (
         <>
+            <InitialRegistrationForm />
             <ConsumptionSummaryChart />
-            <div>
-                <div className="mb-4 mt-8">
-                    <Heading weight="bold">Your Consumptions</Heading>
-                </div>
-                {userConsumptions &&
-                    userConsumptions.map((consumption) => (
-                    <div className="mb-4" key={consumption.id}>
-                        <ConsumptionPreview consumption={consumption} />
-                    </div>
-                ))}
-            </div>
+            {userConsumptions && (
+                <ConsumptionList userConsumptions={userConsumptions} />
+            )}
+            <Flex className="space-x-2">
+                <AddEditConsumptionModal>
+                    <Button>Add Consumption</Button>
+                </AddEditConsumptionModal>
+            </Flex>
         </>
     );
 }
