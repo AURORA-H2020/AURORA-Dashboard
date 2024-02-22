@@ -1,3 +1,4 @@
+import { ConsumptionSources } from "@/models/constants";
 import { CalculationMode, EnergyMode } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { Label } from "@/models/firestore/global-summary/label/consumption-type-labels";
@@ -132,14 +133,6 @@ export const consumptionMapping: ConsumptionAttributes[] = [
         unitLabel: t("unitLabel.eneryUsage"),
     },
     {
-        icon: <CarFront />,
-        category: "transportation",
-        label: t("category.transportation"),
-        unit: "km",
-        colorPrimary: "#1E84FD",
-        unitLabel: t("unitLabel.distance"),
-    },
-    {
         icon: <ThermometerSnowflake />,
         category: "heating",
         label: t("category.heating"),
@@ -147,7 +140,27 @@ export const consumptionMapping: ConsumptionAttributes[] = [
         colorPrimary: "#F5473D",
         unitLabel: t("unitLabel.eneryUsage"),
     },
+    {
+        icon: <CarFront />,
+        category: "transportation",
+        label: t("category.transportation"),
+        unit: "km",
+        colorPrimary: "#1E84FD",
+        unitLabel: t("unitLabel.distance"),
+    },
 ];
+
+export const consumptionSources: ConsumptionSources = {
+    electricity: [
+        { source: "default", name: t("category.sources.default") },
+        {
+            source: "homePhotovoltaics",
+            name: t("category.sources.homePhotovoltaics"),
+        },
+    ],
+    heating: [],
+    transportation: [],
+};
 
 export const categories: ConsumptionCategory[] = consumptionMapping.map(
     (c) => c.category,
