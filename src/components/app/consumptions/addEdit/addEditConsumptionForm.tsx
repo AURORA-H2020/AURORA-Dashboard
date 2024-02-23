@@ -56,14 +56,15 @@ export default function AddEditConsumptionForm({
     onConsumptionAdded?: (success: boolean) => void;
 }) {
     const t = useTranslations();
-    const format = useFormatter();
+
+    const formSchema = electricityFormSchema(t);
 
     const { user } = useAuthContext() as {
         user: User;
     };
 
-    const form = useForm<z.infer<typeof ElectricityFormSchema>>({
-        resolver: zodResolver(ElectricityFormSchema),
+    const form = useForm<z.infer<typeof formSchema>>({
+        resolver: zodResolver(formSchema),
         defaultValues: {
             value: consumption?.value || 100,
             category: "electricity",
