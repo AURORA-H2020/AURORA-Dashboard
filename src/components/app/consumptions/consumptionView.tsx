@@ -1,4 +1,4 @@
-import { Consumption } from "@/models/extensions";
+import { ConsumptionWithID } from "@/models/extensions";
 
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
 import {
@@ -18,7 +18,7 @@ import ConsumptionTableRow from "./consumptionTableRow";
 export default function ConsumptionView({
     consumption,
 }: {
-    consumption: Consumption;
+    consumption: ConsumptionWithID;
 }): JSX.Element {
     const consumptionAttributes = consumptionMapping.find(
         (c) => c.category == consumption.category,
@@ -88,7 +88,7 @@ export default function ConsumptionView({
                                 .toDateString()}
                         </ConsumptionTableRow>
                         <ConsumptionTableRow label="End">
-                            {consumption.electricity.startDate
+                            {consumption.electricity.endDate
                                 ?.toDate()
                                 .toDateString()}
                         </ConsumptionTableRow>
