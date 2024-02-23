@@ -1,30 +1,15 @@
+import { Button } from "@/components/ui/button";
+import { Form, FormField } from "@/components/ui/form";
 import authenticate from "@/firebase/auth/authentication";
-
+import { loginSchema } from "@/lib/zod/authSchemas";
 import { useRouter } from "@/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-import { Button } from "@/components/ui/button";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Strong } from "@radix-ui/themes";
-import { Eye, EyeOff } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-
-const formSchema = z.object({
-    email: z.string().min(2).max(50),
-    password: z.string().min(2).max(50),
-});
+import * as z from "zod";
+import FormInputField from "../formItems/formInputField";
+import FormPasswordField from "../formItems/formPasswordField";
 
 /**
  * Renders a sign-in form and handles sign-in through email, Google,
@@ -35,7 +20,7 @@ function SignInWithEmail() {
     const router = useRouter();
     const t = useTranslations();
 
-    const [showPassword, setShowPassword] = useState(false);
+    const formSchema = loginSchema(t);
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -86,58 +71,24 @@ function SignInWithEmail() {
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>
-                                <Strong>{t("ui.auth.email")}</Strong>
-                            </FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="email"
-                                    placeholder={t("ui.auth.email")}
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
+                        <FormInputField
+                            field={field}
+                            inputType="email"
+                            placeholder={t("ui.auth.email")}
+                            formLabel={t("ui.auth.email")}
+                        />
                     )}
                 />
                 <FormField
                     control={form.control}
                     name="password"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>
-                                <Strong>{t("ui.auth.password")}</Strong>
-                            </FormLabel>
-                            <FormControl>
-                                <div className="relative">
-                                    <Input
-                                        type={
-                                            showPassword ? "text" : "password"
-                                        }
-                                        placeholder={t("ui.auth.password")}
-                                        {...field}
-                                    />
-                                    <div className="absolute inset-y-0 right-0 pr-0 flex items-center cursor-pointer">
-                                        <Button
-                                            className="h-full w-12 p-1 rounded-l-none"
-                                            type="button"
-                                            variant={"outline"}
-                                            onClick={() =>
-                                                setShowPassword(!showPassword)
-                                            }
-                                        >
-                                            {showPassword ? (
-                                                <EyeOff />
-                                            ) : (
-                                                <Eye />
-                                            )}
-                                        </Button>
-                                    </div>
-                                </div>
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
+                        <FormPasswordField
+                            field={field}
+                            placeholder={t("ui.auth.password")}
+                            formLabel={t("ui.auth.password")}
+                            showTogglePassword={true}
+                        />
                     )}
                 />
                 <Button type="submit">{t("ui.auth.signIn")}</Button>

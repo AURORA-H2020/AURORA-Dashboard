@@ -1,27 +1,15 @@
+import { Button } from "@/components/ui/button";
+import { Form, FormField } from "@/components/ui/form";
+import signUp from "@/firebase/auth/authentication";
+import { registrationSchema } from "@/lib/zod/authSchemas";
 import { useRouter } from "@/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
-
-import { Button } from "@/components/ui/button";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import signUp from "@/firebase/auth/authentication";
-import { Strong } from "@radix-ui/themes";
-import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-
-const formSchema = z.object({
-    email: z.string().min(2).max(50),
-    password: z.string().min(2).max(50),
-});
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import * as z from "zod";
+import FormInputField from "../formItems/formInputField";
+import FormPasswordField from "../formItems/formPasswordField";
 
 /**
  * Function for signing up with email.
@@ -33,12 +21,15 @@ function SignUpWithEmail(): JSX.Element {
     const t = useTranslations();
     const router = useRouter();
 
+    const formSchema = registrationSchema(t);
+
     /* TODO: Add Password confirmation and validation (password strength) */
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: "",
             password: "",
+            confirmPassword: "",
         },
     });
 
@@ -83,43 +74,37 @@ function SignUpWithEmail(): JSX.Element {
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>
-                                <Strong>Email</Strong>
-                            </FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="email"
-                                    placeholder="Email"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
+                        <FormInputField
+                            field={field}
+                            inputType="email"
+                            placeholder={t("ui.auth.email")}
+                            formLabel={t("ui.auth.email")}
+                        />
                     )}
                 />
                 <FormField
                     control={form.control}
                     name="password"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>
-                                <Strong>Password</Strong>
-                            </FormLabel>
-                            <FormControl>
-                                <div className="relative">
-                                    <Input
-                                        type={"password"}
-                                        placeholder="Password"
-                                        {...field}
-                                    />
-                                </div>
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
+                        <FormPasswordField
+                            field={field}
+                            placeholder={t("ui.auth.password")}
+                            formLabel={t("ui.auth.password")}
+                        />
                     )}
                 />
-                <Button type="submit">Sign up</Button>
+                <FormField
+                    control={form.control}
+                    name="confirmPassword"
+                    render={({ field }) => (
+                        <FormPasswordField
+                            field={field}
+                            placeholder={t("ui.auth.password")}
+                            formLabel={t("ui.auth.confirmPassword")}
+                        />
+                    )}
+                />
+                <Button type="submit">{t("ui.auth.signUp")}</Button>
             </form>
         </Form>
     );
