@@ -1,33 +1,14 @@
+import FormDatePicker from "@/components/formItems/formDatePicker";
+import FormInputField from "@/components/formItems/formInputField";
+import FormSelect from "@/components/formItems/formSelect";
 import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import { DialogFooter } from "@/components/ui/dialog";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
+import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
 import firebaseApp from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { consumptionSources } from "@/lib/constants";
-import { cn } from "@/lib/utilities";
-import { ElectricityFormSchema } from "@/lib/zod/consumptionSchemas";
+import { electricityFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
@@ -39,8 +20,7 @@ import {
     getFirestore,
     setDoc,
 } from "firebase/firestore";
-import { CalendarIcon } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -125,32 +105,24 @@ export default function AddEditConsumptionForm({
                         control={form.control}
                         name="value"
                         render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Consumption</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="number"
-                                        placeholder="Consumption"
-                                        {...field}
-                                    />
-                                </FormControl>
-                            </FormItem>
+                            <FormInputField
+                                field={field}
+                                inputType="number"
+                                placeholder="Consumption"
+                                formLabel="Consumption"
+                            />
                         )}
                     />
                     <FormField
                         control={form.control}
                         name="electricity.householdSize"
                         render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>People in household</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="number"
-                                        placeholder="People in household"
-                                        {...field}
-                                    />
-                                </FormControl>
-                            </FormItem>
+                            <FormInputField
+                                field={field}
+                                inputType="number"
+                                placeholder="People in household"
+                                formLabel="People in household"
+                            />
                         )}
                     />
 
@@ -158,31 +130,17 @@ export default function AddEditConsumptionForm({
                         control={form.control}
                         name="electricity.electricitySource"
                         render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Electricity Source</FormLabel>
-                                <Select
-                                    onValueChange={field.onChange}
-                                    value={field.value}
-                                >
-                                    <FormControl>
-                                        <SelectTrigger>
-                                            <SelectValue placeholder="Electricity Source" />
-                                        </SelectTrigger>
-                                    </FormControl>
-                                    <SelectContent>
-                                        {consumptionSources.electricity.map(
-                                            (source) => (
-                                                <SelectItem
-                                                    key={source.source}
-                                                    value={source.source}
-                                                >
-                                                    {t(source.name)}
-                                                </SelectItem>
-                                            ),
-                                        )}
-                                    </SelectContent>
-                                </Select>
-                            </FormItem>
+                            <FormSelect
+                                field={field}
+                                options={consumptionSources.electricity.map(
+                                    (source) => ({
+                                        value: source.source,
+                                        label: t(source.name),
+                                    }),
+                                )}
+                                placeholder="Electricity Source"
+                                formLabel={"Electricity Source"}
+                            />
                         )}
                     />
 
@@ -190,54 +148,11 @@ export default function AddEditConsumptionForm({
                         control={form.control}
                         name="electricity.startDate"
                         render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Start Date</FormLabel>
-                                <Popover>
-                                    <PopoverTrigger asChild>
-                                        <FormControl>
-                                            <Button
-                                                variant={"outline"}
-                                                className={cn(
-                                                    "w-[240px] pl-3 text-left font-normal",
-                                                    !field.value &&
-                                                        "text-muted-foreground",
-                                                )}
-                                            >
-                                                {field.value ? (
-                                                    format.dateTime(
-                                                        field.value.toDate(),
-                                                    )
-                                                ) : (
-                                                    <span>Pick a date</span>
-                                                )}
-                                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                            </Button>
-                                        </FormControl>
-                                    </PopoverTrigger>
-                                    <PopoverContent
-                                        className="w-auto p-0"
-                                        align="start"
-                                    >
-                                        <Calendar
-                                            mode="single"
-                                            selected={field.value.toDate()}
-                                            onSelect={(date) => {
-                                                const timestamp =
-                                                    Timestamp.fromDate(
-                                                        date || new Date(),
-                                                    );
-                                                field.onChange(timestamp);
-                                            }}
-                                            disabled={(date) =>
-                                                date > new Date() ||
-                                                date < new Date("1900-01-01")
-                                            }
-                                            initialFocus
-                                        />
-                                    </PopoverContent>
-                                </Popover>
-                                <FormMessage />
-                            </FormItem>
+                            <FormDatePicker
+                                field={field}
+                                placeholder={t("common.placeholder.selectDate")}
+                                formLabel={"Start date"}
+                            />
                         )}
                     />
 
@@ -245,54 +160,11 @@ export default function AddEditConsumptionForm({
                         control={form.control}
                         name="electricity.endDate"
                         render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>End Date</FormLabel>
-                                <Popover>
-                                    <PopoverTrigger asChild>
-                                        <FormControl>
-                                            <Button
-                                                variant={"outline"}
-                                                className={cn(
-                                                    "w-[240px] pl-3 text-left font-normal",
-                                                    !field.value &&
-                                                        "text-muted-foreground",
-                                                )}
-                                            >
-                                                {field.value ? (
-                                                    format.dateTime(
-                                                        field.value.toDate(),
-                                                    )
-                                                ) : (
-                                                    <span>Pick a date</span>
-                                                )}
-                                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                                            </Button>
-                                        </FormControl>
-                                    </PopoverTrigger>
-                                    <PopoverContent
-                                        className="w-auto p-0"
-                                        align="start"
-                                    >
-                                        <Calendar
-                                            mode="single"
-                                            selected={field.value.toDate()}
-                                            onSelect={(date) => {
-                                                const timestamp =
-                                                    Timestamp.fromDate(
-                                                        date || new Date(),
-                                                    );
-                                                field.onChange(timestamp);
-                                            }}
-                                            disabled={(date) =>
-                                                date > new Date() ||
-                                                date < new Date("1900-01-01")
-                                            }
-                                            initialFocus
-                                        />
-                                    </PopoverContent>
-                                </Popover>
-                                <FormMessage />
-                            </FormItem>
+                            <FormDatePicker
+                                field={field}
+                                placeholder={t("common.placeholder.selectDate")}
+                                formLabel={"End date"}
+                            />
                         )}
                     />
 
@@ -300,16 +172,12 @@ export default function AddEditConsumptionForm({
                         control={form.control}
                         name="electricity.costs"
                         render={({ field }) => (
-                            <FormItem>
-                                <FormLabel>Costs</FormLabel>
-                                <FormControl>
-                                    <Input
-                                        type="number"
-                                        placeholder="Costs"
-                                        {...field}
-                                    />
-                                </FormControl>
-                            </FormItem>
+                            <FormInputField
+                                field={field}
+                                inputType="number"
+                                placeholder="Costs"
+                                formLabel="Costs"
+                            />
                         )}
                     />
 
