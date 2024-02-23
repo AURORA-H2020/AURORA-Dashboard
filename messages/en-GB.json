@@ -105,7 +105,12 @@
       "signInWithGoogle": "Sign in with Google",
       "signUpWithGoogle": "Sign up with Google",
       "email": "Email",
-      "password": "Password"
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "error": {
+        "passwordMismatch": "The passwords did not match",
+        "invalidEmail": "Please enter a valid email address"
+      }
     },
     "datePicker": {
       "selectDateRange": "Select a valid date range"
@@ -118,14 +123,20 @@
   "app": {
     "addConsumption": "Add Consumption",
     "updateConsumption": "Edit Consumption",
-    "yourConsumptions": "Your Consumptions"
+    "yourConsumptions": "Your Consumptions",
+    "validation": {
+      "error": {
+        "validValue": "Please enter a valid number"
+      }
+    }
   },
   "common": {
     "co2emission": "CO<sub>2</sub> Emissions",
     "energyUsage": "Energy Usage",
     "and": "and",
     "placeholder": {
-      "selectValue": "Select a value"
+      "selectValue": "Select a value",
+      "selectDate": "Select a date"
     }
   },
   "country": {
