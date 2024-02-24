@@ -128,6 +128,21 @@
       "error": {
         "validValue": "Please enter a valid number"
       }
+    },
+    "user": {
+      "householdProfile": {
+        "retiredIndividuals": "Retired individuals",
+        "homeBasedWorkersOrStudents": "Home based workers or students",
+        "homemakers": "Homemakers",
+        "workersOrStudentsOutsideTheHome": "Workers or students outside the home"
+      }
+    },
+    "consumption": {
+      "publicVehicleOccupancy": {
+        "almostEmpty": "Almost empty",
+        "medium": "Medium",
+        "nearlyFull": "Nearly full"
+      }
     }
   },
   "common": {
@@ -137,7 +152,8 @@
     "placeholder": {
       "selectValue": "Select a value",
       "selectDate": "Select a date"
-    }
+    },
+    "unsure": "Unsure"
   },
   "country": {
     "allSelectedCountries": "All selected countries",
@@ -196,7 +212,37 @@
     "heating": "Heating",
     "sources": {
       "default": "Default",
-      "homePhotovoltaics": "Home Photovoltaics"
+      "homePhotovoltaics": "Home Photovoltaics",
+      "oil": "Oil",
+      "naturalGas": "Natural gas",
+      "liquifiedPetroGas": "Liquified petro gas",
+      "biomass": "Biomass",
+      "locallyProducedBiomass": "Locally produced biomass",
+      "geothermal": "Geothermal",
+      "solarThermal": "Solar thermal",
+      "district": "District heating",
+      "electric": "Electric heating",
+      "wasteTreatment": "Waste treatment",
+      "coal": "Coal",
+      "motorcycle": "Fuel car",
+      "fuelCar": "Fuel car",
+      "electricCar": "Electric car",
+      "hybridCar": "Hybrid car",
+      "electricMotorcycle": "Electric motorcycle",
+      "electricBus": "Electric bus",
+      "hybridElectricBus": "Hybrid electric bus",
+      "alternativeFuelBus": "Alternative fuel bus",
+      "dieselBus": "Diesel bus",
+      "otherBus": "Other bus",
+      "metroTramOrUrbanLightTrain": "Metro, tram, or urban light train",
+      "electricPassengerTrain": "Electric passenger train",
+      "dieselPassengerTrain": "Diesel passenger train",
+      "highSpeedTrain": "High speed train",
+      "plane": "Plane",
+      "electricBike": "Electric bike",
+      "electricScooter": "Electric scooter",
+      "bike": "Bike",
+      "walking": "Walking"
     }
   },
   "unitLabel": {
@@ -216,5 +262,12 @@
     "october": "October",
     "november": "November",
     "december": "December"
+  },
+  "city": {
+    "evora": "Évora",
+    "madrid": "Madrid",
+    "forestOfDean": "Forest of Dean",
+    "ljubljana": "Ljubljana",
+    "aarhus": "Aarhus"
   }
 }
