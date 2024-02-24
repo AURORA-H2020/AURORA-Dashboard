@@ -10,7 +10,9 @@ import { ConsumptionWithID } from "@/models/extensions";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import AddEditConsumptionForm from "./addEditConsumptionForm";
+import ElectricityForm from "./electricityForm";
+import HeatingForm from "./heatingForm";
+import TransportationForm from "./transportationForm";
 
 export default function AddEditConsumptionModal({
     consumption,
@@ -62,7 +64,7 @@ export default function AddEditConsumptionModal({
                                     {t("category.electricity")}
                                 </DialogTitle>
                             </DialogHeader>
-                            <AddEditConsumptionForm
+                            <ElectricityForm
                                 consumption={consumption}
                                 onConsumptionAdded={handleCloseModal}
                             />
@@ -73,7 +75,10 @@ export default function AddEditConsumptionModal({
                                     {t("category.heating")}
                                 </DialogTitle>
                             </DialogHeader>
-                            Coming Soon...
+                            <HeatingForm
+                                consumption={consumption}
+                                onConsumptionAdded={handleCloseModal}
+                            />
                         </TabsContent>
                         <TabsContent value="transportation">
                             <DialogHeader>
@@ -81,7 +86,10 @@ export default function AddEditConsumptionModal({
                                     {t("category.transportation")}
                                 </DialogTitle>
                             </DialogHeader>
-                            Coming Soon...
+                            <TransportationForm
+                                consumption={consumption}
+                                onConsumptionAdded={handleCloseModal}
+                            />
                         </TabsContent>
                     </Tabs>
                 </DialogContent>

@@ -8,8 +8,9 @@ import { useAuthContext } from "@/context/AuthContext";
 import firebaseApp from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { consumptionSources } from "@/lib/constants";
-import { electricityFormSchema } from "@/lib/zod/consumptionSchemas";
+import { heatingFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
+import { Consumption } from "@/models/firestore/consumption/consumption";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
 import {
@@ -28,7 +29,7 @@ import { z } from "zod";
 // Initialize Firestore
 const firestore = getFirestore(firebaseApp);
 
-export default function AddEditConsumptionForm({
+export default function HeatingForm({
     consumption,
     onConsumptionAdded,
 }: {
@@ -36,8 +37,7 @@ export default function AddEditConsumptionForm({
     onConsumptionAdded?: (success: boolean) => void;
 }) {
     const t = useTranslations();
-
-    const formSchema = electricityFormSchema(t);
+    const formSchema = heatingFormSchema(t);
 
     const { user } = useAuthContext() as {
         user: User;
@@ -46,11 +46,12 @@ export default function AddEditConsumptionForm({
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            value: consumption?.value || 100,
-            category: "electricity",
-            electricity: {
-                electricitySource:
-                    consumption?.electricity?.electricitySource || "default",
+            value: consumption?.value || 0,
+            category: "heating",
+            heating: {
+                heatingFuel: consumption?.heating?.heatingFuel || "naturalGas",
+                districtHeatingSource:
+                    consumption?.heating?.districtHeatingSource || "default",
                 costs: consumption?.electricity?.costs || 0,
                 householdSize: consumption?.electricity?.householdSize || 1,
                 startDate:
@@ -62,7 +63,7 @@ export default function AddEditConsumptionForm({
         },
     });
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data: Consumption) => {
         let success = false;
         if (user) {
             const consumptionRef = collection(
@@ -94,7 +95,7 @@ export default function AddEditConsumptionForm({
     };
 
     if (!user) {
-        return <p>Please log in to update your profile.</p>;
+        return;
     }
 
     return (
@@ -115,7 +116,7 @@ export default function AddEditConsumptionForm({
                     />
                     <FormField
                         control={form.control}
-                        name="electricity.householdSize"
+                        name="heating.householdSize"
                         render={({ field }) => (
                             <FormInputField
                                 field={field}
@@ -128,25 +129,43 @@ export default function AddEditConsumptionForm({
 
                     <FormField
                         control={form.control}
-                        name="electricity.electricitySource"
+                        name="heating.heatingFuel"
                         render={({ field }) => (
                             <FormSelect
                                 field={field}
-                                options={consumptionSources.electricity.map(
+                                options={consumptionSources.heating.map(
                                     (source) => ({
                                         value: source.source,
                                         label: t(source.name),
                                     }),
                                 )}
-                                placeholder="Electricity Source"
-                                formLabel={"Electricity Source"}
+                                placeholder="Heating Fuel"
+                                formLabel={"Heating Fuel"}
                             />
                         )}
                     />
 
                     <FormField
                         control={form.control}
-                        name="electricity.startDate"
+                        name="heating.districtHeatingSource"
+                        render={({ field }) => (
+                            <FormSelect
+                                field={field}
+                                options={consumptionSources.districtHeating.map(
+                                    (source) => ({
+                                        value: source.source,
+                                        label: t(source.name),
+                                    }),
+                                )}
+                                placeholder="District Heating Source"
+                                formLabel={"District Heating Source"}
+                            />
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="heating.startDate"
                         render={({ field }) => (
                             <FormDatePicker
                                 field={field}
@@ -158,7 +177,7 @@ export default function AddEditConsumptionForm({
 
                     <FormField
                         control={form.control}
-                        name="electricity.endDate"
+                        name="heating.endDate"
                         render={({ field }) => (
                             <FormDatePicker
                                 field={field}
@@ -170,7 +189,7 @@ export default function AddEditConsumptionForm({
 
                     <FormField
                         control={form.control}
-                        name="electricity.costs"
+                        name="heating.costs"
                         render={({ field }) => (
                             <FormInputField
                                 field={field}
