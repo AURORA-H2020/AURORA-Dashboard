@@ -1,8 +1,17 @@
-import { ConsumptionSources } from "@/models/constants";
+import {
+    CityMapping,
+    ConsumptionAttributes,
+    ConsumptionSources,
+    CountryMapping,
+    GenderMapping,
+    HomeEnergyLabel,
+    LabelMapping,
+    Locale,
+    householdProfile,
+    publicVehicleOccupancy,
+} from "@/models/constants";
 import { CalculationMode, EnergyMode } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { Label } from "@/models/firestore/global-summary/label/consumption-type-labels";
-import { ConsumptionAttributes } from "@/models/meta-data";
 import { Color } from "@tremor/react";
 import { CarFront, ThermometerSnowflake, Zap } from "lucide-react";
 
@@ -13,7 +22,7 @@ const t = (translationKey: string) => {
     return translationKey;
 };
 
-export const supportedLocales = [
+export const supportedLocales: Locale[] = [
     {
         code: "en-GB",
         name: t("language.english"),
@@ -64,7 +73,7 @@ export const allTremorColours: Color[] = [
     "rose",
 ];
 
-export const countriesMapping = [
+export const countriesMapping: CountryMapping[] = [
     {
         ID: "udn3GiM30aqviGBkswpl",
         name: t("country.denmark"),
@@ -109,26 +118,22 @@ export const countriesMapping = [
     },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
-export const citiesMapping = [
-    { ID: "YIyf65PquFxluWhAAo5C", name: "Évora" },
-    { ID: "1VSD4m6qVbOZLot7SFoQ", name: "Madrid" },
-    { ID: "OAiIuFNocG4c0kOBtBvr", name: "Forest of Dean" },
-    { ID: "FJyeCLprBuOqacpvu3LJ", name: "Ljubljana" },
-    { ID: "Au1oUV9pAEtSCu04cfCX", name: "Aarhus" },
+export const citiesMapping: CityMapping[] = [
+    { ID: "YIyf65PquFxluWhAAo5C", name: t("city.evora") },
+    { ID: "1VSD4m6qVbOZLot7SFoQ", name: t("city.madrid") },
+    { ID: "OAiIuFNocG4c0kOBtBvr", name: t("city.forestOfDean") },
+    { ID: "FJyeCLprBuOqacpvu3LJ", name: t("city.ljubljana") },
+    { ID: "Au1oUV9pAEtSCu04cfCX", name: t("city.aarhus") },
 ];
 
-export const genderMappings: { key: string; label: string; color: string }[] = [
+export const genderMappings: GenderMapping[] = [
     { key: "female", label: t("gender.female"), color: "slate-400" },
     { key: "male", label: t("gender.male"), color: "slate-500" },
     { key: "nonBinary", label: t("gender.nonBinary"), color: "slate-600" },
     { key: "other", label: t("gender.other"), color: "slate-700" },
 ];
 
-export const labelMappings: {
-    label: Label;
-    color: string;
-    name: string;
-}[] = [
+export const labelMappings: LabelMapping[] = [
     { label: "A+", color: "#306EBA", name: t("label.aPlus") },
     { label: "A", color: "#42944A", name: t("label.a") },
     { label: "B", color: "#6AAC46", name: t("label.b") },
@@ -174,18 +179,93 @@ export const consumptionSources: ConsumptionSources = {
             name: t("category.sources.homePhotovoltaics"),
         },
     ],
-    heating: [],
-    transportation: [],
+    heating: [
+        { source: "oil", name: t("category.sources.oil") },
+        { source: "naturalGas", name: t("category.sources.naturalGas") },
+        {
+            source: "liquifiedPetroGas",
+            name: t("category.sources.liquifiedPetroGas"),
+        },
+        { source: "biomass", name: t("category.sources.biomass") },
+        {
+            source: "locallyProducedBiomass",
+            name: t("category.sources.locallyProducedBiomass"),
+        },
+        { source: "geothermal", name: t("category.sources.geothermal") },
+        { source: "solarThermal", name: t("category.sources.solarThermal") },
+        { source: "district", name: t("category.sources.district") },
+        { source: "electric", name: t("category.sources.electric") },
+    ],
+    districtHeating: [
+        { source: "coal", name: t("category.sources.coal") },
+        { source: "naturalGas", name: t("category.sources.naturalGas") },
+        { source: "oil", name: t("category.sources.oil") },
+        { source: "electric", name: t("category.sources.electric") },
+        { source: "solarThermal", name: t("category.sources.solarThermal") },
+        { source: "geothermal", name: t("category.sources.geothermal") },
+        { source: "biomass", name: t("category.sources.biomass") },
+        {
+            source: "wasteTreatment",
+            name: t("category.sources.wasteTreatment"),
+        },
+        { source: "default", name: t("category.sources.default") },
+    ],
+    transportation: [
+        { source: "fuelCar", name: t("category.sources.fuelCar") },
+        { source: "electricCar", name: t("category.sources.electricCar") },
+        { source: "hybridCar", name: t("category.sources.hybridCar") },
+        { source: "motorcycle", name: t("category.sources.motorcycle") },
+        {
+            source: "electricMotorcycle",
+            name: t("category.sources.electricMotorcycle"),
+        },
+        { source: "electricBus", name: t("category.sources.electricBus") },
+        {
+            source: "hybridElectricBus",
+            name: t("category.sources.hybridElectricBus"),
+        },
+        {
+            source: "alternativeFuelBus",
+            name: t("category.sources.alternativeFuelBus"),
+        },
+        { source: "dieselBus", name: t("category.sources.dieselBus") },
+        { source: "otherBus", name: t("category.sources.otherBus") },
+        {
+            source: "metroTramOrUrbanLightTrain",
+            name: t("category.sources.metroTramOrUrbanLightTrain"),
+        },
+        {
+            source: "electricPassengerTrain",
+            name: t("category.sources.electricPassengerTrain"),
+        },
+        {
+            source: "dieselPassengerTrain",
+            name: t("category.sources.dieselPassengerTrain"),
+        },
+        {
+            source: "highSpeedTrain",
+            name: t("category.sources.highSpeedTrain"),
+        },
+        { source: "plane", name: t("category.sources.plane") },
+        { source: "electricBike", name: t("category.sources.electricBike") },
+        {
+            source: "electricScooter",
+            name: t("category.sources.electricScooter"),
+        },
+        { source: "bike", name: t("category.sources.bike") },
+        { source: "walking", name: t("category.sources.walking") },
+    ],
 };
 
 export const categories: ConsumptionCategory[] = consumptionMapping.map(
     (c) => c.category,
 );
 
+// TODO: Change to carbonEmissions and energyExpended
 export const energyModes: EnergyMode[] = ["carbon", "energy"];
 export const calculationModes: CalculationMode[] = ["absolute", "relative"];
 
-export const carbonUnit = " kg CO\u2082";
+export const carbonUnit: string = " kg CO\u2082";
 
 export const kiloGramNumberFormatter = Intl.NumberFormat("en-GB", {
     notation: "compact",
@@ -193,6 +273,45 @@ export const kiloGramNumberFormatter = Intl.NumberFormat("en-GB", {
     unit: "kilogram",
     unitDisplay: "short",
 });
+
+export const householdProfiles: householdProfile[] = [
+    {
+        key: "retiredIndividuals",
+        label: t("app.user.householdProfile.retiredIndividuals"),
+    },
+    {
+        key: "homeBasedWorkersOrStudents",
+        label: t("app.user.householdProfile.homeBasedWorkersOrStudents"),
+    },
+    {
+        key: "homemakers",
+        label: t("app.user.householdProfile.homemakers"),
+    },
+    {
+        key: "workersOrStudentsOutsideTheHome",
+        label: t("app.user.householdProfile.workersOrStudentsOutsideTheHome"),
+    },
+];
+
+export const publicVehicleOccupancies: publicVehicleOccupancy[] = [
+    {
+        key: "almostEmpty",
+        label: t("app.consumption.publicVehicleOccupancy.almostEmpty"),
+    },
+    {
+        key: "medium",
+        label: t("app.consumption.publicVehicleOccupancy.medium"),
+    },
+    {
+        key: "nearlyFull",
+        label: t("app.consumption.publicVehicleOccupancy.nearlyFull"),
+    },
+];
+
+export const homeEnergyLabels: HomeEnergyLabel[] = [
+    ...labelMappings.map((label) => ({ key: label.label, label: label.label })),
+    { key: "unsure", label: t("common.unsure") },
+];
 
 export const monthNames = [
     t("month.january"),
