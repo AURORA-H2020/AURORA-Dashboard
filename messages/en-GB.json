@@ -30,6 +30,12 @@
     "auth": {
       "success": "Welcome to AURORA!",
       "error": "An error occured. Please check your credentials."
+    },
+    "consumption": {
+      "addedSuccessfully": "Your consumption was successfully added",
+      "updatedSuccessfully": "Your consumption was successfully updated",
+      "addedError": "An error occured adding your consumption",
+      "updatedError": "An error occured updating your consumption"
     }
   },
   "button": {
