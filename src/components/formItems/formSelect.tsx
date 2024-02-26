@@ -7,10 +7,20 @@ import {
     SelectValue,
 } from "../ui/select";
 
-const FormSelect = ({ field, options, placeholder, formLabel }) => (
+const FormSelect = ({
+    field,
+    options,
+    placeholder,
+    formLabel,
+    disabled = false,
+}) => (
     <FormItem>
         <FormLabel>{formLabel}</FormLabel>
-        <Select onValueChange={field.onChange} value={field.value}>
+        <Select
+            onValueChange={field.onChange}
+            value={field.value}
+            disabled={disabled}
+        >
             <SelectTrigger>
                 <SelectValue placeholder={placeholder} />
             </SelectTrigger>
