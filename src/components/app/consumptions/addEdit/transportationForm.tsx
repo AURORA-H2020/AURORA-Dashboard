@@ -5,29 +5,24 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
-import firebaseApp from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
-import { consumptionSources, publicVehicleOccupancies } from "@/lib/constants";
+import { addEditConsumption } from "@/firebase/consumptions/addEditConsumption";
+import {
+    consumptionSources,
+    privateVehicleTypes,
+    publicVehicleOccupancies,
+    publicVerhicleTypes,
+} from "@/lib/constants";
 import { transportationFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Consumption } from "@/models/firestore/consumption/consumption";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
-import {
-    Timestamp,
-    addDoc,
-    collection,
-    doc,
-    getFirestore,
-    setDoc,
-} from "firebase/firestore";
+import { Timestamp } from "firebase/firestore";
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-
-// Initialize Firestore
-const firestore = getFirestore(firebaseApp);
 
 export default function TransportationForm({
     consumption,
@@ -43,63 +38,65 @@ export default function TransportationForm({
         user: User;
     };
 
+    const initialFormData: DefaultValues<Consumption> = {
+        value: consumption?.value || undefined,
+        category: "transportation",
+        transportation: {
+            transportationType:
+                consumption?.transportation?.transportationType || undefined,
+            privateVehicleOccupancy:
+                consumption?.transportation?.privateVehicleOccupancy ||
+                undefined,
+            publicVehicleOccupancy:
+                consumption?.transportation?.publicVehicleOccupancy ||
+                undefined,
+            dateOfTravel:
+                consumption?.electricity?.startDate || Timestamp.now(),
+            dateOfTravelEnd: consumption?.electricity?.endDate || undefined,
+        },
+        description: consumption?.description || undefined,
+        createdAt: Timestamp.now(),
+    };
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            value: consumption?.value || undefined,
-            category: "transportation",
-            transportation: {
-                transportationType:
-                    consumption?.transportation?.transportationType ||
-                    undefined,
-                privateVehicleOccupancy:
-                    consumption?.transportation?.privateVehicleOccupancy || 1,
-                publicVehicleOccupancy:
-                    consumption?.transportation?.publicVehicleOccupancy ||
-                    undefined,
-                dateOfTravel:
-                    consumption?.electricity?.startDate || Timestamp.now(),
-                dateOfTravelEnd: consumption?.electricity?.endDate || undefined,
-            },
-            description: consumption?.description || undefined,
-            createdAt: Timestamp.now(),
-        },
+        defaultValues: initialFormData,
     });
 
     const onSubmit = async (data: Consumption) => {
-        let success = false;
-        if (user) {
-            const consumptionRef = collection(
-                firestore,
-                FirebaseConstants.collections.users.name,
-                user.uid,
-                FirebaseConstants.collections.users.consumptions.name,
-            );
-            try {
-                if (consumption?.id) {
-                    const docRef = doc(consumptionRef, consumption.id);
-                    await setDoc(docRef, data);
-                    toast.success("Your consumption was updated successfully.");
-                } else {
-                    await addDoc(consumptionRef, data);
-                    toast.success("Your consumption was created successfully.");
-                }
-                success = true;
-            } catch (error) {
-                console.error("Error writing document: ", error);
-                toast.success("There was an error creating your consumption.");
+        const { success } = await addEditConsumption(
+            data,
+            "transportation",
+            user,
+            consumption?.id,
+        );
+        if (success) {
+            if (consumption?.id) {
+                toast.success("Your consumption was updated successfully.");
+            } else {
+                toast.success("Your consumption was created successfully.");
             }
         } else {
-            toast.success("Please login to add a consumption.");
+            toast.error("There was an error creating your consumption.");
         }
+
         if (onConsumptionAdded) {
             onConsumptionAdded(success);
         }
     };
 
-    if (!user) {
-        return;
-    }
+    const formTransportationType = form.watch(
+        "transportation.transportationType",
+    );
+
+    useEffect(() => {
+        if (!privateVehicleTypes.includes(formTransportationType)) {
+            form.setValue("transportation.privateVehicleOccupancy", undefined);
+        }
+        if (!publicVerhicleTypes.includes(formTransportationType)) {
+            form.setValue("transportation.publicVehicleOccupancy", undefined);
+        }
+    }, [formTransportationType, form]);
 
     return (
         <>
@@ -136,36 +133,40 @@ export default function TransportationForm({
                         )}
                     />
 
-                    <FormField
-                        control={form.control}
-                        name="transportation.privateVehicleOccupancy"
-                        render={({ field }) => (
-                            <FormInputField
-                                field={field}
-                                inputType="number"
-                                placeholder="Private Vehicle Occupancy"
-                                formLabel="Private Vehicle Occupancy"
-                            />
-                        )}
-                    />
+                    {privateVehicleTypes.includes(formTransportationType) && (
+                        <FormField
+                            control={form.control}
+                            name="transportation.privateVehicleOccupancy"
+                            render={({ field }) => (
+                                <FormInputField
+                                    field={field}
+                                    inputType="number"
+                                    placeholder="Private Vehicle Occupancy"
+                                    formLabel="Private Vehicle Occupancy"
+                                />
+                            )}
+                        />
+                    )}
 
-                    <FormField
-                        control={form.control}
-                        name="transportation.publicVehicleOccupancy"
-                        render={({ field }) => (
-                            <FormSelect
-                                field={field}
-                                options={publicVehicleOccupancies.map(
-                                    (occupancy) => ({
-                                        value: occupancy.key,
-                                        label: t(occupancy.label),
-                                    }),
-                                )}
-                                placeholder="Public Vehicle Occupancy"
-                                formLabel={"Public Vehicle Occupancy"}
-                            />
-                        )}
-                    />
+                    {publicVerhicleTypes.includes(formTransportationType) && (
+                        <FormField
+                            control={form.control}
+                            name="transportation.publicVehicleOccupancy"
+                            render={({ field }) => (
+                                <FormSelect
+                                    field={field}
+                                    options={publicVehicleOccupancies.map(
+                                        (occupancy) => ({
+                                            value: occupancy.key,
+                                            label: t(occupancy.label),
+                                        }),
+                                    )}
+                                    placeholder="Public Vehicle Occupancy"
+                                    formLabel={"Public Vehicle Occupancy"}
+                                />
+                            )}
+                        />
+                    )}
 
                     <FormField
                         control={form.control}

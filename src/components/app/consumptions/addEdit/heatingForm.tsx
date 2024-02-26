@@ -5,29 +5,19 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
-import firebaseApp from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { addEditConsumption } from "@/firebase/consumptions/addEditConsumption";
 import { consumptionSources } from "@/lib/constants";
 import { heatingFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Consumption } from "@/models/firestore/consumption/consumption";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
-import {
-    Timestamp,
-    addDoc,
-    collection,
-    doc,
-    getFirestore,
-    setDoc,
-} from "firebase/firestore";
+import { Timestamp } from "firebase/firestore";
 import { useTranslations } from "next-intl";
-import { useForm } from "react-hook-form";
+import { useEffect } from "react";
+import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-
-// Initialize Firestore
-const firestore = getFirestore(firebaseApp);
 
 export default function HeatingForm({
     consumption,
@@ -43,60 +33,56 @@ export default function HeatingForm({
         user: User;
     };
 
+    const initialFormData: DefaultValues<Consumption> = {
+        value: consumption?.value || undefined,
+        category: "heating",
+        heating: {
+            heatingFuel: consumption?.heating?.heatingFuel,
+            districtHeatingSource:
+                consumption?.heating?.districtHeatingSource || undefined,
+            costs: consumption?.electricity?.costs || undefined,
+            householdSize: consumption?.electricity?.householdSize || 1,
+            startDate: consumption?.electricity?.startDate || Timestamp.now(),
+            endDate: consumption?.electricity?.endDate || Timestamp.now(),
+        },
+        description: consumption?.description || undefined,
+        createdAt: Timestamp.now(),
+    };
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            value: consumption?.value || 0,
-            category: "heating",
-            heating: {
-                heatingFuel: consumption?.heating?.heatingFuel || "naturalGas",
-                districtHeatingSource:
-                    consumption?.heating?.districtHeatingSource || "default",
-                costs: consumption?.electricity?.costs || 0,
-                householdSize: consumption?.electricity?.householdSize || 1,
-                startDate:
-                    consumption?.electricity?.startDate || Timestamp.now(),
-                endDate: consumption?.electricity?.endDate || Timestamp.now(),
-            },
-            description: consumption?.description || "",
-            createdAt: Timestamp.now(),
-        },
+        defaultValues: initialFormData,
     });
 
     const onSubmit = async (data: Consumption) => {
-        let success = false;
-        if (user) {
-            const consumptionRef = collection(
-                firestore,
-                FirebaseConstants.collections.users.name,
-                user.uid,
-                FirebaseConstants.collections.users.consumptions.name,
-            );
-            try {
-                if (consumption?.id) {
-                    const docRef = doc(consumptionRef, consumption.id);
-                    await setDoc(docRef, data);
-                    toast.success("Your consumption was updated successfully.");
-                } else {
-                    await addDoc(consumptionRef, data);
-                    toast.success("Your consumption was created successfully.");
-                }
-                success = true;
-            } catch (error) {
-                console.error("Error writing document: ", error);
-                toast.success("There was an error creating your consumption.");
-            }
+        const { success } = await addEditConsumption(
+            data,
+            "transportation",
+            user,
+            consumption?.id,
+        );
+        if (consumption?.id) {
+            if (success) {
+                toast.success(t("toast.consumption.updatedSuccessfully"));
+            } else toast.error(t("toast.consumption.updatedError"));
         } else {
-            toast.success("Please login to add a consumption.");
+            if (success) {
+                toast.success(t("toast.consumption.addedSuccessfully"));
+            } else toast.error(t("toast.consumption.addedError"));
         }
+
         if (onConsumptionAdded) {
             onConsumptionAdded(success);
         }
     };
 
-    if (!user) {
-        return;
-    }
+    const formHeatingFuel = form.watch("heating.heatingFuel");
+
+    useEffect(() => {
+        if (formHeatingFuel !== "district") {
+            form.setValue("heating.districtHeatingSource", undefined);
+        }
+    }, [formHeatingFuel, form]);
 
     return (
         <>
@@ -145,23 +131,25 @@ export default function HeatingForm({
                         )}
                     />
 
-                    <FormField
-                        control={form.control}
-                        name="heating.districtHeatingSource"
-                        render={({ field }) => (
-                            <FormSelect
-                                field={field}
-                                options={consumptionSources.districtHeating.map(
-                                    (source) => ({
-                                        value: source.source,
-                                        label: t(source.name),
-                                    }),
-                                )}
-                                placeholder="District Heating Source"
-                                formLabel={"District Heating Source"}
-                            />
-                        )}
-                    />
+                    {formHeatingFuel === "district" && (
+                        <FormField
+                            control={form.control}
+                            name="heating.districtHeatingSource"
+                            render={({ field }) => (
+                                <FormSelect
+                                    field={field}
+                                    options={consumptionSources.districtHeating.map(
+                                        (source) => ({
+                                            value: source.source,
+                                            label: t(source.name),
+                                        }),
+                                    )}
+                                    placeholder="District Heating Source"
+                                    formLabel={"District Heating Source"}
+                                />
+                            )}
+                        />
+                    )}
 
                     <FormField
                         control={form.control}
