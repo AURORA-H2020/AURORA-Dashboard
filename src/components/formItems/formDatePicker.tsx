@@ -34,7 +34,7 @@ const FormDatePicker = ({ field, placeholder, formLabel }) => {
                 <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
                         mode="single"
-                        selected={field.value.toDate()}
+                        selected={field.value?.toDate()}
                         onSelect={(date) => {
                             const timestamp = Timestamp.fromDate(
                                 date || new Date(),
