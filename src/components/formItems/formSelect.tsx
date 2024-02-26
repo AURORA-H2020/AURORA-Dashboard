@@ -1,4 +1,4 @@
-import { FormItem, FormLabel } from "../ui/form";
+import { FormItem, FormLabel, FormMessage } from "../ui/form";
 import {
     Select,
     SelectContent,
@@ -22,6 +22,7 @@ const FormSelect = ({ field, options, placeholder, formLabel }) => (
                 ))}
             </SelectContent>
         </Select>
+        <FormMessage />
     </FormItem>
 );
 
