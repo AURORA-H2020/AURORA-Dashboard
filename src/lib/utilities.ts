@@ -5,8 +5,8 @@ import {
     countriesMapping,
 } from "./constants";
 
+import { ConsumptionAttributes } from "@/models/constants";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { ConsumptionAttributes } from "@/models/meta-data";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
