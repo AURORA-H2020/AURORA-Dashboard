@@ -6,7 +6,12 @@ import { ConsumptionTransportationPublicVehicleOccupancy } from "@/models/firest
 import { ConsumptionTransportationType } from "@/models/firestore/consumption/transportation/consumption-transportation-type";
 import { Timestamp } from "firebase/firestore";
 import { z } from "zod";
-import { consumptionSources, publicVehicleOccupancies } from "../constants";
+import {
+    consumptionSources,
+    privateVehicleTypes,
+    publicVehicleOccupancies,
+    publicVerhicleTypes,
+} from "../constants";
 
 const TimestampSchema = z.instanceof(Timestamp);
 
@@ -56,16 +61,33 @@ export const heatingFormSchema = (
             message: t("app.validation.error.validValue"),
         }),
         category: z.literal("heating"),
-        heating: z.object({
-            heatingFuel: z.enum([heatingFuels[0], ...heatingFuels]),
-            districtHeatingSource: z
-                .enum([districtHeatingSources[0], ...districtHeatingSources])
-                .optional(),
-            costs: z.coerce.number().max(1000000),
-            householdSize: z.coerce.number().min(1).max(100),
-            startDate: TimestampSchema,
-            endDate: TimestampSchema,
-        }),
+        heating: z
+            .object({
+                heatingFuel: z.enum([heatingFuels[0], ...heatingFuels]),
+                districtHeatingSource: z
+                    .enum([
+                        districtHeatingSources[0],
+                        ...districtHeatingSources,
+                    ])
+                    .optional(),
+                costs: z.coerce.number().max(1000000).optional(),
+                householdSize: z.coerce.number().min(1).max(100),
+                startDate: TimestampSchema,
+                endDate: TimestampSchema,
+            })
+            .refine(
+                (data) => {
+                    if (data.heatingFuel === "district") {
+                        return data.districtHeatingSource !== undefined;
+                    }
+                    return true;
+                },
+                {
+                    message:
+                        "District Heating Source is required when district heating is selected",
+                    path: ["districtHeatingSource"],
+                },
+            ),
         description: z.string().max(1000).optional(),
         createdAt: TimestampSchema,
     });
@@ -78,23 +100,50 @@ export const transportationFormSchema = (
             message: t("app.validation.error.validValue"),
         }),
         category: z.literal("transportation"),
-        transportation: z.object({
-            transportationType: z.enum([
-                transportationTypes[0],
-                ...transportationTypes,
-            ]),
-            privateVehicleOccupancy: z.coerce
-                .number()
-                .min(1)
-                .max(15)
-                .optional(),
-            publicVehicleOccupancy: z.enum([
-                transportationPublicVehicleOccupancies[0],
-                ...transportationPublicVehicleOccupancies,
-            ]),
-            dateOfTravel: TimestampSchema,
-            dateOfTravelEnd: TimestampSchema.optional(),
-        }),
+        transportation: z
+            .object({
+                transportationType: z.enum([
+                    transportationTypes[0],
+                    ...transportationTypes,
+                ]),
+                privateVehicleOccupancy: z.coerce
+                    .number()
+                    .min(1)
+                    .max(15)
+                    .optional(),
+                publicVehicleOccupancy: z
+                    .enum([
+                        transportationPublicVehicleOccupancies[0],
+                        ...transportationPublicVehicleOccupancies,
+                    ])
+                    .optional(),
+                dateOfTravel: TimestampSchema,
+                dateOfTravelEnd: TimestampSchema.optional(),
+            })
+            .refine(
+                (data) => {
+                    if (privateVehicleTypes.includes(data.transportationType)) {
+                        return data.privateVehicleOccupancy !== undefined;
+                    }
+                    return true;
+                },
+                {
+                    message: "Please specify a number of passengers",
+                    path: ["privateVehicleOccupancy"],
+                },
+            )
+            .refine(
+                (data) => {
+                    if (publicVerhicleTypes.includes(data.transportationType)) {
+                        return data.publicVehicleOccupancy !== undefined;
+                    }
+                    return true;
+                },
+                {
+                    message: "Please specify an occupancy level",
+                    path: ["publicVehicleOccupancy"],
+                },
+            ),
         description: z.string().max(1000).optional(),
         createdAt: TimestampSchema,
     });
