@@ -2,6 +2,7 @@ import { getConsumptionAttributes, titleCase } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { useState } from "react";
 import ConsumptionView from "./consumptionView";
+"use client";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

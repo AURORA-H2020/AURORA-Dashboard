@@ -1,4 +1,5 @@
 "use client";
+
 import AddEditConsumptionModal from "@/components/app/consumptions/addEdit/addEditConsumptionModal";
 import ConsumptionList from "@/components/app/consumptions/consumptionList";
 import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";

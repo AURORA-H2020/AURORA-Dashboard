@@ -1,4 +1,5 @@
 "use client";
+
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Heading } from "@radix-ui/themes";
