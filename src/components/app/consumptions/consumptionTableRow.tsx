@@ -1,5 +1,4 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import { useTranslations } from "next-intl";
 import React from "react";
 
 // Props when `merged` is not provided or false.
@@ -35,12 +34,10 @@ export default function ConsumptionTableRow(
     const { children, merged } = props;
     const label = merged ? null : props.label; // label is ignored if merged is true
 
-    const t = useTranslations();
-
     return (
         <TableRow>
             {label && (
-                <TableCell className="font-bold w-[40%]">{t(label)}</TableCell>
+                <TableCell className="font-bold w-[40%]">{label}</TableCell>
             )}
             <TableCell
                 colSpan={merged ? 2 : 1}

@@ -101,7 +101,10 @@ export default function TransportationForm({
     return (
         <>
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)}>
+                <form
+                    onSubmit={form.handleSubmit(onSubmit)}
+                    className="flex flex-col gap-4 w-full mt-4"
+                >
                     <FormField
                         control={form.control}
                         name="value"
@@ -188,6 +191,7 @@ export default function TransportationForm({
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
                                 formLabel={"End date"}
+                                showClearButton={true}
                             />
                         )}
                     />

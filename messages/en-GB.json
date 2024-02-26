@@ -159,7 +159,11 @@
       "selectValue": "Select a value",
       "selectDate": "Select a date"
     },
-    "unsure": "Unsure"
+    "unsure": "Unsure",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "duplicate": "Duplicate",
+    "edit": "Edit"
   },
   "country": {
     "allSelectedCountries": "All selected countries",

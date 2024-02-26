@@ -26,6 +26,8 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useTranslations } from "next-intl";
 import { toast } from "sonner";
 import AddEditConsumptionModal from "./addEdit/addEditConsumptionModal";
 
@@ -42,6 +44,8 @@ export default function ConsumptionPreview({
 }: {
     consumption: ConsumptionWithID;
 }): JSX.Element {
+    const t = useTranslations();
+
     const consumptionAttributes = getConsumptionAttributes(
         consumption.category,
     );
@@ -148,33 +152,41 @@ export default function ConsumptionPreview({
             {/* Modal */}
 
             <Dialog open={isModalOpen} onOpenChange={closeModal}>
-                <DialogContent>
-                    <DialogHeader>
-                        <DialogTitle>
-                            {titleCase(consumption.category)}
-                        </DialogTitle>
-                        <DialogDescription>
-                            <ConsumptionView consumption={consumption} />
-                        </DialogDescription>
-                    </DialogHeader>
-                    <DialogFooter className="flex sm:justify-between">
-                        {/* TODO: Add button functionality */}
-
-                        <Button
-                            className="self-left"
-                            variant={"destructive"}
-                            type="submit"
-                            onClick={() => setAlertOpen(true)}
-                        >
-                            Delete
-                        </Button>
-                        <Flex className="space-x-2">
-                            <AddEditConsumptionModal consumption={consumption}>
-                                <Button variant="outline">Edit</Button>
-                            </AddEditConsumptionModal>
-                            <Button variant="outline">Duplicate</Button>
-                        </Flex>
-                    </DialogFooter>
+                <DialogContent className="sm:max-w-lg p-0">
+                    <ScrollArea className="max-h-[80vh] p-6">
+                        <DialogHeader>
+                            <DialogTitle>
+                                {titleCase(consumption.category)}
+                            </DialogTitle>
+                            <DialogDescription>
+                                <ConsumptionView consumption={consumption} />
+                            </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter className="flex sm:justify-between">
+                            {/* TODO: Add button functionality */}
+                            <Flex justify="between" className="gap-2">
+                                <Button
+                                    className="self-left"
+                                    variant={"destructive"}
+                                    onClick={() => setAlertOpen(true)}
+                                >
+                                    {t("common.delete")}
+                                </Button>
+                                <Flex className="gap-2">
+                                    <AddEditConsumptionModal
+                                        consumption={consumption}
+                                    >
+                                        <Button variant="outline">
+                                            {t("common.edit")}
+                                        </Button>
+                                    </AddEditConsumptionModal>
+                                    <Button variant="outline">
+                                        {t("common.duplicate")}
+                                    </Button>
+                                </Flex>
+                            </Flex>
+                        </DialogFooter>
+                    </ScrollArea>
                 </DialogContent>
             </Dialog>
 
@@ -189,10 +201,22 @@ export default function ConsumptionPreview({
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <Button onClick={cancelDelete}>Cancel</Button>
-                        <Button variant="destructive" onClick={acceptDelete}>
-                            Delete
-                        </Button>
+                        <Flex justify="between" className="gap-4">
+                            <Button
+                                onClick={cancelDelete}
+                                variant="outline"
+                                className="w-full"
+                            >
+                                {t("common.cancel")}
+                            </Button>
+                            <Button
+                                variant="destructive"
+                                onClick={acceptDelete}
+                                className="w-full"
+                            >
+                                {t("common.delete")}
+                            </Button>
+                        </Flex>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

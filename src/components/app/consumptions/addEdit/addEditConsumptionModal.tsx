@@ -1,9 +1,4 @@
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { consumptionMapping } from "@/lib/constants";
 import { ConsumptionWithID } from "@/models/extensions";
@@ -13,6 +8,7 @@ import { useState } from "react";
 import ElectricityForm from "./electricityForm";
 import HeatingForm from "./heatingForm";
 import TransportationForm from "./transportationForm";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function AddEditConsumptionModal({
     consumption,
@@ -36,62 +32,52 @@ export default function AddEditConsumptionModal({
         <>
             <div onClick={() => setIsModalOpen(true)}>{children}</div>
             <Dialog open={isModalOpen} onOpenChange={handleCloseModal}>
-                <DialogContent>
-                    <Tabs
-                        value={currentTab}
-                        onValueChange={(value) =>
-                            setCurrentTab(value as ConsumptionCategory)
-                        }
-                    >
-                        {!consumption && (
-                            <div className="overflow-x-auto">
-                                <TabsList className="w-full my-6">
-                                    {consumptionMapping.map((consumption) => (
-                                        <TabsTrigger
-                                            key={consumption.category}
-                                            value={consumption.category}
-                                            className="w-full"
-                                        >
-                                            {t(consumption.label)}
-                                        </TabsTrigger>
-                                    ))}
-                                </TabsList>
-                            </div>
-                        )}
-                        <TabsContent value="electricity">
-                            <DialogHeader>
-                                <DialogTitle>
-                                    {t("category.electricity")}
-                                </DialogTitle>
-                            </DialogHeader>
-                            <ElectricityForm
-                                consumption={consumption}
-                                onConsumptionAdded={handleCloseModal}
-                            />
-                        </TabsContent>
-                        <TabsContent value="heating">
-                            <DialogHeader>
-                                <DialogTitle>
-                                    {t("category.heating")}
-                                </DialogTitle>
-                            </DialogHeader>
-                            <HeatingForm
-                                consumption={consumption}
-                                onConsumptionAdded={handleCloseModal}
-                            />
-                        </TabsContent>
-                        <TabsContent value="transportation">
-                            <DialogHeader>
-                                <DialogTitle>
-                                    {t("category.transportation")}
-                                </DialogTitle>
-                            </DialogHeader>
-                            <TransportationForm
-                                consumption={consumption}
-                                onConsumptionAdded={handleCloseModal}
-                            />
-                        </TabsContent>
-                    </Tabs>
+                <DialogContent className="sm:max-w-lg p-0">
+                    <ScrollArea className="max-h-[80vh] p-6">
+                        <Tabs
+                            value={currentTab}
+                            onValueChange={(value) =>
+                                setCurrentTab(value as ConsumptionCategory)
+                            }
+                        >
+                            {!consumption && (
+                                <div className="overflow-x-auto">
+                                    <TabsList className="w-full my-6">
+                                        {consumptionMapping.map(
+                                            (consumption) => (
+                                                <TabsTrigger
+                                                    key={consumption.category}
+                                                    value={consumption.category}
+                                                    className="w-full"
+                                                >
+                                                    {t(consumption.label)}
+                                                </TabsTrigger>
+                                            ),
+                                        )}
+                                    </TabsList>
+                                </div>
+                            )}
+
+                            <TabsContent value="electricity">
+                                <ElectricityForm
+                                    consumption={consumption}
+                                    onConsumptionAdded={handleCloseModal}
+                                />
+                            </TabsContent>
+                            <TabsContent value="heating">
+                                <HeatingForm
+                                    consumption={consumption}
+                                    onConsumptionAdded={handleCloseModal}
+                                />
+                            </TabsContent>
+                            <TabsContent value="transportation">
+                                <TransportationForm
+                                    consumption={consumption}
+                                    onConsumptionAdded={handleCloseModal}
+                                />
+                            </TabsContent>
+                        </Tabs>
+                    </ScrollArea>
                 </DialogContent>
             </Dialog>
         </>
