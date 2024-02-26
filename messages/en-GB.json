@@ -132,7 +132,8 @@
     "yourConsumptions": "Your Consumptions",
     "validation": {
       "error": {
-        "validValue": "Please enter a valid number"
+        "validValue": "Please enter a valid number",
+        "maxStringLength": "This field cannot exceed {charLimit} characters"
       }
     },
     "user": {

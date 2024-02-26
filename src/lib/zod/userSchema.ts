@@ -20,14 +20,18 @@ const userHomeEnergyLabels: UserHomeEnergyLabel[] = homeEnergyLabels.map(
 );
 
 export const userDataFormSchema = (
-    t: (arg: string) => string,
+    t: (arg: string, val?: any) => string,
 ): z.ZodType<User> =>
     z.object({
         firstName: z.string().max(100, {
-            message: "This field cannot exceed 100 characters.",
+            message: t("app.validation.error.maxStringLength", {
+                charLimit: 100,
+            }),
         }),
         lastName: z.string().max(100, {
-            message: "This field cannot exceed 100 characters.",
+            message: t("app.validation.error.maxStringLength", {
+                charLimit: 100,
+            }),
         }),
         yearOfBirth: z.coerce
             .number()
