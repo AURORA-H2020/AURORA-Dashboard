@@ -2,6 +2,7 @@
 
 import { Toaster } from "@/components/ui/sonner";
 import { AuthContextProvider } from "@/context/AuthContext";
+import { FirebaseDataProvider } from "@/context/FirebaseContext";
 import { Theme } from "@radix-ui/themes";
 import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
@@ -29,12 +30,14 @@ export function Providers({
             timeZone="Europe/Berlin"
         >
             <AuthContextProvider>
-                <Theme>
-                    <NextThemesProvider {...props}>
-                        {children}
-                        <Toaster richColors />
-                    </NextThemesProvider>
-                </Theme>
+                <FirebaseDataProvider>
+                    <Theme>
+                        <NextThemesProvider {...props}>
+                            {children}
+                            <Toaster richColors />
+                        </NextThemesProvider>
+                    </Theme>
+                </FirebaseDataProvider>
             </AuthContextProvider>
         </NextIntlClientProvider>
     );
