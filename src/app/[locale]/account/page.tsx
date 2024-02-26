@@ -2,16 +2,13 @@
 import AddEditConsumptionModal from "@/components/app/consumptions/addEdit/addEditConsumptionModal";
 import ConsumptionList from "@/components/app/consumptions/consumptionList";
 import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";
-import InitialRegistrationForm from "@/components/app/user/initialRegistrationForm";
+import InitialRegistrationModal from "@/components/app/user/initialRegistrationModal";
 import { Button } from "@/components/ui/button";
 import LoadingSpinner from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
-import { fetchUserConsumptions } from "@/lib/firebaseUtils";
-import { ConsumptionWithID } from "@/models/extensions";
-import { useRouter } from "@/navigation";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { Flex } from "@radix-ui/themes";
 import { User } from "firebase/auth";
-import { useEffect, useState } from "react";
 
 /**
  * Renders the account page for authenticated users, displaying user details
@@ -26,37 +23,28 @@ function AccountPage(): JSX.Element {
         user: User;
         loading: boolean;
     };
-    const router = useRouter();
-
-    const [userConsumptions, setUserConsumptions] = useState<
-        ConsumptionWithID[] | null
-    >([]);
-
-    useEffect(() => {
-        if (loading) return;
-
-        if (!user) {
-            router.replace("/");
-            return;
-        }
-
-        const fetchUC = async () => {
-            const userConsumptions = await fetchUserConsumptions(user.uid);
-            setUserConsumptions(userConsumptions);
-        };
-
-        fetchUC();
-    }, [user, router, loading]);
+    const { userData, isLoadingUserData, userConsumptions } = useFirebaseData();
 
     if (!user && loading) {
         // Render loading indicator until the auth check is complete
         return <LoadingSpinner />;
     }
 
+    if (isLoadingUserData) {
+        // Render loading indicator while user data is being loaded
+        return <LoadingSpinner />;
+    }
+
+    if (
+        !userData?.hasOwnProperty("country") ||
+        userData?.country === undefined
+    ) {
+        return <InitialRegistrationModal userData={userData} />;
+    }
+
     // Authenticated user content
     return (
         <>
-            <InitialRegistrationForm />
             <ConsumptionSummaryChart />
             {userConsumptions && (
                 <ConsumptionList userConsumptions={userConsumptions} />
