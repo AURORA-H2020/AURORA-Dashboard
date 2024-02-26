@@ -1,13 +1,18 @@
 import { cn } from "@/lib/utilities";
 import { Timestamp } from "firebase/firestore";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, XIcon } from "lucide-react";
 import { useFormatter } from "next-intl";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
-const FormDatePicker = ({ field, placeholder, formLabel }) => {
+const FormDatePicker = ({
+    field,
+    placeholder,
+    formLabel,
+    showClearButton = false,
+}) => {
     const format = useFormatter();
     return (
         <FormItem>
@@ -28,6 +33,15 @@ const FormDatePicker = ({ field, placeholder, formLabel }) => {
                                 <span>{placeholder}</span>
                             )}
                             <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                            {showClearButton && field.value && (
+                                <XIcon
+                                    className="ml-2 h-4 w-4 opacity-50 cursor-pointer"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        field.onChange(undefined);
+                                    }}
+                                />
+                            )}
                         </Button>
                     </FormControl>
                 </PopoverTrigger>
