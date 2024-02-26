@@ -24,7 +24,7 @@ function AccountPage(): JSX.Element {
         user: User;
         loading: boolean;
     };
-    const { userData, isLoadingUserData, userConsumptions } = useFirebaseData();
+    const { userData, isLoadingUserData } = useFirebaseData();
 
     if (!user && loading) {
         // Render loading indicator until the auth check is complete
@@ -40,16 +40,14 @@ function AccountPage(): JSX.Element {
         !userData?.hasOwnProperty("country") ||
         userData?.country === undefined
     ) {
-        return <InitialRegistrationModal userData={userData} />;
+        return <InitialRegistrationModal />;
     }
 
     // Authenticated user content
     return (
         <>
             <ConsumptionSummaryChart />
-            {userConsumptions && (
-                <ConsumptionList userConsumptions={userConsumptions} />
-            )}
+            <ConsumptionList />
             <Flex className="space-x-2">
                 <AddEditConsumptionModal>
                     <Button>Add Consumption</Button>

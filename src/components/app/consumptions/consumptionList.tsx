@@ -1,7 +1,8 @@
 "use client";
 
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
-import { ConsumptionWithID } from "@/models/extensions";
+import LoadingSpinner from "@/components/ui/loading";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { Heading } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 
@@ -12,12 +13,14 @@ import { useTranslations } from "next-intl";
  * @param {Consumption[]} props.userConsumptions - The user's consumption data.
  * @return {JSX.Element} The consumption list component.
  */
-function ConsumptionList({
-    userConsumptions,
-}: {
-    userConsumptions: ConsumptionWithID[];
-}): JSX.Element {
+function ConsumptionList(): JSX.Element {
     const t = useTranslations();
+
+    const { userConsumptions } = useFirebaseData();
+
+    if (!userConsumptions) {
+        return <LoadingSpinner />;
+    }
 
     // Authenticated user content
     return (

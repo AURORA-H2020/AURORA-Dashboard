@@ -4,19 +4,17 @@ import {
     AlertDialogContent,
 } from "@/components/ui/alert-dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { logout } from "@/firebase/auth/logout";
-import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import UserDataForm from "./userDataForm";
 
-export default function InitialRegistrationModal({
-    userData,
-}: {
-    userData?: FirebaseUser | null;
-}) {
+export default function InitialRegistrationModal() {
     const t = useTranslations();
     const router = useRouter();
+
+    const { userData } = useFirebaseData();
 
     const handleCloseModal = () => {
         router.refresh();

@@ -1,23 +1,4 @@
-import { getConsumptionAttributes, titleCase } from "@/lib/utilities";
-import { ConsumptionWithID } from "@/models/extensions";
-import { useState } from "react";
-import ConsumptionView from "./consumptionView";
 "use client";
-
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Flex, Heading, Text } from "@radix-ui/themes";
-
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
-import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
 
 import {
     AlertDialog,
@@ -27,10 +8,27 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { Separator } from "@/components/ui/separator";
+import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
+import { getConsumptionAttributes, titleCase } from "@/lib/utilities";
+import { ConsumptionWithID } from "@/models/extensions";
+import { Flex, Heading, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 import { toast } from "sonner";
 import AddEditConsumptionModal from "./addEdit/addEditConsumptionModal";
+import ConsumptionView from "./consumptionView";
 
 /**
  * Renders a preview of a consumption object with interactive

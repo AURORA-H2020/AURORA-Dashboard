@@ -31,11 +31,10 @@ import { Input } from "@/components/ui/input";
 import LoadingSpinner from "@/components/ui/loading";
 import { Table, TableBody } from "@/components/ui/table";
 import { useAuthContext } from "@/context/AuthContext";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { deleteAccount } from "@/firebase/firestore/deleteAccount";
 import { downloadUserData } from "@/firebase/firestore/downloadUserData";
-import { fetchUserById } from "@/lib/firebaseUtils";
 import { city2Name, country2Name, titleCase } from "@/lib/utilities";
-import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { useRouter } from "@/navigation";
 import { Flex, Grid } from "@radix-ui/themes";
 import { User } from "firebase/auth";
@@ -57,7 +56,7 @@ function UserSettings(): JSX.Element {
     };
     const router = useRouter();
 
-    const [userData, setUserData] = useState<FirebaseUser | null>(null);
+    const { userData } = useFirebaseData();
 
     // State to manage the visibility of the modal
     const [isModalChangeEmailOpen, setModalChangeEmailOpen] = useState(false);
@@ -102,13 +101,6 @@ function UserSettings(): JSX.Element {
             router.replace("/");
             return;
         }
-
-        const fetchUserData = async () => {
-            const userData = await fetchUserById(user.uid);
-            setUserData(userData);
-        };
-
-        fetchUserData();
     }, [user, router, loading]);
 
     if (!user && loading) {
@@ -172,7 +164,7 @@ function UserSettings(): JSX.Element {
                                 </TableBody>
                             </Table>
                             <CardFooter>
-                                <EditUserDataModal userData={userData}>
+                                <EditUserDataModal>
                                     <Button variant={"outline"}>
                                         Edit profile
                                     </Button>

@@ -1,17 +1,17 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { User as FirebaseUser } from "@/models/firestore/user/user";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { useState } from "react";
 import UserDataForm from "./userDataForm";
 
 export default function EditUserDataModal({
-    userData,
     children,
 }: {
-    userData?: FirebaseUser | null;
     children: React.ReactNode;
 }) {
     const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const { userData } = useFirebaseData();
 
     const handleCloseModal = () => {
         setIsModalOpen(false);
