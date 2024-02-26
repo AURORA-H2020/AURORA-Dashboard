@@ -1,6 +1,7 @@
 "use client";
 
 import ConsumptionTableRow from "@/components/app/consumptions/consumptionTableRow";
+import EditUserDataModal from "@/components/app/user/editUserDataModal";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -12,7 +13,13 @@ import {
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+    Card,
+    CardContent,
+    CardFooter,
+    CardHeader,
+    CardTitle,
+} from "@/components/ui/card";
 import {
     Dialog,
     DialogContent,
@@ -164,6 +171,13 @@ function UserSettings(): JSX.Element {
                                     </ConsumptionTableRow>
                                 </TableBody>
                             </Table>
+                            <CardFooter>
+                                <EditUserDataModal userData={userData}>
+                                    <Button variant={"outline"}>
+                                        Edit profile
+                                    </Button>
+                                </EditUserDataModal>
+                            </CardFooter>
                         </CardContent>
                     </Card>
                 </Flex>
