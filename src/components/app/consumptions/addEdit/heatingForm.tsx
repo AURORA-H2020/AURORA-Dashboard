@@ -57,7 +57,7 @@ export default function HeatingForm({
     const onSubmit = async (data: Consumption) => {
         const { success } = await addEditConsumption(
             data,
-            "transportation",
+            "heating",
             user,
             consumption?.id,
         );
