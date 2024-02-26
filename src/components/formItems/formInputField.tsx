@@ -19,7 +19,12 @@ const FormInputField = ({
     <FormItem>
         <FormLabel>{formLabel}</FormLabel>
         <FormControl>
-            <Input type={inputType} placeholder={placeholder} {...field} />
+            <Input
+                type={inputType}
+                placeholder={placeholder}
+                {...field}
+                value={field.value ?? ""}
+            />
         </FormControl>
         <FormMessage />
     </FormItem>
