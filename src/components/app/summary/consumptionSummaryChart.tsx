@@ -10,25 +10,20 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuthContext } from "@/context/AuthContext";
-import firebase_app from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { categories, consumptionMapping } from "@/lib/constants";
 import {
     getMonthShortName,
     valueFormatterCarbon,
     valueFormatterEnergy,
 } from "@/lib/utilities";
-import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { Flex } from "@radix-ui/themes";
 import { BarChart } from "@tremor/react";
 import { User } from "firebase/auth";
-import { collection, getDocs, getFirestore, query } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-
-const firestore = getFirestore(firebase_app);
 
 interface CurrentSummary {
     month: number;
@@ -69,13 +64,17 @@ export default function ConsumptionSummaryChart() {
         loading: boolean;
     };
 
-    const [userConsumptionSummaries, setUserConsumptionSummaries] = useState<
-        ConsumptionSummary[]
-    >([]);
+    const { userConsumptionSummaries } = useFirebaseData();
 
     const [currentSummary, setCurrentSummary] = useState<CurrentSummary[]>([]);
 
-    const [summaryYear, setSummaryYear] = useState<string>();
+    const [summaryYear, setSummaryYear] = useState<string>(() => {
+        const maxYear = userConsumptionSummaries.reduce(
+            (max, summary) => Math.max(max, summary.year),
+            0,
+        );
+        return maxYear.toString();
+    });
 
     const [currentMeasure, setCurrentMeasure] = useState<
         "carbonEmission" | "energyExpended"
@@ -95,52 +94,6 @@ export default function ConsumptionSummaryChart() {
             transportation: 0,
         }));
     };
-
-    useEffect(() => {
-        if (loading || !user) return;
-
-        /**
-         * Fetches the user consumption summaries from the database and updates the state with the fetched data.
-         *
-         * @param None
-         * @return {Promise<void>} A promise that resolves when the consumption summaries are fetched and the state is updated.
-         */
-        const fetchUserConsumptionSummaries = async () => {
-            try {
-                const userConsumptionsRef = collection(
-                    firestore,
-                    FirebaseConstants.collections.users.name,
-                    user.uid,
-                    FirebaseConstants.collections.users.consumptionSummaries
-                        .name,
-                );
-
-                const q = query(userConsumptionsRef);
-                const querySnapshot = await getDocs(q);
-                const fetchedSummaries = querySnapshot.docs.map((doc) => ({
-                    ...(doc.data() as ConsumptionSummary),
-                    id: doc.id,
-                }));
-
-                setUserConsumptionSummaries(fetchedSummaries);
-
-                // Determine the highest year value
-                const maxYear = fetchedSummaries.reduce(
-                    (max, summary) => Math.max(max, summary.year),
-                    0,
-                );
-
-                // Set the default state value for summaryYear to the highest year value
-                if (maxYear > 0) {
-                    setSummaryYear(maxYear.toString());
-                }
-            } catch (error) {
-                console.error("Error fetching consumption summaries: ", error);
-            }
-        };
-
-        fetchUserConsumptionSummaries();
-    }, [user, loading]);
 
     useEffect(() => {
         if (loading || !user || !summaryYear) return;
