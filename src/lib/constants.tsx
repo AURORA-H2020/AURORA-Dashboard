@@ -211,51 +211,102 @@ export const consumptionSources: ConsumptionSources = {
         { source: "default", name: t("category.sources.default") },
     ],
     transportation: [
-        { source: "fuelCar", name: t("category.sources.fuelCar") },
-        { source: "electricCar", name: t("category.sources.electricCar") },
-        { source: "hybridCar", name: t("category.sources.hybridCar") },
-        { source: "motorcycle", name: t("category.sources.motorcycle") },
+        {
+            source: "fuelCar",
+            name: t("category.sources.fuelCar"),
+            type: "private",
+        },
+        {
+            source: "electricCar",
+            name: t("category.sources.electricCar"),
+            type: "private",
+        },
+        {
+            source: "hybridCar",
+            name: t("category.sources.hybridCar"),
+            type: "private",
+        },
+        {
+            source: "motorcycle",
+            name: t("category.sources.motorcycle"),
+            type: "private",
+        },
         {
             source: "electricMotorcycle",
             name: t("category.sources.electricMotorcycle"),
+            type: "private",
         },
-        { source: "electricBus", name: t("category.sources.electricBus") },
+        {
+            source: "electricBus",
+            name: t("category.sources.electricBus"),
+            type: "public",
+        },
         {
             source: "hybridElectricBus",
             name: t("category.sources.hybridElectricBus"),
+            type: "public",
         },
         {
             source: "alternativeFuelBus",
             name: t("category.sources.alternativeFuelBus"),
+            type: "public",
         },
-        { source: "dieselBus", name: t("category.sources.dieselBus") },
-        { source: "otherBus", name: t("category.sources.otherBus") },
+        {
+            source: "dieselBus",
+            name: t("category.sources.dieselBus"),
+            type: "public",
+        },
+        {
+            source: "otherBus",
+            name: t("category.sources.otherBus"),
+            type: "public",
+        },
         {
             source: "metroTramOrUrbanLightTrain",
             name: t("category.sources.metroTramOrUrbanLightTrain"),
+            type: "public",
         },
         {
             source: "electricPassengerTrain",
             name: t("category.sources.electricPassengerTrain"),
+            type: "public",
         },
         {
             source: "dieselPassengerTrain",
             name: t("category.sources.dieselPassengerTrain"),
+            type: "public",
         },
         {
             source: "highSpeedTrain",
             name: t("category.sources.highSpeedTrain"),
+            type: "public",
         },
-        { source: "plane", name: t("category.sources.plane") },
-        { source: "electricBike", name: t("category.sources.electricBike") },
+        { source: "plane", name: t("category.sources.plane"), type: "none" },
+        {
+            source: "electricBike",
+            name: t("category.sources.electricBike"),
+            type: "none",
+        },
         {
             source: "electricScooter",
             name: t("category.sources.electricScooter"),
+            type: "none",
         },
-        { source: "bike", name: t("category.sources.bike") },
-        { source: "walking", name: t("category.sources.walking") },
+        { source: "bike", name: t("category.sources.bike"), type: "none" },
+        {
+            source: "walking",
+            name: t("category.sources.walking"),
+            type: "none",
+        },
     ],
 };
+
+export const privateVehicleTypes = consumptionSources.transportation
+    .filter((source) => source.type === "private")
+    .map((source) => source.source);
+export const publicVerhicleTypes = consumptionSources.transportation
+    .filter((source) => source.type === "public")
+    .map((source) => source.source);
 
 export const categories: ConsumptionCategory[] = consumptionMapping.map(
     (c) => c.category,

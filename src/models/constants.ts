@@ -17,7 +17,11 @@ export interface ConsumptionSources {
         source: ConsumptionDistrictHeatingSource;
         name: string;
     }[];
-    transportation: { source: ConsumptionTransportationType; name: string }[];
+    transportation: {
+        source: ConsumptionTransportationType;
+        name: string;
+        type: "public" | "private" | "none";
+    }[];
 }
 
 export interface ConsumptionAttributes {
