@@ -21,7 +21,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
-import { getConsumptionAttributes, titleCase } from "@/lib/utilities";
+import { getConsumptionAttributes } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Flex, Heading, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
@@ -112,7 +112,7 @@ export default function ConsumptionPreview({
                         </Flex>
                         <Flex direction={"column"}>
                             <Heading as="h3" size={"4"}>
-                                {titleCase(consumption.category)}
+                                {consumption.category}
                             </Heading>
                             <Text>
                                 {consumption.updatedAt
@@ -154,18 +154,15 @@ export default function ConsumptionPreview({
                 <DialogContent className="sm:max-w-lg p-0">
                     <ScrollArea className="max-h-[80vh] p-6">
                         <DialogHeader>
-                            <DialogTitle>
-                                {titleCase(consumption.category)}
-                            </DialogTitle>
+                            <DialogTitle>{consumption.category}</DialogTitle>
                             <DialogDescription>
                                 <ConsumptionView consumption={consumption} />
                             </DialogDescription>
                         </DialogHeader>
-                        <DialogFooter className="flex sm:justify-between">
+                        <DialogFooter>
                             {/* TODO: Add button functionality */}
-                            <Flex justify="between" className="gap-2">
+                            <Flex justify="between" className="gap-2 w-full">
                                 <Button
-                                    className="self-left"
                                     variant={"destructive"}
                                     onClick={() => setAlertOpen(true)}
                                 >
