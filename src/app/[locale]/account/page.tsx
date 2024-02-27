@@ -20,10 +20,7 @@ import { User } from "firebase/auth";
  *                       a list of Consumption components.
  */
 function AccountPage(): JSX.Element {
-    const { user, loading } = useAuthContext() as {
-        user: User;
-        loading: boolean;
-    };
+    const { user, loading } = useAuthContext();
     const { userData, isLoadingUserData } = useFirebaseData();
 
     if (!user && loading) {

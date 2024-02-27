@@ -9,7 +9,6 @@ import { ConsumptionWithID } from "@/models/extensions";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { useRouter } from "@/navigation";
-import { User } from "firebase/auth";
 import React, { createContext, useContext } from "react";
 import { useAuthContext } from "./AuthContext";
 
@@ -27,10 +26,7 @@ const FirebaseDataContext = createContext<FirebaseDataContextValue | undefined>(
 export const FirebaseDataProvider: React.FC<{
     children: React.ReactNode;
 }> = ({ children }) => {
-    const { user, loading } = useAuthContext() as {
-        user: User;
-        loading: boolean;
-    };
+    const { user, loading } = useAuthContext();
 
     const router = useRouter();
     const { userData, isLoadingUserData } = useFetchUserData(
