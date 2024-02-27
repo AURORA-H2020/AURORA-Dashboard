@@ -3,7 +3,7 @@ import FormSelect from "@/components/formItems/formSelect";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
-import firebaseApp from "@/firebase/config";
+import { addEditUserData } from "@/firebase/user/addEditUserData";
 import {
     citiesMapping,
     countriesMapping,
@@ -12,18 +12,14 @@ import {
     householdProfiles,
 } from "@/lib/constants";
 import { cn } from "@/lib/utilities";
-import { userDataFormSchema } from "@/lib/zod/userSchema";
+import { userDataFormSchema } from "@/lib/zod/userSchemas";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
-import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-
-// Initialize Firestore
-const firestore = getFirestore(firebaseApp);
 
 export default function UserDataForm({
     userData,
@@ -59,20 +55,21 @@ export default function UserDataForm({
         defaultValues: initialFormData,
     });
 
-    const onSubmit = async (data) => {
-        let success = false;
-        if (user) {
-            const userRef = doc(firestore, "users", user.uid);
-            try {
-                await setDoc(userRef, data, { merge: true });
-                toast.success("Your profile was created successfully.");
-                success = true;
-            } catch (error) {
-                console.error("Error writing document: ", error);
-                toast.error("There was an error creating your profile.");
+    const onSubmit = async (userData: FirebaseUser) => {
+        const { success } = await addEditUserData(userData, user);
+
+        if (success) {
+            if (isNewUser) {
+                toast.success("Your profile was created successfully");
+            } else {
+                toast.success("Your profile was updated successfully");
             }
         } else {
-            toast.error("Please login to create a profile.");
+            if (isNewUser) {
+                toast.error("There was an error creating your profile");
+            } else {
+                toast.error("There was an error updating your profile");
+            }
         }
 
         if (onFormSubmit) {
@@ -84,7 +81,7 @@ export default function UserDataForm({
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className={cn(className)}
+                className={cn(className, "flex flex-col gap-4 w-full mt-4")}
             >
                 <FormField
                     control={form.control}
