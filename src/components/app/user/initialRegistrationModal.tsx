@@ -16,24 +16,16 @@ export default function InitialRegistrationModal() {
 
     const { userData } = useFirebaseData();
 
-    const handleCloseModal = () => {
-        router.refresh();
-    };
-
     const handleLogout = async () => {
         await logout();
-        router.push("/");
+        router.replace("/");
     };
 
     return (
         <AlertDialog open={true}>
             <AlertDialogContent className="sm:max-w-lg p-0">
                 <ScrollArea className="max-h-[80vh] p-6">
-                    <UserDataForm
-                        userData={userData}
-                        isNewUser={true}
-                        onFormSubmit={handleCloseModal}
-                    />
+                    <UserDataForm userData={userData} isNewUser={true} />
                 </ScrollArea>
                 <AlertDialogCancel onClick={handleLogout}>
                     {t("navigation.menu.logout")}
