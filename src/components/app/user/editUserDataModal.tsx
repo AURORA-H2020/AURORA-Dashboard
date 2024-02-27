@@ -26,6 +26,7 @@ export default function EditUserDataModal({
                         <UserDataForm
                             userData={userData}
                             onFormSubmit={handleCloseModal}
+                            className="p-2"
                         />
                     </ScrollArea>
                 </DialogContent>
