@@ -23,7 +23,7 @@ export interface CategorySourceDetail {
     count: number;
     carbonEmissions: number;
     energyExpended: number;
-    sources: { source: string; sourceName: string; count: number }[];
+    sources: { source: string; count: number }[];
 }
 
 export interface TimelineData {

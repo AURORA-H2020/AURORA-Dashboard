@@ -2,6 +2,7 @@ import { allTremorColours } from "@/lib/constants";
 import { MetaData } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { DonutChart, Legend } from "@tremor/react";
+import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
 
 /**
@@ -20,6 +21,8 @@ export default function ConsumptionCardSummaryCategory({
     metaData: MetaData | undefined;
     category: ConsumptionCategory;
 }): ReactNode {
+    const t = useTranslations();
+
     const dataSet: {
         source: string;
         sourceName: string;
@@ -35,7 +38,7 @@ export default function ConsumptionCardSummaryCategory({
             if (!thisSource) {
                 dataSet.push({
                     source: source.source,
-                    sourceName: source.sourceName,
+                    sourceName: t(`category.sources.${source.source}`),
                     count: 0,
                 });
                 thisSource = dataSet.find((e) => e.source === source.source);
