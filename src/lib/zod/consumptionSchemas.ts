@@ -35,7 +35,7 @@ export const electricityFormSchema = (
     t: (arg: string) => string,
 ): z.ZodType<Consumption> =>
     z.object({
-        value: z.coerce.number().max(1000000, {
+        value: z.coerce.number().max(100000, {
             message: t("app.validation.error.validValue"),
         }),
         category: z.literal("electricity"),
@@ -44,7 +44,7 @@ export const electricityFormSchema = (
                 electricitySources[0],
                 ...electricitySources,
             ]),
-            costs: z.coerce.number().max(1000000),
+            costs: z.coerce.number().max(100000).optional(),
             householdSize: z.coerce.number().min(1).max(100),
             startDate: TimestampSchema,
             endDate: TimestampSchema,
@@ -57,7 +57,7 @@ export const heatingFormSchema = (
     t: (arg: string) => string,
 ): z.ZodType<Consumption> =>
     z.object({
-        value: z.coerce.number().max(1000000, {
+        value: z.coerce.number().max(100000, {
             message: t("app.validation.error.validValue"),
         }),
         category: z.literal("heating"),
@@ -70,7 +70,7 @@ export const heatingFormSchema = (
                         ...districtHeatingSources,
                     ])
                     .optional(),
-                costs: z.coerce.number().max(1000000).optional(),
+                costs: z.coerce.number().max(100000).optional(),
                 householdSize: z.coerce.number().min(1).max(100),
                 startDate: TimestampSchema,
                 endDate: TimestampSchema,
@@ -96,7 +96,7 @@ export const transportationFormSchema = (
     t: (arg: string) => string,
 ): z.ZodType<Consumption> =>
     z.object({
-        value: z.coerce.number().max(1000000, {
+        value: z.coerce.number().max(100000, {
             message: t("app.validation.error.validValue"),
         }),
         category: z.literal("transportation"),
