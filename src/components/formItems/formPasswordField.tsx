@@ -31,6 +31,7 @@ const FormPasswordField = ({
                         type={showPassword ? "text" : "password"}
                         placeholder={placeholder}
                         {...field}
+                        value={field.value ?? ""}
                     />
                     {showTogglePassword && (
                         <div className="absolute inset-y-0 right-0 pr-0 flex items-center cursor-pointer">
