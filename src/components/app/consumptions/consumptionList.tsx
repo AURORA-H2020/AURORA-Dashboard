@@ -3,8 +3,10 @@
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
 import LoadingSpinner from "@/components/ui/loading";
 import { useFirebaseData } from "@/context/FirebaseContext";
-import { Heading } from "@radix-ui/themes";
+import { Flex, Heading } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
+import AddEditConsumptionModal from "./addEdit/addEditConsumptionModal";
+import { Button } from "@/components/ui/button";
 
 /**
  * Renders a list of Consumption components.
@@ -22,11 +24,21 @@ function ConsumptionList(): JSX.Element {
         return <LoadingSpinner />;
     }
 
-    // Authenticated user content
     return (
         <div>
             <div className="mb-4 mt-8">
-                <Heading weight="bold">{t("app.yourConsumptions")}</Heading>
+                <Flex
+                    justify="between"
+                    align={{ initial: "start", xs: "center" }}
+                    direction={{ initial: "column", xs: "row" }}
+                    className="gap-2"
+                >
+                    <Heading weight="bold">{t("app.yourConsumptions")}</Heading>
+
+                    <AddEditConsumptionModal>
+                        <Button>{t("app.addConsumption")}</Button>
+                    </AddEditConsumptionModal>
+                </Flex>
             </div>
             {userConsumptions &&
                 userConsumptions.map((consumption) => (

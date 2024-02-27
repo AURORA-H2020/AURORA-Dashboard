@@ -1,15 +1,11 @@
 "use client";
 
-import AddEditConsumptionModal from "@/components/app/consumptions/addEdit/addEditConsumptionModal";
 import ConsumptionList from "@/components/app/consumptions/consumptionList";
 import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";
 import InitialRegistrationModal from "@/components/app/user/initialRegistrationModal";
-import { Button } from "@/components/ui/button";
 import LoadingSpinner from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
-import { Flex } from "@radix-ui/themes";
-import { User } from "firebase/auth";
 
 /**
  * Renders the account page for authenticated users, displaying user details
@@ -40,16 +36,10 @@ function AccountPage(): JSX.Element {
         return <InitialRegistrationModal />;
     }
 
-    // Authenticated user content
     return (
         <>
             <ConsumptionSummaryChart />
             <ConsumptionList />
-            <Flex className="space-x-2">
-                <AddEditConsumptionModal>
-                    <Button>Add Consumption</Button>
-                </AddEditConsumptionModal>
-            </Flex>
         </>
     );
 }
