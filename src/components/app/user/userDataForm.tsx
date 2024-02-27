@@ -11,6 +11,7 @@ import {
     homeEnergyLabels,
     householdProfiles,
 } from "@/lib/constants";
+import { cn } from "@/lib/utilities";
 import { userDataFormSchema } from "@/lib/zod/userSchema";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -28,10 +29,12 @@ export default function UserDataForm({
     userData,
     onFormSubmit,
     isNewUser = false,
+    className,
 }: {
     userData?: FirebaseUser | null;
     onFormSubmit?: (success: boolean) => void;
     isNewUser?: boolean;
+    className?: string;
 }) {
     const t = useTranslations();
     const formSchema = userDataFormSchema(t);
@@ -39,8 +42,6 @@ export default function UserDataForm({
     const { user } = useAuthContext() as {
         user: User;
     };
-
-    console.log("userData", userData?.firstName);
 
     const initialFormData: DefaultValues<FirebaseUser> = {
         firstName: userData?.firstName || undefined,
@@ -81,7 +82,10 @@ export default function UserDataForm({
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)}>
+            <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className={cn(className)}
+            >
                 <FormField
                     control={form.control}
                     name="firstName"
