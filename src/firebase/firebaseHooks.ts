@@ -1,5 +1,8 @@
 import firebase_app from "@/firebase/config";
-import { ConsumptionWithID } from "@/models/extensions";
+import {
+    ConsumptionWithID,
+    RecurringConsumptionWithID,
+} from "@/models/extensions";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { Consumption } from "@/models/firestore/consumption/consumption";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
@@ -7,6 +10,7 @@ import { User } from "firebase/auth";
 import { collection, doc, getFirestore, onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { FirebaseConstants } from "./firebase-constants";
+import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 
 const firestore = getFirestore(firebase_app);
 
@@ -67,6 +71,34 @@ export const useFetchUserConsumptions = (user: User | null) => {
     }, [user]);
 
     return userConsumptions;
+};
+
+export const useFetchUserRecurringConsumptions = (user: User | null) => {
+    const [userRecurringConsumptions, setUserRecurringConsumptions] = useState<
+        RecurringConsumptionWithID[]
+    >([]);
+
+    useEffect(() => {
+        if (!user) return;
+
+        const collectionRef = collection(
+            firestore,
+            FirebaseConstants.collections.users.name,
+            user.uid,
+            FirebaseConstants.collections.users.recurringConsumptions.name,
+        );
+        const unsubscribe = onSnapshot(collectionRef, (querySnapshot) => {
+            const recurringConsumptions = querySnapshot.docs.map((doc) => ({
+                ...(doc.data() as RecurringConsumption),
+                id: doc.id,
+            }));
+            setUserRecurringConsumptions(recurringConsumptions);
+        });
+
+        return unsubscribe;
+    }, [user]);
+
+    return userRecurringConsumptions;
 };
 
 export const useFetchUserConsumptionSummaries = (user: User | null) => {

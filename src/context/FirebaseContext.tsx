@@ -4,8 +4,12 @@ import {
     useFetchUserConsumptionSummaries,
     useFetchUserConsumptions,
     useFetchUserData,
+    useFetchUserRecurringConsumptions,
 } from "@/firebase/firebaseHooks";
-import { ConsumptionWithID } from "@/models/extensions";
+import {
+    ConsumptionWithID,
+    RecurringConsumptionWithID,
+} from "@/models/extensions";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { useRouter } from "@/navigation";
@@ -17,6 +21,7 @@ interface FirebaseDataContextValue {
     isLoadingUserData: boolean;
     userConsumptions: ConsumptionWithID[];
     userConsumptionSummaries: ConsumptionSummary[];
+    userRecurringConsumptions: RecurringConsumptionWithID[];
 }
 
 const FirebaseDataContext = createContext<FirebaseDataContextValue | undefined>(
@@ -36,6 +41,8 @@ export const FirebaseDataProvider: React.FC<{
     );
     const userConsumptions = useFetchUserConsumptions(user);
 
+    const userRecurringConsumptions = useFetchUserRecurringConsumptions(user);
+
     const userConsumptionSummaries = useFetchUserConsumptionSummaries(user);
 
     return (
@@ -45,6 +52,7 @@ export const FirebaseDataProvider: React.FC<{
                 isLoadingUserData,
                 userConsumptions,
                 userConsumptionSummaries,
+                userRecurringConsumptions,
             }}
         >
             {children}
