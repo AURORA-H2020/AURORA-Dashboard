@@ -10,17 +10,16 @@ import { FirebaseConstants } from "./firebase-constants";
 
 const firestore = getFirestore(firebase_app);
 
-export const useFetchUserData = (user: User, loading: boolean, router) => {
+export const useFetchUserData = (
+    user: User | null,
+    loading: boolean,
+    router,
+) => {
     const [userData, setUserData] = useState<FirebaseUser | null>(null);
     const [isLoadingUserData, setIsLoadingUserData] = useState<boolean>(true);
 
     useEffect(() => {
-        if (loading) return;
-
-        if (!user) {
-            router.replace("/");
-            return;
-        }
+        if (loading || !user) return;
 
         const docRef = doc(
             firestore,
@@ -29,7 +28,6 @@ export const useFetchUserData = (user: User, loading: boolean, router) => {
         );
         const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
             if (docSnapshot.exists()) {
-                console.log("Document data:", docSnapshot.data());
                 setUserData(docSnapshot.data() as FirebaseUser);
                 setIsLoadingUserData(false);
             } else {
@@ -43,7 +41,7 @@ export const useFetchUserData = (user: User, loading: boolean, router) => {
     return { userData, isLoadingUserData };
 };
 
-export const useFetchUserConsumptions = (user: User) => {
+export const useFetchUserConsumptions = (user: User | null) => {
     const [userConsumptions, setUserConsumptions] = useState<
         ConsumptionWithID[]
     >([]);
@@ -71,7 +69,7 @@ export const useFetchUserConsumptions = (user: User) => {
     return userConsumptions;
 };
 
-export const useFetchUserConsumptionSummaries = (user: User) => {
+export const useFetchUserConsumptionSummaries = (user: User | null) => {
     const [userConsumptionSummaries, setUserConsumptionSummaries] = useState<
         ConsumptionSummary[]
     >([]);
