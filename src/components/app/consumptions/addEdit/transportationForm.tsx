@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
-import { addEditConsumption } from "@/firebase/consumptions/addEditConsumption";
+import { addEditConsumption } from "@/firebase/consumption/addEditConsumption";
 import {
     consumptionSources,
     privateVehicleTypes,
@@ -54,8 +54,9 @@ export default function TransportationForm({
                 consumption?.transportation?.publicVehicleOccupancy ||
                 undefined,
             dateOfTravel:
-                consumption?.electricity?.startDate || Timestamp.now(),
-            dateOfTravelEnd: consumption?.electricity?.endDate || undefined,
+                consumption?.transportation?.dateOfTravel || Timestamp.now(),
+            dateOfTravelEnd:
+                consumption?.transportation?.dateOfTravelEnd || undefined,
         },
         description: consumption?.description || undefined,
         createdAt: Timestamp.now(),

@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
-import { addEditConsumption } from "@/firebase/consumptions/addEditConsumption";
+import { addEditConsumption } from "@/firebase/consumption/addEditConsumption";
 import { consumptionSources } from "@/lib/constants";
 import { cn } from "@/lib/utilities";
 import { heatingFormSchema } from "@/lib/zod/consumptionSchemas";
@@ -43,10 +43,10 @@ export default function HeatingForm({
             heatingFuel: consumption?.heating?.heatingFuel,
             districtHeatingSource:
                 consumption?.heating?.districtHeatingSource || undefined,
-            costs: consumption?.electricity?.costs || undefined,
-            householdSize: consumption?.electricity?.householdSize || 1,
-            startDate: consumption?.electricity?.startDate || Timestamp.now(),
-            endDate: consumption?.electricity?.endDate || Timestamp.now(),
+            costs: consumption?.heating?.costs || undefined,
+            householdSize: consumption?.heating?.householdSize || 1,
+            startDate: consumption?.heating?.startDate || Timestamp.now(),
+            endDate: consumption?.heating?.endDate || Timestamp.now(),
         },
         description: consumption?.description || undefined,
         createdAt: Timestamp.now(),
