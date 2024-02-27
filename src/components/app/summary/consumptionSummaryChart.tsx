@@ -1,6 +1,5 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import LoadingSpinner from "@/components/ui/loading";
 import {
     Select,
@@ -141,88 +140,81 @@ export default function ConsumptionSummaryChart() {
     }
 
     return (
-        <Card className="my-4">
-            <CardHeader>
-                <CardTitle>Summary</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <Flex
-                    direction={{ initial: "column", xs: "row" }}
-                    className="gap-6 mt-6 mb-6"
+        <>
+            <Flex
+                direction={{ initial: "column", xs: "row" }}
+                className="gap-6 mt-6 mb-6"
+            >
+                <Tabs
+                    defaultValue="carbonEmission"
+                    onValueChange={(value) => {
+                        if (
+                            value === "carbonEmission" ||
+                            value === "energyExpended"
+                        ) {
+                            setCurrentMeasure(value);
+                        }
+                        // Optionally, handle the case where the value is not expected
+                        else {
+                            console.error(
+                                "Invalid value for setCurrentMeasure:",
+                                value,
+                            );
+                        }
+                    }}
                 >
-                    <Tabs
-                        defaultValue="carbonEmission"
-                        onValueChange={(value) => {
-                            if (
-                                value === "carbonEmission" ||
-                                value === "energyExpended"
-                            ) {
-                                setCurrentMeasure(value);
-                            }
-                            // Optionally, handle the case where the value is not expected
-                            else {
-                                console.error(
-                                    "Invalid value for setCurrentMeasure:",
-                                    value,
+                    <div className="overflow-x-auto">
+                        <TabsList>
+                            <TabsTrigger value="carbonEmission">
+                                {
+                                    // t("common.co2emission")
+                                    t.rich("common.co2emission", {
+                                        sub: (chunks) => (
+                                            <sub className="mr-1">{chunks}</sub>
+                                        ),
+                                    })
+                                }
+                            </TabsTrigger>
+                            <TabsTrigger value="energyExpended">
+                                {t("common.energyUsage")}
+                            </TabsTrigger>
+                        </TabsList>
+                    </div>
+                </Tabs>
+                <Select value={summaryYear} onValueChange={setSummaryYear}>
+                    <SelectTrigger className="w-24">
+                        <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectGroup>
+                            {userConsumptionSummaries.map((summary) => {
+                                return (
+                                    <SelectItem
+                                        value={summary.year.toString()}
+                                        key={summary.year}
+                                    >
+                                        {summary.year}
+                                    </SelectItem>
                                 );
-                            }
-                        }}
-                    >
-                        <div className="overflow-x-auto">
-                            <TabsList>
-                                <TabsTrigger value="carbonEmission">
-                                    {
-                                        // t("common.co2emission")
-                                        t.rich("common.co2emission", {
-                                            sub: (chunks) => (
-                                                <sub className="mr-1">
-                                                    {chunks}
-                                                </sub>
-                                            ),
-                                        })
-                                    }
-                                </TabsTrigger>
-                                <TabsTrigger value="energyExpended">
-                                    {t("common.energyUsage")}
-                                </TabsTrigger>
-                            </TabsList>
-                        </div>
-                    </Tabs>
-                    <Select value={summaryYear} onValueChange={setSummaryYear}>
-                        <SelectTrigger className="w-24">
-                            <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                {userConsumptionSummaries.map((summary) => {
-                                    return (
-                                        <SelectItem
-                                            value={summary.year.toString()}
-                                            key={summary.year}
-                                        >
-                                            {summary.year}
-                                        </SelectItem>
-                                    );
-                                })}
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-                </Flex>
-                <BarChart
-                    className="mt-4"
-                    yAxisWidth={80}
-                    data={currentSummary}
-                    index="monthName"
-                    categories={categories}
-                    colors={consumptionMapping.map((c) => c.colorPrimary)}
-                    valueFormatter={
-                        currentMeasure === "carbonEmission"
-                            ? valueFormatterCarbon
-                            : valueFormatterEnergy
-                    }
-                    stack={true}
-                />
-            </CardContent>
-        </Card>
+                            })}
+                        </SelectGroup>
+                    </SelectContent>
+                </Select>
+            </Flex>
+            <BarChart
+                className="mt-4"
+                yAxisWidth={80}
+                data={currentSummary}
+                index="monthName"
+                categories={categories}
+                colors={consumptionMapping.map((c) => c.colorPrimary)}
+                valueFormatter={
+                    currentMeasure === "carbonEmission"
+                        ? valueFormatterCarbon
+                        : valueFormatterEnergy
+                }
+                stack={true}
+            />
+        </>
     );
 }

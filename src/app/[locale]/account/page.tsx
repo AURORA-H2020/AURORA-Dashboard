@@ -1,11 +1,18 @@
 "use client";
 
+import AddEditConsumptionModal from "@/components/app/consumptions/addEdit/addEditConsumptionModal";
 import ConsumptionList from "@/components/app/consumptions/consumptionList";
+import AddEditRecurringConsumptionModal from "@/components/app/recurringConsumptions/addEdit/addEditRecurringConsumptionModal";
+import RecurringConsumptionList from "@/components/app/recurringConsumptions/recurringConsumptionList";
 import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";
-import InitialRegistrationModal from "@/components/app/user/initialRegistrationModal";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import LoadingSpinner from "@/components/ui/loading";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
+import { Flex, Heading } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 
 /**
  * Renders the account page for authenticated users, displaying user details
@@ -16,8 +23,10 @@ import { useFirebaseData } from "@/context/FirebaseContext";
  *                       a list of Consumption components.
  */
 function AccountPage(): JSX.Element {
+    const t = useTranslations();
+
     const { user, loading } = useAuthContext();
-    const { userData, isLoadingUserData } = useFirebaseData();
+    const { isLoadingUserData } = useFirebaseData();
 
     if (!user && loading) {
         // Render loading indicator until the auth check is complete
@@ -29,17 +38,59 @@ function AccountPage(): JSX.Element {
         return <LoadingSpinner />;
     }
 
-    if (
-        !userData?.hasOwnProperty("country") ||
-        userData?.country === undefined
-    ) {
-        return <InitialRegistrationModal />;
-    }
-
     return (
         <>
-            <ConsumptionSummaryChart />
-            <ConsumptionList />
+            <Card className="my-4">
+                <CardContent>
+                    <CardHeader>
+                        <CardTitle>Summary</CardTitle>
+                    </CardHeader>
+                    <ConsumptionSummaryChart />
+                </CardContent>
+            </Card>
+
+            <Tabs defaultValue="consumptions" className="mb-4 mt-8">
+                <TabsList>
+                    <TabsTrigger value="consumptions">Consumptions</TabsTrigger>
+                    <TabsTrigger value="recurring-consumptions">
+                        Recurring Consumptions
+                    </TabsTrigger>
+                </TabsList>
+                <TabsContent value="consumptions">
+                    <Flex
+                        justify="between"
+                        align={{ initial: "start", xs: "center" }}
+                        direction={{ initial: "column", xs: "row" }}
+                        className="gap-2"
+                    >
+                        <Heading weight="bold">
+                            {t("app.yourConsumptions")}
+                        </Heading>
+
+                        <AddEditConsumptionModal>
+                            <Button>{t("app.addConsumption")}</Button>
+                        </AddEditConsumptionModal>
+                    </Flex>
+                    <ConsumptionList className="mt-6" />
+                </TabsContent>
+                <TabsContent value="recurring-consumptions">
+                    <Flex
+                        justify="between"
+                        align={{ initial: "start", xs: "center" }}
+                        direction={{ initial: "column", xs: "row" }}
+                        className="gap-2"
+                    >
+                        <Heading weight="bold">
+                            Your Recurring Consumptions
+                        </Heading>
+
+                        <AddEditRecurringConsumptionModal>
+                            <Button>Add recurring consumption</Button>
+                        </AddEditRecurringConsumptionModal>
+                    </Flex>
+                    <RecurringConsumptionList className="mt-6" />
+                </TabsContent>
+            </Tabs>
         </>
     );
 }

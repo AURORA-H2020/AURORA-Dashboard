@@ -3,7 +3,6 @@
 import {
     AlertDialog,
     AlertDialogContent,
-    AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
@@ -13,13 +12,14 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
     Dialog,
     DialogContent,
-    DialogDescription,
     DialogFooter,
     DialogHeader,
     DialogTitle,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
+import { useAuthContext } from "@/context/AuthContext";
+import { deleteConsumption } from "@/firebase/consumption/deleteConsumption";
 import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
 import { getConsumptionAttributes } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
@@ -45,6 +45,8 @@ export default function ConsumptionPreview({
 }): JSX.Element {
     const t = useTranslations();
 
+    const { user } = useAuthContext();
+
     const consumptionAttributes = getConsumptionAttributes(
         consumption.category,
     );
@@ -68,27 +70,17 @@ export default function ConsumptionPreview({
         }
     };
 
-    // Function to handle modal close
-    const closeModal = () => {
-        setModalOpen(false);
-    };
-
-    const acceptDelete = () => {
+    const handleDelete = async () => {
         setAlertOpen(false);
         setModalOpen(false);
 
-        // Wait .5 seconds before deleting
-        setTimeout(() => {
-            toast.success("Consumption deleted", {
-                description: "The consumption has been deleted.",
-            });
-        }, 500);
-
-        // TODO: Delete action
-    };
-
-    const cancelDelete = () => {
-        setAlertOpen(false);
+        deleteConsumption(user, consumption.id).then((success) => {
+            if (success) {
+                toast.success("The consumption has been deleted");
+            } else {
+                toast.error("An error occurred deleting your consumption");
+            }
+        });
     };
 
     return (
@@ -150,38 +142,44 @@ export default function ConsumptionPreview({
 
             {/* Modal */}
 
-            <Dialog open={isModalOpen} onOpenChange={closeModal}>
+            <Dialog open={isModalOpen} onOpenChange={() => setModalOpen(false)}>
                 <DialogContent className="sm:max-w-lg p-0">
                     <ScrollArea className="max-h-[80vh] p-6">
-                        <DialogHeader>
-                            <DialogTitle>{consumption.category}</DialogTitle>
-                            <DialogDescription>
-                                <ConsumptionView consumption={consumption} />
-                            </DialogDescription>
-                        </DialogHeader>
-                        <DialogFooter>
-                            {/* TODO: Add button functionality */}
-                            <Flex justify="between" className="gap-2 w-full">
-                                <Button
-                                    variant={"destructive"}
-                                    onClick={() => setAlertOpen(true)}
+                        <div className="p-2">
+                            <DialogHeader>
+                                <DialogTitle>
+                                    {consumption.category}
+                                </DialogTitle>
+                            </DialogHeader>
+                            <ConsumptionView consumption={consumption} />
+
+                            <DialogFooter>
+                                {/* TODO: Add button functionality */}
+                                <Flex
+                                    justify="between"
+                                    className="gap-2 w-full"
                                 >
-                                    {t("common.delete")}
-                                </Button>
-                                <Flex className="gap-2">
-                                    <AddEditConsumptionModal
-                                        consumption={consumption}
+                                    <Button
+                                        variant={"destructive"}
+                                        onClick={() => setAlertOpen(true)}
                                     >
-                                        <Button variant="outline">
-                                            {t("common.edit")}
-                                        </Button>
-                                    </AddEditConsumptionModal>
-                                    <Button variant="outline">
-                                        {t("common.duplicate")}
+                                        {t("common.delete")}
                                     </Button>
+                                    <Flex className="gap-2">
+                                        <AddEditConsumptionModal
+                                            consumption={consumption}
+                                        >
+                                            <Button variant="outline">
+                                                {t("common.edit")}
+                                            </Button>
+                                        </AddEditConsumptionModal>
+                                        <Button variant="outline">
+                                            {t("common.duplicate")}
+                                        </Button>
+                                    </Flex>
                                 </Flex>
-                            </Flex>
-                        </DialogFooter>
+                            </DialogFooter>
+                        </div>
                     </ScrollArea>
                 </DialogContent>
             </Dialog>
@@ -190,16 +188,13 @@ export default function ConsumptionPreview({
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
-                            Are you absolutely sure?
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
                             Are your sure you want to delete the entry?
-                        </AlertDialogDescription>
+                        </AlertDialogTitle>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <Flex justify="between" className="gap-4">
                             <Button
-                                onClick={cancelDelete}
+                                onClick={() => setAlertOpen(false)}
                                 variant="outline"
                                 className="w-full"
                             >
@@ -207,7 +202,7 @@ export default function ConsumptionPreview({
                             </Button>
                             <Button
                                 variant="destructive"
-                                onClick={acceptDelete}
+                                onClick={handleDelete}
                                 className="w-full"
                             >
                                 {t("common.delete")}
