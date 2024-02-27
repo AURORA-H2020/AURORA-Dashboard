@@ -1,5 +1,6 @@
 "use client";
 
+import { EnsureInitialRegistration } from "@/components/hoc/ensureInitialRegistration";
 import { ProtectAccount } from "@/components/hoc/protectAccount";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "@/navigation";
@@ -22,21 +23,27 @@ export default function AccountLayout({
 
     return (
         <ProtectAccount>
-            <Flex className="gap-2 justify-center">
-                <Button
-                    variant={pathname === "/account" ? "default" : "outline"}
-                >
-                    <Link href={"/account"}>Home</Link>
-                </Button>
-                <Button
-                    variant={
-                        pathname === "/account/settings" ? "default" : "outline"
-                    }
-                >
-                    <Link href={"/account/settings"}>Settings</Link>
-                </Button>
-            </Flex>
-            <div>{children}</div>
+            <EnsureInitialRegistration>
+                <Flex className="gap-2 justify-center">
+                    <Button
+                        variant={
+                            pathname === "/account" ? "default" : "outline"
+                        }
+                    >
+                        <Link href={"/account"}>Home</Link>
+                    </Button>
+                    <Button
+                        variant={
+                            pathname === "/account/settings"
+                                ? "default"
+                                : "outline"
+                        }
+                    >
+                        <Link href={"/account/settings"}>Settings</Link>
+                    </Button>
+                </Flex>
+                <div>{children}</div>
+            </EnsureInitialRegistration>
         </ProtectAccount>
     );
 }
