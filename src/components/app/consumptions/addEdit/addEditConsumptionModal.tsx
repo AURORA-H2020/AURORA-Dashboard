@@ -60,19 +60,19 @@ export default function AddEditConsumptionModal({
                                 </div>
                             )}
 
-                            <TabsContent value="electricity">
+                            <TabsContent value="electricity" className="p-2">
                                 <ElectricityForm
                                     consumption={consumption}
                                     onConsumptionAdded={handleCloseModal}
                                 />
                             </TabsContent>
-                            <TabsContent value="heating">
+                            <TabsContent value="heating" className="p-2">
                                 <HeatingForm
                                     consumption={consumption}
                                     onConsumptionAdded={handleCloseModal}
                                 />
                             </TabsContent>
-                            <TabsContent value="transportation">
+                            <TabsContent value="transportation" className="p-2">
                                 <TransportationForm
                                     consumption={consumption}
                                     onConsumptionAdded={handleCloseModal}

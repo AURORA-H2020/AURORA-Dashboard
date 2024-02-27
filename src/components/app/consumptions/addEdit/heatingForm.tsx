@@ -7,6 +7,7 @@ import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
 import { addEditConsumption } from "@/firebase/consumptions/addEditConsumption";
 import { consumptionSources } from "@/lib/constants";
+import { cn } from "@/lib/utilities";
 import { heatingFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Consumption } from "@/models/firestore/consumption/consumption";
@@ -22,9 +23,11 @@ import { z } from "zod";
 export default function HeatingForm({
     consumption,
     onConsumptionAdded,
+    className,
 }: {
     consumption?: ConsumptionWithID;
     onConsumptionAdded?: (success: boolean) => void;
+    className?: string;
 }) {
     const t = useTranslations();
     const formSchema = heatingFormSchema(t);
@@ -89,7 +92,7 @@ export default function HeatingForm({
             <Form {...form}>
                 <form
                     onSubmit={form.handleSubmit(onSubmit)}
-                    className="flex flex-col gap-4 w-full mt-4"
+                    className={cn(className, "flex flex-col gap-4 w-full mt-4")}
                 >
                     <FormField
                         control={form.control}
