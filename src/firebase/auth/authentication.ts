@@ -40,7 +40,7 @@ export default async function authenticate(
                         password,
                     );
                 } else {
-                    throw new Error(
+                    console.error(
                         "Email and password must be provided for email sign-in",
                     );
                 }
@@ -54,7 +54,7 @@ export default async function authenticate(
                         password,
                     );
                 } else {
-                    throw new Error(
+                    console.error(
                         "Email and password must be provided for email sign-up",
                     );
                 }
