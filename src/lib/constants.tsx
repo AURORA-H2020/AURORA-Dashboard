@@ -171,6 +171,10 @@ export const consumptionMapping: ConsumptionAttributes[] = [
     },
 ];
 
+export const categories: ConsumptionCategory[] = consumptionMapping.map(
+    (c) => c.category,
+);
+
 export const consumptionSources: ConsumptionSources = {
     electricity: [
         { source: "default", name: t("category.sources.default") },
@@ -307,10 +311,6 @@ export const privateVehicleTypes = consumptionSources.transportation
 export const publicVerhicleTypes = consumptionSources.transportation
     .filter((source) => source.type === "public")
     .map((source) => source.source);
-
-export const categories: ConsumptionCategory[] = consumptionMapping.map(
-    (c) => c.category,
-);
 
 // TODO: Change to carbonEmissions and energyExpended
 export const energyModes: EnergyMode[] = ["carbon", "energy"];

@@ -13,12 +13,9 @@ import { Card } from "../ui/card";
 
 import { useAuthContext } from "@/context/AuthContext";
 import { logout } from "@/firebase/auth/logout";
-import { User } from "@/models/firestore/user/user";
 import { useTranslations } from "next-intl";
 
 const MenuItems = ({ items, pathname }) => {
-    const t = useTranslations();
-
     return items.map((item, idx) => {
         // Check if the current pathname is active.
         const isActive =
@@ -30,7 +27,7 @@ const MenuItems = ({ items, pathname }) => {
                     className="w-full"
                     variant={isActive ? "default" : "outline"}
                 >
-                    <Link href={item.path}>{t(item.title)}</Link>
+                    <Link href={item.path}>{item.title}</Link>
                 </Button>
             </li>
         );
@@ -47,7 +44,7 @@ export default function NavigationBar(): ReactElement {
 
     const pathname = usePathname();
 
-    const { user } = useAuthContext() as { user: User };
+    const { user } = useAuthContext();
     const router = useRouter();
 
     const [state, setState] = useState(false);
