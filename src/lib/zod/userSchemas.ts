@@ -48,3 +48,30 @@ export const userDataFormSchema = (
         country: z.string(),
         city: z.string().optional(),
     });
+
+export const userChangeEmailSchema = (t: (arg: string, val?: any) => string) =>
+    z.object({
+        email: z.string().email({
+            message: t("app.validation.error.email"),
+        }),
+        currentPassword: z.string().min(2).max(50),
+    });
+
+export const userChangePasswordSchema = (
+    t: (arg: string, val?: any) => string,
+) =>
+    z
+        .object({
+            currentPassword: z.string().min(2).max(50),
+            password: z.string().min(2).max(50),
+            confirmPassword: z.string().min(2).max(50),
+        })
+        .superRefine(({ confirmPassword, password }, ctx) => {
+            if (confirmPassword !== password) {
+                ctx.addIssue({
+                    code: "custom",
+                    message: t("ui.auth.error.passwordMismatch"),
+                    path: ["confirmPassword"],
+                });
+            }
+        });
