@@ -54,22 +54,19 @@ export default function NavigationBar(): ReactElement {
 
     const handleLogout = async () => {
         await logout();
-        router.push("/");
+        router.replace("/");
     };
 
-    // t("navigation.menu.dashboard")
-    // t("navigation.menu.about")
     const menus = [
-        { title: "navigation.menu.dashboard", path: "/" },
-        { title: "navigation.menu.about", path: "/about" },
+        { title: t("navigation.menu.dashboard"), path: "/" },
+        { title: t("navigation.menu.about"), path: "/about" },
     ];
 
-    // t("navigation.menu.account")
     const loggedOutMenus = [
-        { title: "navigation.menu.account", path: "/signin" },
+        { title: t("navigation.menu.account"), path: "/account" },
     ];
     const loggedInMenus = [
-        { title: "navigation.menu.account", path: "/account" },
+        { title: t("navigation.menu.account"), path: "/account" },
     ];
 
     return (

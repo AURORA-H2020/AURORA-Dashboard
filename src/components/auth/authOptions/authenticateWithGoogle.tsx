@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import authenticate from "@/firebase/auth/authentication";
-import { useRouter } from "@/navigation";
 import { toast } from "sonner";
 
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
@@ -13,7 +12,6 @@ import { useTranslations } from "next-intl";
  * redirects to the account page.
  */
 function AuthenticateWithGoogle({ isSignIn = true }: { isSignIn?: boolean }) {
-    const router = useRouter();
     const t = useTranslations();
 
     /**
@@ -23,7 +21,6 @@ function AuthenticateWithGoogle({ isSignIn = true }: { isSignIn?: boolean }) {
      */
     const postSignIn = () => {
         toast.success(t("toast.auth.success"));
-        router.push("/account");
     };
 
     /**

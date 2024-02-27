@@ -2,14 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import authenticate from "@/firebase/auth/authentication";
 import { loginSchema } from "@/lib/zod/authSchemas";
-import { useRouter } from "@/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
-import FormInputField from "../formItems/formInputField";
-import FormPasswordField from "../formItems/formPasswordField";
+import FormInputField from "../../formItems/formInputField";
+import FormPasswordField from "../../formItems/formPasswordField";
 
 /**
  * Renders a sign-in form and handles sign-in through email, Google,
@@ -17,7 +16,6 @@ import FormPasswordField from "../formItems/formPasswordField";
  * redirects to the account page.
  */
 function SignInWithEmail() {
-    const router = useRouter();
     const t = useTranslations();
 
     const formSchema = loginSchema(t);
@@ -35,7 +33,6 @@ function SignInWithEmail() {
      */
     const postSignIn = () => {
         toast.success(t("toast.auth.success"));
-        router.push("/account");
     };
 
     /**

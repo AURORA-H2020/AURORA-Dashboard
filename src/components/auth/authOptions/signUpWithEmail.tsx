@@ -2,14 +2,13 @@ import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import signUp from "@/firebase/auth/authentication";
 import { registrationSchema } from "@/lib/zod/authSchemas";
-import { useRouter } from "@/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
-import FormInputField from "../formItems/formInputField";
-import FormPasswordField from "../formItems/formPasswordField";
+import FormInputField from "../../formItems/formInputField";
+import FormPasswordField from "../../formItems/formPasswordField";
 
 /**
  * Function for signing up with email.
@@ -19,7 +18,6 @@ import FormPasswordField from "../formItems/formPasswordField";
  */
 function SignUpWithEmail(): JSX.Element {
     const t = useTranslations();
-    const router = useRouter();
 
     const formSchema = registrationSchema(t);
 
@@ -38,7 +36,6 @@ function SignUpWithEmail(): JSX.Element {
      */
     const postSignUp = () => {
         toast.success(t("toast.auth.success"));
-        router.push("/account");
     };
 
     /**
