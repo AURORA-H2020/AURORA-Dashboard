@@ -1,5 +1,6 @@
 "use client";
 
+import { ProtectAccount } from "@/components/hoc/protectAccount";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "@/navigation";
 import { Flex } from "@radix-ui/themes";
@@ -20,7 +21,7 @@ export default function AccountLayout({
     const pathname = usePathname();
 
     return (
-        <>
+        <ProtectAccount>
             <Flex className="gap-2 justify-center">
                 <Button
                     variant={pathname === "/account" ? "default" : "outline"}
@@ -36,6 +37,6 @@ export default function AccountLayout({
                 </Button>
             </Flex>
             <div>{children}</div>
-        </>
+        </ProtectAccount>
     );
 }
