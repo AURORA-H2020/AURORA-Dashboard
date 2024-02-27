@@ -23,7 +23,6 @@ import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consump
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { Flex } from "@radix-ui/themes";
 import { BarChart } from "@tremor/react";
-import { User } from "firebase/auth";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
@@ -61,10 +60,7 @@ const findValueByCategory = (
 export default function ConsumptionSummaryChart() {
     const t = useTranslations();
 
-    const { user, loading } = useAuthContext() as {
-        user: User;
-        loading: boolean;
-    };
+    const { user, loading } = useAuthContext();
 
     const { userConsumptionSummaries } = useFirebaseData();
 
