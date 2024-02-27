@@ -1,4 +1,5 @@
 import { Consumption } from "@/models/firestore/consumption/consumption";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { User } from "@firebase/auth";
 import {
     addDoc,
@@ -9,7 +10,6 @@ import {
 } from "firebase/firestore";
 import firebaseApp from "../config";
 import { FirebaseConstants } from "../firebase-constants";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 
 // Initialize Firestore
 const firestore = getFirestore(firebaseApp);
@@ -42,7 +42,6 @@ function removeInvalidValues(
         }
     });
 
-    // Check nested object for 'costs'
     if (
         consumption.hasOwnProperty("description") &&
         (consumption.description === undefined ||
@@ -80,7 +79,7 @@ export const addEditConsumption = async (
             }
             success = true;
         } catch (error) {
-            throw new Error("Error writing document: " + error);
+            console.error("Error writing document: ", error);
         }
     } else {
         throw new Error("User is not logged in.");
