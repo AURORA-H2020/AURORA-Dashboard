@@ -34,12 +34,8 @@ import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { deleteAccount } from "@/firebase/firestore/deleteAccount";
 import { downloadUserData } from "@/firebase/firestore/downloadUserData";
-import { city2Name, country2Name, titleCase } from "@/lib/utilities";
-import { useRouter } from "@/navigation";
 import { Flex, Grid } from "@radix-ui/themes";
-import { User } from "firebase/auth";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 /**
@@ -48,13 +44,7 @@ import { toast } from "sonner";
  * @return {JSX.Element} The user settings page component
  */
 function UserSettings(): JSX.Element {
-    const t = useTranslations();
-
-    const { user, loading } = useAuthContext() as {
-        user: User;
-        loading: boolean;
-    };
-    const router = useRouter();
+    const { user, loading } = useAuthContext();
 
     const { userData } = useFirebaseData();
 
@@ -93,17 +83,7 @@ function UserSettings(): JSX.Element {
         }
     };
 
-    useEffect(() => {
-        if (loading) return;
-
-        // Redirect to the home page if no user is authenticated
-        if (!user) {
-            router.replace("/");
-            return;
-        }
-    }, [user, router, loading]);
-
-    if (!user && loading) {
+    if (!user || loading || !userData) {
         // Render loading indicator until the auth check is complete
         return <LoadingSpinner />;
     }
@@ -136,41 +116,33 @@ function UserSettings(): JSX.Element {
                                         {userData?.yearOfBirth}
                                     </ConsumptionTableRow>
                                     <ConsumptionTableRow label="Gender">
-                                        {titleCase(userData?.gender || "")}
+                                        {userData?.gender || ""}
                                     </ConsumptionTableRow>
                                     <ConsumptionTableRow label="Home energy label">
-                                        {titleCase(
-                                            userData?.homeEnergyLabel || "",
-                                        )}
+                                        {userData?.homeEnergyLabel || ""}
                                     </ConsumptionTableRow>
                                     <ConsumptionTableRow label="Household profile">
-                                        {titleCase(
-                                            userData?.householdProfile || "",
-                                        )}
+                                        {userData?.householdProfile || ""}
                                     </ConsumptionTableRow>
                                     <ConsumptionTableRow label="Country">
-                                        {t(
-                                            country2Name(
-                                                userData?.country || "",
-                                            ).name,
-                                        )}
+                                        {userData?.country || ""}
                                     </ConsumptionTableRow>
                                     <ConsumptionTableRow label="City">
-                                        {city2Name(userData?.city || "")}
+                                        {userData?.city || ""}
                                     </ConsumptionTableRow>
                                     <ConsumptionTableRow label="User ID">
-                                        {user.uid}
+                                        {user?.uid}
                                     </ConsumptionTableRow>
                                 </TableBody>
                             </Table>
-                            <CardFooter>
-                                <EditUserDataModal>
-                                    <Button variant={"outline"}>
-                                        Edit profile
-                                    </Button>
-                                </EditUserDataModal>
-                            </CardFooter>
                         </CardContent>
+                        <CardFooter>
+                            <EditUserDataModal>
+                                <Button variant={"outline"}>
+                                    Edit profile
+                                </Button>
+                            </EditUserDataModal>
+                        </CardFooter>
                     </Card>
                 </Flex>
                 <Flex direction={"column"} className="gap-6">
