@@ -12,18 +12,21 @@ import {
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
-import { categories, consumptionMapping } from "@/lib/constants";
+import { categories, consumptionMapping, labelMappings } from "@/lib/constants";
 import {
     getMonthShortName,
     valueFormatterCarbon,
     valueFormatterEnergy,
 } from "@/lib/utilities";
+import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { Flex } from "@radix-ui/themes";
+import { Flex, Grid } from "@radix-ui/themes";
 import { BarChart } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import ConsumptionLabel from "./consumptionLabel";
+import { Card, CardContent } from "@/components/ui/card";
 
 interface CurrentSummary {
     month: number;
@@ -63,6 +66,9 @@ export default function ConsumptionSummaryChart() {
 
     const { userConsumptionSummaries } = useFirebaseData();
 
+    const [selectedConsumptionSummary, setSelectedConsumptionSummary] =
+        useState<ConsumptionSummary>();
+
     const [currentSummary, setCurrentSummary] = useState<CurrentSummary[]>([]);
 
     const [summaryYear, setSummaryYear] = useState<string>(() => {
@@ -93,9 +99,8 @@ export default function ConsumptionSummaryChart() {
     };
 
     useEffect(() => {
-        if (loading || !user || !summaryYear) return;
+        if (loading || !user || selectedConsumptionSummary) return;
 
-        // This effect runs when summaryYear changes, including when it's initially set
         const summaryData = userConsumptionSummaries.find(
             (summary) => summary.year === parseInt(summaryYear),
         );
@@ -132,7 +137,16 @@ export default function ConsumptionSummaryChart() {
             // If no data is found for the selected year, use the base summary with zeroes
             setCurrentSummary(baseSummaryData);
         }
-    }, [user, loading, summaryYear, userConsumptionSummaries, currentMeasure]);
+
+        setSelectedConsumptionSummary(summaryData);
+    }, [
+        user,
+        loading,
+        summaryYear,
+        userConsumptionSummaries,
+        currentMeasure,
+        selectedConsumptionSummary,
+    ]);
 
     if (!user && loading) {
         // Render loading indicator until the auth check is complete
@@ -201,20 +215,45 @@ export default function ConsumptionSummaryChart() {
                     </SelectContent>
                 </Select>
             </Flex>
-            <BarChart
-                className="mt-4"
-                yAxisWidth={80}
-                data={currentSummary}
-                index="monthName"
-                categories={categories}
-                colors={consumptionMapping.map((c) => c.colorPrimary)}
-                valueFormatter={
-                    currentMeasure === "carbonEmission"
-                        ? valueFormatterCarbon
-                        : valueFormatterEnergy
-                }
-                stack={true}
-            />
+
+            <Grid gap="4">
+                <Grid columns="4" gap="4">
+                    {selectedConsumptionSummary?.categories.map((category) => (
+                        <ConsumptionLabel
+                            key={category.category}
+                            category={t(`consumption.${category.category}`)}
+                            label={labelMappings.find(
+                                (label) =>
+                                    label.label ===
+                                    category[currentMeasure].label,
+                            )}
+                            value={category[currentMeasure].total}
+                            year={parseInt(summaryYear)}
+                        />
+                    ))}
+                </Grid>
+
+                <Card>
+                    <CardContent>
+                        <BarChart
+                            className="mt-4"
+                            yAxisWidth={80}
+                            data={currentSummary}
+                            index="monthName"
+                            categories={categories}
+                            colors={consumptionMapping.map(
+                                (c) => c.colorPrimary,
+                            )}
+                            valueFormatter={
+                                currentMeasure === "carbonEmission"
+                                    ? valueFormatterCarbon
+                                    : valueFormatterEnergy
+                            }
+                            stack={true}
+                        />
+                    </CardContent>
+                </Card>
+            </Grid>
         </>
     );
 }
