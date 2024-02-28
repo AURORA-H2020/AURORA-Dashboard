@@ -18,7 +18,7 @@ const ConsumptionSummaryLabel = ({
     measure,
     year,
     icon,
-    color,
+    color = "foreground",
 }: {
     category: string;
     label?: string;
@@ -41,7 +41,9 @@ const ConsumptionSummaryLabel = ({
     })} ${measure === "carbonEmission" ? carbonUnit : "kWh"}`;
 
     return (
-        <Card>
+        <Card
+            className={`bg-[${labelColor}] border-[${labelColor}] bg-opacity-30 border-opacity-50`}
+        >
             <CardHeader>
                 <Flex gap="4" justify="between" align="center">
                     <Grid>
@@ -56,11 +58,7 @@ const ConsumptionSummaryLabel = ({
                             </Badge>
                         </CardTitle>
                     </Grid>
-                    {React.cloneElement(icon ?? <></>, {
-                        style: {
-                            color: color,
-                        },
-                    })}
+                    {icon && <div className={`text-[${color}]`}>{icon}</div>}
                 </Flex>
             </CardHeader>
             <CardContent>

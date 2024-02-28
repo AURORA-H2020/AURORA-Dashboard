@@ -1,5 +1,8 @@
 "use client";
 
+import LabelInfoModal from "@/components/infoModals/labelInfoModal";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import {
     Select,
     SelectContent,
@@ -10,17 +13,14 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useFirebaseData } from "@/context/FirebaseContext";
+import { cn } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
-import { Flex, Grid } from "@radix-ui/themes";
+import { Box, Flex, Grid, Heading, Text } from "@radix-ui/themes";
+import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import ConsumptionSummaryChart from "./summary/consumptionSummaryChart";
 import ConsumptionSummaryLabelGrid from "./summary/consumptionSummaryLabels/consumptionSummaryLabelGrid";
-import { Card, CardContent } from "@/components/ui/card";
-import LabelInfoModal from "@/components/infoModals/labelInfoModal";
-import { Button } from "@/components/ui/button";
-import { Info } from "lucide-react";
-import { cn } from "@/lib/utilities";
 
 export default function ConsumptionSummaryPanel({
     className,
@@ -61,12 +61,11 @@ export default function ConsumptionSummaryPanel({
     }
 
     return (
-        <Grid className={cn(className)}>
+        <Grid className={cn(className)} gap="4">
             <Flex
                 direction={{ initial: "column", xs: "row" }}
                 justify="between"
                 gap="2"
-                className="mb-4"
             >
                 <Flex gap="2">
                     <Tabs
@@ -134,12 +133,6 @@ export default function ConsumptionSummaryPanel({
                 </LabelInfoModal>
             </Flex>
 
-            <ConsumptionSummaryLabelGrid
-                consumptionSummary={selectedConsumptionSummary}
-                measure={selectedMeasure}
-                className="mb-4"
-            />
-
             <Card>
                 <CardContent>
                     <ConsumptionSummaryChart
@@ -148,6 +141,28 @@ export default function ConsumptionSummaryPanel({
                     />
                 </CardContent>
             </Card>
+
+            <ConsumptionSummaryLabelGrid
+                consumptionSummary={selectedConsumptionSummary}
+                measure={selectedMeasure}
+            />
+
+            <Box>
+                <Heading size="4">How does it work?</Heading>
+                <Text className="text-sm text-muted-foreground">
+                    Your energy labels are calculated based on your tracked
+                    consumption and specific to your location. This means, as
+                    you enter data throughout the year, more of your carbon
+                    emission and energy budgets will be made available. For
+                    example: If you have only entered data for all days of
+                    January and December, 2/12 of the total budget will be used
+                    to calculate your label. The only exception is
+                    transportation, which yields the full budget after a certain
+                    number of annual entries. Your overall budget is based on
+                    the sum of your electricity, heating and transportation
+                    budgets.
+                </Text>
+            </Box>
         </Grid>
     );
 }

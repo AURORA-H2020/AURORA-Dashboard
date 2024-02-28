@@ -98,50 +98,59 @@ export default function RecurringConsumptionPreview({
                             openModal();
                         }}
                     >
-                        <Flex direction={"column"}>
+                        <Flex direction={"row"} gap="4">
                             <div
                                 className={`bg-[${consumptionAttributes?.colorPrimary}] bg-opacity-20 rounded-full flex items-center justify-center w-12 h-12 text-[${consumptionAttributes?.colorPrimary}]`}
                             >
                                 {consumptionAttributes?.icon}
                             </div>
-                        </Flex>
-                        <Flex direction={"column"}>
-                            <Heading as="h3" size={"4"}>
-                                {recurringConsumption.category}
-                            </Heading>
-                            <Text>
-                                {recurringConsumption.createdAt
-                                    ? recurringConsumption.createdAt
-                                          .toDate()
-                                          .toDateString()
-                                    : ""}
-                            </Text>
+
+                            <Flex direction={"column"}>
+                                <Heading as="h3" size={"4"}>
+                                    {t(
+                                        `category.${recurringConsumption.category}`,
+                                    )}
+                                </Heading>
+                                <Text className="text-muted-foreground">
+                                    {recurringConsumption.isEnabled
+                                        ? t("app.recurringConsumption.enabled")
+                                        : t(
+                                              "app.recurringConsumption.disabled",
+                                          )}
+                                </Text>
+                            </Flex>
                         </Flex>
                         <Flex direction={"column"} align={"end"}>
                             <Text>
-                                {recurringConsumption.transportation?.distance
-                                    ? Math.round(
-                                          recurringConsumption.transportation
-                                              ?.distance,
-                                      ) +
-                                      " " +
-                                      String(consumptionAttributes?.unit)
-                                    : ""}
+                                {recurringConsumption.transportation
+                                    ?.distance &&
+                                    format.number(
+                                        recurringConsumption.transportation
+                                            ?.distance,
+                                        { maximumFractionDigits: 1 },
+                                    ) +
+                                        " " +
+                                        String(consumptionAttributes?.unit)}
+                            </Text>
+                            <Text>
+                                {t(
+                                    `app.recurringConsumption.frequency.${recurringConsumption.frequency.unit}`,
+                                )}
                             </Text>
                         </Flex>
                     </Flex>
                 </CardContent>
             </Card>
 
-            {/* Modal */}
-
             <Dialog open={isModalOpen} onOpenChange={() => setModalOpen(false)}>
                 <DialogContent className="sm:max-w-lg p-0">
                     <ScrollArea className="max-h-[80vh] p-6">
-                        <div className="p-2">
+                        <Box className="p-2">
                             <DialogHeader>
                                 <DialogTitle>
-                                    {recurringConsumption.category}
+                                    {t(
+                                        `category.${recurringConsumption.category}`,
+                                    )}
                                 </DialogTitle>
                             </DialogHeader>
                             <RecurringConsumptionView
@@ -149,7 +158,7 @@ export default function RecurringConsumptionPreview({
                             />
 
                             <DialogFooter>
-                                {/* TODO: Add button functionality */}
+                                {/* TODO: Add duplicate button functionality */}
                                 <Flex
                                     justify="between"
                                     className="gap-2 w-full"
@@ -176,7 +185,7 @@ export default function RecurringConsumptionPreview({
                                     </Flex>
                                 </Flex>
                             </DialogFooter>
-                        </div>
+                        </Box>
                     </ScrollArea>
                 </DialogContent>
             </Dialog>
@@ -193,14 +202,12 @@ export default function RecurringConsumptionPreview({
                             <Button
                                 onClick={() => setAlertOpen(false)}
                                 variant="outline"
-                                className="w-full"
                             >
                                 {t("common.cancel")}
                             </Button>
                             <Button
                                 variant="destructive"
                                 onClick={handleDelete}
-                                className="w-full"
                             >
                                 {t("common.delete")}
                             </Button>

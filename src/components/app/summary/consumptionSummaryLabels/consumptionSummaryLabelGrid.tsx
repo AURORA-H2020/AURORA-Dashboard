@@ -46,7 +46,6 @@ export default function ConsumptionSummaryLabelGrid({
                         measure={measure}
                         year={consumptionSummary.year}
                         icon={consumptionAttributes?.icon}
-                        color={consumptionAttributes?.colorPrimary}
                     />
                 );
             })}

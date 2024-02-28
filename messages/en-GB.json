@@ -159,7 +159,9 @@
         "daily": "Daily",
         "weekly": "Weekly",
         "monthly": "Monthly"
-      }
+      },
+      "enabled": "Enabled",
+      "disabled": "Disabled"
     }
   },
   "common": {

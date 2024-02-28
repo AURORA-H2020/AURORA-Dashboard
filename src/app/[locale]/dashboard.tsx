@@ -16,7 +16,7 @@ import ConsumptionCardSummaryCategory from "../../components/dashboard/consumpti
 import { ConsumptionTimelineChart } from "../../components/dashboard/consumptionTimelineChart";
 import { GenderByCountryChart } from "../../components/dashboard/genderByCountryChart";
 
-import { Flex, Grid } from "@radix-ui/themes";
+import { Box, Flex, Grid } from "@radix-ui/themes";
 import { Card, CardContent } from "../../components/ui/card";
 
 import { ConsumptionAverageCompare } from "@/components/dashboard/consumptionAverageCompare";
@@ -250,9 +250,9 @@ export function Dashboard({
 
                     <Card>
                         <CardContent className="p-6">
-                            <div className="max-w-3xl mx-auto">
+                            <Box className="max-w-3xl mx-auto">
                                 <AutoReport metaData={metaData} />
-                            </div>
+                            </Box>
                         </CardContent>
                     </Card>
                 </>

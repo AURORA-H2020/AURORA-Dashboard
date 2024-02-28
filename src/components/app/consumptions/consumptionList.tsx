@@ -1,9 +1,9 @@
 "use client";
 
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
-import LoadingSpinner from "@/components/ui/loading";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { cn } from "@/lib/utilities";
+import { Grid } from "@radix-ui/themes";
 
 /**
  * Renders a list of Consumption components.
@@ -15,19 +15,16 @@ import { cn } from "@/lib/utilities";
 function ConsumptionList({ className }: { className?: string }): JSX.Element {
     const { userConsumptions } = useFirebaseData();
 
-    if (!userConsumptions) {
-        return <LoadingSpinner />;
-    }
-
     return (
-        <div className={cn(className)}>
+        <Grid className={cn(className)} gap="4">
             {userConsumptions &&
                 userConsumptions.map((consumption) => (
-                    <div className="mb-4" key={consumption.id}>
-                        <ConsumptionPreview consumption={consumption} />
-                    </div>
+                    <ConsumptionPreview
+                        key={consumption.id}
+                        consumption={consumption}
+                    />
                 ))}
-        </div>
+        </Grid>
     );
 }
 
