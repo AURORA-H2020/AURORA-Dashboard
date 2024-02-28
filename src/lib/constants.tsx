@@ -7,8 +7,10 @@ import {
     HomeEnergyLabel,
     LabelMapping,
     Locale,
-    householdProfile,
-    publicVehicleOccupancy,
+    HouseholdProfile,
+    PublicVehicleOccupancy,
+    RecurringConsumptionFrequencyUnitMapping,
+    Weekdays,
 } from "@/models/constants";
 import { CalculationMode, EnergyMode } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
@@ -325,7 +327,7 @@ export const kiloGramNumberFormatter = Intl.NumberFormat("en-GB", {
     unitDisplay: "short",
 });
 
-export const householdProfiles: householdProfile[] = [
+export const householdProfiles: HouseholdProfile[] = [
     {
         key: "retiredIndividuals",
         label: t("app.user.householdProfile.retiredIndividuals"),
@@ -344,7 +346,7 @@ export const householdProfiles: householdProfile[] = [
     },
 ];
 
-export const publicVehicleOccupancies: publicVehicleOccupancy[] = [
+export const publicVehicleOccupancies: PublicVehicleOccupancy[] = [
     {
         key: "almostEmpty",
         label: t("app.consumption.publicVehicleOccupancy.almostEmpty"),
@@ -356,6 +358,53 @@ export const publicVehicleOccupancies: publicVehicleOccupancy[] = [
     {
         key: "nearlyFull",
         label: t("app.consumption.publicVehicleOccupancy.nearlyFull"),
+    },
+];
+
+export const recurringConsumptionFrequencies: RecurringConsumptionFrequencyUnitMapping[] =
+    [
+        {
+            key: "daily",
+            label: t("app.recurringConsumption.frequency.daily"),
+        },
+        {
+            key: "weekly",
+            label: t("app.recurringConsumption.frequency.weekly"),
+        },
+        {
+            key: "monthly",
+            label: t("app.recurringConsumption.frequency.monthly"),
+        },
+    ];
+
+export const weekdays: Weekdays[] = [
+    {
+        key: 0,
+        label: t("common.weekdays.monday"),
+    },
+    {
+        key: 1,
+        label: t("common.weekdays.tuesday"),
+    },
+    {
+        key: 2,
+        label: t("common.weekdays.wednesday"),
+    },
+    {
+        key: 3,
+        label: t("common.weekdays.thursday"),
+    },
+    {
+        key: 4,
+        label: t("common.weekdays.friday"),
+    },
+    {
+        key: 5,
+        label: t("common.weekdays.saturday"),
+    },
+    {
+        key: 6,
+        label: t("common.weekdays.sunday"),
     },
 ];
 

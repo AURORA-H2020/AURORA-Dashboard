@@ -6,6 +6,7 @@ import { ConsumptionHeatingFuel } from "./firestore/consumption/heating/consumpt
 import { ConsumptionTransportationPublicVehicleOccupancy } from "./firestore/consumption/transportation/consumption-transportation-public-vehicle-occupancy";
 import { ConsumptionTransportationType } from "./firestore/consumption/transportation/consumption-transportation-type";
 import { Label } from "./firestore/global-summary/label/consumption-type-labels";
+import { RecurringConsumptionFrequencyUnit } from "./firestore/recurring-consumption/recurring-consumption-frequency-unit";
 import { UserGender } from "./firestore/user/user-gender";
 import { UserHomeEnergyLabel } from "./firestore/user/user-homeEnergyLabel";
 import { UserHouseholdProfile } from "./firestore/user/user-householdProfile";
@@ -33,13 +34,23 @@ export interface ConsumptionAttributes {
     unitLabel: string;
 }
 
-export interface householdProfile {
+export interface HouseholdProfile {
     key: UserHouseholdProfile;
     label: string;
 }
 
-export interface publicVehicleOccupancy {
+export interface PublicVehicleOccupancy {
     key: ConsumptionTransportationPublicVehicleOccupancy;
+    label: string;
+}
+
+export interface RecurringConsumptionFrequencyUnitMapping {
+    key: RecurringConsumptionFrequencyUnit;
+    label: string;
+}
+
+export interface Weekdays {
+    key: number;
     label: string;
 }
 
