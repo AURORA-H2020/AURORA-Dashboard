@@ -18,14 +18,11 @@ function removeInvalidValues(
     recurringConsumption: RecurringConsumption,
     category: ConsumptionCategory,
 ) {
-    const keysToCheck = [
-        "costs",
-        "districtHeatingSource",
+    const transportationKeys = [
         "privateVehicleOccupancy",
         "publicVehicleOccupancy",
-        "dateOfTravelEnd",
     ];
-    keysToCheck.forEach((key) => {
+    transportationKeys.forEach((key) => {
         if (
             recurringConsumption.hasOwnProperty(category) &&
             recurringConsumption[category]?.hasOwnProperty(key)
@@ -38,6 +35,25 @@ function removeInvalidValues(
                 Number.isNaN(value)
             ) {
                 delete recurringConsumption[category]![key];
+            }
+        }
+    });
+
+    const frequencyKeys = ["weekdays", "dayOfMonth"];
+    frequencyKeys.forEach((key) => {
+        if (
+            recurringConsumption.hasOwnProperty("frequency") &&
+            recurringConsumption.frequency?.hasOwnProperty(key)
+        ) {
+            const value = recurringConsumption.frequency[key];
+            if (
+                value === undefined ||
+                value === "" ||
+                value?.length < 1 ||
+                value === null ||
+                Number.isNaN(value)
+            ) {
+                delete recurringConsumption.frequency[key];
             }
         }
     });
