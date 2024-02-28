@@ -1,18 +1,8 @@
 "use client";
 
 import LoadingSpinner from "@/components/ui/loading";
-import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuthContext } from "@/context/AuthContext";
-import { useFirebaseData } from "@/context/FirebaseContext";
-import { categories, consumptionMapping, labelMappings } from "@/lib/constants";
+import { categories, consumptionMapping } from "@/lib/constants";
 import {
     getMonthShortName,
     valueFormatterCarbon,
@@ -21,12 +11,8 @@ import {
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { Flex, Grid } from "@radix-ui/themes";
 import { BarChart } from "@tremor/react";
-import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import ConsumptionLabel from "./consumptionLabel";
-import { Card, CardContent } from "@/components/ui/card";
 
 interface CurrentSummary {
     month: number;
@@ -59,29 +45,16 @@ const findValueByCategory = (
 /**
  * React component for displaying consumption summary chart.
  */
-export default function ConsumptionSummaryChart() {
-    const t = useTranslations();
-
+export default function ConsumptionSummaryChart({
+    consumptionSummary,
+    measure,
+}: {
+    consumptionSummary: ConsumptionSummary;
+    measure: "carbonEmission" | "energyExpended";
+}) {
     const { user, loading } = useAuthContext();
 
-    const { userConsumptionSummaries } = useFirebaseData();
-
-    const [selectedConsumptionSummary, setSelectedConsumptionSummary] =
-        useState<ConsumptionSummary>();
-
     const [currentSummary, setCurrentSummary] = useState<CurrentSummary[]>([]);
-
-    const [summaryYear, setSummaryYear] = useState<string>(() => {
-        const maxYear = userConsumptionSummaries.reduce(
-            (max, summary) => Math.max(max, summary.year),
-            0,
-        );
-        return maxYear.toString();
-    });
-
-    const [currentMeasure, setCurrentMeasure] = useState<
-        "carbonEmission" | "energyExpended"
-    >("carbonEmission");
 
     /**
      * Initializes summary data for 12 months with default values.
@@ -99,54 +72,44 @@ export default function ConsumptionSummaryChart() {
     };
 
     useEffect(() => {
-        if (loading || !user || selectedConsumptionSummary) return;
-
-        const summaryData = userConsumptionSummaries.find(
-            (summary) => summary.year === parseInt(summaryYear),
-        );
+        if (loading || !user || !consumptionSummary) return;
 
         // Initialize with default values for each month
         const baseSummaryData = initializeSummaryData();
 
-        if (summaryData) {
-            const transformedData = summaryData.months.reduce((acc, month) => {
-                acc[month.number - 1] = {
-                    month: month.number,
-                    monthName: getMonthShortName(month.number),
-                    heating: findValueByCategory(
-                        month.categories,
-                        "heating",
-                        currentMeasure,
-                    ),
-                    electricity: findValueByCategory(
-                        month.categories,
-                        "electricity",
-                        currentMeasure,
-                    ),
-                    transportation: findValueByCategory(
-                        month.categories,
-                        "transportation",
-                        currentMeasure,
-                    ),
-                };
-                return acc;
-            }, baseSummaryData);
+        if (consumptionSummary) {
+            const transformedData = consumptionSummary.months.reduce(
+                (acc, month) => {
+                    acc[month.number - 1] = {
+                        month: month.number,
+                        monthName: getMonthShortName(month.number),
+                        heating: findValueByCategory(
+                            month.categories,
+                            "heating",
+                            measure,
+                        ),
+                        electricity: findValueByCategory(
+                            month.categories,
+                            "electricity",
+                            measure,
+                        ),
+                        transportation: findValueByCategory(
+                            month.categories,
+                            "transportation",
+                            measure,
+                        ),
+                    };
+                    return acc;
+                },
+                baseSummaryData,
+            );
 
             setCurrentSummary(transformedData);
         } else {
             // If no data is found for the selected year, use the base summary with zeroes
             setCurrentSummary(baseSummaryData);
         }
-
-        setSelectedConsumptionSummary(summaryData);
-    }, [
-        user,
-        loading,
-        summaryYear,
-        userConsumptionSummaries,
-        currentMeasure,
-        selectedConsumptionSummary,
-    ]);
+    }, [measure, loading, consumptionSummary, user]);
 
     if (!user && loading) {
         // Render loading indicator until the auth check is complete
@@ -154,106 +117,19 @@ export default function ConsumptionSummaryChart() {
     }
 
     return (
-        <>
-            <Flex
-                direction={{ initial: "column", xs: "row" }}
-                className="gap-6 mt-6 mb-6"
-            >
-                <Tabs
-                    defaultValue="carbonEmission"
-                    onValueChange={(value) => {
-                        if (
-                            value === "carbonEmission" ||
-                            value === "energyExpended"
-                        ) {
-                            setCurrentMeasure(value);
-                        }
-                        // Optionally, handle the case where the value is not expected
-                        else {
-                            console.error(
-                                "Invalid value for setCurrentMeasure:",
-                                value,
-                            );
-                        }
-                    }}
-                >
-                    <div className="overflow-x-auto">
-                        <TabsList>
-                            <TabsTrigger value="carbonEmission">
-                                {
-                                    // t("common.co2emission")
-                                    t.rich("common.co2emission", {
-                                        sub: (chunks) => (
-                                            <sub className="mr-1">{chunks}</sub>
-                                        ),
-                                    })
-                                }
-                            </TabsTrigger>
-                            <TabsTrigger value="energyExpended">
-                                {t("common.energyUsage")}
-                            </TabsTrigger>
-                        </TabsList>
-                    </div>
-                </Tabs>
-                <Select value={summaryYear} onValueChange={setSummaryYear}>
-                    <SelectTrigger className="w-24">
-                        <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectGroup>
-                            {userConsumptionSummaries.map((summary) => {
-                                return (
-                                    <SelectItem
-                                        value={summary.year.toString()}
-                                        key={summary.year}
-                                    >
-                                        {summary.year}
-                                    </SelectItem>
-                                );
-                            })}
-                        </SelectGroup>
-                    </SelectContent>
-                </Select>
-            </Flex>
-
-            <Grid gap="4">
-                <Grid columns="4" gap="4">
-                    {selectedConsumptionSummary?.categories.map((category) => (
-                        <ConsumptionLabel
-                            key={category.category}
-                            category={t(`consumption.${category.category}`)}
-                            label={labelMappings.find(
-                                (label) =>
-                                    label.label ===
-                                    category[currentMeasure].label,
-                            )}
-                            value={category[currentMeasure].total}
-                            year={parseInt(summaryYear)}
-                        />
-                    ))}
-                </Grid>
-
-                <Card>
-                    <CardContent>
-                        <BarChart
-                            className="mt-4"
-                            yAxisWidth={80}
-                            data={currentSummary}
-                            index="monthName"
-                            categories={categories}
-                            colors={consumptionMapping.map(
-                                (c) => c.colorPrimary,
-                            )}
-                            valueFormatter={
-                                currentMeasure === "carbonEmission"
-                                    ? valueFormatterCarbon
-                                    : valueFormatterEnergy
-                            }
-                            stack={true}
-                        />
-                    </CardContent>
-                </Card>
-            </Grid>
-        </>
+        <BarChart
+            className="mt-4"
+            yAxisWidth={80}
+            data={currentSummary}
+            index="monthName"
+            categories={categories}
+            colors={consumptionMapping.map((c) => c.colorPrimary)}
+            valueFormatter={
+                measure === "carbonEmission"
+                    ? valueFormatterCarbon
+                    : valueFormatterEnergy
+            }
+            stack={true}
+        />
     );
 }
