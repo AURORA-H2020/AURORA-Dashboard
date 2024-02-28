@@ -91,7 +91,7 @@ export default function UserDataForm({
                             field={field}
                             inputType="text"
                             placeholder="First Name"
-                            formLabel="First Name"
+                            label="First Name"
                         />
                     )}
                 />
@@ -103,7 +103,7 @@ export default function UserDataForm({
                             field={field}
                             inputType="text"
                             placeholder="Last Name"
-                            formLabel="Last Name"
+                            label="Last Name"
                         />
                     )}
                 />
@@ -115,7 +115,7 @@ export default function UserDataForm({
                             field={field}
                             inputType="number"
                             placeholder="Year of Birth"
-                            formLabel="Year of Birth"
+                            label="Year of Birth"
                         />
                     )}
                 />
@@ -130,7 +130,7 @@ export default function UserDataForm({
                                 label: t(gender.label),
                             }))}
                             placeholder="Please select your preferred gender"
-                            formLabel={"Gender"}
+                            label={"Gender"}
                         />
                     )}
                 />
@@ -146,7 +146,7 @@ export default function UserDataForm({
                                 label: label.label,
                             }))}
                             placeholder="Please select your home energy label"
-                            formLabel={"Home Energy Label"}
+                            label={"Home Energy Label"}
                         />
                     )}
                 />
@@ -162,7 +162,7 @@ export default function UserDataForm({
                                 label: t(profile.label),
                             }))}
                             placeholder="Please select your household profile"
-                            formLabel={"Household Profile"}
+                            label={"Household Profile"}
                         />
                     )}
                 />
@@ -178,7 +178,7 @@ export default function UserDataForm({
                                 label: t(country.name),
                             }))}
                             placeholder="Please select your country"
-                            formLabel={"Country"}
+                            label={"Country"}
                             {...(!isNewUser && { disabled: true })}
                         />
                     )}
@@ -195,7 +195,7 @@ export default function UserDataForm({
                                 label: t(city.name),
                             }))}
                             placeholder="Please select your city"
-                            formLabel={"City"}
+                            label={"City"}
                             {...(!isNewUser && { disabled: true })}
                         />
                     )}

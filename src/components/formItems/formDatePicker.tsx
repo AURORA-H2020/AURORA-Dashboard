@@ -6,17 +6,23 @@ import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
+import { ControllerRenderProps } from "react-hook-form";
 
 const FormDatePicker = ({
     field,
     placeholder,
-    formLabel,
+    label,
     showClearButton = false,
+}: {
+    field: ControllerRenderProps<any, any>;
+    placeholder: string;
+    label?: string;
+    showClearButton?: boolean;
 }) => {
     const format = useFormatter();
     return (
         <FormItem>
-            <FormLabel>{formLabel}</FormLabel>
+            {label && <FormLabel>{label}</FormLabel>}
             <Popover>
                 <PopoverTrigger asChild>
                     <FormControl>

@@ -1,10 +1,12 @@
 import FormInputField from "@/components/formItems/formInputField";
+import FormMultiSelect from "@/components/formItems/formMultiSelect";
 import FormSelect from "@/components/formItems/formSelect";
 import FormSwitch from "@/components/formItems/formSwitch";
 import FormTextField from "@/components/formItems/formTextField";
+import FormTimePicker from "@/components/formItems/formTimePicker";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
-import { Form, FormField } from "@/components/ui/form";
+import { Form, FormField, FormLabel } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
 import { addEditRecurringConsumption } from "@/firebase/consumption/addEditRecurringConsumption";
 import {
@@ -12,12 +14,15 @@ import {
     privateVehicleTypes,
     publicVehicleOccupancies,
     publicVerhicleTypes,
+    recurringConsumptionFrequencies,
+    weekdays,
 } from "@/lib/constants";
 import { cn } from "@/lib/utilities";
 import { recurringTransportationFormSchema } from "@/lib/zod/recurringConsumptionSchemas";
 import { RecurringConsumptionWithID } from "@/models/extensions";
 import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Flex, Strong } from "@radix-ui/themes";
 import { User } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import { useTranslations } from "next-intl";
@@ -46,9 +51,10 @@ export default function RecurringTransportationForm({
         createdAt: Timestamp.now(),
         isEnabled: recurringConsumption?.isEnabled ?? true,
         frequency: {
-            unit: recurringConsumption?.frequency?.unit || "weekly",
-            weekdays: recurringConsumption?.frequency?.weekdays || [0, 1],
-            dayOfMonth: recurringConsumption?.frequency?.dayOfMonth ?? 1,
+            unit: recurringConsumption?.frequency?.unit || "daily",
+            weekdays: recurringConsumption?.frequency?.weekdays || undefined,
+            dayOfMonth:
+                recurringConsumption?.frequency?.dayOfMonth ?? undefined,
         },
         category: "transportation",
         transportation: {
@@ -65,7 +71,8 @@ export default function RecurringTransportationForm({
                 recurringConsumption?.transportation?.hourOfTravel ?? 1,
             minuteOfTravel:
                 recurringConsumption?.transportation?.minuteOfTravel ?? 1,
-            distance: recurringConsumption?.transportation?.distance || 1,
+            distance:
+                recurringConsumption?.transportation?.distance || undefined,
         },
         description: recurringConsumption?.description || "",
     };
@@ -101,6 +108,8 @@ export default function RecurringTransportationForm({
         "transportation.transportationType",
     );
 
+    const formFrequencyUnit = form.watch("frequency.unit");
+
     useEffect(() => {
         if (!privateVehicleTypes.includes(formTransportationType)) {
             form.setValue("transportation.privateVehicleOccupancy", undefined);
@@ -108,7 +117,13 @@ export default function RecurringTransportationForm({
         if (!publicVerhicleTypes.includes(formTransportationType)) {
             form.setValue("transportation.publicVehicleOccupancy", undefined);
         }
-    }, [formTransportationType, form]);
+        if (formFrequencyUnit !== "weekly") {
+            form.setValue("frequency.weekdays", undefined);
+        }
+        if (formFrequencyUnit !== "monthly") {
+            form.setValue("frequency.dayOfMonth", undefined);
+        }
+    }, [formTransportationType, form, formFrequencyUnit]);
 
     return (
         <>
@@ -131,42 +146,96 @@ export default function RecurringTransportationForm({
 
                     <FormField
                         control={form.control}
+                        name="frequency.unit"
+                        render={({ field }) => (
+                            <FormSelect
+                                field={field}
+                                options={recurringConsumptionFrequencies.map(
+                                    (occupancy) => ({
+                                        value: occupancy.key,
+                                        label: t(occupancy.label),
+                                    }),
+                                )}
+                                placeholder="Frequency"
+                                label={"Frequency"}
+                            />
+                        )}
+                    />
+
+                    {formFrequencyUnit === "weekly" && (
+                        <FormField
+                            control={form.control}
+                            name="frequency.weekdays"
+                            render={({ field }) => (
+                                <FormMultiSelect
+                                    field={field}
+                                    options={weekdays.map((occupancy) => ({
+                                        value: occupancy.key.toString(),
+                                        label: t(occupancy.label),
+                                    }))}
+                                    placeholder="Weekdays"
+                                    label={"Weekdays"}
+                                />
+                            )}
+                        />
+                    )}
+
+                    {formFrequencyUnit === "monthly" && (
+                        <FormField
+                            control={form.control}
+                            name="frequency.dayOfMonth"
+                            render={({ field }) => (
+                                <FormInputField
+                                    field={field}
+                                    inputType="number"
+                                    placeholder="Day of Month"
+                                    label="Day of Month"
+                                />
+                            )}
+                        />
+                    )}
+
+                    <FormField
+                        control={form.control}
                         name="transportation.distance"
                         render={({ field }) => (
                             <FormInputField
                                 field={field}
                                 inputType="number"
                                 placeholder="Distance"
-                                formLabel="Distance"
+                                label="Distance"
                             />
                         )}
                     />
 
-                    <FormField
-                        control={form.control}
-                        name="transportation.hourOfTravel"
-                        render={({ field }) => (
-                            <FormInputField
-                                field={field}
-                                inputType="number"
-                                placeholder="Hour of travel"
-                                formLabel="Hour of travel"
+                    <Flex justify="between" align="center">
+                        <FormLabel>Start of Travel</FormLabel>
+                        <Flex justify="between" align="center" gap="8">
+                            <FormField
+                                control={form.control}
+                                name="transportation.hourOfTravel"
+                                render={({ field }) => (
+                                    <FormTimePicker
+                                        field={field}
+                                        picker="hours"
+                                    />
+                                )}
                             />
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
-                        name="transportation.minuteOfTravel"
-                        render={({ field }) => (
-                            <FormInputField
-                                field={field}
-                                inputType="number"
-                                placeholder="Minute of travel"
-                                formLabel="Minute of travel"
+                            <div className="mx-2">
+                                <Strong>:</Strong>
+                            </div>
+                            <FormField
+                                control={form.control}
+                                name="transportation.minuteOfTravel"
+                                render={({ field }) => (
+                                    <FormTimePicker
+                                        field={field}
+                                        picker="minutes"
+                                    />
+                                )}
                             />
-                        )}
-                    />
+                        </Flex>
+                    </Flex>
 
                     <FormField
                         control={form.control}
@@ -181,7 +250,7 @@ export default function RecurringTransportationForm({
                                     }),
                                 )}
                                 placeholder="Transportation Type"
-                                formLabel={"Transportation Type"}
+                                label={"Transportation Type"}
                             />
                         )}
                     />
@@ -195,7 +264,7 @@ export default function RecurringTransportationForm({
                                     field={field}
                                     inputType="number"
                                     placeholder="Private Vehicle Occupancy"
-                                    formLabel="Private Vehicle Occupancy"
+                                    label="Private Vehicle Occupancy"
                                 />
                             )}
                         />
@@ -215,7 +284,7 @@ export default function RecurringTransportationForm({
                                         }),
                                     )}
                                     placeholder="Public Vehicle Occupancy"
-                                    formLabel={"Public Vehicle Occupancy"}
+                                    label={"Public Vehicle Occupancy"}
                                 />
                             )}
                         />

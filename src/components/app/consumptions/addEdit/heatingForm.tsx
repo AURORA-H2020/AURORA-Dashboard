@@ -103,7 +103,7 @@ export default function HeatingForm({
                                 field={field}
                                 inputType="number"
                                 placeholder="Consumption"
-                                formLabel="Consumption"
+                                label="Consumption"
                             />
                         )}
                     />
@@ -115,7 +115,7 @@ export default function HeatingForm({
                                 field={field}
                                 inputType="number"
                                 placeholder="People in household"
-                                formLabel="People in household"
+                                label="People in household"
                             />
                         )}
                     />
@@ -133,7 +133,7 @@ export default function HeatingForm({
                                     }),
                                 )}
                                 placeholder="Heating Fuel"
-                                formLabel={"Heating Fuel"}
+                                label={"Heating Fuel"}
                             />
                         )}
                     />
@@ -152,7 +152,7 @@ export default function HeatingForm({
                                         }),
                                     )}
                                     placeholder="District Heating Source"
-                                    formLabel={"District Heating Source"}
+                                    label={"District Heating Source"}
                                 />
                             )}
                         />
@@ -165,7 +165,7 @@ export default function HeatingForm({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                formLabel={"Start date"}
+                                label={"Start date"}
                             />
                         )}
                     />
@@ -177,7 +177,7 @@ export default function HeatingForm({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                formLabel={"End date"}
+                                label={"End date"}
                             />
                         )}
                     />
@@ -190,7 +190,7 @@ export default function HeatingForm({
                                 field={field}
                                 inputType="number"
                                 placeholder="Costs"
-                                formLabel="Costs"
+                                label="Costs"
                             />
                         )}
                     />

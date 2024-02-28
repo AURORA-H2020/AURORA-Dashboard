@@ -72,7 +72,7 @@ function SignInWithEmail() {
                             field={field}
                             inputType="email"
                             placeholder={t("ui.auth.email")}
-                            formLabel={t("ui.auth.email")}
+                            label={t("ui.auth.email")}
                         />
                     )}
                 />
@@ -83,7 +83,7 @@ function SignInWithEmail() {
                         <FormPasswordField
                             field={field}
                             placeholder={t("ui.auth.password")}
-                            formLabel={t("ui.auth.password")}
+                            label={t("ui.auth.password")}
                             showTogglePassword={true}
                         />
                     )}

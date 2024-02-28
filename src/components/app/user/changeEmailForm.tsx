@@ -67,7 +67,7 @@ export function ChangeEmailForm({
                             field={field}
                             inputType="email"
                             placeholder="Email"
-                            formLabel="Email"
+                            label="Email"
                         />
                     )}
                 />
@@ -79,7 +79,7 @@ export function ChangeEmailForm({
                         <FormPasswordField
                             field={field}
                             placeholder={"Current Password"}
-                            formLabel={"Current Password"}
+                            label={"Current Password"}
                         />
                     )}
                 />

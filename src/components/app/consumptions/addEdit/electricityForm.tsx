@@ -93,7 +93,7 @@ export default function ElectricityForm({
                                 field={field}
                                 inputType="number"
                                 placeholder="Consumption"
-                                formLabel="Consumption"
+                                label="Consumption"
                             />
                         )}
                     />
@@ -105,7 +105,7 @@ export default function ElectricityForm({
                                 field={field}
                                 inputType="number"
                                 placeholder="People in household"
-                                formLabel="People in household"
+                                label="People in household"
                             />
                         )}
                     />
@@ -123,7 +123,7 @@ export default function ElectricityForm({
                                     }),
                                 )}
                                 placeholder="Electricity Source"
-                                formLabel={"Electricity Source"}
+                                label={"Electricity Source"}
                             />
                         )}
                     />
@@ -135,7 +135,7 @@ export default function ElectricityForm({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                formLabel={"Start date"}
+                                label={"Start date"}
                             />
                         )}
                     />
@@ -147,7 +147,7 @@ export default function ElectricityForm({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                formLabel={"End date"}
+                                label={"End date"}
                             />
                         )}
                     />
@@ -160,7 +160,7 @@ export default function ElectricityForm({
                                 field={field}
                                 inputType="number"
                                 placeholder="Costs"
-                                formLabel="Costs"
+                                label="Costs"
                             />
                         )}
                     />

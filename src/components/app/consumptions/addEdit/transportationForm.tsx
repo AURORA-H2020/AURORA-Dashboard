@@ -118,7 +118,7 @@ export default function TransportationForm({
                                 field={field}
                                 inputType="number"
                                 placeholder="Consumption"
-                                formLabel="Consumption"
+                                label="Consumption"
                             />
                         )}
                     />
@@ -136,7 +136,7 @@ export default function TransportationForm({
                                     }),
                                 )}
                                 placeholder="Transportation Type"
-                                formLabel={"Transportation Type"}
+                                label={"Transportation Type"}
                             />
                         )}
                     />
@@ -150,7 +150,7 @@ export default function TransportationForm({
                                     field={field}
                                     inputType="number"
                                     placeholder="Private Vehicle Occupancy"
-                                    formLabel="Private Vehicle Occupancy"
+                                    label="Private Vehicle Occupancy"
                                 />
                             )}
                         />
@@ -170,7 +170,7 @@ export default function TransportationForm({
                                         }),
                                     )}
                                     placeholder="Public Vehicle Occupancy"
-                                    formLabel={"Public Vehicle Occupancy"}
+                                    label={"Public Vehicle Occupancy"}
                                 />
                             )}
                         />
@@ -183,7 +183,7 @@ export default function TransportationForm({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                formLabel={"Start date"}
+                                label={"Start date"}
                             />
                         )}
                     />
@@ -195,7 +195,7 @@ export default function TransportationForm({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                formLabel={"End date"}
+                                label={"End date"}
                                 showClearButton={true}
                             />
                         )}

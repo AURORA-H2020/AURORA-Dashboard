@@ -2,6 +2,7 @@ import { FormControl, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { ControllerRenderProps } from "react-hook-form";
 import { FormItem, FormLabel } from "../ui/form";
+import { cn } from "@/lib/utilities";
 
 type InputTypes = "number" | "text" | "email";
 
@@ -9,15 +10,17 @@ const FormInputField = ({
     field,
     inputType,
     placeholder,
-    formLabel,
+    label,
+    className,
 }: {
     field: ControllerRenderProps<any, any>;
     inputType: InputTypes;
     placeholder: string;
-    formLabel: string;
+    label?: string;
+    className?: string;
 }) => (
-    <FormItem>
-        <FormLabel>{formLabel}</FormLabel>
+    <FormItem className={cn(className)}>
+        {label && <FormLabel>{label}</FormLabel>}
         <FormControl>
             <Input
                 type={inputType}

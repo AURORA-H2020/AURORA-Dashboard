@@ -1,3 +1,4 @@
+import { ControllerRenderProps } from "react-hook-form";
 import { FormItem, FormLabel, FormMessage } from "../ui/form";
 import {
     Select,
@@ -11,11 +12,17 @@ const FormSelect = ({
     field,
     options,
     placeholder,
-    formLabel,
+    label,
     disabled = false,
+}: {
+    field: ControllerRenderProps<any, any>;
+    options: { value: string; label: string }[];
+    placeholder: string;
+    label?: string;
+    disabled?: boolean;
 }) => (
     <FormItem>
-        <FormLabel>{formLabel}</FormLabel>
+        {label && <FormLabel>{label}</FormLabel>}
         <Select
             onValueChange={field.onChange}
             value={field.value}

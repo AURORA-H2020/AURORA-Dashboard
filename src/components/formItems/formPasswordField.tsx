@@ -10,21 +10,23 @@ import { FormItem, FormLabel } from "../ui/form";
 const FormPasswordField = ({
     field,
     placeholder,
-    formLabel,
+    label,
     showTogglePassword = false,
 }: {
     field: ControllerRenderProps<any, any>;
     placeholder: string;
-    formLabel: string;
+    label?: string;
     showTogglePassword?: boolean;
 }) => {
     const [showPassword, setShowPassword] = useState(false);
 
     return (
         <FormItem>
-            <FormLabel>
-                <Strong>{formLabel}</Strong>
-            </FormLabel>
+            {label && (
+                <FormLabel>
+                    <Strong>{label}</Strong>
+                </FormLabel>
+            )}
             <FormControl>
                 <div className="relative">
                     <Input
