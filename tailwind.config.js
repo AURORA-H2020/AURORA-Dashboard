@@ -204,6 +204,7 @@ export const safelist = [
         "[#F1BD40]", // E
         "[#DC6E2D]", // F
         "[#D02E26]", // G
+        "[#8F8E94]", // ? (no label)
         "[#FDDD09]", // electricity
         "[#1E84FD]", // transportation
         "[#F5473D]", // heating
