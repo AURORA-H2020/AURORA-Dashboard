@@ -18,11 +18,11 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAuthContext } from "@/context/AuthContext";
-import { deleteConsumption } from "@/firebase/consumption/deleteConsumption";
+import { deleteDocumentById } from "@/firebase/firestore/deleteDocumentById";
 import { getConsumptionAttributes } from "@/lib/utilities";
 import { RecurringConsumptionWithID } from "@/models/extensions";
-import { Flex, Heading, Text } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
+import { Box, Flex, Heading, Text } from "@radix-ui/themes";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
 import AddEditRecurringConsumptionModal from "./addEdit/addEditRecurringConsumptionModal";
@@ -42,6 +42,7 @@ export default function RecurringConsumptionPreview({
     recurringConsumption: RecurringConsumptionWithID;
 }): JSX.Element {
     const t = useTranslations();
+    const format = useFormatter();
 
     const { user } = useAuthContext();
 
@@ -72,7 +73,11 @@ export default function RecurringConsumptionPreview({
         setAlertOpen(false);
         setModalOpen(false);
 
-        deleteConsumption(user, recurringConsumption.id).then((success) => {
+        deleteDocumentById(
+            user,
+            recurringConsumption.id,
+            "recurring-consumptions",
+        ).then((success) => {
             if (success) {
                 toast.success("The consumption has been deleted");
             } else {

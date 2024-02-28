@@ -6,9 +6,10 @@ import { FirebaseConstants } from "../firebase-constants";
 // Initialize Firestore
 const firestore = getFirestore(firebaseApp);
 
-export const deleteConsumption = async (
+export const deleteDocumentById = async (
     user: User | null,
-    consumptionId: string,
+    documentId: string,
+    collectionName: "consumptions" | "recurring-consumptions",
 ) => {
     let success = false;
     if (user) {
@@ -16,13 +17,13 @@ export const deleteConsumption = async (
             firestore,
             FirebaseConstants.collections.users.name,
             user.uid,
-            FirebaseConstants.collections.users.consumptions.name,
+            collectionName,
         );
         try {
-            const docRef = doc(consumptionRef, consumptionId);
+            const docRef = doc(consumptionRef, documentId);
             await deleteDoc(docRef);
             success = true;
-            console.log(`Document with ID ${consumptionId} deleted`);
+            console.log(`Document at ${collectionName}/${documentId} deleted`);
         } catch (error) {
             console.error("Error deleting document: ", error);
         }

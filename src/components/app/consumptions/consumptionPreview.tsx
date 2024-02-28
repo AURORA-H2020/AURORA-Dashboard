@@ -19,7 +19,7 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Separator } from "@/components/ui/separator";
 import { useAuthContext } from "@/context/AuthContext";
-import { deleteConsumption } from "@/firebase/consumption/deleteConsumption";
+import { deleteDocumentById } from "@/firebase/firestore/deleteDocumentById";
 import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
 import { getConsumptionAttributes } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
@@ -74,13 +74,15 @@ export default function ConsumptionPreview({
         setAlertOpen(false);
         setModalOpen(false);
 
-        deleteConsumption(user, consumption.id).then((success) => {
-            if (success) {
-                toast.success("The consumption has been deleted");
-            } else {
-                toast.error("An error occurred deleting your consumption");
-            }
-        });
+        deleteDocumentById(user, consumption.id, "consumptions").then(
+            (success) => {
+                if (success) {
+                    toast.success("The consumption has been deleted");
+                } else {
+                    toast.error("An error occurred deleting your consumption");
+                }
+            },
+        );
     };
 
     return (
