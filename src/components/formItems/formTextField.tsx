@@ -3,12 +3,11 @@ import {
     FormDescription,
     FormMessage,
 } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { ControllerRenderProps } from "react-hook-form";
 import { FormItem, FormLabel } from "../ui/form";
 import { Textarea } from "../ui/textarea";
 
-const FormInputField = ({
+const FormTextField = ({
     field,
     placeholder,
     label,
@@ -33,4 +32,4 @@ const FormInputField = ({
     </FormItem>
 );
 
-export default FormInputField;
+export default FormTextField;

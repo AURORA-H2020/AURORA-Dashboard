@@ -1,6 +1,7 @@
 import FormInputField from "@/components/formItems/formInputField";
 import FormSelect from "@/components/formItems/formSelect";
 import FormSwitch from "@/components/formItems/formSwitch";
+import FormTextField from "@/components/formItems/formTextField";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
@@ -224,11 +225,10 @@ export default function RecurringTransportationForm({
                         control={form.control}
                         name="description"
                         render={({ field }) => (
-                            <FormInputField
+                            <FormTextField
                                 field={field}
-                                inputType="text"
                                 placeholder="Description"
-                                formLabel="Description"
+                                label="Description"
                             />
                         )}
                     />

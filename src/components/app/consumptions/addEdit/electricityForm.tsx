@@ -1,6 +1,7 @@
 import FormDatePicker from "@/components/formItems/formDatePicker";
 import FormInputField from "@/components/formItems/formInputField";
 import FormSelect from "@/components/formItems/formSelect";
+import FormTextField from "@/components/formItems/formTextField";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
@@ -160,6 +161,18 @@ export default function ElectricityForm({
                                 inputType="number"
                                 placeholder="Costs"
                                 formLabel="Costs"
+                            />
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="description"
+                        render={({ field }) => (
+                            <FormTextField
+                                field={field}
+                                placeholder="Description"
+                                label="Description"
                             />
                         )}
                     />
