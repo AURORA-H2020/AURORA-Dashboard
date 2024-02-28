@@ -24,11 +24,39 @@ export const recurringTransportationFormSchema = (
     z.object({
         createdAt: TimestampSchema,
         isEnabled: z.boolean(),
-        frequency: z.object({
-            unit: z.enum(["daily", "weekly", "monthly"]),
-            weekdays: z.array(z.coerce.number().min(0).max(6)).optional(),
-            dayOfMonth: z.coerce.number().min(1).max(31).optional(),
-        }),
+        frequency: z
+            .object({
+                unit: z.enum(["daily", "weekly", "monthly"]),
+                weekdays: z.array(z.coerce.number().min(0).max(6)).optional(),
+                dayOfMonth: z.coerce.number().min(1).max(31).optional(),
+            })
+            .refine(
+                (data) => {
+                    if (data.unit === "weekly") {
+                        return (
+                            data.weekdays !== undefined &&
+                            data.weekdays.length > 0
+                        );
+                    }
+                    return true;
+                },
+                {
+                    message: "Please select at least one weekday",
+                    path: ["weekdays"],
+                },
+            )
+            .refine(
+                (data) => {
+                    if (data.unit === "monthly") {
+                        return data.dayOfMonth !== undefined;
+                    }
+                    return true;
+                },
+                {
+                    message: "Please select a day of the month",
+                    path: ["dayOfMonth"],
+                },
+            ),
         category: z.literal("transportation"),
         transportation: z
             .object({
