@@ -1,6 +1,11 @@
 "use client";
 
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import {
+    Dialog,
+    DialogContent,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { consumptionMapping } from "@/lib/constants";
@@ -34,43 +39,15 @@ export default function AddEditRecurringConsumptionModal({
             <Dialog open={isModalOpen} onOpenChange={handleCloseModal}>
                 <DialogContent className="sm:max-w-lg p-0">
                     <ScrollArea className="max-h-[80vh] p-6">
-                        <Tabs
-                            value={currentTab}
-                            onValueChange={(value) =>
-                                setCurrentTab(value as ConsumptionCategory)
-                            }
-                        >
-                            {!recurringConsumption && (
-                                <div className="overflow-x-auto">
-                                    <TabsList className="w-full my-6">
-                                        {consumptionMapping.map(
-                                            (consumption) => (
-                                                <TabsTrigger
-                                                    key={consumption.category}
-                                                    value={consumption.category}
-                                                    className="w-full"
-                                                >
-                                                    {t(consumption.label)}
-                                                </TabsTrigger>
-                                            ),
-                                        )}
-                                    </TabsList>
-                                </div>
-                            )}
-
-                            <TabsContent value="electricity" className="p-2">
-                                Not implemented
-                            </TabsContent>
-                            <TabsContent value="heating" className="p-2">
-                                Not implemented
-                            </TabsContent>
-                            <TabsContent value="transportation" className="p-2">
-                                <RecurringTransportationForm
-                                    recurringConsumption={recurringConsumption}
-                                    onFormSubmit={handleCloseModal}
-                                />
-                            </TabsContent>
-                        </Tabs>
+                        <DialogHeader>
+                            <DialogTitle>Recurring Transportation</DialogTitle>
+                        </DialogHeader>
+                        <div className="p-2">
+                            <RecurringTransportationForm
+                                recurringConsumption={recurringConsumption}
+                                onFormSubmit={handleCloseModal}
+                            />
+                        </div>
                     </ScrollArea>
                 </DialogContent>
             </Dialog>
