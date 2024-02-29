@@ -4,7 +4,13 @@ import { CalendarIcon, XIcon } from "lucide-react";
 import { useFormatter } from "next-intl";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
-import { FormControl, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+    FormControl,
+    FormDescription,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "../ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { ControllerRenderProps } from "react-hook-form";
 
@@ -12,6 +18,7 @@ const FormDatePicker = ({
     field,
     placeholder,
     label,
+    description,
     showClearButton = false,
     minDate = new Date("1990-01-01"),
     maxDate = new Date("2030-01-01"),
@@ -19,6 +26,7 @@ const FormDatePicker = ({
     field: ControllerRenderProps<any, any>;
     placeholder: string;
     label?: string;
+    description?: string;
     showClearButton?: boolean;
     minDate?: Date;
     maxDate?: Date;
@@ -28,6 +36,7 @@ const FormDatePicker = ({
     return (
         <FormItem>
             {label && <FormLabel>{label}</FormLabel>}
+            {description && <FormDescription>{description}</FormDescription>}
             <Popover>
                 <PopoverTrigger asChild>
                     <FormControl>
