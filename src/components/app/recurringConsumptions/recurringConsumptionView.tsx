@@ -1,7 +1,9 @@
 import { RecurringConsumptionWithID } from "@/models/extensions";
 
 import { Table, TableBody } from "@/components/ui/table";
-import ConsumptionTableRow from "../consumptions/consumptionTableRow";
+import { weekdays } from "@/lib/constants";
+import { useFormatter, useTranslations } from "next-intl";
+import ConsumptionTableRow from "../common/consumptionTableRow";
 
 /**
  * Renders a view displaying various attributes of a user's consumption
@@ -10,13 +12,23 @@ import ConsumptionTableRow from "../consumptions/consumptionTableRow";
  * @param {Consumption} consumption - The consumption data to display
  * @return {JSX.Element} A React component that renders consumption data
  */
-export default function RecurringConsumptionView({
+const RecurringConsumptionView = ({
     recurringConsumption,
 }: {
     recurringConsumption: RecurringConsumptionWithID;
-}): JSX.Element {
+}): JSX.Element => {
+    const t = useTranslations();
+    const format = useFormatter();
+
     return (
         <>
+            <Table className="mt-4 table-fixed">
+                <ConsumptionTableRow merged={true} className="font-bold">
+                    {recurringConsumption.isEnabled
+                        ? t("app.recurringConsumption.enabled")
+                        : t("app.recurringConsumption.disabled")}
+                </ConsumptionTableRow>
+            </Table>
             <Table className="mt-4 table-fixed">
                 <TableBody>
                     <ConsumptionTableRow label="Distance">
@@ -24,61 +36,77 @@ export default function RecurringConsumptionView({
                     </ConsumptionTableRow>
 
                     <ConsumptionTableRow label="Created At">
-                        {recurringConsumption.createdAt
-                            ?.toDate()
-                            .toDateString() || ""}
+                        {format.dateTime(
+                            recurringConsumption.createdAt?.toDate(),
+                        )}
                     </ConsumptionTableRow>
                     <ConsumptionTableRow label="Frequency">
-                        {JSON.stringify(recurringConsumption.frequency)}
+                        {t(
+                            `app.recurringConsumption.frequency.${recurringConsumption.frequency.unit}`,
+                        )}
                     </ConsumptionTableRow>
-                    <ConsumptionTableRow label="Enabled">
-                        {recurringConsumption.isEnabled.toString()}
-                    </ConsumptionTableRow>
+                    {recurringConsumption.frequency.dayOfMonth && (
+                        <ConsumptionTableRow label="Day of Month">
+                            {recurringConsumption.frequency.dayOfMonth}
+                        </ConsumptionTableRow>
+                    )}
+                    {recurringConsumption.frequency.weekdays && (
+                        <ConsumptionTableRow label="Weekdays">
+                            {recurringConsumption.frequency.weekdays
+                                ?.map((day) => t(weekdays[day].label))
+                                .join(", ")}
+                        </ConsumptionTableRow>
+                    )}
                 </TableBody>
             </Table>
 
             {recurringConsumption.transportation ? (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
-                        <ConsumptionTableRow label="Hour of travel">
-                            {recurringConsumption.transportation.hourOfTravel}
-                        </ConsumptionTableRow>
-
-                        <ConsumptionTableRow label="Minute of travel">
-                            {recurringConsumption.transportation.minuteOfTravel}
+                        <ConsumptionTableRow label="Time of travel">
+                            {format.dateTime(
+                                new Date().setHours(
+                                    recurringConsumption.transportation
+                                        .hourOfTravel,
+                                    recurringConsumption.transportation
+                                        .minuteOfTravel,
+                                ),
+                                {
+                                    hour: "numeric",
+                                    minute: "numeric",
+                                },
+                            )}
                         </ConsumptionTableRow>
 
                         <ConsumptionTableRow label="Transportation type">
-                            {
-                                recurringConsumption.transportation
-                                    .transportationType
-                            }
+                            {t(
+                                `category.sources.${recurringConsumption.transportation.transportationType}`,
+                            )}
                         </ConsumptionTableRow>
 
                         {recurringConsumption.transportation
-                            .privateVehicleOccupancy ? (
+                            .privateVehicleOccupancy && (
                             <ConsumptionTableRow label="Occupancy">
                                 {
                                     recurringConsumption.transportation
                                         .privateVehicleOccupancy
                                 }
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
 
                         {recurringConsumption.transportation
-                            .publicVehicleOccupancy ? (
+                            .publicVehicleOccupancy && (
                             <ConsumptionTableRow label="Occupancy">
-                                {
-                                    recurringConsumption.transportation
-                                        .publicVehicleOccupancy
-                                }
+                                {t(
+                                    `app.consumption.publicVehicleOccupancy.${recurringConsumption.transportation.publicVehicleOccupancy}`,
+                                )}
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
                     </TableBody>
                 </Table>
             ) : null}
 
-            {recurringConsumption.description ? (
+            {recurringConsumption.description && (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
                         <ConsumptionTableRow merged={true}>
@@ -86,17 +114,9 @@ export default function RecurringConsumptionView({
                         </ConsumptionTableRow>
                     </TableBody>
                 </Table>
-            ) : null}
-
-            <Table className="mt-4 mb-4 table-fixed">
-                <TableBody>
-                    <ConsumptionTableRow label="Created At">
-                        {recurringConsumption.createdAt
-                            ?.toDate()
-                            .toDateString() || ""}
-                    </ConsumptionTableRow>
-                </TableBody>
-            </Table>
+            )}
         </>
     );
-}
+};
+
+export default RecurringConsumptionView;

@@ -1,12 +1,9 @@
 import { ConsumptionWithID } from "@/models/extensions";
 
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
-import {
-    carbonUnit,
-    consumptionMapping,
-    kiloGramNumberFormatter,
-} from "@/lib/constants";
-import ConsumptionTableRow from "./consumptionTableRow";
+import { carbonUnit, consumptionMapping } from "@/lib/constants";
+import { useFormatter, useTranslations } from "next-intl";
+import ConsumptionTableRow from "../common/consumptionTableRow";
 
 /**
  * Renders a view displaying various attributes of a user's consumption
@@ -15,11 +12,14 @@ import ConsumptionTableRow from "./consumptionTableRow";
  * @param {Consumption} consumption - The consumption data to display
  * @return {JSX.Element} A React component that renders consumption data
  */
-export default function ConsumptionView({
+const ConsumptionView = ({
     consumption,
 }: {
     consumption: ConsumptionWithID;
-}): JSX.Element {
+}): JSX.Element => {
+    const t = useTranslations();
+    const format = useFormatter();
+
     const consumptionAttributes = consumptionMapping.find(
         (c) => c.category == consumption.category,
     );
@@ -29,40 +29,17 @@ export default function ConsumptionView({
             <Table className="mt-4 table-fixed">
                 <TableBody>
                     <ConsumptionTableRow
-                        label={consumptionAttributes?.unitLabel ?? ""}
+                        label={t(consumptionAttributes?.unitLabel) ?? ""}
                     >
-                        {consumption.carbonEmissions ? (
-                            <>
-                                {consumption.value
-                                    ? Math.round(
-                                          consumption.energyExpended || 0,
-                                      ) +
-                                      " " +
-                                      String(consumptionAttributes?.unit)
-                                    : ""}
-                            </>
-                        ) : (
-                            "Calculating..."
-                        )}{" "}
+                        {format.number(consumption.value) +
+                            " " +
+                            consumptionAttributes?.unit}
                     </ConsumptionTableRow>
                     <ConsumptionTableRow label="CO2-Emissions">
-                        {consumption.carbonEmissions ? (
-                            <>
-                                {kiloGramNumberFormatter.format(
-                                    consumption.carbonEmissions,
-                                )}
-                                {carbonUnit}
-                            </>
-                        ) : (
-                            "Calculating..."
-                        )}{" "}
-                    </ConsumptionTableRow>
-
-                    <ConsumptionTableRow label="Created At">
-                        {consumption.createdAt?.toDate().toDateString() || ""}
-                    </ConsumptionTableRow>
-                    <ConsumptionTableRow label="Updated At">
-                        {consumption.updatedAt?.toDate().toDateString() || ""}
+                        {consumption.carbonEmissions
+                            ? format.number(consumption.carbonEmissions) +
+                              carbonUnit
+                            : t("common.calculating")}
                     </ConsumptionTableRow>
                 </TableBody>
             </Table>
@@ -70,27 +47,29 @@ export default function ConsumptionView({
             {consumption.electricity ? (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
-                        {consumption.electricity.costs ? (
+                        {consumption.electricity.costs && (
                             <ConsumptionTableRow label="Costs">
                                 {consumption.electricity.costs}
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
 
                         <ConsumptionTableRow label="People in household">
                             {consumption.electricity.householdSize}
                         </ConsumptionTableRow>
                         <ConsumptionTableRow label="Electricity source">
-                            {consumption.electricity.electricitySource}
+                            {t(
+                                `category.sources.${consumption.electricity.electricitySource}`,
+                            )}
                         </ConsumptionTableRow>
                         <ConsumptionTableRow label="Beginning">
-                            {consumption.electricity.startDate
-                                ?.toDate()
-                                .toDateString()}
+                            {format.dateTime(
+                                consumption.electricity.startDate.toDate(),
+                            )}
                         </ConsumptionTableRow>
                         <ConsumptionTableRow label="End">
-                            {consumption.electricity.endDate
-                                ?.toDate()
-                                .toDateString()}
+                            {format.dateTime(
+                                consumption.electricity.endDate.toDate(),
+                            )}
                         </ConsumptionTableRow>
                     </TableBody>
                 </Table>
@@ -99,82 +78,87 @@ export default function ConsumptionView({
             {consumption.heating ? (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
-                        {consumption.heating.costs ? (
+                        {consumption.heating.costs && (
                             <ConsumptionTableRow label="Costs">
                                 {consumption.heating.costs}
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
 
                         <ConsumptionTableRow label="People in household">
                             {consumption.heating.householdSize}
                         </ConsumptionTableRow>
                         <ConsumptionTableRow label="Heating source">
-                            {consumption.heating.heatingFuel}
+                            {t(
+                                `category.sources.${consumption.heating.heatingFuel}`,
+                            )}
                         </ConsumptionTableRow>
 
-                        {consumption.heating.districtHeatingSource ? (
+                        {consumption.heating.districtHeatingSource && (
                             <ConsumptionTableRow label="District heating fuel">
-                                {consumption.heating.districtHeatingSource}
+                                {t(
+                                    `category.sources.${consumption.heating.districtHeatingSource}`,
+                                )}
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
 
                         <ConsumptionTableRow label="Beginning">
-                            {consumption.heating.startDate
-                                ?.toDate()
-                                .toDateString()}
+                            {format.dateTime(
+                                consumption.heating.startDate?.toDate(),
+                            )}
                         </ConsumptionTableRow>
                         <ConsumptionTableRow label="End">
-                            {consumption.heating.startDate
-                                ?.toDate()
-                                .toDateString()}
+                            {format.dateTime(
+                                consumption.heating.startDate?.toDate(),
+                            )}
                         </ConsumptionTableRow>
                     </TableBody>
                 </Table>
             ) : null}
 
-            {consumption.transportation ? (
+            {consumption.transportation && (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
                         <ConsumptionTableRow label="Start of travel">
-                            {consumption.transportation.dateOfTravel
-                                .toDate()
-                                .toDateString()}
+                            {format.dateTime(
+                                consumption.transportation.dateOfTravel.toDate(),
+                            )}
                         </ConsumptionTableRow>
 
                         {consumption.transportation.dateOfTravelEnd ? (
                             <ConsumptionTableRow label="End of travel">
-                                {consumption.transportation.dateOfTravelEnd
-                                    .toDate()
-                                    .toDateString()}
+                                {format.dateTime(
+                                    consumption.transportation.dateOfTravelEnd.toDate(),
+                                )}
                             </ConsumptionTableRow>
                         ) : null}
 
                         <ConsumptionTableRow label="Transportation type">
-                            {consumption.transportation.transportationType}
+                            {t(
+                                `category.sources.${consumption.transportation.transportationType}`,
+                            )}
                         </ConsumptionTableRow>
 
-                        {consumption.transportation.privateVehicleOccupancy ? (
+                        {consumption.transportation.privateVehicleOccupancy && (
                             <ConsumptionTableRow label="Occupancy">
                                 {
                                     consumption.transportation
                                         .privateVehicleOccupancy
                                 }
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
 
-                        {consumption.transportation.publicVehicleOccupancy ? (
+                        {consumption.transportation.publicVehicleOccupancy && (
                             <ConsumptionTableRow label="Occupancy">
-                                {
-                                    consumption.transportation
-                                        .publicVehicleOccupancy
-                                }
+                                {t(
+                                    `app.consumption.publicVehicleOccupancy.${consumption.transportation.publicVehicleOccupancy}`,
+                                )}
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
                     </TableBody>
                 </Table>
-            ) : null}
+            )}
 
-            {consumption.description ? (
+            {consumption.description && (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
                         <ConsumptionTableRow merged={true}>
@@ -182,23 +166,29 @@ export default function ConsumptionView({
                         </ConsumptionTableRow>
                     </TableBody>
                 </Table>
-            ) : null}
+            )}
 
             <Table className="mt-4 mb-4 table-fixed">
                 <TableBody>
                     <ConsumptionTableRow label="Created At">
-                        {consumption.createdAt?.toDate().toDateString() || ""}
+                        {format.dateTime(consumption.createdAt.toDate())}
                     </ConsumptionTableRow>
-                    <ConsumptionTableRow label="Updated At">
-                        {consumption.updatedAt?.toDate().toDateString() || ""}
-                    </ConsumptionTableRow>
+                    {consumption.updatedAt && (
+                        <ConsumptionTableRow label="Updated At">
+                            {format.dateTime(consumption.updatedAt?.toDate())}
+                        </ConsumptionTableRow>
+                    )}
                 </TableBody>
-                <TableCaption>
-                    {consumption.generatedByRecurringConsumptionId
-                        ? "This entry was automatically added via recurring consumptions."
-                        : null}
-                </TableCaption>
+
+                {consumption.generatedByRecurringConsumptionId && (
+                    <TableCaption>
+                        This entry was automatically added via recurring
+                        consumptions.
+                    </TableCaption>
+                )}
             </Table>
         </>
     );
-}
+};
+
+export default ConsumptionView;

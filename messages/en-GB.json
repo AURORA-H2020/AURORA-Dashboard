@@ -186,7 +186,8 @@
       "friday": "Friday",
       "saturday": "Saturday",
       "sunday": "Sunday"
-    }
+    },
+    "calculating": "Calculating..."
   },
   "country": {
     "allSelectedCountries": "All selected countries",

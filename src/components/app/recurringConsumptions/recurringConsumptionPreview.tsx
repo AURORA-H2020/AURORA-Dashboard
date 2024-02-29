@@ -36,11 +36,11 @@ import RecurringConsumptionView from "./recurringConsumptionView";
  * @return {JSX.Element} A JSX element that includes the consumption
  * card with modals for detailed view and deletion confirmation.
  */
-export default function RecurringConsumptionPreview({
+const RecurringConsumptionPreview = ({
     recurringConsumption,
 }: {
     recurringConsumption: RecurringConsumptionWithID;
-}): JSX.Element {
+}): JSX.Element => {
     const t = useTranslations();
     const format = useFormatter();
 
@@ -157,8 +157,7 @@ export default function RecurringConsumptionPreview({
                                 recurringConsumption={recurringConsumption}
                             />
 
-                            <DialogFooter>
-                                {/* TODO: Add duplicate button functionality */}
+                            <DialogFooter className="mt-4">
                                 <Flex
                                     justify="between"
                                     className="gap-2 w-full"
@@ -179,9 +178,6 @@ export default function RecurringConsumptionPreview({
                                                 {t("common.edit")}
                                             </Button>
                                         </AddEditRecurringConsumptionModal>
-                                        <Button variant="outline">
-                                            {t("common.duplicate")}
-                                        </Button>
                                     </Flex>
                                 </Flex>
                             </DialogFooter>
@@ -217,4 +213,6 @@ export default function RecurringConsumptionPreview({
             </AlertDialog>
         </>
     );
-}
+};
+
+export default RecurringConsumptionPreview;

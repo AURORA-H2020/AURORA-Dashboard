@@ -17,14 +17,13 @@ import {
     DialogTitle,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { useAuthContext } from "@/context/AuthContext";
 import { deleteDocumentById } from "@/firebase/firestore/deleteDocumentById";
-import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
+import { carbonUnit } from "@/lib/constants";
 import { getConsumptionAttributes } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Flex, Heading, Text } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
 import AddEditConsumptionModal from "./addEdit/addEditConsumptionModal";
@@ -38,12 +37,14 @@ import ConsumptionView from "./consumptionView";
  * @return {JSX.Element} A JSX element that includes the consumption
  * card with modals for detailed view and deletion confirmation.
  */
-export default function ConsumptionPreview({
+const ConsumptionPreview = ({
     consumption,
 }: {
     consumption: ConsumptionWithID;
-}): JSX.Element {
+}): JSX.Element => {
     const t = useTranslations();
+
+    const format = useFormatter();
 
     const { user } = useAuthContext();
 
@@ -97,24 +98,25 @@ export default function ConsumptionPreview({
                             openModal();
                         }}
                     >
-                        <Flex direction={"column"}>
+                        <Flex direction={"row"} gap="4">
                             <div
                                 className={`bg-[${consumptionAttributes?.colorPrimary}] bg-opacity-20 rounded-full flex items-center justify-center w-12 h-12 text-[${consumptionAttributes?.colorPrimary}]`}
                             >
                                 {consumptionAttributes?.icon}
                             </div>
-                        </Flex>
-                        <Flex direction={"column"}>
-                            <Heading as="h3" size={"4"}>
-                                {consumption.category}
-                            </Heading>
-                            <Text>
-                                {consumption.updatedAt
-                                    ? consumption.updatedAt
-                                          .toDate()
-                                          .toDateString()
-                                    : ""}
-                            </Text>
+
+                            <Flex direction={"column"}>
+                                <Heading as="h3" size={"4"}>
+                                    {t(`category.${consumption.category}`)}
+                                </Heading>
+                                <Text className="text-muted-foreground">
+                                    {consumption.updatedAt
+                                        ? format.dateTime(
+                                              consumption.updatedAt.toDate(),
+                                          )
+                                        : ""}
+                                </Text>
+                            </Flex>
                         </Flex>
                         <Flex direction={"column"} align={"end"}>
                             <Text>
@@ -124,18 +126,17 @@ export default function ConsumptionPreview({
                                       String(consumptionAttributes?.unit)
                                     : ""}
                             </Text>
-                            <Separator className="my-1 w-[50%] self-center" />
                             <Text>
                                 {consumption.carbonEmissions ? (
                                     <>
-                                        {kiloGramNumberFormatter.format(
+                                        {format.number(
                                             consumption.carbonEmissions,
                                         )}
                                         {carbonUnit}
                                     </>
                                 ) : (
-                                    "Calculating..."
-                                )}{" "}
+                                    t("common.calculating")
+                                )}
                             </Text>
                         </Flex>
                     </Flex>
@@ -155,8 +156,7 @@ export default function ConsumptionPreview({
                             </DialogHeader>
                             <ConsumptionView consumption={consumption} />
 
-                            <DialogFooter>
-                                {/* TODO: Add button functionality */}
+                            <DialogFooter className="mt-4">
                                 <Flex
                                     justify="between"
                                     className="gap-2 w-full"
@@ -220,4 +220,6 @@ export default function ConsumptionPreview({
             </AlertDialog>
         </>
     );
-}
+};
+
+export default ConsumptionPreview;

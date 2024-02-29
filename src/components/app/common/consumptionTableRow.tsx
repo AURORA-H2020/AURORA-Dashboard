@@ -1,4 +1,5 @@
 import { TableCell, TableRow } from "@/components/ui/table";
+import { cn } from "@/lib/utilities";
 import React from "react";
 
 // Props when `merged` is not provided or false.
@@ -6,12 +7,14 @@ interface ConsumptionTableRowPropsWithoutMerged {
     label: string;
     children: React.ReactNode;
     merged?: false;
+    className?: string;
 }
 
 // Props when `merged` is true, without the `label`.
 interface ConsumptionTableRowPropsWithMerged {
     children: React.ReactNode;
     merged: true;
+    className?: string;
 }
 
 // Union type of both props scenarios.
@@ -31,11 +34,11 @@ type ConsumptionTableRowProps =
 export default function ConsumptionTableRow(
     props: ConsumptionTableRowProps,
 ): JSX.Element {
-    const { children, merged } = props;
+    const { children, merged, className } = props;
     const label = merged ? null : props.label; // label is ignored if merged is true
 
     return (
-        <TableRow>
+        <TableRow className={cn(className)}>
             {label && (
                 <TableCell className="font-bold w-[40%]">{label}</TableCell>
             )}

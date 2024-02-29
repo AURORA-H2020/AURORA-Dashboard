@@ -1,6 +1,6 @@
 "use client";
 
-import ConsumptionTableRow from "@/components/app/consumptions/consumptionTableRow";
+import ConsumptionTableRow from "@/components/app/common/consumptionTableRow";
 import { ChangeEmailForm } from "@/components/app/user/changeEmailForm";
 import { ChangePasswordForm } from "@/components/app/user/changePasswordForm";
 import EditUserDataModal from "@/components/app/user/editUserDataModal";
