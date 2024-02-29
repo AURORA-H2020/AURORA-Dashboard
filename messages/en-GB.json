@@ -121,7 +121,8 @@
     "and": "and",
     "placeholder": {
       "selectValue": "Select a value"
-    }
+    },
+    "cancel": "Cancel"
   },
   "country": {
     "allSelectedCountries": "All selected countries",
