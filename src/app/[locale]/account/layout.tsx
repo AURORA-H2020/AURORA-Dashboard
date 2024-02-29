@@ -1,3 +1,4 @@
+import { ProtectAccount } from "@/components/hoc/protectAccount";
 import { Heading, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { unstable_setRequestLocale } from "next-intl/server";
@@ -22,10 +23,10 @@ export default function AccountLayout({
     const t = useTranslations();
 
     return (
-        <>
+        <ProtectAccount>
             <Heading>{t("app.account.myAccount")}</Heading>
             <Text>{t("app.account.comingSoon")}</Text>
             <div>{children}</div>
-        </>
+        </ProtectAccount>
     );
 }
