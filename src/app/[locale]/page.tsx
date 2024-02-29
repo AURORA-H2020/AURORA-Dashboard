@@ -63,7 +63,9 @@ export default async function Home({
             <>
                 <Heading as="h1">{t("dashboard.main.title")}</Heading>
 
-                <Dashboard globalSummaryData={globalSummaryData} />
+                <div className="mt-8">
+                    <Dashboard globalSummaryData={globalSummaryData} />
+                </div>
                 <SelectDashboardSource
                     files={fileList}
                     currentFileDate={globalSummaryData?.date}

@@ -29,6 +29,7 @@ export default function AccountLayout({
                         variant={
                             pathname === "/account" ? "default" : "outline"
                         }
+                        asChild
                     >
                         <Link href={"/account"}>Home</Link>
                     </Button>
@@ -38,6 +39,7 @@ export default function AccountLayout({
                                 ? "default"
                                 : "outline"
                         }
+                        asChild
                     >
                         <Link href={"/account/settings"}>Settings</Link>
                     </Button>

@@ -26,6 +26,7 @@ const MenuItems = ({ items, pathname }) => {
                 <Button
                     className="w-full"
                     variant={isActive ? "default" : "outline"}
+                    asChild
                 >
                     <Link href={item.path}>{item.title}</Link>
                 </Button>

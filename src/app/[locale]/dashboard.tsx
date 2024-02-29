@@ -111,46 +111,36 @@ export function Dashboard({
 
     return (
         <>
-            <Card className="mb-6 mt-6">
-                <CardContent className="p-6">
-                    <Flex
-                        direction={{ initial: "column", sm: "row" }}
-                        className="gap-2 gap-x-4"
-                    >
-                        <Select
-                            onValueChange={handleCategoryChange}
-                            defaultValue="all"
-                        >
-                            <SelectTrigger className="w-[180px]">
-                                <SelectValue />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="all">
-                                    {t("dashboard.filter.allCategories")}
-                                </SelectItem>
-                                {consumptionMapping.map((e) => (
-                                    <SelectItem
-                                        key={e.category}
-                                        value={e.category}
-                                    >
-                                        {t(e.label)}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
+            <Flex
+                direction={{ initial: "column", sm: "row" }}
+                className="gap-2 gap-x-4"
+            >
+                <Select onValueChange={handleCategoryChange} defaultValue="all">
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="all">
+                            {t("dashboard.filter.allCategories")}
+                        </SelectItem>
+                        {consumptionMapping.map((e) => (
+                            <SelectItem key={e.category} value={e.category}>
+                                {t(e.label)}
+                            </SelectItem>
+                        ))}
+                    </SelectContent>
+                </Select>
 
-                        <MultipleSelector
-                            defaultOptions={options}
-                            value={selectedCountries}
-                            onChange={setSelectedCountries}
-                            hidePlaceholderWhenSelected={true}
-                            className="bg-background w-full"
-                            badgeClassName="bg-secondary text-secondary-foreground"
-                            placeholder={t("dashboard.filter.selectCountries")}
-                        />
-                    </Flex>
-                </CardContent>
-            </Card>
+                <MultipleSelector
+                    defaultOptions={options}
+                    value={selectedCountries}
+                    onChange={setSelectedCountries}
+                    hidePlaceholderWhenSelected={true}
+                    className="bg-background w-full"
+                    badgeClassName="bg-secondary text-secondary-foreground"
+                    placeholder={t("dashboard.filter.selectCountries")}
+                />
+            </Flex>
 
             {filteredGlobalSummaryData &&
             filteredGlobalSummaryData?.countries.length === 0 ? (
@@ -165,7 +155,7 @@ export function Dashboard({
                             initial: "1",
                             sm: "2",
                         }}
-                        className="gap-6 mt-6 mb-6"
+                        className="gap-4 mt-4 mb-4"
                     >
                         <Card>
                             <CardContent className="p-6">
@@ -206,7 +196,7 @@ export function Dashboard({
                         </Card>
                     </Grid>
 
-                    <Card className="mb-6">
+                    <Card className="mb-4">
                         <CardContent className="p-6">
                             <ConsumptionTimelineChart
                                 globalSummaryData={filteredGlobalSummaryData}
@@ -216,7 +206,7 @@ export function Dashboard({
                         </CardContent>
                     </Card>
 
-                    <Card className="mb-6">
+                    <Card className="mb-4">
                         <CardContent className="p-6">
                             <LabelSummary
                                 globalSummaryData={filteredGlobalSummaryData}
@@ -226,7 +216,7 @@ export function Dashboard({
                         </CardContent>
                     </Card>
 
-                    <Card className="mb-6">
+                    <Card className="mb-4">
                         <CardContent className="p-6">
                             <GenderByCountryChart
                                 metaData={metaData}
@@ -235,7 +225,7 @@ export function Dashboard({
                         </CardContent>
                     </Card>
 
-                    <Card className="mb-6">
+                    <Card className="mb-4">
                         <CardContent className="p-6">
                             <ConsumptionAverageCompare
                                 metaData={metaData}

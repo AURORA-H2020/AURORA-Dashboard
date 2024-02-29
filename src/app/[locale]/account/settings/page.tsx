@@ -35,6 +35,7 @@ import { useFirebaseData } from "@/context/FirebaseContext";
 import { deleteAccount } from "@/firebase/firestore/deleteAccount";
 import { downloadUserData } from "@/firebase/firestore/downloadUserData";
 import { Flex, Grid } from "@radix-ui/themes";
+import Link from "next/link";
 import { User } from "firebase/auth";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -100,10 +101,13 @@ function UserSettings(): JSX.Element {
         }
     };
 
-    if (!user || loading || !userData) {
-        // Render loading indicator until the auth check is complete
-        return <LoadingSpinner />;
-    }
+    if (loading || !user || !userData) return <LoadingSpinner />;
+
+    const supportLink = new URL("https://www.aurora-h2020.eu/app-support/");
+    supportLink.search = new URLSearchParams({
+        user_id: user.uid,
+        country_id: userData.country,
+    }).toString();
 
     // Authenticated user content
     return (
@@ -209,9 +213,16 @@ function UserSettings(): JSX.Element {
                         </CardHeader>
                         <CardContent>
                             <Flex direction={"column"} className="gap-2">
-                                <Button variant={"outline"}>Get the app</Button>
-                                <Button variant={"outline"}>
-                                    Contact support
+                                <Button variant={"outline"} asChild>
+                                    <Link href="https://www.aurora-h2020.eu/aurora/ourapp/">
+                                        Get the app
+                                    </Link>
+                                </Button>
+
+                                <Button variant={"outline"} asChild>
+                                    <Link href={supportLink.href}>
+                                        Contact support
+                                    </Link>
                                 </Button>
                             </Flex>
                         </CardContent>
@@ -222,12 +233,22 @@ function UserSettings(): JSX.Element {
                         </CardHeader>
                         <CardContent>
                             <Flex direction={"column"} className="gap-2">
-                                <Button variant={"outline"}>Imprint</Button>
-                                <Button variant={"outline"}>
-                                    Privacy Policy
+                                <Button variant={"outline"} asChild>
+                                    <Link href="https://www.aurora-h2020.eu/aurora/app-imprint/">
+                                        Imprint
+                                    </Link>
                                 </Button>
-                                <Button variant={"outline"}>
-                                    Terms of Service
+
+                                <Button variant={"outline"} asChild>
+                                    <Link href="https://www.aurora-h2020.eu/aurora/app-privacy-policy/">
+                                        Privacy Policy
+                                    </Link>
+                                </Button>
+
+                                <Button variant={"outline"} asChild>
+                                    <Link href="https://www.aurora-h2020.eu/aurora/app-tos/">
+                                        Terms of Service
+                                    </Link>
                                 </Button>
                             </Flex>
                         </CardContent>
