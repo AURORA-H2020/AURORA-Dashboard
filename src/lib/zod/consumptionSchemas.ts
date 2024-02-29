@@ -118,7 +118,10 @@ export const transportationFormSchema = (
                     ])
                     .optional(),
                 dateOfTravel: TimestampSchema,
-                dateOfTravelEnd: TimestampSchema.optional(),
+                dateOfTravelEnd: z.preprocess(
+                    (date: any) => (date === null ? undefined : date),
+                    TimestampSchema.optional(),
+                ) as z.ZodType<Timestamp | undefined>,
             })
             .refine(
                 (data) => {

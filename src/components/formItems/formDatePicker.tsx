@@ -44,7 +44,7 @@ const FormDatePicker = ({
                                     className="ml-2 h-4 w-4 opacity-50 cursor-pointer"
                                     onClick={(e) => {
                                         e.stopPropagation();
-                                        field.onChange(undefined);
+                                        field.onChange(null);
                                     }}
                                 />
                             )}
