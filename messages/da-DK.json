@@ -1,114 +1,114 @@
 {
   "about": {
     "carbonEmissionLabels": {
-      "title": "",
-      "description": ""
+      "title": "CO₂-udledningsmærker",
+      "description": "De data, vi bruger til at beregne mærket for CO2-udledning i {countryName}."
     },
     "energyExpendedLabels": {
-      "title": "",
-      "description": ""
+      "title": "Dine energimærker",
+      "description": "De data, vi bruger til at beregne mærket for energiforbrug i {countryName}."
     },
     "metrics": {
-      "title": "",
-      "description": ""
+      "title": "Målesystemer",
+      "description": "De data, vi bruger til at beregne CO2-udledning og energiforbrug baseret på brugerdata i {countryName}."
     },
-    "downloadMetrics": "",
+    "downloadMetrics": "Download metrik",
     "countryData": {
-      "title": "",
-      "description": ""
+      "title": "App-målinger og mærkedata",
+      "description": "Til støtte for Open Science offentliggør AURORA hermed de målinger, som Energy Tracker bruger til at beregne <Strong>CO2-udledning</Strong>, <Strong>energiforbrug</Strong> og <Strong>energimærker</Strong>."
     },
     "downloads": {
-      "title": "",
-      "description": ""
+      "title": "Download data",
+      "description": "Vi tilbyder ovenstående metrik og labeldata til download."
     }
   },
   "toast": {
     "dataDownload": {
-      "success": "",
-      "error": ""
+      "success": "Dine data er blevet downloadet. ",
+      "error": "Dine data kunne ikke downloades"
     },
     "auth": {
-      "success": "",
-      "error": ""
+      "success": "Velkommen til AURORA",
+      "error": "Der opstod en fejl. Prøv venligst igen."
     }
   },
   "button": {
-    "downloadPending": ""
+    "downloadPending": "Download er i gang. "
   },
   "dashboard": {
     "filter": {
-      "allCategories": "",
-      "selectCountries": "",
-      "invalidData": "",
-      "absolute": "",
-      "relative": ""
+      "allCategories": "Alle kategorier",
+      "selectCountries": "Vælg lande",
+      "invalidData": "Ingen data matcher de valgte filtre.",
+      "absolute": "Absolut",
+      "relative": "Relativ"
     },
     "card": {
-      "userCount": "",
-      "individualConsumptions": "",
-      "invalidDateRange": ""
+      "userCount": "Samlet antal brugere af appen",
+      "individualConsumptions": "Samlet antal individuelle forbrug",
+      "invalidDateRange": "Vælg venligst et gyldigt datointerval"
     },
     "consumptionTimeline": {
-      "title": ""
+      "title": "Tidslinje for forbrug: Gennemsnit pr. bruger"
     },
     "energylabels": {
-      "title": "",
-      "description": ""
+      "title": "Energimærker",
+      "description": "AURORA-projektet har designet et sæt mærker, som giver borgerne en klar forståelse af deres nuværende energiprofil. Et separat sæt mærker er tildelt for energiforbrug og CO2 udledning."
     },
     "genderDistribution": {
-      "title": ""
+      "title": "Kønsfordeling"
     },
     "averageCompare": {
-      "title": ""
+      "title": "Gennemsnitligt forbrug pr. bruger"
     },
     "main": {
-      "title": ""
+      "title": "Energy Tracker: Dashboard"
     },
     "autoReport": {
       "reportSnippets": {
-        "accountsCreated": "",
-        "genderDistribution": "",
-        "totalConsumptions": "",
-        "consumptionBreakdown": "",
-        "totalEmissions": "",
-        "emissionsByCategory": ""
+        "accountsCreated": "For {lande} er der {userCount} oprettet konti.",
+        "genderDistribution": "Af disse brugere identificerer {femaleCount} sig som kvinde, {maleCount} som mand, {nonBinaryCount} som ikke-binær og {otherCount} som andet.",
+        "totalConsumptions": "I alt har disse brugere oprettet {totalConsumptions}-forbrug.",
+        "consumptionBreakdown": "{transportationCount} er relateret til transport, {electricityCount} til elektricitet og {heatingCount} til opvarmning.",
+        "totalEmissions": "Det svarer til i alt {totalEmissions}{unit} CO2 udledninger eller {totalEnergy} kWh energi.",
+        "emissionsByCategory": "{transportEmissions}{unit} er fra transport ({transportEnergy} kWh), {electricityEmissions}{unit} fra elektricitet ({electricityEnergy} kWh), og {heatingEmissions}{unit} fra opvarmning ({heatingEnergy} kWh)."
       },
-      "title": ""
+      "title": "Rapport"
     },
     "snapshots": {
-      "lastUpdated": "",
-      "selectSnapshot": "",
-      "downloadSnapshot": ""
+      "lastUpdated": "De viste data blev sidst opdateret",
+      "selectSnapshot": "Vælg et andet snapshot",
+      "downloadSnapshot": "Download dette snapshot"
     }
   },
   "error": {
-    "title": "",
+    "title": "Der opstod en fejl",
     "notFound": {
-      "title": "",
-      "description": ""
+      "title": "Ikke fundet",
+      "description": "Den side, du leder efter, kunne ikke findes."
     },
-    "noData": ""
+    "noData": "Ingen data tilgængelig"
   },
   "metadata": {
-    "title": "",
-    "description": ""
+    "title": "AURORA Energy Tracker: Dashboard",
+    "description": "Se de seneste statistikker i AURORA Energy Trackers mobilapp."
   },
   "ui": {
     "auth": {
-      "orContinueWith": "",
-      "signIn": "",
-      "signUp": "",
-      "signInPrompt": "",
-      "signUpPrompt": "",
+      "orContinueWith": "Eller fortsæt med",
+      "signIn": "Log ind",
+      "signUp": "Tilmeld dig",
+      "signInPrompt": "Log ind på din AURORA Energy Tracker-konto.",
+      "signUpPrompt": "Tilmeld dig AURORA Energy Tracker.",
       "signInWithApple": "Log ind med Apple",
-      "signUpWithApple": "",
+      "signUpWithApple": "Tilmeld dig med Apple",
       "signInWithGoogle": "Log ind med Google",
-      "signUpWithGoogle": "",
+      "signUpWithGoogle": "Tilmeld dig med Google",
       "email": "E-mail",
       "password": "Adgangskode"
     },
     "datePicker": {
-      "selectDateRange": ""
+      "selectDateRange": "Vælg et gyldigt datointerval"
     },
     "monthPicker": {
       "start": "Starten",
@@ -116,47 +116,48 @@
     }
   },
   "common": {
-    "co2emission": "",
-    "energyUsage": "",
-    "and": "",
+    "co2emission": "CO<sub>2</sub>-udledninger",
+    "energyUsage": "Energiforbrug",
+    "and": "og",
     "placeholder": {
-      "selectValue": ""
-    }
+      "selectValue": "Vælg en værdi"
+    },
+    "cancel": "Annuller"
   },
   "country": {
-    "allSelectedCountries": "",
+    "allSelectedCountries": "Alle udvalgte lande",
     "denmark": "Danmark",
     "portugal": "Portugal",
     "slovenia": "Slovenien",
-    "spain": "",
+    "spain": "Spanien",
     "unitedKingdom": "Storbritannien",
-    "zeuropeOther": ""
+    "zeuropeOther": "Andre lande i EU"
   },
   "footer": {
-    "auroraWebsite": "",
-    "iosApp": "",
-    "androidApp": "",
-    "fundingNotice": ""
+    "auroraWebsite": "AURORAs hjemmeside",
+    "iosApp": "iOS-app",
+    "androidApp": "Android-app",
+    "fundingNotice": "Dette projekt har modtaget finansiering fra Den Europæiske Unions forsknings- og innovationsprogram Horizon 2020 under tilskudsaftale nr. 101036418. "
   },
   "navigation": {
     "menu": {
-      "dashboard": "",
-      "about": "",
-      "account": "",
-      "logout": ""
+      "dashboard": "Dashboard",
+      "about": "Om",
+      "account": "Konto",
+      "logout": "Log ud"
     }
   },
   "language": {
-    "english": "",
-    "german": "",
-    "danish": "",
-    "portuguese": "",
-    "slovenian": "",
-    "spanish": ""
+    "english": "Engelsk",
+    "german": "Tysk",
+    "danish": "Dansk",
+    "portuguese": "Portugisisk",
+    "slovenian": "Slovensk",
+    "spanish": "Spansk"
   },
   "countrySpecial": {
-    "unitedKingdom": "",
-    "zeuropeOther": ""
+    "unitedKingdom": "Storbritannien",
+    "zeuropeOther": "andre lande i EU"
   },
   "gender": {
     "female": "Kvinde",
@@ -180,33 +181,33 @@
     "heating": "Varme"
   },
   "unitLabel": {
-    "eneryUsage": "",
+    "eneryUsage": "Energiforbrug",
     "distance": "Afstand"
   },
   "month": {
-    "january": "",
-    "february": "",
-    "march": "",
-    "april": "",
-    "may": "",
-    "june": "",
-    "july": "",
-    "august": "",
-    "september": "",
-    "october": "",
-    "november": "",
-    "december": ""
+    "january": "januar",
+    "february": "februar",
+    "march": "marts",
+    "april": "april",
+    "may": "maj",
+    "june": "juni",
+    "july": "juli",
+    "august": "august",
+    "september": "september",
+    "october": "oktober",
+    "november": "november",
+    "december": "december"
   },
   "app": {
     "account": {
-      "comingSoon": "",
-      "myAccount": "",
-      "downloadMyData": "",
+      "comingSoon": "Download dine data, eller slet din konto. Vi arbejder på at implementere flere funktioner i fremtiden.",
+      "myAccount": "Min konto",
+      "downloadMyData": "Download mine data",
       "deleteAccount": {
-        "button": "",
-        "title": "",
-        "description": "",
-        "confirm": ""
+        "button": "Slet min konto",
+        "title": "Er du sikker på, at du vil slette din konto?",
+        "description": "Denne handling kan ikke fortrydes. Det vil slette din konto permanent og fjerne dine data fra vores servere.",
+        "confirm": "Slet konto"
       }
     }
   }

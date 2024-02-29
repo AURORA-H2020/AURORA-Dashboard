@@ -121,7 +121,8 @@
     "and": "in ",
     "placeholder": {
       "selectValue": "Izberi vrednost"
-    }
+    },
+    "cancel": "Prekliči"
   },
   "country": {
     "allSelectedCountries": "Vse izbrane države",

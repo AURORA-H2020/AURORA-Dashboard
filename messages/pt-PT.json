@@ -121,7 +121,8 @@
     "and": "",
     "placeholder": {
       "selectValue": ""
-    }
+    },
+    "cancel": ""
   },
   "country": {
     "allSelectedCountries": "",
