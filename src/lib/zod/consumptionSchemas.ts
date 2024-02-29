@@ -39,16 +39,29 @@ export const electricityFormSchema = (
             message: t("app.validation.error.validValue"),
         }),
         category: z.literal("electricity"),
-        electricity: z.object({
-            electricitySource: z.enum([
-                electricitySources[0],
-                ...electricitySources,
-            ]),
-            costs: z.coerce.number().max(100000).optional(),
-            householdSize: z.coerce.number().min(1).max(100),
-            startDate: TimestampSchema,
-            endDate: TimestampSchema,
-        }),
+        electricity: z
+            .object({
+                electricitySource: z.enum([
+                    electricitySources[0],
+                    ...electricitySources,
+                ]),
+                costs: z.coerce.number().max(100000).optional(),
+                householdSize: z.coerce.number().min(1).max(100),
+                startDate: TimestampSchema,
+                endDate: TimestampSchema,
+            })
+            .refine(
+                (data) => {
+                    if (data.endDate < data.startDate) {
+                        return false;
+                    }
+                    return true;
+                },
+                {
+                    message: "End date must be after start date",
+                    path: ["endDate"],
+                },
+            ),
         description: z.string().max(1000).optional(),
         createdAt: TimestampSchema,
     });
@@ -86,6 +99,18 @@ export const heatingFormSchema = (
                     message:
                         "District Heating Source is required when district heating is selected",
                     path: ["districtHeatingSource"],
+                },
+            )
+            .refine(
+                (data) => {
+                    if (data.endDate < data.startDate) {
+                        return false;
+                    }
+                    return true;
+                },
+                {
+                    message: "End date must be after start date",
+                    path: ["endDate"],
                 },
             ),
         description: z.string().max(1000).optional(),
@@ -145,6 +170,21 @@ export const transportationFormSchema = (
                 {
                     message: "Please specify an occupancy level",
                     path: ["publicVehicleOccupancy"],
+                },
+            )
+            .refine(
+                (data) => {
+                    if (
+                        data.dateOfTravelEnd &&
+                        data.dateOfTravelEnd < data.dateOfTravel
+                    ) {
+                        return false;
+                    }
+                    return true;
+                },
+                {
+                    message: "End date must be after start date",
+                    path: ["dateOfTravelEnd"],
                 },
             ),
         description: z.string().max(1000).optional(),
