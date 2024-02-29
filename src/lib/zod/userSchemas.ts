@@ -35,8 +35,10 @@ export const userDataFormSchema = (
         }),
         yearOfBirth: z.coerce
             .number()
-            .min(1900, { message: "Please enter a valid year." })
-            .max(2022, { message: "Please enter a valid year." })
+            .min(1900, { message: "Please enter a year after 1900." })
+            .max(new Date().getFullYear(), {
+                message: "Please enter a year in the past.",
+            })
             .optional(),
         gender: z.enum([userGenders[0], ...userGenders]).optional(),
         homeEnergyLabel: z
@@ -47,6 +49,7 @@ export const userDataFormSchema = (
             .optional(),
         country: z.string(),
         city: z.string().optional(),
+        isMarketingConsentAllowed: z.boolean(),
     });
 
 export const userChangeEmailSchema = (t: (arg: string, val?: any) => string) =>

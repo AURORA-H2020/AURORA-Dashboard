@@ -47,4 +47,8 @@ export interface User {
      * The city in country identifier
      */
     city?: string;
+    /**
+     * Whether marketing consent is provided
+     */
+    isMarketingConsentAllowed?: boolean;
 }
