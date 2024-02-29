@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname, useRouter } from "@/navigation";
+import { usePathname } from "@/navigation";
 import Link from "next/link";
 import Logo from "./logo";
 import ThemeToggle from "./themeToggle";
@@ -13,7 +13,6 @@ import { Card } from "../ui/card";
 
 import { useAuthContext } from "@/context/AuthContext";
 import { logout } from "@/firebase/auth/logout";
-import { User } from "@/models/firestore/user/user";
 import { useTranslations } from "next-intl";
 
 const MenuItems = ({ items, pathname }) => {
@@ -47,14 +46,12 @@ export default function NavigationBar(): ReactElement {
 
     const pathname = usePathname();
 
-    const { user } = useAuthContext() as { user: User };
-    const router = useRouter();
+    const { user } = useAuthContext();
 
     const [state, setState] = useState(false);
 
     const handleLogout = async () => {
         await logout();
-        router.push("/");
     };
 
     // t("navigation.menu.dashboard")
