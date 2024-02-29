@@ -19,6 +19,7 @@ import { useTranslations } from "next-intl";
 import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import BorderBox from "../../common/borderBox";
 
 export default function ElectricityForm({
     consumption,
@@ -81,12 +82,12 @@ export default function ElectricityForm({
     };
 
     return (
-        <>
-            <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className={cn(className, "flex flex-col gap-4 w-full mt-4")}
-                >
+        <Form {...form}>
+            <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className={cn(className, "flex flex-col gap-4 w-full")}
+            >
+                <BorderBox>
                     <FormField
                         control={form.control}
                         name="value"
@@ -96,6 +97,7 @@ export default function ElectricityForm({
                                 inputType="number"
                                 placeholder="Consumption"
                                 label="Consumption"
+                                description="You can find this information on your electricity bill."
                             />
                         )}
                     />
@@ -108,6 +110,7 @@ export default function ElectricityForm({
                                 inputType="number"
                                 placeholder="People in household"
                                 label="People in household"
+                                description="How many people, including you, live in your household."
                             />
                         )}
                     />
@@ -126,10 +129,13 @@ export default function ElectricityForm({
                                 )}
                                 placeholder="Electricity Source"
                                 label={"Electricity Source"}
+                                description="Select the appropriate electricity source."
                             />
                         )}
                     />
+                </BorderBox>
 
+                <BorderBox>
                     <FormField
                         control={form.control}
                         name="electricity.startDate"
@@ -141,6 +147,7 @@ export default function ElectricityForm({
                                 maxDate={form
                                     .watch("electricity.endDate")
                                     .toDate()}
+                                description="Select the beginning and end of this consumption. You can find this information on your electricity bill."
                             />
                         )}
                     />
@@ -159,7 +166,9 @@ export default function ElectricityForm({
                             />
                         )}
                     />
+                </BorderBox>
 
+                <BorderBox>
                     <FormField
                         control={form.control}
                         name="electricity.costs"
@@ -181,19 +190,20 @@ export default function ElectricityForm({
                                 field={field}
                                 placeholder="Description"
                                 label="Description"
+                                description="You may add a description to your entry to help you find it later."
                             />
                         )}
                     />
+                </BorderBox>
 
-                    <DialogFooter className="flex sm:justify-between">
-                        <Button type="submit">
-                            {consumption
-                                ? t("app.updateConsumption")
-                                : t("app.addConsumption")}
-                        </Button>
-                    </DialogFooter>
-                </form>
-            </Form>
-        </>
+                <DialogFooter className="flex sm:justify-between">
+                    <Button type="submit">
+                        {consumption
+                            ? t("app.updateConsumption")
+                            : t("app.addConsumption")}
+                    </Button>
+                </DialogFooter>
+            </form>
+        </Form>
     );
 }

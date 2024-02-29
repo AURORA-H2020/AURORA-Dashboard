@@ -12,6 +12,7 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import BorderBox from "../common/borderBox";
 
 export function ChangePasswordForm({
     onFormSubmit,
@@ -62,34 +63,36 @@ export function ChangePasswordForm({
                         <FormPasswordField
                             field={field}
                             placeholder={"Current Password"}
-                            formLabel={"Current Password"}
+                            label={"Current Password"}
                         />
                     )}
                 />
 
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormPasswordField
-                            field={field}
-                            placeholder={t("ui.auth.password")}
-                            formLabel={t("ui.auth.password")}
-                        />
-                    )}
-                />
+                <BorderBox>
+                    <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field }) => (
+                            <FormPasswordField
+                                field={field}
+                                placeholder={t("ui.auth.newPassword")}
+                                label={t("ui.auth.newPassword")}
+                            />
+                        )}
+                    />
 
-                <FormField
-                    control={form.control}
-                    name="confirmPassword"
-                    render={({ field }) => (
-                        <FormPasswordField
-                            field={field}
-                            placeholder={t("ui.auth.password")}
-                            formLabel={t("ui.auth.confirmPassword")}
-                        />
-                    )}
-                />
+                    <FormField
+                        control={form.control}
+                        name="confirmPassword"
+                        render={({ field }) => (
+                            <FormPasswordField
+                                field={field}
+                                placeholder={t("ui.auth.confirmNewPassword")}
+                                label={t("ui.auth.confirmNewPassword")}
+                            />
+                        )}
+                    />
+                </BorderBox>
 
                 <DialogFooter className="flex sm:justify-between">
                     <Button type="submit">Update Password</Button>

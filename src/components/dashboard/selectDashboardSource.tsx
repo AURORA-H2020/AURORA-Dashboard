@@ -99,7 +99,7 @@ export const SelectDashboardSource = ({
     };
 
     return (
-        <Card className="mb-6 mt-6">
+        <Card className="mb-4 mt-4">
             <CardContent className="p-6">
                 <Flex
                     className="gap-4"

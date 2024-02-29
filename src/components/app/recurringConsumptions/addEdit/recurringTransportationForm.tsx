@@ -30,6 +30,7 @@ import { useEffect } from "react";
 import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import BorderBox from "../../common/borderBox";
 
 export default function RecurringTransportationForm({
     recurringConsumption,
@@ -126,24 +127,24 @@ export default function RecurringTransportationForm({
     }, [formTransportationType, form, formFrequencyUnit]);
 
     return (
-        <>
-            <Form {...form}>
-                <form
-                    onSubmit={form.handleSubmit(onSubmit)}
-                    className={cn(className, "flex flex-col gap-4 w-full mt-4")}
-                >
-                    <FormField
-                        control={form.control}
-                        name="isEnabled"
-                        render={({ field }) => (
-                            <FormSwitch
-                                field={field}
-                                label="Enabled"
-                                description="Turn this off to stop tracking this consumption."
-                            />
-                        )}
-                    />
+        <Form {...form}>
+            <form
+                onSubmit={form.handleSubmit(onSubmit)}
+                className={cn(className, "flex flex-col gap-4 w-full")}
+            >
+                <FormField
+                    control={form.control}
+                    name="isEnabled"
+                    render={({ field }) => (
+                        <FormSwitch
+                            field={field}
+                            label="Enabled"
+                            description="Turn this off to stop tracking this consumption."
+                        />
+                    )}
+                />
 
+                <BorderBox>
                     <FormField
                         control={form.control}
                         name="frequency.unit"
@@ -207,7 +208,9 @@ export default function RecurringTransportationForm({
                             />
                         )}
                     />
+                </BorderBox>
 
+                <BorderBox>
                     <Flex justify="between" align="center">
                         <FormLabel>Start of Travel</FormLabel>
                         <Flex justify="between" align="center" gap="8">
@@ -289,28 +292,28 @@ export default function RecurringTransportationForm({
                             )}
                         />
                     )}
+                </BorderBox>
 
-                    <FormField
-                        control={form.control}
-                        name="description"
-                        render={({ field }) => (
-                            <FormTextField
-                                field={field}
-                                placeholder="Description"
-                                label="Description"
-                            />
-                        )}
-                    />
+                <FormField
+                    control={form.control}
+                    name="description"
+                    render={({ field }) => (
+                        <FormTextField
+                            field={field}
+                            placeholder="Description"
+                            label="Description"
+                        />
+                    )}
+                />
 
-                    <DialogFooter className="flex sm:justify-between">
-                        <Button type="submit">
-                            {recurringConsumption
-                                ? t("app.updateConsumption")
-                                : t("app.addConsumption")}
-                        </Button>
-                    </DialogFooter>
-                </form>
-            </Form>
-        </>
+                <DialogFooter className="flex sm:justify-between">
+                    <Button type="submit">
+                        {recurringConsumption
+                            ? t("app.updateRecurringConsumption")
+                            : t("app.addRecurringConsumption")}
+                    </Button>
+                </DialogFooter>
+            </form>
+        </Form>
     );
 }
