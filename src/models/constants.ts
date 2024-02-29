@@ -65,6 +65,7 @@ export interface CountryMapping {
     nameSpecial: string;
     code: string;
     color: string;
+    cities: CityMapping[];
 }
 
 export interface CityMapping {

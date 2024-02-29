@@ -1,5 +1,7 @@
+import { useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
-import { FormItem, FormLabel, FormMessage } from "../ui/form";
+import { Checkbox } from "../ui/checkbox";
+import { FormDescription, FormItem, FormLabel, FormMessage } from "../ui/form";
 import {
     Select,
     SelectContent,
@@ -13,34 +15,81 @@ const FormSelect = ({
     options,
     placeholder,
     label,
+    description,
     disabled = false,
+    optOutLabel,
 }: {
     field: ControllerRenderProps<any, any>;
     options: { value: string; label: string }[];
     placeholder: string;
     label?: string;
+    description?: string;
     disabled?: boolean;
-}) => (
-    <FormItem>
-        {label && <FormLabel>{label}</FormLabel>}
-        <Select
-            onValueChange={field.onChange}
-            value={field.value}
-            disabled={disabled}
-        >
-            <SelectTrigger>
-                <SelectValue placeholder={placeholder} />
-            </SelectTrigger>
-            <SelectContent>
-                {options.map((option) => (
-                    <SelectItem key={option.value} value={option.value}>
-                        {option.label}
-                    </SelectItem>
-                ))}
-            </SelectContent>
-        </Select>
-        <FormMessage />
-    </FormItem>
-);
+    optOutLabel?: string;
+}) => {
+    const [selected, setSelected] = useState<string | undefined | null>(
+        field.value || undefined,
+    );
+
+    const [disableField, setDisableField] = useState<boolean>(false);
+
+    const handleSelectChange = (value: string) => {
+        if (options.map((option) => option.value).includes(value)) {
+            setSelected(value);
+            field.onChange(value);
+        } else {
+            setSelected("");
+            field.onChange(undefined);
+        }
+    };
+
+    const handleCheckChange = (checked: boolean) => {
+        if (checked) {
+            setSelected("");
+            field.onChange(undefined);
+        }
+
+        setDisableField(checked);
+    };
+
+    return (
+        <FormItem>
+            {label && <FormLabel>{label}</FormLabel>}
+            <FormDescription>{description}</FormDescription>
+            <Select
+                onValueChange={handleSelectChange}
+                value={selected as string}
+                disabled={disableField || disabled}
+            >
+                <SelectTrigger>
+                    <SelectValue placeholder={placeholder} />
+                </SelectTrigger>
+                <SelectContent>
+                    {options.map((option) => (
+                        <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                        </SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
+            {optOutLabel && (
+                <div className="flex items-center space-x-2">
+                    <Checkbox
+                        id="terms2"
+                        disabled={disabled}
+                        onCheckedChange={handleCheckChange}
+                    />
+                    <label
+                        htmlFor="terms2"
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                        {optOutLabel}
+                    </label>
+                </div>
+            )}
+            <FormMessage />
+        </FormItem>
+    );
+};
 
 export default FormSelect;

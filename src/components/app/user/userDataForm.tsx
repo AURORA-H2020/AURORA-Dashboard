@@ -1,11 +1,11 @@
 import FormInputField from "@/components/formItems/formInputField";
 import FormSelect from "@/components/formItems/formSelect";
+import FormSwitch from "@/components/formItems/formSwitch";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
 import { addEditUserData } from "@/firebase/user/addEditUserData";
 import {
-    citiesMapping,
     countriesMapping,
     genderMappings,
     homeEnergyLabels,
@@ -13,13 +13,16 @@ import {
 } from "@/lib/constants";
 import { cn } from "@/lib/utilities";
 import { userDataFormSchema } from "@/lib/zod/userSchemas";
+import { CityMapping } from "@/models/constants";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
+import BorderBox from "../common/borderBox";
 
 export default function UserDataForm({
     userData,
@@ -48,6 +51,7 @@ export default function UserDataForm({
         householdProfile: userData?.householdProfile || undefined,
         country: userData?.country || undefined,
         city: userData?.city || undefined,
+        isMarketingConsentAllowed: userData?.isMarketingConsentAllowed || false,
     };
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -77,129 +81,179 @@ export default function UserDataForm({
         }
     };
 
+    const selectedCountry = form.watch("country");
+    const [availableCities, setAvailableCities] = useState<CityMapping[]>([]);
+
+    useEffect(() => {
+        if (selectedCountry) {
+            const country = countriesMapping.find(
+                (country) => country.ID === selectedCountry,
+            );
+
+            if (country) {
+                setAvailableCities(country.cities);
+            }
+        }
+        form.setValue("city", undefined);
+    }, [form, selectedCountry]);
+
     return (
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(onSubmit)}
-                className={cn(className, "flex flex-col gap-4 w-full mt-4")}
+                className={cn(className, "flex flex-col gap-4 w-full")}
             >
-                <FormField
-                    control={form.control}
-                    name="firstName"
-                    render={({ field }) => (
-                        <FormInputField
-                            field={field}
-                            inputType="text"
-                            placeholder="First Name"
-                            label="First Name"
+                <BorderBox>
+                    <FormField
+                        control={form.control}
+                        name="firstName"
+                        render={({ field }) => (
+                            <FormInputField
+                                field={field}
+                                inputType="text"
+                                placeholder="First Name"
+                                label="First Name"
+                            />
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="lastName"
+                        render={({ field }) => (
+                            <FormInputField
+                                field={field}
+                                inputType="text"
+                                placeholder="Last Name"
+                                label="Last Name"
+                            />
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="yearOfBirth"
+                        render={({ field }) => (
+                            <FormInputField
+                                field={field}
+                                inputType="number"
+                                placeholder="Year of Birth"
+                                label="Year of Birth"
+                            />
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="gender"
+                        render={({ field }) => (
+                            <FormSelect
+                                field={field}
+                                options={genderMappings.map((gender) => ({
+                                    value: gender.key,
+                                    label: t(gender.label),
+                                }))}
+                                placeholder="Select your preferred gender"
+                                label={"Gender"}
+                                optOutLabel="Prefer not to say"
+                            />
+                        )}
+                    />
+                </BorderBox>
+                {isNewUser && (
+                    <BorderBox>
+                        <FormField
+                            control={form.control}
+                            name="country"
+                            render={({ field }) => (
+                                <FormSelect
+                                    field={field}
+                                    options={countriesMapping.map(
+                                        (country) => ({
+                                            value: country.ID,
+                                            label: t(country.name),
+                                        }),
+                                    )}
+                                    placeholder="Select your country"
+                                    label={"Country"}
+                                    description="This information helps us to more accurately calculate your
+                            carbon footprint. Please note that you can't change
+                            your country later. Crowdfunding of local photovoltaic
+                            installations is currently only planned for select cities of
+                            AURORA project partners."
+                                />
+                            )}
                         />
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="lastName"
-                    render={({ field }) => (
-                        <FormInputField
-                            field={field}
-                            inputType="text"
-                            placeholder="Last Name"
-                            label="Last Name"
-                        />
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="yearOfBirth"
-                    render={({ field }) => (
-                        <FormInputField
-                            field={field}
-                            inputType="number"
-                            placeholder="Year of Birth"
-                            label="Year of Birth"
-                        />
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="gender"
-                    render={({ field }) => (
-                        <FormSelect
-                            field={field}
-                            options={genderMappings.map((gender) => ({
-                                value: gender.key,
-                                label: t(gender.label),
-                            }))}
-                            placeholder="Please select your preferred gender"
-                            label={"Gender"}
-                        />
-                    )}
-                />
 
-                <FormField
-                    control={form.control}
-                    name="homeEnergyLabel"
-                    render={({ field }) => (
-                        <FormSelect
-                            field={field}
-                            options={homeEnergyLabels.map((label) => ({
-                                value: label.key,
-                                label: label.label,
-                            }))}
-                            placeholder="Please select your home energy label"
-                            label={"Home Energy Label"}
-                        />
-                    )}
-                />
+                        {availableCities.length > 0 && (
+                            <FormField
+                                control={form.control}
+                                name="city"
+                                render={({ field }) => (
+                                    <FormSelect
+                                        key={selectedCountry}
+                                        field={field}
+                                        options={availableCities.map(
+                                            (city) => ({
+                                                value: city.ID,
+                                                label: t(city.name),
+                                            }),
+                                        )}
+                                        optOutLabel="Other city"
+                                        placeholder="Select your city"
+                                        label={"City"}
+                                    />
+                                )}
+                            />
+                        )}
+                    </BorderBox>
+                )}
 
-                <FormField
-                    control={form.control}
-                    name="householdProfile"
-                    render={({ field }) => (
-                        <FormSelect
-                            field={field}
-                            options={householdProfiles.map((profile) => ({
-                                value: profile.key,
-                                label: t(profile.label),
-                            }))}
-                            placeholder="Please select your household profile"
-                            label={"Household Profile"}
-                        />
-                    )}
-                />
+                <BorderBox>
+                    <FormField
+                        control={form.control}
+                        name="homeEnergyLabel"
+                        render={({ field }) => (
+                            <FormSelect
+                                field={field}
+                                options={homeEnergyLabels.map((label) => ({
+                                    value: label.key,
+                                    label: label.label,
+                                }))}
+                                placeholder="Select your home energy label"
+                                label={"Home Energy Label"}
+                                optOutLabel="Prefer not to say"
+                            />
+                        )}
+                    />
 
-                <FormField
-                    control={form.control}
-                    name="country"
-                    render={({ field }) => (
-                        <FormSelect
-                            field={field}
-                            options={countriesMapping.map((country) => ({
-                                value: country.ID,
-                                label: t(country.name),
-                            }))}
-                            placeholder="Please select your country"
-                            label={"Country"}
-                            {...(!isNewUser && { disabled: true })}
-                        />
-                    )}
-                />
+                    <FormField
+                        control={form.control}
+                        name="householdProfile"
+                        render={({ field }) => (
+                            <FormSelect
+                                field={field}
+                                options={householdProfiles.map((profile) => ({
+                                    value: profile.key,
+                                    label: t(profile.label),
+                                }))}
+                                placeholder="Select your household profile"
+                                label={"Household Profile"}
+                                optOutLabel="Prefer not to say"
+                            />
+                        )}
+                    />
+                </BorderBox>
 
-                <FormField
-                    control={form.control}
-                    name="city"
-                    render={({ field }) => (
-                        <FormSelect
-                            field={field}
-                            options={citiesMapping.map((city) => ({
-                                value: city.ID,
-                                label: t(city.name),
-                            }))}
-                            placeholder="Please select your city"
-                            label={"City"}
-                            {...(!isNewUser && { disabled: true })}
-                        />
-                    )}
-                />
+                {isNewUser && (
+                    <FormField
+                        control={form.control}
+                        name="isMarketingConsentAllowed"
+                        render={({ field }) => (
+                            <FormSwitch
+                                field={field}
+                                description="I would like to receive updates about the app and AURORA project by email."
+                            />
+                        )}
+                    />
+                )}
 
                 <Button type="submit">Save Profile</Button>
             </form>

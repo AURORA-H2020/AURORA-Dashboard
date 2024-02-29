@@ -1,13 +1,12 @@
 import {
-    CityMapping,
     ConsumptionAttributes,
     ConsumptionSources,
     CountryMapping,
     GenderMapping,
     HomeEnergyLabel,
+    HouseholdProfile,
     LabelMapping,
     Locale,
-    HouseholdProfile,
     PublicVehicleOccupancy,
     RecurringConsumptionFrequencyUnitMapping,
     Weekdays,
@@ -82,6 +81,7 @@ export const countriesMapping: CountryMapping[] = [
         nameSpecial: t("country.denmark"),
         code: "DK",
         color: "emerald-400",
+        cities: [{ ID: "Au1oUV9pAEtSCu04cfCX", name: t("city.aarhus") }],
     },
     {
         ID: "2E9Ejc8qBJC6HnlPPdIh",
@@ -89,6 +89,7 @@ export const countriesMapping: CountryMapping[] = [
         nameSpecial: t("country.portugal"),
         code: "PT",
         color: "cyan-400",
+        cities: [{ ID: "YIyf65PquFxluWhAAo5C", name: t("city.evora") }],
     },
     {
         ID: "KhUolhyvcbdEsPyREqOZ",
@@ -96,6 +97,7 @@ export const countriesMapping: CountryMapping[] = [
         nameSpecial: t("country.slovenia"),
         code: "SI",
         color: "pink-400",
+        cities: [{ ID: "FJyeCLprBuOqacpvu3LJ", name: t("city.ljubljana") }],
     },
     {
         ID: "4sq82jNQm3x3bH9Fkijm",
@@ -103,6 +105,7 @@ export const countriesMapping: CountryMapping[] = [
         nameSpecial: t("country.spain"),
         code: "ES",
         color: "rose-400",
+        cities: [{ ID: "1VSD4m6qVbOZLot7SFoQ", name: t("city.madrid") }],
     },
     {
         ID: "8mgi5IR4xn9Yca4zDLtU",
@@ -110,6 +113,7 @@ export const countriesMapping: CountryMapping[] = [
         nameSpecial: t("countrySpecial.unitedKingdom"),
         code: "UK",
         color: "orange-400",
+        cities: [{ ID: "OAiIuFNocG4c0kOBtBvr", name: t("city.forestOfDean") }],
     },
     {
         ID: "sPXh74wjZf14Jtmkaas6",
@@ -117,16 +121,9 @@ export const countriesMapping: CountryMapping[] = [
         nameSpecial: t("countrySpecial.zeuropeOther"),
         code: "EU",
         color: "stone-300",
+        cities: [],
     },
 ].sort((a, b) => a.name.localeCompare(b.name));
-
-export const citiesMapping: CityMapping[] = [
-    { ID: "YIyf65PquFxluWhAAo5C", name: t("city.evora") },
-    { ID: "1VSD4m6qVbOZLot7SFoQ", name: t("city.madrid") },
-    { ID: "OAiIuFNocG4c0kOBtBvr", name: t("city.forestOfDean") },
-    { ID: "FJyeCLprBuOqacpvu3LJ", name: t("city.ljubljana") },
-    { ID: "Au1oUV9pAEtSCu04cfCX", name: t("city.aarhus") },
-];
 
 export const genderMappings: GenderMapping[] = [
     { key: "female", label: t("gender.female"), color: "slate-400" },
