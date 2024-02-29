@@ -28,10 +28,12 @@ import { z } from "zod";
 
 export default function TransportationForm({
     consumption,
+    isDuplication,
     onConsumptionAdded,
     className,
 }: {
     consumption?: ConsumptionWithID;
+    isDuplication?: boolean;
     onConsumptionAdded?: (success: boolean) => void;
     className?: string;
 }) {
@@ -73,7 +75,7 @@ export default function TransportationForm({
             data,
             "transportation",
             user,
-            consumption?.id,
+            isDuplication ? undefined : consumption?.id,
         );
         if (success) {
             if (consumption?.id) {

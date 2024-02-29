@@ -175,9 +175,14 @@ export default function ConsumptionPreview({
                                                 {t("common.edit")}
                                             </Button>
                                         </AddEditConsumptionModal>
-                                        <Button variant="outline">
-                                            {t("common.duplicate")}
-                                        </Button>
+                                        <AddEditConsumptionModal
+                                            consumption={consumption}
+                                            isDuplication={true}
+                                        >
+                                            <Button variant="outline">
+                                                {t("common.duplicate")}
+                                            </Button>
+                                        </AddEditConsumptionModal>
                                     </Flex>
                                 </Flex>
                             </DialogFooter>

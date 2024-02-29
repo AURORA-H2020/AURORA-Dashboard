@@ -23,10 +23,12 @@ import { z } from "zod";
 
 export default function HeatingForm({
     consumption,
+    isDuplication,
     onConsumptionAdded,
     className,
 }: {
     consumption?: ConsumptionWithID;
+    isDuplication?: boolean;
     onConsumptionAdded?: (success: boolean) => void;
     className?: string;
 }) {
@@ -63,7 +65,7 @@ export default function HeatingForm({
             data,
             "heating",
             user,
-            consumption?.id,
+            isDuplication ? undefined : consumption?.id,
         );
         if (consumption?.id) {
             if (success) {

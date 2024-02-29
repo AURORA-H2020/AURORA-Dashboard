@@ -89,7 +89,7 @@ export const addEditRecurringConsumption = async (
         try {
             if (consumptionId) {
                 const docRef = doc(consumptionRef, consumptionId);
-                await setDoc(docRef, recurringConsumption);
+                await setDoc(docRef, recurringConsumption, { merge: true });
             } else {
                 await addDoc(consumptionRef, recurringConsumption);
             }

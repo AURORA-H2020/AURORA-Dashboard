@@ -14,8 +14,12 @@ import TransportationForm from "./transportationForm";
 import React from "react";
 
 const AddEditConsumptionModal = React.forwardRef(
-    (props: { consumption?: ConsumptionWithID; children: React.ReactNode }) => {
-        const { consumption, children } = props;
+    (props: {
+        isDuplication?;
+        consumption?: ConsumptionWithID;
+        children: React.ReactNode;
+    }) => {
+        const { isDuplication, consumption, children } = props;
 
         const t = useTranslations();
 
@@ -69,12 +73,14 @@ const AddEditConsumptionModal = React.forwardRef(
                                     <ElectricityForm
                                         consumption={consumption}
                                         onConsumptionAdded={handleCloseModal}
+                                        isDuplication={isDuplication}
                                     />
                                 </TabsContent>
                                 <TabsContent value="heating" className="p-2">
                                     <HeatingForm
                                         consumption={consumption}
                                         onConsumptionAdded={handleCloseModal}
+                                        isDuplication={isDuplication}
                                     />
                                 </TabsContent>
                                 <TabsContent
@@ -84,6 +90,7 @@ const AddEditConsumptionModal = React.forwardRef(
                                     <TransportationForm
                                         consumption={consumption}
                                         onConsumptionAdded={handleCloseModal}
+                                        isDuplication={isDuplication}
                                     />
                                 </TabsContent>
                             </Tabs>

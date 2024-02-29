@@ -22,10 +22,12 @@ import { z } from "zod";
 
 export default function ElectricityForm({
     consumption,
+    isDuplication,
     onConsumptionAdded,
     className,
 }: {
     consumption?: ConsumptionWithID;
+    isDuplication?: boolean;
     onConsumptionAdded?: (success: boolean) => void;
     className?: string;
 }) {
@@ -61,7 +63,7 @@ export default function ElectricityForm({
             data,
             "electricity",
             user,
-            consumption?.id,
+            isDuplication ? undefined : consumption?.id,
         );
         if (success) {
             if (consumption?.id) {

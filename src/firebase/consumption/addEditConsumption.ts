@@ -56,13 +56,13 @@ function removeInvalidValues(
 }
 
 export const addEditConsumption = async (
-    data: Consumption,
+    consumption: Consumption,
     category: ConsumptionCategory,
     user: User,
     consumptionId?: string,
 ) => {
     let success = false;
-    data = removeInvalidValues(data, category);
+    consumption = removeInvalidValues(consumption, category);
     if (user) {
         const consumptionRef = collection(
             firestore,
@@ -73,9 +73,9 @@ export const addEditConsumption = async (
         try {
             if (consumptionId) {
                 const docRef = doc(consumptionRef, consumptionId);
-                await setDoc(docRef, data);
+                await setDoc(docRef, consumption, { merge: true });
             } else {
-                await addDoc(consumptionRef, data);
+                await addDoc(consumptionRef, consumption);
             }
             success = true;
         } catch (error) {
