@@ -1,12 +1,8 @@
+"use client";
+
 import { ProtectAccount } from "@/components/hoc/protectAccount";
 import { Heading, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
-import { unstable_setRequestLocale } from "next-intl/server";
-
-type Props = {
-    children: React.ReactNode;
-    params: { locale: string };
-};
 
 /**
  * Renders the AccountLayout component.
@@ -17,9 +13,9 @@ type Props = {
  */
 export default function AccountLayout({
     children,
-    params: { locale },
-}: Props): React.ReactNode {
-    unstable_setRequestLocale(locale);
+}: {
+    children: React.ReactNode;
+}): React.ReactNode {
     const t = useTranslations();
 
     return (
