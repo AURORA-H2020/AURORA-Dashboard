@@ -120,17 +120,20 @@ const ConsumptionPreview = ({
                         </Flex>
                         <Flex direction={"column"} align={"end"}>
                             <Text>
-                                {consumption.value
-                                    ? Math.round(consumption.value) +
-                                      " " +
-                                      String(consumptionAttributes?.unit)
-                                    : ""}
+                                {format.number(consumption.value, {
+                                    maximumFractionDigits: 1,
+                                }) +
+                                    " " +
+                                    consumptionAttributes?.unit}
                             </Text>
                             <Text>
                                 {consumption.carbonEmissions ? (
                                     <>
                                         {format.number(
                                             consumption.carbonEmissions,
+                                            {
+                                                maximumFractionDigits: 1,
+                                            },
                                         )}
                                         {carbonUnit}
                                     </>

@@ -1,17 +1,12 @@
 "use client";
 
-import LoadingSpinner from "@/components/ui/loading";
-import { useAuthContext } from "@/context/AuthContext";
 import { categories, consumptionMapping } from "@/lib/constants";
-import {
-    getMonthShortName,
-    valueFormatterCarbon,
-    valueFormatterEnergy,
-} from "@/lib/utilities";
+import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { BarChart } from "@tremor/react";
+import { useFormatter } from "next-intl";
 import { useEffect, useState } from "react";
 
 interface CurrentSummary {
@@ -52,27 +47,26 @@ export default function ConsumptionSummaryChart({
     consumptionSummary: ConsumptionSummary;
     measure: "carbonEmission" | "energyExpended";
 }) {
-    const { user, loading } = useAuthContext();
+    const format = useFormatter();
 
-    const [currentSummary, setCurrentSummary] = useState<CurrentSummary[]>([]);
-
-    /**
-     * Initializes summary data for 12 months with default values.
-     *
-     * @return {Array} Array of summary data for each month
-     */
-    const initializeSummaryData = () => {
-        return Array.from({ length: 12 }, (_, index) => ({
-            month: index + 1,
-            monthName: getMonthShortName(index + 1),
-            heating: 0,
-            electricity: 0,
-            transportation: 0,
-        }));
-    };
+    const [currentSummary, setCurrentSummary] = useState<
+        CurrentSummary[] | undefined
+    >([]);
 
     useEffect(() => {
-        if (loading || !user || !consumptionSummary) return;
+        if (!consumptionSummary) return;
+
+        const initializeSummaryData = () => {
+            return Array.from({ length: 12 }, (_, index) => ({
+                month: index + 1,
+                monthName: format.dateTime(new Date(2000, index, 15), {
+                    month: "short",
+                }),
+                heating: 0,
+                electricity: 0,
+                transportation: 0,
+            }));
+        };
 
         // Initialize with default values for each month
         const baseSummaryData = initializeSummaryData();
@@ -82,7 +76,12 @@ export default function ConsumptionSummaryChart({
                 (acc, month) => {
                     acc[month.number - 1] = {
                         month: month.number,
-                        monthName: getMonthShortName(month.number),
+                        monthName: format.dateTime(
+                            new Date(2000, month.number - 1, 15),
+                            {
+                                month: "short",
+                            },
+                        ),
                         heating: findValueByCategory(
                             month.categories,
                             "heating",
@@ -106,21 +105,14 @@ export default function ConsumptionSummaryChart({
 
             setCurrentSummary(transformedData);
         } else {
-            // If no data is found for the selected year, use the base summary with zeroes
-            setCurrentSummary(baseSummaryData);
+            setCurrentSummary(undefined);
         }
-    }, [measure, loading, consumptionSummary, user]);
-
-    if (!user && loading) {
-        // Render loading indicator until the auth check is complete
-        return <LoadingSpinner />;
-    }
+    }, [measure, consumptionSummary, format]);
 
     return (
         <BarChart
             className="mt-4"
-            yAxisWidth={80}
-            data={currentSummary}
+            data={currentSummary ?? []}
             index="monthName"
             categories={categories}
             colors={consumptionMapping.map((c) => c.colorPrimary)}

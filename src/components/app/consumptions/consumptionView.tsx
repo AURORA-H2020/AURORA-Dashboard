@@ -37,8 +37,9 @@ const ConsumptionView = ({
                     </ConsumptionTableRow>
                     <ConsumptionTableRow label="CO2-Emissions">
                         {consumption.carbonEmissions
-                            ? format.number(consumption.carbonEmissions) +
-                              carbonUnit
+                            ? format.number(consumption.carbonEmissions, {
+                                  maximumFractionDigits: 1,
+                              }) + carbonUnit
                             : t("common.calculating")}
                     </ConsumptionTableRow>
                 </TableBody>

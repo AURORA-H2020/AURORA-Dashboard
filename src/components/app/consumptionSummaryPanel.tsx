@@ -62,12 +62,8 @@ export default function ConsumptionSummaryPanel({
 
     return (
         <Grid className={cn(className)} gap="4">
-            <Flex
-                direction={{ initial: "column", xs: "row" }}
-                justify="between"
-                gap="2"
-            >
-                <Flex gap="2">
+            <Flex direction="row" justify="between" gap="2">
+                <Flex gap="2" direction={{ initial: "column", xs: "row" }}>
                     <Tabs
                         defaultValue="carbonEmission"
                         onValueChange={(value) => {
@@ -107,7 +103,7 @@ export default function ConsumptionSummaryPanel({
                         </div>
                     </Tabs>
                     <Select value={summaryYear} onValueChange={setSummaryYear}>
-                        <SelectTrigger className="w-24">
+                        <SelectTrigger className="w-full min-w-24">
                             <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -127,7 +123,7 @@ export default function ConsumptionSummaryPanel({
                     </Select>
                 </Flex>
                 <LabelInfoModal>
-                    <Button variant="ghost" size="icon" className="self-end">
+                    <Button variant="ghost" size="icon">
                         <Info />
                     </Button>
                 </LabelInfoModal>

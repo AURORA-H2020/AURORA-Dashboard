@@ -4,22 +4,26 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { consumptionMapping } from "@/lib/constants";
+import { cn } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { useTranslations } from "next-intl";
-import { useState } from "react";
+import React, { useState } from "react";
 import ElectricityForm from "./electricityForm";
 import HeatingForm from "./heatingForm";
 import TransportationForm from "./transportationForm";
-import React from "react";
 
 const AddEditConsumptionModal = React.forwardRef(
-    (props: {
-        isDuplication?;
-        consumption?: ConsumptionWithID;
-        children: React.ReactNode;
-    }) => {
-        const { isDuplication, consumption, children } = props;
+    (
+        props: {
+            children: React.ReactNode;
+            isDuplication?: boolean;
+            consumption?: ConsumptionWithID;
+            className?: string;
+        },
+        _ref,
+    ) => {
+        const { isDuplication, consumption, children, className } = props;
 
         const t = useTranslations();
 
@@ -34,7 +38,12 @@ const AddEditConsumptionModal = React.forwardRef(
 
         return (
             <>
-                <div onClick={() => setIsModalOpen(true)}>{children}</div>
+                <div
+                    onClick={() => setIsModalOpen(true)}
+                    className={cn(className, "mt-0")}
+                >
+                    {children}
+                </div>
                 <Dialog open={isModalOpen} onOpenChange={handleCloseModal}>
                     <DialogContent className="sm:max-w-lg p-0">
                         <ScrollArea className="max-h-[80vh] p-6">

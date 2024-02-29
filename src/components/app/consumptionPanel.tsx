@@ -13,22 +13,35 @@ const ConsumptionPanel = ({ className }: { className?: string }) => {
 
     return (
         <Tabs defaultValue="consumptions" className={cn(className)}>
-            <Flex justify="between" gap="2" className="mb-4">
+            <Flex
+                justify="between"
+                direction={{
+                    initial: "column",
+                    sm: "row",
+                    md: "column",
+                    lg: "row",
+                }}
+                gap="2"
+                className="mb-4"
+            >
                 <TabsList>
-                    <TabsTrigger value="consumptions">
+                    <TabsTrigger value="consumptions" className="w-full">
                         {t("app.consumptions")}
                     </TabsTrigger>
-                    <TabsTrigger value="recurring-consumptions">
+                    <TabsTrigger
+                        value="recurring-consumptions"
+                        className="w-full"
+                    >
                         {t("app.recurringConsumptions")}
                     </TabsTrigger>
                 </TabsList>
                 <TabsContent value="consumptions" asChild>
-                    <AddEditConsumptionModal>
+                    <AddEditConsumptionModal className="flex justify-end">
                         <Button>{t("app.addConsumption")}</Button>
                     </AddEditConsumptionModal>
                 </TabsContent>
                 <TabsContent value="recurring-consumptions" asChild>
-                    <AddEditRecurringConsumptionModal>
+                    <AddEditRecurringConsumptionModal className="flex justify-end">
                         <Button>{t("app.addRecurringConsumption")}</Button>
                     </AddEditRecurringConsumptionModal>
                 </TabsContent>
