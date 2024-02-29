@@ -15,13 +15,13 @@ const FormSwitch = ({
     disabled = false,
 }: {
     field: ControllerRenderProps<any, any>;
-    label: string;
+    label?: string;
     description?: string;
     disabled?: boolean;
 }) => (
     <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
         <div className="space-y-0.5">
-            <FormLabel className="text-base">{label}</FormLabel>
+            {label && <FormLabel className="text-base">{label}</FormLabel>}
             {description && <FormDescription>{description}</FormDescription>}
         </div>
         <FormControl>
