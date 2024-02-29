@@ -116,7 +116,9 @@
       "error": {
         "passwordMismatch": "The passwords did not match",
         "invalidEmail": "Please enter a valid email address"
-      }
+      },
+      "newPassword": "New password",
+      "confirmNewPassword": "Confirm new password"
     },
     "datePicker": {
       "selectDateRange": "Select a valid date range"
@@ -162,7 +164,8 @@
       },
       "enabled": "Enabled",
       "disabled": "Disabled"
-    }
+    },
+    "updateRecurringConsumption": "Edit Recurring Consumption"
   },
   "common": {
     "co2emission": "CO<sub>2</sub> Emissions",
