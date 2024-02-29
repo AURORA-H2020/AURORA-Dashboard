@@ -13,13 +13,18 @@ const FormDatePicker = ({
     placeholder,
     label,
     showClearButton = false,
+    minDate = new Date("1990-01-01"),
+    maxDate = new Date("2030-01-01"),
 }: {
     field: ControllerRenderProps<any, any>;
     placeholder: string;
     label?: string;
     showClearButton?: boolean;
+    minDate?: Date;
+    maxDate?: Date;
 }) => {
     const format = useFormatter();
+
     return (
         <FormItem>
             {label && <FormLabel>{label}</FormLabel>}
@@ -53,18 +58,17 @@ const FormDatePicker = ({
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
                     <Calendar
+                        fixedWeeks
                         mode="single"
                         selected={field.value?.toDate()}
+                        defaultMonth={field.value?.toDate()}
                         onSelect={(date) => {
                             const timestamp = Timestamp.fromDate(
                                 date || new Date(),
                             );
                             field.onChange(timestamp);
                         }}
-                        disabled={(date) =>
-                            date > new Date("2030-01-01") ||
-                            date < new Date("1990-01-01")
-                        }
+                        disabled={(date) => date > maxDate || date < minDate}
                         initialFocus
                     />
                 </PopoverContent>

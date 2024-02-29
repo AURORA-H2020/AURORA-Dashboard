@@ -186,6 +186,11 @@ export default function TransportationForm({
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
                                 label={"Start date"}
+                                maxDate={
+                                    form
+                                        .watch("transportation.dateOfTravelEnd")
+                                        ?.toDate() || undefined
+                                }
                             />
                         )}
                     />
@@ -199,6 +204,9 @@ export default function TransportationForm({
                                 placeholder={t("common.placeholder.selectDate")}
                                 label={"End date"}
                                 showClearButton={true}
+                                minDate={form
+                                    .watch("transportation.dateOfTravel")
+                                    .toDate()}
                             />
                         )}
                     />

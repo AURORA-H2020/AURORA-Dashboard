@@ -138,6 +138,9 @@ export default function ElectricityForm({
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
                                 label={"Start date"}
+                                maxDate={form
+                                    .watch("electricity.endDate")
+                                    .toDate()}
                             />
                         )}
                     />
@@ -150,6 +153,9 @@ export default function ElectricityForm({
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
                                 label={"End date"}
+                                minDate={form
+                                    .watch("electricity.startDate")
+                                    .toDate()}
                             />
                         )}
                     />

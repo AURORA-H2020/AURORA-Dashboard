@@ -168,6 +168,7 @@ export default function HeatingForm({
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
                                 label={"Start date"}
+                                maxDate={form.watch("heating.endDate").toDate()}
                             />
                         )}
                     />
@@ -180,6 +181,9 @@ export default function HeatingForm({
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
                                 label={"End date"}
+                                minDate={form
+                                    .watch("heating.startDate")
+                                    .toDate()}
                             />
                         )}
                     />
