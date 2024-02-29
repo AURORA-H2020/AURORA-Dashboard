@@ -2,7 +2,7 @@
 
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { cn } from "@/lib/utilities";
-import ConsumptionPlaceholder from "../common/consumptionPlaceholder";
+import PlaceholderCard from "../common/placeholderCard";
 import RecurringConsumptionPreview from "./recurringConsumptionPreview";
 
 /**
@@ -21,9 +21,7 @@ function RecurringConsumptionList({
 
     if (!userRecurringConsumptions || userRecurringConsumptions.length === 0) {
         return (
-            <ConsumptionPlaceholder>
-                No consumptions found.
-            </ConsumptionPlaceholder>
+            <PlaceholderCard>No recurring consumptions found.</PlaceholderCard>
         );
     }
 

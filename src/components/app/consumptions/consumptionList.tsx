@@ -4,7 +4,7 @@ import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { cn } from "@/lib/utilities";
 import { Grid } from "@radix-ui/themes";
-import ConsumptionPlaceholder from "../common/consumptionPlaceholder";
+import PlaceholderCard from "../common/placeholderCard";
 
 /**
  * Renders a list of Consumption components.
@@ -21,11 +21,7 @@ const ConsumptionList = ({
     const { userConsumptions } = useFirebaseData();
 
     if (!userConsumptions || userConsumptions.length === 0) {
-        return (
-            <ConsumptionPlaceholder>
-                No consumptions found.
-            </ConsumptionPlaceholder>
-        );
+        return <PlaceholderCard>No consumptions found.</PlaceholderCard>;
     }
 
     return (

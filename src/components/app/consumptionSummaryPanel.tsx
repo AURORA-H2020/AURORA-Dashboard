@@ -16,11 +16,12 @@ import { useFirebaseData } from "@/context/FirebaseContext";
 import { cn } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { Box, Flex, Grid, Heading, Text } from "@radix-ui/themes";
-import { Info } from "lucide-react";
+import { BarChart4, Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import ConsumptionSummaryChart from "./summary/consumptionSummaryChart";
 import ConsumptionSummaryLabelGrid from "./summary/consumptionSummaryLabels/consumptionSummaryLabelGrid";
+import PlaceholderCard from "./common/placeholderCard";
 
 export default function ConsumptionSummaryPanel({
     className,
@@ -54,9 +55,9 @@ export default function ConsumptionSummaryPanel({
 
     if (!selectedConsumptionSummary) {
         return (
-            <Card>
-                <CardContent>Add consumptions to see your summary</CardContent>
-            </Card>
+            <PlaceholderCard icon={<BarChart4 />}>
+                Add consumptions to see your summary
+            </PlaceholderCard>
         );
     }
 
