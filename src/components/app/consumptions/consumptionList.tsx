@@ -4,6 +4,7 @@ import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { cn } from "@/lib/utilities";
 import { Grid } from "@radix-ui/themes";
+import ConsumptionPlaceholder from "../common/consumptionPlaceholder";
 
 /**
  * Renders a list of Consumption components.
@@ -12,8 +13,20 @@ import { Grid } from "@radix-ui/themes";
  * @param {Consumption[]} props.userConsumptions - The user's consumption data.
  * @return {JSX.Element} The consumption list component.
  */
-function ConsumptionList({ className }: { className?: string }): JSX.Element {
+const ConsumptionList = ({
+    className,
+}: {
+    className?: string;
+}): JSX.Element => {
     const { userConsumptions } = useFirebaseData();
+
+    if (!userConsumptions || userConsumptions.length === 0) {
+        return (
+            <ConsumptionPlaceholder>
+                No consumptions found.
+            </ConsumptionPlaceholder>
+        );
+    }
 
     return (
         <Grid className={cn(className)} gap="4">
@@ -26,6 +39,6 @@ function ConsumptionList({ className }: { className?: string }): JSX.Element {
                 ))}
         </Grid>
     );
-}
+};
 
 export default ConsumptionList;

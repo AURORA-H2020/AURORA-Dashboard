@@ -1,8 +1,8 @@
 "use client";
 
-import LoadingSpinner from "@/components/ui/loading";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { cn } from "@/lib/utilities";
+import ConsumptionPlaceholder from "../common/consumptionPlaceholder";
 import RecurringConsumptionPreview from "./recurringConsumptionPreview";
 
 /**
@@ -19,8 +19,12 @@ function RecurringConsumptionList({
 }): JSX.Element {
     const { userRecurringConsumptions } = useFirebaseData();
 
-    if (!userRecurringConsumptions) {
-        return <LoadingSpinner />;
+    if (!userRecurringConsumptions || userRecurringConsumptions.length === 0) {
+        return (
+            <ConsumptionPlaceholder>
+                No consumptions found.
+            </ConsumptionPlaceholder>
+        );
     }
 
     return (
