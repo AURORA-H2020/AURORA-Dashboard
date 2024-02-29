@@ -2,26 +2,18 @@
 
 import firebase_app from "@/firebase/config";
 import { User, getAuth, onAuthStateChanged } from "firebase/auth";
-import {
-    ReactNode,
-    createContext,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+
+interface AuthContextValue {
+    user: User | null;
+    loading: boolean;
+}
 
 // Initialize Firebase auth instance
 const auth = getAuth(firebase_app);
 
 // Create the authentication context
-export const AuthContext = createContext({});
-
-// Custom hook to access the authentication context
-export const useAuthContext = () => useContext(AuthContext);
-
-interface AuthContextProviderProps {
-    children: ReactNode;
-}
+const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 /**
  * AuthContextProvider component to provide authentication context to child components.
@@ -29,9 +21,9 @@ interface AuthContextProviderProps {
  * @param {AuthContextProviderProps} children - The child components to provide authentication context.
  * @return {JSX.Element} The authentication context provided to child components.
  */
-export function AuthContextProvider({
+export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
-}: AuthContextProviderProps): JSX.Element {
+}) => {
     // Set up state to track the authenticated user and loading status
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
@@ -60,4 +52,14 @@ export function AuthContextProvider({
             {children}
         </AuthContext.Provider>
     );
-}
+};
+
+export const useAuthContext = () => {
+    const context = useContext(AuthContext);
+    if (context === undefined) {
+        throw new Error(
+            "useAuthContext must be used within an AuthContextProvider",
+        );
+    }
+    return context;
+};

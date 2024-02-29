@@ -1,9 +1,9 @@
 "use client";
 
-import AuthenticateWithApple from "@/components/auth/authenticateWithApple";
-import AuthenticateWithGoogle from "@/components/auth/authenticateWithGoogle";
-import SignInWithEmail from "@/components/auth/signInWithEmail";
-import SignUpWithEmail from "@/components/auth/signUpWithEmail";
+import AuthenticateWithApple from "@/components/auth/authOptions/authenticateWithApple";
+import AuthenticateWithGoogle from "@/components/auth/authOptions/authenticateWithGoogle";
+import SignInWithEmail from "@/components/auth/authOptions/signInWithEmail";
+import SignUpWithEmail from "@/components/auth/authOptions/signUpWithEmail";
 import {
     Card,
     CardContent,
@@ -53,7 +53,7 @@ const AuthenticationOptions = ({
  *
  * @return {JSX.Element} The sign-in form component
  */
-const SignInForm = () => {
+export const AuthForm = () => {
     const t = useTranslations();
 
     return (
@@ -64,11 +64,7 @@ const SignInForm = () => {
                         <TabsTrigger value="email-signin" className="w-1/2">
                             {t("ui.auth.signIn")}
                         </TabsTrigger>
-                        <TabsTrigger
-                            value="email-signup"
-                            className="w-1/2"
-                            disabled={true}
-                        >
+                        <TabsTrigger value="email-signup" className="w-1/2">
                             {t("ui.auth.signUp")}
                         </TabsTrigger>
                     </TabsList>
@@ -102,5 +98,3 @@ const SignInForm = () => {
         </Flex>
     );
 };
-
-export default SignInForm;

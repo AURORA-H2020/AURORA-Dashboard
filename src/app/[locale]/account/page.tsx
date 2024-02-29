@@ -12,15 +12,11 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import LoadingSpinner from "@/components/ui/loading";
-import { useAuthContext } from "@/context/AuthContext";
 import { deleteAccount } from "@/firebase/firestore/deleteAccount";
 import { downloadUserData } from "@/firebase/firestore/downloadUserData";
-import { useRouter } from "@/navigation";
 import { Flex, Grid } from "@radix-ui/themes";
-import { User } from "firebase/auth";
 import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { toast } from "sonner";
 
 /**
@@ -30,12 +26,6 @@ import { toast } from "sonner";
  */
 function UserSettings(): JSX.Element {
     const t = useTranslations();
-
-    const { user, loading } = useAuthContext() as {
-        user: User;
-        loading: boolean;
-    };
-    const router = useRouter();
 
     const [isDeleteAlertOpen, setDeleteAlertOpen] = useState(false);
 
@@ -58,21 +48,6 @@ function UserSettings(): JSX.Element {
             setDownloading(false);
         }
     };
-
-    useEffect(() => {
-        if (loading) return;
-
-        // Redirect to the home page if no user is authenticated
-        if (!user) {
-            router.replace("/");
-            return;
-        }
-    }, [user, router, loading]);
-
-    if (!user && loading) {
-        // Render loading indicator until the auth check is complete
-        return <LoadingSpinner />;
-    }
 
     // Authenticated user content
     return (

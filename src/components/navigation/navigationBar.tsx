@@ -66,7 +66,7 @@ export default function NavigationBar(): ReactElement {
 
     // t("navigation.menu.account")
     const loggedOutMenus = [
-        { title: "navigation.menu.account", path: "/signin" },
+        { title: "navigation.menu.account", path: "/account" },
     ];
     const loggedInMenus = [
         { title: "navigation.menu.account", path: "/account" },
