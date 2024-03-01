@@ -1,10 +1,21 @@
 "use client";
 
+import PlaceholderCard from "@/components/app/common/placeholderCard";
+import SimplePagination from "@/components/app/common/simplePagination";
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
-import { useFirebaseData } from "@/context/FirebaseContext";
+import { Label } from "@/components/ui/label";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { useAuthContext } from "@/context/AuthContext";
+import { usePaginatedConsumptions } from "@/firebase/firebaseHooks";
 import { cn } from "@/lib/utilities";
-import { Grid } from "@radix-ui/themes";
-import PlaceholderCard from "../common/placeholderCard";
+import { Flex, Grid, Strong } from "@radix-ui/themes";
+import BorderBox from "../common/borderBox";
 
 /**
  * Renders a list of Consumption components.
@@ -18,21 +29,60 @@ const ConsumptionList = ({
 }: {
     className?: string;
 }): JSX.Element => {
-    const { userConsumptions } = useFirebaseData();
+    const { user } = useAuthContext();
 
-    if (!userConsumptions || userConsumptions.length === 0) {
+    const {
+        fetchNextPage,
+        fetchPreviousPage,
+        consumptionPage,
+        maxPage,
+        currentPage,
+        onOrderChange,
+        orderBy,
+        totalConsumptions,
+    } = usePaginatedConsumptions({
+        user: user,
+        pageSize: 10,
+    });
+
+    if (!consumptionPage || consumptionPage.length === 0) {
         return <PlaceholderCard>No consumptions found.</PlaceholderCard>;
     }
-
     return (
-        <Grid className={cn(className)} gap="4">
-            {userConsumptions &&
-                userConsumptions.map((consumption) => (
+        <Grid gap="4" className={cn(className)}>
+            <Flex direction="column" gap="2">
+                <Label htmlFor="order-by">Order by</Label>
+                <Select onValueChange={onOrderChange} value={orderBy}>
+                    <SelectTrigger id="order-by" className="w-[180px]">
+                        <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="createdAt">Created At</SelectItem>
+                        <SelectItem value="value">Value</SelectItem>
+                    </SelectContent>
+                </Select>
+            </Flex>
+            {consumptionPage &&
+                consumptionPage.map((consumption) => (
                     <ConsumptionPreview
                         key={consumption.id}
                         consumption={consumption}
                     />
                 ))}
+
+            <SimplePagination
+                currentPage={currentPage}
+                maxPage={maxPage}
+                fetchPreviousPage={fetchPreviousPage}
+                fetchNextPage={fetchNextPage}
+            />
+            {totalConsumptions && (
+                <BorderBox>
+                    <p>
+                        Total consumptions: <Strong>{totalConsumptions}</Strong>
+                    </p>
+                </BorderBox>
+            )}
         </Grid>
     );
 };
