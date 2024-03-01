@@ -53,7 +53,7 @@ export default function ElectricityForm({
                 Timestamp.fromMillis(Timestamp.now().toMillis() + 172800000),
         },
         description: consumption?.description || undefined,
-        createdAt: Timestamp.now(),
+        createdAt: consumption?.createdAt || Timestamp.now(),
     };
 
     const form = useForm<z.infer<typeof formSchema>>({

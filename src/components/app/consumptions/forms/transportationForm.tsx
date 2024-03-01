@@ -63,7 +63,7 @@ export default function TransportationForm({
                 consumption?.transportation?.dateOfTravelEnd || undefined,
         },
         description: consumption?.description || undefined,
-        createdAt: Timestamp.now(),
+        createdAt: consumption?.createdAt || Timestamp.now(),
     };
 
     const form = useForm<z.infer<typeof formSchema>>({

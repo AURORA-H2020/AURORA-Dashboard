@@ -49,7 +49,7 @@ export default function RecurringTransportationForm({
     };
 
     const initialFormData: DefaultValues<RecurringConsumption> = {
-        createdAt: Timestamp.now(),
+        createdAt: recurringConsumption?.createdAt || Timestamp.now(),
         isEnabled: recurringConsumption?.isEnabled ?? true,
         frequency: {
             unit: recurringConsumption?.frequency?.unit || "daily",
