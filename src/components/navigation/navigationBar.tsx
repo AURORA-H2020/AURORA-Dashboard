@@ -1,19 +1,17 @@
 "use client";
 
+import { useAuthContext } from "@/context/AuthContext";
+import { logout } from "@/firebase/auth/logout";
 import { usePathname, useRouter } from "@/navigation";
-import Link from "next/link";
-import Logo from "./logo";
-import ThemeToggle from "./themeToggle";
-
 import { Flex } from "@radix-ui/themes";
 import { Menu } from "lucide-react";
+import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { ReactElement, useState } from "react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
-
-import { useAuthContext } from "@/context/AuthContext";
-import { logout } from "@/firebase/auth/logout";
-import { useTranslations } from "next-intl";
+import Logo from "./logo";
+import ThemeToggle from "./themeToggle";
 
 const MenuItems = ({ items, pathname }) => {
     return items.map((item, idx) => {

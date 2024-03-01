@@ -1,9 +1,6 @@
 import { Dashboard } from "@/app/[locale]/dashboard";
-
-import { promises as fs } from "fs";
-
 import { SelectDashboardSource } from "@/components/dashboard/selectDashboardSource";
-import firebase_app from "@/firebase/config";
+import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import {
     firebaseStorageDownloadFile,
@@ -11,6 +8,7 @@ import {
 } from "@/lib/firebaseUtils";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Heading } from "@radix-ui/themes";
+import { promises as fs } from "fs";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
 type Props = {
@@ -39,7 +37,7 @@ export default async function Home({
             "utf8",
         );
         globalSummaryData = JSON.parse(file);
-    } else if (firebase_app) {
+    } else if (firebaseApp) {
         fileList =
             (await firebaseStorageListDashboardFiles(
                 FirebaseConstants.buckets.auroraDashboard.folders.dashboardData

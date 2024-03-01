@@ -1,8 +1,8 @@
 import { getAuth, signOut } from "firebase/auth";
-import firebase_app from "../config";
+import { firebaseApp } from "../config";
 
 // Get the authentication instance using the Firebase app
-const auth = getAuth(firebase_app);
+const auth = getAuth(firebaseApp);
 
 /**
  * Asynchronously logs out the user and refreshes the page.

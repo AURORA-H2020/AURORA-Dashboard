@@ -1,4 +1,4 @@
-import firebase_app from "@/firebase/config";
+import { firebaseApp } from "@/firebase/config";
 import {
     ConsumptionWithID,
     RecurringConsumptionWithID,
@@ -26,7 +26,7 @@ import {
 import { useEffect, useState } from "react";
 import { FirebaseConstants } from "./firebase-constants";
 
-const firestore = getFirestore(firebase_app);
+const firestore = getFirestore(firebaseApp);
 
 export const useFetchUserData = (
     user: User | null,

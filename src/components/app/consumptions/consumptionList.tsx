@@ -4,6 +4,7 @@ import PlaceholderCard from "@/components/app/common/placeholderCard";
 import SimplePagination from "@/components/app/common/simplePagination";
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
 import { Label } from "@/components/ui/label";
+import LoadingSpinner from "@/components/ui/loading";
 import {
     Select,
     SelectContent,
@@ -45,7 +46,11 @@ const ConsumptionList = ({
         pageSize: 10,
     });
 
-    if (!consumptionPage || consumptionPage.length === 0) {
+    if (!consumptionPage) {
+        return <LoadingSpinner />;
+    }
+
+    if (consumptionPage.length < 1) {
         return <PlaceholderCard>No consumptions found.</PlaceholderCard>;
     }
     return (

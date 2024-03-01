@@ -1,12 +1,6 @@
-import firebase_app from "@/firebase/config";
+import { firebaseApp } from "@/firebase/config";
 import { CountryData } from "@/models/countryData";
-import {
-    // StorageReference,
-    getDownloadURL,
-    getStorage,
-    listAll,
-    ref,
-} from "firebase/storage";
+import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 
 /**
  * Downloads a file from Firebase Storage.
@@ -15,7 +9,7 @@ import {
  * @return {Promise<any>} A promise that resolves to the downloaded file.
  */
 const downloadFile = async (path: string): Promise<any> => {
-    const firebaseStorage = getStorage(firebase_app);
+    const firebaseStorage = getStorage(firebaseApp);
     const storageRef = ref(firebaseStorage, path);
 
     const downloadURL = await getDownloadURL(storageRef);
@@ -28,7 +22,7 @@ const downloadFile = async (path: string): Promise<any> => {
 export const firebaseStorageListDashboardFiles = async (
     path: string | undefined,
 ): Promise<string[] | undefined> => {
-    const firebaseStorage = getStorage(firebase_app);
+    const firebaseStorage = getStorage(firebaseApp);
     const storageRef = ref(firebaseStorage, path);
 
     try {
@@ -60,7 +54,7 @@ export const firebaseStorageDownloadFile = async (
 export const getLatestCountryFile = async (
     path: string,
 ): Promise<CountryData | null> => {
-    const firebaseStorage = getStorage(firebase_app);
+    const firebaseStorage = getStorage(firebaseApp);
     const storageRef = ref(firebaseStorage, path);
 
     try {

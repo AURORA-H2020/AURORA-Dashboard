@@ -1,6 +1,6 @@
 import { User } from "firebase/auth";
 import { collection, deleteDoc, doc, getFirestore } from "firebase/firestore";
-import firebaseApp from "../config";
+import { firebaseApp } from "../config";
 import { FirebaseConstants } from "../firebase-constants";
 
 // Initialize Firestore

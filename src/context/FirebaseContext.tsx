@@ -11,12 +11,12 @@ import {
     RecurringConsumptionWithID,
 } from "@/models/extensions";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
+import { Consumption } from "@/models/firestore/consumption/consumption";
+import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { useRouter } from "@/navigation";
 import React, { createContext, useContext } from "react";
 import { useAuthContext } from "./AuthContext";
-import { Consumption } from "@/models/firestore/consumption/consumption";
-import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 
 interface FirebaseDataContextValue {
     userData: FirebaseUser | null;

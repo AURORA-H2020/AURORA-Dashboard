@@ -9,7 +9,7 @@ import {
 import { carbonUnit, labelMappings } from "@/lib/constants";
 import { Flex, Grid } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 
 const ConsumptionSummaryLabel = ({
     category,

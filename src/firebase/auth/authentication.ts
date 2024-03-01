@@ -1,4 +1,4 @@
-import firebase_app from "@/firebase/config";
+import { firebaseApp } from "@/firebase/config";
 import {
     GoogleAuthProvider,
     OAuthProvider,
@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 
 // Get the authentication instance using the Firebase app
-const auth = getAuth(firebase_app);
+const auth = getAuth(firebaseApp);
 
 /**
  * Asynchronously signs in a user using the specified method.

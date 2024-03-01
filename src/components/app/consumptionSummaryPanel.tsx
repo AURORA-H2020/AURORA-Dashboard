@@ -19,9 +19,9 @@ import { Box, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import { BarChart4, Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import PlaceholderCard from "./common/placeholderCard";
 import ConsumptionSummaryChart from "./summary/consumptionSummaryChart";
 import ConsumptionSummaryLabelGrid from "./summary/consumptionSummaryLabels/consumptionSummaryLabelGrid";
-import PlaceholderCard from "./common/placeholderCard";
 
 export default function ConsumptionSummaryPanel({
     className,

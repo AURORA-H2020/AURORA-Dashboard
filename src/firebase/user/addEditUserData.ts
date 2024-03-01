@@ -1,7 +1,7 @@
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { User } from "@firebase/auth";
 import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
-import firebaseApp from "../config";
+import { firebaseApp } from "../config";
 import { FirebaseConstants } from "../firebase-constants";
 
 // Initialize Firestore
@@ -14,6 +14,7 @@ function removeInvalidValues(userData: FirebaseUser) {
         "homeEnergyLabel",
         "householdProfile",
         "city",
+        "acceptedLegalDocumentVersion",
     ];
     keysToCheck.forEach((key) => {
         if (userData.hasOwnProperty(key)) {

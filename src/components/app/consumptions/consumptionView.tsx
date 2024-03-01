@@ -1,7 +1,6 @@
-import { ConsumptionWithID } from "@/models/extensions";
-
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
 import { carbonUnit, consumptionMapping } from "@/lib/constants";
+import { ConsumptionWithID } from "@/models/extensions";
 import { useFormatter, useTranslations } from "next-intl";
 import ConsumptionTableRow from "../common/consumptionTableRow";
 

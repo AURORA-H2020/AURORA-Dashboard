@@ -1,10 +1,9 @@
-import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { consumptionMapping, countriesMapping } from "./constants";
-
 import { ConsumptionAttributes } from "@/models/constants";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { consumptionMapping, countriesMapping } from "./constants";
 
 /**
  * Automatically added by shadcn/ui

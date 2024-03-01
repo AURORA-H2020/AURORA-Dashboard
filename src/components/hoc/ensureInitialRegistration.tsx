@@ -1,7 +1,7 @@
 import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
-import LoadingSpinner from "../ui/loading";
 import InitialRegistration from "../app/user/initialRegistration";
+import LoadingSpinner from "../ui/loading";
 
 export const EnsureInitialRegistration = ({ children }) => {
     const { loading } = useAuthContext();

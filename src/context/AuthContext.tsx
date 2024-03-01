@@ -1,6 +1,6 @@
 "use client";
 
-import firebase_app from "@/firebase/config";
+import { firebaseApp } from "@/firebase/config";
 import { User, getAuth, onAuthStateChanged } from "firebase/auth";
 import { createContext, useContext, useEffect, useState } from "react";
 
@@ -10,7 +10,7 @@ interface AuthContextValue {
 }
 
 // Initialize Firebase auth instance
-const auth = getAuth(firebase_app);
+const auth = getAuth(firebaseApp);
 
 // Create the authentication context
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);

@@ -6,6 +6,7 @@ import FormSwitch from "@/components/formItems/formSwitch";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
+import { firebaseApp } from "@/firebase/config";
 import { addEditUserData } from "@/firebase/user/addEditUserData";
 import {
     countriesMapping,

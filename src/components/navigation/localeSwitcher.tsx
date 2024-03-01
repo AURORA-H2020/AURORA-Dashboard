@@ -1,9 +1,7 @@
-import { useLocale, useTranslations } from "next-intl";
-
-import { useTransition } from "react";
-
 import { supportedLocales } from "@/lib/constants";
 import { usePathname, useRouter } from "@/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { useTransition } from "react";
 import {
     Select,
     SelectContent,

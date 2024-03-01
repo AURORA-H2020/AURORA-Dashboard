@@ -1,11 +1,10 @@
-import firebase_app from "@/firebase/config";
+import { Card, CardContent } from "@/components/ui/card";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { getLatestCountryFile } from "@/lib/firebaseUtils";
 import { CountryData } from "@/models/countryData";
-import { promises as fs } from "fs";
-
-import { Card, CardContent } from "@/components/ui/card";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { Heading, Strong, Text } from "@radix-ui/themes";
+import { promises as fs } from "fs";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import AboutContent from "./about";
 import DataDownloads from "./dataDownloads";
@@ -38,7 +37,7 @@ export default async function About({
             "utf8",
         );
         countryData = JSON.parse(file) as CountryData;
-    } else if (firebase_app) {
+    } else if (firebaseApp) {
         countryData = await getLatestCountryFile(
             FirebaseConstants.buckets.auroraDashboard.folders.countryData.name,
         );

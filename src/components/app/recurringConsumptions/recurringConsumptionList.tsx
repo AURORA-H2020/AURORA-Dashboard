@@ -3,6 +3,7 @@
 import PlaceholderCard from "@/components/app/common/placeholderCard";
 import SimplePagination from "@/components/app/common/simplePagination";
 import { Label } from "@/components/ui/label";
+import LoadingSpinner from "@/components/ui/loading";
 import {
     Select,
     SelectContent,
@@ -14,9 +15,8 @@ import { useAuthContext } from "@/context/AuthContext";
 import { usePaginatedRecurringConsumptions } from "@/firebase/firebaseHooks";
 import { cn } from "@/lib/utilities";
 import { Flex, Grid, Strong } from "@radix-ui/themes";
-import RecurringConsumptionPreview from "./recurringConsumptionPreview";
-import LoadingSpinner from "@/components/ui/loading";
 import BorderBox from "../common/borderBox";
+import RecurringConsumptionPreview from "./recurringConsumptionPreview";
 
 /**
  * Renders a list of Recurring Consumption components.

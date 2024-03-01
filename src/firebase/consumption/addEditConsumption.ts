@@ -8,7 +8,7 @@ import {
     getFirestore,
     setDoc,
 } from "firebase/firestore";
-import firebaseApp from "../config";
+import { firebaseApp } from "../config";
 import { FirebaseConstants } from "../firebase-constants";
 
 // Initialize Firestore
