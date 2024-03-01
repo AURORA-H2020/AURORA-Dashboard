@@ -48,7 +48,9 @@ export default function ElectricityForm({
             costs: consumption?.electricity?.costs || undefined,
             householdSize: consumption?.electricity?.householdSize || 1,
             startDate: consumption?.electricity?.startDate || Timestamp.now(),
-            endDate: consumption?.electricity?.endDate || Timestamp.now(),
+            endDate:
+                consumption?.electricity?.endDate ||
+                Timestamp.fromMillis(Timestamp.now().toMillis() + 172800000),
         },
         description: consumption?.description || undefined,
         createdAt: Timestamp.now(),

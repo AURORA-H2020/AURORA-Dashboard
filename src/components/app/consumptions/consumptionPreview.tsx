@@ -113,6 +113,13 @@ const ConsumptionPreview = ({
                                     {consumption.updatedAt
                                         ? format.dateTime(
                                               consumption.updatedAt.toDate(),
+                                              {
+                                                  year: "numeric",
+                                                  month: "long",
+                                                  day: "numeric",
+                                                  hour: "numeric",
+                                                  minute: "numeric",
+                                              },
                                           )
                                         : ""}
                                 </Text>

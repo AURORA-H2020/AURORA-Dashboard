@@ -2,6 +2,7 @@ import { cn } from "@/lib/utilities";
 import { Timestamp } from "firebase/firestore";
 import { CalendarIcon, XIcon } from "lucide-react";
 import { useFormatter } from "next-intl";
+import { ControllerRenderProps } from "react-hook-form";
 import { Button } from "../ui/button";
 import { Calendar } from "../ui/calendar";
 import {
@@ -12,13 +13,14 @@ import {
     FormMessage,
 } from "../ui/form";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { ControllerRenderProps } from "react-hook-form";
+import { TimePickerCalendar } from "../ui/time-picker-input";
 
 const FormDatePicker = ({
     field,
     placeholder,
     label,
     description,
+    showTimePicker = false,
     showClearButton = false,
     minDate = new Date("1990-01-01"),
     maxDate = new Date("2030-01-01"),
@@ -27,6 +29,7 @@ const FormDatePicker = ({
     placeholder: string;
     label?: string;
     description?: string;
+    showTimePicker?: boolean;
     showClearButton?: boolean;
     minDate?: Date;
     maxDate?: Date;
@@ -48,7 +51,14 @@ const FormDatePicker = ({
                             )}
                         >
                             {field.value ? (
-                                format.dateTime(field.value.toDate())
+                                format.dateTime(field.value.toDate(), {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                    ...(showTimePicker
+                                        ? { hour: "numeric", minute: "numeric" }
+                                        : {}),
+                                })
                             ) : (
                                 <span>{placeholder}</span>
                             )}
@@ -72,14 +82,34 @@ const FormDatePicker = ({
                         selected={field.value?.toDate()}
                         defaultMonth={field.value?.toDate()}
                         onSelect={(date) => {
-                            const timestamp = Timestamp.fromDate(
-                                date || new Date(),
+                            const selectedDate = date ? date : new Date();
+
+                            selectedDate.setHours(
+                                field.value?.toDate().getHours() || 0,
+                                field.value?.toDate().getMinutes() || 0,
                             );
+
+                            console.log(selectedDate);
+
+                            const timestamp = Timestamp.fromDate(selectedDate);
                             field.onChange(timestamp);
                         }}
                         disabled={(date) => date > maxDate || date < minDate}
                         initialFocus
                     />
+                    {showTimePicker && (
+                        <div className="p-3 border-t border-border">
+                            <TimePickerCalendar
+                                setDate={(date) => {
+                                    const timestamp = Timestamp.fromDate(
+                                        date || new Date(),
+                                    );
+                                    field.onChange(timestamp);
+                                }}
+                                date={field.value?.toDate()}
+                            />
+                        </div>
+                    )}
                 </PopoverContent>
             </Popover>
             <FormMessage />

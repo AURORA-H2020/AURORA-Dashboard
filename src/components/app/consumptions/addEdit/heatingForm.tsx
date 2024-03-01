@@ -50,7 +50,9 @@ export default function HeatingForm({
             costs: consumption?.heating?.costs || undefined,
             householdSize: consumption?.heating?.householdSize || 1,
             startDate: consumption?.heating?.startDate || Timestamp.now(),
-            endDate: consumption?.heating?.endDate || Timestamp.now(),
+            endDate:
+                consumption?.heating?.endDate ||
+                Timestamp.fromMillis(Timestamp.now().toMillis() + 172800000),
         },
         description: consumption?.description || undefined,
         createdAt: Timestamp.now(),

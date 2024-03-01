@@ -1,8 +1,9 @@
 "use client";
 
 import { Input } from "@/components/ui/input";
-
+import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utilities";
+import { Clock } from "lucide-react";
 import React from "react";
 import {
     TimePickerType,
@@ -92,7 +93,7 @@ const TimePickerInput = React.forwardRef<
                 id={id || picker}
                 name={name || picker}
                 className={cn(
-                    "w-[48px] text-center font-mono text-base tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
+                    "w-[48px] text-center tabular-nums caret-transparent focus:bg-accent focus:text-accent-foreground [&::-webkit-inner-spin-button]:appearance-none",
                     className,
                 )}
                 value={value || calculatedValue}
@@ -112,6 +113,48 @@ const TimePickerInput = React.forwardRef<
     },
 );
 
+interface TimePickerCalendarProps {
+    date: Date | undefined;
+    setDate: (date: Date | undefined) => void;
+}
+
+const TimePickerCalendar = ({ date, setDate }: TimePickerCalendarProps) => {
+    const minuteRef = React.useRef<HTMLInputElement>(null);
+    const hourRef = React.useRef<HTMLInputElement>(null);
+
+    return (
+        <div className="flex items-end gap-2">
+            <div className="grid gap-1 text-center">
+                <Label htmlFor="hours" className="text-xs">
+                    Hours
+                </Label>
+                <TimePickerInput
+                    picker="hours"
+                    date={date}
+                    setDate={setDate}
+                    ref={hourRef}
+                    onRightFocus={() => minuteRef.current?.focus()}
+                />
+            </div>
+            <div className="grid gap-1 text-center">
+                <Label htmlFor="minutes" className="text-xs">
+                    Minutes
+                </Label>
+                <TimePickerInput
+                    picker="minutes"
+                    date={date}
+                    setDate={setDate}
+                    ref={minuteRef}
+                    onLeftFocus={() => hourRef.current?.focus()}
+                />
+            </div>
+            <div className="flex h-10 items-center">
+                <Clock className="ml-2 h-4 w-4" />
+            </div>
+        </div>
+    );
+};
+
 TimePickerInput.displayName = "TimePickerInput";
 
-export { TimePickerInput };
+export { TimePickerInput, TimePickerCalendar };

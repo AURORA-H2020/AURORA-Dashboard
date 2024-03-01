@@ -38,6 +38,13 @@ const RecurringConsumptionView = ({
                     <ConsumptionTableRow label="Created At">
                         {format.dateTime(
                             recurringConsumption.createdAt?.toDate(),
+                            {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                                hour: "numeric",
+                                minute: "numeric",
+                            },
                         )}
                     </ConsumptionTableRow>
                     <ConsumptionTableRow label="Frequency">

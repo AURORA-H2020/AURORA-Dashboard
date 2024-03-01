@@ -69,9 +69,11 @@ export default function RecurringTransportationForm({
                 recurringConsumption?.transportation?.publicVehicleOccupancy ||
                 undefined,
             hourOfTravel:
-                recurringConsumption?.transportation?.hourOfTravel ?? 1,
+                recurringConsumption?.transportation?.hourOfTravel ??
+                new Date().getHours(),
             minuteOfTravel:
-                recurringConsumption?.transportation?.minuteOfTravel ?? 1,
+                recurringConsumption?.transportation?.minuteOfTravel ??
+                new Date().getMinutes(),
             distance:
                 recurringConsumption?.transportation?.distance || undefined,
         },

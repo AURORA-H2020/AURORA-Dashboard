@@ -64,11 +64,21 @@ const ConsumptionView = ({
                         <ConsumptionTableRow label="Beginning">
                             {format.dateTime(
                                 consumption.electricity.startDate.toDate(),
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                },
                             )}
                         </ConsumptionTableRow>
                         <ConsumptionTableRow label="End">
                             {format.dateTime(
                                 consumption.electricity.endDate.toDate(),
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                },
                             )}
                         </ConsumptionTableRow>
                     </TableBody>
@@ -104,11 +114,21 @@ const ConsumptionView = ({
                         <ConsumptionTableRow label="Beginning">
                             {format.dateTime(
                                 consumption.heating.startDate?.toDate(),
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                },
                             )}
                         </ConsumptionTableRow>
                         <ConsumptionTableRow label="End">
                             {format.dateTime(
                                 consumption.heating.startDate?.toDate(),
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                },
                             )}
                         </ConsumptionTableRow>
                     </TableBody>
@@ -121,6 +141,13 @@ const ConsumptionView = ({
                         <ConsumptionTableRow label="Start of travel">
                             {format.dateTime(
                                 consumption.transportation.dateOfTravel.toDate(),
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                    hour: "numeric",
+                                    minute: "numeric",
+                                },
                             )}
                         </ConsumptionTableRow>
 
@@ -128,6 +155,13 @@ const ConsumptionView = ({
                             <ConsumptionTableRow label="End of travel">
                                 {format.dateTime(
                                     consumption.transportation.dateOfTravelEnd.toDate(),
+                                    {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                        hour: "numeric",
+                                        minute: "numeric",
+                                    },
                                 )}
                             </ConsumptionTableRow>
                         ) : null}
@@ -171,11 +205,23 @@ const ConsumptionView = ({
             <Table className="mt-4 mb-4 table-fixed">
                 <TableBody>
                     <ConsumptionTableRow label="Created At">
-                        {format.dateTime(consumption.createdAt.toDate())}
+                        {format.dateTime(consumption.createdAt.toDate(), {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            hour: "numeric",
+                            minute: "numeric",
+                        })}
                     </ConsumptionTableRow>
                     {consumption.updatedAt && (
                         <ConsumptionTableRow label="Updated At">
-                            {format.dateTime(consumption.updatedAt?.toDate())}
+                            {format.dateTime(consumption.updatedAt?.toDate(), {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                                hour: "numeric",
+                                minute: "numeric",
+                            })}
                         </ConsumptionTableRow>
                     )}
                 </TableBody>
