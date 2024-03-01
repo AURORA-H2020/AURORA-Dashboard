@@ -1,6 +1,7 @@
 "use client";
 
 import { EnsureInitialRegistration } from "@/components/hoc/ensureInitialRegistration";
+import { EnsureLatestConsent } from "@/components/hoc/ensureLatestConsent";
 import { ProtectAccount } from "@/components/hoc/protectAccount";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "@/navigation";
@@ -24,27 +25,29 @@ const AccountLayout = ({
     return (
         <ProtectAccount>
             <EnsureInitialRegistration>
-                <Flex className="gap-2 justify-center">
-                    <Button
-                        variant={
-                            pathname === "/account" ? "default" : "outline"
-                        }
-                        asChild
-                    >
-                        <Link href={"/account"}>Home</Link>
-                    </Button>
-                    <Button
-                        variant={
-                            pathname === "/account/settings"
-                                ? "default"
-                                : "outline"
-                        }
-                        asChild
-                    >
-                        <Link href={"/account/settings"}>Settings</Link>
-                    </Button>
-                </Flex>
-                <div>{children}</div>
+                <EnsureLatestConsent>
+                    <Flex className="gap-2 justify-center">
+                        <Button
+                            variant={
+                                pathname === "/account" ? "default" : "outline"
+                            }
+                            asChild
+                        >
+                            <Link href={"/account"}>Home</Link>
+                        </Button>
+                        <Button
+                            variant={
+                                pathname === "/account/settings"
+                                    ? "default"
+                                    : "outline"
+                            }
+                            asChild
+                        >
+                            <Link href={"/account/settings"}>Settings</Link>
+                        </Button>
+                    </Flex>
+                    <div>{children}</div>
+                </EnsureLatestConsent>
             </EnsureInitialRegistration>
         </ProtectAccount>
     );

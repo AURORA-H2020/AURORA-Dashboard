@@ -51,4 +51,8 @@ export interface User {
      * Whether marketing consent is provided
      */
     isMarketingConsentAllowed?: boolean;
+    /**
+     * The last accepted legal document version
+     */
+    acceptedLegalDocumentVersion?: number;
 }

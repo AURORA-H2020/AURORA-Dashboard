@@ -1,3 +1,5 @@
+"use client";
+
 import FormInputField from "@/components/formItems/formInputField";
 import FormSelect from "@/components/formItems/formSelect";
 import FormSwitch from "@/components/formItems/formSwitch";
@@ -17,6 +19,11 @@ import { CityMapping } from "@/models/constants";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
+import {
+    fetchAndActivate,
+    getRemoteConfig,
+    getValue,
+} from "firebase/remote-config";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { DefaultValues, useForm } from "react-hook-form";
@@ -42,6 +49,23 @@ export default function UserDataForm({
         user: User;
     };
 
+    const remoteConfig = getRemoteConfig(firebaseApp);
+
+    const [latestLegalDocumentsVersion, setLatestLegalDocumentsVersion] =
+        useState<number | undefined>();
+
+    useEffect(() => {
+        if (isNewUser) {
+            fetchAndActivate(remoteConfig).then(() => {
+                const version = getValue(
+                    remoteConfig,
+                    "latestLegalDocumentsVersion",
+                ).asNumber();
+                setLatestLegalDocumentsVersion(version);
+            });
+        }
+    }, [isNewUser, remoteConfig]);
+
     const initialFormData: DefaultValues<FirebaseUser> = {
         firstName: userData?.firstName || undefined,
         lastName: userData?.lastName || undefined,
@@ -52,6 +76,9 @@ export default function UserDataForm({
         country: userData?.country || undefined,
         city: userData?.city || undefined,
         isMarketingConsentAllowed: userData?.isMarketingConsentAllowed || false,
+        acceptedLegalDocumentVersion:
+            userData?.acceptedLegalDocumentVersion ??
+            latestLegalDocumentsVersion,
     };
 
     const form = useForm<z.infer<typeof formSchema>>({
