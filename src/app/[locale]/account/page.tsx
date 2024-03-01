@@ -10,14 +10,19 @@ import { Grid } from "@radix-ui/themes";
  * @return {JSX.Element} The account page component with user information and
  *                       a list of Consumption components.
  */
-function AccountPage(): JSX.Element {
+const AccountPage = (): JSX.Element => {
     return (
-        <Grid columns={{ initial: "1", md: "2" }} gap="8" className="mt-8">
+        <Grid
+            columns={{ initial: "1", md: "2" }}
+            gap="8"
+            className="mt-8"
+            align="start"
+        >
             <ConsumptionSummaryPanel />
 
             <ConsumptionPanel />
         </Grid>
     );
-}
+};
 
 export default AccountPage;

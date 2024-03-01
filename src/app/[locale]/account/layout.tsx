@@ -14,11 +14,11 @@ import Link from "next/link";
  * @param {React.ReactNode} props.children - The children to be rendered.
  * @return {React.ReactNode} The rendered AccountLayout component.
  */
-export default function AccountLayout({
+const AccountLayout = ({
     children,
 }: {
     children: React.ReactNode;
-}): React.ReactNode {
+}): React.ReactNode => {
     const pathname = usePathname();
 
     return (
@@ -48,4 +48,6 @@ export default function AccountLayout({
             </EnsureInitialRegistration>
         </ProtectAccount>
     );
-}
+};
+
+export default AccountLayout;

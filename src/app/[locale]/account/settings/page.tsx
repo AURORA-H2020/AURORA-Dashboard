@@ -45,7 +45,7 @@ import { toast } from "sonner";
  *
  * @return {JSX.Element} The user settings page component
  */
-function UserSettings(): JSX.Element {
+const UserSettings = (): JSX.Element => {
     const { user, loading } = useAuthContext();
 
     const { userData } = useFirebaseData();
@@ -303,6 +303,6 @@ function UserSettings(): JSX.Element {
             </AlertDialog>
         </>
     );
-}
+};
 
 export default UserSettings;
