@@ -25,7 +25,7 @@ import { Box, Flex, Heading, Text } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
-import AddEditRecurringConsumptionModal from "./addEdit/addEditRecurringConsumptionModal";
+import AddEditRecurringConsumptionModal from "./modals/addEditRecurringConsumptionModal";
 import RecurringConsumptionView from "./recurringConsumptionView";
 
 /**

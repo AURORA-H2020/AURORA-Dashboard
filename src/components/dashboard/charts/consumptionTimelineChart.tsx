@@ -21,8 +21,8 @@ import { Info } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { SetStateAction, useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
-import { Alert, AlertTitle } from "../ui/alert";
-import MonthPicker from "../ui/month-picker";
+import { Alert, AlertTitle } from "../../ui/alert";
+import MonthPicker from "../../ui/month-picker";
 /*
 import {
     Select,
@@ -33,7 +33,7 @@ import {
 } from "../ui/select";
 */
 
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { Tabs, TabsList, TabsTrigger } from "../../ui/tabs";
 
 /**
  * Renders a Consumption Timeline Chart with various controls for energy mode, calculation mode, and date range.

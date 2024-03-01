@@ -9,11 +9,15 @@ import {
     AlertDialogTitle,
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { useAuthContext } from "@/context/AuthContext";
 import { deleteAccount } from "@/firebase/firestore/deleteAccount";
+import { Flex } from "@radix-ui/themes";
 import { User } from "firebase/auth";
 import { useState } from "react";
 import { toast } from "sonner";
+import BorderBox from "../../common/borderBox";
 
 const DeleteAccountModal = ({
     children,
@@ -27,6 +31,8 @@ const DeleteAccountModal = ({
     const { user } = useAuthContext();
 
     const [isDeleteAlertOpen, setDeleteAlertOpen] = useState(false);
+
+    const [isDeleteConfirm, setDeleteConfirm] = useState(false);
 
     const handleUserDelete = async (user: User) => {
         const { success, requiresReauth } = await deleteAccount(user);
@@ -61,7 +67,26 @@ const DeleteAccountModal = ({
                         {description}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
-                <AlertDialogFooter>
+                <BorderBox className="mt-2">
+                    <Flex direction="row" align="center" className="space-x-4">
+                        <Checkbox
+                            onCheckedChange={(value) =>
+                                value === true
+                                    ? setDeleteConfirm(true)
+                                    : setDeleteConfirm(false)
+                            }
+                            id="confirm-delete"
+                        />
+                        <Label
+                            htmlFor="confirm-delete"
+                            className="text-sm font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        >
+                            Yes, I want to delete my account and understand that
+                            it is lost forever.
+                        </Label>
+                    </Flex>
+                </BorderBox>
+                <AlertDialogFooter className="gap-2">
                     <AlertDialogCancel
                         onClick={() => setDeleteAlertOpen(false)}
                     >
@@ -69,6 +94,7 @@ const DeleteAccountModal = ({
                     </AlertDialogCancel>
                     <AlertDialogAction
                         variant="destructive"
+                        disabled={!isDeleteConfirm}
                         onClick={() => handleUserDelete(user)}
                     >
                         Delete Account

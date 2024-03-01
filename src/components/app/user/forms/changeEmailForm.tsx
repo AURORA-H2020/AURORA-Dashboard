@@ -14,13 +14,13 @@ import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
-export function ChangeEmailForm({
+const ChangeEmailForm = ({
     onFormSubmit,
     className,
 }: {
     onFormSubmit?: (success: boolean) => void;
     className?: string;
-}) {
+}) => {
     const t = useTranslations();
     const formSchema = userChangeEmailSchema(t);
 
@@ -90,4 +90,6 @@ export function ChangeEmailForm({
             </form>
         </Form>
     );
-}
+};
+
+export default ChangeEmailForm;

@@ -30,7 +30,7 @@ import { useEffect, useState } from "react";
 import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import BorderBox from "../common/borderBox";
+import BorderBox from "../../common/borderBox";
 
 export default function UserDataForm({
     userData,
@@ -50,23 +50,6 @@ export default function UserDataForm({
         user: User;
     };
 
-    const remoteConfig = getRemoteConfig(firebaseApp);
-
-    const [latestLegalDocumentsVersion, setLatestLegalDocumentsVersion] =
-        useState<number | undefined>();
-
-    useEffect(() => {
-        if (isNewUser) {
-            fetchAndActivate(remoteConfig).then(() => {
-                const version = getValue(
-                    remoteConfig,
-                    "latestLegalDocumentsVersion",
-                ).asNumber();
-                setLatestLegalDocumentsVersion(version);
-            });
-        }
-    }, [isNewUser, remoteConfig]);
-
     const initialFormData: DefaultValues<FirebaseUser> = {
         firstName: userData?.firstName || undefined,
         lastName: userData?.lastName || undefined,
@@ -78,8 +61,7 @@ export default function UserDataForm({
         city: userData?.city || undefined,
         isMarketingConsentAllowed: userData?.isMarketingConsentAllowed || false,
         acceptedLegalDocumentVersion:
-            userData?.acceptedLegalDocumentVersion ??
-            latestLegalDocumentsVersion,
+            userData?.acceptedLegalDocumentVersion || undefined,
     };
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -108,6 +90,20 @@ export default function UserDataForm({
             onFormSubmit(success);
         }
     };
+
+    useEffect(() => {
+        if (isNewUser) {
+            const remoteConfig = getRemoteConfig(firebaseApp);
+
+            fetchAndActivate(remoteConfig).then(() => {
+                const latestVersion = getValue(
+                    remoteConfig,
+                    "latestLegalDocumentsVersion",
+                ).asNumber();
+                form.setValue("acceptedLegalDocumentVersion", latestVersion);
+            });
+        }
+    }, [form, isNewUser]);
 
     const selectedCountry = form.watch("country");
     const [availableCities, setAvailableCities] = useState<CityMapping[]>([]);

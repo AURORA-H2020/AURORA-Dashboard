@@ -26,7 +26,7 @@ import { Flex, Heading, Text } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
-import AddEditConsumptionModal from "./addEdit/addEditConsumptionModal";
+import AddEditConsumptionModal from "./modals/addEditConsumptionModal";
 import ConsumptionView from "./consumptionView";
 
 /**

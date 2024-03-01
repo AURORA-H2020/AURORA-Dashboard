@@ -9,9 +9,9 @@ import { ConsumptionWithID } from "@/models/extensions";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
-import ElectricityForm from "./electricityForm";
-import HeatingForm from "./heatingForm";
-import TransportationForm from "./transportationForm";
+import ElectricityForm from "../forms/electricityForm";
+import HeatingForm from "../forms/heatingForm";
+import TransportationForm from "../forms/transportationForm";
 
 const AddEditConsumptionModal = React.forwardRef(
     (

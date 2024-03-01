@@ -10,7 +10,7 @@ import { Flex, Heading } from "@radix-ui/themes";
 import { User } from "firebase/auth";
 import { Info } from "lucide-react";
 import Link from "next/link";
-import DeleteAccountModal from "../common/deleteAccountModal";
+import DeleteAccountModal from "./modals/deleteAccountModal";
 
 const UpdateConsent = ({
     latestLegalDocumentsVersion,

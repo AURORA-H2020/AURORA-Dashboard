@@ -4,9 +4,9 @@ import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { deleteAccount } from "@/firebase/firestore/deleteAccount";
 import { Flex, Heading } from "@radix-ui/themes";
-import UserDataForm from "./userDataForm";
+import UserDataForm from "./forms/userDataForm";
 
-export default function InitialRegistration() {
+const InitialRegistration = () => {
     const { user } = useAuthContext();
 
     const { userData } = useFirebaseData();
@@ -39,4 +39,6 @@ export default function InitialRegistration() {
             </Card>
         </Flex>
     );
-}
+};
+
+export default InitialRegistration;

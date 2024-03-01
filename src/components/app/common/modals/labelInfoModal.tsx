@@ -1,6 +1,6 @@
 import { labelMappings } from "@/lib/constants";
 import { useTranslations } from "next-intl";
-import { Badge } from "../ui/badge";
+import { Badge } from "../../../ui/badge";
 import {
     Dialog,
     DialogContent,
@@ -8,8 +8,8 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "../ui/dialog";
-import { Table, TableBody, TableCell, TableRow } from "../ui/table";
+} from "../../../ui/dialog";
+import { Table, TableBody, TableCell, TableRow } from "../../../ui/table";
 
 const LabelInfoModal = ({ children }: { children: React.ReactNode }) => {
     const t = useTranslations();

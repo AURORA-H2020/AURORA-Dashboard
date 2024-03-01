@@ -10,7 +10,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utilities";
 import { RecurringConsumptionWithID } from "@/models/extensions";
 import React, { useState } from "react";
-import RecurringTransportationForm from "./recurringTransportationForm";
+import RecurringTransportationForm from "../forms/recurringTransportationForm";
 
 const AddEditRecurringConsumptionModal = React.forwardRef(
     (

@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import BorderBox from "../common/borderBox";
+import BorderBox from "../../common/borderBox";
 
 export function ChangePasswordForm({
     onFormSubmit,

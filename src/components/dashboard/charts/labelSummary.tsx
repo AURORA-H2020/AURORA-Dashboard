@@ -19,16 +19,16 @@ import { BarChart } from "@tremor/react";
 import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import LabelInfoModal from "../infoModals/labelInfoModal";
-import { Button } from "../ui/button";
+import LabelInfoModal from "../../app/common/modals/labelInfoModal";
+import { Button } from "../../ui/button";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "../ui/select";
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+} from "../../ui/select";
+import { Tabs, TabsList, TabsTrigger } from "../../ui/tabs";
 
 interface LabelChartData extends LabelEntries {
     country: string;
