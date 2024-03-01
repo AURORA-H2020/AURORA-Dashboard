@@ -45,7 +45,7 @@ function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
 
     return (
         <Button
-            className="w-full my-1"
+            className="w-full"
             onClick={() => handleAuthenticateWithApple()}
         >
             <FontAwesomeIcon icon={faApple} className="mr-2" />

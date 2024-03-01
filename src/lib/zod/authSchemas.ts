@@ -23,3 +23,8 @@ export const loginSchema = (t: (arg: string) => string) =>
         email: z.string().email(t("ui.auth.error.invalidEmail")),
         password: z.string(),
     });
+
+export const passwordResetSchema = (t: (arg: string) => string) =>
+    z.object({
+        email: z.string().email(t("ui.auth.error.invalidEmail")),
+    });

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import authenticate from "@/firebase/auth/authentication";
+import { cn } from "@/lib/utilities";
 import { loginSchema } from "@/lib/zod/authSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -15,7 +16,7 @@ import FormPasswordField from "../../formItems/formPasswordField";
  * or Apple. On successful sign-in, displays a success toast and
  * redirects to the account page.
  */
-function SignInWithEmail() {
+const SignInWithEmail = ({ className }: { className?: string }) => {
     const t = useTranslations();
 
     const formSchema = loginSchema(t);
@@ -62,7 +63,7 @@ function SignInWithEmail() {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(handleSignInWithEmail)}
-                className="space-y-8"
+                className={cn(className, "flex flex-col gap-4 w-full mt-4")}
             >
                 <FormField
                     control={form.control}
@@ -88,10 +89,13 @@ function SignInWithEmail() {
                         />
                     )}
                 />
-                <Button type="submit">{t("ui.auth.signIn")}</Button>
+
+                <Button className="w-full" type="submit">
+                    {t("ui.auth.signIn")}
+                </Button>
             </form>
         </Form>
     );
-}
+};
 
 export default SignInWithEmail;

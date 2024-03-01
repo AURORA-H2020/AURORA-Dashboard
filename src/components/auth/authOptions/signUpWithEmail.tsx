@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import signUp from "@/firebase/auth/authentication";
+import { cn } from "@/lib/utilities";
 import { registrationSchema } from "@/lib/zod/authSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -16,7 +17,7 @@ import FormPasswordField from "../../formItems/formPasswordField";
  * @param {z.infer<typeof formSchema>} values - the form values
  * @return {JSX.Element} the sign up form
  */
-function SignUpWithEmail(): JSX.Element {
+function SignUpWithEmail({ className }: { className?: string }): JSX.Element {
     const t = useTranslations();
 
     const formSchema = registrationSchema(t);
@@ -65,7 +66,7 @@ function SignUpWithEmail(): JSX.Element {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(handleSignUpWithEmail)}
-                className="space-y-8"
+                className={cn(className, "flex flex-col gap-4 w-full mt-4")}
             >
                 <FormField
                     control={form.control}
@@ -101,7 +102,9 @@ function SignUpWithEmail(): JSX.Element {
                         />
                     )}
                 />
-                <Button type="submit">{t("ui.auth.signUp")}</Button>
+                <Button className="w-full" type="submit">
+                    {t("ui.auth.signUp")}
+                </Button>
             </form>
         </Form>
     );

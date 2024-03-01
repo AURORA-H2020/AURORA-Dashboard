@@ -47,7 +47,7 @@ function AuthenticateWithGoogle({ isSignIn = true }: { isSignIn?: boolean }) {
 
     return (
         <Button
-            className="w-full my-1"
+            className="w-full"
             onClick={() => handleAuthenticateWithGoogle()}
         >
             <FontAwesomeIcon icon={faGoogle} className="mr-2" />
