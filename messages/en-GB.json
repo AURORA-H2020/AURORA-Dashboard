@@ -135,7 +135,11 @@
     "validation": {
       "error": {
         "validValue": "Please enter a valid number",
-        "maxStringLength": "This field cannot exceed {charLimit} characters"
+        "maxStringLength": "This field cannot exceed {charLimit} characters",
+        "selectAtLeastOneWeekday": "Please select at least one weekday",
+        "selectDayOfMonth": "Please select a day of the month",
+        "specifyPrivateOccupancyLevel": "Please specify a number of passengers",
+        "specifyPublicOccupancyLevel": "Please specify an occupancy level"
       }
     },
     "user": {

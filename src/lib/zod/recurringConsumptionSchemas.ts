@@ -41,7 +41,7 @@ export const recurringTransportationFormSchema = (
                     return true;
                 },
                 {
-                    message: "Please select at least one weekday",
+                    message: t("app.validation.error.selectAtLeastOneWeekday"),
                     path: ["weekdays"],
                 },
             )
@@ -53,7 +53,7 @@ export const recurringTransportationFormSchema = (
                     return true;
                 },
                 {
-                    message: "Please select a day of the month",
+                    message: t("app.validation.error.selectDayOfMonth"),
                     path: ["dayOfMonth"],
                 },
             ),
@@ -87,7 +87,9 @@ export const recurringTransportationFormSchema = (
                     return true;
                 },
                 {
-                    message: "Please specify a number of passengers",
+                    message: t(
+                        "app.validation.error.specifyPrivateOccupancyLevel",
+                    ),
                     path: ["privateVehicleOccupancy"],
                 },
             )
@@ -99,7 +101,9 @@ export const recurringTransportationFormSchema = (
                     return true;
                 },
                 {
-                    message: "Please specify an occupancy level",
+                    message: t(
+                        "app.validation.error.specifyPublicOccupancyLevel",
+                    ),
                     path: ["publicVehicleOccupancy"],
                 },
             ),
