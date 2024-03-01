@@ -1,11 +1,12 @@
 import { z } from "zod";
+import { passwordSchema } from "./common";
 
 export const registrationSchema = (t: (arg: string) => string) =>
     z
         .object({
             email: z.string().email(t("ui.auth.error.invalidEmail")),
-            password: z.string().min(2).max(50),
-            confirmPassword: z.string().min(2).max(50),
+            password: passwordSchema,
+            confirmPassword: passwordSchema,
         })
         .superRefine(({ confirmPassword, password }, ctx) => {
             if (confirmPassword !== password) {
@@ -20,5 +21,5 @@ export const registrationSchema = (t: (arg: string) => string) =>
 export const loginSchema = (t: (arg: string) => string) =>
     z.object({
         email: z.string().email(t("ui.auth.error.invalidEmail")),
-        password: z.string().min(2).max(50),
+        password: z.string(),
     });

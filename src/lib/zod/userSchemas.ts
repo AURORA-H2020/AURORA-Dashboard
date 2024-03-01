@@ -8,6 +8,7 @@ import {
     homeEnergyLabels,
     householdProfiles,
 } from "../constants";
+import { passwordSchema } from "./common";
 
 const userGenders: UserGender[] = genderMappings.map((gender) => gender.key);
 
@@ -50,6 +51,7 @@ export const userDataFormSchema = (
         country: z.string(),
         city: z.string().optional(),
         isMarketingConsentAllowed: z.boolean(),
+        acceptedLegalDocumentVersion: z.number().optional(),
     });
 
 export const userChangeEmailSchema = (t: (arg: string, val?: any) => string) =>
@@ -57,7 +59,7 @@ export const userChangeEmailSchema = (t: (arg: string, val?: any) => string) =>
         email: z.string().email({
             message: t("app.validation.error.email"),
         }),
-        currentPassword: z.string().min(2).max(50),
+        currentPassword: z.string(),
     });
 
 export const userChangePasswordSchema = (
@@ -65,9 +67,9 @@ export const userChangePasswordSchema = (
 ) =>
     z
         .object({
-            currentPassword: z.string().min(2).max(50),
-            password: z.string().min(2).max(50),
-            confirmPassword: z.string().min(2).max(50),
+            currentPassword: z.string(),
+            password: passwordSchema,
+            confirmPassword: passwordSchema,
         })
         .superRefine(({ confirmPassword, password }, ctx) => {
             if (confirmPassword !== password) {

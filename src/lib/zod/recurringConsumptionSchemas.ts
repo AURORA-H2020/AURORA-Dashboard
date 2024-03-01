@@ -27,7 +27,7 @@ export const recurringTransportationFormSchema = (
         frequency: z
             .object({
                 unit: z.enum(["daily", "weekly", "monthly"]),
-                weekdays: z.array(z.coerce.number().min(0).max(6)).optional(),
+                weekdays: z.array(z.coerce.number().min(1).max(7)).optional(),
                 dayOfMonth: z.coerce.number().min(1).max(31).optional(),
             })
             .refine(
