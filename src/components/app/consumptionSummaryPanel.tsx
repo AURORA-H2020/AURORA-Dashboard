@@ -1,6 +1,6 @@
 "use client";
 
-import LabelInfoModal from "@/components/infoModals/labelInfoModal";
+import LabelInfoModal from "@/components/app/common/modals/labelInfoModal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {

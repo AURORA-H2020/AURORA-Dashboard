@@ -14,7 +14,7 @@ import { Separator } from "./ui/separator";
  *
  * @return {JSX.Element} The rendered footer component.
  */
-export default function Footer(): JSX.Element {
+const Footer = (): JSX.Element => {
     const t = useTranslations();
     return (
         <Card className="items-center">
@@ -70,4 +70,6 @@ export default function Footer(): JSX.Element {
             </CardContent>
         </Card>
     );
-}
+};
+
+export default Footer;

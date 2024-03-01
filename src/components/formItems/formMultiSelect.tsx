@@ -3,10 +3,11 @@ import {
     FormDescription,
     FormMessage,
 } from "@/components/ui/form";
+import { cn } from "@/lib/utilities";
+import { useEffect, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
 import { FormItem, FormLabel } from "../ui/form";
 import MultipleSelector, { Option } from "../ui/multiple-selector";
-import { useEffect, useState } from "react";
 
 const FormMultiSelect = ({
     field,
@@ -14,12 +15,14 @@ const FormMultiSelect = ({
     placeholder,
     label,
     description,
+    className,
 }: {
     field: ControllerRenderProps<any, any>;
     options: Option[];
     placeholder: string;
     label?: string;
     description?: string;
+    className?: string;
 }) => {
     const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
 
@@ -40,7 +43,7 @@ const FormMultiSelect = ({
     };
 
     return (
-        <FormItem>
+        <FormItem className={cn(className)}>
             {label && <FormLabel>{label}</FormLabel>}
 
             <FormControl>

@@ -4,13 +4,12 @@ import { cn } from "@/lib/utilities";
 import "@radix-ui/themes/styles.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Inter } from "next/font/google";
-import { Providers } from "./providers";
-
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { ReactNode } from "react";
 import { locales } from "../../config";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,9 +23,9 @@ type Props = {
  *
  * @return {Array} an array of objects containing the locale
  */
-export function generateStaticParams() {
+export const generateStaticParams = async () => {
     return locales.map((locale) => ({ locale }));
-}
+};
 
 /**
  * Generate metadata based on the provided locale.
@@ -34,16 +33,16 @@ export function generateStaticParams() {
  * @param {Omit<Props, "children">} params - Object containing the locale parameter
  * @return {Promise<{ title: string, description: string }>} Object with title and description metadata
  */
-export async function generateMetadata({
+export const generateMetadata = async ({
     params: { locale },
-}: Omit<Props, "children">) {
+}: Omit<Props, "children">) => {
     const t = await getTranslations({ locale });
 
     return {
         title: t("metadata.title"),
         description: t("metadata.description"),
     };
-}
+};
 
 /**
  * RootLayout function to render the entire layout.
@@ -52,10 +51,7 @@ export async function generateMetadata({
  * @param {string} locale - the locale parameter
  * @return {JSX.Element} the rendered HTML layout
  */
-export default async function RootLayout({
-    children,
-    params: { locale },
-}: Props) {
+const RootLayout = async ({ children, params: { locale } }: Props) => {
     unstable_setRequestLocale(locale);
 
     let messages;
@@ -117,4 +113,6 @@ export default async function RootLayout({
             </body>
         </html>
     );
-}
+};
+
+export default RootLayout;

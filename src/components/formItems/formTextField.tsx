@@ -3,6 +3,7 @@ import {
     FormDescription,
     FormMessage,
 } from "@/components/ui/form";
+import { cn } from "@/lib/utilities";
 import { ControllerRenderProps } from "react-hook-form";
 import { FormItem, FormLabel } from "../ui/form";
 import { Textarea } from "../ui/textarea";
@@ -12,13 +13,15 @@ const FormTextField = ({
     placeholder,
     label,
     description,
+    className,
 }: {
     field: ControllerRenderProps<any, any>;
     placeholder: string;
     label?: string;
     description?: string;
+    className?: string;
 }) => (
-    <FormItem>
+    <FormItem className={cn(className)}>
         {label && <FormLabel>{label}</FormLabel>}
         <FormControl>
             <Textarea

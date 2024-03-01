@@ -1,3 +1,4 @@
+import { cn } from "@/lib/utilities";
 import { useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
 import { Checkbox } from "../ui/checkbox";
@@ -18,6 +19,7 @@ const FormSelect = ({
     description,
     disabled = false,
     optOutLabel,
+    className,
 }: {
     field: ControllerRenderProps<any, any>;
     options: { value: string; label: string }[];
@@ -26,6 +28,7 @@ const FormSelect = ({
     description?: string;
     disabled?: boolean;
     optOutLabel?: string;
+    className?: string;
 }) => {
     const [selected, setSelected] = useState<string | undefined | null>(
         field.value || undefined,
@@ -53,7 +56,7 @@ const FormSelect = ({
     };
 
     return (
-        <FormItem>
+        <FormItem className={cn(className)}>
             {label && <FormLabel>{label}</FormLabel>}
             <FormDescription>{description}</FormDescription>
             <Select

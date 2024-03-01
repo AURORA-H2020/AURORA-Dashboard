@@ -1,27 +1,9 @@
 "use client";
 
-import DetailedCard from "@/components/dashboard/detailedCard";
-import {
-    categories,
-    consumptionMapping,
-    countriesMapping,
-} from "@/lib/constants";
-import { getMetaData } from "@/lib/transformData";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { BlocksIcon, Info, UsersIcon } from "lucide-react";
-import { useEffect, useState } from "react";
-import AutoReport from "../../components/dashboard/autoReport";
-import ConsumptionCardSummary from "../../components/dashboard/consumptionCardSummary";
-import ConsumptionCardSummaryCategory from "../../components/dashboard/consumptionCardSummaryCategory";
-import { ConsumptionTimelineChart } from "../../components/dashboard/consumptionTimelineChart";
-import { GenderByCountryChart } from "../../components/dashboard/genderByCountryChart";
-
-import { Box, Flex, Grid } from "@radix-ui/themes";
-import { Card, CardContent } from "../../components/ui/card";
-
+import CountryUsersPieChart from "@/components/dashboard/charts/countryUsersPieChart";
+import { LabelSummary } from "@/components/dashboard/charts/labelSummary";
 import { ConsumptionAverageCompare } from "@/components/dashboard/consumptionAverageCompare";
-import CountryUsersPieChart from "@/components/dashboard/countryUsersPieChart";
-import { LabelSummary } from "@/components/dashboard/labelSummary";
+import DetailedCard from "@/components/dashboard/detailedCard";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import MultipleSelector, { Option } from "@/components/ui/multiple-selector";
 import {
@@ -31,9 +13,25 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import {
+    categories,
+    consumptionMapping,
+    countriesMapping,
+} from "@/lib/constants";
+import { getMetaData } from "@/lib/transformData";
 import { MetaData } from "@/models/dashboard-data";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { Box, Flex, Grid } from "@radix-ui/themes";
+import { BlocksIcon, Info, UsersIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
+import AutoReport from "../../components/dashboard/autoReport";
+import { ConsumptionTimelineChart } from "../../components/dashboard/charts/consumptionTimelineChart";
+import { GenderByCountryChart } from "../../components/dashboard/charts/genderByCountryChart";
+import ConsumptionCardSummary from "../../components/dashboard/consumptionCardSummary";
+import ConsumptionCardSummaryCategory from "../../components/dashboard/consumptionCardSummaryCategory";
+import { Card, CardContent } from "../../components/ui/card";
 
 /**
  * Renders the Dashboard component.

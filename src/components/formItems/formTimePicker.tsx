@@ -1,5 +1,6 @@
 import { FormControl, FormMessage } from "@/components/ui/form";
-import React, { useEffect, useState } from "react";
+import { cn } from "@/lib/utilities";
+import { useEffect, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
 import { FormItem, FormLabel } from "../ui/form";
 import { TimePickerInput } from "../ui/time-picker-input";
@@ -9,10 +10,12 @@ const FormTimePicker = ({
     field,
     label,
     picker,
+    className,
 }: {
     field: ControllerRenderProps<any, any>;
     label?: string;
     picker: TimePickerType;
+    className?: string;
 }) => {
     const [date, setDate] = useState<Date | undefined>(new Date());
 
@@ -40,7 +43,7 @@ const FormTimePicker = ({
     };
 
     return (
-        <FormItem>
+        <FormItem className={cn(className)}>
             {label && <FormLabel className="text-xs">{label}</FormLabel>}
             <FormControl>
                 <TimePickerInput

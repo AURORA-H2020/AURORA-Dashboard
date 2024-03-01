@@ -24,6 +24,7 @@ const FormDatePicker = ({
     showClearButton = false,
     minDate = new Date("1990-01-01"),
     maxDate = new Date("2030-01-01"),
+    className,
 }: {
     field: ControllerRenderProps<any, any>;
     placeholder: string;
@@ -33,11 +34,12 @@ const FormDatePicker = ({
     showClearButton?: boolean;
     minDate?: Date;
     maxDate?: Date;
+    className?: string;
 }) => {
     const format = useFormatter();
 
     return (
-        <FormItem>
+        <FormItem className={cn(className)}>
             {label && <FormLabel>{label}</FormLabel>}
             {description && <FormDescription>{description}</FormDescription>}
             <Popover>
