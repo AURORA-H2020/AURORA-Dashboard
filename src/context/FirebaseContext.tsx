@@ -15,6 +15,8 @@ import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { useRouter } from "@/navigation";
 import React, { createContext, useContext } from "react";
 import { useAuthContext } from "./AuthContext";
+import { Consumption } from "@/models/firestore/consumption/consumption";
+import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 
 interface FirebaseDataContextValue {
     userData: FirebaseUser | null;
@@ -39,9 +41,20 @@ export const FirebaseDataProvider: React.FC<{
         loading,
         router,
     );
-    const userConsumptions = useFetchUserConsumptions(user);
 
-    const userRecurringConsumptions = useFetchUserRecurringConsumptions(user);
+    const userConsumptions = useFetchUserConsumptions({ user: user })?.docs.map(
+        (doc) => ({
+            ...(doc.data() as Consumption),
+            id: doc.id,
+        }),
+    ) as ConsumptionWithID[];
+
+    const userRecurringConsumptions = useFetchUserRecurringConsumptions({
+        user: user,
+    })?.docs.map((doc) => ({
+        ...(doc.data() as RecurringConsumption),
+        id: doc.id,
+    })) as RecurringConsumptionWithID[];
 
     const userConsumptionSummaries = useFetchUserConsumptionSummaries(user);
 
