@@ -232,7 +232,7 @@ export default function TransportationForm({
 
                 <DialogFooter className="flex sm:justify-between">
                     <Button type="submit">
-                        {consumption
+                        {consumption && !isDuplication
                             ? t("app.updateConsumption")
                             : t("app.addConsumption")}
                     </Button>
