@@ -75,7 +75,7 @@ function SignUpWithEmail(): JSX.Element {
                             field={field}
                             inputType="email"
                             placeholder={t("ui.auth.email")}
-                            formLabel={t("ui.auth.email")}
+                            label={t("ui.auth.email")}
                         />
                     )}
                 />
@@ -86,7 +86,7 @@ function SignUpWithEmail(): JSX.Element {
                         <FormPasswordField
                             field={field}
                             placeholder={t("ui.auth.password")}
-                            formLabel={t("ui.auth.password")}
+                            label={t("ui.auth.password")}
                         />
                     )}
                 />
@@ -97,7 +97,7 @@ function SignUpWithEmail(): JSX.Element {
                         <FormPasswordField
                             field={field}
                             placeholder={t("ui.auth.password")}
-                            formLabel={t("ui.auth.confirmPassword")}
+                            label={t("ui.auth.confirmPassword")}
                         />
                     )}
                 />
