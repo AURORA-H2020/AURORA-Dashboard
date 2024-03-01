@@ -1,5 +1,7 @@
-import AddEditConsumptionModal from "@/components/app/consumptions/modals/addEditConsumptionModal";
+"use client";
+
 import ConsumptionList from "@/components/app/consumptions/consumptionList";
+import AddEditConsumptionModal from "@/components/app/consumptions/modals/addEditConsumptionModal";
 import AddEditRecurringConsumptionModal from "@/components/app/recurringConsumptions/modals/addEditRecurringConsumptionModal";
 import RecurringConsumptionList from "@/components/app/recurringConsumptions/recurringConsumptionList";
 import { Button } from "@/components/ui/button";
