@@ -81,7 +81,7 @@ const ConsumptionList = ({
                 fetchPreviousPage={fetchPreviousPage}
                 fetchNextPage={fetchNextPage}
             />
-            {totalConsumptions && (
+            {totalConsumptions > 0 && (
                 <BorderBox>
                     <p>
                         Total consumptions: <Strong>{totalConsumptions}</Strong>

@@ -81,7 +81,7 @@ const ConsumptionList = ({
                 fetchPreviousPage={fetchPreviousPage}
                 fetchNextPage={fetchNextPage}
             />
-            {totalRecurringConsumptions && (
+            {totalRecurringConsumptions > 0 && (
                 <BorderBox>
                     <p>
                         Total recurring consumptions:{" "}
