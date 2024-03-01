@@ -60,7 +60,7 @@ const RecurringConsumptionView = ({
                     {recurringConsumption.frequency.weekdays && (
                         <ConsumptionTableRow label="Weekdays">
                             {recurringConsumption.frequency.weekdays
-                                ?.map((day) => t(weekdays[day].label))
+                                ?.map((day) => t(weekdays[day - 1]?.label))
                                 .join(", ")}
                         </ConsumptionTableRow>
                     )}

@@ -376,31 +376,31 @@ export const recurringConsumptionFrequencies: RecurringConsumptionFrequencyUnitM
 
 export const weekdays: Weekdays[] = [
     {
-        key: 0,
+        key: 1,
         label: t("common.weekdays.monday"),
     },
     {
-        key: 1,
+        key: 2,
         label: t("common.weekdays.tuesday"),
     },
     {
-        key: 2,
+        key: 3,
         label: t("common.weekdays.wednesday"),
     },
     {
-        key: 3,
+        key: 4,
         label: t("common.weekdays.thursday"),
     },
     {
-        key: 4,
+        key: 5,
         label: t("common.weekdays.friday"),
     },
     {
-        key: 5,
+        key: 6,
         label: t("common.weekdays.saturday"),
     },
     {
-        key: 6,
+        key: 7,
         label: t("common.weekdays.sunday"),
     },
 ];
