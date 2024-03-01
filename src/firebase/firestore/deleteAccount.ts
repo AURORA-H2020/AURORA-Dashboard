@@ -14,6 +14,7 @@ export const deleteAccount = async (user: User | null) => {
             .then(() => {
                 console.log("User account deleted");
                 success = true;
+                window.location.reload(); // Refresh the page
             })
             .catch((error) => {
                 if (error.code === "auth/requires-recent-login") {
