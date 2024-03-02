@@ -20,11 +20,11 @@ import { useFormatter, useTranslations } from "next-intl";
  * @return {JSX.Element} - The rendered report component.
  */
 
-export default function AutoReport({
+const AutoReport = ({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}): JSX.Element {
+}): JSX.Element => {
     const t = useTranslations();
     const format = useFormatter();
 
@@ -169,4 +169,6 @@ export default function AutoReport({
             )}
         </>
     );
-}
+};
+
+export default AutoReport;

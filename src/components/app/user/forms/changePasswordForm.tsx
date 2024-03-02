@@ -14,13 +14,13 @@ import { toast } from "sonner";
 import { z } from "zod";
 import BorderBox from "../../common/borderBox";
 
-export function ChangePasswordForm({
+const ChangePasswordForm = ({
     onFormSubmit,
     className,
 }: {
     onFormSubmit?: (success: boolean) => void;
     className?: string;
-}) {
+}) => {
     const t = useTranslations();
     const formSchema = userChangePasswordSchema(t);
 
@@ -100,4 +100,6 @@ export function ChangePasswordForm({
             </form>
         </Form>
     );
-}
+};
+
+export default ChangePasswordForm;

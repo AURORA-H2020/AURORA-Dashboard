@@ -16,7 +16,7 @@ type Props = {
  * @param {Props} reset - the function to reset the error state
  * @return {JSX.Element} the error page component
  */
-export default function Error({ error, reset }: Props) {
+const Error = ({ error, reset }: Props) => {
     const t = useTranslations();
 
     useEffect(() => {
@@ -42,4 +42,6 @@ export default function Error({ error, reset }: Props) {
             </div>
         </PageLayout>
     );
-}
+};
+
+export default Error;

@@ -21,7 +21,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import BorderBox from "../../common/borderBox";
 
-export default function ElectricityForm({
+const ElectricityForm = ({
     consumption,
     isDuplication,
     onConsumptionAdded,
@@ -31,7 +31,7 @@ export default function ElectricityForm({
     isDuplication?: boolean;
     onConsumptionAdded?: (success: boolean) => void;
     className?: string;
-}) {
+}) => {
     const t = useTranslations();
     const formSchema = electricityFormSchema(t);
 
@@ -208,4 +208,6 @@ export default function ElectricityForm({
             </form>
         </Form>
     );
-}
+};
+
+export default ElectricityForm;

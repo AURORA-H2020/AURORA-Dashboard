@@ -10,10 +10,10 @@ import { countriesMapping } from "@/lib/constants";
 import { getMetaDataSummary } from "@/lib/transformData";
 import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
 import { BarList } from "@tremor/react";
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import LoadingSpinner from "../ui/loading";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
-export function ConsumptionAverageCompare({
+const ConsumptionAverageCompare = ({
     metaData,
     categories,
     countries,
@@ -23,7 +23,7 @@ export function ConsumptionAverageCompare({
     categories: ConsumptionCategory[];
     countries: string[];
     title: string;
-}): JSX.Element {
+}): JSX.Element => {
     const t = useTranslations();
 
     const [selectedEnergyMode, setSelectedEnergyMode] =
@@ -135,4 +135,6 @@ export function ConsumptionAverageCompare({
             )}
         </>
     );
-}
+};
+
+export default ConsumptionAverageCompare;

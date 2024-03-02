@@ -23,11 +23,7 @@ import PlaceholderCard from "./common/placeholderCard";
 import ConsumptionSummaryChart from "./summary/consumptionSummaryChart";
 import ConsumptionSummaryLabelGrid from "./summary/consumptionSummaryLabels/consumptionSummaryLabelGrid";
 
-export default function ConsumptionSummaryPanel({
-    className,
-}: {
-    className?: string;
-}) {
+const ConsumptionSummaryPanel = ({ className }: { className?: string }) => {
     const t = useTranslations();
 
     const { userConsumptionSummaries } = useFirebaseData();
@@ -162,4 +158,6 @@ export default function ConsumptionSummaryPanel({
             </Box>
         </Grid>
     );
-}
+};
+
+export default ConsumptionSummaryPanel;

@@ -16,11 +16,11 @@ import { toast } from "sonner";
  * @param {Object} globalSummaryData - The global summary data for download
  * @return {void} No return value
  */
-export default function DataDownloads({
+const DataDownloads = ({
     countryData,
 }: {
     countryData: CountryData | undefined;
-}) {
+}) => {
     const t = useTranslations();
 
     const [downloading, setDownloading] = useState(false);
@@ -53,4 +53,6 @@ export default function DataDownloads({
             </Button>
         </Flex>
     );
-}
+};
+
+export default DataDownloads;

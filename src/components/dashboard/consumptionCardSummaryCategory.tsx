@@ -14,13 +14,13 @@ import { ReactNode } from "react";
  * @param {ConsumptionCategory} props.category - The category of consumption to summarize.
  * @return {ReactNode} - The JSX element representing the consumption card summary category.
  */
-export default function ConsumptionCardSummaryCategory({
+const ConsumptionCardSummaryCategory = ({
     metaData,
     category,
 }: {
     metaData: MetaData | undefined;
     category: ConsumptionCategory;
-}): ReactNode {
+}): ReactNode => {
     const t = useTranslations();
 
     const dataSet: {
@@ -66,4 +66,6 @@ export default function ConsumptionCardSummaryCategory({
             />
         </>
     );
-}
+};
+
+export default ConsumptionCardSummaryCategory;

@@ -9,7 +9,7 @@ import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { ReactNode } from "react";
 import { locales } from "../../config";
-import { Providers } from "./providers";
+import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 

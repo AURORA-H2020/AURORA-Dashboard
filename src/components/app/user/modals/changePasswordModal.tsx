@@ -6,7 +6,7 @@ import {
     DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { ChangePasswordForm } from "../forms/changePasswordForm";
+import ChangePasswordForm from "../forms/changePasswordForm";
 
 const ChangePasswordModal = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(false);

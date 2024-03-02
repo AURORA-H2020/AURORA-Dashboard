@@ -44,7 +44,7 @@ interface LabelChartData extends LabelEntries {
  * @param {string} description - the description of the label summary
  * @return {JSX.Element} The rendered label summary component
  */
-export function LabelSummary({
+const LabelSummary = ({
     globalSummaryData,
     categories,
     title,
@@ -52,7 +52,7 @@ export function LabelSummary({
     globalSummaryData: GlobalSummary | undefined;
     categories: ConsumptionCategory[];
     title: string;
-}): JSX.Element {
+}): JSX.Element => {
     const t = useTranslations();
 
     const [transformedData, setTransformedData] = useState<
@@ -235,4 +235,6 @@ export function LabelSummary({
             />
         </>
     );
-}
+};
+
+export default LabelSummary;

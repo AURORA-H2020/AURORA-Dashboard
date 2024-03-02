@@ -1,8 +1,8 @@
 "use client";
 
 import CountryUsersPieChart from "@/components/dashboard/charts/countryUsersPieChart";
-import { LabelSummary } from "@/components/dashboard/charts/labelSummary";
-import { ConsumptionAverageCompare } from "@/components/dashboard/consumptionAverageCompare";
+import LabelSummary from "@/components/dashboard/charts/labelSummary";
+import ConsumptionAverageCompare from "@/components/dashboard/consumptionAverageCompare";
 import DetailedCard from "@/components/dashboard/detailedCard";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import MultipleSelector, { Option } from "@/components/ui/multiple-selector";
@@ -27,8 +27,8 @@ import { BlocksIcon, Info, UsersIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import AutoReport from "../../components/dashboard/autoReport";
-import { ConsumptionTimelineChart } from "../../components/dashboard/charts/consumptionTimelineChart";
-import { GenderByCountryChart } from "../../components/dashboard/charts/genderByCountryChart";
+import ConsumptionTimelineChart from "../../components/dashboard/charts/consumptionTimelineChart";
+import GenderByCountryChart from "../../components/dashboard/charts/genderByCountryChart";
 import ConsumptionCardSummary from "../../components/dashboard/consumptionCardSummary";
 import ConsumptionCardSummaryCategory from "../../components/dashboard/consumptionCardSummaryCategory";
 import { Card, CardContent } from "../../components/ui/card";
@@ -39,11 +39,11 @@ import { Card, CardContent } from "../../components/ui/card";
  * @param {object} localData - The localData object containing the summaries.
  * @return {JSX.Element} The JSX element representing the Dashboard component.
  */
-export function Dashboard({
+const Dashboard = ({
     globalSummaryData,
 }: {
     globalSummaryData: GlobalSummary | undefined;
-}): JSX.Element {
+}): JSX.Element => {
     const t = useTranslations();
 
     // Options available for country multiselect
@@ -247,4 +247,6 @@ export function Dashboard({
             )}
         </>
     );
-}
+};
+
+export default Dashboard;

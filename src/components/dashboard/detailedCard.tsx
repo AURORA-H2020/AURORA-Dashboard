@@ -18,7 +18,7 @@ import { useFormatter } from "next-intl";
  * @param {ElementType<any>?} props.icon - The optional icon element type.
  * @returns {JSX.Element} - The JSX element representing the detailed card.
  */
-export default function DetailedCard({
+const DetailedCard = ({
     metaData,
     measure,
     categories,
@@ -32,7 +32,7 @@ export default function DetailedCard({
     title: string;
     icon?: ElementType<any>;
     className?: string;
-}): JSX.Element {
+}): JSX.Element => {
     const format = useFormatter();
 
     let metricValue = 0;
@@ -57,4 +57,6 @@ export default function DetailedCard({
             </div>
         </Flex>
     );
-}
+};
+
+export default DetailedCard;

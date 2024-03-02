@@ -11,11 +11,11 @@ import { useTranslations } from "next-intl";
  * @param {string[]} props.countries - The list of countries to filter the metadata by.
  * @return {JSX.Element} The rendered GenderCardSummary component.
  */
-export default function CountryUsersPieChart({
+const CountryUsersPieChart = ({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}): JSX.Element {
+}): JSX.Element => {
     const t = useTranslations();
 
     const dataSet = metaData?.map((country) => {
@@ -52,4 +52,6 @@ export default function CountryUsersPieChart({
             />
         </>
     );
-}
+};
+
+export default CountryUsersPieChart;

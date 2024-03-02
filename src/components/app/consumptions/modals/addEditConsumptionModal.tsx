@@ -45,8 +45,8 @@ const AddEditConsumptionModal = React.forwardRef(
                     {children}
                 </div>
                 <Dialog open={isModalOpen} onOpenChange={handleCloseModal}>
-                    <DialogContent className="sm:max-w-lg p-0">
-                        <ScrollArea className="max-h-[80vh] p-6">
+                    <DialogContent className="sm:max-w-lg">
+                        <ScrollArea className="max-h-[80vh]">
                             <Tabs
                                 value={currentTab}
                                 onValueChange={(value) =>
@@ -75,27 +75,21 @@ const AddEditConsumptionModal = React.forwardRef(
                                     </div>
                                 )}
 
-                                <TabsContent
-                                    value="electricity"
-                                    className="p-2"
-                                >
+                                <TabsContent value="electricity">
                                     <ElectricityForm
                                         consumption={consumption}
                                         onConsumptionAdded={handleCloseModal}
                                         isDuplication={isDuplication}
                                     />
                                 </TabsContent>
-                                <TabsContent value="heating" className="p-2">
+                                <TabsContent value="heating">
                                     <HeatingForm
                                         consumption={consumption}
                                         onConsumptionAdded={handleCloseModal}
                                         isDuplication={isDuplication}
                                     />
                                 </TabsContent>
-                                <TabsContent
-                                    value="transportation"
-                                    className="p-2"
-                                >
+                                <TabsContent value="transportation">
                                     <TransportationForm
                                         consumption={consumption}
                                         onConsumptionAdded={handleCloseModal}

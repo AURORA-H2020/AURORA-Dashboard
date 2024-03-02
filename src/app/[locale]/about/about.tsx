@@ -14,11 +14,11 @@ import { useTranslations } from "next-intl";
  * @param {Object} data - The data to be displayed in the JSON view.
  * @return {JSX.Element} - The JSON view component.
  */
-export default function AboutContent({
+const AboutContent = ({
     countryData,
 }: {
     countryData: CountryData | undefined;
-}): JSX.Element {
+}): JSX.Element => {
     const t = useTranslations();
 
     return (
@@ -42,7 +42,7 @@ export default function AboutContent({
             {countriesMapping.map((country) => {
                 return (
                     <TabsContent value={country.code} key={country.code}>
-                        {countryData ? (
+                        {countryData && (
                             <Grid
                                 columns={{ initial: "1", md: "3" }}
                                 className="gap-2 md:space-x-4 max-md:space-y-4 mt-8"
@@ -108,12 +108,12 @@ export default function AboutContent({
                                     />
                                 </Flex>
                             </Grid>
-                        ) : (
-                            <></>
                         )}
                     </TabsContent>
                 );
             })}
         </Tabs>
     );
-}
+};
+
+export default AboutContent;

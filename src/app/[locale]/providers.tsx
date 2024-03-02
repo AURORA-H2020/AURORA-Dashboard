@@ -16,13 +16,13 @@ import * as React from "react";
  * @param {ThemeProviderProps} props - The props for the ThemeProvider component.
  * @return {ReactElement} The rendered Providers component.
  */
-export function Providers({
+const Providers = ({
     children,
     params: { messages, locale },
     ...props
 }: {
     params: { messages: AbstractIntlMessages; locale: string };
-} & ThemeProviderProps): React.ReactElement {
+} & ThemeProviderProps): React.ReactElement => {
     return (
         <NextIntlClientProvider
             locale={locale}
@@ -41,4 +41,6 @@ export function Providers({
             </AuthContextProvider>
         </NextIntlClientProvider>
     );
-}
+};
+
+export default Providers;

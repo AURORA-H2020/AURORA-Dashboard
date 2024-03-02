@@ -10,11 +10,7 @@ import { useFirebaseData } from "@/context/FirebaseContext";
 import { useState } from "react";
 import UserDataForm from "../forms/userDataForm";
 
-export default function EditUserDataModal({
-    children,
-}: {
-    children: React.ReactNode;
-}) {
+const EditUserDataModal = ({ children }: { children: React.ReactNode }) => {
     const [open, setOpen] = useState(false);
 
     const { userData } = useFirebaseData();
@@ -22,18 +18,19 @@ export default function EditUserDataModal({
     return (
         <Dialog open={open} onOpenChange={setOpen}>
             <DialogTrigger asChild>{children}</DialogTrigger>
-            <DialogContent className="sm:max-w-lg p-0">
-                <DialogHeader>
+            <DialogContent className="sm:max-w-lg">
+                <DialogHeader className="">
                     <DialogTitle>Edit Profile</DialogTitle>
                 </DialogHeader>
-                <ScrollArea className="max-h-[80vh] p-6">
+                <ScrollArea className="max-h-[80vh]">
                     <UserDataForm
                         userData={userData}
                         onFormSubmit={() => setOpen(false)}
-                        className="p-2"
                     />
                 </ScrollArea>
             </DialogContent>
         </Dialog>
     );
-}
+};
+
+export default EditUserDataModal;

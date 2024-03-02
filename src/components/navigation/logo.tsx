@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
  *
  * @return {JSX.Element} The logo component.
  */
-export default function Logo(): JSX.Element {
+const Logo = (): JSX.Element => {
     const [mounted, setMounted] = useState(false);
     const { theme } = useTheme();
 
@@ -42,4 +42,6 @@ export default function Logo(): JSX.Element {
             className="object-scale-down h-8 w-30 mr-3"
         />
     );
-}
+};
+
+export default Logo;

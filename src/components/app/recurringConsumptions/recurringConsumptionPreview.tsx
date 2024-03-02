@@ -21,7 +21,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { deleteDocumentById } from "@/firebase/firestore/deleteDocumentById";
 import { getConsumptionAttributes } from "@/lib/utilities";
 import { RecurringConsumptionWithID } from "@/models/extensions";
-import { Box, Flex, Heading, Text } from "@radix-ui/themes";
+import { Flex, Heading, Text } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -143,45 +143,38 @@ const RecurringConsumptionPreview = ({
             </Card>
 
             <Dialog open={isModalOpen} onOpenChange={() => setModalOpen(false)}>
-                <DialogContent className="sm:max-w-lg p-0">
-                    <ScrollArea className="max-h-[80vh] p-6">
-                        <Box className="p-2">
-                            <DialogHeader>
-                                <DialogTitle>
-                                    {t(
-                                        `category.${recurringConsumption.category}`,
-                                    )}
-                                </DialogTitle>
-                            </DialogHeader>
-                            <RecurringConsumptionView
-                                recurringConsumption={recurringConsumption}
-                            />
+                <DialogContent className="sm:max-w-lg">
+                    <DialogHeader>
+                        <DialogTitle>
+                            {t(`category.${recurringConsumption.category}`)}
+                        </DialogTitle>
+                    </DialogHeader>
+                    <ScrollArea className="max-h-[80vh]">
+                        <RecurringConsumptionView
+                            recurringConsumption={recurringConsumption}
+                        />
 
-                            <DialogFooter className="mt-4">
-                                <Flex
-                                    justify="between"
-                                    className="gap-2 w-full"
+                        <DialogFooter className="mt-4">
+                            <Flex justify="between" className="gap-2 w-full">
+                                <Button
+                                    variant={"destructive"}
+                                    onClick={() => setAlertOpen(true)}
                                 >
-                                    <Button
-                                        variant={"destructive"}
-                                        onClick={() => setAlertOpen(true)}
+                                    {t("common.delete")}
+                                </Button>
+                                <Flex className="gap-2">
+                                    <AddEditRecurringConsumptionModal
+                                        recurringConsumption={
+                                            recurringConsumption
+                                        }
                                     >
-                                        {t("common.delete")}
-                                    </Button>
-                                    <Flex className="gap-2">
-                                        <AddEditRecurringConsumptionModal
-                                            recurringConsumption={
-                                                recurringConsumption
-                                            }
-                                        >
-                                            <Button variant="outline">
-                                                {t("common.edit")}
-                                            </Button>
-                                        </AddEditRecurringConsumptionModal>
-                                    </Flex>
+                                        <Button variant="outline">
+                                            {t("common.edit")}
+                                        </Button>
+                                    </AddEditRecurringConsumptionModal>
                                 </Flex>
-                            </DialogFooter>
-                        </Box>
+                            </Flex>
+                        </DialogFooter>
                     </ScrollArea>
                 </DialogContent>
             </Dialog>

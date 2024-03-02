@@ -12,11 +12,11 @@ import { Alert, AlertTitle } from "../ui/alert";
  * @param {{ metaData: MetaData | undefined }} - Object containing metaData
  * @return {JSX.Element} - The rendered consumption card summary
  */
-export default function ConsumptionCardSummary({
+const ConsumptionCardSummary = ({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}): JSX.Element {
+}): JSX.Element => {
     const t = useTranslations();
     const format = useFormatter();
 
@@ -57,4 +57,6 @@ export default function ConsumptionCardSummary({
             })}
         </>
     );
-}
+};
+
+export default ConsumptionCardSummary;

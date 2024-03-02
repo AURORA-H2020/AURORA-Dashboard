@@ -10,7 +10,7 @@ import {
     SelectValue,
 } from "../ui/select";
 
-export default function LocaleSwitcher() {
+const LocaleSwitcher = () => {
     const t = useTranslations();
     const locale = useLocale();
 
@@ -31,7 +31,7 @@ export default function LocaleSwitcher() {
             disabled={isPending}
         >
             <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Theme" />
+                <SelectValue placeholder="Select language" />
             </SelectTrigger>
             <SelectContent>
                 {supportedLocales.map((locale) => (
@@ -42,4 +42,6 @@ export default function LocaleSwitcher() {
             </SelectContent>
         </Select>
     );
-}
+};
+
+export default LocaleSwitcher;

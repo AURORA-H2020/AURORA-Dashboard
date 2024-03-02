@@ -9,7 +9,7 @@ import { useTranslations } from "next-intl";
  *
  * @return {JSX.Element} The rendered NotFoundPage component.
  */
-export default function NotFoundPage() {
+const NotFoundPage = () => {
     const t = useTranslations();
 
     return (
@@ -17,4 +17,6 @@ export default function NotFoundPage() {
             <p className="max-w-[460px]">{t("error.notFound.description")}</p>
         </PageLayout>
     );
-}
+};
+
+export default NotFoundPage;

@@ -11,11 +11,11 @@ import { useTranslations } from "next-intl";
  * @param {string[]} props.countries - The list of countries to filter the metadata by.
  * @return {JSX.Element} The rendered GenderCardSummary component.
  */
-export default function GenderCardSummary({
+const GenderCardSummary = ({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}): JSX.Element {
+}): JSX.Element => {
     const t = useTranslations();
 
     let countFemale = 0;
@@ -67,4 +67,6 @@ export default function GenderCardSummary({
             />
         </>
     );
-}
+};
+
+export default GenderCardSummary;

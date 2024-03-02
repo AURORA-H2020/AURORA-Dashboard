@@ -8,7 +8,7 @@ import { useEffect } from "react";
 // is requested that doesn't match the middleware and
 // therefore doesn't have a locale associated with it.
 
-export default function NotFound() {
+const NotFound = () => {
     const router = useRouter();
 
     useEffect(() => {
@@ -30,4 +30,6 @@ export default function NotFound() {
             </body>
         </html>
     );
-}
+};
+
+export default NotFound;

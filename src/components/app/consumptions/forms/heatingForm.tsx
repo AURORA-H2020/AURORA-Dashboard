@@ -22,7 +22,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import BorderBox from "../../common/borderBox";
 
-export default function HeatingForm({
+const HeatingForm = ({
     consumption,
     isDuplication,
     onConsumptionAdded,
@@ -32,7 +32,7 @@ export default function HeatingForm({
     isDuplication?: boolean;
     onConsumptionAdded?: (success: boolean) => void;
     className?: string;
-}) {
+}) => {
     const t = useTranslations();
     const formSchema = heatingFormSchema(t);
 
@@ -236,4 +236,6 @@ export default function HeatingForm({
             </form>
         </Form>
     );
-}
+};
+
+export default HeatingForm;

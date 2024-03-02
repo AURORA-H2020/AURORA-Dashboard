@@ -23,9 +23,7 @@ type Props = {
  * @return {Promise<JSX.Element>} A promise that resolves with the
  *                                rendered home page component.
  */
-export default async function About({
-    params: { locale },
-}: Props): Promise<JSX.Element> {
+const About = async ({ params: { locale } }: Props): Promise<JSX.Element> => {
     unstable_setRequestLocale(locale);
     const t = await getTranslations();
 
@@ -70,4 +68,6 @@ export default async function About({
             </Card>
         </>
     );
-}
+};
+
+export default About;

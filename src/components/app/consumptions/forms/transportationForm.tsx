@@ -27,7 +27,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import BorderBox from "../../common/borderBox";
 
-export default function TransportationForm({
+const TransportationForm = ({
     consumption,
     isDuplication,
     onConsumptionAdded,
@@ -37,7 +37,7 @@ export default function TransportationForm({
     isDuplication?: boolean;
     onConsumptionAdded?: (success: boolean) => void;
     className?: string;
-}) {
+}) => {
     const t = useTranslations();
     const formSchema = transportationFormSchema(t);
 
@@ -240,4 +240,6 @@ export default function TransportationForm({
             </form>
         </Form>
     );
-}
+};
+
+export default TransportationForm;

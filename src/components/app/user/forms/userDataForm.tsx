@@ -32,7 +32,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import BorderBox from "../../common/borderBox";
 
-export default function UserDataForm({
+const UserDataForm = ({
     userData,
     onFormSubmit,
     isNewUser = false,
@@ -42,7 +42,7 @@ export default function UserDataForm({
     onFormSubmit?: (success: boolean) => void;
     isNewUser?: boolean;
     className?: string;
-}) {
+}) => {
     const t = useTranslations();
     const formSchema = userDataFormSchema(t);
 
@@ -283,4 +283,6 @@ export default function UserDataForm({
             </form>
         </Form>
     );
-}
+};
+
+export default UserDataForm;

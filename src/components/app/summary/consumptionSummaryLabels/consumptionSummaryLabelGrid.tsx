@@ -7,7 +7,7 @@ import { Grid } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import ConsumptionSummaryLabel from "./consumptionSummaryLabel";
 
-export default function ConsumptionSummaryLabelGrid({
+const ConsumptionSummaryLabelGrid = ({
     consumptionSummary,
     measure,
     className,
@@ -15,7 +15,7 @@ export default function ConsumptionSummaryLabelGrid({
     consumptionSummary: ConsumptionSummary;
     measure: "carbonEmission" | "energyExpended";
     className?: string;
-}) {
+}) => {
     const t = useTranslations();
 
     return (
@@ -51,4 +51,6 @@ export default function ConsumptionSummaryLabelGrid({
             })}
         </Grid>
     );
-}
+};
+
+export default ConsumptionSummaryLabelGrid;

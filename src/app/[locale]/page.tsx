@@ -1,4 +1,4 @@
-import { Dashboard } from "@/app/[locale]/dashboard";
+import Dashboard from "@/app/[locale]/dashboard";
 import { SelectDashboardSource } from "@/components/dashboard/selectDashboardSource";
 import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
@@ -21,10 +21,10 @@ type Props = {
  *
  * @return {Promise<JSX.Element>} The JSX element representing the Home component.
  */
-export default async function Home({
+const Home = async ({
     params: { locale },
     searchParams,
-}: Props): Promise<JSX.Element> {
+}: Props): Promise<JSX.Element> => {
     unstable_setRequestLocale(locale);
     const t = await getTranslations();
 
@@ -74,4 +74,6 @@ export default async function Home({
     } else {
         return <>Not found</>;
     }
-}
+};
+
+export default Home;

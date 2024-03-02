@@ -156,47 +156,40 @@ const ConsumptionPreview = ({
             {/* Modal */}
 
             <Dialog open={isModalOpen} onOpenChange={() => setModalOpen(false)}>
-                <DialogContent className="sm:max-w-lg p-0">
-                    <ScrollArea className="max-h-[80vh] p-6">
-                        <div className="p-2">
-                            <DialogHeader>
-                                <DialogTitle>
-                                    {consumption.category}
-                                </DialogTitle>
-                            </DialogHeader>
-                            <ConsumptionView consumption={consumption} />
+                <DialogContent className="sm:max-w-lg">
+                    <DialogHeader>
+                        <DialogTitle>{consumption.category}</DialogTitle>
+                    </DialogHeader>
+                    <ScrollArea className="max-h-[80vh]">
+                        <ConsumptionView consumption={consumption} />
 
-                            <DialogFooter className="mt-4">
-                                <Flex
-                                    justify="between"
-                                    className="gap-2 w-full"
+                        <DialogFooter className="mt-4">
+                            <Flex justify="between" className="gap-2 w-full">
+                                <Button
+                                    variant={"destructive"}
+                                    onClick={() => setAlertOpen(true)}
                                 >
-                                    <Button
-                                        variant={"destructive"}
-                                        onClick={() => setAlertOpen(true)}
+                                    {t("common.delete")}
+                                </Button>
+                                <Flex className="gap-2">
+                                    <AddEditConsumptionModal
+                                        consumption={consumption}
                                     >
-                                        {t("common.delete")}
-                                    </Button>
-                                    <Flex className="gap-2">
-                                        <AddEditConsumptionModal
-                                            consumption={consumption}
-                                        >
-                                            <Button variant="outline">
-                                                {t("common.edit")}
-                                            </Button>
-                                        </AddEditConsumptionModal>
-                                        <AddEditConsumptionModal
-                                            consumption={consumption}
-                                            isDuplication={true}
-                                        >
-                                            <Button variant="outline">
-                                                {t("common.duplicate")}
-                                            </Button>
-                                        </AddEditConsumptionModal>
-                                    </Flex>
+                                        <Button variant="outline">
+                                            {t("common.edit")}
+                                        </Button>
+                                    </AddEditConsumptionModal>
+                                    <AddEditConsumptionModal
+                                        consumption={consumption}
+                                        isDuplication={true}
+                                    >
+                                        <Button variant="outline">
+                                            {t("common.duplicate")}
+                                        </Button>
+                                    </AddEditConsumptionModal>
                                 </Flex>
-                            </DialogFooter>
-                        </div>
+                            </Flex>
+                        </DialogFooter>
                     </ScrollArea>
                 </DialogContent>
             </Dialog>

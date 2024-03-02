@@ -31,9 +31,7 @@ type ConsumptionTableRowProps =
  * @return {JSX.Element} A table row element for consumption
  * data.
  */
-export default function ConsumptionTableRow(
-    props: ConsumptionTableRowProps,
-): JSX.Element {
+const ConsumptionTableRow = (props: ConsumptionTableRowProps): JSX.Element => {
     const { children, merged, className } = props;
     const label = merged ? null : props.label; // label is ignored if merged is true
 
@@ -50,4 +48,6 @@ export default function ConsumptionTableRow(
             </TableCell>
         </TableRow>
     );
-}
+};
+
+export default ConsumptionTableRow;

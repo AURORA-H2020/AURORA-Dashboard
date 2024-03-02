@@ -38,7 +38,7 @@ const MenuItems = ({ items, pathname }) => {
  *
  * @return {ReactElement} The rendered navigation bar component
  */
-export default function NavigationBar(): ReactElement {
+const NavigationBar = (): ReactElement => {
     const t = useTranslations();
 
     const pathname = usePathname();
@@ -121,4 +121,6 @@ export default function NavigationBar(): ReactElement {
             </Card>
         </nav>
     );
-}
+};
+
+export default NavigationBar;

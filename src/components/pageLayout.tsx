@@ -13,7 +13,7 @@ type Props = {
  * @param {string} title - the title of the page
  * @return {JSX.Element} the rendered page layout
  */
-export default function PageLayout({ children, title }: Props) {
+const PageLayout = ({ children, title }: Props) => {
     return (
         <Card>
             <CardHeader>
@@ -22,4 +22,6 @@ export default function PageLayout({ children, title }: Props) {
             <CardContent>{children}</CardContent>
         </Card>
     );
-}
+};
+
+export default PageLayout;

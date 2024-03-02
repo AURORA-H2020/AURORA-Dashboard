@@ -32,13 +32,13 @@ interface ExtendedDemographic {
     [key: string]: string;
 }
 
-export function GenderByCountryChart({
+const GenderByCountryChart = ({
     metaData,
     title,
 }: {
     metaData: MetaData | undefined;
     title: string;
-}): JSX.Element {
+}): JSX.Element => {
     const t = useTranslations();
 
     const [genderData, setGenderData] = useState<
@@ -139,4 +139,6 @@ export function GenderByCountryChart({
             />
         </>
     );
-}
+};
+
+export default GenderByCountryChart;

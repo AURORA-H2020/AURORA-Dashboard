@@ -40,13 +40,13 @@ const findValueByCategory = (
 /**
  * React component for displaying consumption summary chart.
  */
-export default function ConsumptionSummaryChart({
+const ConsumptionSummaryChart = ({
     consumptionSummary,
     measure,
 }: {
     consumptionSummary: ConsumptionSummary;
     measure: "carbonEmission" | "energyExpended";
-}) {
+}) => {
     const format = useFormatter();
 
     const [currentSummary, setCurrentSummary] = useState<
@@ -124,4 +124,6 @@ export default function ConsumptionSummaryChart({
             stack={true}
         />
     );
-}
+};
+
+export default ConsumptionSummaryChart;

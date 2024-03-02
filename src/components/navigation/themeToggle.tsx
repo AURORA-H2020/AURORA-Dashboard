@@ -10,7 +10,7 @@ import { Button } from "../ui/button";
  *
  * @return {JSX.Element} The theme toggle button.
  */
-export default function ThemeToggle(): JSX.Element {
+const ThemeToggle = (): JSX.Element => {
     const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();
 
@@ -35,4 +35,6 @@ export default function ThemeToggle(): JSX.Element {
             {theme === "light" ? <Moon /> : <Sun />}
         </Button>
     );
-}
+};
+
+export default ThemeToggle;

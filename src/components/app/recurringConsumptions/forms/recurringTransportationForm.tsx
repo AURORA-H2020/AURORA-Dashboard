@@ -32,7 +32,7 @@ import { toast } from "sonner";
 import { z } from "zod";
 import BorderBox from "../../common/borderBox";
 
-export default function RecurringTransportationForm({
+const RecurringTransportationForm = ({
     recurringConsumption,
     onFormSubmit,
     className,
@@ -40,7 +40,7 @@ export default function RecurringTransportationForm({
     recurringConsumption?: RecurringConsumptionWithID;
     onFormSubmit?: (success: boolean) => void;
     className?: string;
-}) {
+}) => {
     const t = useTranslations();
     const formSchema = recurringTransportationFormSchema(t);
 
@@ -318,4 +318,6 @@ export default function RecurringTransportationForm({
             </form>
         </Form>
     );
-}
+};
+
+export default RecurringTransportationForm;

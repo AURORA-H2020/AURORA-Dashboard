@@ -38,19 +38,16 @@ const AddEditRecurringConsumptionModal = React.forwardRef(
                     {children}
                 </div>
                 <Dialog open={isModalOpen} onOpenChange={handleCloseModal}>
-                    <DialogContent className="sm:max-w-lg p-0">
-                        <ScrollArea className="max-h-[80vh] p-6">
-                            <DialogHeader>
-                                <DialogTitle>
-                                    Recurring Transportation
-                                </DialogTitle>
-                            </DialogHeader>
-                            <div className="p-2">
-                                <RecurringTransportationForm
-                                    recurringConsumption={recurringConsumption}
-                                    onFormSubmit={handleCloseModal}
-                                />
-                            </div>
+                    <DialogContent className="sm:max-w-lg">
+                        <DialogHeader>
+                            <DialogTitle>Recurring Transportation</DialogTitle>
+                        </DialogHeader>
+
+                        <ScrollArea className="max-h-[80vh]">
+                            <RecurringTransportationForm
+                                recurringConsumption={recurringConsumption}
+                                onFormSubmit={handleCloseModal}
+                            />
                         </ScrollArea>
                     </DialogContent>
                 </Dialog>
