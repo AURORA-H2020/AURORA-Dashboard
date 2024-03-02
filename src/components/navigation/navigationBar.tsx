@@ -6,14 +6,22 @@ import { usePathname, useRouter } from "@/navigation";
 import { Flex } from "@radix-ui/themes";
 import { Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { ReactElement, useState } from "react";
+import { Link } from "@/navigation";
+import { Dispatch, ReactElement, SetStateAction, useState } from "react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import Logo from "./logo";
 import ThemeToggle from "./themeToggle";
 
-const MenuItems = ({ items, pathname }) => {
+const MenuItems = ({
+    items,
+    pathname,
+    setState,
+}: {
+    items: { title: string; path: string }[];
+    pathname: string;
+    setState: Dispatch<SetStateAction<boolean>>;
+}) => {
     return items.map((item, idx) => {
         // Check if the current pathname is active.
         const isActive =
@@ -24,6 +32,7 @@ const MenuItems = ({ items, pathname }) => {
                 <Button
                     className="w-full"
                     variant={isActive ? "default" : "outline"}
+                    onClick={() => setState(false)}
                     asChild
                 >
                     <Link href={item.path}>{item.title}</Link>
@@ -93,12 +102,17 @@ const NavigationBar = (): ReactElement => {
                     }`}
                 >
                     <ul className="justify-end items-center space-y-2 md:flex md:space-x-6 md:space-y-0">
-                        <MenuItems items={menus} pathname={pathname} />
+                        <MenuItems
+                            items={menus}
+                            pathname={pathname}
+                            setState={setState}
+                        />
                         {user ? (
                             <>
                                 <MenuItems
                                     items={loggedInMenus}
                                     pathname={pathname}
+                                    setState={setState}
                                 />
                                 <li>
                                     <Button
@@ -114,6 +128,7 @@ const NavigationBar = (): ReactElement => {
                             <MenuItems
                                 items={loggedOutMenus}
                                 pathname={pathname}
+                                setState={setState}
                             />
                         )}
                     </ul>
