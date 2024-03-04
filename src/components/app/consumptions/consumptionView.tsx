@@ -31,9 +31,11 @@ const ConsumptionView = ({
                     <ConsumptionTableRow
                         label={t(consumptionAttributes?.unitLabel) ?? ""}
                     >
-                        {format.number(consumption.value) +
-                            " " +
-                            consumptionAttributes?.unit}
+                        {consumption.energyExpended
+                            ? format.number(consumption.energyExpended, {
+                                  maximumFractionDigits: 1,
+                              }) + consumptionAttributes?.unit
+                            : t("common.calculating")}
                     </ConsumptionTableRow>
                     <ConsumptionTableRow label="CO2-Emissions">
                         {consumption.carbonEmissions
@@ -51,6 +53,12 @@ const ConsumptionView = ({
                         {consumption.electricity.costs && (
                             <ConsumptionTableRow label="Costs">
                                 {consumption.electricity.costs}
+                            </ConsumptionTableRow>
+                        )}
+                        {consumption.electricity.electricityExported && (
+                            <ConsumptionTableRow label="Costs">
+                                {consumption.electricity.electricityExported +
+                                    " kWh"}
                             </ConsumptionTableRow>
                         )}
 
@@ -172,6 +180,12 @@ const ConsumptionView = ({
                                 `category.sources.${consumption.transportation.transportationType}`,
                             )}
                         </ConsumptionTableRow>
+
+                        {consumption.transportation.fuelConsumption && (
+                            <ConsumptionTableRow label="Occupancy">
+                                {consumption.transportation.fuelConsumption}
+                            </ConsumptionTableRow>
+                        )}
 
                         {consumption.transportation.privateVehicleOccupancy && (
                             <ConsumptionTableRow label="Occupancy">

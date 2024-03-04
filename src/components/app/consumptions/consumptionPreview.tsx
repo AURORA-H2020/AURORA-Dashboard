@@ -127,11 +127,14 @@ const ConsumptionPreview = ({
                         </Flex>
                         <Flex direction={"column"} align={"end"}>
                             <Text>
-                                {format.number(consumption.value, {
-                                    maximumFractionDigits: 1,
-                                }) +
-                                    " " +
-                                    consumptionAttributes?.unit}
+                                {consumption.energyExpended
+                                    ? format.number(
+                                          consumption.energyExpended,
+                                          {
+                                              maximumFractionDigits: 1,
+                                          },
+                                      ) + consumptionAttributes?.unit
+                                    : t("common.calculating")}
                             </Text>
                             <Text>
                                 {consumption.carbonEmissions ? (
