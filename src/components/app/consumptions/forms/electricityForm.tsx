@@ -16,6 +16,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import { useTranslations } from "next-intl";
+import { useEffect } from "react";
 import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -45,6 +46,8 @@ const ElectricityForm = ({
         electricity: {
             electricitySource:
                 consumption?.electricity?.electricitySource || undefined,
+            electricityExported:
+                consumption?.electricity?.electricityExported || undefined,
             costs: consumption?.electricity?.costs || undefined,
             householdSize: consumption?.electricity?.householdSize || 1,
             startDate: consumption?.electricity?.startDate || Timestamp.now(),
@@ -83,6 +86,14 @@ const ElectricityForm = ({
         }
     };
 
+    const formElectricitySource = form.watch("electricity.electricitySource");
+
+    useEffect(() => {
+        if (formElectricitySource !== "homePhotovoltaics") {
+            form.setValue("electricity.electricityExported", undefined);
+        }
+    }, [formElectricitySource, form]);
+
     return (
         <Form {...form}>
             <form
@@ -90,33 +101,6 @@ const ElectricityForm = ({
                 className={cn(className, "flex flex-col gap-4 w-full")}
             >
                 <BorderBox>
-                    <FormField
-                        control={form.control}
-                        name="value"
-                        render={({ field }) => (
-                            <FormInputField
-                                field={field}
-                                inputType="number"
-                                placeholder="Consumption"
-                                label="Consumption"
-                                description="You can find this information on your electricity bill."
-                            />
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="electricity.householdSize"
-                        render={({ field }) => (
-                            <FormInputField
-                                field={field}
-                                inputType="number"
-                                placeholder="People in household"
-                                label="People in household"
-                                description="How many people, including you, live in your household."
-                            />
-                        )}
-                    />
-
                     <FormField
                         control={form.control}
                         name="electricity.electricitySource"
@@ -132,6 +116,60 @@ const ElectricityForm = ({
                                 placeholder="Electricity Source"
                                 label={"Electricity Source"}
                                 description="Select the appropriate electricity source."
+                            />
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="value"
+                        render={({ field }) => (
+                            <FormInputField
+                                field={field}
+                                inputType="number"
+                                placeholder="Consumption"
+                                unit="kWh"
+                                label={
+                                    formElectricitySource ===
+                                    "homePhotovoltaics"
+                                        ? "Energy produced"
+                                        : "Consumption"
+                                }
+                                description={
+                                    formElectricitySource ===
+                                    "homePhotovoltaics"
+                                        ? "You can usually find this information on an app or website provided by your PV installation contractor."
+                                        : "You can find this information on your electricity bill."
+                                }
+                            />
+                        )}
+                    />
+                    {formElectricitySource === "homePhotovoltaics" && (
+                        <FormField
+                            control={form.control}
+                            name="electricity.electricityExported"
+                            render={({ field }) => (
+                                <FormInputField
+                                    field={field}
+                                    inputType="number"
+                                    placeholder="Energy exported"
+                                    unit="kWh"
+                                    label="Set energy exported to the grid"
+                                    description="You can find this information on your electricity bill."
+                                    showSwitch={true}
+                                />
+                            )}
+                        />
+                    )}
+                    <FormField
+                        control={form.control}
+                        name="electricity.householdSize"
+                        render={({ field }) => (
+                            <FormInputField
+                                field={field}
+                                inputType="number"
+                                placeholder="People in household"
+                                label="People in household"
+                                description="How many people, including you, live in your household."
                             />
                         )}
                     />

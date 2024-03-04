@@ -50,6 +50,10 @@ export const consumptionSources: ConsumptionSources = {
     electricity: [
         { source: "default", name: t("category.sources.default") },
         {
+            source: "defaultGreenProvider",
+            name: t("category.sources.defaultGreenEnergy"),
+        },
+        {
             source: "homePhotovoltaics",
             name: t("category.sources.homePhotovoltaics"),
         },

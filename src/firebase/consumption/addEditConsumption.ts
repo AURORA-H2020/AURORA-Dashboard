@@ -24,6 +24,7 @@ function removeInvalidValues(
         "privateVehicleOccupancy",
         "publicVehicleOccupancy",
         "dateOfTravelEnd",
+        "electricityExported",
     ];
     keysToCheck.forEach((key) => {
         if (

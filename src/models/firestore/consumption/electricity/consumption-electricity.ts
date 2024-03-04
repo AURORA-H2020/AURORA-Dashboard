@@ -17,7 +17,12 @@ export interface ConsumptionElectricity {
      * The electricity type
      * Optional to support legacy consumptions before this property was introduced
      */
-    electricitySource: ConsumptionElectricitySource;
+    electricitySource?: ConsumptionElectricitySource;
+    /**
+     * The electricity type
+     * Optional to support legacy consumptions before this property was introduced
+     */
+    electricityExported?: number;
     /**
      * The start date
      */

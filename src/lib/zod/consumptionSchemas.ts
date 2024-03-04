@@ -34,7 +34,8 @@ const transportationPublicVehicleOccupancies: ConsumptionTransportationPublicVeh
 export const electricityFormSchema = (
     t: (arg: string) => string,
 ): z.ZodType<Consumption> =>
-    z.object({
+    z
+        .object({
         value: z.coerce.number().max(100000, {
             message: t("app.validation.error.validValue"),
         }),
@@ -45,6 +46,12 @@ export const electricityFormSchema = (
                     electricitySources[0],
                     ...electricitySources,
                 ]),
+                    electricityExported: z.coerce
+                        .number()
+                        .max(100000, {
+                            message: t("app.validation.error.validValue"),
+                        })
+                        .optional(),
                 costs: z.coerce.number().max(100000).optional(),
                 householdSize: z.coerce.number().min(1).max(100),
                 startDate: TimestampSchema,
@@ -64,7 +71,23 @@ export const electricityFormSchema = (
             ),
         description: z.string().max(1000).optional(),
         createdAt: TimestampSchema,
-    });
+        })
+        .refine(
+            (data) => {
+                if (
+                    data.electricity.electricityExported &&
+                    data.value < data.electricity.electricityExported
+                ) {
+                    return false;
+                }
+                return true;
+            },
+            {
+                message:
+                    "Your exported electricity cannot exceed your total production",
+                path: ["electricity", "electricityExported"],
+            },
+        );
 
 export const heatingFormSchema = (
     t: (arg: string) => string,
