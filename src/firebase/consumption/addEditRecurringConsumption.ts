@@ -21,6 +21,7 @@ function removeInvalidValues(
     const transportationKeys = [
         "privateVehicleOccupancy",
         "publicVehicleOccupancy",
+        "fuelConsumption",
     ];
     transportationKeys.forEach((key) => {
         if (

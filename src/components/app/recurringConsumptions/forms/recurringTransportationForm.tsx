@@ -62,6 +62,9 @@ const RecurringTransportationForm = ({
             transportationType:
                 recurringConsumption?.transportation?.transportationType ||
                 undefined,
+            fuelConsumption:
+                recurringConsumption?.transportation?.fuelConsumption ||
+                undefined,
             privateVehicleOccupancy:
                 recurringConsumption?.transportation?.privateVehicleOccupancy ||
                 undefined,
@@ -259,6 +262,24 @@ const RecurringTransportationForm = ({
                             />
                         )}
                     />
+
+                    {["fuelCar", "hybridCar", "motorcycle"].includes(
+                        formTransportationType,
+                    ) && (
+                        <FormField
+                            control={form.control}
+                            name="transportation.fuelConsumption"
+                            render={({ field }) => (
+                                <FormInputField
+                                    field={field}
+                                    inputType="number"
+                                    placeholder="Fuel Consumption per 100km"
+                                    label="Set custom fuel consumption"
+                                    showSwitch={true}
+                                />
+                            )}
+                        />
+                    )}
 
                     {privateVehicleTypes.includes(formTransportationType) && (
                         <FormField

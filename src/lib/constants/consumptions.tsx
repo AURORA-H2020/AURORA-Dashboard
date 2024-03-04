@@ -188,7 +188,21 @@ export const consumptionSources: ConsumptionSources = {
             name: t("category.sources.highSpeedTrain"),
             type: "public",
         },
-        { source: "plane", name: t("category.sources.plane"), type: "none" },
+        {
+            source: "plane",
+            name: t("category.sources.planeDomestic"),
+            type: "none",
+        },
+        {
+            source: "planeIntraEu",
+            name: t("category.sources.planeIntraEu"),
+            type: "none",
+        },
+        {
+            source: "planeExtraEu",
+            name: t("category.sources.planeExtraEu"),
+            type: "none",
+        },
         {
             source: "electricBike",
             name: t("category.sources.electricBike"),

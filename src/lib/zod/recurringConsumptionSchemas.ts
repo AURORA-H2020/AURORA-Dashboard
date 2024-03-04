@@ -64,6 +64,7 @@ export const recurringTransportationFormSchema = (
                     transportationTypes[0],
                     ...transportationTypes,
                 ]),
+                fuelConsumption: z.coerce.number().min(1).max(50).optional(),
                 privateVehicleOccupancy: z.coerce
                     .number()
                     .min(1)

@@ -36,41 +36,41 @@ export const electricityFormSchema = (
 ): z.ZodType<Consumption> =>
     z
         .object({
-        value: z.coerce.number().max(100000, {
-            message: t("app.validation.error.validValue"),
-        }),
-        category: z.literal("electricity"),
-        electricity: z
-            .object({
-                electricitySource: z.enum([
-                    electricitySources[0],
-                    ...electricitySources,
-                ]),
+            value: z.coerce.number().max(100000, {
+                message: t("app.validation.error.validValue"),
+            }),
+            category: z.literal("electricity"),
+            electricity: z
+                .object({
+                    electricitySource: z.enum([
+                        electricitySources[0],
+                        ...electricitySources,
+                    ]),
                     electricityExported: z.coerce
                         .number()
                         .max(100000, {
                             message: t("app.validation.error.validValue"),
                         })
                         .optional(),
-                costs: z.coerce.number().max(100000).optional(),
-                householdSize: z.coerce.number().min(1).max(100),
-                startDate: TimestampSchema,
-                endDate: TimestampSchema,
-            })
-            .refine(
-                (data) => {
-                    if (data.endDate < data.startDate) {
-                        return false;
-                    }
-                    return true;
-                },
-                {
-                    message: "End date must be after start date",
-                    path: ["endDate"],
-                },
-            ),
-        description: z.string().max(1000).optional(),
-        createdAt: TimestampSchema,
+                    costs: z.coerce.number().max(100000).optional(),
+                    householdSize: z.coerce.number().min(1).max(100),
+                    startDate: TimestampSchema,
+                    endDate: TimestampSchema,
+                })
+                .refine(
+                    (data) => {
+                        if (data.endDate < data.startDate) {
+                            return false;
+                        }
+                        return true;
+                    },
+                    {
+                        message: "End date must be after start date",
+                        path: ["endDate"],
+                    },
+                ),
+            description: z.string().max(1000).optional(),
+            createdAt: TimestampSchema,
         })
         .refine(
             (data) => {
@@ -154,6 +154,7 @@ export const transportationFormSchema = (
                     transportationTypes[0],
                     ...transportationTypes,
                 ]),
+                fuelConsumption: z.coerce.number().min(1).max(50).optional(),
                 privateVehicleOccupancy: z.coerce
                     .number()
                     .min(1)

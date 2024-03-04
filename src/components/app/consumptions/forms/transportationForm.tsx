@@ -51,6 +51,8 @@ const TransportationForm = ({
         transportation: {
             transportationType:
                 consumption?.transportation?.transportationType || undefined,
+            fuelConsumption:
+                consumption?.transportation?.fuelConsumption || undefined,
             privateVehicleOccupancy:
                 consumption?.transportation?.privateVehicleOccupancy ||
                 undefined,
@@ -112,6 +114,11 @@ const TransportationForm = ({
                 onSubmit={form.handleSubmit(onSubmit)}
                 className={cn(className, "flex flex-col gap-4 w-full")}
             >
+                <BorderBox className="text-sm text-muted-foreground">
+                    Please, do not add travels you make on behalf of your
+                    company. This does not include your commute, which should
+                    still be added.
+                </BorderBox>
                 <BorderBox>
                     <FormField
                         control={form.control}
@@ -120,8 +127,9 @@ const TransportationForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="number"
-                                placeholder="Consumption"
-                                label="Consumption"
+                                placeholder="Distance"
+                                label="Distance"
+                                unit="km"
                             />
                         )}
                     />
@@ -143,6 +151,24 @@ const TransportationForm = ({
                             />
                         )}
                     />
+
+                    {["fuelCar", "hybridCar", "motorcycle"].includes(
+                        formTransportationType,
+                    ) && (
+                        <FormField
+                            control={form.control}
+                            name="transportation.fuelConsumption"
+                            render={({ field }) => (
+                                <FormInputField
+                                    field={field}
+                                    inputType="number"
+                                    placeholder="Fuel Consumption per 100km"
+                                    label="Set custom fuel consumption"
+                                    showSwitch={true}
+                                />
+                            )}
+                        />
+                    )}
 
                     {privateVehicleTypes.includes(formTransportationType) && (
                         <FormField
