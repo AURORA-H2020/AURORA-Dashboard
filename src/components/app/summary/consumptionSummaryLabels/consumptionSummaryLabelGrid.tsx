@@ -1,6 +1,6 @@
 "use client";
 
-import { consumptionMapping } from "@/lib/constants";
+import { consumptionMapping } from "@/lib/constants/consumptions";
 import { cn } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { Grid } from "@radix-ui/themes";

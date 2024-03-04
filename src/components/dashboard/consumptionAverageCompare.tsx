@@ -6,7 +6,7 @@ import { Flex, Heading } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-import { countriesMapping } from "@/lib/constants";
+import { countriesMapping } from "@/lib/constants/constants";
 import { getMetaDataSummary } from "@/lib/transformData";
 import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
 import { BarList } from "@tremor/react";

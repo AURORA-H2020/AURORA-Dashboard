@@ -7,7 +7,7 @@ import {
     genderMappings,
     homeEnergyLabels,
     householdProfiles,
-} from "../constants";
+} from "../constants/constants";
 import { passwordSchema } from "./common";
 
 const userGenders: UserGender[] = genderMappings.map((gender) => gender.key);

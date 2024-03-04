@@ -9,14 +9,14 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField, FormLabel } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
 import { addEditRecurringConsumption } from "@/firebase/consumption/addEditRecurringConsumption";
+import { weekdays } from "@/lib/constants/constants";
 import {
     consumptionSources,
     privateVehicleTypes,
     publicVehicleOccupancies,
     publicVerhicleTypes,
     recurringConsumptionFrequencies,
-    weekdays,
-} from "@/lib/constants";
+} from "@/lib/constants/consumptions";
 import { cn } from "@/lib/utilities";
 import { recurringTransportationFormSchema } from "@/lib/zod/recurringConsumptionSchemas";
 import { RecurringConsumptionWithID } from "@/models/extensions";

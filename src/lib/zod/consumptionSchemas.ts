@@ -11,7 +11,7 @@ import {
     privateVehicleTypes,
     publicVehicleOccupancies,
     publicVerhicleTypes,
-} from "../constants";
+} from "../constants/consumptions";
 
 const TimestampSchema = z.instanceof(Timestamp);
 

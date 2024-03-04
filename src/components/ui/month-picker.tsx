@@ -1,4 +1,4 @@
-import { monthNames } from "@/lib/constants";
+import { monthNames } from "@/lib/constants/constants";
 import { Flex, Text } from "@radix-ui/themes";
 import { CalendarIcon } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";

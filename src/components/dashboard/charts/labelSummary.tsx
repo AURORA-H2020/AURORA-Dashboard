@@ -1,6 +1,7 @@
 "use client";
 
-import { countriesMapping, labelMappings } from "@/lib/constants";
+import { countriesMapping } from "@/lib/constants/constants";
+import { labelMappings } from "@/lib/constants/consumptions";
 import { annualLabelData } from "@/lib/transformData";
 import {
     getYearsInSummary,

@@ -12,7 +12,7 @@ import {
     privateVehicleTypes,
     publicVehicleOccupancies,
     publicVerhicleTypes,
-} from "@/lib/constants";
+} from "@/lib/constants/consumptions";
 import { cn } from "@/lib/utilities";
 import { transportationFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";

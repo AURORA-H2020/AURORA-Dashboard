@@ -1,7 +1,7 @@
 import { RecurringConsumptionWithID } from "@/models/extensions";
 
 import { Table, TableBody } from "@/components/ui/table";
-import { weekdays } from "@/lib/constants";
+import { weekdays } from "@/lib/constants/constants";
 import { useFormatter, useTranslations } from "next-intl";
 import ConsumptionTableRow from "../common/consumptionTableRow";
 

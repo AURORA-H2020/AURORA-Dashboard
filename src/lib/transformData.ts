@@ -11,7 +11,8 @@ import {
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { DateRange } from "react-day-picker";
-import { genderMappings, labelMappings } from "./constants";
+import { genderMappings } from "./constants/constants";
+import { labelMappings } from "./constants/consumptions";
 import { getMonthShortName } from "./utilities";
 
 /**

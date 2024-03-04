@@ -6,7 +6,8 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import { carbonUnit, labelMappings } from "@/lib/constants";
+import { carbonUnit } from "@/lib/constants/constants";
+import { labelMappings } from "@/lib/constants/consumptions";
 import { Flex, Grid } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
 import { ReactElement } from "react";

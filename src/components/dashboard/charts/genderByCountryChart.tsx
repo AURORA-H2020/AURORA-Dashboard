@@ -1,4 +1,4 @@
-import { countriesMapping, genderMappings } from "@/lib/constants";
+import { countriesMapping, genderMappings } from "@/lib/constants/constants";
 import { CalculationMode, MetaData } from "@/models/dashboard-data";
 import { BarChart } from "@tremor/react";
 

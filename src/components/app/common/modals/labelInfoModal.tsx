@@ -1,4 +1,4 @@
-import { labelMappings } from "@/lib/constants";
+import { labelMappings } from "@/lib/constants/consumptions";
 import { useTranslations } from "next-intl";
 import { Badge } from "../../../ui/badge";
 import {

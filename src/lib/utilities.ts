@@ -3,7 +3,8 @@ import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { consumptionMapping, countriesMapping } from "./constants";
+import { countriesMapping } from "./constants/constants";
+import { consumptionMapping } from "./constants/consumptions";
 
 /**
  * Automatically added by shadcn/ui

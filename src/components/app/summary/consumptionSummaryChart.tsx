@@ -1,6 +1,6 @@
 "use client";
 
-import { categories, consumptionMapping } from "@/lib/constants";
+import { categories, consumptionMapping } from "@/lib/constants/consumptions";
 import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";

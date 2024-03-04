@@ -1,4 +1,4 @@
-import { categories } from "@/lib/constants";
+import { categories } from "@/lib/constants/consumptions";
 import { getConsumptionAttributes } from "@/lib/utilities";
 import { MetaData } from "@/models/dashboard-data";
 import { Strong } from "@radix-ui/themes";

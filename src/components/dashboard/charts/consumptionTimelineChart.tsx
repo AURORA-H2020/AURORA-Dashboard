@@ -1,6 +1,6 @@
 "use client";
 
-import { countriesMapping } from "@/lib/constants";
+import { countriesMapping } from "@/lib/constants/constants";
 import { temporalData } from "@/lib/transformData";
 import {
     getSortedCountryLabels,

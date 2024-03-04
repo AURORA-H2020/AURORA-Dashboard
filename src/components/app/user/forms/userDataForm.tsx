@@ -13,7 +13,7 @@ import {
     genderMappings,
     homeEnergyLabels,
     householdProfiles,
-} from "@/lib/constants";
+} from "@/lib/constants/constants";
 import { cn } from "@/lib/utilities";
 import { userDataFormSchema } from "@/lib/zod/userSchemas";
 import { CityMapping } from "@/models/constants";

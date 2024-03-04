@@ -13,11 +13,8 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
-import {
-    categories,
-    consumptionMapping,
-    countriesMapping,
-} from "@/lib/constants";
+import { countriesMapping } from "@/lib/constants/constants";
+import { categories, consumptionMapping } from "@/lib/constants/consumptions";
 import { getMetaData } from "@/lib/transformData";
 import { MetaData } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";

@@ -1,7 +1,7 @@
 "use client";
 
 import AboutJson from "@/components/aboutPage/jsonView";
-import { countriesMapping } from "@/lib/constants";
+import { countriesMapping } from "@/lib/constants/constants";
 import { CountryData } from "@/models/countryData";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";

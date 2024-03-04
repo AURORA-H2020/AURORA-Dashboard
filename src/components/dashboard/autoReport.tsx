@@ -7,7 +7,7 @@ import {
     AccordionTrigger,
 } from "@/components/ui/accordion";
 
-import { carbonUnit, countriesMapping } from "@/lib/constants";
+import { carbonUnit, countriesMapping } from "@/lib/constants/constants";
 import { getMetaDataSummary } from "@/lib/transformData";
 import { Heading, Text } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";

@@ -7,7 +7,7 @@ import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
 import { addEditConsumption } from "@/firebase/consumption/addEditConsumption";
-import { consumptionSources } from "@/lib/constants";
+import { consumptionSources } from "@/lib/constants/consumptions";
 import { cn } from "@/lib/utilities";
 import { electricityFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";

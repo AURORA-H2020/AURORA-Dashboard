@@ -3,7 +3,7 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { consumptionMapping } from "@/lib/constants";
+import { consumptionMapping } from "@/lib/constants/consumptions";
 import { cn } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
