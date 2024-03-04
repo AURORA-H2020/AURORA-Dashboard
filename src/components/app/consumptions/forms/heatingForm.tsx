@@ -102,33 +102,6 @@ const HeatingForm = ({
                 <BorderBox>
                     <FormField
                         control={form.control}
-                        name="value"
-                        render={({ field }) => (
-                            <FormInputField
-                                field={field}
-                                inputType="number"
-                                placeholder="Consumption"
-                                label="Consumption"
-                                description="You can find this information on your heating bill."
-                            />
-                        )}
-                    />
-                    <FormField
-                        control={form.control}
-                        name="heating.householdSize"
-                        render={({ field }) => (
-                            <FormInputField
-                                field={field}
-                                inputType="number"
-                                placeholder="People in household"
-                                label="People in household"
-                                description="How many people, including you, live in your household."
-                            />
-                        )}
-                    />
-
-                    <FormField
-                        control={form.control}
                         name="heating.heatingFuel"
                         render={({ field }) => (
                             <FormSelect
@@ -165,6 +138,37 @@ const HeatingForm = ({
                             )}
                         />
                     )}
+                    <FormField
+                        control={form.control}
+                        name="value"
+                        render={({ field }) => (
+                            <FormInputField
+                                field={field}
+                                inputType="number"
+                                placeholder="Consumption"
+                                label="Consumption"
+                                description="You can find this information on your heating bill."
+                                unit={
+                                    consumptionSources.heating.find(
+                                        (e) => e.source === formHeatingFuel,
+                                    )?.unit || undefined
+                                }
+                            />
+                        )}
+                    />
+                    <FormField
+                        control={form.control}
+                        name="heating.householdSize"
+                        render={({ field }) => (
+                            <FormInputField
+                                field={field}
+                                inputType="number"
+                                placeholder="People in household"
+                                label="People in household"
+                                description="How many people, including you, live in your household."
+                            />
+                        )}
+                    />
                 </BorderBox>
 
                 <BorderBox>

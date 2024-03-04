@@ -13,7 +13,11 @@ import { UserHouseholdProfile } from "./firestore/user/user-householdProfile";
 
 export interface ConsumptionSources {
     electricity: { source: ConsumptionElectricitySource; name: string }[];
-    heating: { source: ConsumptionHeatingFuel; name: string }[];
+    heating: {
+        source: ConsumptionHeatingFuel;
+        name: string;
+        unit: "kg" | "kWh" | "l";
+    }[];
     districtHeating: {
         source: ConsumptionDistrictHeatingSource;
         name: string;
