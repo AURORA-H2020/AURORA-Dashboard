@@ -252,7 +252,7 @@
     "transportation": "Transportation",
     "heating": "Heating",
     "sources": {
-      "default": "Default",
+      "default": "National Grid (standard)",
       "homePhotovoltaics": "Home Photovoltaics",
       "oil": "Oil",
       "naturalGas": "Natural gas",
@@ -279,11 +279,16 @@
       "electricPassengerTrain": "Electric passenger train",
       "dieselPassengerTrain": "Diesel passenger train",
       "highSpeedTrain": "High speed train",
-      "plane": "Plane",
+      "planeDomestic": "Plane (domestic)",
       "electricBike": "Electric bike",
       "electricScooter": "Electric scooter",
       "bike": "Bike",
-      "walking": "Walking"
+      "walking": "Walking",
+      "defaultGreenEnergy": "National Grid (green provider)",
+      "firewood": "Firewood",
+      "butane": "Butane",
+      "planeIntraEu": "Plane (intra EU)",
+      "planeExtraEu": "Plane (extra EU)"
     }
   },
   "unitLabel": {
