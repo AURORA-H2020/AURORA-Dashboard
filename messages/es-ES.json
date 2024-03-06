@@ -1,163 +1,163 @@
 {
   "about": {
     "carbonEmissionLabels": {
-      "title": "",
-      "description": ""
+      "title": "Etiquetas de Emisiones de Carbono",
+      "description": "Los datos que utilizamos para calcular la etiqueta de emisiones de carbono en {countryName}."
     },
     "energyExpendedLabels": {
-      "title": "",
-      "description": ""
+      "title": "Etiquetas de energía gastada",
+      "description": "Los datos que utilizamos para calcular la etiqueta de consumo energético en {countryName}."
     },
     "metrics": {
-      "title": "",
-      "description": ""
+      "title": "Métricas",
+      "description": "Los datos que utilizamos para calcular las emisiones de carbono y el consumo de energía en función de los datos del usuario en {countryName}."
     },
-    "downloadMetrics": "",
+    "downloadMetrics": "Descargar métricas",
     "countryData": {
-      "title": "",
-      "description": ""
+      "title": "Métricas de la aplicación y datos de las etiquetas",
+      "description": "En apoyo de la Ciencia Abierta, AURORA divulga por la presente las métricas utilizadas por el Rastreador de Energía para calcular las <Strong>emisiones de carbono</Strong>, el <Strong>uso de energía</Strong> y las <Strong>etiquetas</Strong>."
     },
     "downloads": {
-      "title": "",
-      "description": ""
+      "title": "Descargar nuestros datos",
+      "description": "Ofrecemos las métricas anteriores y los datos de las etiquetas para su descarga."
     }
   },
   "toast": {
     "dataDownload": {
-      "success": "",
-      "error": ""
+      "success": "Sus datos se han descargado correctamente",
+      "error": "No se han podido descargar sus datos"
     },
     "auth": {
-      "success": "",
-      "error": ""
+      "success": "¡Bienvenido a AURORA!",
+      "error": "Se ha producido un error. Por favor, compruebe sus credenciales."
     }
   },
   "button": {
-    "downloadPending": ""
+    "downloadPending": "Descargando..."
   },
   "dashboard": {
     "filter": {
-      "allCategories": "",
-      "selectCountries": "",
-      "invalidData": "",
-      "absolute": "",
-      "relative": ""
+      "allCategories": "Todas las categorías",
+      "selectCountries": "Seleccionar países",
+      "invalidData": "Ningún dato coincide con los filtros seleccionados.",
+      "absolute": "Absoluta",
+      "relative": "Relativa"
     },
     "card": {
-      "userCount": "",
-      "individualConsumptions": "",
-      "invalidDateRange": ""
+      "userCount": "Número total de usuarios de la aplicación",
+      "individualConsumptions": "Número total de consumos individuales",
+      "invalidDateRange": "Por favor, seleccione un intervalo de fechas válido"
     },
     "consumptionTimeline": {
-      "title": ""
+      "title": "Cronología de consumo: Media por usuario"
     },
     "energylabels": {
-      "title": "",
-      "description": ""
+      "title": "Etiquetas energéticas",
+      "description": "El proyecto AURORA ha diseñado un conjunto de etiquetas que permiten a los ciudadanos conocer claramente su perfil energético actual. Se asigna un conjunto separado de etiquetas para el Consumo Energético y las Emisiones de Carbono."
     },
     "genderDistribution": {
-      "title": ""
+      "title": "Distribución por sexos"
     },
     "averageCompare": {
-      "title": ""
+      "title": "Consumo medio por usuario"
     },
     "main": {
-      "title": ""
+      "title": "Rastreador de energía: Cuadro de mandos"
     },
     "autoReport": {
       "reportSnippets": {
-        "accountsCreated": "",
-        "genderDistribution": "",
-        "totalConsumptions": "",
-        "consumptionBreakdown": "",
-        "totalEmissions": "",
-        "emissionsByCategory": ""
+        "accountsCreated": "Para {countries} se han creado {userCount} cuentas.",
+        "genderDistribution": "De esos usuarios, {femaleCount} se identifica como mujer, {maleCount} como hombre, {nonBinaryCount} como no binario y {otherCount} como otro.",
+        "totalConsumptions": "En total, esos usuarios han creado {totalConsumptions} consumos.",
+        "consumptionBreakdown": "{transportationCount} están relacionados con el transporte, {electricityCount} con la electricidad y {heatingCount} con la calefacción.",
+        "totalEmissions": "Esto equivale a un total de {totalEmissions}{unit} emisiones o {totalEnergy} kWh de energía utilizada.",
+        "emissionsByCategory": "Las {transportationEmissions} {unit} proceden del transporte ({transportationEnergy} kWh), las {electricityEmissions} {unidad} proceden de la electricidad ({electricityEnergy} kWh) y las {heatingEmissions} {unit} proceden de la calefacción ({heatingEnergy} kWh)."
       },
-      "title": ""
+      "title": "Informe"
     },
     "snapshots": {
-      "lastUpdated": "",
-      "selectSnapshot": "",
-      "downloadSnapshot": ""
+      "lastUpdated": "Los datos mostrados se actualizaron por última vez el",
+      "selectSnapshot": "Seleccionar otra imagen",
+      "downloadSnapshot": "Descargar esta imagen"
     }
   },
   "error": {
-    "title": "",
+    "title": "Se ha producido un error",
     "notFound": {
-      "title": "",
-      "description": ""
+      "title": "No se ha encontrado",
+      "description": "No se ha encontrado la página que busca."
     },
-    "noData": ""
+    "noData": "No hay datos disponibles"
   },
   "metadata": {
-    "title": "",
-    "description": ""
+    "title": "Rastreador de energía AURORA: Cuadro de mandos",
+    "description": "Explore las últimas estadísticas de la aplicación móvil AURORA Energy Tracker."
   },
   "ui": {
     "auth": {
-      "orContinueWith": "",
-      "signIn": "",
-      "signUp": "",
-      "signInPrompt": "",
-      "signUpPrompt": "",
-      "signInWithApple": "",
-      "signUpWithApple": "",
-      "signInWithGoogle": "",
-      "signUpWithGoogle": "",
-      "email": "",
-      "password": ""
+      "orContinueWith": "O continuar con",
+      "signIn": "Iniciar sesión",
+      "signUp": "Inscríbase",
+      "signInPrompt": "Acceda a su cuenta de AURORA Energy Tracker.",
+      "signUpPrompt": "Inscríbase en AURORA Energy Tracker.",
+      "signInWithApple": "Iniciar sesión con Apple",
+      "signUpWithApple": "Registrarse en Apple",
+      "signInWithGoogle": "Iniciar sesión con Google",
+      "signUpWithGoogle": "Registrarse en Google",
+      "email": "Correo electrónico",
+      "password": "Contraseña"
     },
     "datePicker": {
-      "selectDateRange": ""
+      "selectDateRange": "Seleccione un intervalo de fechas válido"
     },
     "monthPicker": {
-      "start": "",
-      "end": ""
+      "start": "Inicio",
+      "end": "Fin"
     }
   },
   "common": {
-    "co2emission": "",
-    "energyUsage": "",
-    "and": "",
+    "co2emission": "Emisiones de<sub>CO2</sub> ",
+    "energyUsage": "Uso de la energía",
+    "and": "y",
     "placeholder": {
-      "selectValue": ""
+      "selectValue": "Seleccione un valor"
     },
-    "cancel": ""
+    "cancel": "Cancelar"
   },
   "country": {
-    "allSelectedCountries": "",
+    "allSelectedCountries": "Todos los países seleccionados",
     "denmark": "Dinamarca",
     "portugal": "Portugal",
     "slovenia": "Eslovenia",
-    "spain": "",
+    "spain": "España",
     "unitedKingdom": "Reino Unido",
-    "zeuropeOther": ""
+    "zeuropeOther": "Otros en la UE"
   },
   "footer": {
-    "auroraWebsite": "",
-    "iosApp": "",
-    "androidApp": "",
-    "fundingNotice": ""
+    "auroraWebsite": "Sitio web de AURORA",
+    "iosApp": "Aplicación iOS",
+    "androidApp": "Aplicación Android",
+    "fundingNotice": "Este proyecto ha recibido financiación del programa de investigación e innovación Horizonte 2020 de la Unión Europea en virtud del acuerdo de subvención nº 101036418."
   },
   "navigation": {
     "menu": {
-      "dashboard": "",
-      "about": "",
-      "account": "",
-      "logout": ""
+      "dashboard": "Cuadro de mandos",
+      "about": "Acerca de",
+      "account": "Cuenta",
+      "logout": "Cierre de sesión"
     }
   },
   "language": {
-    "english": "",
-    "german": "",
-    "danish": "",
-    "portuguese": "",
-    "slovenian": "",
-    "spanish": ""
+    "english": "Inglés",
+    "german": "Alemán",
+    "danish": "Danés",
+    "portuguese": "Portugués",
+    "slovenian": "Esloveno",
+    "spanish": "Español"
   },
   "countrySpecial": {
-    "unitedKingdom": "",
-    "zeuropeOther": ""
+    "unitedKingdom": "el Reino Unido",
+    "zeuropeOther": "otros en la UE"
   },
   "gender": {
     "female": "Mujer",
@@ -181,33 +181,33 @@
     "heating": "Calefacción"
   },
   "unitLabel": {
-    "eneryUsage": "",
+    "eneryUsage": "Uso de la energía",
     "distance": "Distancia"
   },
   "month": {
-    "january": "",
-    "february": "",
-    "march": "",
-    "april": "",
-    "may": "",
-    "june": "",
-    "july": "",
-    "august": "",
-    "september": "",
-    "october": "",
-    "november": "",
-    "december": ""
+    "january": "Enero",
+    "february": "Febrero",
+    "march": "Marzo",
+    "april": "Abril",
+    "may": "Mayo",
+    "june": "Junio",
+    "july": "Julio",
+    "august": "Agosto",
+    "september": "Septiembre",
+    "october": "Octubre",
+    "november": "Noviembre",
+    "december": "Diciembre"
   },
   "app": {
     "account": {
-      "comingSoon": "",
-      "myAccount": "",
-      "downloadMyData": "",
+      "comingSoon": "Descargue sus datos o elimine su cuenta. Estamos trabajando para implementar más funciones en el futuro.",
+      "myAccount": "Mi cuenta",
+      "downloadMyData": "Descargar mis datos",
       "deleteAccount": {
-        "button": "",
-        "title": "",
-        "description": "",
-        "confirm": ""
+        "button": "Eliminar mi cuenta",
+        "title": "¿Seguro que quiere eliminar tu cuenta?",
+        "description": "Esta acción no se puede deshacer. Esto borrará permanentemente su cuenta y eliminará sus datos de nuestros servidores.",
+        "confirm": "Eliminar cuenta"
       }
     }
   }

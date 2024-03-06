@@ -2,50 +2,50 @@
   "about": {
     "carbonEmissionLabels": {
       "title": "CO₂-udledningsmærker",
-      "description": "De data, vi bruger til at beregne mærket for CO2-udledning i {countryName}."
+      "description": "De data, vi bruger til at beregne CO2-udledningsmærket i {countryName}."
     },
     "energyExpendedLabels": {
-      "title": "Dine energimærker",
-      "description": "De data, vi bruger til at beregne mærket for energiforbrug i {countryName}."
+      "title": "Dine energiforbrugsmærker",
+      "description": "De data, vi bruger til at beregne energiforbrugsmærket i {countryName}."
     },
     "metrics": {
-      "title": "Målesystemer",
+      "title": "Målestandarder",
       "description": "De data, vi bruger til at beregne CO2-udledning og energiforbrug baseret på brugerdata i {countryName}."
     },
-    "downloadMetrics": "Download metrik",
+    "downloadMetrics": "Download målestandarder",
     "countryData": {
       "title": "App-målinger og mærkedata",
-      "description": "Til støtte for Open Science offentliggør AURORA hermed de målinger, som Energy Tracker bruger til at beregne <Strong>CO2-udledning</Strong>, <Strong>energiforbrug</Strong> og <Strong>energimærker</Strong>."
+      "description": "For at støtte Open Science offentliggør AURORA hermed de målinger, som Energy Tracker bruger til at beregne <Strong>CO2-udledning</Strong>, <Strong>energiforbrug</Strong> og <Strong>energimærker</Strong>."
     },
     "downloads": {
-      "title": "Download data",
-      "description": "Vi tilbyder ovenstående metrik og labeldata til download."
+      "title": "Download vores data",
+      "description": "Vi tilbyder ovenstående målestandarder og labeldata til download."
     }
   },
   "toast": {
     "dataDownload": {
-      "success": "Dine data er blevet downloadet. ",
+      "success": "Dine data er blevet downloadet",
       "error": "Dine data kunne ikke downloades"
     },
     "auth": {
-      "success": "Velkommen til AURORA",
-      "error": "Der opstod en fejl. Prøv venligst igen."
+      "success": "Velkommen til AURORA!",
+      "error": "Der opstod en fejl. Tjek venligst dine brugeroplysninger."
     }
   },
   "button": {
-    "downloadPending": "Download er i gang. "
+    "downloadPending": "Downloader..."
   },
   "dashboard": {
     "filter": {
       "allCategories": "Alle kategorier",
       "selectCountries": "Vælg lande",
       "invalidData": "Ingen data matcher de valgte filtre.",
-      "absolute": "Absolut",
+      "absolute": "Total",
       "relative": "Relativ"
     },
     "card": {
       "userCount": "Samlet antal brugere af appen",
-      "individualConsumptions": "Samlet antal individuelle forbrug",
+      "individualConsumptions": "Samlet mændge individuelt forbrug",
       "invalidDateRange": "Vælg venligst et gyldigt datointerval"
     },
     "consumptionTimeline": {
@@ -66,9 +66,9 @@
     },
     "autoReport": {
       "reportSnippets": {
-        "accountsCreated": "For {lande} er der {userCount} oprettet konti.",
-        "genderDistribution": "Af disse brugere identificerer {femaleCount} sig som kvinde, {maleCount} som mand, {nonBinaryCount} som ikke-binær og {otherCount} som andet.",
-        "totalConsumptions": "I alt har disse brugere oprettet {totalConsumptions}-forbrug.",
+        "accountsCreated": "I {lande} er der {userCount} oprettet konti.",
+        "genderDistribution": "Af disse brugere identificerer {femaleCount} sig som kvinde, {maleCount} som mand, {nonBinaryCount} som non-binær og {otherCount} som andet.",
+        "totalConsumptions": "I alt har disse brugere oprettet {totalConsumptions} forbrug.",
         "consumptionBreakdown": "{transportationCount} er relateret til transport, {electricityCount} til elektricitet og {heatingCount} til opvarmning.",
         "totalEmissions": "Det svarer til i alt {totalEmissions}{unit} CO2 udledninger eller {totalEnergy} kWh energi.",
         "emissionsByCategory": "{transportEmissions}{unit} er fra transport ({transportEnergy} kWh), {electricityEmissions}{unit} fra elektricitet ({electricityEnergy} kWh), og {heatingEmissions}{unit} fra opvarmning ({heatingEnergy} kWh)."
@@ -77,8 +77,8 @@
     },
     "snapshots": {
       "lastUpdated": "De viste data blev sidst opdateret",
-      "selectSnapshot": "Vælg et andet snapshot",
-      "downloadSnapshot": "Download dette snapshot"
+      "selectSnapshot": "Vælg et andet billede",
+      "downloadSnapshot": "Download dette billede"
     }
   },
   "error": {
@@ -125,7 +125,7 @@
     "cancel": "Annuller"
   },
   "country": {
-    "allSelectedCountries": "Alle udvalgte lande",
+    "allSelectedCountries": "Alle valgte lande",
     "denmark": "Danmark",
     "portugal": "Portugal",
     "slovenia": "Slovenien",
@@ -206,7 +206,7 @@
       "deleteAccount": {
         "button": "Slet min konto",
         "title": "Er du sikker på, at du vil slette din konto?",
-        "description": "Denne handling kan ikke fortrydes. Det vil slette din konto permanent og fjerne dine data fra vores servere.",
+        "description": "Denne handling kan ikke fortrydes. Du vil permanent slette din konto og fjerne dine data fra vores servere.",
         "confirm": "Slet konto"
       }
     }
