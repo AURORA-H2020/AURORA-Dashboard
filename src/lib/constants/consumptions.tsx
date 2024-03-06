@@ -190,7 +190,7 @@ export const consumptionSources: ConsumptionSources = {
         },
         {
             source: "plane",
-            name: t("category.sources.planeDomestic"),
+            name: t("category.sources.plane"),
             type: "none",
         },
         {
