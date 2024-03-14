@@ -222,6 +222,12 @@ export const consumptionSources: ConsumptionSources = {
     ],
 };
 
+export const fuelConsumptionEnabledTransportationTypes = [
+    "fuelCar",
+    "hybridCar",
+    "motorcycle",
+];
+
 export const privateVehicleTypes = consumptionSources.transportation
     .filter((source) => source.type === "private")
     .map((source) => source.source);

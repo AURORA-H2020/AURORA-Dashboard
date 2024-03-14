@@ -9,6 +9,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { addEditConsumption } from "@/firebase/consumption/addEditConsumption";
 import {
     consumptionSources,
+    fuelConsumptionEnabledTransportationTypes,
     privateVehicleTypes,
     publicVehicleOccupancies,
     publicVerhicleTypes,
@@ -100,6 +101,13 @@ const TransportationForm = ({
     );
 
     useEffect(() => {
+        if (
+            !fuelConsumptionEnabledTransportationTypes.includes(
+                formTransportationType,
+            )
+        ) {
+            form.setValue("transportation.fuelConsumption", undefined);
+        }
         if (!privateVehicleTypes.includes(formTransportationType)) {
             form.setValue("transportation.privateVehicleOccupancy", undefined);
         }
@@ -152,7 +160,7 @@ const TransportationForm = ({
                         )}
                     />
 
-                    {["fuelCar", "hybridCar", "motorcycle"].includes(
+                    {fuelConsumptionEnabledTransportationTypes.includes(
                         formTransportationType,
                     ) && (
                         <FormField
