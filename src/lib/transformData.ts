@@ -60,30 +60,40 @@ export function temporalData(
                             locale,
                         );
 
-                        let currentDate = `${dateMonth} ${year.year}`;
+                        const currentDate = new Date(
+                            parseInt(year.year),
+                            month.month - 1,
+                        );
 
-                        if (
-                            dateRange.from! >
-                            new Date(parseInt(year.year), month.month - 1)
-                        ) {
+                        if (dateRange.from! > currentDate) {
                             return;
                         }
+                        if (dateRange.to! < currentDate) {
+                            return;
+                        }
+
+                        // return if the date exceeds the current month
                         if (
-                            dateRange.to! <
-                            new Date(parseInt(year.year), month.month - 1)
+                            currentDate >
+                            new Date(
+                                new Date().getFullYear(),
+                                new Date().getMonth() + 1,
+                                0,
+                            )
                         ) {
                             return;
                         }
 
                         let thisDate = temporalData.find(
-                            (e) => e.Date === currentDate,
+                            (e) => e.dateString === `${dateMonth} ${year.year}`,
                         );
                         if (!thisDate) {
                             temporalData.push({
-                                Date: currentDate,
+                                dateString: `${dateMonth} ${year.year}`,
+                                date: currentDate,
                             });
                             thisDate = temporalData.find(
-                                (e) => e.Date === currentDate,
+                                (e) => e.date === currentDate,
                             );
                         }
 
@@ -107,9 +117,11 @@ export function temporalData(
         );
     });
 
+    console.log(temporalData);
+
     temporalData.sort(function (a, b) {
-        var keyA = new Date(Date.parse(a.Date!)),
-            keyB = new Date(Date.parse(b.Date!));
+        let keyA = a.date!,
+            keyB = b.date!;
 
         if (keyA < keyB) return -1;
         if (keyA > keyB) return 1;

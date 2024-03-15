@@ -8,11 +8,7 @@ import {
     valueFormatterCarbon,
     valueFormatterEnergy,
 } from "@/lib/utilities";
-import {
-    // CalculationMode,
-    EnergyMode,
-    TimelineData,
-} from "@/models/dashboard-data";
+import { EnergyMode, TimelineData } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Flex, Heading } from "@radix-ui/themes";
@@ -23,15 +19,6 @@ import { SetStateAction, useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
 import { Alert, AlertTitle } from "../ui/alert";
 import MonthPicker from "../ui/month-picker";
-/*
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "../ui/select";
-*/
 
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
@@ -67,14 +54,6 @@ export function ConsumptionTimelineChart({
     ) => {
         setDateRange(dateRange);
     };
-
-    /*
-    const [calculationMode, setCalculationMode] =
-        useState<CalculationMode>("relative");
-
-    const handleCalculationModeChange = (calculationMode: CalculationMode) => {
-        setCalculationMode(calculationMode);
-    };*/
 
     const [selectedEnergyMode, setSelectedEnergyMode] =
         useState<EnergyMode>("carbon");
@@ -153,28 +132,6 @@ export function ConsumptionTimelineChart({
                     validYears={getYearsInSummary(globalSummaryData)}
                     onChange={handleDateChange}
                 />
-
-                {/** }
-                <Select
-                    value={calculationMode}
-                    onValueChange={handleCalculationModeChange}
-                >
-                    
-                    <SelectTrigger className="w-[180px]">
-                        <SelectValue defaultValue="relative" />
-                    </SelectTrigger>
-
-
-                    <SelectContent>
-                        <SelectItem value="absolute">
-                            {t("dashboard.filter.absolute")}
-                        </SelectItem>
-                        <SelectItem value="relative">
-                            {t("dashboard.filter.averagePerUser")}
-                        </SelectItem>
-                    </SelectContent>
-                </Select>
-                {*/}
             </Flex>
 
             {dateRange?.from &&
@@ -184,7 +141,7 @@ export function ConsumptionTimelineChart({
                     className="h-80 mt-8"
                     showAnimation={true}
                     data={transformedData}
-                    index="Date"
+                    index="dateString"
                     categories={getSortedCountryLabels(
                         includedCountryIds,
                     ).names.map((name) => t(name))}

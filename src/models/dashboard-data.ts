@@ -27,7 +27,8 @@ export interface CategorySourceDetail {
 }
 
 export interface TimelineData {
-    Date?: string;
+    date?: Date;
+    dateString?: string;
     [key: string]: any;
 }
 
