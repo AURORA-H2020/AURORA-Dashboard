@@ -2,11 +2,11 @@
   "about": {
     "carbonEmissionLabels": {
       "title": "Etiquetas de Emissão de Carbono ",
-      "description": "Os dados que usamos para calcular a etiqueta das emissões de carbono em Portugal. "
+      "description": "Os dados que usamos para calcular a etiqueta das emissões de carbono em {countryName}. "
     },
     "energyExpendedLabels": {
       "title": "Etiquetas de Energia Consumida",
-      "description": "Os dados que usamos para calcular a etiqueta das emissões de carbono em Portugal. "
+      "description": "Os dados que usamos para calcular a etiqueta das emissões de carbono em {countryName}."
     },
     "metrics": {
       "title": "Métricas",
@@ -66,7 +66,7 @@
     },
     "autoReport": {
       "reportSnippets": {
-        "accountsCreated": "Para {países} {userCount} foram criadas contas.",
+        "accountsCreated": "Para {countries} {userCount} foram criadas contas.",
         "genderDistribution": "Desses utilizadores, {femaleCount} identifica-se como mulher, {maleCount} como homem, {nonBinaryCount} como não binário e {otherCount} como outro.",
         "totalConsumptions": "No total, estes utilizadores criaram {totalConsumptions} consumos.",
         "consumptionBreakdown": "{transportationCount} estão relacionados com o transporte, {electricityCount} com a eletricidade e {heatingCount} com o aquecimento.",

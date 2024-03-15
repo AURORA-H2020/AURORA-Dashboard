@@ -70,7 +70,7 @@
         "genderDistribution": "Von diesen Nutzern identifizieren sich {femaleCount} als weiblich, {maleCount} als männlich, {nonBinaryCount} als nicht-binär und {otherCount} als andere Geschlechter.",
         "totalConsumptions": "Insgesamt haben diese Benutzer {totalConsumptions} Verbräuche erstellt.",
         "consumptionBreakdown": "{transportationCount} beziehen sich auf Transport, {electricityCount} auf Elektrizität und {heatingCount} auf Heizen.",
-        "totalEmissions": "Dies entspricht insgesamt {totalEmissions}{unit} Emissionen oder {gesamteEnergie} kWh verbrauchter Energie.",
+        "totalEmissions": "Dies entspricht insgesamt {totalEmissions}{unit} Emissionen oder {totalEnergy} kWh verbrauchter Energie.",
         "emissionsByCategory": "{transportationEmissions}{unit} stammen aus dem Verkehr ({transportationEnergy} kWh), {electricityEmissions}{unit} aus der Elektrizität ({electricityEnergy} kWh) und {heatingEmissions}{unit} vom Heizen ({heatingEnergy} kWh)."
       },
       "title": "Bericht"

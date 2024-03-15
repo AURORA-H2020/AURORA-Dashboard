@@ -66,12 +66,12 @@
     },
     "autoReport": {
       "reportSnippets": {
-        "accountsCreated": "I {lande} er der {userCount} oprettet konti.",
+        "accountsCreated": "I {countries} er der {userCount} oprettet konti.",
         "genderDistribution": "Af disse brugere identificerer {femaleCount} sig som kvinde, {maleCount} som mand, {nonBinaryCount} som non-binær og {otherCount} som andet.",
         "totalConsumptions": "I alt har disse brugere oprettet {totalConsumptions} forbrug.",
         "consumptionBreakdown": "{transportationCount} er relateret til transport, {electricityCount} til elektricitet og {heatingCount} til opvarmning.",
         "totalEmissions": "Det svarer til i alt {totalEmissions}{unit} CO2 udledninger eller {totalEnergy} kWh energi.",
-        "emissionsByCategory": "{transportEmissions}{unit} er fra transport ({transportEnergy} kWh), {electricityEmissions}{unit} fra elektricitet ({electricityEnergy} kWh), og {heatingEmissions}{unit} fra opvarmning ({heatingEnergy} kWh)."
+        "emissionsByCategory": "{transportationEmissions}{unit} er fra transport ({transportationEnergy} kWh), {electricityEmissions}{unit} fra elektricitet ({electricityEnergy} kWh), og {heatingEmissions}{unit} fra opvarmning ({heatingEnergy} kWh)."
       },
       "title": "Rapport"
     },

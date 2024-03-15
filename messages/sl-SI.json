@@ -66,12 +66,12 @@
     },
     "autoReport": {
       "reportSnippets": {
-        "accountsCreated": "Za {države} je bilo ustvarjenih {userCount} profilov.",
+        "accountsCreated": "Za {countries} je bilo ustvarjenih {userCount} profilov.",
         "genderDistribution": "Od teh uporabnikov se jih {femaleCount} opredeljuje kot ženska, {maleCount} kot moški, {nonBinaryCount} kot nebinarni in {otherCount} kot drugo.",
         "totalConsumptions": "Ti uporabniki so skupaj ustvarili {totalConsumptions} porabe.",
         "consumptionBreakdown": "{transportationCount} jih je povezanih s prevozom, {electricityCount} z električno energijo in {heatingCount} z ogrevanjem.",
-        "totalEmissions": "To pomeni skupno {totalEmissions}{enota} emisij ali {totalEnergy} kWh porabljene energije.",
-        "emissionsByCategory": "{transportationEmissions}{enota} so emisije prometa ({transportationEnergy} kWh), {electricityEmissions}{enota} električne energije ({electricityEnergy} kWh) in {heatingEmissions}{enota} ogrevanja ({heatingEnergy} kWh)."
+        "totalEmissions": "To pomeni skupno {totalEmissions}{unit} emisij ali {totalEnergy} kWh porabljene energije.",
+        "emissionsByCategory": "{transportationEmissions}{unit} so emisije prometa ({transportationEnergy} kWh), {electricityEmissions}{unit} električne energije ({electricityEnergy} kWh) in {heatingEmissions}{unit} ogrevanja ({heatingEnergy} kWh)."
       },
       "title": "Poročilo"
     },
