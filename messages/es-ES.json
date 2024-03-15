@@ -71,7 +71,7 @@
         "totalConsumptions": "En total, esos usuarios han creado {totalConsumptions} consumos.",
         "consumptionBreakdown": "{transportationCount} están relacionados con el transporte, {electricityCount} con la electricidad y {heatingCount} con la calefacción.",
         "totalEmissions": "Esto equivale a un total de {totalEmissions}{unit} emisiones o {totalEnergy} kWh de energía utilizada.",
-        "emissionsByCategory": "Las {transportationEmissions} {unit} proceden del transporte ({transportationEnergy} kWh), las {electricityEmissions} {unidad} proceden de la electricidad ({electricityEnergy} kWh) y las {heatingEmissions} {unit} proceden de la calefacción ({heatingEnergy} kWh)."
+        "emissionsByCategory": "Las {transportationEmissions}{unit} proceden del transporte ({transportationEnergy} kWh), las {electricityEmissions}{unit} proceden de la electricidad ({electricityEnergy} kWh) y las {heatingEmissions}{unit} proceden de la calefacción ({heatingEnergy} kWh)."
       },
       "title": "Informe"
     },
