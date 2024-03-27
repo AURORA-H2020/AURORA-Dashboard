@@ -1,3 +1,5 @@
+"use client";
+
 import { supportedLocales } from "@/lib/constants/constants";
 import { usePathname, useRouter } from "@/navigation";
 import { useLocale, useTranslations } from "next-intl";
@@ -31,7 +33,9 @@ const LocaleSwitcher = () => {
             disabled={isPending}
         >
             <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select language" />
+                <SelectValue
+                    placeholder={t("common.placeholder.selectLanguage")}
+                />
             </SelectTrigger>
             <SelectContent>
                 {supportedLocales.map((locale) => (

@@ -21,7 +21,7 @@ const Logo = (): JSX.Element => {
         return (
             <Image
                 src={"/logo/AURORA-logo-light.png"}
-                alt="Picture of the author"
+                alt="AURORA Logo"
                 height={100}
                 width={100}
                 className="object-scale-down h-8 w-30 mr-3"
@@ -36,7 +36,7 @@ const Logo = (): JSX.Element => {
                     ? "/logo/AURORA-logo-light.png"
                     : "/logo/AURORA-logo-dark.png"
             }
-            alt="Picture of the author"
+            alt="AURORA Logo"
             height={100}
             width={100}
             className="object-scale-down h-8 w-30 mr-3"

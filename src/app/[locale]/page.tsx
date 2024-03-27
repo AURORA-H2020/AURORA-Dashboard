@@ -58,7 +58,7 @@ const Home = async ({
 
     if (globalSummaryData && fileList) {
         return (
-            <>
+            <div>
                 <Heading as="h1">{t("dashboard.main.title")}</Heading>
 
                 <div className="mt-8">
@@ -69,10 +69,10 @@ const Home = async ({
                     currentFileDate={globalSummaryData?.date}
                     globalSummaryData={globalSummaryData}
                 />
-            </>
+            </div>
         );
     } else {
-        return <>Not found</>;
+        return <div>{t("error.notFound.title")}</div>;
     }
 };
 

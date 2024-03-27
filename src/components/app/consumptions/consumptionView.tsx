@@ -37,7 +37,7 @@ const ConsumptionView = ({
                               }) + consumptionAttributes?.unit
                             : t("common.calculating")}
                     </ConsumptionTableRow>
-                    <ConsumptionTableRow label="CO2-Emissions">
+                    <ConsumptionTableRow label={t("common.co2emission")}>
                         {consumption.carbonEmissions
                             ? format.number(consumption.carbonEmissions, {
                                   maximumFractionDigits: 1,
@@ -51,26 +51,32 @@ const ConsumptionView = ({
                 <Table className="mt-4 table-fixed">
                     <TableBody>
                         {consumption.electricity.costs && (
-                            <ConsumptionTableRow label="Costs">
+                            <ConsumptionTableRow label={t("app.form.costs")}>
                                 {consumption.electricity.costs}
                             </ConsumptionTableRow>
                         )}
                         {consumption.electricity.electricityExported && (
-                            <ConsumptionTableRow label="Costs">
+                            <ConsumptionTableRow
+                                label={t("app.form.electricityExported")}
+                            >
                                 {consumption.electricity.electricityExported +
                                     " kWh"}
                             </ConsumptionTableRow>
                         )}
 
-                        <ConsumptionTableRow label="People in household">
+                        <ConsumptionTableRow
+                            label={t("app.form.peopleInHousehold")}
+                        >
                             {consumption.electricity.householdSize}
                         </ConsumptionTableRow>
-                        <ConsumptionTableRow label="Electricity source">
+                        <ConsumptionTableRow
+                            label={t("app.form.electricitySource")}
+                        >
                             {t(
                                 `category.sources.${consumption.electricity.electricitySource}`,
                             )}
                         </ConsumptionTableRow>
-                        <ConsumptionTableRow label="Beginning">
+                        <ConsumptionTableRow label={t("ui.monthPicker.start")}>
                             {format.dateTime(
                                 consumption.electricity.startDate.toDate(),
                                 {
@@ -80,7 +86,7 @@ const ConsumptionView = ({
                                 },
                             )}
                         </ConsumptionTableRow>
-                        <ConsumptionTableRow label="End">
+                        <ConsumptionTableRow label={t("ui.monthPicker.end")}>
                             {format.dateTime(
                                 consumption.electricity.endDate.toDate(),
                                 {
@@ -98,29 +104,37 @@ const ConsumptionView = ({
                 <Table className="mt-4 table-fixed">
                     <TableBody>
                         {consumption.heating.costs && (
-                            <ConsumptionTableRow label="Costs">
+                            <ConsumptionTableRow label={t("app.form.costs")}>
                                 {consumption.heating.costs}
                             </ConsumptionTableRow>
                         )}
 
-                        <ConsumptionTableRow label="People in household">
+                        <ConsumptionTableRow
+                            label={t("app.form.peopleInHousehold")}
+                        >
                             {consumption.heating.householdSize}
                         </ConsumptionTableRow>
-                        <ConsumptionTableRow label="Heating source">
+                        <ConsumptionTableRow
+                            label={t("app.form.heating.heatingFuel")}
+                        >
                             {t(
                                 `category.sources.${consumption.heating.heatingFuel}`,
                             )}
                         </ConsumptionTableRow>
 
                         {consumption.heating.districtHeatingSource && (
-                            <ConsumptionTableRow label="District heating fuel">
+                            <ConsumptionTableRow
+                                label={t(
+                                    "app.form.heating.districtHeatingSource",
+                                )}
+                            >
                                 {t(
                                     `category.sources.${consumption.heating.districtHeatingSource}`,
                                 )}
                             </ConsumptionTableRow>
                         )}
 
-                        <ConsumptionTableRow label="Beginning">
+                        <ConsumptionTableRow label={t("ui.monthPicker.start")}>
                             {format.dateTime(
                                 consumption.heating.startDate?.toDate(),
                                 {
@@ -130,7 +144,7 @@ const ConsumptionView = ({
                                 },
                             )}
                         </ConsumptionTableRow>
-                        <ConsumptionTableRow label="End">
+                        <ConsumptionTableRow label={t("ui.monthPicker.end")}>
                             {format.dateTime(
                                 consumption.heating.startDate?.toDate(),
                                 {
@@ -147,7 +161,9 @@ const ConsumptionView = ({
             {consumption.transportation && (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
-                        <ConsumptionTableRow label="Start of travel">
+                        <ConsumptionTableRow
+                            label={t("app.form.startOfTravel")}
+                        >
                             {format.dateTime(
                                 consumption.transportation.dateOfTravel.toDate(),
                                 {
@@ -161,7 +177,9 @@ const ConsumptionView = ({
                         </ConsumptionTableRow>
 
                         {consumption.transportation.dateOfTravelEnd ? (
-                            <ConsumptionTableRow label="End of travel">
+                            <ConsumptionTableRow
+                                label={t("app.form.endOfTravel")}
+                            >
                                 {format.dateTime(
                                     consumption.transportation.dateOfTravelEnd.toDate(),
                                     {
@@ -175,20 +193,26 @@ const ConsumptionView = ({
                             </ConsumptionTableRow>
                         ) : null}
 
-                        <ConsumptionTableRow label="Transportation type">
+                        <ConsumptionTableRow
+                            label={t("app.form.transportationType")}
+                        >
                             {t(
                                 `category.sources.${consumption.transportation.transportationType}`,
                             )}
                         </ConsumptionTableRow>
 
                         {consumption.transportation.fuelConsumption && (
-                            <ConsumptionTableRow label="Occupancy">
+                            <ConsumptionTableRow
+                                label={t("app.form.fuelConsumption")}
+                            >
                                 {consumption.transportation.fuelConsumption}
                             </ConsumptionTableRow>
                         )}
 
                         {consumption.transportation.privateVehicleOccupancy && (
-                            <ConsumptionTableRow label="Occupancy">
+                            <ConsumptionTableRow
+                                label={t("app.form.occupancy")}
+                            >
                                 {
                                     consumption.transportation
                                         .privateVehicleOccupancy
@@ -197,9 +221,11 @@ const ConsumptionView = ({
                         )}
 
                         {consumption.transportation.publicVehicleOccupancy && (
-                            <ConsumptionTableRow label="Occupancy">
+                            <ConsumptionTableRow
+                                label={t("app.form.occupancy")}
+                            >
                                 {t(
-                                    `app.consumption.publicVehicleOccupancy.${consumption.transportation.publicVehicleOccupancy}`,
+                                    `app.form.publicVehicleOccupancy.${consumption.transportation.publicVehicleOccupancy}`,
                                 )}
                             </ConsumptionTableRow>
                         )}
@@ -219,7 +245,7 @@ const ConsumptionView = ({
 
             <Table className="mt-4 mb-4 table-fixed">
                 <TableBody>
-                    <ConsumptionTableRow label="Created At">
+                    <ConsumptionTableRow label={t("app.form.createdAt")}>
                         {format.dateTime(consumption.createdAt.toDate(), {
                             year: "numeric",
                             month: "long",
@@ -229,7 +255,7 @@ const ConsumptionView = ({
                         })}
                     </ConsumptionTableRow>
                     {consumption.updatedAt && (
-                        <ConsumptionTableRow label="Updated At">
+                        <ConsumptionTableRow label={t("app.form.updatedAt")}>
                             {format.dateTime(consumption.updatedAt?.toDate(), {
                                 year: "numeric",
                                 month: "long",
@@ -243,8 +269,7 @@ const ConsumptionView = ({
 
                 {consumption.generatedByRecurringConsumptionId && (
                     <TableCaption>
-                        This entry was automatically added via recurring
-                        consumptions.
+                        {t("app.form.recurringAutomaticDisclaimer")}
                     </TableCaption>
                 )}
             </Table>

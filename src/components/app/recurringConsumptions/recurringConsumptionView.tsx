@@ -25,17 +25,17 @@ const RecurringConsumptionView = ({
             <Table className="mt-4 table-fixed">
                 <ConsumptionTableRow merged={true} className="font-bold">
                     {recurringConsumption.isEnabled
-                        ? t("app.recurringConsumption.enabled")
-                        : t("app.recurringConsumption.disabled")}
+                        ? t("app.form.enabled")
+                        : t("app.form.disabled")}
                 </ConsumptionTableRow>
             </Table>
             <Table className="mt-4 table-fixed">
                 <TableBody>
-                    <ConsumptionTableRow label="Distance">
+                    <ConsumptionTableRow label={t("unitLabel.distance")}>
                         {recurringConsumption.transportation?.distance}
                     </ConsumptionTableRow>
 
-                    <ConsumptionTableRow label="Created At">
+                    <ConsumptionTableRow label={t("app.form.createdAt")}>
                         {format.dateTime(
                             recurringConsumption.createdAt?.toDate(),
                             {
@@ -47,18 +47,18 @@ const RecurringConsumptionView = ({
                             },
                         )}
                     </ConsumptionTableRow>
-                    <ConsumptionTableRow label="Frequency">
+                    <ConsumptionTableRow label={t("app.form.frequency")}>
                         {t(
-                            `app.recurringConsumption.frequency.${recurringConsumption.frequency.unit}`,
+                            `app.form.frequencyOptions.${recurringConsumption.frequency.unit}`,
                         )}
                     </ConsumptionTableRow>
                     {recurringConsumption.frequency.dayOfMonth && (
-                        <ConsumptionTableRow label="Day of Month">
+                        <ConsumptionTableRow label={t("app.form.dayOfMonth")}>
                             {recurringConsumption.frequency.dayOfMonth}
                         </ConsumptionTableRow>
                     )}
                     {recurringConsumption.frequency.weekdays && (
-                        <ConsumptionTableRow label="Weekdays">
+                        <ConsumptionTableRow label={t("app.form.weekdays")}>
                             {recurringConsumption.frequency.weekdays
                                 ?.map((day) => t(weekdays[day - 1]?.label))
                                 .join(", ")}
@@ -70,7 +70,7 @@ const RecurringConsumptionView = ({
             {recurringConsumption.transportation ? (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
-                        <ConsumptionTableRow label="Time of travel">
+                        <ConsumptionTableRow label={t("app.form.timeOfTravel")}>
                             {format.dateTime(
                                 new Date().setHours(
                                     recurringConsumption.transportation
@@ -85,7 +85,9 @@ const RecurringConsumptionView = ({
                             )}
                         </ConsumptionTableRow>
 
-                        <ConsumptionTableRow label="Transportation type">
+                        <ConsumptionTableRow
+                            label={t("app.form.transportationType")}
+                        >
                             {t(
                                 `category.sources.${recurringConsumption.transportation.transportationType}`,
                             )}
@@ -93,7 +95,9 @@ const RecurringConsumptionView = ({
 
                         {recurringConsumption.transportation
                             .privateVehicleOccupancy && (
-                            <ConsumptionTableRow label="Occupancy">
+                            <ConsumptionTableRow
+                                label={t("app.form.occupancy")}
+                            >
                                 {
                                     recurringConsumption.transportation
                                         .privateVehicleOccupancy
@@ -103,9 +107,11 @@ const RecurringConsumptionView = ({
 
                         {recurringConsumption.transportation
                             .publicVehicleOccupancy && (
-                            <ConsumptionTableRow label="Occupancy">
+                            <ConsumptionTableRow
+                                label={t("app.form.occupancy")}
+                            >
                                 {t(
-                                    `app.consumption.publicVehicleOccupancy.${recurringConsumption.transportation.publicVehicleOccupancy}`,
+                                    `app.form.publicVehicleOccupancy.${recurringConsumption.transportation.publicVehicleOccupancy}`,
                                 )}
                             </ConsumptionTableRow>
                         )}

@@ -40,11 +40,10 @@ const ChangeEmailForm = ({
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         changeEmail(user, data.currentPassword, data.email).then((result) => {
             if (result.success) {
-                toast.success("Your email was updated successfully");
+                toast.success(t("toast.changeEmail.success"));
             } else
-                toast.error("An error occurred updating your email", {
-                    description:
-                        "Please check your current password and try again.",
+                toast.error(t("toast.changeEmail.errorTitle"), {
+                    description: t("toast.changeEmail.errorDescription"),
                 });
 
             if (onFormSubmit && result.success) {
@@ -66,8 +65,8 @@ const ChangeEmailForm = ({
                         <FormInputField
                             field={field}
                             inputType="email"
-                            placeholder="Email"
-                            label="Email"
+                            placeholder={t("ui.auth.email")}
+                            label={t("ui.auth.email")}
                         />
                     )}
                 />
@@ -78,14 +77,16 @@ const ChangeEmailForm = ({
                     render={({ field }) => (
                         <FormPasswordField
                             field={field}
-                            placeholder={"Current Password"}
-                            label={"Current Password"}
+                            placeholder={t("ui.auth.currentPassword")}
+                            label={t("ui.auth.currentPassword")}
                         />
                     )}
                 />
 
                 <DialogFooter className="flex sm:justify-between">
-                    <Button type="submit">Update Email</Button>
+                    <Button type="submit">
+                        {t("app.account.changeEmail")}
+                    </Button>
                 </DialogFooter>
             </form>
         </Form>

@@ -6,6 +6,7 @@ import { ProtectAccount } from "@/components/hoc/protectAccount";
 import { Button } from "@/components/ui/button";
 import { usePathname } from "@/navigation";
 import { Flex } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 
 /**
@@ -20,6 +21,7 @@ const AccountLayout = ({
 }: {
     children: React.ReactNode;
 }): React.ReactNode => {
+    const t = useTranslations();
     const pathname = usePathname();
 
     return (
@@ -33,7 +35,9 @@ const AccountLayout = ({
                             }
                             asChild
                         >
-                            <Link href={"/account"}>Home</Link>
+                            <Link href={"/account"}>
+                                {t("navigation.account.home")}
+                            </Link>
                         </Button>
                         <Button
                             variant={
@@ -43,7 +47,9 @@ const AccountLayout = ({
                             }
                             asChild
                         >
-                            <Link href={"/account/settings"}>Settings</Link>
+                            <Link href={"/account/settings"}>
+                                {t("navigation.account.settings")}
+                            </Link>
                         </Button>
                     </Flex>
                     <div>{children}</div>

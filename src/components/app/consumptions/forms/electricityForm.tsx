@@ -113,9 +113,15 @@ const ElectricityForm = ({
                                         label: t(source.name),
                                     }),
                                 )}
-                                placeholder="Electricity Source"
-                                label={"Electricity Source"}
-                                description="Select the appropriate electricity source."
+                                placeholder={t(
+                                    "app.form.electricity.electricitySource",
+                                )}
+                                label={t(
+                                    "app.form.electricity.electricitySource",
+                                )}
+                                description={t(
+                                    "app.form.electricity.electricitySourceDescription",
+                                )}
                             />
                         )}
                     />
@@ -126,19 +132,25 @@ const ElectricityForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="number"
-                                placeholder="Consumption"
+                                placeholder={t("app.consumption")}
                                 unit="kWh"
                                 label={
                                     formElectricitySource ===
                                     "homePhotovoltaics"
-                                        ? "Energy produced"
-                                        : "Consumption"
+                                        ? t(
+                                              "app.form.electricity.energyProduced",
+                                          )
+                                        : t("app.consumption")
                                 }
                                 description={
                                     formElectricitySource ===
                                     "homePhotovoltaics"
-                                        ? "You can usually find this information on an app or website provided by your PV installation contractor."
-                                        : "You can find this information on your electricity bill."
+                                        ? t(
+                                              "app.form.electricity.pvProductionDescription",
+                                          )
+                                        : t(
+                                              "app.form.electricity.energyBillDescription",
+                                          )
                                 }
                             />
                         )}
@@ -151,10 +163,16 @@ const ElectricityForm = ({
                                 <FormInputField
                                     field={field}
                                     inputType="number"
-                                    placeholder="Energy exported"
+                                    placeholder={t(
+                                        "app.form.electricity.energyExported",
+                                    )}
                                     unit="kWh"
-                                    label="Set energy exported to the grid"
-                                    description="You can find this information on your electricity bill."
+                                    label={t(
+                                        "app.form.electricity.gridExported",
+                                    )}
+                                    description={t(
+                                        "app.form.electricity.pvProductionDescription",
+                                    )}
                                     showSwitch={true}
                                 />
                             )}
@@ -167,9 +185,11 @@ const ElectricityForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="number"
-                                placeholder="People in household"
-                                label="People in household"
-                                description="How many people, including you, live in your household."
+                                placeholder={t("app.form.peopleInHousehold")}
+                                label={t("app.form.peopleInHousehold")}
+                                description={t(
+                                    "app.form.peopleInHouseholdDescription",
+                                )}
                             />
                         )}
                     />
@@ -183,11 +203,13 @@ const ElectricityForm = ({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                label={"Start date"}
+                                label={t("ui.monthPicker.start")}
                                 maxDate={form
                                     .watch("electricity.endDate")
                                     .toDate()}
-                                description="Select the beginning and end of this consumption. You can find this information on your electricity bill."
+                                description={t(
+                                    "app.form.electricity.dateSelectDescription",
+                                )}
                             />
                         )}
                     />
@@ -199,7 +221,7 @@ const ElectricityForm = ({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                label={"End date"}
+                                label={t("ui.monthPicker.end")}
                                 minDate={form
                                     .watch("electricity.startDate")
                                     .toDate()}
@@ -216,8 +238,8 @@ const ElectricityForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="number"
-                                placeholder="Costs"
-                                label="Costs"
+                                placeholder={t("app.form.costs")}
+                                label={t("app.form.costs")}
                             />
                         )}
                     />
@@ -228,9 +250,9 @@ const ElectricityForm = ({
                         render={({ field }) => (
                             <FormTextField
                                 field={field}
-                                placeholder="Description"
-                                label="Description"
-                                description="You may add a description to your entry to help you find it later."
+                                placeholder={t("app.form.description")}
+                                label={t("app.form.description")}
+                                description={t("app.form.descriptionHelpText")}
                             />
                         )}
                     />

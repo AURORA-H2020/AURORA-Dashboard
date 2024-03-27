@@ -74,15 +74,15 @@ const UserDataForm = ({
 
         if (success) {
             if (isNewUser) {
-                toast.success("Your profile was created successfully");
+                toast.success(t("toast.createProfile.success"));
             } else {
-                toast.success("Your profile was updated successfully");
+                toast.success(t("toast.updateProfile.success"));
             }
         } else {
             if (isNewUser) {
-                toast.error("There was an error creating your profile");
+                toast.error(t("toast.createProfile.error"));
             } else {
-                toast.error("There was an error updating your profile");
+                toast.error(t("toast.updateProfile.error"));
             }
         }
 
@@ -135,8 +135,8 @@ const UserDataForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="text"
-                                placeholder="First Name"
-                                label="First Name"
+                                placeholder={t("app.profile.firstName")}
+                                label={t("app.profile.firstName")}
                             />
                         )}
                     />
@@ -147,8 +147,8 @@ const UserDataForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="text"
-                                placeholder="Last Name"
-                                label="Last Name"
+                                placeholder={t("app.profile.lastName")}
+                                label={t("app.profile.lastName")}
                             />
                         )}
                     />
@@ -159,8 +159,8 @@ const UserDataForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="number"
-                                placeholder="Year of Birth"
-                                label="Year of Birth"
+                                placeholder={t("app.profile.yearOfBirth")}
+                                label={t("app.profile.yearOfBirth")}
                             />
                         )}
                     />
@@ -174,9 +174,9 @@ const UserDataForm = ({
                                     value: gender.key,
                                     label: t(gender.label),
                                 }))}
-                                placeholder="Select your preferred gender"
-                                label={"Gender"}
-                                optOutLabel="Prefer not to say"
+                                placeholder={t("app.form.profile.selectGender")}
+                                label={t("app.profile.gender")}
+                                optOutLabel={t("common.preferNotToSay")}
                             />
                         )}
                     />
@@ -195,13 +195,13 @@ const UserDataForm = ({
                                             label: t(country.name),
                                         }),
                                     )}
-                                    placeholder="Select your country"
-                                    label={"Country"}
-                                    description="This information helps us to more accurately calculate your
-                            carbon footprint. Please note that you can't change
-                            your country later. Crowdfunding of local photovoltaic
-                            installations is currently only planned for select cities of
-                            AURORA project partners."
+                                    placeholder={t(
+                                        "app.form.profile.selectCountry",
+                                    )}
+                                    label={t("app.profile.country")}
+                                    description={t(
+                                        "app.form.profile.selectCountryDescription",
+                                    )}
                                 />
                             )}
                         />
@@ -220,9 +220,11 @@ const UserDataForm = ({
                                                 label: t(city.name),
                                             }),
                                         )}
-                                        optOutLabel="Other city"
-                                        placeholder="Select your city"
-                                        label={"City"}
+                                        placeholder={t(
+                                            "app.form.profile.selectCity",
+                                        )}
+                                        label={t("app.profile.city")}
+                                        optOutLabel={t("city.otherCity")}
                                     />
                                 )}
                             />
@@ -241,9 +243,11 @@ const UserDataForm = ({
                                     value: label.key,
                                     label: label.label,
                                 }))}
-                                placeholder="Select your home energy label"
-                                label={"Home Energy Label"}
-                                optOutLabel="Prefer not to say"
+                                placeholder={t(
+                                    "app.form.profile.selectHomeEnergyLabel",
+                                )}
+                                label={t("app.profile.homeEnergyLabel")}
+                                optOutLabel={t("common.preferNotToSay")}
                             />
                         )}
                     />
@@ -258,9 +262,11 @@ const UserDataForm = ({
                                     value: profile.key,
                                     label: t(profile.label),
                                 }))}
-                                placeholder="Select your household profile"
-                                label={"Household Profile"}
-                                optOutLabel="Prefer not to say"
+                                placeholder={t(
+                                    "app.form.profile.selectHouseholdProfile",
+                                )}
+                                label={t("app.profile.householdProfile")}
+                                optOutLabel={t("common.preferNotToSay")}
                             />
                         )}
                     />
@@ -273,13 +279,17 @@ const UserDataForm = ({
                         render={({ field }) => (
                             <FormSwitch
                                 field={field}
-                                description="I would like to receive updates about the app and AURORA project by email."
+                                description={t(
+                                    "app.form.profile.marketingConsentDescription",
+                                )}
                             />
                         )}
                     />
                 )}
 
-                <Button type="submit">Save Profile</Button>
+                <Button type="submit">
+                    {t("app.form.profile.saveProfile")}
+                </Button>
             </form>
         </Form>
     );

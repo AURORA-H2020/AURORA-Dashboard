@@ -123,9 +123,7 @@ const TransportationForm = ({
                 className={cn(className, "flex flex-col gap-4 w-full")}
             >
                 <BorderBox className="text-sm text-muted-foreground">
-                    Please, do not add travels you make on behalf of your
-                    company. This does not include your commute, which should
-                    still be added.
+                    {t("app.form.transportDisclaimer")}
                 </BorderBox>
                 <BorderBox>
                     <FormField
@@ -135,8 +133,8 @@ const TransportationForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="number"
-                                placeholder="Distance"
-                                label="Distance"
+                                placeholder={t("unitLabel.distance")}
+                                label={t("unitLabel.distance")}
                                 unit="km"
                             />
                         )}
@@ -154,8 +152,8 @@ const TransportationForm = ({
                                         label: t(source.name),
                                     }),
                                 )}
-                                placeholder="Transportation Type"
-                                label={"Transportation Type"}
+                                placeholder={t("app.form.transportationType")}
+                                label={t("app.form.transportationType")}
                             />
                         )}
                     />
@@ -170,8 +168,10 @@ const TransportationForm = ({
                                 <FormInputField
                                     field={field}
                                     inputType="number"
-                                    placeholder="Fuel Consumption per 100km"
-                                    label="Set custom fuel consumption"
+                                    placeholder={t("app.form.fuelConsumption")}
+                                    label={t(
+                                        "app.form.setCustomFuelConsumption",
+                                    )}
                                     showSwitch={true}
                                     unit={
                                         [
@@ -194,8 +194,8 @@ const TransportationForm = ({
                                 <FormInputField
                                     field={field}
                                     inputType="number"
-                                    placeholder="Private Vehicle Occupancy"
-                                    label="Private Vehicle Occupancy"
+                                    placeholder={t("app.form.occupancy")}
+                                    label={t("app.form.occupancy")}
                                 />
                             )}
                         />
@@ -214,8 +214,8 @@ const TransportationForm = ({
                                             label: t(occupancy.label),
                                         }),
                                     )}
-                                    placeholder="Public Vehicle Occupancy"
-                                    label={"Public Vehicle Occupancy"}
+                                    placeholder={t("app.form.occupancy")}
+                                    label={t("app.form.occupancy")}
                                 />
                             )}
                         />
@@ -230,7 +230,7 @@ const TransportationForm = ({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                label={"Start date"}
+                                label={t("app.form.startOfTravel")}
                                 showTimePicker={true}
                                 maxDate={
                                     form
@@ -248,7 +248,7 @@ const TransportationForm = ({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                label={"End date"}
+                                label={t("app.form.endOfTravel")}
                                 showTimePicker={true}
                                 showClearButton={true}
                                 minDate={form
@@ -265,9 +265,9 @@ const TransportationForm = ({
                     render={({ field }) => (
                         <FormTextField
                             field={field}
-                            placeholder="Description"
-                            label="Description"
-                            description="You may add a description to your consumption to help you find it later."
+                            placeholder={t("app.form.description")}
+                            label={t("app.form.description")}
+                            description={t("app.form.descriptionHelpText")}
                         />
                     )}
                 />

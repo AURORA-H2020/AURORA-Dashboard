@@ -1,9 +1,9 @@
 "use client";
 
 import ConsumptionTableRow from "@/components/app/common/consumptionTableRow";
-import DeleteAccountModal from "@/components/app/user/modals/deleteAccountModal";
 import ChangeEmailModal from "@/components/app/user/modals/changeEmailModal";
 import ChangePasswordModal from "@/components/app/user/modals/changePasswordModal";
+import DeleteAccountModal from "@/components/app/user/modals/deleteAccountModal";
 import EditUserDataModal from "@/components/app/user/modals/editUserDataModal";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,7 +18,9 @@ import { Table, TableBody } from "@/components/ui/table";
 import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { downloadUserData } from "@/firebase/firestore/downloadUserData";
+import { externalLinks } from "@/lib/constants/constants";
 import { Flex, Grid } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -29,13 +31,15 @@ import { toast } from "sonner";
  * @return {JSX.Element} The user settings page component
  */
 const UserSettings = (): JSX.Element => {
+    const t = useTranslations();
     const { user, loading } = useAuthContext();
 
     const { userData } = useFirebaseData();
 
     const [downloading, setDownloading] = useState(false);
+
     /**
-     * Wrapper function to handle downloading user data.
+     * Function to handle downloading user data.
      *
      * @return {Promise<void>} Resolves when user data is downloaded successfully
      */
@@ -43,11 +47,11 @@ const UserSettings = (): JSX.Element => {
         setDownloading(true);
         try {
             await downloadUserData();
-            toast.success("Your data was successfully downloaded");
+            toast.success(t("toast.dataDownload.success"));
         } catch (error) {
             // Handle the error
             console.error("Error downloading user data:", error);
-            toast.error("Your data could not be downloaded");
+            toast.error(t("toast.dataDownload.error"));
         } finally {
             setDownloading(false);
         }
@@ -55,13 +59,12 @@ const UserSettings = (): JSX.Element => {
 
     if (loading || !user || !userData) return <LoadingSpinner />;
 
-    const supportLink = new URL("https://www.aurora-h2020.eu/app-support/");
+    const supportLink = new URL(externalLinks.supportWebsite);
     supportLink.search = new URLSearchParams({
         user_id: user.uid,
         country_id: userData.country,
     }).toString();
 
-    // Authenticated user content
     return (
         <Grid
             columns={{
@@ -73,36 +76,54 @@ const UserSettings = (): JSX.Element => {
             <Flex direction={"column"} className="gap-6">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Your Profile</CardTitle>
+                        <CardTitle>{t("app.profile.yourProfile")}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <Table>
                             <TableBody>
-                                <ConsumptionTableRow label="First name">
+                                <ConsumptionTableRow
+                                    label={t("app.profile.firstName")}
+                                >
                                     {userData?.firstName}
                                 </ConsumptionTableRow>
-                                <ConsumptionTableRow label="Last name">
+                                <ConsumptionTableRow
+                                    label={t("app.profile.lastName")}
+                                >
                                     {userData?.lastName}
                                 </ConsumptionTableRow>
-                                <ConsumptionTableRow label="Year of birth">
+                                <ConsumptionTableRow
+                                    label={t("app.profile.yearOfBirth")}
+                                >
                                     {userData?.yearOfBirth}
                                 </ConsumptionTableRow>
-                                <ConsumptionTableRow label="Gender">
+                                <ConsumptionTableRow
+                                    label={t("app.profile.gender")}
+                                >
                                     {userData?.gender || ""}
                                 </ConsumptionTableRow>
-                                <ConsumptionTableRow label="Home energy label">
+                                <ConsumptionTableRow
+                                    label={t("app.profile.homeEnergyLabel")}
+                                >
                                     {userData?.homeEnergyLabel || ""}
                                 </ConsumptionTableRow>
-                                <ConsumptionTableRow label="Household profile">
+                                <ConsumptionTableRow
+                                    label={t("app.profile.householdProfile")}
+                                >
                                     {userData?.householdProfile || ""}
                                 </ConsumptionTableRow>
-                                <ConsumptionTableRow label="Country">
+                                <ConsumptionTableRow
+                                    label={t("app.profile.country")}
+                                >
                                     {userData?.country || ""}
                                 </ConsumptionTableRow>
-                                <ConsumptionTableRow label="City">
+                                <ConsumptionTableRow
+                                    label={t("app.profile.city")}
+                                >
                                     {userData?.city || ""}
                                 </ConsumptionTableRow>
-                                <ConsumptionTableRow label="User ID">
+                                <ConsumptionTableRow
+                                    label={t("app.profile.userID")}
+                                >
                                     {user?.uid}
                                 </ConsumptionTableRow>
                             </TableBody>
@@ -111,7 +132,7 @@ const UserSettings = (): JSX.Element => {
                     <CardFooter>
                         <EditUserDataModal>
                             <Button variant={"outline"} className="w-full">
-                                Edit Profile
+                                {t("app.form.profile.editProfile")}
                             </Button>
                         </EditUserDataModal>
                     </CardFooter>
@@ -120,18 +141,18 @@ const UserSettings = (): JSX.Element => {
             <Flex direction={"column"} className="gap-6">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Account</CardTitle>
+                        <CardTitle>{t("app.account.account")}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <Flex direction={"column"} className="gap-2">
                             <ChangeEmailModal>
                                 <Button variant={"outline"}>
-                                    Change Email
+                                    {t("app.account.changeEmail")}
                                 </Button>
                             </ChangeEmailModal>
                             <ChangePasswordModal>
                                 <Button variant={"outline"}>
-                                    Change Password
+                                    {t("app.account.changePassword")}
                                 </Button>
                             </ChangePasswordModal>
                             <Button
@@ -140,12 +161,12 @@ const UserSettings = (): JSX.Element => {
                                 disabled={downloading}
                             >
                                 {downloading
-                                    ? "Downloading..."
-                                    : "Download my data"}
+                                    ? t("button.downloadPending")
+                                    : t("app.account.downloadMyData")}
                             </Button>
                             <DeleteAccountModal>
                                 <Button variant="destructive">
-                                    Delete My Account
+                                    {t("app.account.deleteMyAccount")}
                                 </Button>
                             </DeleteAccountModal>
                         </Flex>
@@ -153,19 +174,19 @@ const UserSettings = (): JSX.Element => {
                 </Card>
                 <Card>
                     <CardHeader>
-                        <CardTitle>Support</CardTitle>
+                        <CardTitle>{t("app.support.support")}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <Flex direction={"column"} className="gap-2">
                             <Button variant={"outline"} asChild>
-                                <Link href="https://www.aurora-h2020.eu/aurora/ourapp/">
-                                    Get the App
+                                <Link href={externalLinks.appDownload}>
+                                    {t("app.support.getTheApp")}
                                 </Link>
                             </Button>
 
                             <Button variant={"outline"} asChild>
                                 <Link href={supportLink.href}>
-                                    Contact Support
+                                    {t("app.support.contactSupport")}
                                 </Link>
                             </Button>
                         </Flex>
@@ -173,25 +194,25 @@ const UserSettings = (): JSX.Element => {
                 </Card>
                 <Card>
                     <CardHeader>
-                        <CardTitle>Legal Information</CardTitle>
+                        <CardTitle>{t("app.legal.legalInformation")}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <Flex direction={"column"} className="gap-2">
                             <Button variant={"outline"} asChild>
-                                <Link href="https://www.aurora-h2020.eu/aurora/app-imprint/">
-                                    Imprint
+                                <Link href={externalLinks.imprint}>
+                                    {t("app.legal.imprint")}
                                 </Link>
                             </Button>
 
                             <Button variant={"outline"} asChild>
-                                <Link href="https://www.aurora-h2020.eu/aurora/app-privacy-policy/">
-                                    Privacy Policy
+                                <Link href={externalLinks.privacyPolicy}>
+                                    {t("app.legal.privacyPolicy")}
                                 </Link>
                             </Button>
 
                             <Button variant={"outline"} asChild>
-                                <Link href="https://www.aurora-h2020.eu/aurora/app-tos/">
-                                    Terms of Service
+                                <Link href={externalLinks.termsOfService}>
+                                    {t("app.legal.termsOfService")}
                                 </Link>
                             </Button>
                         </Flex>

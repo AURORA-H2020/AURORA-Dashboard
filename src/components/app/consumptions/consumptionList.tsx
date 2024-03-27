@@ -16,6 +16,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { usePaginatedConsumptions } from "@/firebase/firebaseHooks";
 import { cn } from "@/lib/utilities";
 import { Flex, Grid, Strong } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 import BorderBox from "../common/borderBox";
 
 /**
@@ -30,6 +31,7 @@ const ConsumptionList = ({
 }: {
     className?: string;
 }): JSX.Element => {
+    const t = useTranslations();
     const { user } = useAuthContext();
 
     const {
@@ -51,19 +53,25 @@ const ConsumptionList = ({
     }
 
     if (consumptionPage.length < 1) {
-        return <PlaceholderCard>No consumptions found.</PlaceholderCard>;
+        return (
+            <PlaceholderCard>{t("error.noConsumptionsFound")}</PlaceholderCard>
+        );
     }
     return (
         <Grid gap="4" className={cn(className)}>
             <Flex direction="column" gap="2">
-                <Label htmlFor="order-by">Order by</Label>
+                <Label htmlFor="order-by">{t("app.filter.orderBy")}</Label>
                 <Select onValueChange={onOrderChange} value={orderBy}>
                     <SelectTrigger id="order-by" className="w-[180px]">
                         <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="createdAt">Created At</SelectItem>
-                        <SelectItem value="value">Value</SelectItem>
+                        <SelectItem value="createdAt">
+                            {t("app.form.createdAt")}
+                        </SelectItem>
+                        <SelectItem value="value">
+                            {t("app.consumption")}
+                        </SelectItem>
                     </SelectContent>
                 </Select>
             </Flex>
@@ -84,7 +92,9 @@ const ConsumptionList = ({
             {totalConsumptions > 0 && (
                 <BorderBox>
                     <p>
-                        Total consumptions: <Strong>{totalConsumptions}</Strong>
+                        {t("app.totalConsumptions")}
+                        {": "}
+                        <Strong>{totalConsumptions}</Strong>
                     </p>
                 </BorderBox>
             )}

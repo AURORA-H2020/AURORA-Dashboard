@@ -5,8 +5,8 @@ export const registrationSchema = (t: (arg: string) => string) =>
     z
         .object({
             email: z.string().email(t("ui.auth.error.invalidEmail")),
-            password: passwordSchema,
-            confirmPassword: passwordSchema,
+            password: passwordSchema(t),
+            confirmPassword: passwordSchema(t),
         })
         .superRefine(({ confirmPassword, password }, ctx) => {
             if (confirmPassword !== password) {

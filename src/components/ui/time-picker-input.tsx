@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utilities";
 import { Clock } from "lucide-react";
+import { useTranslations } from "next-intl";
 import React from "react";
 import {
     TimePickerType,
@@ -119,6 +120,7 @@ interface TimePickerCalendarProps {
 }
 
 const TimePickerCalendar = ({ date, setDate }: TimePickerCalendarProps) => {
+    const t = useTranslations();
     const minuteRef = React.useRef<HTMLInputElement>(null);
     const hourRef = React.useRef<HTMLInputElement>(null);
 
@@ -126,7 +128,7 @@ const TimePickerCalendar = ({ date, setDate }: TimePickerCalendarProps) => {
         <div className="flex items-end gap-2">
             <div className="grid gap-1 text-center">
                 <Label htmlFor="hours" className="text-xs">
-                    Hours
+                    {t("common.hours")}
                 </Label>
                 <TimePickerInput
                     picker="hours"
@@ -138,7 +140,7 @@ const TimePickerCalendar = ({ date, setDate }: TimePickerCalendarProps) => {
             </div>
             <div className="grid gap-1 text-center">
                 <Label htmlFor="minutes" className="text-xs">
-                    Minutes
+                    {t("common.minutes")}
                 </Label>
                 <TimePickerInput
                     picker="minutes"
@@ -157,4 +159,4 @@ const TimePickerCalendar = ({ date, setDate }: TimePickerCalendarProps) => {
 
 TimePickerInput.displayName = "TimePickerInput";
 
-export { TimePickerInput, TimePickerCalendar };
+export { TimePickerCalendar, TimePickerInput };

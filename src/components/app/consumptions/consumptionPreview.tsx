@@ -78,9 +78,9 @@ const ConsumptionPreview = ({
         deleteDocumentById(user, consumption.id, "consumptions").then(
             (success) => {
                 if (success) {
-                    toast.success("The consumption has been deleted");
+                    toast.success(t("toast.deleteConsumption.success"));
                 } else {
-                    toast.error("An error occurred deleting your consumption");
+                    toast.error(t("toast.deleteConsumption.error"));
                 }
             },
         );
@@ -161,7 +161,9 @@ const ConsumptionPreview = ({
             <Dialog open={isModalOpen} onOpenChange={() => setModalOpen(false)}>
                 <DialogContent className="sm:max-w-lg">
                     <DialogHeader>
-                        <DialogTitle>{consumption.category}</DialogTitle>
+                        <DialogTitle>
+                            {t(`category.${consumption.category}`)}
+                        </DialogTitle>
                     </DialogHeader>
                     <ScrollArea className="max-h-[80vh]">
                         <ConsumptionView consumption={consumption} />
@@ -201,7 +203,7 @@ const ConsumptionPreview = ({
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
-                            Are your sure you want to delete the entry?
+                            {t("app.form.deleteConsumptionDialogTitle")}
                         </AlertDialogTitle>
                     </AlertDialogHeader>
                     <AlertDialogFooter>

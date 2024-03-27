@@ -1,3 +1,5 @@
+"use client";
+
 import {
     Dialog,
     DialogContent,
@@ -6,10 +8,12 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import ResetPasswordForm from "../forms/resetPasswordForm";
 
 const ResetPasswordModal = ({ children }: { children: React.ReactNode }) => {
+    const t = useTranslations();
     const [open, setOpen] = useState(false);
 
     return (
@@ -17,10 +21,11 @@ const ResetPasswordModal = ({ children }: { children: React.ReactNode }) => {
             <DialogTrigger asChild>{children}</DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Forgot Password</DialogTitle>
+                    <DialogTitle>
+                        {t("ui.auth.resetPassword.resetPassword")}
+                    </DialogTitle>
                     <DialogDescription>
-                        Provide the email address you used to register your
-                        account below. We will send you a password reset link.
+                        {t("ui.auth.resetPassword.description")}
                     </DialogDescription>
                 </DialogHeader>
                 <ResetPasswordForm onFormSubmit={() => setOpen(false)} />

@@ -65,7 +65,7 @@ export const electricityFormSchema = (
                         return true;
                     },
                     {
-                        message: "End date must be after start date",
+                        message: t("app.validation.error.date.endAfterStart"),
                         path: ["endDate"],
                     },
                 ),
@@ -83,8 +83,9 @@ export const electricityFormSchema = (
                 return true;
             },
             {
-                message:
-                    "Your exported electricity cannot exceed your total production",
+                message: t(
+                    "app.validation.error.electricity.exportedExceedsProduction",
+                ),
                 path: ["electricity", "electricityExported"],
             },
         );
@@ -119,8 +120,9 @@ export const heatingFormSchema = (
                     return true;
                 },
                 {
-                    message:
-                        "District Heating Source is required when district heating is selected",
+                    message: t(
+                        "app.validation.error.heating.districtHeatingSourceRequired",
+                    ),
                     path: ["districtHeatingSource"],
                 },
             )
@@ -132,7 +134,7 @@ export const heatingFormSchema = (
                     return true;
                 },
                 {
-                    message: "End date must be after start date",
+                    message: t("app.validation.error.date.endAfterStart"),
                     path: ["endDate"],
                 },
             ),
@@ -180,7 +182,9 @@ export const transportationFormSchema = (
                     return true;
                 },
                 {
-                    message: "Please specify a number of passengers",
+                    message: t(
+                        "app.validation.error.specifyPrivateOccupancyLevel",
+                    ),
                     path: ["privateVehicleOccupancy"],
                 },
             )
@@ -192,7 +196,9 @@ export const transportationFormSchema = (
                     return true;
                 },
                 {
-                    message: "Please specify an occupancy level",
+                    message: t(
+                        "app.validation.error.specifyPublicOccupancyLevel",
+                    ),
                     path: ["publicVehicleOccupancy"],
                 },
             )
@@ -207,7 +213,7 @@ export const transportationFormSchema = (
                     return true;
                 },
                 {
-                    message: "End date must be after start date",
+                    message: t("app.validation.error.date.endAfterStart"),
                     path: ["dateOfTravelEnd"],
                 },
             ),

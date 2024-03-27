@@ -28,13 +28,12 @@ const ResetPasswordForm = ({
     const onSubmit = async (data: z.infer<typeof formSchema>) => {
         resetPassword(data.email).then((result) => {
             if (result.success) {
-                toast.success("Your password was reset", {
-                    description: "Check your email for further instructions.",
+                toast.success(t("toast.resetPassword.successTitle"), {
+                    description: t("toast.resetPassword.successDescription"),
                 });
             } else
-                toast.error("An error occurred resetting your password", {
-                    description:
-                        "Please check the email address you provided is accurate and you have an existing account.",
+                toast.error(t("toast.resetPassword.errorTitle"), {
+                    description: t("toast.resetPassword.errorDescription"),
                 });
 
             if (onFormSubmit && result.success) {
@@ -56,14 +55,16 @@ const ResetPasswordForm = ({
                         <FormInputField
                             field={field}
                             inputType="email"
-                            placeholder="Email"
-                            label="Email"
+                            placeholder={t("ui.auth.email")}
+                            label={t("ui.auth.email")}
                         />
                     )}
                 />
 
                 <DialogFooter className="flex sm:justify-between">
-                    <Button type="submit">Reset Password</Button>
+                    <Button type="submit">
+                        {t("ui.auth.resetPassword.resetPassword")}
+                    </Button>
                 </DialogFooter>
             </form>
         </Form>

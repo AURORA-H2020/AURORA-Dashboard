@@ -11,6 +11,7 @@ import { cn } from "@/lib/utilities";
 import { RecurringConsumptionWithID } from "@/models/extensions";
 import React, { useState } from "react";
 import RecurringTransportationForm from "../forms/recurringTransportationForm";
+import { useTranslations } from "next-intl";
 
 const AddEditRecurringConsumptionModal = React.forwardRef(
     (
@@ -21,6 +22,7 @@ const AddEditRecurringConsumptionModal = React.forwardRef(
         },
         _ref,
     ) => {
+        const t = useTranslations();
         const { recurringConsumption, children, className } = props;
 
         const [isModalOpen, setIsModalOpen] = useState(false);
@@ -40,7 +42,9 @@ const AddEditRecurringConsumptionModal = React.forwardRef(
                 <Dialog open={isModalOpen} onOpenChange={handleCloseModal}>
                     <DialogContent className="sm:max-w-lg">
                         <DialogHeader>
-                            <DialogTitle>Recurring Transportation</DialogTitle>
+                            <DialogTitle>
+                                {t("app.form.recurringTransportation")}
+                            </DialogTitle>
                         </DialogHeader>
 
                         <ScrollArea className="max-h-[80vh]">

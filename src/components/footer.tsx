@@ -8,6 +8,7 @@ import Logo from "./navigation/logo";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
+import { externalLinks } from "@/lib/constants/constants";
 
 /**
  * Renders the footer component.
@@ -35,7 +36,7 @@ const Footer = (): JSX.Element => {
                         className=""
                     >
                         <Button variant="link">
-                            <Link href="https://aurora-h2020.eu">
+                            <Link href={externalLinks.auroraWebsite}>
                                 {t("footer.auroraWebsite")}
                             </Link>
                         </Button>
@@ -44,7 +45,7 @@ const Footer = (): JSX.Element => {
                             className="h-5 hidden md:block"
                         />
                         <Button variant="link">
-                            <Link href="https://apps.apple.com/us/app/aurora-energy-tracker/id1668801198">
+                            <Link href={externalLinks.iosDownload}>
                                 {t("footer.iosApp")}
                             </Link>
                         </Button>
@@ -53,7 +54,7 @@ const Footer = (): JSX.Element => {
                             className="h-5 hidden md:block"
                         />
                         <Button variant="link">
-                            <Link href="https://play.google.com/store/apps/details?id=eu.inscico.aurora_app">
+                            <Link href={externalLinks.androidDownload}>
                                 {t("footer.androidApp")}
                             </Link>
                         </Button>

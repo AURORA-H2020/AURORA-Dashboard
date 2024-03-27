@@ -79,9 +79,9 @@ const RecurringConsumptionPreview = ({
             "recurring-consumptions",
         ).then((success) => {
             if (success) {
-                toast.success("The consumption has been deleted");
+                toast.success(t("toast.deleteRecurringConsumption.success"));
             } else {
-                toast.error("An error occurred deleting your consumption");
+                toast.error(t("toast.deleteRecurringConsumption.error"));
             }
         });
     };
@@ -113,10 +113,8 @@ const RecurringConsumptionPreview = ({
                                 </Heading>
                                 <Text className="text-muted-foreground">
                                     {recurringConsumption.isEnabled
-                                        ? t("app.recurringConsumption.enabled")
-                                        : t(
-                                              "app.recurringConsumption.disabled",
-                                          )}
+                                        ? t("app.form.enabled")
+                                        : t("app.form.disabled")}
                                 </Text>
                             </Flex>
                         </Flex>
@@ -134,7 +132,7 @@ const RecurringConsumptionPreview = ({
                             </Text>
                             <Text>
                                 {t(
-                                    `app.recurringConsumption.frequency.${recurringConsumption.frequency.unit}`,
+                                    `app.form.frequencyOptions.${recurringConsumption.frequency.unit}`,
                                 )}
                             </Text>
                         </Flex>
@@ -183,7 +181,7 @@ const RecurringConsumptionPreview = ({
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
-                            Are your sure you want to delete the entry?
+                            {t("app.form.deleteConsumptionDialogTitle")}
                         </AlertDialogTitle>
                     </AlertDialogHeader>
                     <AlertDialogFooter>

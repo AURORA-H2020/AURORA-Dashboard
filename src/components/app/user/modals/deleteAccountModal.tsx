@@ -15,19 +15,21 @@ import { useAuthContext } from "@/context/AuthContext";
 import { deleteAccount } from "@/firebase/firestore/deleteAccount";
 import { Flex } from "@radix-ui/themes";
 import { User } from "firebase/auth";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
 import BorderBox from "../../common/borderBox";
 
 const DeleteAccountModal = ({
     children,
-    title = "Are you sure you want to delete your account?",
-    description = "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
+    title,
+    description,
 }: {
     children: React.ReactNode;
     title?: string;
     description?: string;
 }) => {
+    const t = useTranslations();
     const { user } = useAuthContext();
 
     const [isDeleteAlertOpen, setDeleteAlertOpen] = useState(false);
@@ -38,15 +40,17 @@ const DeleteAccountModal = ({
         const { success, requiresReauth } = await deleteAccount(user);
 
         if (success) {
-            toast.success("Your account has been deleted");
+            toast.success(t("toast.deleteAccount.success"));
             setDeleteAlertOpen(false);
         } else {
             if (requiresReauth) {
-                toast.error("Please reauthenticate to update your password", {
+                toast.error(t("toast.deleteAccount.reAuthErrorTitle"), {
                     duration: 10000,
-                    description: "You can do this by logging out and back in.",
+                    description: t(
+                        "toast.deleteAccount.reAuthErrorDescription",
+                    ),
                 });
-            } else toast.error("An error occurred updating your password");
+            } else toast.error(t("toast.deleteAccount.generalError"));
         }
     };
 
@@ -62,9 +66,12 @@ const DeleteAccountModal = ({
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle>{title}</AlertDialogTitle>
+                    <AlertDialogTitle>
+                        {title ?? t("app.account.deletePopup.title")}
+                    </AlertDialogTitle>
                     <AlertDialogDescription>
-                        {description}
+                        {description ??
+                            t("app.account.deletePopup.description")}
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <BorderBox className="mt-2">
@@ -81,8 +88,9 @@ const DeleteAccountModal = ({
                             htmlFor="confirm-delete"
                             className="text-sm font-medium peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                         >
-                            Yes, I want to delete my account and understand that
-                            it is lost forever.
+                            {t(
+                                "app.account.deletePopup.confirmationDisclaimer",
+                            )}
                         </Label>
                     </Flex>
                 </BorderBox>
@@ -90,14 +98,14 @@ const DeleteAccountModal = ({
                     <AlertDialogCancel
                         onClick={() => setDeleteAlertOpen(false)}
                     >
-                        Cancel
+                        {t("common.cancel")}
                     </AlertDialogCancel>
                     <AlertDialogAction
                         variant="destructive"
                         disabled={!isDeleteConfirm}
                         onClick={() => handleUserDelete(user)}
                     >
-                        Delete Account
+                        {t("app.account.deleteMyAccount")}
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

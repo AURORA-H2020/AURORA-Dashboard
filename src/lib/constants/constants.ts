@@ -26,10 +26,12 @@ export const supportedLocales: Locale[] = [
         code: "da-DK",
         name: t("language.danish"),
     },
+    */
     {
         code: "de-DE",
         name: t("language.german"),
     },
+    /*
     {
         code: "pt-PT",
         name: t("language.portuguese"),
@@ -67,6 +69,21 @@ export const allTremorColours: Color[] = [
     "rose",
     "rose",
 ];
+
+export const externalLinks = {
+    privacyPolicy: "https://www.aurora-h2020.eu/aurora/app-privacy-policy/",
+    termsOfService: "https://www.aurora-h2020.eu/aurora/app-tos/",
+    imprint: "https://www.aurora-h2020.eu/aurora/app-imprint/",
+    appDownload: "https://www.aurora-h2020.eu/aurora/ourapp/",
+    auroraWebsite: "https://www.aurora-h2020.eu/",
+    supportEmail: "mailto:app-support@aurora-h2020.eu",
+    supportWebsite: "https://www.aurora-h2020.eu/app-support/",
+    cordisPage: "https://cordis.europa.eu/project/id/101036418",
+    iosDownload:
+        "https://apps.apple.com/us/app/aurora-energy-tracker/id1668801198",
+    androidDownload:
+        "https://play.google.com/store/apps/details?id=eu.inscico.aurora_app",
+};
 
 export const countriesMapping: CountryMapping[] = [
     {
@@ -161,31 +178,31 @@ export const householdProfiles: HouseholdProfile[] = [
 export const weekdays: Weekdays[] = [
     {
         key: 1,
-        label: t("common.weekdays.monday"),
+        label: t("common.weekdayOptions.monday"),
     },
     {
         key: 2,
-        label: t("common.weekdays.tuesday"),
+        label: t("common.weekdayOptions.tuesday"),
     },
     {
         key: 3,
-        label: t("common.weekdays.wednesday"),
+        label: t("common.weekdayOptions.wednesday"),
     },
     {
         key: 4,
-        label: t("common.weekdays.thursday"),
+        label: t("common.weekdayOptions.thursday"),
     },
     {
         key: 5,
-        label: t("common.weekdays.friday"),
+        label: t("common.weekdayOptions.friday"),
     },
     {
         key: 6,
-        label: t("common.weekdays.saturday"),
+        label: t("common.weekdayOptions.saturday"),
     },
     {
         key: 7,
-        label: t("common.weekdays.sunday"),
+        label: t("common.weekdayOptions.sunday"),
     },
 ];
 

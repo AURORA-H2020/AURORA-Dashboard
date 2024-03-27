@@ -36,11 +36,10 @@ const ChangePasswordForm = ({
         changePassword(user, data.currentPassword, data.password).then(
             (result) => {
                 if (result.success) {
-                    toast.success("Your password was updated successfully");
+                    toast.success(t("toast.changePassword.success"));
                 } else
-                    toast.error("An error occurred updating your password", {
-                        description:
-                            "Please check your current password and try again.",
+                    toast.error(t("toast.changePassword.errorTitle"), {
+                        description: t("toast.changePassword.errorDescription"),
                     });
 
                 if (onFormSubmit && result.success) {
@@ -62,8 +61,8 @@ const ChangePasswordForm = ({
                     render={({ field }) => (
                         <FormPasswordField
                             field={field}
-                            placeholder={"Current Password"}
-                            label={"Current Password"}
+                            placeholder={t("ui.auth.currentPassword")}
+                            label={t("ui.auth.currentPassword")}
                         />
                     )}
                 />
@@ -95,7 +94,9 @@ const ChangePasswordForm = ({
                 </BorderBox>
 
                 <DialogFooter className="flex sm:justify-between">
-                    <Button type="submit">Update Password</Button>
+                    <Button type="submit">
+                        {t("app.account.changePassword")}
+                    </Button>
                 </DialogFooter>
             </form>
         </Form>

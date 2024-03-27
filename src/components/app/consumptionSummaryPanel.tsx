@@ -52,7 +52,7 @@ const ConsumptionSummaryPanel = ({ className }: { className?: string }) => {
     if (!selectedConsumptionSummary) {
         return (
             <PlaceholderCard icon={<BarChart4 />}>
-                Add consumptions to see your summary
+                {t("app.summary.noDataAvailable")}
             </PlaceholderCard>
         );
     }
@@ -141,19 +141,9 @@ const ConsumptionSummaryPanel = ({ className }: { className?: string }) => {
             />
 
             <Box>
-                <Heading size="4">How does it work?</Heading>
+                <Heading size="4">{t("app.labelGuide.title")}</Heading>
                 <Text className="text-sm text-muted-foreground">
-                    Your energy labels are calculated based on your tracked
-                    consumption and specific to your location. This means, as
-                    you enter data throughout the year, more of your carbon
-                    emission and energy budgets will be made available. For
-                    example: If you have only entered data for all days of
-                    January and December, 2/12 of the total budget will be used
-                    to calculate your label. The only exception is
-                    transportation, which yields the full budget after a certain
-                    number of annual entries. Your overall budget is based on
-                    the sum of your electricity, heating and transportation
-                    budgets.
+                    {t("app.labelGuide.description")}
                 </Text>
             </Box>
         </Grid>

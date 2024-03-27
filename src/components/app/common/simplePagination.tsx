@@ -1,3 +1,5 @@
+"use client";
+
 import {
     Pagination,
     PaginationContent,
@@ -6,6 +8,7 @@ import {
     PaginationNext,
     PaginationPrevious,
 } from "@/components/ui/pagination";
+import { useTranslations } from "next-intl";
 
 const SimplePagination = ({
     currentPage,
@@ -18,6 +21,8 @@ const SimplePagination = ({
     fetchPreviousPage: () => void;
     fetchNextPage: () => void;
 }) => {
+    const t = useTranslations();
+
     return (
         <Pagination>
             <PaginationContent>
@@ -28,7 +33,7 @@ const SimplePagination = ({
                                 className="cursor-pointer"
                                 onClick={fetchPreviousPage}
                             >
-                                Previous
+                                {t("common.pagination.previous")}
                             </PaginationPrevious>
                         </PaginationItem>
                         <PaginationItem>
@@ -63,7 +68,7 @@ const SimplePagination = ({
                                 className="cursor-pointer"
                                 onClick={fetchNextPage}
                             >
-                                Next
+                                {t("common.pagination.next")}
                             </PaginationNext>
                         </PaginationItem>
                     </>

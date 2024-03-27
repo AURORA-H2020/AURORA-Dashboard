@@ -35,7 +35,7 @@ const ConsumptionSummaryLabel = ({
     const labelAttributes = labelMappings.find((e) => e.label === label);
 
     const labelColor = labelAttributes?.color ?? "#8F8E94";
-    const labelText = `${(labelAttributes?.name && t(labelAttributes?.name)) || "No consumptions"} (${labelAttributes?.label || "?"})`;
+    const labelText = `${(labelAttributes?.name && t(labelAttributes?.name)) || t("error.noConsumptions")} (${labelAttributes?.label || "?"})`;
 
     const labelValue = `${format.number(value, {
         maximumFractionDigits: 0,
@@ -65,7 +65,7 @@ const ConsumptionSummaryLabel = ({
             <CardContent>
                 <Grid>
                     <div className="text-2xl font-bold">{labelValue}</div>
-                    <p className="text-sm text-muted-foreground">{`in ${year}`}</p>
+                    <p className="text-sm text-muted-foreground">{`${t("common.in")} ${year}`}</p>
                 </Grid>
             </CardContent>
         </Card>

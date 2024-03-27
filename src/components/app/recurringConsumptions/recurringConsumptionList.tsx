@@ -15,6 +15,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { usePaginatedRecurringConsumptions } from "@/firebase/firebaseHooks";
 import { cn } from "@/lib/utilities";
 import { Flex, Grid, Strong } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 import BorderBox from "../common/borderBox";
 import RecurringConsumptionPreview from "./recurringConsumptionPreview";
 
@@ -30,6 +31,7 @@ const ConsumptionList = ({
 }: {
     className?: string;
 }): JSX.Element => {
+    const t = useTranslations();
     const { user } = useAuthContext();
 
     const {
@@ -51,19 +53,27 @@ const ConsumptionList = ({
     }
 
     if (recurringConsumptionPage.length < 1) {
-        return <PlaceholderCard>No consumptions found.</PlaceholderCard>;
+        return (
+            <PlaceholderCard>
+                {t("error.noRecurringConsumptionsFound")}
+            </PlaceholderCard>
+        );
     }
     return (
         <Grid gap="4" className={cn(className)}>
             <Flex direction="column" gap="2">
-                <Label htmlFor="order-by">Order by</Label>
+                <Label htmlFor="order-by">{t("app.filter.orderBy")}</Label>
                 <Select onValueChange={onOrderChange} value={orderBy}>
                     <SelectTrigger id="order-by" className="w-[180px]">
                         <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="createdAt">Created At</SelectItem>
-                        <SelectItem value="frequency">Frequency</SelectItem>
+                        <SelectItem value="createdAt">
+                            {t("app.form.createdAt")}
+                        </SelectItem>
+                        <SelectItem value="frequency">
+                            {t("app.form.frequency")}
+                        </SelectItem>
                     </SelectContent>
                 </Select>
             </Flex>
@@ -84,7 +94,8 @@ const ConsumptionList = ({
             {totalRecurringConsumptions > 0 && (
                 <BorderBox>
                     <p>
-                        Total recurring consumptions:{" "}
+                        {t("app.totalRecurringConsumptions")}
+                        {": "}
                         <Strong>{totalRecurringConsumptions}</Strong>
                     </p>
                 </BorderBox>

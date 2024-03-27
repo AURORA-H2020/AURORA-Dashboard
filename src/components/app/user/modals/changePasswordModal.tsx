@@ -5,10 +5,12 @@ import {
     DialogTitle,
     DialogTrigger,
 } from "@/components/ui/dialog";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 import ChangePasswordForm from "../forms/changePasswordForm";
 
 const ChangePasswordModal = ({ children }: { children: React.ReactNode }) => {
+    const t = useTranslations();
     const [open, setOpen] = useState(false);
 
     return (
@@ -16,7 +18,7 @@ const ChangePasswordModal = ({ children }: { children: React.ReactNode }) => {
             <DialogTrigger asChild>{children}</DialogTrigger>
             <DialogContent>
                 <DialogHeader>
-                    <DialogTitle>Change Password</DialogTitle>
+                    <DialogTitle>{t("app.account.changePassword")}</DialogTitle>
                 </DialogHeader>
                 <ChangePasswordForm onFormSubmit={() => setOpen(false)} />
             </DialogContent>

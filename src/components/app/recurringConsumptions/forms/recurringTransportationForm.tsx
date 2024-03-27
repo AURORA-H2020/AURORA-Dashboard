@@ -98,12 +98,12 @@ const RecurringTransportationForm = ({
         );
         if (success) {
             if (recurringConsumption?.id) {
-                toast.success("Your consumption was updated successfully.");
+                toast.success(t("toast.consumption.updatedSuccessfully"));
             } else {
-                toast.success("Your consumption was created successfully.");
+                toast.success(t("toast.consumption.addedSuccessfully"));
             }
         } else {
-            toast.error("There was an error creating your consumption.");
+            toast.error(t("toast.consumption.addedError"));
         }
 
         if (onFormSubmit) {
@@ -151,16 +151,16 @@ const RecurringTransportationForm = ({
                     render={({ field }) => (
                         <FormSwitch
                             field={field}
-                            label="Enabled"
-                            description="Turn this off to stop tracking this consumption."
+                            label={t("app.form.enabled")}
+                            description={t(
+                                "app.form.recurringToggleDescription",
+                            )}
                         />
                     )}
                 />
 
                 <BorderBox className="text-sm text-muted-foreground">
-                    Please, do not add travels you make on behalf of your
-                    company. This does not include your commute, which should
-                    still be added.
+                    {t("app.form.transportDisclaimer")}
                 </BorderBox>
 
                 <BorderBox>
@@ -176,8 +176,8 @@ const RecurringTransportationForm = ({
                                         label: t(occupancy.label),
                                     }),
                                 )}
-                                placeholder="Frequency"
-                                label={"Frequency"}
+                                placeholder={t("app.form.frequency")}
+                                label={t("app.form.frequency")}
                             />
                         )}
                     />
@@ -193,8 +193,8 @@ const RecurringTransportationForm = ({
                                         value: occupancy.key.toString(),
                                         label: t(occupancy.label),
                                     }))}
-                                    placeholder="Weekdays"
-                                    label={"Weekdays"}
+                                    placeholder={t("app.form.weekdays")}
+                                    label={t("app.form.weekdays")}
                                 />
                             )}
                         />
@@ -208,8 +208,8 @@ const RecurringTransportationForm = ({
                                 <FormInputField
                                     field={field}
                                     inputType="number"
-                                    placeholder="Day of Month"
-                                    label="Day of Month"
+                                    placeholder={t("app.form.dayOfMonth")}
+                                    label={t("app.form.dayOfMonth")}
                                 />
                             )}
                         />
@@ -222,8 +222,8 @@ const RecurringTransportationForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="number"
-                                placeholder="Distance"
-                                label="Distance"
+                                placeholder={t("unitLabel.distance")}
+                                label={t("unitLabel.distance")}
                             />
                         )}
                     />
@@ -231,7 +231,7 @@ const RecurringTransportationForm = ({
 
                 <BorderBox>
                     <Flex justify="between" align="center">
-                        <FormLabel>Start of Travel</FormLabel>
+                        <FormLabel>{t("app.form.startOfTravel")}</FormLabel>
                         <Flex justify="between" align="center" gap="8">
                             <FormField
                                 control={form.control}
@@ -271,8 +271,8 @@ const RecurringTransportationForm = ({
                                         label: t(source.name),
                                     }),
                                 )}
-                                placeholder="Transportation Type"
-                                label={"Transportation Type"}
+                                placeholder={t("app.form.transportationType")}
+                                label={t("app.form.transportationType")}
                             />
                         )}
                     />
@@ -287,8 +287,10 @@ const RecurringTransportationForm = ({
                                 <FormInputField
                                     field={field}
                                     inputType="number"
-                                    placeholder="Fuel Consumption per 100km"
-                                    label="Set custom fuel consumption"
+                                    placeholder={t("app.form.fuelConsumption")}
+                                    label={t(
+                                        "app.form.setCustomFuelConsumption",
+                                    )}
                                     showSwitch={true}
                                     unit={
                                         [
@@ -311,8 +313,8 @@ const RecurringTransportationForm = ({
                                 <FormInputField
                                     field={field}
                                     inputType="number"
-                                    placeholder="Private Vehicle Occupancy"
-                                    label="Private Vehicle Occupancy"
+                                    placeholder={t("app.form.occupancy")}
+                                    label={t("app.form.occupancy")}
                                 />
                             )}
                         />
@@ -331,8 +333,8 @@ const RecurringTransportationForm = ({
                                             label: t(occupancy.label),
                                         }),
                                     )}
-                                    placeholder="Public Vehicle Occupancy"
-                                    label={"Public Vehicle Occupancy"}
+                                    placeholder={t("app.form.occupancy")}
+                                    label={t("app.form.occupancy")}
                                 />
                             )}
                         />
@@ -345,8 +347,8 @@ const RecurringTransportationForm = ({
                     render={({ field }) => (
                         <FormTextField
                             field={field}
-                            placeholder="Description"
-                            label="Description"
+                            placeholder={t("app.form.description")}
+                            label={t("app.form.description")}
                         />
                     )}
                 />

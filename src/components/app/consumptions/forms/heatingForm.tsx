@@ -112,9 +112,11 @@ const HeatingForm = ({
                                         label: t(source.name),
                                     }),
                                 )}
-                                placeholder="Heating Fuel"
-                                label={"Heating Fuel"}
-                                description="Select your type of heating. You can find this information on your heating bill."
+                                placeholder={t("app.form.heating.heatingFuel")}
+                                label={t("app.form.heating.heatingFuel")}
+                                description={t(
+                                    "app.form.heating.heatingFuelDescription",
+                                )}
                             />
                         )}
                     />
@@ -132,8 +134,12 @@ const HeatingForm = ({
                                             label: t(source.name),
                                         }),
                                     )}
-                                    placeholder="District Heating Source"
-                                    label={"District Heating Source"}
+                                    placeholder={t(
+                                        "app.form.heating.districtHeatingSource",
+                                    )}
+                                    label={t(
+                                        "app.form.heating.districtHeatingSource",
+                                    )}
                                 />
                             )}
                         />
@@ -145,9 +151,11 @@ const HeatingForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="number"
-                                placeholder="Consumption"
-                                label="Consumption"
-                                description="You can find this information on your heating bill."
+                                placeholder={t("app.consumption")}
+                                label={t("app.consumption")}
+                                description={t(
+                                    "app.form.heating.heatingBillDescription",
+                                )}
                                 unit={
                                     consumptionSources.heating.find(
                                         (e) => e.source === formHeatingFuel,
@@ -163,9 +171,11 @@ const HeatingForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="number"
-                                placeholder="People in household"
-                                label="People in household"
-                                description="How many people, including you, live in your household."
+                                placeholder={t("app.form.peopleInHousehold")}
+                                label={t("app.form.peopleInHousehold")}
+                                description={t(
+                                    "app.form.peopleInHouseholdDescription",
+                                )}
                             />
                         )}
                     />
@@ -179,9 +189,11 @@ const HeatingForm = ({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                label={"Start date"}
+                                label={t("ui.monthPicker.start")}
                                 maxDate={form.watch("heating.endDate").toDate()}
-                                description="Select the beginning and end of this consumption. You can find this information on your heating bill."
+                                description={t(
+                                    "app.form.heating.dateSelectDescription",
+                                )}
                             />
                         )}
                     />
@@ -193,7 +205,7 @@ const HeatingForm = ({
                             <FormDatePicker
                                 field={field}
                                 placeholder={t("common.placeholder.selectDate")}
-                                label={"End date"}
+                                label={t("ui.monthPicker.end")}
                                 minDate={form
                                     .watch("heating.startDate")
                                     .toDate()}
@@ -210,8 +222,8 @@ const HeatingForm = ({
                             <FormInputField
                                 field={field}
                                 inputType="number"
-                                placeholder="Costs"
-                                label="Costs"
+                                placeholder={t("app.form.costs")}
+                                label={t("app.form.costs")}
                             />
                         )}
                     />
@@ -222,9 +234,9 @@ const HeatingForm = ({
                         render={({ field }) => (
                             <FormTextField
                                 field={field}
-                                placeholder="Description"
-                                label="Description"
-                                description="You may add a description to your entry to help you find it later."
+                                placeholder={t("app.form.description")}
+                                label={t("app.form.description")}
+                                description={t("app.form.descriptionHelpText")}
                             />
                         )}
                     />

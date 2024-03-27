@@ -12,6 +12,7 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { externalLinks } from "@/lib/constants/constants";
 import { Flex, Grid, Link } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import BorderBox from "../app/common/borderBox";
@@ -88,7 +89,7 @@ export const AuthForm = () => {
                             <SignInWithEmail />
                             <ResetPasswordModal>
                                 <Button className="self-end p-0" variant="link">
-                                    Forgot password
+                                    {t("ui.auth.resetPassword.forgotPassword")}
                                 </Button>
                             </ResetPasswordModal>
                             <AuthenticationOptions isSignIn={true} />
@@ -109,20 +110,28 @@ export const AuthForm = () => {
                     </TabsContent>
                 </Card>
                 <BorderBox className="text-sm text-muted-foreground">
-                    This tool was developed by the AURORA Horizon 2020 EU-funded
-                    project (No. <Link href="#">101036418</Link>). Your data is
-                    processed by members of the project consortium and securely
-                    storedd in Google Firebase. Your data will only be used for
-                    research purposes in an anonymised format and never
-                    commercially without your explicit consent. You can modify,
-                    download or delete your data at any time or reach out to our
-                    support under{" "}
-                    <Link href="mailto:app-support@aurora-h2020.eu">
-                        app-support@aurora-h2020.eu
-                    </Link>
-                    . By proceeding you agree to AURORA&apos;s{" "}
-                    <Link href="#">Terms of Service</Link>
-                    and <Link href="#">Privacy Policy</Link>.
+                    {t.rich("ui.auth.legal", {
+                        projectNumber: (chunks) => (
+                            <Link href={externalLinks.cordisPage}>
+                                {chunks}
+                            </Link>
+                        ),
+                        supportEmail: (chunks) => (
+                            <Link href={externalLinks.supportEmail}>
+                                {chunks}
+                            </Link>
+                        ),
+                        termsOfService: (chunks) => (
+                            <Link href={externalLinks.termsOfService}>
+                                {chunks}
+                            </Link>
+                        ),
+                        privacyPolicy: (chunks) => (
+                            <Link href={externalLinks.privacyPolicy}>
+                                {chunks}
+                            </Link>
+                        ),
+                    })}
                 </BorderBox>
             </Tabs>
         </Flex>

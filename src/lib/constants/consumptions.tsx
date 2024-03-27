@@ -240,15 +240,15 @@ export const publicVerhicleTypes = consumptionSources.transportation
 export const publicVehicleOccupancies: PublicVehicleOccupancy[] = [
     {
         key: "almostEmpty",
-        label: t("app.consumption.publicVehicleOccupancy.almostEmpty"),
+        label: t("app.form.publicVehicleOccupancy.almostEmpty"),
     },
     {
         key: "medium",
-        label: t("app.consumption.publicVehicleOccupancy.medium"),
+        label: t("app.form.publicVehicleOccupancy.medium"),
     },
     {
         key: "nearlyFull",
-        label: t("app.consumption.publicVehicleOccupancy.nearlyFull"),
+        label: t("app.form.publicVehicleOccupancy.nearlyFull"),
     },
 ];
 
@@ -256,15 +256,15 @@ export const recurringConsumptionFrequencies: RecurringConsumptionFrequencyUnitM
     [
         {
             key: "daily",
-            label: t("app.recurringConsumption.frequency.daily"),
+            label: t("app.form.frequencyOptions.daily"),
         },
         {
             key: "weekly",
-            label: t("app.recurringConsumption.frequency.weekly"),
+            label: t("app.form.frequencyOptions.weekly"),
         },
         {
             key: "monthly",
-            label: t("app.recurringConsumption.frequency.monthly"),
+            label: t("app.form.frequencyOptions.monthly"),
         },
     ];
 

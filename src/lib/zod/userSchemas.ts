@@ -36,9 +36,9 @@ export const userDataFormSchema = (
         }),
         yearOfBirth: z.coerce
             .number()
-            .min(1900, { message: "Please enter a year after 1900." })
+            .min(1900, { message: t("app.validation.error.year.after1900") })
             .max(new Date().getFullYear(), {
-                message: "Please enter a year in the past.",
+                message: t("app.validation.error.year.inPast"),
             })
             .optional(),
         gender: z.enum([userGenders[0], ...userGenders]).optional(),
@@ -68,8 +68,8 @@ export const userChangePasswordSchema = (
     z
         .object({
             currentPassword: z.string(),
-            password: passwordSchema,
-            confirmPassword: passwordSchema,
+            password: passwordSchema(t),
+            confirmPassword: passwordSchema(t),
         })
         .superRefine(({ confirmPassword, password }, ctx) => {
             if (confirmPassword !== password) {
