@@ -18,7 +18,11 @@ import { Table, TableBody } from "@/components/ui/table";
 import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { downloadUserData } from "@/firebase/firestore/downloadUserData";
-import { externalLinks } from "@/lib/constants/constants";
+import {
+    citiesMappings,
+    countriesMapping,
+    externalLinks,
+} from "@/lib/constants/constants";
 import { Flex, Grid } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
@@ -114,12 +118,20 @@ const UserSettings = (): JSX.Element => {
                                 <ConsumptionTableRow
                                     label={t("app.profile.country")}
                                 >
-                                    {userData?.country || ""}
+                                    {t(
+                                        countriesMapping.find(
+                                            (e) => e.ID === userData.country,
+                                        )?.name,
+                                    ) || ""}
                                 </ConsumptionTableRow>
                                 <ConsumptionTableRow
                                     label={t("app.profile.city")}
                                 >
-                                    {userData?.city || ""}
+                                    {t(
+                                        citiesMappings.find(
+                                            (e) => e.ID === userData.city,
+                                        )?.name,
+                                    ) || ""}
                                 </ConsumptionTableRow>
                                 <ConsumptionTableRow
                                     label={t("app.profile.userID")}

@@ -1,19 +1,17 @@
 "use client";
 
-import { categories, consumptionMapping } from "@/lib/constants/consumptions";
+import { consumptionMapping } from "@/lib/constants/consumptions";
 import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { BarChart } from "@tremor/react";
-import { useFormatter } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
 interface CurrentSummary {
     month: number;
-    heating: number;
-    electricity: number;
-    transportation: number;
+    [key: string]: number;
 }
 
 /**
@@ -47,6 +45,7 @@ const ConsumptionSummaryChart = ({
     consumptionSummary: ConsumptionSummary;
     measure: "carbonEmission" | "energyExpended";
 }) => {
+    const t = useTranslations();
     const format = useFormatter();
 
     const [currentSummary, setCurrentSummary] = useState<
@@ -62,9 +61,19 @@ const ConsumptionSummaryChart = ({
                 monthName: format.dateTime(new Date(2000, index, 15), {
                     month: "short",
                 }),
-                heating: 0,
-                electricity: 0,
-                transportation: 0,
+                [t(
+                    consumptionMapping.find((e) => e.category === "heating")
+                        ?.label,
+                )]: 0,
+                [t(
+                    consumptionMapping.find((e) => e.category === "electricity")
+                        ?.label,
+                )]: 0,
+                [t(
+                    consumptionMapping.find(
+                        (e) => e.category === "transportation",
+                    )?.label,
+                )]: 0,
             }));
         };
 
@@ -82,17 +91,29 @@ const ConsumptionSummaryChart = ({
                                 month: "short",
                             },
                         ),
-                        heating: findValueByCategory(
+                        [t(
+                            consumptionMapping.find(
+                                (e) => e.category === "heating",
+                            )?.label,
+                        )]: findValueByCategory(
                             month.categories,
                             "heating",
                             measure,
                         ),
-                        electricity: findValueByCategory(
+                        [t(
+                            consumptionMapping.find(
+                                (e) => e.category === "electricity",
+                            )?.label,
+                        )]: findValueByCategory(
                             month.categories,
                             "electricity",
                             measure,
                         ),
-                        transportation: findValueByCategory(
+                        [t(
+                            consumptionMapping.find(
+                                (e) => e.category === "transportation",
+                            )?.label,
+                        )]: findValueByCategory(
                             month.categories,
                             "transportation",
                             measure,
@@ -103,18 +124,18 @@ const ConsumptionSummaryChart = ({
                 baseSummaryData,
             );
 
-            setCurrentSummary(transformedData);
+            setCurrentSummary(transformedData as CurrentSummary[]);
         } else {
             setCurrentSummary(undefined);
         }
-    }, [measure, consumptionSummary, format]);
+    }, [measure, consumptionSummary, format, t]);
 
     return (
         <BarChart
             className="mt-4"
             data={currentSummary ?? []}
             index="monthName"
-            categories={categories}
+            categories={consumptionMapping.map((c) => t(c.label))}
             colors={consumptionMapping.map((c) => c.colorPrimary)}
             valueFormatter={
                 measure === "carbonEmission"

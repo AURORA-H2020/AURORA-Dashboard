@@ -136,6 +136,10 @@ export const countriesMapping: CountryMapping[] = [
     },
 ].sort((a, b) => a.name.localeCompare(b.name));
 
+export const citiesMappings = countriesMapping
+    .map((country) => country.cities)
+    .reduce((acc, val) => acc.concat(val), []);
+
 export const genderMappings: GenderMapping[] = [
     { key: "female", label: t("gender.female"), color: "slate-400" },
     { key: "male", label: t("gender.male"), color: "slate-500" },

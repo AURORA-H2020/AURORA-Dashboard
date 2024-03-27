@@ -91,8 +91,6 @@ const FormDatePicker = ({
                                 field.value?.toDate().getMinutes() || 0,
                             );
 
-                            console.log(selectedDate);
-
                             const timestamp = Timestamp.fromDate(selectedDate);
                             field.onChange(timestamp);
                         }}
