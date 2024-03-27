@@ -223,6 +223,8 @@ export const consumptionSources: ConsumptionSources = {
 };
 
 export const fuelConsumptionEnabledTransportationTypes = [
+    "electricCar",
+    "electricMotorcycle",
     "fuelCar",
     "hybridCar",
     "motorcycle",

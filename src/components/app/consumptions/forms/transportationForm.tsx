@@ -173,6 +173,14 @@ const TransportationForm = ({
                                     placeholder="Fuel Consumption per 100km"
                                     label="Set custom fuel consumption"
                                     showSwitch={true}
+                                    unit={
+                                        [
+                                            "electricCar",
+                                            "electricBike",
+                                        ].includes(formTransportationType)
+                                            ? "kWh/100km"
+                                            : "L/100km"
+                                    }
                                 />
                             )}
                         />

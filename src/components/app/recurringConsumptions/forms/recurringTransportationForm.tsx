@@ -12,6 +12,7 @@ import { addEditRecurringConsumption } from "@/firebase/consumption/addEditRecur
 import { weekdays } from "@/lib/constants/constants";
 import {
     consumptionSources,
+    fuelConsumptionEnabledTransportationTypes,
     privateVehicleTypes,
     publicVehicleOccupancies,
     publicVerhicleTypes,
@@ -117,6 +118,13 @@ const RecurringTransportationForm = ({
     const formFrequencyUnit = form.watch("frequency.unit");
 
     useEffect(() => {
+        if (
+            !fuelConsumptionEnabledTransportationTypes.includes(
+                formTransportationType,
+            )
+        ) {
+            form.setValue("transportation.fuelConsumption", undefined);
+        }
         if (!privateVehicleTypes.includes(formTransportationType)) {
             form.setValue("transportation.privateVehicleOccupancy", undefined);
         }
@@ -148,6 +156,12 @@ const RecurringTransportationForm = ({
                         />
                     )}
                 />
+
+                <BorderBox className="text-sm text-muted-foreground">
+                    Please, do not add travels you make on behalf of your
+                    company. This does not include your commute, which should
+                    still be added.
+                </BorderBox>
 
                 <BorderBox>
                     <FormField
@@ -263,7 +277,7 @@ const RecurringTransportationForm = ({
                         )}
                     />
 
-                    {["fuelCar", "hybridCar", "motorcycle"].includes(
+                    {fuelConsumptionEnabledTransportationTypes.includes(
                         formTransportationType,
                     ) && (
                         <FormField
@@ -276,6 +290,14 @@ const RecurringTransportationForm = ({
                                     placeholder="Fuel Consumption per 100km"
                                     label="Set custom fuel consumption"
                                     showSwitch={true}
+                                    unit={
+                                        [
+                                            "electricCar",
+                                            "electricBike",
+                                        ].includes(formTransportationType)
+                                            ? "kWh/100km"
+                                            : "L/100km"
+                                    }
                                 />
                             )}
                         />

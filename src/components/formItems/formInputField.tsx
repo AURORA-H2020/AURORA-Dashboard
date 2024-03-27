@@ -68,6 +68,7 @@ const FormInputField = ({
                             placeholder={placeholder}
                             {...field}
                             value={field.value ?? ""}
+                            className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         />
                         {unit && (
                             <div className="absolute inset-y-0 right-0 pr-0 flex items-center cursor-pointer">
