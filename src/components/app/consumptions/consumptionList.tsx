@@ -3,19 +3,22 @@
 import PlaceholderCard from "@/components/app/common/placeholderCard";
 import SimplePagination from "@/components/app/common/simplePagination";
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
-import { Label } from "@/components/ui/label";
-import LoadingSpinner from "@/components/ui/loading";
+import { Button } from "@/components/ui/button";
 import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuLabel,
+    DropdownMenuRadioGroup,
+    DropdownMenuRadioItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import LoadingSpinner from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { usePaginatedConsumptions } from "@/firebase/firebaseHooks";
 import { cn } from "@/lib/utilities";
 import { Flex, Grid, Strong } from "@radix-ui/themes";
+import { ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import BorderBox from "../common/borderBox";
 
@@ -60,20 +63,39 @@ const ConsumptionList = ({
     return (
         <Grid gap="4" className={cn(className)}>
             <Flex direction="column" gap="2">
-                <Label htmlFor="order-by">{t("app.filter.orderBy")}</Label>
-                <Select onValueChange={onOrderChange} value={orderBy}>
-                    <SelectTrigger id="order-by" className="w-[180px]">
-                        <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="createdAt">
-                            {t("app.form.createdAt")}
-                        </SelectItem>
-                        <SelectItem value="value">
-                            {t("app.consumption")}
-                        </SelectItem>
-                    </SelectContent>
-                </Select>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild className="w-[180px]">
+                        <Button
+                            variant="outline"
+                            size="sm"
+                            className="h-7 gap-1 text-sm"
+                        >
+                            <ArrowUpDown className="h-3.5 w-3.5" />
+                            <span className="sr-only sm:not-sr-only">
+                                {t("app.filter.order")}
+                            </span>
+                        </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>
+                            {t("app.filter.orderBy")}
+                        </DropdownMenuLabel>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuRadioGroup
+                            value={orderBy}
+                            onValueChange={(value) =>
+                                onOrderChange(value as "createdAt" | "value")
+                            }
+                        >
+                            <DropdownMenuRadioItem value="createdAt">
+                                {t("app.form.createdAt")}
+                            </DropdownMenuRadioItem>
+                            <DropdownMenuRadioItem value="value">
+                                {t("app.consumption")}
+                            </DropdownMenuRadioItem>
+                        </DropdownMenuRadioGroup>
+                    </DropdownMenuContent>
+                </DropdownMenu>
             </Flex>
             {consumptionPage &&
                 consumptionPage.map((consumption) => (
