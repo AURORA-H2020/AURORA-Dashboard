@@ -4,7 +4,7 @@ import React from "react";
 
 // Props when `merged` is not provided or false.
 interface ConsumptionTableRowPropsWithoutMerged {
-    label: string;
+    label: string | React.ReactNode;
     children: React.ReactNode;
     merged?: false;
     className?: string;

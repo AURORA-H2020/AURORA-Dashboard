@@ -22,7 +22,7 @@ export const consumptionMapping: ConsumptionAttributes[] = [
         label: t("category.electricity"),
         unit: "kWh",
         colorPrimary: "#FDDD09",
-        unitLabel: t("unitLabel.eneryUsage"),
+        unitLabel: t("app.consumption"),
     },
     {
         icon: <ThermometerSnowflake />,
@@ -30,7 +30,7 @@ export const consumptionMapping: ConsumptionAttributes[] = [
         label: t("category.heating"),
         unit: "kWh",
         colorPrimary: "#F5473D",
-        unitLabel: t("unitLabel.eneryUsage"),
+        unitLabel: t("app.consumption"),
     },
     {
         icon: <CarFront />,

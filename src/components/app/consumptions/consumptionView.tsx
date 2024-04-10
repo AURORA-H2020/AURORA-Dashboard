@@ -31,17 +31,34 @@ const ConsumptionView = ({
                     <ConsumptionTableRow
                         label={t(consumptionAttributes?.unitLabel) ?? ""}
                     >
-                        {consumption.energyExpended
-                            ? format.number(consumption.energyExpended, {
-                                  maximumFractionDigits: 1,
-                              }) + consumptionAttributes?.unit
-                            : t("common.calculating")}
+                        {format.number(consumption.value, {
+                            maximumFractionDigits: 1,
+                        }) +
+                            " " +
+                            consumptionAttributes?.unit}
                     </ConsumptionTableRow>
-                    <ConsumptionTableRow label={t("common.co2emission")}>
+
+                    <ConsumptionTableRow
+                        label={
+                            // t("common.co2emission")
+                            t.rich("common.co2emission", {
+                                sub: (chunks) => (
+                                    <sub className="mr-1">{chunks}</sub>
+                                ),
+                            })
+                        }
+                    >
                         {consumption.carbonEmissions
                             ? format.number(consumption.carbonEmissions, {
                                   maximumFractionDigits: 1,
                               }) + carbonUnit
+                            : t("common.calculating")}
+                    </ConsumptionTableRow>
+                    <ConsumptionTableRow label={t("unitLabel.eneryUsage")}>
+                        {consumption.energyExpended
+                            ? format.number(consumption.energyExpended, {
+                                  maximumFractionDigits: 1,
+                              }) + " kWh"
                             : t("common.calculating")}
                     </ConsumptionTableRow>
                 </TableBody>
