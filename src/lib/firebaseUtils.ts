@@ -1,5 +1,7 @@
 import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { CountryData } from "@/models/countryData";
+import { BackupUserData } from "@/models/extensions";
 import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
 
 /**
@@ -61,6 +63,34 @@ export const getLatestCountryFile = async (
         const res = await listAll(storageRef);
         const summaryFiles = res.items
             .filter((itemRef) => itemRef.name.startsWith("countries"))
+            .sort((a, b) => a.name.localeCompare(b.name)); // Alphabetical sort
+
+        // The latest file will be the last one after sorting
+        if (summaryFiles.length > 0) {
+            return await downloadFile(
+                summaryFiles[summaryFiles.length - 1].fullPath,
+            );
+        }
+        return null; // If there are no summary files, return null
+    } catch (error) {
+        console.error(error);
+        return null; // In case of error, return null
+    }
+};
+
+export const getLatestUserData = async (): Promise<BackupUserData | null> => {
+    const firebaseStorage = getStorage(firebaseApp);
+    const storageRef = ref(
+        firebaseStorage,
+        FirebaseConstants.buckets.auroraDashboard.folders.userDataBackup.name,
+    );
+
+    console.log(JSON.stringify(storageRef));
+
+    try {
+        const res = await listAll(storageRef);
+        const summaryFiles = res.items
+            .filter((itemRef) => itemRef.name.startsWith("users-backup"))
             .sort((a, b) => a.name.localeCompare(b.name)); // Alphabetical sort
 
         // The latest file will be the last one after sorting

@@ -39,6 +39,9 @@ export const FirebaseConstants = {
                 countryData: {
                     name: "country-data",
                 },
+                userDataBackup: {
+                    name: "user-data-backup",
+                },
             },
         },
         default: {

@@ -60,6 +60,61 @@ export const useFetchUserData = (
     return { userData, isLoadingUserData };
 };
 
+export const useUserRoles = (userId: string | undefined) => {
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
+    const [isAdminLoading, setIsAdminLoading] = useState<boolean>(true);
+
+    useEffect(() => {
+        if (!userId) return;
+
+        const docRef = doc(firestore, "user-roles", userId);
+        const unsubscribe = onSnapshot(
+            docRef,
+            (docSnapshot) => {
+                if (docSnapshot.exists()) {
+                    const data = docSnapshot.data();
+                    setIsAdmin(data?.isAdmin || false);
+                } else {
+                    setIsAdmin(false);
+                }
+                setIsAdminLoading(false);
+            },
+            () => {
+                setIsAdminLoading(false);
+            },
+        );
+
+        return unsubscribe;
+    }, [userId]);
+
+    return { isAdmin, isAdminLoading };
+};
+
+export const useFetchBlacklistedUsers = () => {
+    const [blacklistedUsers, setBlacklistedUsers] =
+        useState<QuerySnapshot<unknown, DocumentData>>();
+
+    useEffect(() => {
+        const collectionRef = collection(
+            firestore,
+            FirebaseConstants.collections.exportUserDataBlacklistedUsers.name,
+        );
+
+        const blacklistedUsersQuery = query(collectionRef);
+
+        const unsubscribe = onSnapshot(
+            blacklistedUsersQuery,
+            (querySnapshot) => {
+                setBlacklistedUsers(querySnapshot);
+            },
+        );
+
+        return unsubscribe;
+    }, []);
+
+    return { blacklistedUsers };
+};
+
 export const useFetchUserConsumptions = ({
     user,
     pageSize = 5,
