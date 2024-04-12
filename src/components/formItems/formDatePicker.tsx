@@ -42,7 +42,7 @@ const FormDatePicker = ({
         <FormItem className={cn(className)}>
             {label && <FormLabel>{label}</FormLabel>}
             {description && <FormDescription>{description}</FormDescription>}
-            <Popover>
+            <Popover modal={true}>
                 <PopoverTrigger asChild>
                     <FormControl>
                         <Button
