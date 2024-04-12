@@ -224,6 +224,7 @@ const RecurringTransportationForm = ({
                                 inputType="number"
                                 placeholder={t("unitLabel.distance")}
                                 label={t("unitLabel.distance")}
+                                unit="km"
                             />
                         )}
                     />
