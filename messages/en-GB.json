@@ -395,7 +395,8 @@
       "dashboard": "Dashboard",
       "about": "About",
       "account": "Account",
-      "logout": "Logout"
+      "logout": "Logout",
+      "admin": "Admin"
     },
     "account": {
       "home": "Home",

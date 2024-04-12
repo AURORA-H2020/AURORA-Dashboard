@@ -18,6 +18,7 @@ import {
 import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/sheet";
 import Logo from "./logo";
 import ThemeToggle from "./themeToggle";
+import { useUserRoles } from "@/firebase/firebaseHooks";
 
 /**
  * Renders the navigation bar component.
@@ -30,6 +31,7 @@ const NavigationBar = (): ReactElement => {
     const pathname = usePathname();
 
     const { user } = useAuthContext();
+    const { isAdmin } = useUserRoles(user?.uid);
     const router = useRouter();
 
     const handleLogout = async () => {
@@ -47,6 +49,8 @@ const NavigationBar = (): ReactElement => {
         { title: t("navigation.menu.account"), path: "/account" },
         { title: t("navigation.account.settings"), path: "/account/settings" },
     ];
+
+    const adminMenus = [{ title: t("navigation.menu.admin"), path: "/admin" }];
 
     return (
         <Card className="flex items-center gap-4 p-4 md:px-8">
@@ -130,6 +134,18 @@ const NavigationBar = (): ReactElement => {
                                     </DropdownMenuItem>
                                 </Link>
                             ))}
+                            {isAdmin && (
+                                <>
+                                    <DropdownMenuSeparator />
+                                    {adminMenus.map((menu, idx) => (
+                                        <Link href={menu.path} key={idx}>
+                                            <DropdownMenuItem>
+                                                {menu.title}
+                                            </DropdownMenuItem>
+                                        </Link>
+                                    ))}
+                                </>
+                            )}
                             <DropdownMenuSeparator />
                             <DropdownMenuItem onClick={handleLogout}>
                                 {t("navigation.menu.logout")}
