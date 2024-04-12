@@ -30,6 +30,7 @@
         "@radix-ui/react-switch": "^1.0.3",
         "@radix-ui/react-tabs": "^1.0.4",
         "@radix-ui/themes": "^2.0.3",
+        "@tanstack/react-table": "^8.15.3",
         "@tremor/react": "^3.14.1",
         "@types/node": "20.11.24",
         "@types/react": "18.2.61",
