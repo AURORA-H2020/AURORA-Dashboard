@@ -3,6 +3,7 @@
 import {
     ColumnDef,
     ColumnFiltersState,
+    InitialTableState,
     PaginationState,
     SortingState,
     VisibilityState,
@@ -29,11 +30,13 @@ import { DataTableViewOptions } from "./data-table-view-options";
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
+    initialState?: InitialTableState;
 }
 
 export function DataTable<TData, TValue>({
     columns,
     data,
+    initialState = {},
 }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [pagination, setPagination] = React.useState<PaginationState>({
@@ -43,7 +46,7 @@ export function DataTable<TData, TValue>({
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);
     const [columnVisibility, setColumnVisibility] =
-        React.useState<VisibilityState>({});
+        React.useState<VisibilityState>(initialState.columnVisibility ?? {});
     const [rowSelection, setRowSelection] = React.useState({});
 
     const table = useReactTable({
@@ -58,6 +61,7 @@ export function DataTable<TData, TValue>({
         getFilteredRowModel: getFilteredRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
         onRowSelectionChange: setRowSelection,
+        initialState: initialState,
         state: {
             sorting,
             pagination,
