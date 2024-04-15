@@ -69,9 +69,7 @@ const ConsumptionSummaryPanel = ({ className }: { className?: string }) => {
                                 value === "energyExpended"
                             ) {
                                 setSelectedMeasure(value);
-                            }
-                            // Optionally, handle the case where the value is not expected
-                            else {
+                            } else {
                                 console.error(
                                     "Invalid value for setCurrentMeasure:",
                                     value,

@@ -13,7 +13,7 @@ export interface RecurringConsumptionWithID extends RecurringConsumption {
     id: string;
 }
 
-interface ExtendedUser extends User {
+export interface ExtendedUser extends User {
     consumptions: Consumption[];
     recurringConsumptions: RecurringConsumption[];
     consumptionSummaries: ConsumptionSummary[];
