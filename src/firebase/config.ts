@@ -2,6 +2,7 @@ import { getApp, getApps, initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
 import { FirebaseConstants } from "./firebase-constants";
+import { connectStorageEmulator, getStorage } from "firebase/storage";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -27,6 +28,10 @@ if (process.env.NEXT_PUBLIC_TEST_MODE === "true") {
     // Firestore Emulator
     const firestore = getFirestore(firebaseApp);
     connectFirestoreEmulator(firestore, "localhost", 8080);
+
+    // Storage Emulator
+    const storage = getStorage(firebaseApp);
+    connectStorageEmulator(storage, "localhost", 9199);
 
     // Authentication Emulator
     const auth = getAuth(firebaseApp);
