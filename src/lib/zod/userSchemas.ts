@@ -1,14 +1,14 @@
+import {
+    genderMappings,
+    homeEnergyLabels,
+    householdProfiles,
+} from "@/lib/constants/constants";
+import { passwordSchema } from "@/lib/zod/common";
 import { User } from "@/models/firestore/user/user";
 import { UserGender } from "@/models/firestore/user/user-gender";
 import { UserHomeEnergyLabel } from "@/models/firestore/user/user-homeEnergyLabel";
 import { UserHouseholdProfile } from "@/models/firestore/user/user-householdProfile";
 import { z } from "zod";
-import {
-    genderMappings,
-    homeEnergyLabels,
-    householdProfiles,
-} from "../constants/constants";
-import { passwordSchema } from "./common";
 
 const userGenders: UserGender[] = genderMappings.map((gender) => gender.key);
 

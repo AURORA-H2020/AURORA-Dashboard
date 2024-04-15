@@ -1,10 +1,10 @@
 "use client";
 
+import { DataTable } from "@/components/ui/data-table";
 import { useFetchBlacklistedUsers } from "@/firebase/firebaseHooks";
 import { BackupUserData } from "@/models/extensions";
-import { DataTable } from "../ui/data-table";
-import { columns } from "./columns";
 import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
+import { columns } from "./columns";
 
 export type UserRow = {
     uid: string;

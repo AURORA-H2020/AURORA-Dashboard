@@ -1,14 +1,15 @@
 import {
     FormControl,
     FormDescription,
+    FormItem,
+    FormLabel,
     FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utilities";
 import { useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
-import { FormItem, FormLabel } from "../ui/form";
-import { Switch } from "../ui/switch";
 
 type InputTypes = "number" | "text" | "email";
 

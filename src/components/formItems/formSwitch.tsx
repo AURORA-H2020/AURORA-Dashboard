@@ -1,13 +1,13 @@
-import { cn } from "@/lib/utilities";
-import { ControllerRenderProps } from "react-hook-form";
 import {
     FormControl,
     FormDescription,
     FormItem,
     FormLabel,
     FormMessage,
-} from "../ui/form";
-import { Switch } from "../ui/switch";
+} from "@/components/ui/form";
+import { Switch } from "@/components/ui/switch";
+import { cn } from "@/lib/utilities";
+import { ControllerRenderProps } from "react-hook-form";
 
 const FormSwitch = ({
     field,

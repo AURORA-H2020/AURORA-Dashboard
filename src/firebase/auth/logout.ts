@@ -1,5 +1,5 @@
+import { firebaseApp } from "@/firebase/config";
 import { getAuth, signOut } from "firebase/auth";
-import { firebaseApp } from "../config";
 
 // Get the authentication instance using the Firebase app
 const auth = getAuth(firebaseApp);

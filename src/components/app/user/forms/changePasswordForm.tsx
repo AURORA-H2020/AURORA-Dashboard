@@ -1,3 +1,6 @@
+"use client";
+
+import BorderBox from "@/components/app/common/borderBox";
 import FormPasswordField from "@/components/formItems/formPasswordField";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
@@ -12,7 +15,6 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import BorderBox from "../../common/borderBox";
 
 const ChangePasswordForm = ({
     onFormSubmit,

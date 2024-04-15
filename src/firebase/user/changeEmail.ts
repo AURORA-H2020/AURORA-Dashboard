@@ -1,5 +1,5 @@
+import { reauthenticateUser } from "@/firebase/auth/reauthenticate";
 import { User, updateEmail } from "firebase/auth";
-import { reauthenticateUser } from "../auth/reauthenticate";
 
 export const changeEmail = async (
     user: User | null,

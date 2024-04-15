@@ -1,9 +1,12 @@
 "use client";
 
+import BorderBox from "@/components/app/common/borderBox";
+import ResetPasswordModal from "@/components/app/user/modals/resetPasswordModal";
 import AuthenticateWithApple from "@/components/auth/authOptions/authenticateWithApple";
 import AuthenticateWithGoogle from "@/components/auth/authOptions/authenticateWithGoogle";
 import SignInWithEmail from "@/components/auth/authOptions/signInWithEmail";
 import SignUpWithEmail from "@/components/auth/authOptions/signUpWithEmail";
+import { Button } from "@/components/ui/button";
 import {
     Card,
     CardContent,
@@ -15,9 +18,6 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { externalLinks } from "@/lib/constants/constants";
 import { Flex, Grid, Link } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
-import BorderBox from "../app/common/borderBox";
-import ResetPasswordModal from "../app/user/modals/resetPasswordModal";
-import { Button } from "../ui/button";
 
 /**
  * Renders the authentication options based on the sign-in state.

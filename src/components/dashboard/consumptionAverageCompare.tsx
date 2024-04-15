@@ -1,17 +1,16 @@
 "use client";
 
-import { EnergyMode, MetaData, MetaDataSummary } from "@/models/dashboard-data";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { Flex, Heading } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-
+import LoadingSpinner from "@/components/ui/loading";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { countriesMapping } from "@/lib/constants/constants";
 import { getMetaDataSummary } from "@/lib/transformData";
 import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
+import { EnergyMode, MetaData, MetaDataSummary } from "@/models/dashboard-data";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { Flex, Heading } from "@radix-ui/themes";
 import { BarList } from "@tremor/react";
-import LoadingSpinner from "../ui/loading";
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 const ConsumptionAverageCompare = ({
     metaData,

@@ -1,5 +1,6 @@
 "use client";
 
+import ChangeEmailForm from "@/components/app/user/forms/changeEmailForm";
 import {
     Dialog,
     DialogContent,
@@ -9,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import ChangeEmailForm from "../forms/changeEmailForm";
 
 const ChangeEmailModal = ({ children }: { children: React.ReactNode }) => {
     const t = useTranslations();

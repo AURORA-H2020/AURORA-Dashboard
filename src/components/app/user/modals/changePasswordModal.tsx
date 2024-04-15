@@ -1,3 +1,4 @@
+import ChangePasswordForm from "@/components/app/user/forms/changePasswordForm";
 import {
     Dialog,
     DialogContent,
@@ -7,7 +8,6 @@ import {
 } from "@/components/ui/dialog";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import ChangePasswordForm from "../forms/changePasswordForm";
 
 const ChangePasswordModal = ({ children }: { children: React.ReactNode }) => {
     const t = useTranslations();

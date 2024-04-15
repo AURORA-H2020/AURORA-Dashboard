@@ -1,5 +1,7 @@
 "use client";
 
+import UpdateConsent from "@/components/app/user/updateConsent";
+import LoadingSpinner from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { firebaseApp } from "@/firebase/config";
@@ -9,8 +11,6 @@ import {
     getValue,
 } from "firebase/remote-config";
 import { useEffect, useState } from "react";
-import UpdateConsent from "../app/user/updateConsent";
-import LoadingSpinner from "../ui/loading";
 
 export const EnsureLatestConsent = ({ children }) => {
     const remoteConfig = getRemoteConfig(firebaseApp);

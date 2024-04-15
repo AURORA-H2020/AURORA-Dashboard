@@ -1,5 +1,6 @@
 "use client";
 
+import RecurringTransportationForm from "@/components/app/recurringConsumptions/forms/recurringTransportationForm";
 import {
     Dialog,
     DialogContent,
@@ -9,9 +10,8 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utilities";
 import { RecurringConsumptionWithID } from "@/models/extensions";
-import React, { useState } from "react";
-import RecurringTransportationForm from "../forms/recurringTransportationForm";
 import { useTranslations } from "next-intl";
+import React, { useState } from "react";
 
 const AddEditRecurringConsumptionModal = React.forwardRef(
     (

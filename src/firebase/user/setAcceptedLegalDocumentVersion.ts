@@ -1,9 +1,8 @@
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { User } from "@firebase/auth";
 import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
-import { firebaseApp } from "../config";
-import { FirebaseConstants } from "../firebase-constants";
 
-// Initialize Firestore
 const firestore = getFirestore(firebaseApp);
 
 export const setAcceptedLegalDocumentVersion = async (

@@ -1,5 +1,15 @@
 "use client";
 
+import LabelInfoModal from "@/components/app/common/modals/labelInfoModal";
+import { Button } from "@/components/ui/button";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { countriesMapping } from "@/lib/constants/constants";
 import { labelMappings } from "@/lib/constants/consumptions";
 import { annualLabelData } from "@/lib/transformData";
@@ -20,16 +30,6 @@ import { BarChart } from "@tremor/react";
 import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import LabelInfoModal from "../../app/common/modals/labelInfoModal";
-import { Button } from "../../ui/button";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "../../ui/select";
-import { Tabs, TabsList, TabsTrigger } from "../../ui/tabs";
 
 interface LabelChartData extends LabelEntries {
     country: string;

@@ -1,5 +1,6 @@
 "use client";
 
+import BorderBox from "@/components/app/common/borderBox";
 import FormInputField from "@/components/formItems/formInputField";
 import FormSelect from "@/components/formItems/formSelect";
 import FormSwitch from "@/components/formItems/formSwitch";
@@ -30,7 +31,6 @@ import { useEffect, useState } from "react";
 import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
-import BorderBox from "../../common/borderBox";
 
 const UserDataForm = ({
     userData,

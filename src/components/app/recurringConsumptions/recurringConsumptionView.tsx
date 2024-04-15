@@ -1,9 +1,10 @@
-import { RecurringConsumptionWithID } from "@/models/extensions";
+"use client";
 
+import ConsumptionTableRow from "@/components/app/common/consumptionTableRow";
 import { Table, TableBody } from "@/components/ui/table";
 import { weekdays } from "@/lib/constants/constants";
+import { RecurringConsumptionWithID } from "@/models/extensions";
 import { useFormatter, useTranslations } from "next-intl";
-import ConsumptionTableRow from "../common/consumptionTableRow";
 
 /**
  * Renders a view displaying various attributes of a user's consumption

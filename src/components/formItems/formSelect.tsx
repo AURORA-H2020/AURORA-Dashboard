@@ -1,15 +1,20 @@
-import { cn } from "@/lib/utilities";
-import { useState } from "react";
-import { ControllerRenderProps } from "react-hook-form";
-import { Checkbox } from "../ui/checkbox";
-import { FormDescription, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+    FormDescription,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
+import { cn } from "@/lib/utilities";
+import { useState } from "react";
+import { ControllerRenderProps } from "react-hook-form";
 
 const FormSelect = ({
     field,

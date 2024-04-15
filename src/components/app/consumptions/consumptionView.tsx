@@ -1,9 +1,9 @@
+import ConsumptionTableRow from "@/components/app/common/consumptionTableRow";
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
 import { carbonUnit } from "@/lib/constants/constants";
 import { consumptionMapping } from "@/lib/constants/consumptions";
 import { ConsumptionWithID } from "@/models/extensions";
 import { useFormatter, useTranslations } from "next-intl";
-import ConsumptionTableRow from "../common/consumptionTableRow";
 
 /**
  * Renders a view displaying various attributes of a user's consumption

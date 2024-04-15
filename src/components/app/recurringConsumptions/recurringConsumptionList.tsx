@@ -1,7 +1,9 @@
 "use client";
 
+import BorderBox from "@/components/app/common/borderBox";
 import PlaceholderCard from "@/components/app/common/placeholderCard";
 import SimplePagination from "@/components/app/common/simplePagination";
+import RecurringConsumptionPreview from "@/components/app/recurringConsumptions/recurringConsumptionPreview";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -19,8 +21,6 @@ import { cn } from "@/lib/utilities";
 import { Flex, Grid, Strong } from "@radix-ui/themes";
 import { ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";
-import BorderBox from "../common/borderBox";
-import RecurringConsumptionPreview from "./recurringConsumptionPreview";
 
 /**
  * Renders a list of Recurring Consumption components.

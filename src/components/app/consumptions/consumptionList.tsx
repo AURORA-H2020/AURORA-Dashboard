@@ -1,5 +1,6 @@
 "use client";
 
+import BorderBox from "@/components/app/common/borderBox";
 import PlaceholderCard from "@/components/app/common/placeholderCard";
 import SimplePagination from "@/components/app/common/simplePagination";
 import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
@@ -20,7 +21,6 @@ import { cn } from "@/lib/utilities";
 import { Flex, Grid, Strong } from "@radix-ui/themes";
 import { ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";
-import BorderBox from "../common/borderBox";
 
 /**
  * Renders a list of Consumption components.

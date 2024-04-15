@@ -1,19 +1,19 @@
 "use client";
 
-import * as React from "react";
 import { X } from "lucide-react";
+import * as React from "react";
 
+import { Badge } from "@/components/ui/badge";
 import {
     Command,
+    CommandEmpty,
     CommandGroup,
     CommandItem,
-    CommandEmpty,
     CommandList,
 } from "@/components/ui/command";
+import { cn } from "@/lib/utilities";
 import { Command as CommandPrimitive } from "cmdk";
 import { useEffect } from "react";
-import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utilities";
 
 export interface Option {
     value: string;

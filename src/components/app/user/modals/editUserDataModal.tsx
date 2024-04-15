@@ -1,5 +1,6 @@
 "use client";
 
+import UserDataForm from "@/components/app/user/forms/userDataForm";
 import {
     Dialog,
     DialogContent,
@@ -11,7 +12,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import UserDataForm from "../forms/userDataForm";
 
 const EditUserDataModal = ({ children }: { children: React.ReactNode }) => {
     const t = useTranslations();

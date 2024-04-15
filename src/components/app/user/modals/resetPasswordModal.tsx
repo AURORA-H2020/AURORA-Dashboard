@@ -1,5 +1,6 @@
 "use client";
 
+import ResetPasswordForm from "@/components/app/user/forms/resetPasswordForm";
 import {
     Dialog,
     DialogContent,
@@ -10,7 +11,6 @@ import {
 } from "@/components/ui/dialog";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
-import ResetPasswordForm from "../forms/resetPasswordForm";
 
 const ResetPasswordModal = ({ children }: { children: React.ReactNode }) => {
     const t = useTranslations();

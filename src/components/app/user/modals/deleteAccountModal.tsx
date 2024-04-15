@@ -1,3 +1,4 @@
+import BorderBox from "@/components/app/common/borderBox";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -18,7 +19,6 @@ import { User } from "firebase/auth";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
-import BorderBox from "../../common/borderBox";
 
 const DeleteAccountModal = ({
     children,

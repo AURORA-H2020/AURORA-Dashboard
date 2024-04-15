@@ -1,24 +1,29 @@
 "use client";
 
-import { useAuthContext } from "@/context/AuthContext";
-import { logout } from "@/firebase/auth/logout";
-import { Link, usePathname, useRouter } from "@/navigation";
-import { CircleUser, Menu } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { ReactElement } from "react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
+import Logo from "@/components/navigation/logo";
+import ThemeToggle from "@/components/navigation/themeToggle";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 import {
     DropdownMenu,
     DropdownMenuContent,
     DropdownMenuItem,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
-import { Sheet, SheetClose, SheetContent, SheetTrigger } from "../ui/sheet";
-import Logo from "./logo";
-import ThemeToggle from "./themeToggle";
+} from "@/components/ui/dropdown-menu";
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetTrigger,
+} from "@/components/ui/sheet";
+import { useAuthContext } from "@/context/AuthContext";
+import { logout } from "@/firebase/auth/logout";
 import { useUserRoles } from "@/firebase/firebaseHooks";
+import { Link, usePathname, useRouter } from "@/navigation";
+import { CircleUser, Menu } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ReactElement } from "react";
 
 /**
  * Renders the navigation bar component.

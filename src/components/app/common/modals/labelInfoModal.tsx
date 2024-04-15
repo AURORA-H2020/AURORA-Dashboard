@@ -1,6 +1,4 @@
-import { labelMappings } from "@/lib/constants/consumptions";
-import { useTranslations } from "next-intl";
-import { Badge } from "../../../ui/badge";
+import { Badge } from "@/components/ui/badge";
 import {
     Dialog,
     DialogContent,
@@ -8,8 +6,10 @@ import {
     DialogHeader,
     DialogTitle,
     DialogTrigger,
-} from "../../../ui/dialog";
-import { Table, TableBody, TableCell, TableRow } from "../../../ui/table";
+} from "@/components/ui/dialog";
+import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
+import { labelMappings } from "@/lib/constants/consumptions";
+import { useTranslations } from "next-intl";
 
 const LabelInfoModal = ({ children }: { children: React.ReactNode }) => {
     const t = useTranslations();

@@ -1,7 +1,7 @@
 import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { downloadJsonAsFile } from "@/lib/utilities";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { FirebaseConstants } from "../firebase-constants";
 
 /**
  * Downloads user data from the specified region and initiates the download process.

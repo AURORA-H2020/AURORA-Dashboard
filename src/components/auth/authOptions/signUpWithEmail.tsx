@@ -1,3 +1,5 @@
+import FormInputField from "@/components/formItems/formInputField";
+import FormPasswordField from "@/components/formItems/formPasswordField";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import signUp from "@/firebase/auth/authentication";
@@ -8,8 +10,6 @@ import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import * as z from "zod";
-import FormInputField from "../../formItems/formInputField";
-import FormPasswordField from "../../formItems/formPasswordField";
 
 /**
  * Function for signing up with email.

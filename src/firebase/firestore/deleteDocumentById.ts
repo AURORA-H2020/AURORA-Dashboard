@@ -1,7 +1,7 @@
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { User } from "firebase/auth";
 import { collection, deleteDoc, doc, getFirestore } from "firebase/firestore";
-import { firebaseApp } from "../config";
-import { FirebaseConstants } from "../firebase-constants";
 
 // Initialize Firestore
 const firestore = getFirestore(firebaseApp);

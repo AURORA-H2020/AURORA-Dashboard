@@ -1,5 +1,6 @@
 import Footer from "@/components/footer";
 import NavigationBar from "@/components/navigation/navigationBar";
+import { locales } from "@/config";
 import { cn } from "@/lib/utilities";
 import "@radix-ui/themes/styles.css";
 import { Analytics } from "@vercel/analytics/react";
@@ -8,7 +9,6 @@ import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { ReactNode } from "react";
-import { locales } from "../../config";
 import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });

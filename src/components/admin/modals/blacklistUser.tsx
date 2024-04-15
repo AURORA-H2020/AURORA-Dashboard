@@ -1,5 +1,6 @@
 "use client";
 
+import BlacklistUserForm from "@/components/admin/forms/blacklistUserForm";
 import {
     Dialog,
     DialogContent,
@@ -9,7 +10,6 @@ import {
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { cn } from "@/lib/utilities";
 import React, { useState } from "react";
-import BlacklistUserForm from "../forms/blacklistUserForm";
 
 const BlacklistUserModal = React.forwardRef(
     (

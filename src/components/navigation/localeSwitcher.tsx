@@ -1,16 +1,16 @@
 "use client";
 
-import { supportedLocales } from "@/lib/constants/constants";
-import { usePathname, useRouter } from "@/navigation";
-import { useLocale, useTranslations } from "next-intl";
-import { useTransition } from "react";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
+import { supportedLocales } from "@/lib/constants/constants";
+import { usePathname, useRouter } from "@/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { useTransition } from "react";
 
 const LocaleSwitcher = () => {
     const t = useTranslations();

@@ -1,6 +1,6 @@
 import { useAuthContext } from "@/context/AuthContext";
-import { AuthForm } from "../auth/authForm";
-import LoadingSpinner from "../ui/loading";
+import { AuthForm } from "@/components/auth/authForm";
+import LoadingSpinner from "@/components/ui/loading";
 
 export const ProtectAccount = ({ children }) => {
     const { user, loading } = useAuthContext();

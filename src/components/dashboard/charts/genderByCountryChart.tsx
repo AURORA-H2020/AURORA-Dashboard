@@ -1,21 +1,20 @@
-import { countriesMapping, genderMappings } from "@/lib/constants/constants";
-import { CalculationMode, MetaData } from "@/models/dashboard-data";
-import { BarChart } from "@tremor/react";
-
-import {
-    valueFormatterAbsolute,
-    valueFormatterPercentage,
-} from "@/lib/utilities";
-import { Flex, Heading } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "../../ui/select";
+} from "@/components/ui/select";
+import { countriesMapping, genderMappings } from "@/lib/constants/constants";
+import {
+    valueFormatterAbsolute,
+    valueFormatterPercentage,
+} from "@/lib/utilities";
+import { CalculationMode, MetaData } from "@/models/dashboard-data";
+import { Flex, Heading } from "@radix-ui/themes";
+import { BarChart } from "@tremor/react";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 
 /**
  * Generate the GenderCardCountry component.

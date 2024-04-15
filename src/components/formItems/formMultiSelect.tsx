@@ -1,13 +1,14 @@
 import {
     FormControl,
     FormDescription,
+    FormItem,
+    FormLabel,
     FormMessage,
 } from "@/components/ui/form";
+import MultipleSelector, { Option } from "@/components/ui/multiple-selector";
 import { cn } from "@/lib/utilities";
 import { useEffect, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
-import { FormItem, FormLabel } from "../ui/form";
-import MultipleSelector, { Option } from "../ui/multiple-selector";
 
 const FormMultiSelect = ({
     field,

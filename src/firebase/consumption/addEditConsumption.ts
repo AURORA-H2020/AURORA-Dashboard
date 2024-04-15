@@ -1,3 +1,5 @@
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { Consumption } from "@/models/firestore/consumption/consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { User } from "@firebase/auth";
@@ -8,8 +10,6 @@ import {
     getFirestore,
     setDoc,
 } from "firebase/firestore";
-import { firebaseApp } from "../config";
-import { FirebaseConstants } from "../firebase-constants";
 
 // Initialize Firestore
 const firestore = getFirestore(firebaseApp);

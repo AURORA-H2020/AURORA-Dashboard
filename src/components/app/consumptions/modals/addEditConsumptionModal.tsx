@@ -1,5 +1,8 @@
 "use client";
 
+import ElectricityForm from "@/components/app/consumptions/forms/electricityForm";
+import HeatingForm from "@/components/app/consumptions/forms/heatingForm";
+import TransportationForm from "@/components/app/consumptions/forms/transportationForm";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -9,9 +12,6 @@ import { ConsumptionWithID } from "@/models/extensions";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { useTranslations } from "next-intl";
 import React, { useState } from "react";
-import ElectricityForm from "../forms/electricityForm";
-import HeatingForm from "../forms/heatingForm";
-import TransportationForm from "../forms/transportationForm";
 
 const AddEditConsumptionModal = React.forwardRef(
     (

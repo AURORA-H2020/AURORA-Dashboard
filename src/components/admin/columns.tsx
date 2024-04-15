@@ -1,10 +1,8 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
-import { Button } from "../ui/button";
-import { Checkbox } from "../ui/checkbox";
-import { DataTableColumnHeader } from "../ui/data-table-column-header";
+import { Button } from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -12,7 +10,9 @@ import {
     DropdownMenuLabel,
     DropdownMenuSeparator,
     DropdownMenuTrigger,
-} from "../ui/dropdown-menu";
+} from "@/components/ui/dropdown-menu";
+import { ColumnDef } from "@tanstack/react-table";
+import { MoreHorizontal } from "lucide-react";
 import ViewUserModal from "./modals/viewUser";
 import { UserRow } from "./usersTable";
 
