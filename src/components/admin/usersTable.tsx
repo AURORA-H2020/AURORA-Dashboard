@@ -4,6 +4,7 @@ import { useFetchBlacklistedUsers } from "@/firebase/firebaseHooks";
 import { BackupUserData } from "@/models/extensions";
 import { DataTable } from "../ui/data-table";
 import { columns } from "./columns";
+import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
 
 export type UserRow = {
     uid: string;
@@ -11,12 +12,15 @@ export type UserRow = {
     recurringConsumptions: number;
     carbonEmissions: number;
     energyExpended: number;
-    blacklisted: boolean;
+    blacklistData: BlacklistedUser | null;
 };
 
 export const UsersTable = ({ userData }: { userData: BackupUserData }) => {
     const blacklistedUsers = useFetchBlacklistedUsers().blacklistedUsers?.docs;
-    const blacklistedUserIds = blacklistedUsers?.map((user) => user.id);
+    const blacklistData = blacklistedUsers?.map((user) => ({
+        uid: user.id,
+        data: user.data(),
+    }));
 
     const userTableData: UserRow[] = Object.keys(userData).map((uid) => {
         return {
@@ -35,9 +39,18 @@ export const UsersTable = ({ userData }: { userData: BackupUserData }) => {
                 },
                 0,
             ),
-            blacklisted: blacklistedUserIds?.includes(uid) ? true : false,
+            blacklistData:
+                blacklistData?.find((user) => user.uid === uid)?.data || null,
         };
     });
 
-    return <DataTable columns={columns} data={userTableData} />;
+    return (
+        <DataTable
+            columns={columns(userData)}
+            data={userTableData}
+            initialState={{
+                columnVisibility: { recurringConsumptions: false },
+            }}
+        />
+    );
 };
