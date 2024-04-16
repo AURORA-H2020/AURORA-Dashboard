@@ -2,28 +2,19 @@
 
 import {
     useFetchUserConsumptionSummaries,
-    useFetchUserConsumptions,
     useFetchUserData,
-    useFetchUserRecurringConsumptions,
 } from "@/firebase/firebaseHooks";
-import {
-    ConsumptionWithID,
-    RecurringConsumptionWithID,
-} from "@/models/extensions";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
-import { Consumption } from "@/models/firestore/consumption/consumption";
-import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
-import { useRouter } from "@/navigation";
 import React, { createContext, useContext } from "react";
 import { useAuthContext } from "./AuthContext";
 
 interface FirebaseDataContextValue {
     userData: FirebaseUser | null;
     isLoadingUserData: boolean;
-    userConsumptions: ConsumptionWithID[];
     userConsumptionSummaries: ConsumptionSummary[];
-    userRecurringConsumptions: RecurringConsumptionWithID[];
+    // userConsumptions: ConsumptionWithID[];
+    // userRecurringConsumptions: RecurringConsumptionWithID[];
 }
 
 const FirebaseDataContext = createContext<FirebaseDataContextValue | undefined>(
@@ -35,14 +26,9 @@ export const FirebaseDataProvider: React.FC<{
 }> = ({ children }) => {
     const { user, loading } = useAuthContext();
 
-    const router = useRouter();
-    const { userData, isLoadingUserData } = useFetchUserData(
-        user,
-        loading,
-        router,
-    );
+    const { userData, isLoadingUserData } = useFetchUserData(user, loading);
 
-    const userConsumptions = useFetchUserConsumptions({ user: user })?.docs.map(
+    /* const userConsumptions = useFetchUserConsumptions({ user: user })?.docs.map(
         (doc) => ({
             ...(doc.data() as Consumption),
             id: doc.id,
@@ -54,7 +40,7 @@ export const FirebaseDataProvider: React.FC<{
     })?.docs.map((doc) => ({
         ...(doc.data() as RecurringConsumption),
         id: doc.id,
-    })) as RecurringConsumptionWithID[];
+    })) as RecurringConsumptionWithID[]; */
 
     const userConsumptionSummaries = useFetchUserConsumptionSummaries(user);
 
@@ -63,9 +49,9 @@ export const FirebaseDataProvider: React.FC<{
             value={{
                 userData,
                 isLoadingUserData,
-                userConsumptions,
                 userConsumptionSummaries,
-                userRecurringConsumptions,
+                // userConsumptions,
+                // userRecurringConsumptions,
             }}
         >
             {children}
