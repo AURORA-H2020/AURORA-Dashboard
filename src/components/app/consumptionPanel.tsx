@@ -48,10 +48,18 @@ const ConsumptionPanel = ({ className }: { className?: string }) => {
                     </AddEditRecurringConsumptionModal>
                 </TabsContent>
             </Flex>
-            <TabsContent value="consumptions">
+            <TabsContent
+                forceMount
+                value="consumptions"
+                className="data-[state=inactive]:hidden"
+            >
                 <ConsumptionList />
             </TabsContent>
-            <TabsContent value="recurring-consumptions">
+            <TabsContent
+                forceMount
+                value="recurring-consumptions"
+                className="data-[state=inactive]:hidden"
+            >
                 <RecurringConsumptionList />
             </TabsContent>
         </Tabs>
