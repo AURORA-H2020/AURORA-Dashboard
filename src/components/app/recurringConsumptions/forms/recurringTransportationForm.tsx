@@ -352,6 +352,7 @@ const RecurringTransportationForm = ({
                             field={field}
                             placeholder={t("app.form.description")}
                             label={t("app.form.description")}
+                            description={t("app.form.descriptionHelpText")}
                         />
                     )}
                 />
