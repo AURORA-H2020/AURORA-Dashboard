@@ -1,7 +1,6 @@
 "use client";
 
 import { DataTable } from "@/components/ui/data-table";
-import { useFetchBlacklistedUsers } from "@/firebase/firebaseHooks";
 import { BackupUserData } from "@/models/extensions";
 import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
 import { columns } from "./columns";
@@ -15,13 +14,13 @@ export type UserRow = {
     blacklistData: BlacklistedUser | null;
 };
 
-export const UsersTable = ({ userData }: { userData: BackupUserData }) => {
-    const blacklistedUsers = useFetchBlacklistedUsers().blacklistedUsers?.docs;
-    const blacklistData = blacklistedUsers?.map((user) => ({
-        uid: user.id,
-        data: user.data(),
-    }));
-
+export const UsersTable = ({
+    userData,
+    blacklistData,
+}: {
+    userData: BackupUserData;
+    blacklistData: { uid: string; data: BlacklistedUser }[] | undefined;
+}) => {
     const userTableData: UserRow[] = Object.keys(userData).map((uid) => {
         return {
             uid: uid,
