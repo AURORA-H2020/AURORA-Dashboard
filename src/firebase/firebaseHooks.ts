@@ -28,11 +28,7 @@ import { FirebaseConstants } from "./firebase-constants";
 
 const firestore = getFirestore(firebaseApp);
 
-export const useFetchUserData = (
-    user: User | null,
-    loading: boolean,
-    router,
-) => {
+export const useFetchUserData = (user: User | null, loading: boolean) => {
     const [userData, setUserData] = useState<FirebaseUser | null>(null);
     const [isLoadingUserData, setIsLoadingUserData] = useState<boolean>(true);
 
@@ -55,7 +51,7 @@ export const useFetchUserData = (
         });
 
         return unsubscribe;
-    }, [user, router, loading]);
+    }, [user, loading]);
 
     return { userData, isLoadingUserData };
 };
@@ -74,8 +70,6 @@ export const useUserRoles = (userId: string | undefined) => {
                 if (docSnapshot.exists()) {
                     const data = docSnapshot.data();
                     setIsAdmin(data?.isAdmin || false);
-                } else {
-                    setIsAdmin(false);
                 }
                 setIsAdminLoading(false);
             },
@@ -90,11 +84,13 @@ export const useUserRoles = (userId: string | undefined) => {
     return { isAdmin, isAdminLoading };
 };
 
-export const useFetchBlacklistedUsers = () => {
+export const useFetchBlacklistedUsers = (user: User | null) => {
     const [blacklistedUsers, setBlacklistedUsers] =
         useState<QuerySnapshot<unknown, DocumentData>>();
 
     useEffect(() => {
+        if (!user) return;
+
         const collectionRef = collection(
             firestore,
             FirebaseConstants.collections.exportUserDataBlacklistedUsers.name,
@@ -110,7 +106,7 @@ export const useFetchBlacklistedUsers = () => {
         );
 
         return unsubscribe;
-    }, []);
+    }, [user]);
 
     return { blacklistedUsers };
 };
@@ -282,7 +278,8 @@ export const usePaginatedConsumptions = ({
     const [totalConsumptions, setTotalConsumptions] = useState<number>(0);
     const maxPage = Math.ceil(totalConsumptions / pageSize);
 
-    user &&
+    useEffect(() => {
+        if (!user) return;
         getCountFromServer(
             collection(
                 firestore,
@@ -291,6 +288,7 @@ export const usePaginatedConsumptions = ({
                 FirebaseConstants.collections.users.consumptions.name,
             ),
         ).then((snapshot) => setTotalConsumptions(snapshot.data().count));
+    }, [user]);
 
     const onOrderChange = (order: "createdAt" | "value") => {
         setLastDoc(undefined);
@@ -353,7 +351,9 @@ export const usePaginatedRecurringConsumptions = ({
         useState<number>(0);
     const maxPage = Math.ceil(totalRecurringConsumptions / pageSize);
 
-    user &&
+    useEffect(() => {
+        if (!user) return;
+
         getCountFromServer(
             collection(
                 firestore,
@@ -364,6 +364,7 @@ export const usePaginatedRecurringConsumptions = ({
         ).then((snapshot) =>
             setTotalRecurringConsumptions(snapshot.data().count),
         );
+    }, [user]);
 
     const onOrderChange = (order: "createdAt" | "frequency") => {
         setLastDoc(undefined);
