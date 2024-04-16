@@ -2,7 +2,13 @@ import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { User } from "@firebase/auth";
-import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
+import {
+    collection,
+    deleteField,
+    doc,
+    getFirestore,
+    setDoc,
+} from "firebase/firestore";
 
 const firestore = getFirestore(firebaseApp);
 
@@ -24,7 +30,7 @@ function removeInvalidValues(userData: FirebaseUser) {
                 value === null ||
                 Number.isNaN(value)
             ) {
-                delete userData[key];
+                userData[key] = deleteField();
             }
         }
     });

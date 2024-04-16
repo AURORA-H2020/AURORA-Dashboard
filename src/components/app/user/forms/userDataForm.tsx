@@ -12,9 +12,9 @@ import { addEditUserData } from "@/firebase/user/addEditUserData";
 import {
     countriesMapping,
     genderMappings,
-    homeEnergyLabels,
     householdProfiles,
 } from "@/lib/constants/constants";
+import { labelMappings } from "@/lib/constants/consumptions";
 import { cn } from "@/lib/utilities";
 import { userDataFormSchema } from "@/lib/zod/userSchemas";
 import { CityMapping } from "@/models/constants";
@@ -109,6 +109,8 @@ const UserDataForm = ({
     const [availableCities, setAvailableCities] = useState<CityMapping[]>([]);
 
     useEffect(() => {
+        if (!isNewUser) return;
+
         if (selectedCountry) {
             const country = countriesMapping.find(
                 (country) => country.ID === selectedCountry,
@@ -119,7 +121,7 @@ const UserDataForm = ({
             }
         }
         form.setValue("city", undefined);
-    }, [form, selectedCountry]);
+    }, [form, isNewUser, selectedCountry]);
 
     return (
         <Form {...form}>
@@ -161,6 +163,7 @@ const UserDataForm = ({
                                 inputType="number"
                                 placeholder={t("app.profile.yearOfBirth")}
                                 label={t("app.profile.yearOfBirth")}
+                                optOutLabel={t("common.preferNotToSay")}
                             />
                         )}
                     />
@@ -239,10 +242,16 @@ const UserDataForm = ({
                         render={({ field }) => (
                             <FormSelect
                                 field={field}
-                                options={homeEnergyLabels.map((label) => ({
-                                    value: label.key,
-                                    label: label.label,
-                                }))}
+                                options={[
+                                    ...labelMappings.map((label) => ({
+                                        value: label.label,
+                                        label: label.label,
+                                    })),
+                                    {
+                                        value: "unsure",
+                                        label: t("common.unsure"),
+                                    },
+                                ]}
                                 placeholder={t(
                                     "app.form.profile.selectHomeEnergyLabel",
                                 )}

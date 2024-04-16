@@ -10,6 +10,7 @@ import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utilities";
 import { useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
+import { Checkbox } from "../ui/checkbox";
 
 type InputTypes = "number" | "text" | "email";
 
@@ -22,6 +23,8 @@ const FormInputField = ({
     className,
     showSwitch,
     unit,
+    optOutLabel,
+    disabled = false,
 }: {
     field: ControllerRenderProps<any, any>;
     inputType: InputTypes;
@@ -31,19 +34,35 @@ const FormInputField = ({
     className?: string;
     showSwitch?: boolean;
     unit?: string;
+    optOutLabel?: string;
+    disabled?: boolean;
 }) => {
+    const [disableField, setDisableField] = useState<boolean>(false);
+
     const [visible, setVisible] = useState(
         showSwitch ? (field.value ? true : false) : true,
     );
 
-    const handleCheckedChange = (state: boolean) => {
+    const handleSwitchChange = (state: boolean) => {
         if (state) {
             setVisible(true);
         } else {
             setVisible(false);
-            field.value = undefined;
-            field.onChange(undefined);
+            clearField();
         }
+    };
+
+    const handleCheckChange = (checked: boolean) => {
+        if (checked) {
+            clearField();
+        }
+
+        setDisableField(checked);
+    };
+
+    const clearField = () => {
+        field.value = undefined;
+        field.onChange(undefined);
     };
 
     return (
@@ -52,7 +71,7 @@ const FormInputField = ({
                 <div className="flex items-center space-x-2">
                     <Switch
                         checked={visible}
-                        onCheckedChange={handleCheckedChange}
+                        onCheckedChange={handleSwitchChange}
                         id={field.name}
                     />
                     <FormLabel htmlFor={field.name}>{label}</FormLabel>
@@ -69,6 +88,7 @@ const FormInputField = ({
                             placeholder={placeholder}
                             {...field}
                             value={field.value ?? ""}
+                            disabled={disableField || disabled}
                             className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                         />
                         {unit && (
@@ -80,6 +100,27 @@ const FormInputField = ({
                         )}
                     </div>
                 </FormControl>
+            )}
+            {optOutLabel && (
+                <div className="flex items-center space-x-2">
+                    <Checkbox
+                        id={
+                            label?.split(" ").join("-").toLowerCase() ??
+                            optOutLabel
+                        }
+                        disabled={disabled}
+                        onCheckedChange={handleCheckChange}
+                    />
+                    <label
+                        htmlFor={
+                            label?.split(" ").join("-").toLowerCase() ??
+                            optOutLabel
+                        }
+                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                    >
+                        {optOutLabel}
+                    </label>
+                </div>
             )}
 
             <FormMessage />
