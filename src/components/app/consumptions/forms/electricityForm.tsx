@@ -170,9 +170,6 @@ const ElectricityForm = ({
                                     label={t(
                                         "app.form.electricity.gridExported",
                                     )}
-                                    description={t(
-                                        "app.form.electricity.pvProductionDescription",
-                                    )}
                                     showSwitch={true}
                                 />
                             )}
