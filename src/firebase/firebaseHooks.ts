@@ -45,7 +45,7 @@ export const useFetchUserData = (user: User | null, loading: boolean) => {
                 setUserData(docSnapshot.data() as FirebaseUser);
                 setIsLoadingUserData(false);
             } else {
-                console.log("User document does not exist");
+                console.error("User document does not exist");
                 setIsLoadingUserData(false);
             }
         });

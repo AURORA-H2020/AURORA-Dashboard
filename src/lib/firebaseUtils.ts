@@ -85,8 +85,6 @@ export const getLatestUserData = async (): Promise<BackupUserData | null> => {
         FirebaseConstants.buckets.auroraDashboard.folders.userDataBackup.name,
     );
 
-    console.log(JSON.stringify(storageRef));
-
     try {
         const res = await listAll(storageRef);
         const summaryFiles = res.items

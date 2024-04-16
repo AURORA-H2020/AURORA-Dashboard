@@ -22,7 +22,6 @@ function SignUpWithEmail({ className }: { className?: string }): JSX.Element {
 
     const formSchema = registrationSchema(t);
 
-    /* TODO: Add Password confirmation and validation (password strength) */
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
@@ -55,7 +54,7 @@ function SignUpWithEmail({ className }: { className?: string }): JSX.Element {
 
         if (error) {
             // Display and log any sign-in errors
-            console.log(error);
+            console.error("Error signing in user: ", error);
             toast.error(t("toast.auth.error"));
         } else {
             postSignUp();

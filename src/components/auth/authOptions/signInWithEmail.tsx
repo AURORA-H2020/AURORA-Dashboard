@@ -52,7 +52,7 @@ const SignInWithEmail = ({ className }: { className?: string }) => {
 
         if (error) {
             // Display and log any sign-in errors
-            console.log(error);
+            console.error("Error signing in user: ", error);
             toast.error(t("toast.auth.error"));
         } else {
             postSignIn();
