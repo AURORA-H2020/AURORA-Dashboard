@@ -10,10 +10,10 @@ export const ProtectAdmin = ({ children }) => {
     const router = useRouter();
 
     useEffect(() => {
-        if (!loading && !isAdminLoading && user && !isAdmin) {
+        if (!loading && !isAdminLoading && !isAdmin) {
             router.push("/account");
         }
-    }, [loading, isAdminLoading, user, isAdmin, router]);
+    }, [loading, isAdminLoading, isAdmin, router]);
 
     if (loading || isAdminLoading) {
         return <LoadingSpinner />;
