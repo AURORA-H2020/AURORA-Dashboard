@@ -38,23 +38,14 @@ const ConsumptionView = ({
                             consumptionAttributes?.unit}
                     </ConsumptionTableRow>
 
-                    <ConsumptionTableRow
-                        label={
-                            // t("common.co2emission")
-                            t.rich("common.co2emission", {
-                                sub: (chunks) => (
-                                    <sub className="mr-1">{chunks}</sub>
-                                ),
-                            })
-                        }
-                    >
+                    <ConsumptionTableRow label={t("common.carbonEmissions")}>
                         {consumption.carbonEmissions
                             ? format.number(consumption.carbonEmissions, {
                                   maximumFractionDigits: 1,
                               }) + carbonUnit
                             : t("common.calculating")}
                     </ConsumptionTableRow>
-                    <ConsumptionTableRow label={t("unitLabel.eneryUsage")}>
+                    <ConsumptionTableRow label={t("common.energyUsage")}>
                         {consumption.energyExpended
                             ? format.number(consumption.energyExpended, {
                                   maximumFractionDigits: 1,

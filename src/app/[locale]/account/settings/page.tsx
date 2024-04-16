@@ -100,20 +100,29 @@ const UserSettings = (): JSX.Element => {
                                 >
                                     {userData?.yearOfBirth}
                                 </ConsumptionTableRow>
+
                                 <ConsumptionTableRow
                                     label={t("app.profile.gender")}
                                 >
-                                    {userData?.gender || ""}
+                                    {userData.gender
+                                        ? t(`gender.${userData.gender}`)
+                                        : ""}
                                 </ConsumptionTableRow>
                                 <ConsumptionTableRow
                                     label={t("app.profile.homeEnergyLabel")}
                                 >
-                                    {userData?.homeEnergyLabel || ""}
+                                    {userData.homeEnergyLabel == "unsure"
+                                        ? t("common.unsure")
+                                        : userData.homeEnergyLabel ?? ""}
                                 </ConsumptionTableRow>
                                 <ConsumptionTableRow
                                     label={t("app.profile.householdProfile")}
                                 >
-                                    {userData?.householdProfile || ""}
+                                    {userData.householdProfile
+                                        ? t(
+                                              `app.user.householdProfile.${userData.householdProfile}`,
+                                          )
+                                        : ""}
                                 </ConsumptionTableRow>
                                 <ConsumptionTableRow
                                     label={t("app.profile.country")}
@@ -122,7 +131,7 @@ const UserSettings = (): JSX.Element => {
                                         countriesMapping.find(
                                             (e) => e.ID === userData.country,
                                         )?.name,
-                                    ) || ""}
+                                    ) ?? ""}
                                 </ConsumptionTableRow>
                                 <ConsumptionTableRow
                                     label={t("app.profile.city")}
@@ -131,7 +140,7 @@ const UserSettings = (): JSX.Element => {
                                         citiesMappings.find(
                                             (e) => e.ID === userData.city,
                                         )?.name,
-                                    ) || ""}
+                                    ) ?? ""}
                                 </ConsumptionTableRow>
                                 <ConsumptionTableRow
                                     label={t("app.profile.userID")}
