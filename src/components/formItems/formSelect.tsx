@@ -83,12 +83,18 @@ const FormSelect = ({
             {optOutLabel && (
                 <div className="flex items-center space-x-2">
                     <Checkbox
-                        id="terms2"
+                        id={
+                            label?.split(" ").join("-").toLowerCase() ??
+                            optOutLabel
+                        }
                         disabled={disabled}
                         onCheckedChange={handleCheckChange}
                     />
                     <label
-                        htmlFor="terms2"
+                        htmlFor={
+                            label?.split(" ").join("-").toLowerCase() ??
+                            optOutLabel
+                        }
                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
                         {optOutLabel}
