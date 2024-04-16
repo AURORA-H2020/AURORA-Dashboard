@@ -33,7 +33,7 @@ const RecurringConsumptionView = ({
             <Table className="mt-4 table-fixed">
                 <TableBody>
                     <ConsumptionTableRow label={t("unitLabel.distance")}>
-                        {recurringConsumption.transportation?.distance}
+                        {recurringConsumption.transportation?.distance + " km"}
                     </ConsumptionTableRow>
 
                     <ConsumptionTableRow label={t("app.form.createdAt")}>

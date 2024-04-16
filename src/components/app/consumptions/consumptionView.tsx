@@ -2,6 +2,7 @@ import ConsumptionTableRow from "@/components/app/common/consumptionTableRow";
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
 import { carbonUnit } from "@/lib/constants/constants";
 import { consumptionMapping } from "@/lib/constants/consumptions";
+import { getConsumptionUnit } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { useFormatter, useTranslations } from "next-intl";
 
@@ -24,6 +25,14 @@ const ConsumptionView = ({
         (c) => c.category == consumption.category,
     );
 
+    const consumptionUnit = getConsumptionUnit(
+        consumption.category,
+        consumption.heating?.heatingFuel ??
+            consumption.electricity?.electricitySource ??
+            consumption.transportation?.transportationType ??
+            "",
+    );
+
     return (
         <>
             <Table className="mt-4 table-fixed">
@@ -33,9 +42,7 @@ const ConsumptionView = ({
                     >
                         {format.number(consumption.value, {
                             maximumFractionDigits: 1,
-                        }) +
-                            " " +
-                            consumptionAttributes?.unit}
+                        }) + consumptionUnit}
                     </ConsumptionTableRow>
 
                     <ConsumptionTableRow label={t("common.carbonEmissions")}>

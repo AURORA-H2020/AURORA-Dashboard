@@ -126,9 +126,7 @@ const RecurringConsumptionPreview = ({
                                         recurringConsumption.transportation
                                             ?.distance,
                                         { maximumFractionDigits: 1 },
-                                    ) +
-                                        " " +
-                                        String(consumptionAttributes?.unit)}
+                                    ) + " km"}
                             </Text>
                             <Text>
                                 {t(

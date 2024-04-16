@@ -20,7 +20,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAuthContext } from "@/context/AuthContext";
 import { deleteDocumentById } from "@/firebase/firestore/deleteDocumentById";
 import { carbonUnit } from "@/lib/constants/constants";
-import { getConsumptionAttributes } from "@/lib/utilities";
+import { getConsumptionAttributes, getConsumptionUnit } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Flex, Heading, Text } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
@@ -50,6 +50,14 @@ const ConsumptionPreview = ({
 
     const consumptionAttributes = getConsumptionAttributes(
         consumption.category,
+    );
+
+    const consumptionUnit = getConsumptionUnit(
+        consumption.category,
+        consumption.heating?.heatingFuel ??
+            consumption.electricity?.electricitySource ??
+            consumption.transportation?.transportationType ??
+            "",
     );
 
     // State to manage the visibility of the modal
@@ -130,7 +138,7 @@ const ConsumptionPreview = ({
                                 {consumption.value
                                     ? format.number(consumption.value, {
                                           maximumFractionDigits: 1,
-                                      }) + consumptionAttributes?.unit
+                                      }) + consumptionUnit
                                     : t("common.calculating")}
                             </Text>
                             <Text>

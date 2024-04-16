@@ -4,7 +4,10 @@ import { GlobalSummary } from "@/models/firestore/global-summary/global-summary"
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { countriesMapping } from "./constants/constants";
-import { consumptionMapping } from "./constants/consumptions";
+import {
+    consumptionMapping,
+    consumptionSources,
+} from "./constants/consumptions";
 
 /**
  * Automatically added by shadcn/ui
@@ -40,13 +43,30 @@ export function getMonthShortName(
  * @return {ConsumptionAttributes | undefined} The consumption attributes for the given category, or undefined if not found
  */
 export function getConsumptionAttributes(
-    ConsumptionCategory: ConsumptionCategory,
+    consumptionCategory: ConsumptionCategory,
 ): ConsumptionAttributes | undefined {
     const consumptionAttributes = consumptionMapping.find(
-        (c) => c.category == ConsumptionCategory,
+        (c) => c.category == consumptionCategory,
     );
 
     return consumptionAttributes || undefined;
+}
+
+export function getConsumptionUnit(
+    category: ConsumptionCategory,
+    source: string,
+): string {
+    let consumptionUnit = "kWh";
+
+    if (category === "heating") {
+        consumptionUnit =
+            consumptionSources.heating.find((c) => c.source == source)?.unit ??
+            "kWh";
+    } else if (category === "transportation") {
+        consumptionUnit = "km";
+    }
+
+    return " " + consumptionUnit;
 }
 
 /**

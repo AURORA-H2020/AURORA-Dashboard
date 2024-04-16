@@ -33,7 +33,6 @@ export interface ConsumptionAttributes {
     icon: ReactElement;
     category: ConsumptionCategory;
     label: string;
-    unit: string;
     colorPrimary: string;
     unitLabel: string;
 }
