@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { labelMappings } from "@/lib/constants/consumptions";
+import { Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 
 const LabelInfoModal = ({ children }: { children: React.ReactNode }) => {
@@ -23,25 +24,25 @@ const LabelInfoModal = ({ children }: { children: React.ReactNode }) => {
                         {t("dashboard.energylabels.title")}
                     </DialogTitle>
                     <DialogDescription>
-                        {t("dashboard.energylabels.description")}
-                        <Table className="mt-6">
-                            <TableBody>
-                                {labelMappings.map((label) => (
-                                    <TableRow key={label.label}>
-                                        <TableCell className="font-medium">
-                                            <Badge
-                                                className={`bg-[${label.color}] hover:bg-[${label.color}] text-white`}
-                                            >
-                                                {label.label}
-                                            </Badge>
-                                        </TableCell>
-                                        <TableCell>{t(label.name)}</TableCell>
-                                    </TableRow>
-                                ))}
-                            </TableBody>
-                        </Table>
+                        <Text>{t("dashboard.energylabels.description")}</Text>
                     </DialogDescription>
                 </DialogHeader>
+                <Table className="mt-6">
+                    <TableBody>
+                        {labelMappings.map((label) => (
+                            <TableRow key={label.label}>
+                                <TableCell className="font-medium">
+                                    <Badge
+                                        className={`bg-[${label.color}] hover:bg-[${label.color}] text-white`}
+                                    >
+                                        {label.label}
+                                    </Badge>
+                                </TableCell>
+                                <TableCell>{t(label.name)}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
             </DialogContent>
         </Dialog>
     );
