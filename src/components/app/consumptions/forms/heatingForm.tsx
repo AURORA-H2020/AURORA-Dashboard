@@ -7,17 +7,17 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { addEditConsumption } from "@/firebase/consumption/addEditConsumption";
 import { consumptionSources } from "@/lib/constants/consumptions";
-import { cn } from "@/lib/utilities";
+import { cn, convertUnit, getConsumptionUnit } from "@/lib/utilities";
 import { heatingFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Consumption } from "@/models/firestore/consumption/consumption";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -36,12 +36,26 @@ const HeatingForm = ({
     const t = useTranslations();
     const formSchema = heatingFormSchema(t);
 
-    const { user } = useAuthContext() as {
-        user: User;
-    };
+    const { user } = useAuthContext();
+    const { userData } = useFirebaseData();
+
+    const [valueUnit, setValueUnit] = useState<{
+        userUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb";
+        firebaseUnit: "km" | "L" | "kg" | "kWh";
+    }>();
 
     const initialFormData: DefaultValues<Consumption> = {
-        value: consumption?.value || undefined,
+        value:
+            (consumption &&
+                convertUnit(
+                    consumption?.value ?? 0,
+                    getConsumptionUnit(
+                        consumption,
+                        userData?.settings?.unitSystem ?? "metric",
+                    ).firebaseUnit,
+                    userData?.settings?.unitSystem ?? "metric",
+                ).quantity) ||
+            undefined,
         category: "heating",
         heating: {
             heatingFuel: consumption?.heating?.heatingFuel,
@@ -63,11 +77,31 @@ const HeatingForm = ({
         defaultValues: initialFormData,
     });
 
+    const formHeatingFuel = form.watch("heating.heatingFuel");
+
+    useEffect(() => {
+        setValueUnit(
+            getConsumptionUnit(
+                form.getValues(),
+                userData?.settings?.unitSystem ?? "metric",
+            ),
+        );
+    }, [form, userData, formHeatingFuel]);
+
+    useEffect(() => {
+        if (formHeatingFuel !== "district") {
+            form.setValue("heating.districtHeatingSource", undefined);
+        }
+    }, [formHeatingFuel, form]);
+
+    if (!user) return null;
+
     const onSubmit = async (data: Consumption) => {
         const { success } = await addEditConsumption(
             data,
             "heating",
             user,
+            userData?.settings?.unitSystem ?? "metric",
             isDuplication ? undefined : consumption?.id,
         );
         if (consumption?.id) {
@@ -84,14 +118,6 @@ const HeatingForm = ({
             onConsumptionAdded(success);
         }
     };
-
-    const formHeatingFuel = form.watch("heating.heatingFuel");
-
-    useEffect(() => {
-        if (formHeatingFuel !== "district") {
-            form.setValue("heating.districtHeatingSource", undefined);
-        }
-    }, [formHeatingFuel, form]);
 
     return (
         <Form {...form}>
@@ -156,11 +182,7 @@ const HeatingForm = ({
                                 description={t(
                                     "app.form.heating.heatingBillDescription",
                                 )}
-                                unit={
-                                    consumptionSources.heating.find(
-                                        (e) => e.source === formHeatingFuel,
-                                    )?.unit || undefined
-                                }
+                                unit={valueUnit?.userUnit}
                             />
                         )}
                     />

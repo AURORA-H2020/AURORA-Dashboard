@@ -1,8 +1,9 @@
 import ConsumptionTableRow from "@/components/app/common/consumptionTableRow";
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { carbonUnit } from "@/lib/constants/constants";
 import { consumptionMapping } from "@/lib/constants/consumptions";
-import { getConsumptionUnit } from "@/lib/utilities";
+import { getConsumptionUnit, useConvertUnit } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { useFormatter, useTranslations } from "next-intl";
 
@@ -21,16 +22,36 @@ const ConsumptionView = ({
     const t = useTranslations();
     const format = useFormatter();
 
-    const consumptionAttributes = consumptionMapping.find(
-        (c) => c.category == consumption.category,
+    const { userData } = useFirebaseData();
+
+    const convertedValue = useConvertUnit(
+        consumption.value,
+        getConsumptionUnit(
+            consumption,
+            userData?.settings?.unitSystem ?? "metric",
+        ).firebaseUnit,
+        userData?.settings?.unitSystem ?? "metric",
     );
 
-    const consumptionUnit = getConsumptionUnit(
-        consumption.category,
-        consumption.heating?.heatingFuel ??
-            consumption.electricity?.electricitySource ??
-            consumption.transportation?.transportationType ??
-            "",
+    const convertedCarbonEmissions = useConvertUnit(
+        consumption.carbonEmissions,
+        "kg",
+        userData?.settings?.unitSystem ?? "metric",
+        carbonUnit,
+    );
+
+    const convertedFuelConsumption = useConvertUnit(
+        consumption.transportation?.fuelConsumption ?? undefined,
+        ["electricCar", "electricBike"].includes(
+            consumption?.transportation?.transportationType ?? "",
+        )
+            ? "kWh/100km"
+            : "L/100km",
+        userData?.settings?.unitSystem ?? "metric",
+    );
+
+    const consumptionAttributes = consumptionMapping.find(
+        (c) => c.category == consumption.category,
     );
 
     return (
@@ -40,17 +61,12 @@ const ConsumptionView = ({
                     <ConsumptionTableRow
                         label={t(consumptionAttributes?.unitLabel) ?? ""}
                     >
-                        {format.number(consumption.value, {
-                            maximumFractionDigits: 1,
-                        }) + consumptionUnit}
+                        {convertedValue?.toString() ?? t("common.calculating")}
                     </ConsumptionTableRow>
 
                     <ConsumptionTableRow label={t("common.carbonEmissions")}>
-                        {consumption.carbonEmissions
-                            ? format.number(consumption.carbonEmissions, {
-                                  maximumFractionDigits: 1,
-                              }) + carbonUnit
-                            : t("common.calculating")}
+                        {convertedCarbonEmissions?.toString() ??
+                            t("common.calculating")}
                     </ConsumptionTableRow>
                     <ConsumptionTableRow label={t("common.energyUsage")}>
                         {consumption.energyExpended
@@ -220,7 +236,7 @@ const ConsumptionView = ({
                             <ConsumptionTableRow
                                 label={t("app.form.fuelConsumption")}
                             >
-                                {consumption.transportation.fuelConsumption}
+                                {convertedFuelConsumption?.toString()}
                             </ConsumptionTableRow>
                         )}
 

@@ -18,16 +18,21 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useAuthContext } from "@/context/AuthContext";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { deleteDocumentById } from "@/firebase/firestore/deleteDocumentById";
 import { carbonUnit } from "@/lib/constants/constants";
-import { getConsumptionAttributes, getConsumptionUnit } from "@/lib/utilities";
+import {
+    getConsumptionAttributes,
+    getConsumptionUnit,
+    useConvertUnit,
+} from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Flex, Heading, Text } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
-import AddEditConsumptionModal from "./modals/addEditConsumptionModal";
 import ConsumptionView from "./consumptionView";
+import AddEditConsumptionModal from "./modals/addEditConsumptionModal";
 
 /**
  * Renders a preview of a consumption object with interactive
@@ -44,20 +49,28 @@ const ConsumptionPreview = ({
 }): JSX.Element => {
     const t = useTranslations();
 
-    const format = useFormatter();
-
     const { user } = useAuthContext();
+    const { userData } = useFirebaseData();
+
+    const format = useFormatter();
+    const convertedValue = useConvertUnit(
+        consumption.value,
+        getConsumptionUnit(
+            consumption,
+            userData?.settings?.unitSystem ?? "metric",
+        ).firebaseUnit,
+        userData?.settings?.unitSystem ?? "metric",
+    );
+
+    const convertedCarbonEmissions = useConvertUnit(
+        consumption.carbonEmissions,
+        "kg",
+        userData?.settings?.unitSystem ?? "metric",
+        carbonUnit,
+    );
 
     const consumptionAttributes = getConsumptionAttributes(
         consumption.category,
-    );
-
-    const consumptionUnit = getConsumptionUnit(
-        consumption.category,
-        consumption.heating?.heatingFuel ??
-            consumption.electricity?.electricitySource ??
-            consumption.transportation?.transportationType ??
-            "",
     );
 
     // State to manage the visibility of the modal
@@ -135,26 +148,12 @@ const ConsumptionPreview = ({
                         </Flex>
                         <Flex direction={"column"} align={"end"}>
                             <Text>
-                                {consumption.value
-                                    ? format.number(consumption.value, {
-                                          maximumFractionDigits: 1,
-                                      }) + consumptionUnit
-                                    : t("common.calculating")}
+                                {convertedValue?.toString() ??
+                                    t("common.calculating")}
                             </Text>
                             <Text>
-                                {consumption.carbonEmissions ? (
-                                    <>
-                                        {format.number(
-                                            consumption.carbonEmissions,
-                                            {
-                                                maximumFractionDigits: 1,
-                                            },
-                                        )}
-                                        {carbonUnit}
-                                    </>
-                                ) : (
-                                    t("common.calculating")
-                                )}
+                                {convertedCarbonEmissions?.toString() ??
+                                    t("common.calculating")}
                             </Text>
                         </Flex>
                     </Flex>

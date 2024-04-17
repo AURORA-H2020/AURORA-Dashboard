@@ -1,5 +1,6 @@
 import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { convertUnit, getConsumptionUnit } from "@/lib/utilities";
 import { Consumption } from "@/models/firestore/consumption/consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { User } from "@firebase/auth";
@@ -57,14 +58,61 @@ function removeInvalidValues(
     return consumption;
 }
 
+function convertUnits(
+    consumption: Consumption,
+    userUnitSystem: "metric" | "imperial",
+) {
+    const valueUserUnit = getConsumptionUnit(
+        consumption,
+        userUnitSystem,
+    ).userUnit;
+    consumption.value = convertUnit(
+        consumption.value,
+        valueUserUnit,
+        "metric",
+    ).quantity;
+
+    /**
+     * Specific for transportation
+     */
+    if (
+        consumption.transportation &&
+        consumption.transportation.fuelConsumption
+    ) {
+        let fuelConsumptionUserUnit =
+            userUnitSystem === "metric" ? "L/100km" : "mpg";
+        if (
+            ["electricCar", "electricBike"].includes(
+                consumption.transportation.transportationType,
+            )
+        ) {
+            fuelConsumptionUserUnit =
+                userUnitSystem === "metric" ? "kWh/100km" : "mi/kWh";
+        }
+        consumption.transportation.fuelConsumption = convertUnit(
+            consumption.transportation.fuelConsumption,
+            fuelConsumptionUserUnit as
+                | "L/100km"
+                | "mpg"
+                | "kWh/100km"
+                | "mi/kWh",
+            "metric",
+        ).quantity;
+    }
+    return consumption;
+}
+
 export const addEditConsumption = async (
     consumption: Consumption,
     category: ConsumptionCategory,
     user: User,
+    userUnitSystem: "metric" | "imperial",
     consumptionId?: string,
 ) => {
     let success = false;
     consumption = removeInvalidValues(consumption, category);
+    consumption = convertUnits(consumption, userUnitSystem);
+
     if (user) {
         const consumptionRef = collection(
             firestore,

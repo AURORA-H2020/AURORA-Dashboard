@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { addEditConsumption } from "@/firebase/consumption/addEditConsumption";
 import { consumptionSources } from "@/lib/constants/consumptions";
 import { cn } from "@/lib/utilities";
@@ -14,7 +15,6 @@ import { electricityFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Consumption } from "@/models/firestore/consumption/consumption";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
@@ -36,9 +36,8 @@ const ElectricityForm = ({
     const t = useTranslations();
     const formSchema = electricityFormSchema(t);
 
-    const { user } = useAuthContext() as {
-        user: User;
-    };
+    const { user } = useAuthContext();
+    const { userData } = useFirebaseData();
 
     const initialFormData: DefaultValues<Consumption> = {
         value: consumption?.value || undefined,
@@ -64,11 +63,22 @@ const ElectricityForm = ({
         defaultValues: initialFormData,
     });
 
+    const formElectricitySource = form.watch("electricity.electricitySource");
+
+    useEffect(() => {
+        if (formElectricitySource !== "homePhotovoltaics") {
+            form.setValue("electricity.electricityExported", undefined);
+        }
+    }, [formElectricitySource, form]);
+
+    if (!user) return null;
+
     const onSubmit = async (data: Consumption) => {
         const { success } = await addEditConsumption(
             data,
             "electricity",
             user,
+            userData?.settings?.unitSystem ?? "metric",
             isDuplication ? undefined : consumption?.id,
         );
         if (success) {
@@ -85,14 +95,6 @@ const ElectricityForm = ({
             onConsumptionAdded(success);
         }
     };
-
-    const formElectricitySource = form.watch("electricity.electricitySource");
-
-    useEffect(() => {
-        if (formElectricitySource !== "homePhotovoltaics") {
-            form.setValue("electricity.electricityExported", undefined);
-        }
-    }, [formElectricitySource, form]);
 
     return (
         <Form {...form}>

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { addEditConsumption } from "@/firebase/consumption/addEditConsumption";
 import {
     consumptionSources,
@@ -15,12 +16,11 @@ import {
     publicVehicleOccupancies,
     publicVerhicleTypes,
 } from "@/lib/constants/consumptions";
-import { cn } from "@/lib/utilities";
+import { cn, convertUnit, useConvertUnit } from "@/lib/utilities";
 import { transportationFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Consumption } from "@/models/firestore/consumption/consumption";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
@@ -42,18 +42,48 @@ const TransportationForm = ({
     const t = useTranslations();
     const formSchema = transportationFormSchema(t);
 
-    const { user } = useAuthContext() as {
-        user: User;
-    };
+    const { user } = useAuthContext();
+    const { userData } = useFirebaseData();
+
+    const distanceUnit = useConvertUnit(
+        100,
+        "km",
+        userData?.settings?.unitSystem ?? "metric",
+    )?.unit;
+
+    const fuelConsumptionUnitRegular = useConvertUnit(
+        100,
+        "L/100km",
+        userData?.settings?.unitSystem ?? "metric",
+    )?.unit;
+
+    const fuelConsumptionUnitElectric = useConvertUnit(
+        100,
+        "kWh/100km",
+        userData?.settings?.unitSystem ?? "metric",
+    )?.unit;
 
     const initialFormData: DefaultValues<Consumption> = {
-        value: consumption?.value || undefined,
+        value:
+            convertUnit(
+                consumption?.value ?? 0,
+                "km",
+                userData?.settings?.unitSystem ?? "metric",
+            ).quantity || undefined,
         category: "transportation",
         transportation: {
             transportationType:
                 consumption?.transportation?.transportationType || undefined,
             fuelConsumption:
-                consumption?.transportation?.fuelConsumption || undefined,
+                convertUnit(
+                    consumption?.transportation?.fuelConsumption ?? 0,
+                    ["electricCar", "electricBike"].includes(
+                        consumption?.transportation?.transportationType ?? "",
+                    )
+                        ? "kWh/100km"
+                        : "L/100km",
+                    userData?.settings?.unitSystem ?? "metric",
+                ).quantity || undefined,
             privateVehicleOccupancy:
                 consumption?.transportation?.privateVehicleOccupancy ||
                 undefined,
@@ -73,28 +103,6 @@ const TransportationForm = ({
         resolver: zodResolver(formSchema),
         defaultValues: initialFormData,
     });
-
-    const onSubmit = async (data: Consumption) => {
-        const { success } = await addEditConsumption(
-            data,
-            "transportation",
-            user,
-            isDuplication ? undefined : consumption?.id,
-        );
-        if (success) {
-            if (consumption?.id) {
-                toast.success("Your consumption was updated successfully.");
-            } else {
-                toast.success("Your consumption was created successfully.");
-            }
-        } else {
-            toast.error("There was an error creating your consumption.");
-        }
-
-        if (onConsumptionAdded) {
-            onConsumptionAdded(success);
-        }
-    };
 
     const formTransportationType = form.watch(
         "transportation.transportationType",
@@ -116,6 +124,31 @@ const TransportationForm = ({
         }
     }, [formTransportationType, form]);
 
+    if (!user) return null;
+
+    const onSubmit = async (data: Consumption) => {
+        const { success } = await addEditConsumption(
+            data,
+            "transportation",
+            user,
+            userData?.settings?.unitSystem ?? "metric",
+            isDuplication ? undefined : consumption?.id,
+        );
+        if (success) {
+            if (consumption?.id) {
+                toast.success("Your consumption was updated successfully.");
+            } else {
+                toast.success("Your consumption was created successfully.");
+            }
+        } else {
+            toast.error("There was an error creating your consumption.");
+        }
+
+        if (onConsumptionAdded) {
+            onConsumptionAdded(success);
+        }
+    };
+
     return (
         <Form {...form}>
             <form
@@ -135,7 +168,7 @@ const TransportationForm = ({
                                 inputType="number"
                                 placeholder={t("unitLabel.distance")}
                                 label={t("unitLabel.distance")}
-                                unit="km"
+                                unit={distanceUnit}
                             />
                         )}
                     />
@@ -178,8 +211,8 @@ const TransportationForm = ({
                                             "electricCar",
                                             "electricBike",
                                         ].includes(formTransportationType)
-                                            ? "kWh/100km"
-                                            : "L/100km"
+                                            ? fuelConsumptionUnitElectric
+                                            : fuelConsumptionUnitRegular
                                     }
                                 />
                             )}
