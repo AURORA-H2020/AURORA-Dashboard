@@ -2,7 +2,9 @@
 
 import ConsumptionTableRow from "@/components/app/common/consumptionTableRow";
 import { Table, TableBody } from "@/components/ui/table";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { weekdays } from "@/lib/constants/constants";
+import { useConvertUnit } from "@/lib/utilities";
 import { RecurringConsumptionWithID } from "@/models/extensions";
 import { useFormatter, useTranslations } from "next-intl";
 
@@ -21,6 +23,24 @@ const RecurringConsumptionView = ({
     const t = useTranslations();
     const format = useFormatter();
 
+    const { userData } = useFirebaseData();
+
+    const convertedValue = useConvertUnit(
+        recurringConsumption.transportation?.distance,
+        "km",
+        userData?.settings?.unitSystem ?? "metric",
+    );
+
+    const convertedFuelConsumption = useConvertUnit(
+        recurringConsumption.transportation?.fuelConsumption ?? undefined,
+        ["electricCar", "electricBike"].includes(
+            recurringConsumption?.transportation?.transportationType ?? "",
+        )
+            ? "kWh/100km"
+            : "L/100km",
+        userData?.settings?.unitSystem ?? "metric",
+    );
+
     return (
         <>
             <Table className="mt-4 table-fixed">
@@ -33,7 +53,7 @@ const RecurringConsumptionView = ({
             <Table className="mt-4 table-fixed">
                 <TableBody>
                     <ConsumptionTableRow label={t("unitLabel.distance")}>
-                        {recurringConsumption.transportation?.distance + " km"}
+                        {convertedValue?.toString() ?? t("common.calculating")}
                     </ConsumptionTableRow>
 
                     <ConsumptionTableRow label={t("app.form.createdAt")}>
@@ -93,6 +113,15 @@ const RecurringConsumptionView = ({
                                 `category.sources.${recurringConsumption.transportation.transportationType}`,
                             )}
                         </ConsumptionTableRow>
+
+                        {recurringConsumption.transportation
+                            .fuelConsumption && (
+                            <ConsumptionTableRow
+                                label={t("app.form.fuelConsumption")}
+                            >
+                                {convertedFuelConsumption?.toString()}
+                            </ConsumptionTableRow>
+                        )}
 
                         {recurringConsumption.transportation
                             .privateVehicleOccupancy && (

@@ -1,5 +1,6 @@
 import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { convertUnit } from "@/lib/utilities";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 import { User } from "@firebase/auth";
@@ -72,14 +73,55 @@ function removeInvalidValues(
     return recurringConsumption;
 }
 
+function convertUnits(
+    recurringConsumption: RecurringConsumption,
+    userUnitSystem: "metric" | "imperial",
+) {
+    if (
+        recurringConsumption.transportation &&
+        recurringConsumption.transportation.fuelConsumption
+    ) {
+        const valueUserUnit = userUnitSystem === "metric" ? "km" : "mi";
+        recurringConsumption.transportation.distance = convertUnit(
+            recurringConsumption.transportation?.distance,
+            valueUserUnit,
+            "metric",
+        ).quantity;
+
+        let fuelConsumptionUserUnit =
+            userUnitSystem === "metric" ? "L/100km" : "mpg";
+        if (
+            ["electricCar", "electricBike"].includes(
+                recurringConsumption.transportation.transportationType,
+            )
+        ) {
+            fuelConsumptionUserUnit =
+                userUnitSystem === "metric" ? "kWh/100km" : "mi/kWh";
+        }
+        recurringConsumption.transportation.fuelConsumption = convertUnit(
+            recurringConsumption.transportation.fuelConsumption,
+            fuelConsumptionUserUnit as
+                | "L/100km"
+                | "mpg"
+                | "kWh/100km"
+                | "mi/kWh",
+            "metric",
+        ).quantity;
+    }
+    return recurringConsumption;
+}
+
 export const addEditRecurringConsumption = async (
     recurringConsumption: RecurringConsumption,
     category: ConsumptionCategory,
     user: User,
+    userUnitSystem: "metric" | "imperial",
     consumptionId?: string,
 ) => {
     let success = false;
     recurringConsumption = removeInvalidValues(recurringConsumption, category);
+    recurringConsumption = convertUnits(recurringConsumption, userUnitSystem);
+
     if (user) {
         const consumptionRef = collection(
             firestore,

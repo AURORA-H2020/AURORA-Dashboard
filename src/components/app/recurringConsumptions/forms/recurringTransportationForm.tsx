@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField, FormLabel } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { addEditRecurringConsumption } from "@/firebase/consumption/addEditRecurringConsumption";
 import { weekdays } from "@/lib/constants/constants";
 import {
@@ -21,13 +22,12 @@ import {
     publicVerhicleTypes,
     recurringConsumptionFrequencies,
 } from "@/lib/constants/consumptions";
-import { cn } from "@/lib/utilities";
+import { cn, convertUnit, useConvertUnit } from "@/lib/utilities";
 import { recurringTransportationFormSchema } from "@/lib/zod/recurringConsumptionSchemas";
 import { RecurringConsumptionWithID } from "@/models/extensions";
 import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Flex, Strong } from "@radix-ui/themes";
-import { User } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
@@ -47,9 +47,26 @@ const RecurringTransportationForm = ({
     const t = useTranslations();
     const formSchema = recurringTransportationFormSchema(t);
 
-    const { user } = useAuthContext() as {
-        user: User;
-    };
+    const { user } = useAuthContext();
+    const { userData } = useFirebaseData();
+
+    const distanceUnit = useConvertUnit(
+        100,
+        "km",
+        userData?.settings?.unitSystem ?? "metric",
+    )?.unit;
+
+    const fuelConsumptionUnitRegular = useConvertUnit(
+        100,
+        "L/100km",
+        userData?.settings?.unitSystem ?? "metric",
+    )?.unit;
+
+    const fuelConsumptionUnitElectric = useConvertUnit(
+        100,
+        "kWh/100km",
+        userData?.settings?.unitSystem ?? "metric",
+    )?.unit;
 
     const initialFormData: DefaultValues<RecurringConsumption> = {
         createdAt: recurringConsumption?.createdAt || Timestamp.now(),
@@ -66,8 +83,16 @@ const RecurringTransportationForm = ({
                 recurringConsumption?.transportation?.transportationType ||
                 undefined,
             fuelConsumption:
-                recurringConsumption?.transportation?.fuelConsumption ||
-                undefined,
+                convertUnit(
+                    recurringConsumption?.transportation?.fuelConsumption ?? 0,
+                    ["electricCar", "electricBike"].includes(
+                        recurringConsumption?.transportation
+                            ?.transportationType ?? "",
+                    )
+                        ? "kWh/100km"
+                        : "L/100km",
+                    userData?.settings?.unitSystem ?? "metric",
+                ).quantity || undefined,
             privateVehicleOccupancy:
                 recurringConsumption?.transportation?.privateVehicleOccupancy ||
                 undefined,
@@ -81,7 +106,11 @@ const RecurringTransportationForm = ({
                 recurringConsumption?.transportation?.minuteOfTravel ??
                 new Date().getMinutes(),
             distance:
-                recurringConsumption?.transportation?.distance || undefined,
+                convertUnit(
+                    recurringConsumption?.transportation?.distance ?? 0,
+                    "km",
+                    userData?.settings?.unitSystem ?? "metric",
+                ).quantity || undefined,
         },
         description: recurringConsumption?.description || "",
     };
@@ -91,32 +120,9 @@ const RecurringTransportationForm = ({
         defaultValues: initialFormData,
     });
 
-    const onSubmit = async (data: RecurringConsumption) => {
-        const { success } = await addEditRecurringConsumption(
-            data,
-            "transportation",
-            user,
-            recurringConsumption?.id,
-        );
-        if (success) {
-            if (recurringConsumption?.id) {
-                toast.success(t("toast.consumption.updatedSuccessfully"));
-            } else {
-                toast.success(t("toast.consumption.addedSuccessfully"));
-            }
-        } else {
-            toast.error(t("toast.consumption.addedError"));
-        }
-
-        if (onFormSubmit) {
-            onFormSubmit(success);
-        }
-    };
-
     const formTransportationType = form.watch(
         "transportation.transportationType",
     );
-
     const formFrequencyUnit = form.watch("frequency.unit");
 
     useEffect(() => {
@@ -140,6 +146,31 @@ const RecurringTransportationForm = ({
             form.setValue("frequency.dayOfMonth", undefined);
         }
     }, [formTransportationType, form, formFrequencyUnit]);
+
+    if (!user) return null;
+
+    const onSubmit = async (data: RecurringConsumption) => {
+        const { success } = await addEditRecurringConsumption(
+            data,
+            "transportation",
+            user,
+            userData?.settings?.unitSystem ?? "metric",
+            recurringConsumption?.id,
+        );
+        if (success) {
+            if (recurringConsumption?.id) {
+                toast.success(t("toast.consumption.updatedSuccessfully"));
+            } else {
+                toast.success(t("toast.consumption.addedSuccessfully"));
+            }
+        } else {
+            toast.error(t("toast.consumption.addedError"));
+        }
+
+        if (onFormSubmit) {
+            onFormSubmit(success);
+        }
+    };
 
     return (
         <Form {...form}>
@@ -226,7 +257,7 @@ const RecurringTransportationForm = ({
                                 inputType="number"
                                 placeholder={t("unitLabel.distance")}
                                 label={t("unitLabel.distance")}
-                                unit="km"
+                                unit={distanceUnit}
                             />
                         )}
                     />
@@ -300,8 +331,8 @@ const RecurringTransportationForm = ({
                                             "electricCar",
                                             "electricBike",
                                         ].includes(formTransportationType)
-                                            ? "kWh/100km"
-                                            : "L/100km"
+                                            ? fuelConsumptionUnitElectric
+                                            : fuelConsumptionUnitRegular
                                     }
                                 />
                             )}
