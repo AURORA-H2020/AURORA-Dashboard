@@ -2,9 +2,11 @@
 
 import {
     useFetchUserConsumptionSummaries,
+    useFetchUserCountryData,
     useFetchUserData,
 } from "@/firebase/firebaseHooks";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
+import { Country } from "@/models/firestore/country/country";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import React, { createContext, useContext } from "react";
 import { useAuthContext } from "./AuthContext";
@@ -13,6 +15,7 @@ interface FirebaseDataContextValue {
     userData: FirebaseUser | null;
     isLoadingUserData: boolean;
     userConsumptionSummaries: ConsumptionSummary[];
+    userCountryData: Country | null;
     // userConsumptions: ConsumptionWithID[];
     // userRecurringConsumptions: RecurringConsumptionWithID[];
 }
@@ -28,6 +31,10 @@ export const FirebaseDataProvider: React.FC<{
 
     const { userData, isLoadingUserData } = useFetchUserData(user, loading);
 
+    const userConsumptionSummaries = useFetchUserConsumptionSummaries(user);
+
+    const { userCountryData } = useFetchUserCountryData(user, userData);
+
     /* const userConsumptions = useFetchUserConsumptions({ user: user })?.docs.map(
         (doc) => ({
             ...(doc.data() as Consumption),
@@ -42,14 +49,13 @@ export const FirebaseDataProvider: React.FC<{
         id: doc.id,
     })) as RecurringConsumptionWithID[]; */
 
-    const userConsumptionSummaries = useFetchUserConsumptionSummaries(user);
-
     return (
         <FirebaseDataContext.Provider
             value={{
                 userData,
                 isLoadingUserData,
                 userConsumptionSummaries,
+                userCountryData,
                 // userConsumptions,
                 // userRecurringConsumptions,
             }}

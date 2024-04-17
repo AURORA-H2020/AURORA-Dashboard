@@ -5,6 +5,7 @@ import {
 } from "@/models/extensions";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { Consumption } from "@/models/firestore/consumption/consumption";
+import { Country } from "@/models/firestore/country/country";
 import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { User } from "firebase/auth";
@@ -260,6 +261,42 @@ export const useFetchUserConsumptionSummaries = (user: User | null) => {
     }, [user]);
 
     return userConsumptionSummaries;
+};
+
+export const useFetchUserCountryData = (
+    user: User | null,
+    userData: FirebaseUser | null,
+) => {
+    const [userCountryData, setUserCountryData] = useState<Country | null>(
+        null,
+    );
+
+    const [isLoadingUserCountryData, setIsLoadingUserCountryData] =
+        useState<boolean>(true);
+
+    useEffect(() => {
+        if (!user || !userData?.country) return;
+
+        const docRef = doc(
+            firestore,
+            FirebaseConstants.collections.countries.name,
+            userData.country,
+        );
+
+        const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
+            if (docSnapshot.exists()) {
+                setUserCountryData(docSnapshot.data() as Country);
+                setIsLoadingUserCountryData(false);
+            } else {
+                console.error("Country document does not exist");
+                setIsLoadingUserCountryData(false);
+            }
+        });
+
+        return unsubscribe;
+    }, [user, userData?.country]);
+
+    return { userCountryData, isLoadingUserCountryData };
 };
 
 export const usePaginatedConsumptions = ({
