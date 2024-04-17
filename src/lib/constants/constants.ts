@@ -4,6 +4,7 @@ import {
     HomeEnergyLabel,
     HouseholdProfile,
     Locale,
+    UnitSystem,
     Weekdays,
 } from "@/models/constants";
 import { CalculationMode, EnergyMode } from "@/models/dashboard-data";
@@ -151,7 +152,11 @@ export const genderMappings: GenderMapping[] = [
 export const energyModes: EnergyMode[] = ["carbon", "energy"];
 export const calculationModes: CalculationMode[] = ["absolute", "relative"];
 
-export const carbonUnit: string = " kg CO\u2082";
+export const carbonUnitWeight = (
+    unitSystem: "metric" | "imperial" = "metric",
+): string => `${unitSystem == "imperial" ? "lb" : "kg"} ${carbonUnit}`;
+
+export const carbonUnit = "CO\u2082";
 
 export const kiloGramNumberFormatter = Intl.NumberFormat("en-GB", {
     notation: "compact",
@@ -176,6 +181,17 @@ export const householdProfiles: HouseholdProfile[] = [
     {
         key: "workersOrStudentsOutsideTheHome",
         label: t("app.user.householdProfile.workersOrStudentsOutsideTheHome"),
+    },
+];
+
+export const unitSystems: UnitSystem[] = [
+    {
+        key: "metric",
+        label: t("app.user.settings.unitSystem.metric"),
+    },
+    {
+        key: "imperial",
+        label: t("app.user.settings.unitSystem.imperial"),
     },
 ];
 

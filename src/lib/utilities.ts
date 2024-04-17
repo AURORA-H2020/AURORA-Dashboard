@@ -1,13 +1,17 @@
-import { ConsumptionAttributes } from "@/models/constants";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
-import { countriesMapping } from "./constants/constants";
+import { carbonUnit, countriesMapping } from "@/lib/constants/constants";
 import {
     consumptionMapping,
     consumptionSources,
-} from "./constants/consumptions";
+} from "@/lib/constants/consumptions";
+import { ConsumptionAttributes } from "@/models/constants";
+import { Consumption } from "@/models/firestore/consumption/consumption";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { UserSettingsUnitSystem } from "@/models/firestore/user/user-settings/user-settings-unitSystem";
+import { clsx, type ClassValue } from "clsx";
+import convert from "convert";
+import { useFormatter } from "next-intl";
+import { twMerge } from "tailwind-merge";
 
 /**
  * Automatically added by shadcn/ui
@@ -52,33 +56,22 @@ export function getConsumptionAttributes(
     return consumptionAttributes || undefined;
 }
 
-export function getConsumptionUnit(
-    category: ConsumptionCategory,
-    source: string,
-): string {
-    let consumptionUnit = "kWh";
-
-    if (category === "heating") {
-        consumptionUnit =
-            consumptionSources.heating.find((c) => c.source == source)?.unit ??
-            "kWh";
-    } else if (category === "transportation") {
-        consumptionUnit = "km";
-    }
-
-    return " " + consumptionUnit;
-}
-
 /**
  * Formats a number as a string with thousands separators and units for carbon dioxide.
  *
  * @param {number} number - The number to be formatted.
  * @return {string} The formatted number with the unit "kg CO₂".
  */
-export const valueFormatterCarbon = (number: number): string =>
-    `${Intl.NumberFormat("us")
+export const valueFormatterCarbon = (
+    number: number,
+    unitSystem: "metric" | "imperial" = "metric",
+): string => {
+    const unit =
+        unitSystem == "imperial" ? `lb ${carbonUnit}` : `kg ${carbonUnit}`;
+    return `${Intl.NumberFormat("us")
         .format(Math.round(number))
-        .toString()} \n kg CO\u2082`;
+        .toString()} \n ${unit}`;
+};
 
 /**
  * Formats the given number as a string representing energy in kilowatt-hours.
@@ -191,5 +184,151 @@ export function getSortedCountryLabels(countryIds: string[] | undefined) {
     return {
         names: countryLabels.map((country) => country.name),
         colors: countryLabels.map((country) => country.color),
+    };
+}
+
+export function getConsumptionUnit(
+    consumption: Consumption,
+    unitSystem: UserSettingsUnitSystem,
+): {
+    userUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb";
+    firebaseUnit: "km" | "L" | "kg" | "kWh";
+} {
+    let userConsumptionUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb" =
+        "kWh";
+    let firebaseConsumptionUnit: "km" | "L" | "kg" | "kWh" = "kWh";
+
+    const category = consumption.category;
+    const source =
+        consumption.electricity?.electricitySource ??
+        consumption.heating?.heatingFuel ??
+        consumption.transportation?.transportationType ??
+        "";
+
+    if (category === "heating") {
+        firebaseConsumptionUnit =
+            consumptionSources.heating.find((c) => c.source == source)?.unit ??
+            "kWh";
+    } else if (category === "transportation") {
+        firebaseConsumptionUnit = "km";
+    }
+
+    if (unitSystem === "imperial") {
+        if (firebaseConsumptionUnit === "km") {
+            userConsumptionUnit = "mi";
+        } else if (firebaseConsumptionUnit === "L") {
+            userConsumptionUnit = "gal";
+        } else if (firebaseConsumptionUnit === "kg") {
+            userConsumptionUnit = "lb";
+        }
+    } else {
+        userConsumptionUnit = firebaseConsumptionUnit;
+    }
+
+    return {
+        userUnit: userConsumptionUnit,
+        firebaseUnit: firebaseConsumptionUnit,
+    };
+}
+
+export function convertUnit(
+    value: number,
+    unit:
+        | "km"
+        | "mi"
+        | "L"
+        | "gal"
+        | "kWh"
+        | "kg"
+        | "lb"
+        | "L/100km"
+        | "mpg"
+        | "kWh/100km"
+        | "mi/kWh",
+    toUnitSystem: "imperial" | "metric",
+): { quantity: number; unit: string } {
+    let convertedData;
+
+    if (unit === "kWh") {
+        convertedData = { quantity: value, unit: "kWh" };
+    } else if (unit === "L/100km" || unit === "mpg") {
+        // 1 L/100km = 282.481 mpg
+        const conversionFactor = 282.481;
+
+        if (unit === "L/100km" && toUnitSystem === "imperial") {
+            convertedData = { quantity: value * conversionFactor, unit: "mpg" };
+        } else if (unit === "mpg" && toUnitSystem === "metric") {
+            convertedData = {
+                quantity: value / conversionFactor,
+                unit: "L/100km",
+            };
+        } else {
+            convertedData = { quantity: value, unit: unit };
+        }
+    } else if (unit === "kWh/100km" || unit === "mi/kWh") {
+        // 1 kWh/100km = 62.137119 mi/kWh
+        const conversionFactor = 62.137119;
+
+        if (unit === "kWh/100km" && toUnitSystem === "imperial") {
+            convertedData = {
+                quantity: value * conversionFactor,
+                unit: "mi/kWh",
+            };
+        } else if (unit === "mi/kWh" && toUnitSystem === "metric") {
+            convertedData = {
+                quantity: value / conversionFactor,
+                unit: "kWh/100km",
+            };
+        } else {
+            convertedData = { quantity: value, unit: unit };
+        }
+    } else {
+        convertedData = convert(value, unit).to("best", toUnitSystem);
+    }
+
+    return {
+        quantity: convertedData.quantity,
+        unit: convertedData.unit,
+    };
+}
+
+/**
+ * Function to convert unit
+ */
+export function useConvertUnit(
+    value: number | undefined,
+    unit:
+        | "km"
+        | "mi"
+        | "L"
+        | "gal"
+        | "kWh"
+        | "kg"
+        | "lb"
+        | "L/100km"
+        | "mpg"
+        | "kWh/100km"
+        | "mi/kWh",
+    toUnitSystem: "imperial" | "metric",
+    unitSuffix: string = "",
+    digits: number = 1,
+):
+    | { rawNumber: number; number: string; unit: string; toString(): string }
+    | undefined {
+    const format = useFormatter();
+
+    if (!value) return undefined;
+
+    let convertedData = convertUnit(value, unit, toUnitSystem);
+
+    return {
+        rawNumber: convertedData.quantity,
+        number: format.number(convertedData.quantity, {
+            maximumFractionDigits: digits,
+        }),
+        unit: `${convertedData.unit} ${unitSuffix}`,
+        toString() {
+            return `${this.number} ${this.unit}`;
+        },
     };
 }

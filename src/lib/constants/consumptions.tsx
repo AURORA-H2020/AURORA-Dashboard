@@ -56,7 +56,7 @@ export const consumptionSources: ConsumptionSources = {
         },
     ],
     heating: [
-        { source: "oil", name: t("category.sources.oil"), unit: "l" },
+        { source: "oil", name: t("category.sources.oil"), unit: "L" },
         {
             source: "naturalGas",
             name: t("category.sources.naturalGas"),
@@ -71,7 +71,7 @@ export const consumptionSources: ConsumptionSources = {
         {
             source: "liquifiedPetroGas",
             name: t("category.sources.liquifiedPetroGas"),
-            unit: "l",
+            unit: "L",
         },
         { source: "biomass", name: t("category.sources.biomass"), unit: "kg" },
         {

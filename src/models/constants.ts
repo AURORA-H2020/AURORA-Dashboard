@@ -10,13 +10,14 @@ import { RecurringConsumptionFrequencyUnit } from "./firestore/recurring-consump
 import { UserGender } from "./firestore/user/user-gender";
 import { UserHomeEnergyLabel } from "./firestore/user/user-homeEnergyLabel";
 import { UserHouseholdProfile } from "./firestore/user/user-householdProfile";
+import { UserSettingsUnitSystem } from "./firestore/user/user-settings/user-settings-unitSystem";
 
 export interface ConsumptionSources {
     electricity: { source: ConsumptionElectricitySource; name: string }[];
     heating: {
         source: ConsumptionHeatingFuel;
         name: string;
-        unit: "kg" | "kWh" | "l";
+        unit: "kg" | "kWh" | "L";
     }[];
     districtHeating: {
         source: ConsumptionDistrictHeatingSource;
@@ -39,6 +40,11 @@ export interface ConsumptionAttributes {
 
 export interface HouseholdProfile {
     key: UserHouseholdProfile;
+    label: string;
+}
+
+export interface UnitSystem {
+    key: UserSettingsUnitSystem;
     label: string;
 }
 
