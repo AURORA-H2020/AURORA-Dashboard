@@ -22,7 +22,7 @@ const ConsumptionView = ({
     const t = useTranslations();
     const format = useFormatter();
 
-    const { userData } = useFirebaseData();
+    const { userData, userCountryData } = useFirebaseData();
 
     const convertedValue = useConvertUnit(
         consumption.value,
@@ -83,7 +83,11 @@ const ConsumptionView = ({
                     <TableBody>
                         {consumption.electricity.costs && (
                             <ConsumptionTableRow label={t("app.form.costs")}>
-                                {consumption.electricity.costs}
+                                {format.number(consumption.electricity.costs, {
+                                    style: "currency",
+                                    currency:
+                                        userCountryData?.currencyCode ?? "EUR",
+                                })}
                             </ConsumptionTableRow>
                         )}
                         {consumption.electricity.electricityExported && (
@@ -136,7 +140,11 @@ const ConsumptionView = ({
                     <TableBody>
                         {consumption.heating.costs && (
                             <ConsumptionTableRow label={t("app.form.costs")}>
-                                {consumption.heating.costs}
+                                {format.number(consumption.heating.costs, {
+                                    style: "currency",
+                                    currency:
+                                        userCountryData?.currencyCode ?? "EUR",
+                                })}
                             </ConsumptionTableRow>
                         )}
 

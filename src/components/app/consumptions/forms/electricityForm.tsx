@@ -37,7 +37,7 @@ const ElectricityForm = ({
     const formSchema = electricityFormSchema(t);
 
     const { user } = useAuthContext();
-    const { userData } = useFirebaseData();
+    const { userData, userCountryData } = useFirebaseData();
 
     const initialFormData: DefaultValues<Consumption> = {
         value: consumption?.value || undefined,
@@ -239,6 +239,7 @@ const ElectricityForm = ({
                                 inputType="number"
                                 placeholder={t("app.form.costs")}
                                 label={t("app.form.costs")}
+                                unit={userCountryData?.currencyCode ?? "EUR"}
                             />
                         )}
                     />

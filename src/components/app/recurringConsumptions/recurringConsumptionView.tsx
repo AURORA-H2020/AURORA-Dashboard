@@ -10,7 +10,7 @@ import { useFormatter, useTranslations } from "next-intl";
 
 /**
  * Renders a view displaying various attributes of a user's consumption
- * data in table rows, such as carbon emissions, costs, and dates.
+ * data in table rows, such as carbon emissions and dates.
  *
  * @param {Consumption} consumption - The consumption data to display
  * @return {JSX.Element} A React component that renders consumption data

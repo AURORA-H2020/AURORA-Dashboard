@@ -37,7 +37,7 @@ const HeatingForm = ({
     const formSchema = heatingFormSchema(t);
 
     const { user } = useAuthContext();
-    const { userData } = useFirebaseData();
+    const { userData, userCountryData } = useFirebaseData();
 
     const [valueUnit, setValueUnit] = useState<{
         userUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb";
@@ -246,6 +246,7 @@ const HeatingForm = ({
                                 inputType="number"
                                 placeholder={t("app.form.costs")}
                                 label={t("app.form.costs")}
+                                unit={userCountryData?.currencyCode ?? "EUR"}
                             />
                         )}
                     />
