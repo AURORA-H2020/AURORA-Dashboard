@@ -27,7 +27,7 @@ import {
 import { Flex, Grid } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "sonner";
 
 /**
@@ -38,10 +38,16 @@ import { toast } from "sonner";
 const UserSettings = (): JSX.Element => {
     const t = useTranslations();
     const { user, loading } = useAuthContext();
-
     const { userData } = useFirebaseData();
 
+    const [authProvider, setAuthProvider] = useState<string | null>(null);
     const [downloading, setDownloading] = useState(false);
+
+    useEffect(() => {
+        user?.getIdTokenResult().then((idToken) => {
+            setAuthProvider(idToken.signInProvider);
+        });
+    }, [user]);
 
     /**
      * Function to handle downloading user data.
@@ -181,16 +187,20 @@ const UserSettings = (): JSX.Element => {
                     </CardHeader>
                     <CardContent>
                         <Flex direction={"column"} className="gap-2">
-                            <ChangeEmailModal>
-                                <Button variant={"outline"}>
-                                    {t("app.account.changeEmail")}
-                                </Button>
-                            </ChangeEmailModal>
-                            <ChangePasswordModal>
-                                <Button variant={"outline"}>
-                                    {t("app.account.changePassword")}
-                                </Button>
-                            </ChangePasswordModal>
+                            {authProvider == "password" && (
+                                <>
+                                    <ChangeEmailModal>
+                                        <Button variant={"outline"}>
+                                            {t("app.account.changeEmail")}
+                                        </Button>
+                                    </ChangeEmailModal>
+                                    <ChangePasswordModal>
+                                        <Button variant={"outline"}>
+                                            {t("app.account.changePassword")}
+                                        </Button>
+                                    </ChangePasswordModal>
+                                </>
+                            )}
                             <Button
                                 variant={"outline"}
                                 onClick={downloadUserDataWrapper}
