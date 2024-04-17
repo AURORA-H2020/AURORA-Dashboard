@@ -1,14 +1,12 @@
-import { MetaData } from "@/models/dashboard-data";
-
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
-
-import { carbonUnit, countriesMapping } from "@/lib/constants/constants";
+import { carbonUnitWeight, countriesMapping } from "@/lib/constants/constants";
 import { getMetaDataSummary } from "@/lib/transformData";
+import { MetaData } from "@/models/dashboard-data";
 import { Heading, Text } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
 
@@ -106,7 +104,7 @@ const AutoReport = ({
                     totalEmissions: format.number(
                         reportData.consumptions.total.carbonEmissions,
                     ),
-                    unit: carbonUnit,
+                    unit: carbonUnitWeight(),
                     totalEnergy: format.number(
                         reportData.consumptions.total.energyExpended,
                     ),
@@ -136,7 +134,7 @@ const AutoReport = ({
                         reportData.consumptions.heating.energyExpended,
                     ),
 
-                    unit: carbonUnit,
+                    unit: carbonUnitWeight(),
                 })}
             </Text>
         );
