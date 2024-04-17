@@ -13,6 +13,7 @@ import {
     countriesMapping,
     genderMappings,
     householdProfiles,
+    unitSystems,
 } from "@/lib/constants/constants";
 import { labelMappings } from "@/lib/constants/consumptions";
 import { cn } from "@/lib/utilities";
@@ -62,6 +63,9 @@ const UserDataForm = ({
         isMarketingConsentAllowed: userData?.isMarketingConsentAllowed || false,
         acceptedLegalDocumentVersion:
             userData?.acceptedLegalDocumentVersion || undefined,
+        settings: {
+            unitSystem: userData?.settings?.unitSystem || "metric",
+        },
     };
 
     const form = useForm<z.infer<typeof formSchema>>({
@@ -276,6 +280,24 @@ const UserDataForm = ({
                                 )}
                                 label={t("app.profile.householdProfile")}
                                 optOutLabel={t("common.preferNotToSay")}
+                            />
+                        )}
+                    />
+
+                    <FormField
+                        control={form.control}
+                        name="settings.unitSystem"
+                        render={({ field }) => (
+                            <FormSelect
+                                field={field}
+                                options={unitSystems.map((unitSystem) => ({
+                                    value: unitSystem.key,
+                                    label: t(unitSystem.label),
+                                }))}
+                                placeholder={t(
+                                    "app.form.profile.selectUnitSystem",
+                                )}
+                                label={t("app.profile.unitSystem")}
                             />
                         )}
                     />

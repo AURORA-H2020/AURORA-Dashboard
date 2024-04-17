@@ -52,6 +52,9 @@ export const userDataFormSchema = (
         city: z.string().optional(),
         isMarketingConsentAllowed: z.boolean(),
         acceptedLegalDocumentVersion: z.number().optional(),
+        settings: z.object({
+            unitSystem: z.enum(["metric", "imperial"]),
+        }),
     });
 
 export const userChangeEmailSchema = (t: (arg: string, val?: any) => string) =>

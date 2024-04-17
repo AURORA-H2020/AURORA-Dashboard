@@ -22,6 +22,7 @@ import {
     citiesMappings,
     countriesMapping,
     externalLinks,
+    unitSystems,
 } from "@/lib/constants/constants";
 import { Flex, Grid } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
@@ -141,6 +142,20 @@ const UserSettings = (): JSX.Element => {
                                             (e) => e.ID === userData.city,
                                         )?.name,
                                     ) ?? ""}
+                                </ConsumptionTableRow>
+                                <ConsumptionTableRow
+                                    label={t("app.profile.unitSystem")}
+                                >
+                                    {t(
+                                        unitSystems.find(
+                                            (e) =>
+                                                e.key ===
+                                                userData.settings?.unitSystem,
+                                        )?.label,
+                                    ) ??
+                                        t(
+                                            "app.user.settings.unitSystem.metric",
+                                        )}
                                 </ConsumptionTableRow>
                                 <ConsumptionTableRow
                                     label={t("app.profile.userID")}
