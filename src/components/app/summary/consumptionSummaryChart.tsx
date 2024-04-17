@@ -1,7 +1,12 @@
 "use client";
 
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { consumptionMapping } from "@/lib/constants/consumptions";
-import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
+import {
+    convertUnit,
+    valueFormatterCarbon,
+    valueFormatterEnergy,
+} from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
@@ -47,6 +52,8 @@ const ConsumptionSummaryChart = ({
 }) => {
     const t = useTranslations();
     const format = useFormatter();
+
+    const { userData } = useFirebaseData();
 
     const [currentSummary, setCurrentSummary] = useState<
         CurrentSummary[] | undefined
@@ -95,29 +102,41 @@ const ConsumptionSummaryChart = ({
                             consumptionMapping.find(
                                 (e) => e.category === "heating",
                             )?.label,
-                        )]: findValueByCategory(
-                            month.categories,
-                            "heating",
-                            measure,
-                        ),
+                        )]: convertUnit(
+                            findValueByCategory(
+                                month.categories,
+                                "heating",
+                                measure,
+                            ),
+                            measure === "carbonEmission" ? "kg" : "kWh",
+                            userData?.settings?.unitSystem ?? "metric",
+                        ).quantity,
                         [t(
                             consumptionMapping.find(
                                 (e) => e.category === "electricity",
                             )?.label,
-                        )]: findValueByCategory(
-                            month.categories,
-                            "electricity",
-                            measure,
-                        ),
+                        )]: convertUnit(
+                            findValueByCategory(
+                                month.categories,
+                                "electricity",
+                                measure,
+                            ),
+                            measure === "carbonEmission" ? "kg" : "kWh",
+                            userData?.settings?.unitSystem ?? "metric",
+                        ).quantity,
                         [t(
                             consumptionMapping.find(
                                 (e) => e.category === "transportation",
                             )?.label,
-                        )]: findValueByCategory(
-                            month.categories,
-                            "transportation",
-                            measure,
-                        ),
+                        )]: convertUnit(
+                            findValueByCategory(
+                                month.categories,
+                                "transportation",
+                                measure,
+                            ),
+                            measure === "carbonEmission" ? "kg" : "kWh",
+                            userData?.settings?.unitSystem ?? "metric",
+                        ).quantity,
                     };
                     return acc;
                 },
@@ -128,7 +147,7 @@ const ConsumptionSummaryChart = ({
         } else {
             setCurrentSummary(undefined);
         }
-    }, [measure, consumptionSummary, format, t]);
+    }, [measure, consumptionSummary, format, t, userData]);
 
     return (
         <BarChart
@@ -139,7 +158,11 @@ const ConsumptionSummaryChart = ({
             colors={consumptionMapping.map((c) => c.colorPrimary)}
             valueFormatter={
                 measure === "carbonEmission"
-                    ? valueFormatterCarbon
+                    ? (value) =>
+                          valueFormatterCarbon(
+                              value,
+                              userData?.settings?.unitSystem,
+                          )
                     : valueFormatterEnergy
             }
             stack={true}

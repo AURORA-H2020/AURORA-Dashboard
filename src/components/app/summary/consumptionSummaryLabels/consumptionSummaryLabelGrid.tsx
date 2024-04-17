@@ -1,11 +1,11 @@
 "use client";
 
+import ConsumptionSummaryLabel from "@/components/app/summary/consumptionSummaryLabels/consumptionSummaryLabel";
 import { consumptionMapping } from "@/lib/constants/consumptions";
 import { cn } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { Grid } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
-import ConsumptionSummaryLabel from "./consumptionSummaryLabel";
 
 const ConsumptionSummaryLabelGrid = ({
     consumptionSummary,

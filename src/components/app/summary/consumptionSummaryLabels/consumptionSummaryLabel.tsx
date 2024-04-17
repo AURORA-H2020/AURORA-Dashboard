@@ -6,10 +6,12 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
+import { useFirebaseData } from "@/context/FirebaseContext";
 import { carbonUnit } from "@/lib/constants/constants";
 import { labelMappings } from "@/lib/constants/consumptions";
+import { useConvertUnit } from "@/lib/utilities";
 import { Flex, Grid } from "@radix-ui/themes";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
 
 const ConsumptionSummaryLabel = ({
@@ -30,16 +32,18 @@ const ConsumptionSummaryLabel = ({
     color?: string;
 }) => {
     const t = useTranslations();
-    const format = useFormatter();
+    const { userData } = useFirebaseData();
 
     const labelAttributes = labelMappings.find((e) => e.label === label);
 
     const labelColor = labelAttributes?.color ?? "#8F8E94";
     const labelText = `${(labelAttributes?.name && t(labelAttributes?.name)) || t("error.noConsumptions")} (${labelAttributes?.label || "?"})`;
-
-    const labelValue = `${format.number(value, {
-        maximumFractionDigits: 0,
-    })} ${measure === "carbonEmission" ? carbonUnit : "kWh"}`;
+    const labelValue = useConvertUnit(
+        value,
+        measure === "carbonEmission" ? "kg" : "kWh",
+        userData?.settings?.unitSystem ?? "metric",
+        measure === "carbonEmission" ? carbonUnit : "",
+    )?.toString();
 
     return (
         <Card
