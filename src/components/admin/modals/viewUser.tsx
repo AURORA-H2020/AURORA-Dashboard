@@ -3,6 +3,7 @@
 import BorderBox from "@/components/app/common/borderBox";
 import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
     Dialog,
     DialogContent,
@@ -26,6 +27,7 @@ import { cn } from "@/lib/utilities";
 import { ExtendedUser } from "@/models/extensions";
 import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
+import { Grid } from "@radix-ui/themes";
 import React, { useEffect, useMemo, useState } from "react";
 import BlacklistUserModal from "./blacklistUser";
 
@@ -81,7 +83,7 @@ const ViewUserModal = React.forwardRef(
                     {children}
                 </div>
                 <Dialog open={isModalOpen} onOpenChange={handleCloseModal}>
-                    <DialogContent className="sm:max-w-lg">
+                    <DialogContent className="sm:max-w-[1000px]">
                         <DialogHeader>
                             <DialogTitle>User: {uid}</DialogTitle>
                         </DialogHeader>
@@ -159,6 +161,61 @@ const ViewUserModal = React.forwardRef(
                                 <BorderBox className="my-4">
                                     Not enough data to display summary
                                 </BorderBox>
+                            )}
+                            {user.consumptions.length > 0 && (
+                                <>
+                                    <span className="text-xl font-bold">
+                                        Top 10 Consumptions
+                                    </span>
+                                    <Grid columns="2" gap="2">
+                                        {user.consumptions
+                                            .sort((a, b) =>
+                                                (a.carbonEmissions ?? 0) >
+                                                (b.carbonEmissions ?? 0)
+                                                    ? -1
+                                                    : 1,
+                                            )
+                                            .slice(0, 10)
+                                            .map((consumption) => (
+                                                <Card
+                                                    key={consumption.createdAt.toString()}
+                                                    className="m-2"
+                                                >
+                                                    <CardHeader className="pb-6 font-bold">
+                                                        <span>{`${consumption.category}: ${
+                                                            consumption
+                                                                .transportation
+                                                                ?.transportationType ??
+                                                            consumption
+                                                                .electricity
+                                                                ?.electricitySource ??
+                                                            consumption.heating
+                                                                ?.heatingFuel
+                                                        }`}</span>
+                                                    </CardHeader>
+                                                    <CardContent>
+                                                        <Grid columns="2">
+                                                            <div>
+                                                                Carbon
+                                                                Emissions:{" "}
+                                                                {Math.floor(
+                                                                    consumption.carbonEmissions ??
+                                                                        0,
+                                                                )}
+                                                            </div>
+                                                            <div>
+                                                                Energy Expended:{" "}
+                                                                {Math.floor(
+                                                                    consumption.energyExpended ??
+                                                                        0,
+                                                                )}
+                                                            </div>
+                                                        </Grid>
+                                                    </CardContent>
+                                                </Card>
+                                            ))}
+                                    </Grid>
+                                </>
                             )}
                         </ScrollArea>
                         <DialogFooter>
