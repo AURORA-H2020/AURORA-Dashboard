@@ -94,10 +94,6 @@ const RootLayout = async ({
                 />
                 <meta name="msapplication-TileColor" content="#da532c" />
                 <meta name="theme-color" content="#00c566" />
-                {/* <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
-                /> */}
             </head>
             <body className={cn(inter.className, "")}>
                 <Providers
