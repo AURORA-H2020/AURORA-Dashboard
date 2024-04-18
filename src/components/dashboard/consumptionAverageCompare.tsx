@@ -22,7 +22,7 @@ const ConsumptionAverageCompare = ({
     categories: ConsumptionCategory[];
     countries: string[];
     title: string;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
 
     const [selectedEnergyMode, setSelectedEnergyMode] =

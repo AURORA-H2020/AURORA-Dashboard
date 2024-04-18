@@ -27,7 +27,7 @@ import { DateRange } from "react-day-picker";
  * @param {GlobalSummary | undefined} globalSummaryData - The global summary data.
  * @param {ConsumptionCategory[]} categories - The consumption categories.
  * @param {string} title - The title of the chart.
- * @return {JSX.Element} The rendered consumption timeline chart.
+ * @return {React.ReactNode} The rendered consumption timeline chart.
  */
 const ConsumptionTimelineChart = ({
     globalSummaryData,
@@ -37,7 +37,7 @@ const ConsumptionTimelineChart = ({
     globalSummaryData: GlobalSummary | undefined;
     categories: ConsumptionCategory[];
     title: string;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
     const locale = useLocale();
 

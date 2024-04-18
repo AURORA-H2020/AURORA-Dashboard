@@ -12,7 +12,13 @@ import {
 
 const firestore = getFirestore(firebaseApp);
 
-function removeInvalidValues(userData: FirebaseUser) {
+/**
+ * Removes invalid values from the given userData object based on the specified keys.
+ *
+ * @param {FirebaseUser} userData - The userData object to remove invalid values from.
+ * @return {FirebaseUser} The userData object with invalid values removed.
+ */
+function removeInvalidValues(userData: FirebaseUser): FirebaseUser {
     const keysToCheck = [
         "yearOfBirth",
         "gender",
@@ -38,7 +44,18 @@ function removeInvalidValues(userData: FirebaseUser) {
     return userData;
 }
 
-export const addEditUserData = async (userData: FirebaseUser, user: User) => {
+/**
+ * Adds or edits user data in the Firebase Firestore database.
+ *
+ * @param {FirebaseUser} userData - The user data to add or edit.
+ * @param {User} user - The authenticated user.
+ * @return {Promise<{ success: boolean }>} - A promise that resolves to an object indicating the success of the operation.
+ * @throws {Error} - If the user is not logged in.
+ */
+export const addEditUserData = async (
+    userData: FirebaseUser,
+    user: User,
+): Promise<{ success: boolean }> => {
     let success = false;
     userData = removeInvalidValues(userData);
     if (user) {

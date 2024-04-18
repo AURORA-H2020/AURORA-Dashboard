@@ -22,6 +22,16 @@ import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+/**
+ * Renders an electricity form component.
+ *
+ * @param {Object} props - The component props.
+ * @param {ConsumptionWithID | undefined} props.consumption - The consumption object.
+ * @param {boolean | undefined} props.isDuplication - Indicates if the consumption is a duplication.
+ * @param {((success: boolean) => void) | undefined} props.onConsumptionAdded - Callback function to be called when consumption is added.
+ * @param {string | undefined} props.className - The class name of the component.
+ * @return {React.ReactElement} The rendered electricity form component.
+ */
 const ElectricityForm = ({
     consumption,
     isDuplication,
@@ -32,7 +42,7 @@ const ElectricityForm = ({
     isDuplication?: boolean;
     onConsumptionAdded?: (success: boolean) => void;
     className?: string;
-}) => {
+}): React.ReactElement => {
     const t = useTranslations();
     const formSchema = electricityFormSchema(t);
 
@@ -71,7 +81,7 @@ const ElectricityForm = ({
         }
     }, [formElectricitySource, form]);
 
-    if (!user) return null;
+    if (!user) return <></>;
 
     const onSubmit = async (data: Consumption) => {
         const { success } = await addEditConsumption(

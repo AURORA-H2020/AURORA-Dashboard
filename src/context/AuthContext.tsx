@@ -19,11 +19,11 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
  * AuthContextProvider component to provide authentication context to child components.
  *
  * @param {AuthContextProviderProps} children - The child components to provide authentication context.
- * @return {JSX.Element} The authentication context provided to child components.
+ * @return {React.ReactNode} The authentication context provided to child components.
  */
 export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
     children,
-}) => {
+}): React.ReactNode => {
     // Set up state to track the authenticated user and loading status
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);

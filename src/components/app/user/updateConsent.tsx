@@ -14,13 +14,21 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import DeleteAccountModal from "./modals/deleteAccountModal";
 
+/**
+ * Renders the UpdateConsent component.
+ *
+ * @param {Object} props - The component props.
+ * @param {number} props.latestLegalDocumentsVersion - The latest version of the legal documents.
+ * @param {User} props.user - The user object.
+ * @return {React.ReactElement} The rendered UpdateConsent component.
+ */
 const UpdateConsent = ({
     latestLegalDocumentsVersion,
     user,
 }: {
     latestLegalDocumentsVersion: number;
     user: User;
-}) => {
+}): React.ReactElement => {
     const t = useTranslations();
     return (
         <Flex justify={"center"}>

@@ -12,7 +12,12 @@ import { usePathname, useRouter } from "@/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
 
-const LocaleSwitcher = () => {
+/**
+ * Renders a locale switcher component that allows the user to select a different locale.
+ *
+ * @return {React.ReactElement} The rendered locale switcher component.
+ */
+const LocaleSwitcher = (): React.ReactElement => {
     const t = useTranslations();
     const locale = useLocale();
 

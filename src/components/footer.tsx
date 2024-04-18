@@ -13,9 +13,9 @@ import { externalLinks } from "@/lib/constants/constants";
 /**
  * Renders the footer component.
  *
- * @return {JSX.Element} The rendered footer component.
+ * @return {React.ReactNode} The rendered footer component.
  */
-const Footer = (): JSX.Element => {
+const Footer = (): React.ReactNode => {
     const t = useTranslations();
     return (
         <Card className="items-center">

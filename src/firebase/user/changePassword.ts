@@ -1,11 +1,20 @@
 import { reauthenticateUser } from "@/firebase/auth/reauthenticate";
 import { User, updatePassword } from "firebase/auth";
 
+/**
+ * Updates the user's password after reauthentication with current password.
+ *
+ * @param {User | null} user - The user object or null if user is not logged in.
+ * @param {string} currentPassword - The current password of the user.
+ * @param {string} newPassword - The new password to update to.
+ * @return {Promise<{ success: boolean }>} - A promise that resolves to an object indicating the success of the operation.
+ * @throws {Error} - If the user is not logged in.
+ */
 export const changePassword = async (
     user: User | null,
     currentPassword: string,
     newPassword: string,
-) => {
+): Promise<{ success: boolean }> => {
     let success = false;
 
     if (user) {

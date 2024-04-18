@@ -19,9 +19,13 @@ import {
  * @param {Object} dateRange - the date range object containing from and to dates
  * @param {Array} validYears - the array of valid years for selection
  * @param {Function} onChange - the callback function triggered when the date range is changed
- * @return {JSX.Element} the MonthPicker component
+ * @return {React.ReactElement} the MonthPicker component
  */
-const MonthPicker = ({ dateRange, validYears, onChange }) => {
+const MonthPicker = ({
+    dateRange,
+    validYears,
+    onChange,
+}): React.ReactElement => {
     const [startMonth, setStartMonth] = useState(
         monthNames[dateRange.from.getMonth()],
     );

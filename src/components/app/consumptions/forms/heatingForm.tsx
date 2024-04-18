@@ -22,6 +22,15 @@ import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+/**
+ * Renders a form for entering heating consumption data.
+ *
+ * @param {ConsumptionWithID} consumption - The consumption data with ID.
+ * @param {boolean} isDuplication - Flag indicating duplication.
+ * @param {(success: boolean) => void} onConsumptionAdded - Callback function for when consumption is added.
+ * @param {string} className - Additional CSS classes for styling.
+ * @return {React.ReactElement} The rendered HeatingForm component.
+ */
 const HeatingForm = ({
     consumption,
     isDuplication,
@@ -32,7 +41,7 @@ const HeatingForm = ({
     isDuplication?: boolean;
     onConsumptionAdded?: (success: boolean) => void;
     className?: string;
-}) => {
+}): React.ReactElement => {
     const t = useTranslations();
     const formSchema = heatingFormSchema(t);
 
@@ -94,7 +103,7 @@ const HeatingForm = ({
         }
     }, [formHeatingFuel, form]);
 
-    if (!user) return null;
+    if (!user) return <></>;
 
     const onSubmit = async (data: Consumption) => {
         const { success } = await addEditConsumption(

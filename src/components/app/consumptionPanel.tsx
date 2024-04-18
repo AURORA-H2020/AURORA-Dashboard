@@ -10,7 +10,17 @@ import { cn } from "@/lib/utilities";
 import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 
-const ConsumptionPanel = ({ className }: { className?: string }) => {
+/**
+ * Renders a panel for managing consumptions and recurring consumptions.
+ *
+ * @param {string} className - Optional class name for styling the panel.
+ * @return {React.ReactElement} The rendered panel.
+ */
+const ConsumptionPanel = ({
+    className,
+}: {
+    className?: string;
+}): React.ReactElement => {
     const t = useTranslations();
 
     return (

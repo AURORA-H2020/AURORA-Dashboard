@@ -8,9 +8,9 @@ import { useEffect, useState } from "react";
 /**
  * Renders a theme toggle button.
  *
- * @return {JSX.Element} The theme toggle button.
+ * @return {React.ReactElement} The theme toggle button.
  */
-const ThemeToggle = (): JSX.Element => {
+const ThemeToggle = (): React.ReactElement => {
     const [mounted, setMounted] = useState(false);
     const { theme, setTheme } = useTheme();
 

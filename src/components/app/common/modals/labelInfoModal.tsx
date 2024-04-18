@@ -12,7 +12,18 @@ import { labelMappings } from "@/lib/constants/consumptions";
 import { Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 
-const LabelInfoModal = ({ children }: { children: React.ReactNode }) => {
+/**
+ * Renders a modal component that displays information about labels.
+ *
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components to be rendered inside the modal trigger.
+ * @return {React.ReactNode} The rendered modal component.
+ */
+const LabelInfoModal = ({
+    children,
+}: {
+    children: React.ReactNode;
+}): React.ReactNode => {
     const t = useTranslations();
 
     return (

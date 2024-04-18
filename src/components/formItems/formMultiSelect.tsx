@@ -10,6 +10,17 @@ import { cn } from "@/lib/utilities";
 import { useEffect, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
 
+/**
+ * Renders a form component for selecting multiple options.
+ *
+ * @param {ControllerRenderProps<any, any>} field - The field object from react-hook-form.
+ * @param {Option[]} options - The available options for selection.
+ * @param {string} placeholder - The placeholder text for the input.
+ * @param {string} [label] - The label text for the form item.
+ * @param {string} [description] - The description text for the form item.
+ * @param {string} [className] - The additional class name for the form item.
+ * @return {React.ReactNode} The rendered form component.
+ */
 const FormMultiSelect = ({
     field,
     options,
@@ -24,7 +35,7 @@ const FormMultiSelect = ({
     label?: string;
     description?: string;
     className?: string;
-}) => {
+}): React.ReactNode => {
     const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
 
     useEffect(() => {

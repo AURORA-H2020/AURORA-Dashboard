@@ -3,7 +3,15 @@ import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 
 const auth = getAuth(firebaseApp);
 
-export async function resetPassword(email: string) {
+/**
+ * Resets the password for a user with the provided email.
+ *
+ * @param {string} email - The email of the user requesting the password reset.
+ * @return {Promise<{ success: boolean }>} Object indicating the success of the password reset operation.
+ */
+export async function resetPassword(
+    email: string,
+): Promise<{ success: boolean }> {
     let success = false;
 
     await sendPasswordResetEmail(auth, email)

@@ -39,14 +39,14 @@ import AddEditConsumptionModal from "./modals/addEditConsumptionModal";
  * elements such as modals for viewing, editing, and deleting.
  *
  * @param {Consumption} consumption - The consumption data to display.
- * @return {JSX.Element} A JSX element that includes the consumption
+ * @return {React.ReactNode} A JSX element that includes the consumption
  * card with modals for detailed view and deletion confirmation.
  */
 const ConsumptionPreview = ({
     consumption,
 }: {
     consumption: ConsumptionWithID;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
 
     const { user } = useAuthContext();

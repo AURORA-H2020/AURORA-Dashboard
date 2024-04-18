@@ -28,10 +28,12 @@ type ConsumptionTableRowProps =
  *
  * @param {ConsumptionTableRowProps} props - Object with
  * children elements, merge flag, and optional label.
- * @return {JSX.Element} A table row element for consumption
+ * @return {React.ReactNode} A table row element for consumption
  * data.
  */
-const ConsumptionTableRow = (props: ConsumptionTableRowProps): JSX.Element => {
+const ConsumptionTableRow = (
+    props: ConsumptionTableRowProps,
+): React.ReactNode => {
     const { children, merged, className } = props;
     const label = merged ? null : props.label; // label is ignored if merged is true
 

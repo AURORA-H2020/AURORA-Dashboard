@@ -10,6 +10,15 @@ import { cn } from "@/lib/utilities";
 import { useEffect, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
 
+/**
+ * Renders a form time picker component.
+ *
+ * @param field The field object for the form.
+ * @param label The label text for the form field.
+ * @param picker The type of time picker.
+ * @param className The additional CSS class name for the component.
+ * @returns The rendered form time picker component.
+ */
 const FormTimePicker = ({
     field,
     label,
@@ -20,9 +29,11 @@ const FormTimePicker = ({
     label?: string;
     picker: TimePickerType;
     className?: string;
-}) => {
+}): React.ReactNode => {
+    // The state for the selected date
     const [date, setDate] = useState<Date | undefined>(new Date());
 
+    // When the component mounts, set the initial date
     useEffect(() => {
         if (!field.value) return;
 
@@ -35,6 +46,11 @@ const FormTimePicker = ({
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
+    /**
+     * Handles time changes.
+     *
+     * @param date The selected date.
+     */
     const handleOnChange = (date: Date | undefined) => {
         setDate(date);
         let timeValue: number | undefined = undefined;

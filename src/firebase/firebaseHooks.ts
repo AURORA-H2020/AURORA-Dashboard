@@ -29,7 +29,17 @@ import { FirebaseConstants } from "./firebase-constants";
 
 const firestore = getFirestore(firebaseApp);
 
-export const useFetchUserData = (user: User | null, loading: boolean) => {
+/**
+ * Custom hook that fetches user data from Firestore based on the provided user object.
+ *
+ * @param {User | null} user - The user object representing the user whose data is being fetched.
+ * @param {boolean} loading - A boolean indicating whether the data is currently being loaded.
+ * @return {{ userData: FirebaseUser | null, isLoadingUserData: boolean }} An object containing the fetched user data and a boolean indicating whether the data is currently being loaded.
+ */
+export const useFetchUserData = (
+    user: User | null,
+    loading: boolean,
+): { userData: FirebaseUser | null; isLoadingUserData: boolean } => {
     const [userData, setUserData] = useState<FirebaseUser | null>(null);
     const [isLoadingUserData, setIsLoadingUserData] = useState<boolean>(true);
 
@@ -57,7 +67,15 @@ export const useFetchUserData = (user: User | null, loading: boolean) => {
     return { userData, isLoadingUserData };
 };
 
-export const useUserRoles = (userId: string | undefined) => {
+/**
+ * Custom hook that fetches user roles from Firestore based on the provided userId.
+ *
+ * @param {string | undefined} userId - The userId for which user roles are being fetched.
+ * @return {{ isAdmin: boolean, isAdminLoading: boolean }} An object containing the user's admin status and loading state.
+ */
+export const useUserRoles = (
+    userId: string | undefined,
+): { isAdmin: boolean; isAdminLoading: boolean } => {
     const [isAdmin, setIsAdmin] = useState<boolean>(false);
     const [isAdminLoading, setIsAdminLoading] = useState<boolean>(true);
 
@@ -85,6 +103,12 @@ export const useUserRoles = (userId: string | undefined) => {
     return { isAdmin, isAdminLoading };
 };
 
+/**
+ * Fetches the blacklisted users from the Firestore database based on the provided user.
+ *
+ * @param {User | null} user - The currently logged-in user.
+ * @return {Object} - An object containing the blacklisted users.
+ */
 export const useFetchBlacklistedUsers = (user: User | null) => {
     const [blacklistedUsers, setBlacklistedUsers] =
         useState<QuerySnapshot<unknown, DocumentData>>();
@@ -112,6 +136,17 @@ export const useFetchBlacklistedUsers = (user: User | null) => {
     return { blacklistedUsers };
 };
 
+/**
+ * Fetches user consumptions from Firestore based on the provided parameters.
+ *
+ * @param {Object} options - The options for fetching user consumptions.
+ * @param {User | null} options.user - The user object.
+ * @param {number} [options.pageSize=5] - The number of consumptions to fetch per page.
+ * @param {DocumentData | undefined} [options.lastDoc=undefined] - The last document of the previous page.
+ * @param {DocumentData | undefined} [options.firstDoc=undefined] - The first document of the next page.
+ * @param {"createdAt" | "value"} [options.orderByValue="createdAt"] - The field to order the consumptions by.
+ * @return {QuerySnapshot<unknown, DocumentData> | undefined} The user consumptions query snapshot.
+ */
 export const useFetchUserConsumptions = ({
     user,
     pageSize = 5,
@@ -124,7 +159,7 @@ export const useFetchUserConsumptions = ({
     lastDoc?: DocumentData | undefined;
     firstDoc?: DocumentData | undefined;
     orderByValue?: "createdAt" | "value";
-}) => {
+}): QuerySnapshot<unknown, DocumentData> | undefined => {
     const [userConsumptions, setUserConsumptions] =
         useState<QuerySnapshot<unknown, DocumentData>>();
 
@@ -172,6 +207,16 @@ export const useFetchUserConsumptions = ({
     return userConsumptions;
 };
 
+/**
+ * Fetches user recurring consumptions from Firestore based on the provided parameters.
+ *
+ * @param {User | null} user - The user object.
+ * @param {number} [pageSize=5] - The number of consumptions to fetch per page.
+ * @param {DocumentData | undefined} [lastDoc=undefined] - The last document of the previous page.
+ * @param {DocumentData | undefined} [firstDoc=undefined] - The first document of the next page.
+ * @param {"createdAt" | "frequency"} [orderByValue="createdAt"] - The field to order the consumptions by.
+ * @return {QuerySnapshot<unknown, DocumentData> | undefined} The user recurring consumptions query snapshot.
+ */
 export const useFetchUserRecurringConsumptions = ({
     user,
     pageSize = 5,
@@ -184,7 +229,7 @@ export const useFetchUserRecurringConsumptions = ({
     lastDoc?: DocumentData | undefined;
     firstDoc?: DocumentData | undefined;
     orderByValue?: "createdAt" | "frequency";
-}) => {
+}): QuerySnapshot<unknown, DocumentData> | undefined => {
     const [userRecurringConsumptions, setUserRecurringConsumptions] =
         useState<QuerySnapshot<unknown, DocumentData>>();
 
@@ -234,7 +279,15 @@ export const useFetchUserRecurringConsumptions = ({
     return userRecurringConsumptions;
 };
 
-export const useFetchUserConsumptionSummaries = (user: User | null) => {
+/**
+ * Fetches the consumption summaries for a given user from Firestore.
+ *
+ * @param {User | null} user - The user object representing the user whose consumption summaries are being fetched.
+ * @return {ConsumptionSummary[]} An array of consumption summaries for the user.
+ */
+export const useFetchUserConsumptionSummaries = (
+    user: User | null,
+): ConsumptionSummary[] => {
     const [userConsumptionSummaries, setUserConsumptionSummaries] = useState<
         ConsumptionSummary[]
     >([]);
@@ -263,10 +316,17 @@ export const useFetchUserConsumptionSummaries = (user: User | null) => {
     return userConsumptionSummaries;
 };
 
+/**
+ * Fetches the user's country data from Firestore based on the provided user object and user data.
+ *
+ * @param {User | null} user - The user object representing the user whose data is being fetched.
+ * @param {FirebaseUser | null} userData - The user data object containing the country information.
+ * @return {{ userCountryData: Country | null, isLoadingUserCountryData: boolean }} An object containing the fetched user country data and a boolean indicating whether the data is currently being loaded.
+ */
 export const useFetchUserCountryData = (
     user: User | null,
     userData: FirebaseUser | null,
-) => {
+): { userCountryData: Country | null; isLoadingUserCountryData: boolean } => {
     const [userCountryData, setUserCountryData] = useState<Country | null>(
         null,
     );
@@ -299,6 +359,22 @@ export const useFetchUserCountryData = (
     return { userCountryData, isLoadingUserCountryData };
 };
 
+/**
+ * Returns an object containing functions and data related to paginated consumptions for a given user.
+ *
+ * @param {Object} options - The options for paginated consumptions.
+ * @param {User | null} options.user - The user object.
+ * @param {number} [options.pageSize=5] - The number of consumptions to fetch per page.
+ * @return {Object} An object containing the following properties:
+ *  - fetchNextPage: A function to fetch the next page of consumptions.
+ *  - fetchPreviousPage: A function to fetch the previous page of consumptions.
+ *  - consumptionPage: An array of consumption objects for the current page.
+ *  - maxPage: The maximum number of pages of consumptions.
+ *  - currentPage: The current page number.
+ *  - onOrderChange: A function to change the order of consumptions.
+ *  - orderBy: The field to order the consumptions by.
+ *  - totalConsumptions: The total number of consumptions for the user.
+ */
 export const usePaginatedConsumptions = ({
     user,
     pageSize = 5,

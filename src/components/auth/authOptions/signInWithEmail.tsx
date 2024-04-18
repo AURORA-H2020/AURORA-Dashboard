@@ -12,11 +12,18 @@ import { toast } from "sonner";
 import * as z from "zod";
 
 /**
- * Renders a sign-in form and handles sign-in through email, Google,
- * or Apple. On successful sign-in, displays a success toast and
+ * Renders a sign-in form and handles sign-in through email. On successful sign-in, displays a success toast and
  * redirects to the account page.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} [props.className] - The CSS class name for the component.
+ * @return {React.ReactElement} The rendered sign-in form.
  */
-const SignInWithEmail = ({ className }: { className?: string }) => {
+const SignInWithEmail = ({
+    className,
+}: {
+    className?: string;
+}): React.ReactElement => {
     const t = useTranslations();
 
     const formSchema = loginSchema(t);

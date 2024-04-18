@@ -10,13 +10,13 @@ import React from "react";
  * Renders a summary of consumption card data based on the provided metaData.
  *
  * @param {{ metaData: MetaData | undefined }} - Object containing metaData
- * @return {JSX.Element} - The rendered consumption card summary
+ * @return {React.ReactNode} - The rendered consumption card summary
  */
 const ConsumptionCardSummary = ({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
     const format = useFormatter();
 

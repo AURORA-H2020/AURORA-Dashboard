@@ -1,3 +1,4 @@
+import Providers from "@/app/[locale]/providers";
 import Footer from "@/components/footer";
 import NavigationBar from "@/components/navigation/navigationBar";
 import { locales } from "@/config";
@@ -8,13 +9,11 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
-import { ReactNode } from "react";
-import Providers from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
 type Props = {
-    children: ReactNode;
+    children: React.ReactNode;
     params: { locale: string };
 };
 
@@ -35,7 +34,10 @@ export const generateStaticParams = async () => {
  */
 export const generateMetadata = async ({
     params: { locale },
-}: Omit<Props, "children">) => {
+}: Omit<Props, "children">): Promise<{
+    title: string;
+    description: string;
+}> => {
     const t = await getTranslations({ locale });
 
     return {
@@ -49,9 +51,12 @@ export const generateMetadata = async ({
  *
  * @param {Props} children - the child components to be rendered
  * @param {string} locale - the locale parameter
- * @return {JSX.Element} the rendered HTML layout
+ * @return {React.ReactNode} the rendered HTML layout
  */
-const RootLayout = async ({ children, params: { locale } }: Props) => {
+const RootLayout = async ({
+    children,
+    params: { locale },
+}: Props): Promise<React.ReactNode> => {
     unstable_setRequestLocale(locale);
 
     let messages;
@@ -89,10 +94,10 @@ const RootLayout = async ({ children, params: { locale } }: Props) => {
                 />
                 <meta name="msapplication-TileColor" content="#da532c" />
                 <meta name="theme-color" content="#00c566" />
-                <meta
+                {/* <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
-                />
+                /> */}
             </head>
             <body className={cn(inter.className, "")}>
                 <Providers

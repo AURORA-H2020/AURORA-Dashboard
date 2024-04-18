@@ -20,6 +20,14 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
 
+/**
+ * Renders the DeleteAccountModal component.
+ *
+ * @param {React.ReactNode} children - The content to be displayed inside the modal.
+ * @param {string} [title] - The title of the modal.
+ * @param {string} [description] - The description of the modal.
+ * @return {React.ReactNode} The rendered DeleteAccountModal component.
+ */
 const DeleteAccountModal = ({
     children,
     title,
@@ -28,7 +36,7 @@ const DeleteAccountModal = ({
     children: React.ReactNode;
     title?: string;
     description?: string;
-}) => {
+}): React.ReactNode => {
     const t = useTranslations();
     const { user } = useAuthContext();
 

@@ -16,7 +16,7 @@ import { useFormatter } from "next-intl";
  * @param {ConsumptionCategory[]} props.categories - The array of consumption categories.
  * @param {string} props.title - The title string.
  * @param {ElementType<any>?} props.icon - The optional icon element type.
- * @returns {JSX.Element} - The JSX element representing the detailed card.
+ * @returns {React.ReactNode} - The JSX element representing the detailed card.
  */
 const DetailedCard = ({
     metaData,
@@ -32,7 +32,7 @@ const DetailedCard = ({
     title: string;
     icon?: ElementType<any>;
     className?: string;
-}): JSX.Element => {
+}): React.ReactNode => {
     const format = useFormatter();
 
     let metricValue = 0;

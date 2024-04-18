@@ -8,7 +8,12 @@ import { useEffect } from "react";
 // is requested that doesn't match the middleware and
 // therefore doesn't have a locale associated with it.
 
-const NotFound = () => {
+/**
+ * A function component for rendering the default Next.js 404 page with a redirect timer.
+ *
+ * @return {React.ReactElement} The JSX element representing the 404 page.
+ */
+const NotFound = (): React.ReactElement => {
     const router = useRouter();
 
     useEffect(() => {

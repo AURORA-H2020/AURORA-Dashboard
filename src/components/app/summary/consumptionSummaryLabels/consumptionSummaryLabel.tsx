@@ -12,8 +12,19 @@ import { labelMappings } from "@/lib/constants/consumptions";
 import { useConvertUnit } from "@/lib/utilities";
 import { Flex, Grid } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
-import { ReactElement } from "react";
 
+/**
+ * Renders a consumption summary label with category, label, value, measure, year, icon, and color.
+ *
+ * @param {string} category - The category of the label.
+ * @param {string} [label] - The label text.
+ * @param {number} value - The numerical value.
+ * @param {"carbonEmission" | "energyExpended"} measure - The type of measure.
+ * @param {number} year - The year associated with the label.
+ * @param {React.ReactElement} [icon] - The icon element.
+ * @param {string} [color="foreground"] - The color of the label.
+ * @return {React.ReactElement} The rendered consumption summary label component.
+ */
 const ConsumptionSummaryLabel = ({
     category,
     label,
@@ -28,9 +39,9 @@ const ConsumptionSummaryLabel = ({
     value: number;
     measure: "carbonEmission" | "energyExpended";
     year: number;
-    icon?: ReactElement;
+    icon?: React.ReactElement;
     color?: string;
-}) => {
+}): React.ReactElement => {
     const t = useTranslations();
     const { userData } = useFirebaseData();
 

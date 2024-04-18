@@ -8,7 +8,7 @@ import { getFunctions, httpsCallable } from "firebase/functions";
  *
  * @return {Promise<void>} A promise that resolves after the download process is completed.
  */
-export const downloadUserData = async () => {
+export const downloadUserData = async (): Promise<void> => {
     try {
         const functions = getFunctions(
             firebaseApp,

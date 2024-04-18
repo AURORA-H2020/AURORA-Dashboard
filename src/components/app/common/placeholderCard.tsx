@@ -13,8 +13,8 @@ const PlaceholderCard = ({
 }: {
     children: React.ReactNode;
     className?: string;
-    icon?: JSX.Element;
-}): JSX.Element => {
+    icon?: React.ReactElement;
+}): React.ReactNode => {
     const size = 50;
 
     return (

@@ -16,6 +16,12 @@ import { MoreHorizontal } from "lucide-react";
 import ViewUserModal from "./modals/viewUser";
 import { UserRow } from "./usersTable";
 
+/**
+ * Generates an array of column definitions for a table.
+ *
+ * @param {Object} userData - An object containing user data.
+ * @return {Array<ColumnDef<UserRow>>} An array of column definitions.
+ */
 export const columns = (userData): ColumnDef<UserRow>[] => {
     return [
         {

@@ -34,14 +34,14 @@ import RecurringConsumptionView from "./recurringConsumptionView";
  * elements such as modals for viewing, editing, and deleting.
  *
  * @param {Consumption} consumption - The consumption data to display.
- * @return {JSX.Element} A JSX element that includes the consumption
+ * @return {React.ReactNode} A JSX element that includes the consumption
  * card with modals for detailed view and deletion confirmation.
  */
 const RecurringConsumptionPreview = ({
     recurringConsumption,
 }: {
     recurringConsumption: RecurringConsumptionWithID;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
 
     const { user } = useAuthContext();

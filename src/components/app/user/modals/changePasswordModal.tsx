@@ -9,7 +9,18 @@ import {
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-const ChangePasswordModal = ({ children }: { children: React.ReactNode }) => {
+/**
+ * Renders a modal component for changing the user's password.
+ *
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The content to be displayed as the trigger for the modal.
+ * @return {React.ReactNode} The rendered modal component.
+ */
+const ChangePasswordModal = ({
+    children,
+}: {
+    children: React.ReactNode;
+}): React.ReactNode => {
     const t = useTranslations();
     const [open, setOpen] = useState(false);
 

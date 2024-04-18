@@ -1,7 +1,7 @@
-import { getApp, getApps, initializeApp } from "firebase/app";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { FirebaseApp, getApp, getApps, initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
-import { FirebaseConstants } from "./firebase-constants";
 import { connectStorageEmulator, getStorage } from "firebase/storage";
 
 // Firebase configuration
@@ -15,7 +15,7 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-let firebaseApp;
+let firebaseApp: FirebaseApp;
 
 if (!getApps().length) {
     firebaseApp = initializeApp(firebaseConfig);

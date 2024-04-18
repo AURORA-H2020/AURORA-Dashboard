@@ -23,7 +23,7 @@ import { useEffect, useState } from "react";
  * @param {MetaData | undefined} props.metaData - The metadata object, which may be undefined.
  * @param {string[]} props.countries - The list of countries.
  * @param {string} props.title - The title of the component.
- * @return {JSX.Element} The rendered component.
+ * @return {React.ReactNode} The rendered component.
  */
 
 interface ExtendedDemographic {
@@ -37,7 +37,7 @@ const GenderByCountryChart = ({
 }: {
     metaData: MetaData | undefined;
     title: string;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
 
     const [genderData, setGenderData] = useState<

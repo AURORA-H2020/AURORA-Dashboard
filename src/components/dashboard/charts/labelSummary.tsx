@@ -43,7 +43,7 @@ interface LabelChartData extends LabelEntries {
  * @param {ConsumptionCategory[]} categories - the consumption categories
  * @param {string} title - the title of the label summary
  * @param {string} description - the description of the label summary
- * @return {JSX.Element} The rendered label summary component
+ * @return {React.ReactNode} The rendered label summary component
  */
 const LabelSummary = ({
     globalSummaryData,
@@ -53,7 +53,7 @@ const LabelSummary = ({
     globalSummaryData: GlobalSummary | undefined;
     categories: ConsumptionCategory[];
     title: string;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
 
     const [transformedData, setTransformedData] = useState<

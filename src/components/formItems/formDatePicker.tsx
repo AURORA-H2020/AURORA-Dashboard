@@ -19,6 +19,23 @@ import { CalendarIcon, XIcon } from "lucide-react";
 import { useFormatter } from "next-intl";
 import { ControllerRenderProps } from "react-hook-form";
 
+/**
+ * FormDatePicker component.
+ *
+ * This component is a DatePicker input field that can be used in a Form.
+ * It renders a Popover with a Calendar inside to select a date.
+ * Optionally, it can also render a TimePicker below the Calendar.
+ *
+ * @param field - The ControllerRenderProps returned from `useController`
+ * @param placeholder - The placeholder string to display when no date is selected
+ * @param label - The label to display above the input field
+ * @param description - The description to display below the input field
+ * @param showTimePicker - Whether or not to show a TimePicker below the Calendar (defaults to false)
+ * @param showClearButton - Whether or not to show a clear button to clear the selected date (defaults to false)
+ * @param minDate - The minimum selectable date (defaults to 1990-01-01)
+ * @param maxDate - The maximum selectable date (defaults to 2030-01-01)
+ * @param className - Additional CSS class names to apply to the component
+ */
 const FormDatePicker = ({
     field,
     placeholder,

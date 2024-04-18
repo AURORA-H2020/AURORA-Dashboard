@@ -9,13 +9,13 @@ import { useTranslations } from "next-intl";
  * @param {Object} props - The component props.
  * @param {MetaData | undefined} props.metaData - The metadata object containing gender data.
  * @param {string[]} props.countries - The list of countries to filter the metadata by.
- * @return {JSX.Element} The rendered GenderCardSummary component.
+ * @return {React.ReactNode} The rendered GenderCardSummary component.
  */
 const CountryUsersPieChart = ({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
 
     const dataSet = metaData?.map((country) => {

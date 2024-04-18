@@ -8,7 +8,12 @@ import { useTranslations } from "next-intl";
 import UserDataForm from "./forms/userDataForm";
 import DeleteAccountModal from "./modals/deleteAccountModal";
 
-const InitialRegistration = () => {
+/**
+ * Renders the initial registration component.
+ *
+ * @return {React.ReactElement} The rendered initial registration component.
+ */
+const InitialRegistration = (): React.ReactElement => {
     const t = useTranslations();
 
     const { userData } = useFirebaseData();

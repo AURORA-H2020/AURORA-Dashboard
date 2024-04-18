@@ -16,6 +16,19 @@ import { cn } from "@/lib/utilities";
 import { useId, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
 
+/**
+ * Renders a form select component with options and optional opt-out label.
+ *
+ * @param {ControllerRenderProps<any, any>} field - The field object provided by react-hook-form's Controller component.
+ * @param {Array<{ value: string; label: string }>} options - An array of objects with value and label properties, used to populate the options of the select box.
+ * @param {string} placeholder - The placeholder text to display when no option is selected.
+ * @param {string} [label] - The label text to display above the select box.
+ * @param {string} [description] - The description text to display below the select box.
+ * @param {boolean} [disabled=false] - Whether the select box should be disabled.
+ * @param {string} [optOutLabel] - The text to display in the checkbox that, when checked, sets the selected value to undefined and disables the select box.
+ * @param {string} [className] - The class name to apply to the form item container div.
+ * @return {React.ReactNode} The rendered form select component.
+ */
 const FormSelect = ({
     field,
     options,
@@ -42,7 +55,13 @@ const FormSelect = ({
 
     const labelId = useId();
 
-    const handleSelectChange = (value: string) => {
+    /**
+     * Handles the change event of the select component.
+     *
+     * @param {string} value - The selected value from the select component.
+     * @return {void} This function does not return anything.
+     */
+    const handleSelectChange = (value: string): void => {
         if (options.map((option) => option.value).includes(value)) {
             setSelected(value);
             field.onChange(value);
@@ -52,7 +71,13 @@ const FormSelect = ({
         }
     };
 
-    const handleCheckChange = (checked: boolean) => {
+    /**
+     * Handles the change event of the check component.
+     *
+     * @param {boolean} checked - The state of the check.
+     * @return {void} This function does not return anything.
+     */
+    const handleCheckChange = (checked: boolean): void => {
         if (checked) {
             setSelected("");
             field.onChange(undefined);
@@ -87,11 +112,7 @@ const FormSelect = ({
                         disabled={disabled}
                         onCheckedChange={handleCheckChange}
                     />
-                    <label
-                        htmlFor={labelId}
-                    >
-                        {optOutLabel}
-                    </label>
+                    <label htmlFor={labelId}>{optOutLabel}</label>
                 </div>
             )}
             {description && <FormDescription>{description}</FormDescription>}

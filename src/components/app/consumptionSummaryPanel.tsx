@@ -23,7 +23,17 @@ import PlaceholderCard from "./common/placeholderCard";
 import ConsumptionSummaryChart from "./summary/consumptionSummaryChart";
 import ConsumptionSummaryLabelGrid from "./summary/consumptionSummaryLabels/consumptionSummaryLabelGrid";
 
-const ConsumptionSummaryPanel = ({ className }: { className?: string }) => {
+/**
+ * Renders a consumption summary panel with a chart, labels, and selectors for measure and year.
+ *
+ * @param {string} className - The optional CSS class name for the panel.
+ * @return {React.ReactElement} The rendered consumption summary panel component.
+ */
+const ConsumptionSummaryPanel = ({
+    className,
+}: {
+    className?: string;
+}): React.ReactElement => {
     const t = useTranslations();
 
     const { userConsumptionSummaries } = useFirebaseData();

@@ -12,13 +12,13 @@ import { useTranslations } from "next-intl";
  * Renders a JSON view of the provided data.
  *
  * @param {Object} data - The data to be displayed in the JSON view.
- * @return {JSX.Element} - The JSON view component.
+ * @return {React.ReactNode} - The JSON view component.
  */
 const AboutContent = ({
     countryData,
 }: {
     countryData: CountryData | undefined;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
 
     return (

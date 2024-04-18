@@ -19,12 +19,12 @@ type Props = {
 /**
  * Asynchronous function that represents the Home component.
  *
- * @return {Promise<JSX.Element>} The JSX element representing the Home component.
+ * @return {Promise<React.ReactNode>} The JSX element representing the Home component.
  */
 const Home = async ({
     params: { locale },
     searchParams,
-}: Props): Promise<JSX.Element> => {
+}: Props): Promise<React.ReactNode> => {
     unstable_setRequestLocale(locale);
     const t = await getTranslations();
 

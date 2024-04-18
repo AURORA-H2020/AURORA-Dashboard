@@ -7,9 +7,9 @@ import { useEffect, useState } from "react";
 /**
  * Renders the logo component.
  *
- * @return {JSX.Element} The logo component.
+ * @return {React.ReactElement} The logo component.
  */
-const Logo = (): JSX.Element => {
+const Logo = (): React.ReactElement => {
     const [mounted, setMounted] = useState(false);
     const { theme } = useTheme();
 

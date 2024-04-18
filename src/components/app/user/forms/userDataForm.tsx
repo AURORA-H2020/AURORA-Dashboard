@@ -33,6 +33,16 @@ import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+/**
+ * Renders a form for user data submission.
+ *
+ * @param {Object} props - The component props.
+ * @param {FirebaseUser | null} props.userData - The user data object.
+ * @param {(success: boolean) => void} props.onFormSubmit - The callback function to handle form submission.
+ * @param {boolean} props.isNewUser - Indicates if the user is new.
+ * @param {string} props.className - The CSS class name for the form.
+ * @return {React.ReactNode} The rendered form component.
+ */
 const UserDataForm = ({
     userData,
     onFormSubmit,
@@ -43,7 +53,7 @@ const UserDataForm = ({
     onFormSubmit?: (success: boolean) => void;
     isNewUser?: boolean;
     className?: string;
-}) => {
+}): React.ReactNode => {
     const t = useTranslations();
     const formSchema = userDataFormSchema(t);
 

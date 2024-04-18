@@ -19,6 +19,14 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
 
+/**
+ * Renders the SelectDashboardSource component with file selection, date handling, and data download functionality.
+ *
+ * @param {string[]} files - An array of file names.
+ * @param {number} currentFileDate - The current file date.
+ * @param {GlobalSummary | undefined} globalSummaryData - The global summary data.
+ * @return {React.ReactElement} The rendered SelectDashboardSource component.
+ */
 export const SelectDashboardSource = ({
     files,
     currentFileDate,
@@ -27,7 +35,7 @@ export const SelectDashboardSource = ({
     files: string[];
     currentFileDate: number;
     globalSummaryData: GlobalSummary | undefined;
-}) => {
+}): React.ReactElement => {
     const t = useTranslations();
     const format = useFormatter();
 

@@ -5,10 +5,18 @@ import { collection, doc, getFirestore, setDoc } from "firebase/firestore";
 
 const firestore = getFirestore(firebaseApp);
 
+/**
+ * Sets the accepted legal document version for a given user.
+ *
+ * @param {number} acceptedLegalDocumentVersion - The version of the legal document that the user has accepted.
+ * @param {User} user - The user for whom the legal document version is being set.
+ * @return {Promise<{ success: boolean }>} - A promise that resolves to an object indicating the success of the operation.
+ * @throws {Error} - Throws an error if the user is not logged in.
+ */
 export const setAcceptedLegalDocumentVersion = async (
     acceptedLegalDocumentVersion: number,
     user: User,
-) => {
+): Promise<{ success: boolean }> => {
     let success = false;
 
     const legalData = {

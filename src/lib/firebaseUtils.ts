@@ -21,6 +21,12 @@ const downloadFile = async (path: string): Promise<any> => {
     return downloadedFile;
 };
 
+/**
+ * Retrieves a list of dashboard files from Firebase Storage based on the provided path.
+ *
+ * @param {string | undefined} path - The path to the directory in Firebase Storage.
+ * @return {Promise<string[] | undefined>} A promise that resolves to an array of dashboard file names or undefined in case of an error.
+ */
 export const firebaseStorageListDashboardFiles = async (
     path: string | undefined,
 ): Promise<string[] | undefined> => {
@@ -40,6 +46,13 @@ export const firebaseStorageListDashboardFiles = async (
     }
 };
 
+/**
+ * Downloads a file from Firebase Storage based on the provided file name and path.
+ *
+ * @param {string} fileName - The name of the file to download.
+ * @param {string} path - The path to the directory in Firebase Storage.
+ * @return {Promise<any>} A promise that resolves to the downloaded file.
+ */
 export const firebaseStorageDownloadFile = async (
     fileName: string,
     path: string,
@@ -78,6 +91,11 @@ export const getLatestCountryFile = async (
     }
 };
 
+/**
+ * Retrieves the latest user data backup from the Firebase storage.
+ *
+ * @return {Promise<BackupUserData | null>} A promise that resolves to the latest user data backup or null if no backup files are found.
+ */
 export const getLatestUserData = async (): Promise<BackupUserData | null> => {
     const firebaseStorage = getStorage(firebaseApp);
     const storageRef = ref(

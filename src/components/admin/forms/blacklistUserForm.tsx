@@ -15,6 +15,15 @@ import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+/**
+ * Renders a form for blacklisting a user.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.blacklistUid - The UID of the user to be blacklisted.
+ * @param {function} [props.onFormSubmit] - Optional callback function to be called when the form is submitted.
+ * @param {string} [props.className] - Optional CSS class name for styling.
+ * @return {React.ReactNode} The rendered form component.
+ */
 const BlacklistUserForm = ({
     blacklistUid,
     onFormSubmit,
@@ -23,7 +32,7 @@ const BlacklistUserForm = ({
     blacklistUid: string;
     onFormSubmit?: (success: boolean) => void;
     className?: string;
-}) => {
+}): React.ReactNode => {
     const formSchema = blacklistUserFormSchema;
 
     const { user } = useAuthContext() as {

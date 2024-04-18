@@ -12,12 +12,16 @@ import { toast } from "sonner";
 import * as z from "zod";
 
 /**
- * Function for signing up with email.
+ * Renders a form for signing up with email and password.
  *
- * @param {z.infer<typeof formSchema>} values - the form values
- * @return {JSX.Element} the sign up form
+ * @param {string} className - optional class name for styling
+ * @return {React.ReactNode} the rendered form component
  */
-function SignUpWithEmail({ className }: { className?: string }): JSX.Element {
+function SignUpWithEmail({
+    className,
+}: {
+    className?: string;
+}): React.ReactNode {
     const t = useTranslations();
 
     const formSchema = registrationSchema(t);

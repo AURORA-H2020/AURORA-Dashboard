@@ -12,13 +12,13 @@ import { useFormatter, useTranslations } from "next-intl";
  * data in table rows, such as carbon emissions, costs, and dates.
  *
  * @param {Consumption} consumption - The consumption data to display
- * @return {JSX.Element} A React component that renders consumption data
+ * @return {React.ReactNode} A React component that renders consumption data
  */
 const ConsumptionView = ({
     consumption,
 }: {
     consumption: ConsumptionWithID;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
     const format = useFormatter();
 

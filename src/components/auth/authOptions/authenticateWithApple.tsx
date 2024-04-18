@@ -1,17 +1,21 @@
 import { Button } from "@/components/ui/button";
 import signIn from "@/firebase/auth/authentication";
-import { toast } from "sonner";
-
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 /**
- * Renders a sign-in form and handles sign-in through email, Google,
- * or Apple. On successful sign-in, displays a success toast and
- * redirects to the account page.
+ * Renders a button component for authenticating with Apple.
+ *
+ * @param {boolean} isSignIn - Indicates whether the user is signing in. Defaults to true.
+ * @return {React.ReactElement} The button component for authenticating with Apple.
  */
-function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
+function AuthenticateWithApple({
+    isSignIn = true,
+}: {
+    isSignIn?: boolean;
+}): React.ReactElement {
     const t = useTranslations();
 
     /**

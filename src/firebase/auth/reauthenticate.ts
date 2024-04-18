@@ -4,7 +4,17 @@ import {
     reauthenticateWithCredential,
 } from "firebase/auth";
 
-export async function reauthenticateUser(user: User, password?: string) {
+/**
+ * Reauthenticates a user with their email and password.
+ *
+ * @param {User} user - The user object representing the authenticated user.
+ * @param {string} [password] - The password of the user.
+ * @return {Promise<{ success: boolean, reauthUser
+ */
+export async function reauthenticateUser(
+    user: User,
+    password?: string,
+): Promise<{ success: boolean; reauthUser: User | null }> {
     let success = false;
     let reauthUser: User | null = null;
 

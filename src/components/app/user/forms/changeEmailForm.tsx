@@ -14,13 +14,21 @@ import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+/**
+ * Renders a form for changing the user's email address.
+ *
+ * @param {Object} props - The component props.
+ * @param {function} props.onFormSubmit - A callback function to be called when the form is submitted successfully.
+ * @param {string} props.className - The CSS class name for the form container.
+ * @return {React.ReactElement} The rendered form component.
+ */
 const ChangeEmailForm = ({
     onFormSubmit,
     className,
 }: {
     onFormSubmit?: (success: boolean) => void;
     className?: string;
-}) => {
+}): React.ReactElement => {
     const t = useTranslations();
     const formSchema = userChangeEmailSchema(t);
 

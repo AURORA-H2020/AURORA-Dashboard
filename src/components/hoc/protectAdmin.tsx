@@ -4,7 +4,21 @@ import { useUserRoles } from "@/firebase/firebaseHooks";
 import { useRouter } from "@/navigation";
 import { useEffect } from "react";
 
-export const ProtectAdmin = ({ children }) => {
+/**
+ * Higher order component (HOC) that protects an admin route.
+ * If the user is not authenticated or not an admin, they will be redirected to the account page.
+ * If the user is authenticated and an admin, the children will be rendered.
+ * If the loading is in progress, a loading spinner will be rendered instead of the children.
+ *
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The child components to render.
+ * @return {React.ReactNode} The rendered component.
+ */
+export const ProtectAdmin = ({
+    children,
+}: {
+    children: React.ReactNode;
+}): React.ReactNode => {
     const { user, loading } = useAuthContext();
     const { isAdmin, isAdminLoading } = useUserRoles(user?.uid);
     const router = useRouter();

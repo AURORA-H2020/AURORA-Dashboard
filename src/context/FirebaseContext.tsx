@@ -24,6 +24,13 @@ const FirebaseDataContext = createContext<FirebaseDataContextValue | undefined>(
     undefined,
 );
 
+/**
+ * Renders a FirebaseDataProvider component that wraps the provided children and provides access to Firebase data.
+ *
+ * @param {Object} props - The props object.
+ * @param {React.ReactNode} props.children - The children to be wrapped by the FirebaseDataProvider.
+ * @return {React.FC} The FirebaseDataProvider component.
+ */
 export const FirebaseDataProvider: React.FC<{
     children: React.ReactNode;
 }> = ({ children }) => {
@@ -65,7 +72,13 @@ export const FirebaseDataProvider: React.FC<{
     );
 };
 
-export const useFirebaseData = () => {
+/**
+ * Returns the Firebase data from the FirebaseDataContext.
+ *
+ * @return {FirebaseDataContextValue} The Firebase data from the context.
+ * @throws {Error} If the useFirebaseData is not used within a FirebaseDataProvider.
+ */
+export const useFirebaseData = (): FirebaseDataContextValue => {
     const context = useContext(FirebaseDataContext);
     if (context === undefined) {
         throw new Error(

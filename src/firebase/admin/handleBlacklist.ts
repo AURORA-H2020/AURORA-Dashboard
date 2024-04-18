@@ -12,11 +12,20 @@ import {
 
 const firestore = getFirestore(firebaseApp);
 
+/**
+ * Blacklists a user by adding their UID to the exportUserDataBlacklistedUsers collection in Firestore.
+ *
+ * @param {User | null} user - The currently logged-in user.
+ * @param {string} uid - The UID of the user to be blacklisted.
+ * @param {BlacklistedUser} payload - The data to be stored for the blacklisted user.
+ * @return {Promise<{success: boolean}>} - A promise that resolves to an object indicating the success of the operation.
+ * @throws {Error} - If the user is not logged in.
+ */
 export const blacklistUser = async (
     user: User | null,
     uid: string,
     payload: BlacklistedUser,
-) => {
+): Promise<{ success: boolean }> => {
     let success = false;
 
     if (user) {

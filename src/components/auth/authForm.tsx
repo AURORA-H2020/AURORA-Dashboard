@@ -23,13 +23,13 @@ import { useTranslations } from "next-intl";
  * Renders the authentication options based on the sign-in state.
  *
  * @param {boolean} isSignIn - Indicates whether the user is signing in.
- * @return {JSX.Element} The rendered authentication options component.
+ * @return {React.ReactNode} The rendered authentication options component.
  */
 const AuthenticationOptions = ({
     isSignIn,
 }: {
     isSignIn: boolean;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
 
     return (
@@ -57,7 +57,7 @@ const AuthenticationOptions = ({
 /**
  * Renders a sign-in form with tabs for email sign-in and sign-up options.
  *
- * @return {JSX.Element} The sign-in form component
+ * @return {React.ReactNode} The sign-in form component
  */
 export const AuthForm = () => {
     const t = useTranslations();

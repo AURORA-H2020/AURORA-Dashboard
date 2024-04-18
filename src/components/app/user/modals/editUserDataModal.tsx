@@ -13,7 +13,17 @@ import { useFirebaseData } from "@/context/FirebaseContext";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-const EditUserDataModal = ({ children }: { children: React.ReactNode }) => {
+/**
+ * Renders the Edit User Data Modal component.
+ *
+ * @param {React.ReactNode} children - The content to be displayed as the trigger for the modal.
+ * @return {React.ReactNode} The rendered Edit User Data Modal component.
+ */
+const EditUserDataModal = ({
+    children,
+}: {
+    children: React.ReactNode;
+}): React.ReactNode => {
     const t = useTranslations();
     const [open, setOpen] = useState(false);
 

@@ -3,7 +3,6 @@ import { MetaData } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { DonutChart, Legend } from "@tremor/react";
 import { useTranslations } from "next-intl";
-import { ReactNode } from "react";
 
 /**
  * Generates a summary of consumption by category for a given set of countries.
@@ -20,7 +19,7 @@ const ConsumptionCardSummaryCategory = ({
 }: {
     metaData: MetaData | undefined;
     category: ConsumptionCategory;
-}): ReactNode => {
+}): React.ReactElement => {
     const t = useTranslations();
 
     const dataSet: {

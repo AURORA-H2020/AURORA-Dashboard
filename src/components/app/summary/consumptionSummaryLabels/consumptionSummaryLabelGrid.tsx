@@ -7,6 +7,14 @@ import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consu
 import { Grid } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 
+/**
+ * Renders the Consumption Summary Label Grid component.
+ *
+ * @param {ConsumptionSummary} consumptionSummary - The consumption summary data.
+ * @param {"carbonEmission" | "energyExpended"} measure - The type of measure.
+ * @param {string} [className] - The optional class name for styling.
+ * @return {React.ReactElement} The rendered Consumption Summary Label Grid component.
+ */
 const ConsumptionSummaryLabelGrid = ({
     consumptionSummary,
     measure,
@@ -15,7 +23,7 @@ const ConsumptionSummaryLabelGrid = ({
     consumptionSummary: ConsumptionSummary;
     measure: "carbonEmission" | "energyExpended";
     className?: string;
-}) => {
+}): React.ReactElement => {
     const t = useTranslations();
 
     return (

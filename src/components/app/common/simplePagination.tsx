@@ -10,6 +10,16 @@ import {
 } from "@/components/ui/pagination";
 import { useTranslations } from "next-intl";
 
+/**
+ * Renders a simple pagination component.
+ *
+ * @param {Object} props - The props object.
+ * @param {number} props.currentPage - The current page number.
+ * @param {number} props.maxPage - The maximum page number.
+ * @param {() => void} props.fetchPreviousPage - The function to fetch the previous page.
+ * @param {() => void} props.fetchNextPage - The function to fetch the next page.
+ * @return {React.ReactElement} The rendered simple pagination component.
+ */
 const SimplePagination = ({
     currentPage,
     maxPage,
@@ -20,7 +30,7 @@ const SimplePagination = ({
     maxPage: number;
     fetchPreviousPage: () => void;
     fetchNextPage: () => void;
-}) => {
+}): React.ReactElement => {
     const t = useTranslations();
 
     return (

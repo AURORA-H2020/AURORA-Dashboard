@@ -12,13 +12,19 @@ import {
     setDoc,
 } from "firebase/firestore";
 
-// Initialize Firestore
 const firestore = getFirestore(firebaseApp);
 
+/**
+ * Removes invalid values from the given recurringConsumption object based on the specified category.
+ *
+ * @param {RecurringConsumption} recurringConsumption - The recurringConsumption object to remove invalid values from.
+ * @param {ConsumptionCategory} category - The category to filter the recurringConsumption object by.
+ * @return {RecurringConsumption} - The updated recurringConsumption object with invalid values removed.
+ */
 function removeInvalidValues(
     recurringConsumption: RecurringConsumption,
     category: ConsumptionCategory,
-) {
+): RecurringConsumption {
     const transportationKeys = [
         "privateVehicleOccupancy",
         "publicVehicleOccupancy",
@@ -73,10 +79,17 @@ function removeInvalidValues(
     return recurringConsumption;
 }
 
+/**
+ * Converts the units of the given recurringConsumption object based on the user's unit system.
+ *
+ * @param {RecurringConsumption} recurringConsumption - The recurringConsumption object to convert units for.
+ * @param {"metric" | "imperial"} userUnitSystem - The user's unit system (metric or imperial).
+ * @return {RecurringConsumption} The recurringConsumption object with units converted based on the user's unit system.
+ */
 function convertUnits(
     recurringConsumption: RecurringConsumption,
     userUnitSystem: "metric" | "imperial",
-) {
+): RecurringConsumption {
     if (
         recurringConsumption.transportation &&
         recurringConsumption.transportation.fuelConsumption
@@ -111,13 +124,24 @@ function convertUnits(
     return recurringConsumption;
 }
 
+/**
+ * Adds or edits a recurring consumption for a user.
+ *
+ * @param {RecurringConsumption} recurringConsumption - The recurring consumption to add or edit.
+ * @param {ConsumptionCategory} category - The category of the consumption.
+ * @param {User} user - The user for whom the consumption is being added or edited.
+ * @param {"metric" | "imperial"} userUnitSystem - The unit system of the user (metric or imperial).
+ * @param {string} [consumptionId] - The ID of the consumption to edit (optional).
+ * @throws {Error} Throws an error if the user is not logged in.
+ * @return {Promise<{ success: boolean }>} Returns a promise that resolves to an object indicating the success of the operation.
+ */
 export const addEditRecurringConsumption = async (
     recurringConsumption: RecurringConsumption,
     category: ConsumptionCategory,
     user: User,
     userUnitSystem: "metric" | "imperial",
     consumptionId?: string,
-) => {
+): Promise<{ success: boolean }> => {
     let success = false;
     recurringConsumption = removeInvalidValues(recurringConsumption, category);
     recurringConsumption = convertUnits(recurringConsumption, userUnitSystem);

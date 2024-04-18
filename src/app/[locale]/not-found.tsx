@@ -7,9 +7,9 @@ import { useTranslations } from "next-intl";
 /**
  * Renders the NotFoundPage component.
  *
- * @return {JSX.Element} The rendered NotFoundPage component.
+ * @return {React.ReactNode} The rendered NotFoundPage component.
  */
-const NotFoundPage = () => {
+const NotFoundPage = (): React.ReactNode => {
     const t = useTranslations();
 
     return (

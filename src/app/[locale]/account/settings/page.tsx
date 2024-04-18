@@ -33,9 +33,9 @@ import { toast } from "sonner";
 /**
  * Renders the user settings page with profile and account information.
  *
- * @return {JSX.Element} The user settings page component
+ * @return {React.ReactNode} The user settings page component
  */
-const UserSettings = (): JSX.Element => {
+const UserSettings = (): React.ReactNode => {
     const t = useTranslations();
     const { user, loading } = useAuthContext();
     const { userData } = useFirebaseData();

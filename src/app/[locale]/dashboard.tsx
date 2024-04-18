@@ -34,13 +34,13 @@ import { useEffect, useState } from "react";
  * Renders the Dashboard component.
  *
  * @param {object} localData - The localData object containing the summaries.
- * @return {JSX.Element} The JSX element representing the Dashboard component.
+ * @return {React.ReactNode} The React Node representing the Dashboard component.
  */
 const Dashboard = ({
     globalSummaryData,
 }: {
     globalSummaryData: GlobalSummary | undefined;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
 
     // Options available for country multiselect

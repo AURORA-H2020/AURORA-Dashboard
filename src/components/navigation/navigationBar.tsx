@@ -23,14 +23,13 @@ import { useUserRoles } from "@/firebase/firebaseHooks";
 import { Link, usePathname, useRouter } from "@/navigation";
 import { CircleUser, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { ReactElement } from "react";
 
 /**
  * Renders the navigation bar component.
  *
  * @return {ReactElement} The rendered navigation bar component
  */
-const NavigationBar = (): ReactElement => {
+const NavigationBar = (): React.ReactElement => {
     const t = useTranslations();
 
     const pathname = usePathname();
@@ -39,7 +38,12 @@ const NavigationBar = (): ReactElement => {
     const { isAdmin } = useUserRoles(user?.uid);
     const router = useRouter();
 
-    const handleLogout = async () => {
+    /**
+     * Logs the user out and redirects them to the home page.
+     *
+     * @return {Promise<void>} A promise that resolves when the user is logged out and redirected.
+     */
+    const handleLogout = async (): Promise<void> => {
         await logout();
         router.replace("/");
     };

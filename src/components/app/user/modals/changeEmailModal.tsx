@@ -11,7 +11,18 @@ import {
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-const ChangeEmailModal = ({ children }: { children: React.ReactNode }) => {
+/**
+ * Renders a modal component for changing the user's email.
+ *
+ * @param {Object} props - The component props.
+ * @param {React.ReactNode} props.children - The content to be displayed as the trigger for the modal.
+ * @return {React.ReactNode} The rendered modal component.
+ */
+const ChangeEmailModal = ({
+    children,
+}: {
+    children: React.ReactNode;
+}): React.ReactNode => {
     const t = useTranslations();
     const [open, setOpen] = useState(false);
 

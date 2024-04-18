@@ -27,13 +27,13 @@ import { useTranslations } from "next-intl";
  *
  * @param {Object} props - The props object.
  * @param {Consumption[]} props.userConsumptions - The user's consumption data.
- * @return {JSX.Element} The consumption list component.
+ * @return {React.ReactNode} The consumption list component.
  */
 const ConsumptionList = ({
     className,
 }: {
     className?: string;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
     const { user } = useAuthContext();
 

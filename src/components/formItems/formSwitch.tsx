@@ -9,6 +9,16 @@ import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utilities";
 import { ControllerRenderProps } from "react-hook-form";
 
+/**
+ * Renders a form switch component.
+ *
+ * @param {ControllerRenderProps<any, any>} field - The field object for the form.
+ * @param {string} [label] - The label text for the form switch.
+ * @param {string} [description] - The description text for the form switch.
+ * @param {boolean} [disabled=false] - Determines if the switch is disabled.
+ * @param {string} [className] - The additional CSS class name for the component.
+ * @return {React.ReactNode} The rendered form switch component.
+ */
 const FormSwitch = ({
     field,
     label,
@@ -21,7 +31,7 @@ const FormSwitch = ({
     description?: string;
     disabled?: boolean;
     className?: string;
-}) => (
+}): React.ReactNode => (
     <FormItem
         className={cn(
             className,

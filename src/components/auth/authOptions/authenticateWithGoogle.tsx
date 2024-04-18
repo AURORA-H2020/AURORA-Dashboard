@@ -1,17 +1,22 @@
 import { Button } from "@/components/ui/button";
 import authenticate from "@/firebase/auth/authentication";
-import { toast } from "sonner";
-
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 /**
- * Renders a sign-in form and handles sign-in through email, Google,
- * or Apple. On successful sign-in, displays a success toast and
- * redirects to the account page.
+ * Renders a button component that handles authentication with Google.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isSignIn - Determines if the component is used for sign-in or sign-up.
+ * @return {React.ReactElement} The rendered button component.
  */
-function AuthenticateWithGoogle({ isSignIn = true }: { isSignIn?: boolean }) {
+function AuthenticateWithGoogle({
+    isSignIn = true,
+}: {
+    isSignIn?: boolean;
+}): React.ReactElement {
     const t = useTranslations();
 
     /**

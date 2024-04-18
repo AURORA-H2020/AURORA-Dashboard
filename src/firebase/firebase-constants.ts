@@ -44,13 +44,5 @@ export const FirebaseConstants = {
                 },
             },
         },
-        default: {
-            name: "aurora-app-cf67c.appspot.com",
-            folders: {
-                userDataBackup: {
-                    name: "user-data-backup",
-                },
-            },
-        },
     },
 };

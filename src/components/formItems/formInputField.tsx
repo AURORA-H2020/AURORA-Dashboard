@@ -1,3 +1,4 @@
+import { Checkbox } from "@/components/ui/checkbox";
 import {
     FormControl,
     FormDescription,
@@ -10,10 +11,24 @@ import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utilities";
 import { useId, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
-import { Checkbox } from "../ui/checkbox";
 
 type InputTypes = "number" | "text" | "email";
 
+/**
+ * Renders a form input field component.
+ *
+ * @param {ControllerRenderProps<any, any>} field - The field object for the form.
+ * @param {InputTypes} inputType - The type of input field.
+ * @param {string} placeholder - The placeholder text for the input field.
+ * @param {string} [label] - The label text for the form field.
+ * @param {string} [description] - The description text for the form field.
+ * @param {string} [className] - The additional CSS class name for the component.
+ * @param {boolean} [showSwitch] - Determines if a switch is shown.
+ * @param {string} [unit] - The unit for the input field.
+ * @param {string} [optOutLabel] - The label for opting out.
+ * @param {boolean} [disabled=false] - Indicates if the field is disabled.
+ * @return {React.ReactNode} The rendered form input field component.
+ */
 const FormInputField = ({
     field,
     inputType,
@@ -36,7 +51,7 @@ const FormInputField = ({
     unit?: string;
     optOutLabel?: string;
     disabled?: boolean;
-}) => {
+}): React.ReactNode => {
     const [disableField, setDisableField] = useState<boolean>(false);
     const [visible, setVisible] = useState(
         showSwitch ? (field.value ? true : false) : true,
@@ -44,6 +59,11 @@ const FormInputField = ({
 
     const labelId = useId();
 
+    /**
+     * Handles the switch change event.
+     *
+     * @param {boolean} state - The state of the switch.
+     */
     const handleSwitchChange = (state: boolean) => {
         if (state) {
             setVisible(true);
@@ -53,6 +73,12 @@ const FormInputField = ({
         }
     };
 
+    /**
+     * Handles the check change event.
+     *
+     * @param {boolean} checked - The state of the check.
+     * @return {void} No return value.
+     */
     const handleCheckChange = (checked: boolean) => {
         if (checked) {
             clearField();
@@ -61,6 +87,11 @@ const FormInputField = ({
         setDisableField(checked);
     };
 
+    /**
+     * Clears the field by setting its value to undefined and calling the onChange function with undefined as the argument.
+     *
+     * @return {void} This function does not return anything.
+     */
     const clearField = () => {
         field.value = undefined;
         field.onChange(undefined);

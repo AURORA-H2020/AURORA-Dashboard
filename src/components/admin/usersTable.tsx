@@ -14,13 +14,23 @@ export type UserRow = {
     blacklistData: BlacklistedUser | null;
 };
 
+/**
+ * Renders a table of user data, including user ID, number of consumptions, number of recurring consumptions,
+ * total carbon emissions, and total energy expended. Also includes blacklist data for each user, if available.
+ *
+ * @param {Object} props - The component props.
+ * @param {BackupUserData} props.userData - The user data to be displayed in the table.
+ * @param {Array<Object>} [props.blacklistData] - Optional array of blacklisted user data, where each object contains
+ * a user ID and the corresponding blacklisted user data.
+ * @return {React.ReactNode} The rendered table of user data.
+ */
 export const UsersTable = ({
     userData,
     blacklistData,
 }: {
     userData: BackupUserData;
     blacklistData: { uid: string; data: BlacklistedUser }[] | undefined;
-}) => {
+}): React.ReactNode => {
     const userTableData: UserRow[] = Object.keys(userData).map((uid) => {
         return {
             uid: uid,

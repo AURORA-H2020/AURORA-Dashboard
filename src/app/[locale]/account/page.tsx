@@ -7,10 +7,9 @@ import { Grid } from "@radix-ui/themes";
  * and a list of their consumptions. Redirects to the home page if the user
  * is not authenticated. It fetches user consumption data from Firestore.
  *
- * @return {JSX.Element} The account page component with user information and
- *                       a list of Consumption components.
+ * @return {React.ReactNode} The account page component with user information and a list of Consumption components.
  */
-const AccountPage = (): JSX.Element => {
+const AccountPage = (): React.ReactNode => {
     return (
         <Grid
             columns={{ initial: "1", md: "2" }}

@@ -15,14 +15,14 @@ import { useFormatter, useTranslations } from "next-intl";
  *
  * @param {Object} props - The props object.
  * @param {MetaData | undefined} props.metaData - The metaData object containing the data for the report.
- * @return {JSX.Element} - The rendered report component.
+ * @return {React.ReactNode} - The rendered report component.
  */
 
 const AutoReport = ({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}): JSX.Element => {
+}): React.ReactNode => {
     const t = useTranslations();
     const format = useFormatter();
 

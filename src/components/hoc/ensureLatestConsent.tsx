@@ -12,7 +12,17 @@ import {
 } from "firebase/remote-config";
 import { useEffect, useState } from "react";
 
-export const EnsureLatestConsent = ({ children }) => {
+/**
+ * Component to ensure the latest consent from the user before rendering the children.
+ *
+ * @param {ReactNode} children - The components to be rendered.
+ * @return {ReactNode} The rendered children or UpdateConsent component.
+ */
+export const EnsureLatestConsent = ({
+    children,
+}: {
+    children: React.ReactNode;
+}): React.ReactNode => {
     const remoteConfig = getRemoteConfig(firebaseApp);
     const { user, loading } = useAuthContext();
 

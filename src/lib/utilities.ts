@@ -187,6 +187,13 @@ export function getSortedCountryLabels(countryIds: string[] | undefined) {
     };
 }
 
+/**
+ * Retrieves the consumption unit based on the given consumption and unit system.
+ *
+ * @param {Consumption} consumption - The consumption object.
+ * @param {UserSettingsUnitSystem} unitSystem - The unit system.
+ * @return {{userUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb"; firebaseUnit: "km" | "L" | "kg" | "kWh;}} - The consumption unit.
+ */
 export function getConsumptionUnit(
     consumption: Consumption,
     unitSystem: UserSettingsUnitSystem,
@@ -231,6 +238,18 @@ export function getConsumptionUnit(
     };
 }
 
+/**
+ * Converts a given value from one unit to another unit system.
+ *
+ * @param {number} value - The value to be converted.
+ * @param {string} unit - The unit of the given value. It can be one of the following:
+ *                       "km" for kilometers, "mi" for miles, "L" for liters, "gal" for gallons,
+ *                       "kWh" for kilowatt-hours, "kg" for kilograms, "lb" for pounds,
+ *                       "L/100km" for liters per 100 kilometers, "mpg" for miles per gallon,
+ *                       "kWh/100km" for kilowatt-hours per 100 kilometers, or "mi/kWh" for miles per kilowatt-hour.
+ * @param {"imperial" | "metric"} toUnitSystem - The target unit system. It can be either "imperial" or "metric".
+ * @return {{ quantity: number; unit: string }} - The converted value and its unit.
+ */
 export function convertUnit(
     value: number,
     unit:
@@ -293,7 +312,14 @@ export function convertUnit(
 }
 
 /**
- * Function to convert unit
+ * A hook that converts a given value from one unit to another unit system.
+ *
+ * @param {number | undefined} value - The value to be converted.
+ * @param {"km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb" | "L/100km" | "mpg" | "kWh/100km" | "mi/kWh"} unit - The unit of the given value.
+ * @param {"imperial" | "metric"} toUnitSystem - The target unit system.
+ * @param {string} unitSuffix - The suffix to be appended to the unit.
+ * @param {number} digits - The maximum number of fraction digits to be displayed.
+ * @return {{ rawNumber: number; number: string; unit: string; toString(): string } | undefined} - The converted value, number, unit, and a toString method.
  */
 export function useConvertUnit(
     value: number | undefined,

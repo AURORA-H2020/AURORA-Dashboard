@@ -11,13 +11,21 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+/**
+ * Renders a form for resetting a user's password.
+ *
+ * @param {Object} props - The component props.
+ * @param {Function} props.onFormSubmit - A callback function called when the form is submitted.
+ * @param {string} props.className - The CSS class name for the form container.
+ * @return {React.ReactElement} The rendered form component.
+ */
 const ResetPasswordForm = ({
     onFormSubmit,
     className,
 }: {
     onFormSubmit?: (success: boolean) => void;
     className?: string;
-}) => {
+}): React.ReactElement => {
     const t = useTranslations();
     const formSchema = passwordResetSchema(t);
 

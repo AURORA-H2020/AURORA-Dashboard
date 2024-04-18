@@ -28,6 +28,15 @@ import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+/**
+ * Renders a form for transportation data entry.
+ *
+ * @param {ConsumptionWithID | undefined} consumption - The consumption data with an ID.
+ * @param {boolean | undefined} isDuplication - Flag indicating if the entry is a duplication.
+ * @param {(success: boolean) => void | undefined} onConsumptionAdded - Callback function for consumption added event.
+ * @param {string | undefined} className - Additional CSS class for styling.
+ * @return {React.ReactElement} The rendered form for transportation data entry.
+ */
 const TransportationForm = ({
     consumption,
     isDuplication,
@@ -38,7 +47,7 @@ const TransportationForm = ({
     isDuplication?: boolean;
     onConsumptionAdded?: (success: boolean) => void;
     className?: string;
-}) => {
+}): React.ReactElement => {
     const t = useTranslations();
     const formSchema = transportationFormSchema(t);
 
@@ -124,7 +133,7 @@ const TransportationForm = ({
         }
     }, [formTransportationType, form]);
 
-    if (!user) return null;
+    if (!user) return <></>;
 
     const onSubmit = async (data: Consumption) => {
         const { success } = await addEditConsumption(

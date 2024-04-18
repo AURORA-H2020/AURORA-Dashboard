@@ -1,15 +1,21 @@
+import { firebaseApp } from "@/firebase/config";
 import {
     initializeAppCheck,
     ReCaptchaEnterpriseProvider,
 } from "firebase/app-check";
-import { firebaseApp } from "@/firebase/config";
 import { useEffect } from "react";
 
+/**
+ * Initializes Firebase App Check with ReCaptchaEnterpriseProvider.
+ *
+ * @param {React.ReactNode} children - The children nodes.
+ * @return {React.ReactNode} The rendered children.
+ */
 export const FirebaseAppCheckProvider = ({
     children,
 }: {
     children: React.ReactNode;
-}) => {
+}): React.ReactNode => {
     useEffect(() => {
         try {
             if (process.env.NEXT_PUBLIC_TEST_MODE === "true") {
