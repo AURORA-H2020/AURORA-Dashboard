@@ -45,7 +45,6 @@ const FormDatePicker = ({
     return (
         <FormItem className={cn(className)}>
             {label && <FormLabel>{label}</FormLabel>}
-            {description && <FormDescription>{description}</FormDescription>}
             <Popover modal={true}>
                 <PopoverTrigger asChild>
                     <FormControl>
@@ -116,6 +115,7 @@ const FormDatePicker = ({
                     )}
                 </PopoverContent>
             </Popover>
+            {description && <FormDescription>{description}</FormDescription>}
             <FormMessage />
         </FormItem>
     );

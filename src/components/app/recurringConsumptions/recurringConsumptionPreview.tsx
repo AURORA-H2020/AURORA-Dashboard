@@ -22,7 +22,7 @@ import { useFirebaseData } from "@/context/FirebaseContext";
 import { deleteDocumentById } from "@/firebase/firestore/deleteDocumentById";
 import { getConsumptionAttributes, useConvertUnit } from "@/lib/utilities";
 import { RecurringConsumptionWithID } from "@/models/extensions";
-import { Flex, Heading, Text } from "@radix-ui/themes";
+import { Flex, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -113,12 +113,12 @@ const RecurringConsumptionPreview = ({
                             </div>
 
                             <Flex direction={"column"}>
-                                <Heading as="h3" size={"4"}>
+                                <Text className="font-bold">
                                     {t(
                                         `category.${recurringConsumption.category}`,
                                     )}
-                                </Heading>
-                                <Text className="text-muted-foreground">
+                                </Text>
+                                <Text className="text-muted-foreground text-sm">
                                     {recurringConsumption.isEnabled
                                         ? t("app.form.enabled")
                                         : t("app.form.disabled")}

@@ -59,7 +59,7 @@ const NavigationBar = (): ReactElement => {
 
     return (
         <Card className="flex items-center gap-4 p-4 md:px-8">
-            <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
+            <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-md lg:gap-6">
                 <Link href="/" className="w-max">
                     <Logo />
                 </Link>
@@ -71,7 +71,7 @@ const NavigationBar = (): ReactElement => {
 
                     return (
                         <Link
-                            key={idx}
+                            key={`${idx}`}
                             href={item.path}
                             className={`${isActive ? "text-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground`}
                         >
@@ -105,7 +105,7 @@ const NavigationBar = (): ReactElement => {
                                 pathname.startsWith(`${item.path}/`);
 
                             return (
-                                <SheetClose key={idx} asChild>
+                                <SheetClose key={`${idx}`} asChild>
                                     <Link
                                         href={item.path}
                                         className={`${isActive ? "text-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground`}
@@ -133,7 +133,7 @@ const NavigationBar = (): ReactElement => {
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
                             {loggedInMenus.map((menu, idx) => (
-                                <Link href={menu.path} key={idx}>
+                                <Link href={menu.path} key={`${idx}`}>
                                     <DropdownMenuItem>
                                         {menu.title}
                                     </DropdownMenuItem>
@@ -143,7 +143,7 @@ const NavigationBar = (): ReactElement => {
                                 <>
                                     <DropdownMenuSeparator />
                                     {adminMenus.map((menu, idx) => (
-                                        <Link href={menu.path} key={idx}>
+                                        <Link href={menu.path} key={`${idx}`}>
                                             <DropdownMenuItem>
                                                 {menu.title}
                                             </DropdownMenuItem>

@@ -13,7 +13,7 @@ import {
     SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utilities";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
 
 const FormSelect = ({
@@ -38,8 +38,9 @@ const FormSelect = ({
     const [selected, setSelected] = useState<string | undefined | null>(
         field.value || undefined,
     );
-
     const [disableField, setDisableField] = useState<boolean>(false);
+
+    const labelId = useId();
 
     const handleSelectChange = (value: string) => {
         if (options.map((option) => option.value).includes(value)) {
@@ -63,7 +64,6 @@ const FormSelect = ({
     return (
         <FormItem className={cn(className)}>
             {label && <FormLabel>{label}</FormLabel>}
-            <FormDescription>{description}</FormDescription>
             <Select
                 onValueChange={handleSelectChange}
                 value={selected as string}
@@ -83,24 +83,18 @@ const FormSelect = ({
             {optOutLabel && (
                 <div className="flex items-center space-x-2">
                     <Checkbox
-                        id={
-                            label?.split(" ").join("-").toLowerCase() ??
-                            optOutLabel
-                        }
+                        id={labelId}
                         disabled={disabled}
                         onCheckedChange={handleCheckChange}
                     />
                     <label
-                        htmlFor={
-                            label?.split(" ").join("-").toLowerCase() ??
-                            optOutLabel
-                        }
-                        className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                        htmlFor={labelId}
                     >
                         {optOutLabel}
                     </label>
                 </div>
             )}
+            {description && <FormDescription>{description}</FormDescription>}
             <FormMessage />
         </FormItem>
     );

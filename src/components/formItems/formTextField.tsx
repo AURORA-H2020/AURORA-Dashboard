@@ -27,7 +27,7 @@ const FormTextField = ({
         <FormControl>
             <Textarea
                 placeholder={placeholder}
-                className="resize-none"
+                className="resize-none text-md"
                 {...field}
             />
         </FormControl>

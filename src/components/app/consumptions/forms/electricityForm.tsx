@@ -206,9 +206,6 @@ const ElectricityForm = ({
                                 maxDate={form
                                     .watch("electricity.endDate")
                                     .toDate()}
-                                description={t(
-                                    "app.form.electricity.dateSelectDescription",
-                                )}
                             />
                         )}
                     />
@@ -224,6 +221,9 @@ const ElectricityForm = ({
                                 minDate={form
                                     .watch("electricity.startDate")
                                     .toDate()}
+                                description={t(
+                                    "app.form.electricity.dateSelectDescription",
+                                )}
                             />
                         )}
                     />

@@ -41,7 +41,10 @@ const FormPasswordField = ({
                         placeholder={placeholder}
                         {...field}
                         value={field.value ?? ""}
-                        className={cn(showTogglePassword ? "pr-14" : "")}
+                        className={cn(
+                            showTogglePassword ? "pr-14" : "",
+                            "text-md",
+                        )}
                     />
                     {showTogglePassword && (
                         <div className="absolute inset-y-0 right-0 pr-0 flex items-center cursor-pointer">

@@ -27,7 +27,7 @@ import {
     useConvertUnit,
 } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
-import { Flex, Heading, Text } from "@radix-ui/themes";
+import { Flex, Text } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -127,13 +127,13 @@ const ConsumptionPreview = ({
                             </div>
 
                             <Flex direction={"column"}>
-                                <Heading as="h3" size={"4"}>
+                                <Text className="font-bold">
                                     {t(`category.${consumption.category}`)}
-                                </Heading>
-                                <Text className="text-muted-foreground">
-                                    {consumption.updatedAt
+                                </Text>
+                                <Text className="text-muted-foreground text-sm">
+                                    {consumption.createdAt
                                         ? format.dateTime(
-                                              consumption.updatedAt.toDate(),
+                                              consumption.createdAt.toDate(),
                                               {
                                                   year: "numeric",
                                                   month: "long",

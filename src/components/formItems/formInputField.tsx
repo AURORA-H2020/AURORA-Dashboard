@@ -8,7 +8,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utilities";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
 import { Checkbox } from "../ui/checkbox";
 
@@ -38,10 +38,11 @@ const FormInputField = ({
     disabled?: boolean;
 }) => {
     const [disableField, setDisableField] = useState<boolean>(false);
-
     const [visible, setVisible] = useState(
         showSwitch ? (field.value ? true : false) : true,
     );
+
+    const labelId = useId();
 
     const handleSwitchChange = (state: boolean) => {
         if (state) {
@@ -79,7 +80,6 @@ const FormInputField = ({
             ) : (
                 label && <FormLabel>{label}</FormLabel>
             )}
-            {description && <FormDescription>{description}</FormDescription>}
             {visible && (
                 <FormControl>
                     <div className="relative">
@@ -89,7 +89,7 @@ const FormInputField = ({
                             {...field}
                             value={field.value ?? ""}
                             disabled={disableField || disabled}
-                            className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                            className="[appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none text-md"
                         />
                         {unit && (
                             <div className="absolute inset-y-0 right-0 pr-0 flex items-center cursor-pointer">
@@ -104,25 +104,19 @@ const FormInputField = ({
             {optOutLabel && (
                 <div className="flex items-center space-x-2">
                     <Checkbox
-                        id={
-                            label?.split(" ").join("-").toLowerCase() ??
-                            optOutLabel
-                        }
+                        id={labelId}
                         disabled={disabled}
                         onCheckedChange={handleCheckChange}
                     />
                     <label
-                        htmlFor={
-                            label?.split(" ").join("-").toLowerCase() ??
-                            optOutLabel
-                        }
+                        htmlFor={labelId}
                         className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
                     >
                         {optOutLabel}
                     </label>
                 </div>
             )}
-
+            {description && <FormDescription>{description}</FormDescription>}
             <FormMessage />
         </FormItem>
     );

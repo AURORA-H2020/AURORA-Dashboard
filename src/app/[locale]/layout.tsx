@@ -88,7 +88,7 @@ const RootLayout = async ({ children, params: { locale } }: Props) => {
                     color="#5bbad5"
                 />
                 <meta name="msapplication-TileColor" content="#da532c" />
-                <meta name="theme-color" content="#ffffff" />
+                <meta name="theme-color" content="#00c566" />
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"

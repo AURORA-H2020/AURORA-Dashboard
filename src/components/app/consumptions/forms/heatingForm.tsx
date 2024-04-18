@@ -213,9 +213,6 @@ const HeatingForm = ({
                                 placeholder={t("common.placeholder.selectDate")}
                                 label={t("ui.monthPicker.start")}
                                 maxDate={form.watch("heating.endDate").toDate()}
-                                description={t(
-                                    "app.form.heating.dateSelectDescription",
-                                )}
                             />
                         )}
                     />
@@ -231,6 +228,9 @@ const HeatingForm = ({
                                 minDate={form
                                     .watch("heating.startDate")
                                     .toDate()}
+                                description={t(
+                                    "app.form.heating.dateSelectDescription",
+                                )}
                             />
                         )}
                     />
