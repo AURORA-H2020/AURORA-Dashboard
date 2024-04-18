@@ -27,9 +27,11 @@ import { cn } from "@/lib/utilities";
 import { ExtendedUser } from "@/models/extensions";
 import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
-import { Grid } from "@radix-ui/themes";
+import { Flex, Grid } from "@radix-ui/themes";
 import React, { useEffect, useMemo, useState } from "react";
 import BlacklistUserModal from "./blacklistUser";
+import { useFormatter } from "next-intl";
+import { toast } from "sonner";
 
 const ViewUserModal = React.forwardRef(
     (
@@ -44,6 +46,8 @@ const ViewUserModal = React.forwardRef(
     ) => {
         const { user: loggedInUser } = useAuthContext();
         const { user, uid, blacklistData, children, className } = props;
+
+        const format = useFormatter();
 
         const userConsumptionSummaries = useMemo(
             () => user?.consumptionSummaries ?? [],
@@ -85,18 +89,99 @@ const ViewUserModal = React.forwardRef(
                 <Dialog open={isModalOpen} onOpenChange={handleCloseModal}>
                     <DialogContent className="sm:max-w-[1000px]">
                         <DialogHeader>
-                            <DialogTitle>User: {uid}</DialogTitle>
+                            <Flex
+                                direction="row"
+                                justify="between"
+                                align="center"
+                            >
+                                <DialogTitle>User: {uid}</DialogTitle>
+                                <Button
+                                    variant="outline"
+                                    className="w-24 mr-8"
+                                    onClick={() =>
+                                        navigator.clipboard
+                                            .writeText(`users/${uid}`)
+                                            .then(() =>
+                                                toast.success("Path copied"),
+                                            )
+                                    }
+                                >
+                                    Copy Path
+                                </Button>
+                            </Flex>
                         </DialogHeader>
                         <ScrollArea className="max-h-[80vh]">
-                            <p>
-                                <b>Gender:</b> {user?.gender}
-                            </p>
-                            <p>
-                                <b>Country:</b> {user?.country}
-                            </p>
-                            <p>
-                                <b>City:</b> {user?.city ?? "N/A"}
-                            </p>
+                            <Grid gap="2" columns="3">
+                                <Card className="m-2">
+                                    <CardHeader className="pb-6 font-bold">
+                                        User data
+                                    </CardHeader>
+                                    <CardContent>
+                                        <p>
+                                            <b>Gender:</b> {user?.gender}
+                                        </p>
+                                        <p>
+                                            <b>Country:</b> {user?.country}
+                                        </p>
+                                        <p>
+                                            <b>City:</b> {user?.city ?? "N/A"}
+                                        </p>
+                                    </CardContent>
+                                </Card>
+                                <Card className="m-2">
+                                    <CardHeader className="pb-6 font-bold">
+                                        Consumption Metadata
+                                    </CardHeader>
+                                    <CardContent>
+                                        <p>
+                                            <b>Consumption Version:</b>{" "}
+                                            {user.consumptionMeta?.version ??
+                                                "N/A"}
+                                        </p>
+                                        <p>
+                                            <b>Summary Recalulation:</b>{" "}
+                                            {user.consumptionMeta
+                                                ?.lastRecalculation
+                                                ? format.dateTime(
+                                                      new Date(
+                                                          user.consumptionMeta
+                                                              ?.lastRecalculation[
+                                                              "_seconds"
+                                                          ] * 1000,
+                                                      ),
+                                                  )
+                                                : "N/A"}
+                                        </p>
+                                    </CardContent>
+                                </Card>
+                                <Card className="m-2">
+                                    <CardHeader className="pb-6 font-bold">
+                                        Summary Metadata
+                                    </CardHeader>
+                                    <CardContent>
+                                        <p>
+                                            <b>Summary Version:</b>{" "}
+                                            {user.consumptionSummaryMeta
+                                                ?.version ?? "N/A"}
+                                        </p>
+                                        <p>
+                                            <b>Summary Recalulation:</b>{" "}
+                                            {user.consumptionSummaryMeta
+                                                ?.lastRecalculation
+                                                ? format.dateTime(
+                                                      new Date(
+                                                          user
+                                                              .consumptionSummaryMeta
+                                                              ?.lastRecalculation[
+                                                              "_seconds"
+                                                          ] * 1000,
+                                                      ),
+                                                  )
+                                                : "N/A"}
+                                        </p>
+                                    </CardContent>
+                                </Card>
+                            </Grid>
 
                             <BorderBox className="my-4">
                                 <p>
@@ -222,7 +307,16 @@ const ViewUserModal = React.forwardRef(
                             {blacklistData ? (
                                 <Button
                                     onClick={() =>
-                                        unBlacklistUser(loggedInUser, uid)
+                                        unBlacklistUser(loggedInUser, uid).then(
+                                            (success) =>
+                                                success
+                                                    ? toast.success(
+                                                          "User unblacklisted",
+                                                      )
+                                                    : toast.error(
+                                                          "Error unblacklisting user",
+                                                      ),
+                                        )
                                     }
                                     className="btn btn-primary"
                                     variant="default"
