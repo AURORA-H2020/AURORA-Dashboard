@@ -10,10 +10,12 @@ const auth = getAuth(firebaseApp);
  * @return {Promise<void>} A Promise that resolves when the logout process is complete.
  */
 export async function logout() {
-    try {
-        await signOut(auth);
-        window.location.reload(); // Refresh the page
-    } catch (error) {
-        console.error("Logout failed", error);
-    }
+    return await signOut(auth)
+        .then(() => {
+            return true;
+        })
+        .catch((error) => {
+            console.error("Logout failed", error);
+            return false;
+        });
 }

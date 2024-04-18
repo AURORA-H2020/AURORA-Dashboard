@@ -29,7 +29,11 @@
     },
     "auth": {
       "success": "Welcome to AURORA!",
-      "error": "An error occured. Please check your credentials."
+      "error": "An error occured. Please check your credentials.",
+      "logout": {
+        "success": "You successfully logged out. Goodbye!",
+        "error": "An error occured logging you out. Please try again."
+      }
     },
     "consumption": {
       "addedSuccessfully": "Your consumption was successfully added",

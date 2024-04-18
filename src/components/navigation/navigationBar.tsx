@@ -20,9 +20,10 @@ import {
 import { useAuthContext } from "@/context/AuthContext";
 import { logout } from "@/firebase/auth/logout";
 import { useUserRoles } from "@/firebase/firebaseHooks";
-import { Link, usePathname, useRouter } from "@/navigation";
+import { Link, usePathname } from "@/navigation";
 import { CircleUser, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 /**
  * Renders the navigation bar component.
@@ -36,16 +37,20 @@ const NavigationBar = (): React.ReactElement => {
 
     const { user } = useAuthContext();
     const { isAdmin } = useUserRoles(user?.uid);
-    const router = useRouter();
 
     /**
      * Logs the user out and redirects them to the home page.
      *
      * @return {Promise<void>} A promise that resolves when the user is logged out and redirected.
      */
-    const handleLogout = async (): Promise<void> => {
-        await logout();
-        router.replace("/");
+    const handleLogout = () => {
+        logout().then((success) => {
+            if (success) {
+                toast.success(t("toast.auth.logout.success"));
+            } else {
+                toast.error(t("toast.auth.logout.error"));
+            }
+        });
     };
 
     const menuItems = [

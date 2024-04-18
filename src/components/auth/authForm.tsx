@@ -57,7 +57,7 @@ const AuthenticationOptions = ({
 /**
  * Renders a sign-in form with tabs for email sign-in and sign-up options.
  *
- * @return {React.ReactNode} The sign-in form component
+ * @return {React.ReactElement} The sign-in form component
  */
 export const AuthForm = () => {
     const t = useTranslations();
