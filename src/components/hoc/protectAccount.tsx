@@ -1,6 +1,6 @@
 import { useAuthContext } from "@/context/AuthContext";
 import { AuthForm } from "@/components/auth/authForm";
-import LoadingSpinner from "@/components/ui/loading";
+import { LoadingSpinner } from "@/components/ui/loading";
 
 /**
  * Higher order component (HOC) that protects an account based route.

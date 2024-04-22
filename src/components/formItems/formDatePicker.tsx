@@ -138,4 +138,4 @@ const FormDatePicker = ({
     );
 };
 
-export default FormDatePicker;
+export { FormDatePicker };

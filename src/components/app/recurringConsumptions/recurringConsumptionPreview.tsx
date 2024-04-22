@@ -26,8 +26,8 @@ import { Flex, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
-import AddEditRecurringConsumptionModal from "./modals/addEditRecurringConsumptionModal";
-import RecurringConsumptionView from "./recurringConsumptionView";
+import { AddEditRecurringConsumptionModal } from "./modals/addEditRecurringConsumptionModal";
+import { RecurringConsumptionView } from "./recurringConsumptionView";
 
 /**
  * Renders a preview of a consumption object with interactive
@@ -206,4 +206,4 @@ const RecurringConsumptionPreview = ({
     );
 };
 
-export default RecurringConsumptionPreview;
+export { RecurringConsumptionPreview };

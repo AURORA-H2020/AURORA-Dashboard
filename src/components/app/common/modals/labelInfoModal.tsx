@@ -59,4 +59,4 @@ const LabelInfoModal = ({
     );
 };
 
-export default LabelInfoModal;
+export { LabelInfoModal };

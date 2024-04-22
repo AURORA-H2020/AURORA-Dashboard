@@ -1,6 +1,6 @@
 "use client";
 
-import LoadingSpinner from "@/components/ui/loading";
+import { LoadingSpinner } from "@/components/ui/loading";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { countriesMapping } from "@/lib/constants/constants";
 import { getMetaDataSummary } from "@/lib/transformData";
@@ -136,4 +136,4 @@ const ConsumptionAverageCompare = ({
     );
 };
 
-export default ConsumptionAverageCompare;
+export { ConsumptionAverageCompare };

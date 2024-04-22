@@ -1,4 +1,4 @@
-import ChangePasswordForm from "@/components/app/user/forms/changePasswordForm";
+import { ChangePasswordForm } from "@/components/app/user/forms/changePasswordForm";
 import {
     Dialog,
     DialogContent,
@@ -37,4 +37,4 @@ const ChangePasswordModal = ({
     );
 };
 
-export default ChangePasswordModal;
+export { ChangePasswordModal };

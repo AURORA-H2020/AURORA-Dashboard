@@ -1,6 +1,6 @@
 "use client";
 
-import AboutJson from "@/components/aboutPage/jsonView";
+import { AboutJson } from "@/components/aboutPage/jsonView";
 import { countriesMapping } from "@/lib/constants/constants";
 import { CountryData } from "@/models/countryData";
 
@@ -116,4 +116,4 @@ const AboutContent = ({
     );
 };
 
-export default AboutContent;
+export { AboutContent };

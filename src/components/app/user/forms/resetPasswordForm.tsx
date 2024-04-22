@@ -1,4 +1,4 @@
-import FormInputField from "@/components/formItems/formInputField";
+import { FormInputField } from "@/components/formItems/formInputField";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
@@ -79,4 +79,4 @@ const ResetPasswordForm = ({
     );
 };
 
-export default ResetPasswordForm;
+export { ResetPasswordForm };

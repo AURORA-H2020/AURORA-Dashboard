@@ -140,4 +140,4 @@ const GenderByCountryChart = ({
     );
 };
 
-export default GenderByCountryChart;
+export { GenderByCountryChart };

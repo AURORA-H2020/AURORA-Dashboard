@@ -22,4 +22,4 @@ const BorderBox = ({
     );
 };
 
-export default BorderBox;
+export { BorderBox };

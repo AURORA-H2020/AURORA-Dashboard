@@ -1,6 +1,6 @@
 "use client";
 
-import ConsumptionSummaryLabel from "@/components/app/summary/consumptionSummaryLabels/consumptionSummaryLabel";
+import { ConsumptionSummaryLabel } from "@/components/app/summary/consumptionSummaryLabels/consumptionSummaryLabel";
 import { consumptionMapping } from "@/lib/constants/consumptions";
 import { cn } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
@@ -61,4 +61,4 @@ const ConsumptionSummaryLabelGrid = ({
     );
 };
 
-export default ConsumptionSummaryLabelGrid;
+export { ConsumptionSummaryLabelGrid };

@@ -86,4 +86,4 @@ const FormPasswordField = ({
     );
 };
 
-export default FormPasswordField;
+export { FormPasswordField };

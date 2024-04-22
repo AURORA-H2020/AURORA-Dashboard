@@ -1,7 +1,7 @@
 "use client";
 
 import { Alert, AlertTitle } from "@/components/ui/alert";
-import MonthPicker from "@/components/ui/month-picker";
+import { MonthPicker } from "@/components/ui/month-picker";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { countriesMapping } from "@/lib/constants/constants";
 import { temporalData } from "@/lib/transformData";
@@ -165,4 +165,4 @@ const ConsumptionTimelineChart = ({
     );
 };
 
-export default ConsumptionTimelineChart;
+export { ConsumptionTimelineChart };

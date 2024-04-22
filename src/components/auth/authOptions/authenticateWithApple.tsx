@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import signIn from "@/firebase/auth/authentication";
+import { authenticate } from "@/firebase/auth/authentication";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
@@ -32,7 +32,7 @@ function AuthenticateWithApple({
      */
     async function handleAuthenticateWithApple() {
         try {
-            const { error } = await signIn("apple");
+            const { error } = await authenticate("apple");
             if (error) {
                 // Handle the error appropriately
                 console.error(error);
@@ -60,4 +60,4 @@ function AuthenticateWithApple({
     );
 }
 
-export default AuthenticateWithApple;
+export { AuthenticateWithApple };

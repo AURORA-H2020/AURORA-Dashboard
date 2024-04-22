@@ -55,4 +55,4 @@ const DataDownloads = ({
     );
 };
 
-export default DataDownloads;
+export { DataDownloads };

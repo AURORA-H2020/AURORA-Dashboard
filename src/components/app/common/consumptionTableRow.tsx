@@ -52,4 +52,4 @@ const ConsumptionTableRow = (
     );
 };
 
-export default ConsumptionTableRow;
+export { ConsumptionTableRow };

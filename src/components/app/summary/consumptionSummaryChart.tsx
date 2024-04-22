@@ -170,4 +170,4 @@ const ConsumptionSummaryChart = ({
     );
 };
 
-export default ConsumptionSummaryChart;
+export { ConsumptionSummaryChart };

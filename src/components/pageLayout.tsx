@@ -23,4 +23,4 @@ const PageLayout = ({ children, title }: Props): React.ReactNode => {
     );
 };
 
-export default PageLayout;
+export { PageLayout };

@@ -121,4 +121,4 @@ const FormSelect = ({
     );
 };
 
-export default FormSelect;
+export { FormSelect };

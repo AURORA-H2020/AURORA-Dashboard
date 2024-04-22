@@ -1,4 +1,4 @@
-import Dashboard from "@/app/[locale]/dashboard";
+import { Dashboard } from "@/app/[locale]/dashboard";
 import { SelectDashboardSource } from "@/components/dashboard/selectDashboardSource";
 import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
@@ -21,7 +21,7 @@ type Props = {
  *
  * @return {Promise<React.ReactNode>} The JSX element representing the Home component.
  */
-const Home = async ({
+const HomePage = async ({
     params: { locale },
     searchParams,
 }: Props): Promise<React.ReactNode> => {
@@ -76,4 +76,4 @@ const Home = async ({
     }
 };
 
-export default Home;
+export default HomePage;

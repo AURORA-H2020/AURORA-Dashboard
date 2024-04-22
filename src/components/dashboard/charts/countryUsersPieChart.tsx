@@ -54,4 +54,4 @@ const CountryUsersPieChart = ({
     );
 };
 
-export default CountryUsersPieChart;
+export { CountryUsersPieChart };

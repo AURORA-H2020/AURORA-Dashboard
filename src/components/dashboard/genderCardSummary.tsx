@@ -69,4 +69,4 @@ const GenderCardSummary = ({
     );
 };
 
-export default GenderCardSummary;
+export { GenderCardSummary };

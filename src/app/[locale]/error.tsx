@@ -1,6 +1,6 @@
 "use client";
 
-import PageLayout from "@/components/pageLayout";
+import { PageLayout } from "@/components/pageLayout";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 
@@ -44,4 +44,4 @@ const Error = ({ error, reset }: Props): React.ReactNode => {
     );
 };
 
-export default Error;
+export { Error };

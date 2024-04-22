@@ -1,11 +1,11 @@
 "use client";
 
-import BorderBox from "@/components/app/common/borderBox";
-import ResetPasswordModal from "@/components/app/user/modals/resetPasswordModal";
-import AuthenticateWithApple from "@/components/auth/authOptions/authenticateWithApple";
-import AuthenticateWithGoogle from "@/components/auth/authOptions/authenticateWithGoogle";
-import SignInWithEmail from "@/components/auth/authOptions/signInWithEmail";
-import SignUpWithEmail from "@/components/auth/authOptions/signUpWithEmail";
+import { BorderBox } from "@/components/app/common/borderBox";
+import { ResetPasswordModal } from "@/components/app/user/modals/resetPasswordModal";
+import { AuthenticateWithApple } from "@/components/auth/authOptions/authenticateWithApple";
+import { AuthenticateWithGoogle } from "@/components/auth/authOptions/authenticateWithGoogle";
+import { SignInWithEmail } from "@/components/auth/authOptions/signInWithEmail";
+import { SignUpWithEmail } from "@/components/auth/authOptions/signUpWithEmail";
 import { Button } from "@/components/ui/button";
 import {
     Card,

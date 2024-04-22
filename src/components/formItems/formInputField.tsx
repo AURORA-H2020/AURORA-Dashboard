@@ -153,4 +153,4 @@ const FormInputField = ({
     );
 };
 
-export default FormInputField;
+export { FormInputField };

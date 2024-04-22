@@ -1,4 +1,4 @@
-import LoadingSpinner from "@/components/ui/loading";
+import { LoadingSpinner } from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { useUserRoles } from "@/firebase/firebaseHooks";
 import { useRouter } from "@/navigation";

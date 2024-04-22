@@ -1,7 +1,7 @@
 "use client";
 
 import { UsersTable } from "@/components/admin/usersTable";
-import LoadingSpinner from "@/components/ui/loading";
+import { LoadingSpinner } from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { useFetchBlacklistedUsers } from "@/firebase/firebaseHooks";
 import { getLatestUserData } from "@/lib/firebaseUtils";

@@ -5,7 +5,7 @@ import {
     FormLabel,
     FormMessage,
 } from "@/components/ui/form";
-import MultipleSelector, { Option } from "@/components/ui/multiple-selector";
+import { MultipleSelector, Option } from "@/components/ui/multiple-selector";
 import { cn } from "@/lib/utilities";
 import { useEffect, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
@@ -75,4 +75,4 @@ const FormMultiSelect = ({
     );
 };
 
-export default FormMultiSelect;
+export { FormMultiSelect };

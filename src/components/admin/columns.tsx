@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
-import ViewUserModal from "./modals/viewUser";
+import { ViewUserModal } from "./modals/viewUser";
 import { UserRow } from "./usersTable";
 
 /**

@@ -1,7 +1,7 @@
 "use client";
 
-import BorderBox from "@/components/app/common/borderBox";
-import FormPasswordField from "@/components/formItems/formPasswordField";
+import { BorderBox } from "@/components/app/common/borderBox";
+import { FormPasswordField } from "@/components/formItems/formPasswordField";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
@@ -113,4 +113,4 @@ const ChangePasswordForm = ({
     );
 };
 
-export default ChangePasswordForm;
+export { ChangePasswordForm };

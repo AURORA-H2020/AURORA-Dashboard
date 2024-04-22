@@ -46,4 +46,4 @@ const FormTextField = ({
     </FormItem>
 );
 
-export default FormTextField;
+export { FormTextField };

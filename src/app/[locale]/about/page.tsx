@@ -5,8 +5,8 @@ import { getLatestCountryFile } from "@/lib/firebaseUtils";
 import { CountryData } from "@/models/countryData";
 import { Heading, Strong, Text } from "@radix-ui/themes";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
-import AboutContent from "./about";
-import DataDownloads from "./dataDownloads";
+import { AboutContent } from "./about";
+import { DataDownloads } from "./dataDownloads";
 
 type Props = {
     params: { locale: string };
@@ -21,7 +21,7 @@ type Props = {
  *
  * @return {Promise<React.ReactNode>} A promise that resolves with the rendered home page component.
  */
-const About = async ({
+const AboutPage = async ({
     params: { locale },
 }: Props): Promise<React.ReactNode> => {
     unstable_setRequestLocale(locale);
@@ -64,4 +64,4 @@ const About = async ({
     );
 };
 
-export default About;
+export default AboutPage;

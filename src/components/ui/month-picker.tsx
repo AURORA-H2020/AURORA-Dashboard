@@ -154,4 +154,4 @@ const MonthPicker = ({
     );
 };
 
-export default MonthPicker;
+export { MonthPicker };

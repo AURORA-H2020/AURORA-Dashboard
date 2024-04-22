@@ -1,8 +1,8 @@
-import FormInputField from "@/components/formItems/formInputField";
-import FormPasswordField from "@/components/formItems/formPasswordField";
+import { FormInputField } from "@/components/formItems/formInputField";
+import { FormPasswordField } from "@/components/formItems/formPasswordField";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
-import signUp from "@/firebase/auth/authentication";
+import { authenticate } from "@/firebase/auth/authentication";
 import { cn } from "@/lib/utilities";
 import { registrationSchema } from "@/lib/zod/authSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -50,7 +50,7 @@ function SignUpWithEmail({
      */
     async function handleSignUpWithEmail(values: z.infer<typeof formSchema>) {
         // Attempt to sign in with provided email and password
-        const { error } = await signUp(
+        const { error } = await authenticate(
             "email-signup",
             values.email,
             values.password,
@@ -113,4 +113,4 @@ function SignUpWithEmail({
     );
 }
 
-export default SignUpWithEmail;
+export { SignUpWithEmail };

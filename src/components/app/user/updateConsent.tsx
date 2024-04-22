@@ -12,7 +12,7 @@ import { User } from "firebase/auth";
 import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import DeleteAccountModal from "./modals/deleteAccountModal";
+import { DeleteAccountModal } from "./modals/deleteAccountModal";
 
 /**
  * Renders the UpdateConsent component.
@@ -88,4 +88,4 @@ const UpdateConsent = ({
     );
 };
 
-export default UpdateConsent;
+export { UpdateConsent };

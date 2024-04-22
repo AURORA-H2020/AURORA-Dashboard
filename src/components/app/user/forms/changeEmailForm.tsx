@@ -1,5 +1,5 @@
-import FormInputField from "@/components/formItems/formInputField";
-import FormPasswordField from "@/components/formItems/formPasswordField";
+import { FormInputField } from "@/components/formItems/formInputField";
+import { FormPasswordField } from "@/components/formItems/formPasswordField";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
@@ -101,4 +101,4 @@ const ChangeEmailForm = ({
     );
 };
 
-export default ChangeEmailForm;
+export { ChangeEmailForm };

@@ -59,4 +59,4 @@ const DetailedCard = ({
     );
 };
 
-export default DetailedCard;
+export { DetailedCard };

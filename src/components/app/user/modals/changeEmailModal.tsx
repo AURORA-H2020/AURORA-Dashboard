@@ -1,6 +1,6 @@
 "use client";
 
-import ChangeEmailForm from "@/components/app/user/forms/changeEmailForm";
+import { ChangeEmailForm } from "@/components/app/user/forms/changeEmailForm";
 import {
     Dialog,
     DialogContent,
@@ -39,4 +39,4 @@ const ChangeEmailModal = ({
     );
 };
 
-export default ChangeEmailModal;
+export { ChangeEmailModal };

@@ -1,4 +1,4 @@
-import BorderBox from "@/components/app/common/borderBox";
+import { BorderBox } from "@/components/app/common/borderBox";
 import {
     AlertDialog,
     AlertDialogAction,
@@ -121,4 +121,4 @@ const DeleteAccountModal = ({
     );
 };
 
-export default DeleteAccountModal;
+export { DeleteAccountModal };

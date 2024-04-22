@@ -1,6 +1,6 @@
 "use client";
 
-import LabelInfoModal from "@/components/app/common/modals/labelInfoModal";
+import { LabelInfoModal } from "@/components/app/common/modals/labelInfoModal";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -19,9 +19,9 @@ import { Box, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import { BarChart4, Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import PlaceholderCard from "./common/placeholderCard";
-import ConsumptionSummaryChart from "./summary/consumptionSummaryChart";
-import ConsumptionSummaryLabelGrid from "./summary/consumptionSummaryLabels/consumptionSummaryLabelGrid";
+import { PlaceholderCard } from "./common/placeholderCard";
+import { ConsumptionSummaryChart } from "./summary/consumptionSummaryChart";
+import { ConsumptionSummaryLabelGrid } from "./summary/consumptionSummaryLabels/consumptionSummaryLabelGrid";
 
 /**
  * Renders a consumption summary panel with a chart, labels, and selectors for measure and year.
@@ -158,4 +158,4 @@ const ConsumptionSummaryPanel = ({
     );
 };
 
-export default ConsumptionSummaryPanel;
+export { ConsumptionSummaryPanel };

@@ -21,7 +21,7 @@ const auth = getAuth(firebaseApp);
  * @return {Promise<{result: UserCredential | null; error: Error | null}>}
  * An object containing either the UserCredential or an error.
  */
-export default async function authenticate(
+export async function authenticate(
     method: "email-signin" | "email-signup" | "google" | "apple",
     email?: string,
     password?: string,

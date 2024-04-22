@@ -45,4 +45,4 @@ const Providers = ({
     );
 };
 
-export default Providers;
+export { Providers };

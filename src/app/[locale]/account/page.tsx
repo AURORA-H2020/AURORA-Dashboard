@@ -1,5 +1,5 @@
-import ConsumptionPanel from "@/components/app/consumptionPanel";
-import ConsumptionSummaryPanel from "@/components/app/consumptionSummaryPanel";
+import { ConsumptionPanel } from "@/components/app/consumptionPanel";
+import { ConsumptionSummaryPanel } from "@/components/app/consumptionSummaryPanel";
 import { Grid } from "@radix-ui/themes";
 
 /**

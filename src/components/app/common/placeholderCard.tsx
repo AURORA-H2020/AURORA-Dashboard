@@ -33,4 +33,4 @@ const PlaceholderCard = ({
     );
 };
 
-export default PlaceholderCard;
+export { PlaceholderCard };

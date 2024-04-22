@@ -1,6 +1,6 @@
 "use client";
 
-import RecurringTransportationForm from "@/components/app/recurringConsumptions/forms/recurringTransportationForm";
+import { RecurringTransportationForm } from "@/components/app/recurringConsumptions/forms/recurringTransportationForm";
 import {
     Dialog,
     DialogContent,
@@ -63,4 +63,4 @@ const AddEditRecurringConsumptionModal = React.forwardRef(
 AddEditRecurringConsumptionModal.displayName =
     "AddEditRecurringConsumptionModal";
 
-export default AddEditRecurringConsumptionModal;
+export { AddEditRecurringConsumptionModal };

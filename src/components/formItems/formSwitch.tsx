@@ -53,4 +53,4 @@ const FormSwitch = ({
     </FormItem>
 );
 
-export default FormSwitch;
+export { FormSwitch };

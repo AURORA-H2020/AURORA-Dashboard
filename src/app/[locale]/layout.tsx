@@ -1,6 +1,6 @@
-import Providers from "@/app/[locale]/providers";
-import Footer from "@/components/footer";
-import NavigationBar from "@/components/navigation/navigationBar";
+import { Providers } from "@/app/[locale]/providers";
+import { Footer } from "@/components/footer";
+import { NavigationBar } from "@/components/navigation/navigationBar";
 import { locales } from "@/config";
 import { cn } from "@/lib/utilities";
 import "@radix-ui/themes/styles.css";

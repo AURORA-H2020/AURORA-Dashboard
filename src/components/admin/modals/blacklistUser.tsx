@@ -1,6 +1,6 @@
 "use client";
 
-import BlacklistUserForm from "@/components/admin/forms/blacklistUserForm";
+import { BlacklistUserForm } from "@/components/admin/forms/blacklistUserForm";
 import {
     Dialog,
     DialogContent,
@@ -53,4 +53,4 @@ const BlacklistUserModal = React.forwardRef(
 
 BlacklistUserModal.displayName = "BlacklistUserModal";
 
-export default BlacklistUserModal;
+export { BlacklistUserModal };

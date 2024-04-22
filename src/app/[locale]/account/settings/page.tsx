@@ -1,10 +1,10 @@
 "use client";
 
-import ConsumptionTableRow from "@/components/app/common/consumptionTableRow";
-import ChangeEmailModal from "@/components/app/user/modals/changeEmailModal";
-import ChangePasswordModal from "@/components/app/user/modals/changePasswordModal";
-import DeleteAccountModal from "@/components/app/user/modals/deleteAccountModal";
-import EditUserDataModal from "@/components/app/user/modals/editUserDataModal";
+import { ConsumptionTableRow } from "@/components/app/common/consumptionTableRow";
+import { ChangeEmailModal } from "@/components/app/user/modals/changeEmailModal";
+import { ChangePasswordModal } from "@/components/app/user/modals/changePasswordModal";
+import { DeleteAccountModal } from "@/components/app/user/modals/deleteAccountModal";
+import { EditUserDataModal } from "@/components/app/user/modals/editUserDataModal";
 import { Button } from "@/components/ui/button";
 import {
     Card,
@@ -13,7 +13,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card";
-import LoadingSpinner from "@/components/ui/loading";
+import { LoadingSpinner } from "@/components/ui/loading";
 import { Table, TableBody } from "@/components/ui/table";
 import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
@@ -35,7 +35,7 @@ import { toast } from "sonner";
  *
  * @return {React.ReactNode} The user settings page component
  */
-const UserSettings = (): React.ReactNode => {
+const UserSettingsPage = (): React.ReactNode => {
     const t = useTranslations();
     const { user, loading } = useAuthContext();
     const { userData } = useFirebaseData();
@@ -269,4 +269,4 @@ const UserSettings = (): React.ReactNode => {
     );
 };
 
-export default UserSettings;
+export default UserSettingsPage;

@@ -1,4 +1,4 @@
-import PageLayout from "@/components/pageLayout";
+import { PageLayout } from "@/components/pageLayout";
 import { useTranslations } from "next-intl";
 
 // Note that `app/[locale]/[...rest]/page.tsx`
@@ -19,4 +19,4 @@ const NotFoundPage = (): React.ReactNode => {
     );
 };
 
-export default NotFoundPage;
+export { NotFoundPage };

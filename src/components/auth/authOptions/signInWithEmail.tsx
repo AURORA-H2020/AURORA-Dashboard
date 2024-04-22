@@ -1,8 +1,8 @@
-import FormInputField from "@/components/formItems/formInputField";
-import FormPasswordField from "@/components/formItems/formPasswordField";
+import { FormInputField } from "@/components/formItems/formInputField";
+import { FormPasswordField } from "@/components/formItems/formPasswordField";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
-import authenticate from "@/firebase/auth/authentication";
+import { authenticate } from "@/firebase/auth/authentication";
 import { cn } from "@/lib/utilities";
 import { loginSchema } from "@/lib/zod/authSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -105,4 +105,4 @@ const SignInWithEmail = ({
     );
 };
 
-export default SignInWithEmail;
+export { SignInWithEmail };

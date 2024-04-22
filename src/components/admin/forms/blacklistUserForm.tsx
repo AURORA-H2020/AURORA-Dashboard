@@ -1,4 +1,4 @@
-import FormSelect from "@/components/formItems/formSelect";
+import { FormSelect } from "@/components/formItems/formSelect";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
@@ -94,4 +94,4 @@ const BlacklistUserForm = ({
     );
 };
 
-export default BlacklistUserForm;
+export { BlacklistUserForm };

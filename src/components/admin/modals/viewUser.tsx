@@ -1,7 +1,7 @@
 "use client";
 
-import BorderBox from "@/components/app/common/borderBox";
-import ConsumptionSummaryChart from "@/components/app/summary/consumptionSummaryChart";
+import { BorderBox } from "@/components/app/common/borderBox";
+import { ConsumptionSummaryChart } from "@/components/app/summary/consumptionSummaryChart";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
@@ -29,7 +29,7 @@ import { BlacklistedUser } from "@/models/firestore/_export-user-data-blackliste
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { Flex, Grid } from "@radix-ui/themes";
 import React, { useEffect, useMemo, useState } from "react";
-import BlacklistUserModal from "./blacklistUser";
+import { BlacklistUserModal } from "./blacklistUser";
 import { useFormatter } from "next-intl";
 import { toast } from "sonner";
 
@@ -343,4 +343,4 @@ const ViewUserModal = React.forwardRef(
 
 ViewUserModal.displayName = "ViewUserModal";
 
-export default ViewUserModal;
+export { ViewUserModal };

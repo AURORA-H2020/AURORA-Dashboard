@@ -5,8 +5,8 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { Flex, Heading } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
-import UserDataForm from "./forms/userDataForm";
-import DeleteAccountModal from "./modals/deleteAccountModal";
+import { UserDataForm } from "./forms/userDataForm";
+import { DeleteAccountModal } from "./modals/deleteAccountModal";
 
 /**
  * Renders the initial registration component.
@@ -47,4 +47,4 @@ const InitialRegistration = (): React.ReactElement => {
     );
 };
 
-export default InitialRegistration;
+export { InitialRegistration };

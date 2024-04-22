@@ -1,9 +1,9 @@
 "use client";
 
-import BorderBox from "@/components/app/common/borderBox";
-import PlaceholderCard from "@/components/app/common/placeholderCard";
-import SimplePagination from "@/components/app/common/simplePagination";
-import RecurringConsumptionPreview from "@/components/app/recurringConsumptions/recurringConsumptionPreview";
+import { BorderBox } from "@/components/app/common/borderBox";
+import { PlaceholderCard } from "@/components/app/common/placeholderCard";
+import { SimplePagination } from "@/components/app/common/simplePagination";
+import { RecurringConsumptionPreview } from "@/components/app/recurringConsumptions/recurringConsumptionPreview";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -14,7 +14,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import LoadingSpinner from "@/components/ui/loading";
+import { LoadingSpinner } from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { usePaginatedRecurringConsumptions } from "@/firebase/firebaseHooks";
 import { cn } from "@/lib/utilities";
@@ -29,7 +29,7 @@ import { useTranslations } from "next-intl";
  * @param {Consumption[]} props.userConsumptions - The user's consumption data.
  * @return {React.ReactNode} The consumption list component.
  */
-const ConsumptionList = ({
+const RecurringConsumptionList = ({
     className,
 }: {
     className?: string;
@@ -126,4 +126,4 @@ const ConsumptionList = ({
     );
 };
 
-export default ConsumptionList;
+export { RecurringConsumptionList };

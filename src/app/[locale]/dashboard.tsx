@@ -1,17 +1,17 @@
 "use client";
 
-import AutoReport from "@/components/dashboard/autoReport";
-import ConsumptionTimelineChart from "@/components/dashboard/charts/consumptionTimelineChart";
-import CountryUsersPieChart from "@/components/dashboard/charts/countryUsersPieChart";
-import GenderByCountryChart from "@/components/dashboard/charts/genderByCountryChart";
-import LabelSummary from "@/components/dashboard/charts/labelSummary";
-import ConsumptionAverageCompare from "@/components/dashboard/consumptionAverageCompare";
-import ConsumptionCardSummary from "@/components/dashboard/consumptionCardSummary";
-import ConsumptionCardSummaryCategory from "@/components/dashboard/consumptionCardSummaryCategory";
-import DetailedCard from "@/components/dashboard/detailedCard";
+import { AutoReport } from "@/components/dashboard/autoReport";
+import { ConsumptionTimelineChart } from "@/components/dashboard/charts/consumptionTimelineChart";
+import { CountryUsersPieChart } from "@/components/dashboard/charts/countryUsersPieChart";
+import { GenderByCountryChart } from "@/components/dashboard/charts/genderByCountryChart";
+import { LabelSummary } from "@/components/dashboard/charts/labelSummary";
+import { ConsumptionAverageCompare } from "@/components/dashboard/consumptionAverageCompare";
+import { ConsumptionCardSummary } from "@/components/dashboard/consumptionCardSummary";
+import { ConsumptionCardSummaryCategory } from "@/components/dashboard/consumptionCardSummaryCategory";
+import { DetailedCard } from "@/components/dashboard/detailedCard";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Card, CardContent } from "@/components/ui/card";
-import MultipleSelector, { Option } from "@/components/ui/multiple-selector";
+import { MultipleSelector, Option } from "@/components/ui/multiple-selector";
 import {
     Select,
     SelectContent,
@@ -246,4 +246,4 @@ const Dashboard = ({
     );
 };
 
-export default Dashboard;
+export { Dashboard };

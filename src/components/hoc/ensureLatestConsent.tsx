@@ -1,7 +1,7 @@
 "use client";
 
-import UpdateConsent from "@/components/app/user/updateConsent";
-import LoadingSpinner from "@/components/ui/loading";
+import { UpdateConsent } from "@/components/app/user/updateConsent";
+import { LoadingSpinner } from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { firebaseApp } from "@/firebase/config";

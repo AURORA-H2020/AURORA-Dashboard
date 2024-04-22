@@ -37,4 +37,4 @@ const ThemeToggle = (): React.ReactElement => {
     );
 };
 
-export default ThemeToggle;
+export { ThemeToggle };

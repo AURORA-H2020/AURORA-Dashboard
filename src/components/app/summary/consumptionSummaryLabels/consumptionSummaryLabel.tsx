@@ -87,4 +87,4 @@ const ConsumptionSummaryLabel = ({
     );
 };
 
-export default ConsumptionSummaryLabel;
+export { ConsumptionSummaryLabel };

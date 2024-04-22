@@ -16,7 +16,7 @@ import Link from "next/link";
  * @param {React.ReactNode} props.children - The children to be rendered.
  * @return {React.ReactNode} The rendered AccountLayout component.
  */
-const AccountLayout = ({
+const AccountSettingsLayout = ({
     children,
 }: {
     children: React.ReactNode;
@@ -59,4 +59,4 @@ const AccountLayout = ({
     );
 };
 
-export default AccountLayout;
+export default AccountSettingsLayout;

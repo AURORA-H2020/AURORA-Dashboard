@@ -44,4 +44,4 @@ const Logo = (): React.ReactElement => {
     );
 };
 
-export default Logo;
+export { Logo };

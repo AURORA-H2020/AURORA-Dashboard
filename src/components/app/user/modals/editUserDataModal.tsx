@@ -1,6 +1,6 @@
 "use client";
 
-import UserDataForm from "@/components/app/user/forms/userDataForm";
+import { UserDataForm } from "@/components/app/user/forms/userDataForm";
 import {
     Dialog,
     DialogContent,
@@ -49,4 +49,4 @@ const EditUserDataModal = ({
     );
 };
 
-export default EditUserDataModal;
+export { EditUserDataModal };

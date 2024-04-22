@@ -53,4 +53,4 @@ const LocaleSwitcher = (): React.ReactElement => {
     );
 };
 
-export default LocaleSwitcher;
+export { LocaleSwitcher };

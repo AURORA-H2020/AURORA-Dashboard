@@ -1,9 +1,9 @@
 "use client";
 
-import BorderBox from "@/components/app/common/borderBox";
-import FormInputField from "@/components/formItems/formInputField";
-import FormSelect from "@/components/formItems/formSelect";
-import FormSwitch from "@/components/formItems/formSwitch";
+import { BorderBox } from "@/components/app/common/borderBox";
+import { FormInputField } from "@/components/formItems/formInputField";
+import { FormSelect } from "@/components/formItems/formSelect";
+import { FormSwitch } from "@/components/formItems/formSwitch";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { useAuthContext } from "@/context/AuthContext";
@@ -336,4 +336,4 @@ const UserDataForm = ({
     );
 };
 
-export default UserDataForm;
+export { UserDataForm };

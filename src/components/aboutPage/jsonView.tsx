@@ -12,4 +12,4 @@ const AboutJson = ({ data }: { data: Object }): React.ReactNode => {
     return <JsonView src={data} collapsed={1} />;
 };
 
-export default AboutJson;
+export { AboutJson };

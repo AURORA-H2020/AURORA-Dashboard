@@ -1,8 +1,8 @@
-import BorderBox from "@/components/app/common/borderBox";
-import FormDatePicker from "@/components/formItems/formDatePicker";
-import FormInputField from "@/components/formItems/formInputField";
-import FormSelect from "@/components/formItems/formSelect";
-import FormTextField from "@/components/formItems/formTextField";
+import { BorderBox } from "@/components/app/common/borderBox";
+import { FormDatePicker } from "@/components/formItems/formDatePicker";
+import { FormInputField } from "@/components/formItems/formInputField";
+import { FormSelect } from "@/components/formItems/formSelect";
+import { FormTextField } from "@/components/formItems/formTextField";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
@@ -326,4 +326,4 @@ const TransportationForm = ({
     );
 };
 
-export default TransportationForm;
+export { TransportationForm };

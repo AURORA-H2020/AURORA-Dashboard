@@ -67,4 +67,4 @@ const ConsumptionCardSummaryCategory = ({
     );
 };
 
-export default ConsumptionCardSummaryCategory;
+export { ConsumptionCardSummaryCategory };

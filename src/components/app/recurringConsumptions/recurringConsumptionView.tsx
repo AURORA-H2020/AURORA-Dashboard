@@ -1,6 +1,6 @@
 "use client";
 
-import ConsumptionTableRow from "@/components/app/common/consumptionTableRow";
+import { ConsumptionTableRow } from "@/components/app/common/consumptionTableRow";
 import { Table, TableBody } from "@/components/ui/table";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { weekdays } from "@/lib/constants/constants";
@@ -162,4 +162,4 @@ const RecurringConsumptionView = ({
     );
 };
 
-export default RecurringConsumptionView;
+export { RecurringConsumptionView };

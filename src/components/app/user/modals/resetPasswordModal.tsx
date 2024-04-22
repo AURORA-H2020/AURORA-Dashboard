@@ -1,6 +1,6 @@
 "use client";
 
-import ResetPasswordForm from "@/components/app/user/forms/resetPasswordForm";
+import { ResetPasswordForm } from "@/components/app/user/forms/resetPasswordForm";
 import {
     Dialog,
     DialogContent,
@@ -34,4 +34,4 @@ const ResetPasswordModal = ({ children }: { children: React.ReactNode }) => {
     );
 };
 
-export default ResetPasswordModal;
+export { ResetPasswordModal };

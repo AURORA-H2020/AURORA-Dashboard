@@ -37,4 +37,4 @@ const NotFound = (): React.ReactElement => {
     );
 };
 
-export default NotFound;
+export { NotFound };

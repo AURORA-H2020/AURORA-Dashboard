@@ -59,4 +59,4 @@ const ConsumptionCardSummary = ({
     );
 };
 
-export default ConsumptionCardSummary;
+export { ConsumptionCardSummary };

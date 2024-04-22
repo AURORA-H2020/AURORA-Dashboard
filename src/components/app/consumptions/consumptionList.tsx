@@ -1,9 +1,9 @@
 "use client";
 
-import BorderBox from "@/components/app/common/borderBox";
-import PlaceholderCard from "@/components/app/common/placeholderCard";
-import SimplePagination from "@/components/app/common/simplePagination";
-import ConsumptionPreview from "@/components/app/consumptions/consumptionPreview";
+import { BorderBox } from "@/components/app/common/borderBox";
+import { PlaceholderCard } from "@/components/app/common/placeholderCard";
+import { SimplePagination } from "@/components/app/common/simplePagination";
+import { ConsumptionPreview } from "@/components/app/consumptions/consumptionPreview";
 import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
@@ -14,7 +14,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import LoadingSpinner from "@/components/ui/loading";
+import { LoadingSpinner } from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { usePaginatedConsumptions } from "@/firebase/firebaseHooks";
 import { cn } from "@/lib/utilities";
@@ -122,4 +122,4 @@ const ConsumptionList = ({
     );
 };
 
-export default ConsumptionList;
+export { ConsumptionList };

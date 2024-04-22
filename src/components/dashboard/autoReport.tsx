@@ -169,4 +169,4 @@ const AutoReport = ({
     );
 };
 
-export default AutoReport;
+export { AutoReport };

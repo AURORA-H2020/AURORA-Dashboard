@@ -88,4 +88,4 @@ const SimplePagination = ({
     );
 };
 
-export default SimplePagination;
+export { SimplePagination };

@@ -1,6 +1,6 @@
 "use client";
 
-import LabelInfoModal from "@/components/app/common/modals/labelInfoModal";
+import { LabelInfoModal } from "@/components/app/common/modals/labelInfoModal";
 import { Button } from "@/components/ui/button";
 import {
     Select,
@@ -238,4 +238,4 @@ const LabelSummary = ({
     );
 };
 
-export default LabelSummary;
+export { LabelSummary };

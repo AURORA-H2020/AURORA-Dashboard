@@ -1,4 +1,4 @@
-import ConsumptionTableRow from "@/components/app/common/consumptionTableRow";
+import { ConsumptionTableRow } from "@/components/app/common/consumptionTableRow";
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { carbonUnit } from "@/lib/constants/constants";
@@ -316,4 +316,4 @@ const ConsumptionView = ({
     );
 };
 
-export default ConsumptionView;
+export { ConsumptionView };

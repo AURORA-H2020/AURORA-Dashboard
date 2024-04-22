@@ -1,7 +1,7 @@
 "use client";
 
-import Logo from "@/components/navigation/logo";
-import ThemeToggle from "@/components/navigation/themeToggle";
+import { Logo } from "@/components/navigation/logo";
+import { ThemeToggle } from "@/components/navigation/themeToggle";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import {
@@ -172,4 +172,4 @@ const NavigationBar = (): React.ReactElement => {
     );
 };
 
-export default NavigationBar;
+export { NavigationBar };

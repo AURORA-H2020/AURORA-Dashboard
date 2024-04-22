@@ -31,8 +31,8 @@ import { Flex, Text } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
-import ConsumptionView from "./consumptionView";
-import AddEditConsumptionModal from "./modals/addEditConsumptionModal";
+import { ConsumptionView } from "./consumptionView";
+import { AddEditConsumptionModal } from "./modals/addEditConsumptionModal";
 
 /**
  * Renders a preview of a consumption object with interactive
@@ -234,4 +234,4 @@ const ConsumptionPreview = ({
     );
 };
 
-export default ConsumptionPreview;
+export { ConsumptionPreview };

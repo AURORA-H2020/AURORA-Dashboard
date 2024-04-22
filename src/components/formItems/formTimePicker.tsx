@@ -77,4 +77,4 @@ const FormTimePicker = ({
     );
 };
 
-export default FormTimePicker;
+export { FormTimePicker };
