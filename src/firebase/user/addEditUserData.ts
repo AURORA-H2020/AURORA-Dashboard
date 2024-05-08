@@ -1,7 +1,7 @@
 import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
-import { User } from "@firebase/auth";
+import { User } from "firebase/auth";
 import {
     collection,
     deleteField,

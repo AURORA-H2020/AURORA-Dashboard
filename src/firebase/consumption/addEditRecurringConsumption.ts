@@ -3,7 +3,7 @@ import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { convertUnit } from "@/lib/utilities";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
-import { User } from "@firebase/auth";
+import { User } from "firebase/auth";
 import {
     addDoc,
     collection,
