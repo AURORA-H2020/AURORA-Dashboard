@@ -1,3 +1,6 @@
+import { genderMappings } from "@/lib/constants/constants";
+import { labelMappings } from "@/lib/constants/consumptions";
+import { getMonthShortName } from "@/lib/utilities";
 import {
     CalculationMode,
     ConsumptionsDetail,
@@ -11,8 +14,6 @@ import {
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { DateRange } from "react-day-picker";
-import { genderMappings, labelMappings } from "./constants";
-import { camelCaseToWords, getMonthShortName } from "./utilities";
 
 /**
  * Retrieves temporal data based on the provided parameters.
@@ -267,7 +268,6 @@ export function getMetaData(
                         if (!currentSource) {
                             currentSource = {
                                 source: source.source,
-                                sourceName: camelCaseToWords(source.source),
                                 count: 0,
                             };
                             summaryCategory.sources.push(currentSource);

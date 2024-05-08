@@ -1,40 +1,22 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import LoadingSpinner from "@/components/ui/loading";
+"use client";
+
+import { useFirebaseData } from "@/context/FirebaseContext";
+import { consumptionMapping } from "@/lib/constants/consumptions";
 import {
-    Select,
-    SelectContent,
-    SelectGroup,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/components/ui/select";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useAuthContext } from "@/context/AuthContext";
-import firebase_app from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
-import { categories, consumptionMapping } from "@/lib/constants";
-import {
-    getMonthShortName,
+    convertUnit,
     valueFormatterCarbon,
     valueFormatterEnergy,
 } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { Flex } from "@radix-ui/themes";
 import { BarChart } from "@tremor/react";
-import { User } from "firebase/auth";
-import { collection, getDocs, getFirestore, query } from "firebase/firestore";
-import { useTranslations } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-
-const firestore = getFirestore(firebase_app);
 
 interface CurrentSummary {
     month: number;
-    heating: number;
-    electricity: number;
-    transportation: number;
+    [key: string]: number;
 }
 
 /**
@@ -61,217 +43,131 @@ const findValueByCategory = (
 /**
  * React component for displaying consumption summary chart.
  */
-export default function ConsumptionSummaryChart() {
+const ConsumptionSummaryChart = ({
+    consumptionSummary,
+    measure,
+}: {
+    consumptionSummary: ConsumptionSummary;
+    measure: "carbonEmission" | "energyExpended";
+}) => {
     const t = useTranslations();
+    const format = useFormatter();
 
-    const { user, loading } = useAuthContext() as {
-        user: User;
-        loading: boolean;
-    };
+    const { userData } = useFirebaseData();
 
-    const [userConsumptionSummaries, setUserConsumptionSummaries] = useState<
-        ConsumptionSummary[]
+    const [currentSummary, setCurrentSummary] = useState<
+        CurrentSummary[] | undefined
     >([]);
 
-    const [currentSummary, setCurrentSummary] = useState<CurrentSummary[]>([]);
-
-    const [summaryYear, setSummaryYear] = useState<string>();
-
-    const [currentMeasure, setCurrentMeasure] = useState<
-        "carbonEmission" | "energyExpended"
-    >("carbonEmission");
-
-    /**
-     * Initializes summary data for 12 months with default values.
-     *
-     * @return {Array} Array of summary data for each month
-     */
-    const initializeSummaryData = () => {
-        return Array.from({ length: 12 }, (_, index) => ({
-            month: index + 1,
-            monthName: getMonthShortName(index + 1),
-            heating: 0,
-            electricity: 0,
-            transportation: 0,
-        }));
-    };
-
     useEffect(() => {
-        if (loading || !user) return;
+        if (!consumptionSummary) return;
 
-        /**
-         * Fetches the user consumption summaries from the database and updates the state with the fetched data.
-         *
-         * @param None
-         * @return {Promise<void>} A promise that resolves when the consumption summaries are fetched and the state is updated.
-         */
-        const fetchUserConsumptionSummaries = async () => {
-            try {
-                const userConsumptionsRef = collection(
-                    firestore,
-                    FirebaseConstants.collections.users.name,
-                    user.uid,
-                    FirebaseConstants.collections.users.consumptionSummaries
-                        .name,
-                );
-
-                const q = query(userConsumptionsRef);
-                const querySnapshot = await getDocs(q);
-                const fetchedSummaries = querySnapshot.docs.map((doc) => ({
-                    ...(doc.data() as ConsumptionSummary),
-                    id: doc.id,
-                }));
-
-                setUserConsumptionSummaries(fetchedSummaries);
-
-                // Determine the highest year value
-                const maxYear = fetchedSummaries.reduce(
-                    (max, summary) => Math.max(max, summary.year),
-                    0,
-                );
-
-                // Set the default state value for summaryYear to the highest year value
-                if (maxYear > 0) {
-                    setSummaryYear(maxYear.toString());
-                }
-            } catch (error) {
-                console.error("Error fetching consumption summaries: ", error);
-            }
+        const initializeSummaryData = () => {
+            return Array.from({ length: 12 }, (_, index) => ({
+                month: index + 1,
+                monthName: format.dateTime(new Date(2000, index, 15), {
+                    month: "short",
+                }),
+                [t(
+                    consumptionMapping.find((e) => e.category === "heating")
+                        ?.label,
+                )]: 0,
+                [t(
+                    consumptionMapping.find((e) => e.category === "electricity")
+                        ?.label,
+                )]: 0,
+                [t(
+                    consumptionMapping.find(
+                        (e) => e.category === "transportation",
+                    )?.label,
+                )]: 0,
+            }));
         };
-
-        fetchUserConsumptionSummaries();
-    }, [user, loading]);
-
-    useEffect(() => {
-        if (loading || !user || !summaryYear) return;
-
-        // This effect runs when summaryYear changes, including when it's initially set
-        const summaryData = userConsumptionSummaries.find(
-            (summary) => summary.year === parseInt(summaryYear),
-        );
 
         // Initialize with default values for each month
         const baseSummaryData = initializeSummaryData();
 
-        if (summaryData) {
-            const transformedData = summaryData.months.reduce((acc, month) => {
-                acc[month.number - 1] = {
-                    month: month.number,
-                    monthName: getMonthShortName(month.number),
-                    heating: findValueByCategory(
-                        month.categories,
-                        "heating",
-                        currentMeasure,
-                    ),
-                    electricity: findValueByCategory(
-                        month.categories,
-                        "electricity",
-                        currentMeasure,
-                    ),
-                    transportation: findValueByCategory(
-                        month.categories,
-                        "transportation",
-                        currentMeasure,
-                    ),
-                };
-                return acc;
-            }, baseSummaryData);
+        if (consumptionSummary) {
+            const transformedData = consumptionSummary.months.reduce(
+                (acc, month) => {
+                    acc[month.number - 1] = {
+                        month: month.number,
+                        monthName: format.dateTime(
+                            new Date(2000, month.number - 1, 15),
+                            {
+                                month: "short",
+                            },
+                        ),
+                        [t(
+                            consumptionMapping.find(
+                                (e) => e.category === "heating",
+                            )?.label,
+                        )]: convertUnit(
+                            findValueByCategory(
+                                month.categories,
+                                "heating",
+                                measure,
+                            ),
+                            measure === "carbonEmission" ? "kg" : "kWh",
+                            userData?.settings?.unitSystem ?? "metric",
+                        ).quantity,
+                        [t(
+                            consumptionMapping.find(
+                                (e) => e.category === "electricity",
+                            )?.label,
+                        )]: convertUnit(
+                            findValueByCategory(
+                                month.categories,
+                                "electricity",
+                                measure,
+                            ),
+                            measure === "carbonEmission" ? "kg" : "kWh",
+                            userData?.settings?.unitSystem ?? "metric",
+                        ).quantity,
+                        [t(
+                            consumptionMapping.find(
+                                (e) => e.category === "transportation",
+                            )?.label,
+                        )]: convertUnit(
+                            findValueByCategory(
+                                month.categories,
+                                "transportation",
+                                measure,
+                            ),
+                            measure === "carbonEmission" ? "kg" : "kWh",
+                            userData?.settings?.unitSystem ?? "metric",
+                        ).quantity,
+                    };
+                    return acc;
+                },
+                baseSummaryData,
+            );
 
-            setCurrentSummary(transformedData);
+            setCurrentSummary(transformedData as CurrentSummary[]);
         } else {
-            // If no data is found for the selected year, use the base summary with zeroes
-            setCurrentSummary(baseSummaryData);
+            setCurrentSummary(undefined);
         }
-    }, [user, loading, summaryYear, userConsumptionSummaries, currentMeasure]);
-
-    if (!user && loading) {
-        // Render loading indicator until the auth check is complete
-        return <LoadingSpinner />;
-    }
+    }, [measure, consumptionSummary, format, t, userData]);
 
     return (
-        <Card className="my-4">
-            <CardHeader>
-                <CardTitle>Summary</CardTitle>
-            </CardHeader>
-            <CardContent>
-                <Flex
-                    direction={{ initial: "column", xs: "row" }}
-                    className="gap-6 mt-6 mb-6"
-                >
-                    <Tabs
-                        defaultValue="carbonEmission"
-                        onValueChange={(value) => {
-                            if (
-                                value === "carbonEmission" ||
-                                value === "energyExpended"
-                            ) {
-                                setCurrentMeasure(value);
-                            }
-                            // Optionally, handle the case where the value is not expected
-                            else {
-                                console.error(
-                                    "Invalid value for setCurrentMeasure:",
-                                    value,
-                                );
-                            }
-                        }}
-                    >
-                        <div className="overflow-x-auto">
-                            <TabsList>
-                                <TabsTrigger value="carbonEmission">
-                                    {
-                                        // t("common.co2emission")
-                                        t.rich("common.co2emission", {
-                                            sub: (chunks) => (
-                                                <sub className="mr-1">
-                                                    {chunks}
-                                                </sub>
-                                            ),
-                                        })
-                                    }
-                                </TabsTrigger>
-                                <TabsTrigger value="energyExpended">
-                                    {t("common.energyUsage")}
-                                </TabsTrigger>
-                            </TabsList>
-                        </div>
-                    </Tabs>
-                    <Select value={summaryYear} onValueChange={setSummaryYear}>
-                        <SelectTrigger className="w-24">
-                            <SelectValue />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectGroup>
-                                {userConsumptionSummaries.map((summary) => {
-                                    return (
-                                        <SelectItem
-                                            value={summary.year.toString()}
-                                            key={summary.year}
-                                        >
-                                            {summary.year}
-                                        </SelectItem>
-                                    );
-                                })}
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-                </Flex>
-                <BarChart
-                    className="mt-4"
-                    yAxisWidth={80}
-                    data={currentSummary}
-                    index="monthName"
-                    categories={categories}
-                    colors={consumptionMapping.map((c) => c.colorPrimary)}
-                    valueFormatter={
-                        currentMeasure === "carbonEmission"
-                            ? valueFormatterCarbon
-                            : valueFormatterEnergy
-                    }
-                    stack={true}
-                />
-            </CardContent>
-        </Card>
+        <BarChart
+            className="mt-4"
+            data={currentSummary ?? []}
+            index="monthName"
+            categories={consumptionMapping.map((c) => t(c.label))}
+            colors={consumptionMapping.map((c) => c.colorPrimary)}
+            valueFormatter={
+                measure === "carbonEmission"
+                    ? (value) =>
+                          valueFormatterCarbon(
+                              value,
+                              userData?.settings?.unitSystem,
+                          )
+                    : valueFormatterEnergy
+            }
+            stack={true}
+        />
     );
-}
+};
+
+export { ConsumptionSummaryChart };

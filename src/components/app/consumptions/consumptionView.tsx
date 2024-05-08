@@ -1,25 +1,55 @@
-import { Consumption } from "@/models/extensions";
-
+import { ConsumptionTableRow } from "@/components/app/common/consumptionTableRow";
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
-import {
-    carbonUnit,
-    consumptionMapping,
-    kiloGramNumberFormatter,
-} from "@/lib/constants";
-import ConsumptionTableRow from "./consumptionTableRow";
+import { useFirebaseData } from "@/context/FirebaseContext";
+import { carbonUnit } from "@/lib/constants/constants";
+import { consumptionMapping } from "@/lib/constants/consumptions";
+import { getConsumptionUnit, useConvertUnit } from "@/lib/utilities";
+import { ConsumptionWithID } from "@/models/extensions";
+import { useFormatter, useTranslations } from "next-intl";
 
 /**
  * Renders a view displaying various attributes of a user's consumption
  * data in table rows, such as carbon emissions, costs, and dates.
  *
  * @param {Consumption} consumption - The consumption data to display
- * @return {JSX.Element} A React component that renders consumption data
+ * @return {React.ReactNode} A React component that renders consumption data
  */
-export default function ConsumptionView({
+const ConsumptionView = ({
     consumption,
 }: {
-    consumption: Consumption;
-}): JSX.Element {
+    consumption: ConsumptionWithID;
+}): React.ReactNode => {
+    const t = useTranslations();
+    const format = useFormatter();
+
+    const { userData, userCountryData } = useFirebaseData();
+
+    const convertedValue = useConvertUnit(
+        consumption.value,
+        getConsumptionUnit(
+            consumption,
+            userData?.settings?.unitSystem ?? "metric",
+        ).firebaseUnit,
+        userData?.settings?.unitSystem ?? "metric",
+    );
+
+    const convertedCarbonEmissions = useConvertUnit(
+        consumption.carbonEmissions,
+        "kg",
+        userData?.settings?.unitSystem ?? "metric",
+        carbonUnit,
+    );
+
+    const convertedFuelConsumption = useConvertUnit(
+        consumption.transportation?.fuelConsumption ?? undefined,
+        ["electricCar", "electricBike"].includes(
+            consumption?.transportation?.transportationType ?? "",
+        )
+            ? "kWh/100km"
+            : "L/100km",
+        userData?.settings?.unitSystem ?? "metric",
+    );
+
     const consumptionAttributes = consumptionMapping.find(
         (c) => c.category == consumption.category,
     );
@@ -29,40 +59,21 @@ export default function ConsumptionView({
             <Table className="mt-4 table-fixed">
                 <TableBody>
                     <ConsumptionTableRow
-                        label={consumptionAttributes?.unitLabel ?? ""}
+                        label={t(consumptionAttributes?.unitLabel) ?? ""}
                     >
-                        {consumption.carbonEmissions ? (
-                            <>
-                                {consumption.value
-                                    ? Math.round(
-                                          consumption.energyExpended || 0,
-                                      ) +
-                                      " " +
-                                      String(consumptionAttributes?.unit)
-                                    : ""}
-                            </>
-                        ) : (
-                            "Calculating..."
-                        )}{" "}
-                    </ConsumptionTableRow>
-                    <ConsumptionTableRow label="CO2-Emissions">
-                        {consumption.carbonEmissions ? (
-                            <>
-                                {kiloGramNumberFormatter.format(
-                                    consumption.carbonEmissions,
-                                )}
-                                {carbonUnit}
-                            </>
-                        ) : (
-                            "Calculating..."
-                        )}{" "}
+                        {convertedValue?.toString() ?? t("common.calculating")}
                     </ConsumptionTableRow>
 
-                    <ConsumptionTableRow label="Created At">
-                        {consumption.createdAt?.toDate().toDateString() || ""}
+                    <ConsumptionTableRow label={t("common.carbonEmissions")}>
+                        {convertedCarbonEmissions?.toString() ??
+                            t("common.calculating")}
                     </ConsumptionTableRow>
-                    <ConsumptionTableRow label="Updated At">
-                        {consumption.updatedAt?.toDate().toDateString() || ""}
+                    <ConsumptionTableRow label={t("common.energyUsage")}>
+                        {consumption.energyExpended
+                            ? format.number(consumption.energyExpended, {
+                                  maximumFractionDigits: 1,
+                              }) + " kWh"
+                            : t("common.calculating")}
                     </ConsumptionTableRow>
                 </TableBody>
             </Table>
@@ -70,27 +81,55 @@ export default function ConsumptionView({
             {consumption.electricity ? (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
-                        {consumption.electricity.costs ? (
-                            <ConsumptionTableRow label="Costs">
-                                {consumption.electricity.costs}
+                        {consumption.electricity.costs && (
+                            <ConsumptionTableRow label={t("app.form.costs")}>
+                                {format.number(consumption.electricity.costs, {
+                                    style: "currency",
+                                    currency:
+                                        userCountryData?.currencyCode ?? "EUR",
+                                })}
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
+                        {consumption.electricity.electricityExported && (
+                            <ConsumptionTableRow
+                                label={t("app.form.electricityExported")}
+                            >
+                                {consumption.electricity.electricityExported +
+                                    " kWh"}
+                            </ConsumptionTableRow>
+                        )}
 
-                        <ConsumptionTableRow label="People in household">
+                        <ConsumptionTableRow
+                            label={t("app.form.peopleInHousehold")}
+                        >
                             {consumption.electricity.householdSize}
                         </ConsumptionTableRow>
-                        <ConsumptionTableRow label="Electricity source">
-                            {consumption.electricity.electricitySource}
+                        <ConsumptionTableRow
+                            label={t("app.form.electricitySource")}
+                        >
+                            {t(
+                                `category.sources.${consumption.electricity.electricitySource}`,
+                            )}
                         </ConsumptionTableRow>
-                        <ConsumptionTableRow label="Beginning">
-                            {consumption.electricity.startDate
-                                ?.toDate()
-                                .toDateString()}
+                        <ConsumptionTableRow label={t("ui.monthPicker.start")}>
+                            {format.dateTime(
+                                consumption.electricity.startDate.toDate(),
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                },
+                            )}
                         </ConsumptionTableRow>
-                        <ConsumptionTableRow label="End">
-                            {consumption.electricity.startDate
-                                ?.toDate()
-                                .toDateString()}
+                        <ConsumptionTableRow label={t("ui.monthPicker.end")}>
+                            {format.dateTime(
+                                consumption.electricity.endDate.toDate(),
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                },
+                            )}
                         </ConsumptionTableRow>
                     </TableBody>
                 </Table>
@@ -99,82 +138,141 @@ export default function ConsumptionView({
             {consumption.heating ? (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
-                        {consumption.heating.costs ? (
-                            <ConsumptionTableRow label="Costs">
-                                {consumption.heating.costs}
+                        {consumption.heating.costs && (
+                            <ConsumptionTableRow label={t("app.form.costs")}>
+                                {format.number(consumption.heating.costs, {
+                                    style: "currency",
+                                    currency:
+                                        userCountryData?.currencyCode ?? "EUR",
+                                })}
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
 
-                        <ConsumptionTableRow label="People in household">
+                        <ConsumptionTableRow
+                            label={t("app.form.peopleInHousehold")}
+                        >
                             {consumption.heating.householdSize}
                         </ConsumptionTableRow>
-                        <ConsumptionTableRow label="Heating source">
-                            {consumption.heating.heatingFuel}
+                        <ConsumptionTableRow
+                            label={t("app.form.heating.heatingFuel")}
+                        >
+                            {t(
+                                `category.sources.${consumption.heating.heatingFuel}`,
+                            )}
                         </ConsumptionTableRow>
 
-                        {consumption.heating.districtHeatingSource ? (
-                            <ConsumptionTableRow label="District heating fuel">
-                                {consumption.heating.districtHeatingSource}
+                        {consumption.heating.districtHeatingSource && (
+                            <ConsumptionTableRow
+                                label={t(
+                                    "app.form.heating.districtHeatingSource",
+                                )}
+                            >
+                                {t(
+                                    `category.sources.${consumption.heating.districtHeatingSource}`,
+                                )}
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
 
-                        <ConsumptionTableRow label="Beginning">
-                            {consumption.heating.startDate
-                                ?.toDate()
-                                .toDateString()}
+                        <ConsumptionTableRow label={t("ui.monthPicker.start")}>
+                            {format.dateTime(
+                                consumption.heating.startDate?.toDate(),
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                },
+                            )}
                         </ConsumptionTableRow>
-                        <ConsumptionTableRow label="End">
-                            {consumption.heating.startDate
-                                ?.toDate()
-                                .toDateString()}
+                        <ConsumptionTableRow label={t("ui.monthPicker.end")}>
+                            {format.dateTime(
+                                consumption.heating.startDate?.toDate(),
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                },
+                            )}
                         </ConsumptionTableRow>
                     </TableBody>
                 </Table>
             ) : null}
 
-            {consumption.transportation ? (
+            {consumption.transportation && (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
-                        <ConsumptionTableRow label="Start of travel">
-                            {consumption.transportation.dateOfTravel
-                                .toDate()
-                                .toDateString()}
+                        <ConsumptionTableRow
+                            label={t("app.form.startOfTravel")}
+                        >
+                            {format.dateTime(
+                                consumption.transportation.dateOfTravel.toDate(),
+                                {
+                                    year: "numeric",
+                                    month: "long",
+                                    day: "numeric",
+                                    hour: "numeric",
+                                    minute: "numeric",
+                                },
+                            )}
                         </ConsumptionTableRow>
 
                         {consumption.transportation.dateOfTravelEnd ? (
-                            <ConsumptionTableRow label="End of travel">
-                                {consumption.transportation.dateOfTravelEnd
-                                    .toDate()
-                                    .toDateString()}
+                            <ConsumptionTableRow
+                                label={t("app.form.endOfTravel")}
+                            >
+                                {format.dateTime(
+                                    consumption.transportation.dateOfTravelEnd.toDate(),
+                                    {
+                                        year: "numeric",
+                                        month: "long",
+                                        day: "numeric",
+                                        hour: "numeric",
+                                        minute: "numeric",
+                                    },
+                                )}
                             </ConsumptionTableRow>
                         ) : null}
 
-                        <ConsumptionTableRow label="Transportation type">
-                            {consumption.transportation.transportationType}
+                        <ConsumptionTableRow
+                            label={t("app.form.transportationType")}
+                        >
+                            {t(
+                                `category.sources.${consumption.transportation.transportationType}`,
+                            )}
                         </ConsumptionTableRow>
 
-                        {consumption.transportation.privateVehicleOccupancy ? (
-                            <ConsumptionTableRow label="Occupancy">
+                        {consumption.transportation.fuelConsumption && (
+                            <ConsumptionTableRow
+                                label={t("app.form.fuelConsumption")}
+                            >
+                                {convertedFuelConsumption?.toString()}
+                            </ConsumptionTableRow>
+                        )}
+
+                        {consumption.transportation.privateVehicleOccupancy && (
+                            <ConsumptionTableRow
+                                label={t("app.form.occupancy")}
+                            >
                                 {
                                     consumption.transportation
                                         .privateVehicleOccupancy
                                 }
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
 
-                        {consumption.transportation.publicVehicleOccupancy ? (
-                            <ConsumptionTableRow label="Occupancy">
-                                {
-                                    consumption.transportation
-                                        .publicVehicleOccupancy
-                                }
+                        {consumption.transportation.publicVehicleOccupancy && (
+                            <ConsumptionTableRow
+                                label={t("app.form.occupancy")}
+                            >
+                                {t(
+                                    `app.form.publicVehicleOccupancy.${consumption.transportation.publicVehicleOccupancy}`,
+                                )}
                             </ConsumptionTableRow>
-                        ) : null}
+                        )}
                     </TableBody>
                 </Table>
-            ) : null}
+            )}
 
-            {consumption.description ? (
+            {consumption.description && (
                 <Table className="mt-4 table-fixed">
                     <TableBody>
                         <ConsumptionTableRow merged={true}>
@@ -182,23 +280,40 @@ export default function ConsumptionView({
                         </ConsumptionTableRow>
                     </TableBody>
                 </Table>
-            ) : null}
+            )}
 
             <Table className="mt-4 mb-4 table-fixed">
                 <TableBody>
-                    <ConsumptionTableRow label="Created At">
-                        {consumption.createdAt?.toDate().toDateString() || ""}
+                    <ConsumptionTableRow label={t("app.form.createdAt")}>
+                        {format.dateTime(consumption.createdAt.toDate(), {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
+                            hour: "numeric",
+                            minute: "numeric",
+                        })}
                     </ConsumptionTableRow>
-                    <ConsumptionTableRow label="Updated At">
-                        {consumption.updatedAt?.toDate().toDateString() || ""}
-                    </ConsumptionTableRow>
+                    {consumption.updatedAt && (
+                        <ConsumptionTableRow label={t("app.form.updatedAt")}>
+                            {format.dateTime(consumption.updatedAt?.toDate(), {
+                                year: "numeric",
+                                month: "long",
+                                day: "numeric",
+                                hour: "numeric",
+                                minute: "numeric",
+                            })}
+                        </ConsumptionTableRow>
+                    )}
                 </TableBody>
-                <TableCaption>
-                    {consumption.generatedByRecurringConsumptionId
-                        ? "This entry was automatically added via recurring consumptions."
-                        : null}
-                </TableCaption>
+
+                {consumption.generatedByRecurringConsumptionId && (
+                    <TableCaption>
+                        {t("app.form.recurringAutomaticDisclaimer")}
+                    </TableCaption>
+                )}
             </Table>
         </>
     );
-}
+};
+
+export { ConsumptionView };

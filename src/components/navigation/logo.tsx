@@ -7,9 +7,9 @@ import { useEffect, useState } from "react";
 /**
  * Renders the logo component.
  *
- * @return {JSX.Element} The logo component.
+ * @return {React.ReactElement} The logo component.
  */
-export default function Logo(): JSX.Element {
+const Logo = (): React.ReactElement => {
     const [mounted, setMounted] = useState(false);
     const { theme } = useTheme();
 
@@ -21,7 +21,7 @@ export default function Logo(): JSX.Element {
         return (
             <Image
                 src={"/logo/AURORA-logo-light.png"}
-                alt="Picture of the author"
+                alt="AURORA Logo"
                 height={100}
                 width={100}
                 className="object-scale-down h-8 w-30 mr-3"
@@ -36,10 +36,12 @@ export default function Logo(): JSX.Element {
                     ? "/logo/AURORA-logo-light.png"
                     : "/logo/AURORA-logo-dark.png"
             }
-            alt="Picture of the author"
+            alt="AURORA Logo"
             height={100}
             width={100}
             className="object-scale-down h-8 w-30 mr-3"
         />
     );
-}
+};
+
+export { Logo };

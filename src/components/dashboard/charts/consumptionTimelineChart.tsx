@@ -1,6 +1,9 @@
 "use client";
 
-import { countriesMapping } from "@/lib/constants";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import { MonthPicker } from "@/components/ui/month-picker";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { countriesMapping } from "@/lib/constants/constants";
 import { temporalData } from "@/lib/transformData";
 import {
     getSortedCountryLabels,
@@ -17,10 +20,6 @@ import { Info } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { SetStateAction, useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
-import { Alert, AlertTitle } from "../ui/alert";
-import MonthPicker from "../ui/month-picker";
-
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
 /**
  * Renders a Consumption Timeline Chart with various controls for energy mode, calculation mode, and date range.
@@ -28,9 +27,9 @@ import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
  * @param {GlobalSummary | undefined} globalSummaryData - The global summary data.
  * @param {ConsumptionCategory[]} categories - The consumption categories.
  * @param {string} title - The title of the chart.
- * @return {JSX.Element} The rendered consumption timeline chart.
+ * @return {React.ReactNode} The rendered consumption timeline chart.
  */
-export function ConsumptionTimelineChart({
+const ConsumptionTimelineChart = ({
     globalSummaryData,
     categories,
     title,
@@ -38,7 +37,7 @@ export function ConsumptionTimelineChart({
     globalSummaryData: GlobalSummary | undefined;
     categories: ConsumptionCategory[];
     title: string;
-}): JSX.Element {
+}): React.ReactNode => {
     const t = useTranslations();
     const locale = useLocale();
 
@@ -164,4 +163,6 @@ export function ConsumptionTimelineChart({
             )}
         </>
     );
-}
+};
+
+export { ConsumptionTimelineChart };

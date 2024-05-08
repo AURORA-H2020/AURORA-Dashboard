@@ -1,19 +1,22 @@
 import { Button } from "@/components/ui/button";
-import authenticate from "@/firebase/auth/authentication";
-import { useRouter } from "@/navigation";
-import { toast } from "sonner";
-
+import { authenticate } from "@/firebase/auth/authentication";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 /**
- * Renders a sign-in form and handles sign-in through email, Google,
- * or Apple. On successful sign-in, displays a success toast and
- * redirects to the account page.
+ * Renders a button component that handles authentication with Google.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isSignIn - Determines if the component is used for sign-in or sign-up.
+ * @return {React.ReactElement} The rendered button component.
  */
-function AuthenticateWithGoogle({ isSignIn = true }: { isSignIn?: boolean }) {
-    const router = useRouter();
+function AuthenticateWithGoogle({
+    isSignIn = true,
+}: {
+    isSignIn?: boolean;
+}): React.ReactElement {
     const t = useTranslations();
 
     /**
@@ -23,7 +26,6 @@ function AuthenticateWithGoogle({ isSignIn = true }: { isSignIn?: boolean }) {
      */
     const postSignIn = () => {
         toast.success(t("toast.auth.success"));
-        router.push("/account");
     };
 
     /**
@@ -50,7 +52,7 @@ function AuthenticateWithGoogle({ isSignIn = true }: { isSignIn?: boolean }) {
 
     return (
         <Button
-            className="w-full my-1"
+            className="w-full"
             onClick={() => handleAuthenticateWithGoogle()}
         >
             <FontAwesomeIcon icon={faGoogle} className="mr-2" />
@@ -61,4 +63,4 @@ function AuthenticateWithGoogle({ isSignIn = true }: { isSignIn?: boolean }) {
     );
 }
 
-export default AuthenticateWithGoogle;
+export { AuthenticateWithGoogle };

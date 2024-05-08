@@ -1,214 +1,214 @@
 {
-  "about": {
-    "carbonEmissionLabels": {
-      "title": "Oznake za emisije ogljika",
-      "description": "Podatki, ki jih uporabljamo za izračun oznake za emisije ogljika v {countryName}."
+    "about": {
+        "carbonEmissionLabels": {
+            "title": "Oznake za emisije ogljika",
+            "description": "Podatki, ki jih uporabljamo za izračun oznake za emisije ogljika v {countryName}."
+        },
+        "energyExpendedLabels": {
+            "title": "Oznake porabljene energije",
+            "description": "Podatki, ki jih uporabimo za izračun oznake za porabo energije v {countryName}."
+        },
+        "metrics": {
+            "title": "Metrike",
+            "description": "Podatki, ki jih uporabljamo za izračun emisij ogljika in porabe energije na podlagi podatkov o uporabnikih v {countryName}."
+        },
+        "downloadMetrics": "Metrike za prenos",
+        "countryData": {
+            "title": "Metrike aplikacij in podatki o oznakah",
+            "description": "V podporo odprti znanosti AURORA razkriva metrike, ki jih Energy Tracker uporablja za izračun <Strong>emisij ogljika</Strong>, <Strong>porabe energije</Strong> in <Strong>oznake</Strong>."
+        },
+        "downloads": {
+            "title": "Prenesi naše podatke",
+            "description": "Zgornje metrike in podatke o oznakah lahko prenesete."
+        }
     },
-    "energyExpendedLabels": {
-      "title": "Oznake porabljene energije",
-      "description": "Podatki, ki jih uporabimo za izračun oznake za porabo energije v {countryName}."
+    "toast": {
+        "dataDownload": {
+            "success": "Podatki so bili uspešno preneseni",
+            "error": "Podatkov ni bilo mogoče prenesti"
+        },
+        "auth": {
+            "success": "Dobrodošli v AURORI!",
+            "error": "Prišlo je do napake. Preverite svoja pooblastila."
+        }
     },
-    "metrics": {
-      "title": "Metrike",
-      "description": "Podatki, ki jih uporabljamo za izračun emisij ogljika in porabe energije na podlagi podatkov o uporabnikih v {countryName}."
+    "button": {
+        "downloadPending": "Prenašanje..."
     },
-    "downloadMetrics": "Metrike za prenos",
-    "countryData": {
-      "title": "Metrike aplikacij in podatki o oznakah",
-      "description": "V podporo odprti znanosti AURORA razkriva metrike, ki jih Energy Tracker uporablja za izračun <Strong>emisij ogljika</Strong>, <Strong>porabe energije</Strong> in <Strong>oznake</Strong>."
+    "dashboard": {
+        "filter": {
+            "allCategories": "Vse kategorije",
+            "selectCountries": "Izberi države",
+            "invalidData": "Izbranim filtrom ne ustrezajo nobeni podatki.",
+            "absolute": "Absolutno",
+            "relative": "Relativno"
+        },
+        "card": {
+            "userCount": "Skupno število uporabnikov aplikacije",
+            "individualConsumptions": "Skupno število posameznih porab",
+            "invalidDateRange": "Izberi veljavno datumsko območje"
+        },
+        "consumptionTimeline": {
+            "title": "Časovni okvir porabe: Povprečje na uporabnika"
+        },
+        "energylabels": {
+            "title": "Energijske oznake",
+            "description": "V okviru projekta AURORA je bil oblikovan niz oznak, ki občanom omogočajo jasno razumevanje njihovega trenutnega energetskega profila. Za porabo energije in emisije ogljika sta dodeljena ločena sklopa oznak."
+        },
+        "genderDistribution": {
+            "title": "Porazdelitev po spolu"
+        },
+        "averageCompare": {
+            "title": "Povprečna poraba na uporabnika"
+        },
+        "main": {
+            "title": "Energy Tracker: Nadzorna plošča"
+        },
+        "autoReport": {
+            "reportSnippets": {
+                "accountsCreated": "Za {countries} je bilo ustvarjenih {userCount} profilov.",
+                "genderDistribution": "Od teh uporabnikov se jih {femaleCount} opredeljuje kot ženska, {maleCount} kot moški, {nonBinaryCount} kot nebinarni in {otherCount} kot drugo.",
+                "totalConsumptions": "Ti uporabniki so skupaj ustvarili {totalConsumptions} porabe.",
+                "consumptionBreakdown": "{transportationCount} jih je povezanih s prevozom, {electricityCount} z električno energijo in {heatingCount} z ogrevanjem.",
+                "totalEmissions": "To pomeni skupno {totalEmissions}{unit} emisij ali {totalEnergy} kWh porabljene energije.",
+                "emissionsByCategory": "{transportationEmissions}{unit} so emisije prometa ({transportationEnergy} kWh), {electricityEmissions}{unit} električne energije ({electricityEnergy} kWh) in {heatingEmissions}{unit} ogrevanja ({heatingEnergy} kWh)."
+            },
+            "title": "Poročilo"
+        },
+        "snapshots": {
+            "lastUpdated": "Prikazani podatki so bili nazadnje posodobljeni",
+            "selectSnapshot": "Izberi drug posnetek",
+            "downloadSnapshot": "Prenesi ta posnetek"
+        }
     },
-    "downloads": {
-      "title": "Prenesi naše podatke",
-      "description": "Zgornje metrike in podatke o oznakah lahko prenesete."
+    "error": {
+        "title": "Zgodila se je napaka",
+        "notFound": {
+            "title": "Ni bilo najdeno",
+            "description": "Strani, ki jo iščeš, ni bilo mogoče najti."
+        },
+        "noData": "Podatki niso na voljo"
+    },
+    "metadata": {
+        "title": "AURORA Energy Tracker: Nadzorna plošča",
+        "description": "Razišči najnovejše statistike mobilne aplikacije AURORA Energy Tracker."
+    },
+    "ui": {
+        "auth": {
+            "orContinueWith": "Ali pa nadaljuj z",
+            "signIn": "Prijavi se",
+            "signUp": "Registriraj se",
+            "signInPrompt": "Prijavi se v svoj račun AURORA Energy Tracker.",
+            "signUpPrompt": "Registriraj se v AURORA Energy Tracker.",
+            "signInWithApple": "Prijavi se z Apple-om",
+            "signUpWithApple": "Registriraj se z Apple-om",
+            "signInWithGoogle": "Prijavi se z Googlom",
+            "signUpWithGoogle": "Registriraj se z Googlom",
+            "email": "E-pošta",
+            "password": "Geslo"
+        },
+        "datePicker": {
+            "selectDateRange": "Izberi veljavno datumsko območje"
+        },
+        "monthPicker": {
+            "start": "Začetek",
+            "end": "Konec"
+        }
+    },
+    "common": {
+        "co2emission": "Emisije<sub>CO2</sub> ",
+        "energyUsage": "Poraba energije",
+        "and": "in ",
+        "placeholder": {
+            "selectValue": "Izberi vrednost"
+        },
+        "cancel": "Prekliči"
+    },
+    "country": {
+        "allSelectedCountries": "Vse izbrane države",
+        "denmark": "Danska",
+        "portugal": "Portugalska",
+        "slovenia": "Slovenija",
+        "spain": "Španija",
+        "unitedKingdom": "Združeno kraljestvo",
+        "zeuropeOther": "Ostali v EU"
+    },
+    "footer": {
+        "auroraWebsite": "Spletna stran AURORA",
+        "iosApp": "Aplikacija za iOS",
+        "androidApp": "Aplikacija za Android",
+        "fundingNotice": "Ta projekt je financiran iz programa Evropske unije za raziskave in inovacije Obzorje 2020 v okviru sporazuma o dodelitvi sredstev št. 101036418."
+    },
+    "navigation": {
+        "menu": {
+            "dashboard": "Nadzorna plošča",
+            "about": "O",
+            "account": "Račun",
+            "logout": "Odjava"
+        }
+    },
+    "language": {
+        "english": "Angleščina",
+        "german": "Nemščina",
+        "danish": "Danščina",
+        "portuguese": "Portugalščina",
+        "slovenian": "Slovenščina",
+        "spanish": "Španščina"
+    },
+    "countrySpecial": {
+        "unitedKingdom": "Združeno kraljestvo",
+        "zeuropeOther": "ostali v EU"
+    },
+    "gender": {
+        "female": "Ženska",
+        "male": "Moški",
+        "nonBinary": "Nebinarno",
+        "other": "Ostalo"
+    },
+    "label": {
+        "aPlus": "Avantgardist",
+        "a": "Ambasador",
+        "b": "Brezhibnež",
+        "c": "Ciljno usmerjen",
+        "d": "Dosegaš cilj",
+        "e": "Enostavno dosegljivo",
+        "f": "Faza poskusov",
+        "g": "Gradnja temeljev"
+    },
+    "category": {
+        "electricity": "Električna energija",
+        "transportation": "Prevozi",
+        "heating": "Ogrevanje"
+    },
+    "unitLabel": {
+        "eneryUsage": "Poraba energije",
+        "distance": "Razdalja"
+    },
+    "month": {
+        "january": "Januar",
+        "february": "Februar",
+        "march": "Marec",
+        "april": "April",
+        "may": "Maj",
+        "june": "Junij",
+        "july": "Julij",
+        "august": "Avgust",
+        "september": "September",
+        "october": "Oktober",
+        "november": "November",
+        "december": "December"
+    },
+    "app": {
+        "account": {
+            "comingSoon": "Prenesi svoje podatke ali izbriši svoj račun. V prihodnosti bomo uvedli še več funkcij.",
+            "myAccount": "Moj račun",
+            "downloadMyData": "Prenesi moje podatke",
+            "deleteAccount": {
+                "button": "Izbriši moj račun",
+                "title": "Si prepričan, da želiš izbrisati svoj račun?",
+                "description": "Tega dejanja ni mogoče preklicati. S tem boš trajno izbrisal svoj račun in odstranil svoje podatke iz naših strežnikov.",
+                "confirm": "Izbriši račun"
+            }
+        }
     }
-  },
-  "toast": {
-    "dataDownload": {
-      "success": "Podatki so bili uspešno preneseni",
-      "error": "Podatkov ni bilo mogoče prenesti"
-    },
-    "auth": {
-      "success": "Dobrodošli v AURORI!",
-      "error": "Prišlo je do napake. Preverite svoja pooblastila."
-    }
-  },
-  "button": {
-    "downloadPending": "Prenašanje..."
-  },
-  "dashboard": {
-    "filter": {
-      "allCategories": "Vse kategorije",
-      "selectCountries": "Izberi države",
-      "invalidData": "Izbranim filtrom ne ustrezajo nobeni podatki.",
-      "absolute": "Absolutno",
-      "relative": "Relativno"
-    },
-    "card": {
-      "userCount": "Skupno število uporabnikov aplikacije",
-      "individualConsumptions": "Skupno število posameznih porab",
-      "invalidDateRange": "Izberi veljavno datumsko območje"
-    },
-    "consumptionTimeline": {
-      "title": "Časovni okvir porabe: Povprečje na uporabnika"
-    },
-    "energylabels": {
-      "title": "Energijske oznake",
-      "description": "V okviru projekta AURORA je bil oblikovan niz oznak, ki občanom omogočajo jasno razumevanje njihovega trenutnega energetskega profila. Za porabo energije in emisije ogljika sta dodeljena ločena sklopa oznak."
-    },
-    "genderDistribution": {
-      "title": "Porazdelitev po spolu"
-    },
-    "averageCompare": {
-      "title": "Povprečna poraba na uporabnika"
-    },
-    "main": {
-      "title": "Energy Tracker: Nadzorna plošča"
-    },
-    "autoReport": {
-      "reportSnippets": {
-        "accountsCreated": "Za {countries} je bilo ustvarjenih {userCount} profilov.",
-        "genderDistribution": "Od teh uporabnikov se jih {femaleCount} opredeljuje kot ženska, {maleCount} kot moški, {nonBinaryCount} kot nebinarni in {otherCount} kot drugo.",
-        "totalConsumptions": "Ti uporabniki so skupaj ustvarili {totalConsumptions} porabe.",
-        "consumptionBreakdown": "{transportationCount} jih je povezanih s prevozom, {electricityCount} z električno energijo in {heatingCount} z ogrevanjem.",
-        "totalEmissions": "To pomeni skupno {totalEmissions}{unit} emisij ali {totalEnergy} kWh porabljene energije.",
-        "emissionsByCategory": "{transportationEmissions}{unit} so emisije prometa ({transportationEnergy} kWh), {electricityEmissions}{unit} električne energije ({electricityEnergy} kWh) in {heatingEmissions}{unit} ogrevanja ({heatingEnergy} kWh)."
-      },
-      "title": "Poročilo"
-    },
-    "snapshots": {
-      "lastUpdated": "Prikazani podatki so bili nazadnje posodobljeni",
-      "selectSnapshot": "Izberi drug posnetek",
-      "downloadSnapshot": "Prenesi ta posnetek"
-    }
-  },
-  "error": {
-    "title": "Zgodila se je napaka",
-    "notFound": {
-      "title": "Ni bilo najdeno",
-      "description": "Strani, ki jo iščeš, ni bilo mogoče najti."
-    },
-    "noData": "Podatki niso na voljo"
-  },
-  "metadata": {
-    "title": "AURORA Energy Tracker: Nadzorna plošča",
-    "description": "Razišči najnovejše statistike mobilne aplikacije AURORA Energy Tracker."
-  },
-  "ui": {
-    "auth": {
-      "orContinueWith": "Ali pa nadaljuj z",
-      "signIn": "Prijavi se",
-      "signUp": "Registriraj se",
-      "signInPrompt": "Prijavi se v svoj račun AURORA Energy Tracker.",
-      "signUpPrompt": "Registriraj se v AURORA Energy Tracker.",
-      "signInWithApple": "Prijavi se z Apple-om",
-      "signUpWithApple": "Registriraj se z Apple-om",
-      "signInWithGoogle": "Prijavi se z Googlom",
-      "signUpWithGoogle": "Registriraj se z Googlom",
-      "email": "E-pošta",
-      "password": "Geslo"
-    },
-    "datePicker": {
-      "selectDateRange": "Izberi veljavno datumsko območje"
-    },
-    "monthPicker": {
-      "start": "Začetek",
-      "end": "Konec"
-    }
-  },
-  "common": {
-    "co2emission": "Emisije<sub>CO2</sub> ",
-    "energyUsage": "Poraba energije",
-    "and": "in ",
-    "placeholder": {
-      "selectValue": "Izberi vrednost"
-    },
-    "cancel": "Prekliči"
-  },
-  "country": {
-    "allSelectedCountries": "Vse izbrane države",
-    "denmark": "Danska",
-    "portugal": "Portugalska",
-    "slovenia": "Slovenija",
-    "spain": "Španija",
-    "unitedKingdom": "Združeno kraljestvo",
-    "zeuropeOther": "Ostali v EU"
-  },
-  "footer": {
-    "auroraWebsite": "Spletna stran AURORA",
-    "iosApp": "Aplikacija za iOS",
-    "androidApp": "Aplikacija za Android",
-    "fundingNotice": "Ta projekt je financiran iz programa Evropske unije za raziskave in inovacije Obzorje 2020 v okviru sporazuma o dodelitvi sredstev št. 101036418."
-  },
-  "navigation": {
-    "menu": {
-      "dashboard": "Nadzorna plošča",
-      "about": "O",
-      "account": "Račun",
-      "logout": "Odjava"
-    }
-  },
-  "language": {
-    "english": "Angleščina",
-    "german": "Nemščina",
-    "danish": "Danščina",
-    "portuguese": "Portugalščina",
-    "slovenian": "Slovenščina",
-    "spanish": "Španščina"
-  },
-  "countrySpecial": {
-    "unitedKingdom": "Združeno kraljestvo",
-    "zeuropeOther": "ostali v EU"
-  },
-  "gender": {
-    "female": "Ženska",
-    "male": "Moški",
-    "nonBinary": "Nebinarno",
-    "other": "Ostalo"
-  },
-  "label": {
-    "aPlus": "Avantgardist",
-    "a": "Ambasador",
-    "b": "Brezhibnež",
-    "c": "Ciljno usmerjen",
-    "d": "Dosegaš cilj",
-    "e": "Enostavno dosegljivo",
-    "f": "Faza poskusov",
-    "g": "Gradnja temeljev"
-  },
-  "category": {
-    "electricity": "Električna energija",
-    "transportation": "Prevozi",
-    "heating": "Ogrevanje"
-  },
-  "unitLabel": {
-    "eneryUsage": "Poraba energije",
-    "distance": "Razdalja"
-  },
-  "month": {
-    "january": "Januar",
-    "february": "Februar",
-    "march": "Marec",
-    "april": "April",
-    "may": "Maj",
-    "june": "Junij",
-    "july": "Julij",
-    "august": "Avgust",
-    "september": "September",
-    "october": "Oktober",
-    "november": "November",
-    "december": "December"
-  },
-  "app": {
-    "account": {
-      "comingSoon": "Prenesi svoje podatke ali izbriši svoj račun. V prihodnosti bomo uvedli še več funkcij.",
-      "myAccount": "Moj račun",
-      "downloadMyData": "Prenesi moje podatke",
-      "deleteAccount": {
-        "button": "Izbriši moj račun",
-        "title": "Si prepričan, da želiš izbrisati svoj račun?",
-        "description": "Tega dejanja ni mogoče preklicati. S tem boš trajno izbrisal svoj račun in odstranil svoje podatke iz naših strežnikov.",
-        "confirm": "Izbriši račun"
-      }
-    }
-  }
 }

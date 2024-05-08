@@ -1,46 +1,74 @@
-import { getConsumptionAttributes, titleCase } from "@/lib/utilities";
-import { Consumption } from "@/models/extensions";
-import { useState } from "react";
-import ConsumptionView from "./consumptionView";
-
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Flex, Heading, Text } from "@radix-ui/themes";
-
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-} from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
-import { carbonUnit, kiloGramNumberFormatter } from "@/lib/constants";
+"use client";
 
 import {
     AlertDialog,
     AlertDialogContent,
-    AlertDialogDescription,
     AlertDialogFooter,
     AlertDialogHeader,
     AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+    Dialog,
+    DialogContent,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { useAuthContext } from "@/context/AuthContext";
+import { useFirebaseData } from "@/context/FirebaseContext";
+import { deleteDocumentById } from "@/firebase/firestore/deleteDocumentById";
+import { carbonUnit } from "@/lib/constants/constants";
+import {
+    getConsumptionAttributes,
+    getConsumptionUnit,
+    useConvertUnit,
+} from "@/lib/utilities";
+import { ConsumptionWithID } from "@/models/extensions";
+import { Flex, Text } from "@radix-ui/themes";
+import { useFormatter, useTranslations } from "next-intl";
+import { useState } from "react";
 import { toast } from "sonner";
+import { ConsumptionView } from "./consumptionView";
+import { AddEditConsumptionModal } from "./modals/addEditConsumptionModal";
 
 /**
  * Renders a preview of a consumption object with interactive
  * elements such as modals for viewing, editing, and deleting.
  *
  * @param {Consumption} consumption - The consumption data to display.
- * @return {JSX.Element} A JSX element that includes the consumption
+ * @return {React.ReactNode} A JSX element that includes the consumption
  * card with modals for detailed view and deletion confirmation.
  */
-export default function ConsumptionPreview({
+const ConsumptionPreview = ({
     consumption,
 }: {
-    consumption: Consumption;
-}): JSX.Element {
+    consumption: ConsumptionWithID;
+}): React.ReactNode => {
+    const t = useTranslations();
+
+    const { user } = useAuthContext();
+    const { userData } = useFirebaseData();
+
+    const format = useFormatter();
+    const convertedValue = useConvertUnit(
+        consumption.value,
+        getConsumptionUnit(
+            consumption,
+            userData?.settings?.unitSystem ?? "metric",
+        ).firebaseUnit,
+        userData?.settings?.unitSystem ?? "metric",
+    );
+
+    const convertedCarbonEmissions = useConvertUnit(
+        consumption.carbonEmissions,
+        "kg",
+        userData?.settings?.unitSystem ?? "metric",
+        carbonUnit,
+    );
+
     const consumptionAttributes = getConsumptionAttributes(
         consumption.category,
     );
@@ -64,27 +92,19 @@ export default function ConsumptionPreview({
         }
     };
 
-    // Function to handle modal close
-    const closeModal = () => {
-        setModalOpen(false);
-    };
-
-    const acceptDelete = () => {
+    const handleDelete = async () => {
         setAlertOpen(false);
         setModalOpen(false);
 
-        // Wait .5 seconds before deleting
-        setTimeout(() => {
-            toast.success("Consumption deleted", {
-                description: "The consumption has been deleted.",
-            });
-        }, 500);
-
-        // TODO: Delete action
-    };
-
-    const cancelDelete = () => {
-        setAlertOpen(false);
+        deleteDocumentById(user, consumption.id, "consumptions").then(
+            (success) => {
+                if (success) {
+                    toast.success(t("toast.deleteConsumption.success"));
+                } else {
+                    toast.error(t("toast.deleteConsumption.error"));
+                }
+            },
+        );
     };
 
     return (
@@ -99,45 +119,41 @@ export default function ConsumptionPreview({
                             openModal();
                         }}
                     >
-                        <Flex direction={"column"}>
+                        <Flex direction={"row"} gap="4">
                             <div
                                 className={`bg-[${consumptionAttributes?.colorPrimary}] bg-opacity-20 rounded-full flex items-center justify-center w-12 h-12 text-[${consumptionAttributes?.colorPrimary}]`}
                             >
                                 {consumptionAttributes?.icon}
                             </div>
-                        </Flex>
-                        <Flex direction={"column"}>
-                            <Heading as="h3" size={"4"}>
-                                {titleCase(consumption.category)}
-                            </Heading>
-                            <Text>
-                                {consumption.updatedAt
-                                    ? consumption.updatedAt
-                                          .toDate()
-                                          .toDateString()
-                                    : ""}
-                            </Text>
+
+                            <Flex direction={"column"}>
+                                <Text className="font-bold">
+                                    {t(`category.${consumption.category}`)}
+                                </Text>
+                                <Text className="text-muted-foreground text-sm">
+                                    {consumption.createdAt
+                                        ? format.dateTime(
+                                              consumption.createdAt.toDate(),
+                                              {
+                                                  year: "numeric",
+                                                  month: "long",
+                                                  day: "numeric",
+                                                  hour: "numeric",
+                                                  minute: "numeric",
+                                              },
+                                          )
+                                        : ""}
+                                </Text>
+                            </Flex>
                         </Flex>
                         <Flex direction={"column"} align={"end"}>
                             <Text>
-                                {consumption.value
-                                    ? Math.round(consumption.value) +
-                                      " " +
-                                      String(consumptionAttributes?.unit)
-                                    : ""}
+                                {convertedValue?.toString() ??
+                                    t("common.calculating")}
                             </Text>
-                            <Separator className="my-1 w-[50%] self-center" />
                             <Text>
-                                {consumption.carbonEmissions ? (
-                                    <>
-                                        {kiloGramNumberFormatter.format(
-                                            consumption.carbonEmissions,
-                                        )}
-                                        {carbonUnit}
-                                    </>
-                                ) : (
-                                    "Calculating..."
-                                )}{" "}
+                                {convertedCarbonEmissions?.toString() ??
+                                    t("common.calculating")}
                             </Text>
                         </Flex>
                     </Flex>
@@ -146,36 +162,44 @@ export default function ConsumptionPreview({
 
             {/* Modal */}
 
-            <Dialog open={isModalOpen} onOpenChange={closeModal}>
-                <DialogContent>
+            <Dialog open={isModalOpen} onOpenChange={() => setModalOpen(false)}>
+                <DialogContent className="sm:max-w-lg">
                     <DialogHeader>
                         <DialogTitle>
-                            {titleCase(consumption.category)}
+                            {t(`category.${consumption.category}`)}
                         </DialogTitle>
-                        <DialogDescription>
-                            <ConsumptionView consumption={consumption} />
-                        </DialogDescription>
                     </DialogHeader>
-                    <DialogFooter className="flex sm:justify-between">
-                        {/* TODO: Add button functionality */}
+                    <ScrollArea className="max-h-[80vh]">
+                        <ConsumptionView consumption={consumption} />
 
-                        <Button
-                            className="self-left"
-                            variant={"destructive"}
-                            type="submit"
-                            onClick={() => setAlertOpen(true)}
-                        >
-                            Delete
-                        </Button>
-                        <Flex className="space-x-2">
-                            <Button variant={"outline"} type="submit">
-                                Edit
-                            </Button>
-                            <Button variant={"outline"} type="submit">
-                                Duplicate
-                            </Button>
-                        </Flex>
-                    </DialogFooter>
+                        <DialogFooter className="mt-4">
+                            <Flex justify="between" className="gap-2 w-full">
+                                <Button
+                                    variant={"destructive"}
+                                    onClick={() => setAlertOpen(true)}
+                                >
+                                    {t("common.delete")}
+                                </Button>
+                                <Flex className="gap-2">
+                                    <AddEditConsumptionModal
+                                        consumption={consumption}
+                                    >
+                                        <Button variant="outline">
+                                            {t("common.edit")}
+                                        </Button>
+                                    </AddEditConsumptionModal>
+                                    <AddEditConsumptionModal
+                                        consumption={consumption}
+                                        isDuplication={true}
+                                    >
+                                        <Button variant="outline">
+                                            {t("common.duplicate")}
+                                        </Button>
+                                    </AddEditConsumptionModal>
+                                </Flex>
+                            </Flex>
+                        </DialogFooter>
+                    </ScrollArea>
                 </DialogContent>
             </Dialog>
 
@@ -183,20 +207,31 @@ export default function ConsumptionPreview({
                 <AlertDialogContent>
                     <AlertDialogHeader>
                         <AlertDialogTitle>
-                            Are you absolutely sure?
+                            {t("app.form.deleteConsumptionDialogTitle")}
                         </AlertDialogTitle>
-                        <AlertDialogDescription>
-                            Are your sure you want to delete the entry?
-                        </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <Button onClick={cancelDelete}>Cancel</Button>
-                        <Button variant="destructive" onClick={acceptDelete}>
-                            Delete
-                        </Button>
+                        <Flex justify="between" className="gap-4">
+                            <Button
+                                onClick={() => setAlertOpen(false)}
+                                variant="outline"
+                                className="w-full"
+                            >
+                                {t("common.cancel")}
+                            </Button>
+                            <Button
+                                variant="destructive"
+                                onClick={handleDelete}
+                                className="w-full"
+                            >
+                                {t("common.delete")}
+                            </Button>
+                        </Flex>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>
         </>
     );
-}
+};
+
+export { ConsumptionPreview };

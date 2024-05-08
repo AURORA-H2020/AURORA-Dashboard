@@ -1,14 +1,12 @@
-import { MetaData } from "@/models/dashboard-data";
-
 import {
     Accordion,
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
 } from "@/components/ui/accordion";
-
-import { carbonUnit, countriesMapping } from "@/lib/constants";
+import { carbonUnitWeight, countriesMapping } from "@/lib/constants/constants";
 import { getMetaDataSummary } from "@/lib/transformData";
+import { MetaData } from "@/models/dashboard-data";
 import { Heading, Text } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
 
@@ -17,14 +15,14 @@ import { useFormatter, useTranslations } from "next-intl";
  *
  * @param {Object} props - The props object.
  * @param {MetaData | undefined} props.metaData - The metaData object containing the data for the report.
- * @return {JSX.Element} - The rendered report component.
+ * @return {React.ReactNode} - The rendered report component.
  */
 
-export default function AutoReport({
+const AutoReport = ({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}): JSX.Element {
+}): React.ReactNode => {
     const t = useTranslations();
     const format = useFormatter();
 
@@ -106,7 +104,7 @@ export default function AutoReport({
                     totalEmissions: format.number(
                         reportData.consumptions.total.carbonEmissions,
                     ),
-                    unit: carbonUnit,
+                    unit: carbonUnitWeight(),
                     totalEnergy: format.number(
                         reportData.consumptions.total.energyExpended,
                     ),
@@ -136,7 +134,7 @@ export default function AutoReport({
                         reportData.consumptions.heating.energyExpended,
                     ),
 
-                    unit: carbonUnit,
+                    unit: carbonUnitWeight(),
                 })}
             </Text>
         );
@@ -169,4 +167,6 @@ export default function AutoReport({
             )}
         </>
     );
-}
+};
+
+export { AutoReport };

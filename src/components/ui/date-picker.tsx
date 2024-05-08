@@ -53,4 +53,4 @@ const DatePicker = ({ dateRange, onChange }) => {
     );
 };
 
-export default DatePicker;
+export { DatePicker };

@@ -1,44 +1,37 @@
-import { useRouter } from "@/navigation";
+import { FormInputField } from "@/components/formItems/formInputField";
+import { FormPasswordField } from "@/components/formItems/formPasswordField";
+import { Button } from "@/components/ui/button";
+import { Form, FormField } from "@/components/ui/form";
+import { authenticate } from "@/firebase/auth/authentication";
+import { cn } from "@/lib/utilities";
+import { registrationSchema } from "@/lib/zod/authSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
-import { Button } from "@/components/ui/button";
-import {
-    Form,
-    FormControl,
-    FormField,
-    FormItem,
-    FormLabel,
-    FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import signUp from "@/firebase/auth/authentication";
-import { Strong } from "@radix-ui/themes";
-import { toast } from "sonner";
-import { useTranslations } from "next-intl";
-
-const formSchema = z.object({
-    email: z.string().min(2).max(50),
-    password: z.string().min(2).max(50),
-});
-
 /**
- * Function for signing up with email.
+ * Renders a form for signing up with email and password.
  *
- * @param {z.infer<typeof formSchema>} values - the form values
- * @return {JSX.Element} the sign up form
+ * @param {string} className - optional class name for styling
+ * @return {React.ReactNode} the rendered form component
  */
-function SignUpWithEmail(): JSX.Element {
+function SignUpWithEmail({
+    className,
+}: {
+    className?: string;
+}): React.ReactNode {
     const t = useTranslations();
-    const router = useRouter();
 
-    /* TODO: Add Password confirmation and validation (password strength) */
+    const formSchema = registrationSchema(t);
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             email: "",
             password: "",
+            confirmPassword: "",
         },
     });
 
@@ -47,7 +40,6 @@ function SignUpWithEmail(): JSX.Element {
      */
     const postSignUp = () => {
         toast.success(t("toast.auth.success"));
-        router.push("/account");
     };
 
     /**
@@ -58,7 +50,7 @@ function SignUpWithEmail(): JSX.Element {
      */
     async function handleSignUpWithEmail(values: z.infer<typeof formSchema>) {
         // Attempt to sign in with provided email and password
-        const { error } = await signUp(
+        const { error } = await authenticate(
             "email-signup",
             values.email,
             values.password,
@@ -66,7 +58,7 @@ function SignUpWithEmail(): JSX.Element {
 
         if (error) {
             // Display and log any sign-in errors
-            console.log(error);
+            console.error("Error signing in user: ", error);
             toast.error(t("toast.auth.error"));
         } else {
             postSignUp();
@@ -77,52 +69,48 @@ function SignUpWithEmail(): JSX.Element {
         <Form {...form}>
             <form
                 onSubmit={form.handleSubmit(handleSignUpWithEmail)}
-                className="space-y-8"
+                className={cn(className, "flex flex-col gap-4 w-full mt-4")}
             >
                 <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>
-                                <Strong>Email</Strong>
-                            </FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="email"
-                                    placeholder="Email"
-                                    {...field}
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
+                        <FormInputField
+                            field={field}
+                            inputType="email"
+                            placeholder={t("ui.auth.email")}
+                            label={t("ui.auth.email")}
+                        />
                     )}
                 />
                 <FormField
                     control={form.control}
                     name="password"
                     render={({ field }) => (
-                        <FormItem>
-                            <FormLabel>
-                                <Strong>Password</Strong>
-                            </FormLabel>
-                            <FormControl>
-                                <div className="relative">
-                                    <Input
-                                        type={"password"}
-                                        placeholder="Password"
-                                        {...field}
-                                    />
-                                </div>
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
+                        <FormPasswordField
+                            field={field}
+                            placeholder={t("ui.auth.password")}
+                            label={t("ui.auth.password")}
+                        />
                     )}
                 />
-                <Button type="submit">Sign up</Button>
+                <FormField
+                    control={form.control}
+                    name="confirmPassword"
+                    render={({ field }) => (
+                        <FormPasswordField
+                            field={field}
+                            placeholder={t("ui.auth.password")}
+                            label={t("ui.auth.confirmPassword")}
+                        />
+                    )}
+                />
+                <Button className="w-full" type="submit">
+                    {t("ui.auth.signUp")}
+                </Button>
             </form>
         </Form>
     );
 }
 
-export default SignUpWithEmail;
+export { SignUpWithEmail };

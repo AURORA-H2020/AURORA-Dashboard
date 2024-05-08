@@ -1,18 +1,23 @@
-import { useLocale, useTranslations } from "next-intl";
+"use client";
 
-import { useTransition } from "react";
-
-import { supportedLocales } from "@/lib/constants";
-import { usePathname, useRouter } from "@/navigation";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
+import { supportedLocales } from "@/lib/constants/constants";
+import { usePathname, useRouter } from "@/navigation";
+import { useLocale, useTranslations } from "next-intl";
+import { useTransition } from "react";
 
-export default function LocaleSwitcher() {
+/**
+ * Renders a locale switcher component that allows the user to select a different locale.
+ *
+ * @return {React.ReactElement} The rendered locale switcher component.
+ */
+const LocaleSwitcher = (): React.ReactElement => {
     const t = useTranslations();
     const locale = useLocale();
 
@@ -33,7 +38,9 @@ export default function LocaleSwitcher() {
             disabled={isPending}
         >
             <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Theme" />
+                <SelectValue
+                    placeholder={t("common.placeholder.selectLanguage")}
+                />
             </SelectTrigger>
             <SelectContent>
                 {supportedLocales.map((locale) => (
@@ -44,4 +51,6 @@ export default function LocaleSwitcher() {
             </SelectContent>
         </Select>
     );
-}
+};
+
+export { LocaleSwitcher };

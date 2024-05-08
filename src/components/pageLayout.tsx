@@ -1,9 +1,8 @@
-import { ReactNode } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
 type Props = {
-    children?: ReactNode;
-    title: ReactNode;
+    children?: React.ReactNode;
+    title: React.ReactNode;
 };
 
 /**
@@ -11,9 +10,9 @@ type Props = {
  *
  * @param {Object} children - the content to display in the layout
  * @param {string} title - the title of the page
- * @return {JSX.Element} the rendered page layout
+ * @return {React.ReactNode} the rendered page layout
  */
-export default function PageLayout({ children, title }: Props) {
+const PageLayout = ({ children, title }: Props): React.ReactNode => {
     return (
         <Card>
             <CardHeader>
@@ -22,4 +21,6 @@ export default function PageLayout({ children, title }: Props) {
             <CardContent>{children}</CardContent>
         </Card>
     );
-}
+};
+
+export { PageLayout };

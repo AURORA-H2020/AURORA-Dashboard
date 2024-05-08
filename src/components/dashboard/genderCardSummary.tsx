@@ -1,4 +1,4 @@
-import { genderMappings } from "@/lib/constants";
+import { genderMappings } from "@/lib/constants/constants";
 import { MetaData } from "@/models/dashboard-data";
 import { DonutChart, Legend } from "@tremor/react";
 import { useTranslations } from "next-intl";
@@ -9,13 +9,13 @@ import { useTranslations } from "next-intl";
  * @param {Object} props - The component props.
  * @param {MetaData | undefined} props.metaData - The metadata object containing gender data.
  * @param {string[]} props.countries - The list of countries to filter the metadata by.
- * @return {JSX.Element} The rendered GenderCardSummary component.
+ * @return {React.ReactNode} The rendered GenderCardSummary component.
  */
-export default function GenderCardSummary({
+const GenderCardSummary = ({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}): JSX.Element {
+}): React.ReactNode => {
     const t = useTranslations();
 
     let countFemale = 0;
@@ -67,4 +67,6 @@ export default function GenderCardSummary({
             />
         </>
     );
-}
+};
+
+export { GenderCardSummary };

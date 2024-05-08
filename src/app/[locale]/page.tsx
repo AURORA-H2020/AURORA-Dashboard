@@ -1,9 +1,6 @@
 import { Dashboard } from "@/app/[locale]/dashboard";
-
-import { promises as fs } from "fs";
-
 import { SelectDashboardSource } from "@/components/dashboard/selectDashboardSource";
-import firebase_app from "@/firebase/config";
+import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import {
     firebaseStorageDownloadFile,
@@ -11,6 +8,7 @@ import {
 } from "@/lib/firebaseUtils";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Heading } from "@radix-ui/themes";
+import { promises as fs } from "fs";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
 type Props = {
@@ -21,12 +19,12 @@ type Props = {
 /**
  * Asynchronous function that represents the Home component.
  *
- * @return {Promise<JSX.Element>} The JSX element representing the Home component.
+ * @return {Promise<React.ReactNode>} The JSX element representing the Home component.
  */
-export default async function Home({
+const HomePage = async ({
     params: { locale },
     searchParams,
-}: Props): Promise<JSX.Element> {
+}: Props): Promise<React.ReactNode> => {
     unstable_setRequestLocale(locale);
     const t = await getTranslations();
 
@@ -39,7 +37,7 @@ export default async function Home({
             "utf8",
         );
         globalSummaryData = JSON.parse(file);
-    } else if (firebase_app) {
+    } else if (firebaseApp) {
         fileList =
             (await firebaseStorageListDashboardFiles(
                 FirebaseConstants.buckets.auroraDashboard.folders.dashboardData
@@ -60,18 +58,22 @@ export default async function Home({
 
     if (globalSummaryData && fileList) {
         return (
-            <>
+            <div>
                 <Heading as="h1">{t("dashboard.main.title")}</Heading>
 
-                <Dashboard globalSummaryData={globalSummaryData} />
+                <div className="mt-8">
+                    <Dashboard globalSummaryData={globalSummaryData} />
+                </div>
                 <SelectDashboardSource
                     files={fileList}
                     currentFileDate={globalSummaryData?.date}
                     globalSummaryData={globalSummaryData}
                 />
-            </>
+            </div>
         );
     } else {
-        return <>Not found</>;
+        return <div>{t("error.notFound.title")}</div>;
     }
-}
+};
+
+export default HomePage;

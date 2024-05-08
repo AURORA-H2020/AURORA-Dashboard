@@ -1,128 +1,175 @@
 "use client";
 
-import { usePathname } from "@/navigation";
-import Link from "next/link";
-import Logo from "./logo";
-import ThemeToggle from "./themeToggle";
-
-import { Flex } from "@radix-ui/themes";
-import { Menu } from "lucide-react";
-import { ReactElement, useState } from "react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-
+import { Logo } from "@/components/navigation/logo";
+import { ThemeToggle } from "@/components/navigation/themeToggle";
+import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import {
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuSeparator,
+    DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+    Sheet,
+    SheetClose,
+    SheetContent,
+    SheetTrigger,
+} from "@/components/ui/sheet";
 import { useAuthContext } from "@/context/AuthContext";
 import { logout } from "@/firebase/auth/logout";
+import { useUserRoles } from "@/firebase/firebaseHooks";
+import { Link, usePathname } from "@/navigation";
+import { CircleUser, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
-
-const MenuItems = ({ items, pathname }) => {
-    const t = useTranslations();
-
-    return items.map((item, idx) => {
-        // Check if the current pathname is active.
-        const isActive =
-            pathname === item.path || pathname.startsWith(`${item.path}/`);
-
-        return (
-            <li key={idx}>
-                <Button
-                    className="w-full"
-                    variant={isActive ? "default" : "outline"}
-                >
-                    <Link href={item.path}>{t(item.title)}</Link>
-                </Button>
-            </li>
-        );
-    });
-};
+import { toast } from "sonner";
 
 /**
  * Renders the navigation bar component.
  *
  * @return {ReactElement} The rendered navigation bar component
  */
-export default function NavigationBar(): ReactElement {
+const NavigationBar = (): React.ReactElement => {
     const t = useTranslations();
 
     const pathname = usePathname();
 
     const { user } = useAuthContext();
+    const { isAdmin } = useUserRoles(user?.uid);
 
-    const [state, setState] = useState(false);
-
-    const handleLogout = async () => {
-        await logout();
+    /**
+     * Logs the user out and redirects them to the home page.
+     *
+     * @return {Promise<void>} A promise that resolves when the user is logged out and redirected.
+     */
+    const handleLogout = () => {
+        logout().then((success) => {
+            if (success) {
+                toast.success(t("toast.auth.logout.success"));
+            } else {
+                toast.error(t("toast.auth.logout.error"));
+            }
+        });
     };
 
-    // t("navigation.menu.dashboard")
-    // t("navigation.menu.about")
-    const menus = [
-        { title: "navigation.menu.dashboard", path: "/" },
-        { title: "navigation.menu.about", path: "/about" },
+    const menuItems = [
+        { title: t("navigation.menu.dashboard"), path: "/" },
+        { title: t("navigation.menu.about"), path: "/about" },
+        { title: t("navigation.menu.account"), path: "/account" },
     ];
 
-    // t("navigation.menu.account")
-    const loggedOutMenus = [
-        { title: "navigation.menu.account", path: "/account" },
-    ];
     const loggedInMenus = [
-        { title: "navigation.menu.account", path: "/account" },
+        { title: t("navigation.menu.account"), path: "/account" },
+        { title: t("navigation.account.settings"), path: "/account/settings" },
     ];
+
+    const adminMenus = [{ title: t("navigation.menu.admin"), path: "/admin" }];
 
     return (
-        <nav className="w-full">
-            <Card className="items-center px-4 max-w-screen-xl mx-auto md:flex md:px-8">
-                <div className="flex items-center justify-between py-3 md:py-5 md:block">
-                    <Flex direction={"row"} className="items-center">
-                        <Link href="/">
+        <Card className="flex items-center gap-4 p-4 md:px-8">
+            <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-md lg:gap-6">
+                <Link href="/" className="w-max">
+                    <Logo />
+                </Link>
+                {menuItems.map((item, idx) => {
+                    // Check if the current pathname is active.
+                    const isActive =
+                        pathname === item.path ||
+                        pathname.startsWith(`${item.path}/`);
+
+                    return (
+                        <Link
+                            key={`${idx}`}
+                            href={item.path}
+                            className={`${isActive ? "text-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground`}
+                        >
+                            {item.title}
+                        </Link>
+                    );
+                })}
+            </nav>
+            <Sheet>
+                <SheetTrigger asChild>
+                    <Button
+                        variant="outline"
+                        size="icon"
+                        className="shrink-0 md:hidden"
+                    >
+                        <Menu className="h-5 w-5" />
+                    </Button>
+                </SheetTrigger>
+                <SheetContent side="left">
+                    <nav className="grid gap-6 text-lg font-medium">
+                        <Link
+                            href="/"
+                            className="flex items-center gap-2 text-lg font-semibold"
+                        >
                             <Logo />
                         </Link>
-                        <ThemeToggle />
-                    </Flex>
+                        {menuItems.map((item, idx) => {
+                            // Check if the current pathname is active.
+                            const isActive =
+                                pathname === item.path ||
+                                pathname.startsWith(`${item.path}/`);
 
-                    <div className="md:hidden">
-                        <Button
-                            variant={state ? "secondary" : "outline"}
-                            className="p-2"
-                            onClick={() => setState(!state)}
-                        >
-                            <Menu />
-                        </Button>
-                    </div>
-                </div>
-
-                <div
-                    className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
-                        state ? "block" : "hidden"
-                    }`}
-                >
-                    <ul className="justify-end items-center space-y-2 md:flex md:space-x-6 md:space-y-0">
-                        <MenuItems items={menus} pathname={pathname} />
-                        {user ? (
-                            <>
-                                <MenuItems
-                                    items={loggedInMenus}
-                                    pathname={pathname}
-                                />
-                                <li>
-                                    <Button
-                                        variant={"secondary"}
-                                        className="w-full"
-                                        onClick={handleLogout}
+                            return (
+                                <SheetClose key={`${idx}`} asChild>
+                                    <Link
+                                        href={item.path}
+                                        className={`${isActive ? "text-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground`}
                                     >
-                                        {t("navigation.menu.logout")}
-                                    </Button>
-                                </li>
-                            </>
-                        ) : (
-                            <MenuItems
-                                items={loggedOutMenus}
-                                pathname={pathname}
-                            />
-                        )}
-                    </ul>
-                </div>
-            </Card>
-        </nav>
+                                        {item.title}
+                                    </Link>
+                                </SheetClose>
+                            );
+                        })}
+                    </nav>
+                </SheetContent>
+            </Sheet>
+            <div className="flex w-full justify-end items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+                <ThemeToggle />
+                {user && (
+                    <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                            <Button
+                                variant="secondary"
+                                size="icon"
+                                className="rounded-full"
+                            >
+                                <CircleUser className="h-5 w-5" />
+                            </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                            {loggedInMenus.map((menu, idx) => (
+                                <Link href={menu.path} key={`${idx}`}>
+                                    <DropdownMenuItem>
+                                        {menu.title}
+                                    </DropdownMenuItem>
+                                </Link>
+                            ))}
+                            {isAdmin && (
+                                <>
+                                    <DropdownMenuSeparator />
+                                    {adminMenus.map((menu, idx) => (
+                                        <Link href={menu.path} key={`${idx}`}>
+                                            <DropdownMenuItem>
+                                                {menu.title}
+                                            </DropdownMenuItem>
+                                        </Link>
+                                    ))}
+                                </>
+                            )}
+                            <DropdownMenuSeparator />
+                            <DropdownMenuItem onClick={handleLogout}>
+                                {t("navigation.menu.logout")}
+                            </DropdownMenuItem>
+                        </DropdownMenuContent>
+                    </DropdownMenu>
+                )}
+            </div>
+        </Card>
     );
-}
+};
+
+export { NavigationBar };

@@ -1,6 +1,13 @@
 "use client";
 
-// Client component with dropdown
+import { Button } from "@/components/ui/button";
+import { Calendar } from "@/components/ui/calendar";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+    Popover,
+    PopoverContent,
+    PopoverTrigger,
+} from "@/components/ui/popover";
 import { cn, downloadJsonAsFile } from "@/lib/utilities";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { usePathname, useRouter } from "@/navigation";
@@ -11,11 +18,15 @@ import { useFormatter, useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
-import { Button } from "../ui/button";
-import { Calendar } from "../ui/calendar";
-import { Card, CardContent } from "../ui/card";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 
+/**
+ * Renders the SelectDashboardSource component with file selection, date handling, and data download functionality.
+ *
+ * @param {string[]} files - An array of file names.
+ * @param {number} currentFileDate - The current file date.
+ * @param {GlobalSummary | undefined} globalSummaryData - The global summary data.
+ * @return {React.ReactElement} The rendered SelectDashboardSource component.
+ */
 export const SelectDashboardSource = ({
     files,
     currentFileDate,
@@ -24,7 +35,7 @@ export const SelectDashboardSource = ({
     files: string[];
     currentFileDate: number;
     globalSummaryData: GlobalSummary | undefined;
-}) => {
+}): React.ReactElement => {
     const t = useTranslations();
     const format = useFormatter();
 
@@ -99,7 +110,7 @@ export const SelectDashboardSource = ({
     };
 
     return (
-        <Card className="mb-6 mt-6">
+        <Card className="mb-4 mt-4">
             <CardContent className="p-6">
                 <Flex
                     className="gap-4"

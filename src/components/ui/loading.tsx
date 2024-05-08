@@ -28,4 +28,4 @@ const LoadingSpinner: React.FC<LoadingButtonProps> = ({ children }) => {
     );
 };
 
-export default LoadingSpinner;
+export { LoadingSpinner };

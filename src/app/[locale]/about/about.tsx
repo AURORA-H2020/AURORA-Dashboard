@@ -1,7 +1,7 @@
 "use client";
 
-import AboutJson from "@/components/aboutPage/jsonView";
-import { countriesMapping } from "@/lib/constants";
+import { AboutJson } from "@/components/aboutPage/jsonView";
+import { countriesMapping } from "@/lib/constants/constants";
 import { CountryData } from "@/models/countryData";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -12,13 +12,13 @@ import { useTranslations } from "next-intl";
  * Renders a JSON view of the provided data.
  *
  * @param {Object} data - The data to be displayed in the JSON view.
- * @return {JSX.Element} - The JSON view component.
+ * @return {React.ReactNode} - The JSON view component.
  */
-export default function AboutContent({
+const AboutContent = ({
     countryData,
 }: {
     countryData: CountryData | undefined;
-}): JSX.Element {
+}): React.ReactNode => {
     const t = useTranslations();
 
     return (
@@ -42,7 +42,7 @@ export default function AboutContent({
             {countriesMapping.map((country) => {
                 return (
                     <TabsContent value={country.code} key={country.code}>
-                        {countryData ? (
+                        {countryData && (
                             <Grid
                                 columns={{ initial: "1", md: "3" }}
                                 className="gap-2 md:space-x-4 max-md:space-y-4 mt-8"
@@ -108,12 +108,12 @@ export default function AboutContent({
                                     />
                                 </Flex>
                             </Grid>
-                        ) : (
-                            <></>
                         )}
                     </TabsContent>
                 );
             })}
         </Tabs>
     );
-}
+};
+
+export { AboutContent };

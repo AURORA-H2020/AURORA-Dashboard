@@ -1,22 +1,22 @@
-import { categories } from "@/lib/constants";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+import { categories } from "@/lib/constants/consumptions";
 import { getConsumptionAttributes } from "@/lib/utilities";
 import { MetaData } from "@/models/dashboard-data";
 import { Strong } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
 import React from "react";
-import { Alert, AlertTitle } from "../ui/alert";
 
 /**
  * Renders a summary of consumption card data based on the provided metaData.
  *
  * @param {{ metaData: MetaData | undefined }} - Object containing metaData
- * @return {JSX.Element} - The rendered consumption card summary
+ * @return {React.ReactNode} - The rendered consumption card summary
  */
-export default function ConsumptionCardSummary({
+const ConsumptionCardSummary = ({
     metaData,
 }: {
     metaData: MetaData | undefined;
-}): JSX.Element {
+}): React.ReactNode => {
     const t = useTranslations();
     const format = useFormatter();
 
@@ -57,4 +57,6 @@ export default function ConsumptionCardSummary({
             })}
         </>
     );
-}
+};
+
+export { ConsumptionCardSummary };

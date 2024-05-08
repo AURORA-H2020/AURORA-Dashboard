@@ -5,28 +5,32 @@ import { ConsumptionTransportationPublicVehicleOccupancy } from "../consumption/
  * A recurring consumption transportation
  */
 export interface RecurringConsumptionTransportation {
-  /**
-   * The type of transportation
-   */
-  transportationType: ConsumptionTransportationType;
-  /**
-   * The occupancy of a private vehicle
-   */
-  privateVehicleOccupancy?: number;
-  /**
-   * The occupancy of a public vehicle
-   */
-  publicVehicleOccupancy?: ConsumptionTransportationPublicVehicleOccupancy;
-  /**
-   * The hour of travel
-   */
-  hourOfTravel: number;
-  /**
-   * The minute of travel
-   */
-  minuteOfTravel: number;
-  /**
-   * The distance
-   */
-  distance: number;
+    /**
+     * The type of transportation
+     */
+    transportationType: ConsumptionTransportationType;
+    /**
+     * The fuel consumption
+     */
+    fuelConsumption?: number;
+    /**
+     * The occupancy of a private vehicle
+     */
+    privateVehicleOccupancy?: number;
+    /**
+     * The occupancy of a public vehicle
+     */
+    publicVehicleOccupancy?: ConsumptionTransportationPublicVehicleOccupancy;
+    /**
+     * The hour of travel
+     */
+    hourOfTravel: number;
+    /**
+     * The minute of travel
+     */
+    minuteOfTravel: number;
+    /**
+     * The distance
+     */
+    distance: number;
 }
