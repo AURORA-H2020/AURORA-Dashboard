@@ -7,7 +7,7 @@ import {
     firebaseStorageListDashboardFiles,
 } from "@/lib/firebaseUtils";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { Heading } from "@radix-ui/themes";
+import { Heading, Text } from "@radix-ui/themes";
 import { promises as fs } from "fs";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
 
@@ -69,6 +69,11 @@ const HomePage = async ({
                     currentFileDate={globalSummaryData?.date}
                     globalSummaryData={globalSummaryData}
                 />
+                <div className="text-center w-full">
+                    <Text className="text-muted-foreground italic">
+                        {t("dashboard.main.description")}
+                    </Text>
+                </div>
             </div>
         );
     } else {
