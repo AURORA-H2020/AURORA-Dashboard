@@ -185,7 +185,7 @@ const ConsumptionView = ({
                         </ConsumptionTableRow>
                         <ConsumptionTableRow label={t("ui.monthPicker.end")}>
                             {format.dateTime(
-                                consumption.heating.startDate?.toDate(),
+                                consumption.heating.endDate?.toDate(),
                                 {
                                     year: "numeric",
                                     month: "long",
