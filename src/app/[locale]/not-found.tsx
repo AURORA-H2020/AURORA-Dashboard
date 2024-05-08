@@ -19,4 +19,4 @@ const NotFoundPage = (): React.ReactNode => {
     );
 };
 
-export { NotFoundPage };
+export default NotFoundPage;

@@ -44,4 +44,4 @@ const Error = ({ error, reset }: Props): React.ReactNode => {
     );
 };
 
-export { Error };
+export default Error;
