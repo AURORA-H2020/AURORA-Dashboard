@@ -23,16 +23,14 @@ export const supportedLocales: Locale[] = [
         code: "en-GB",
         name: t("language.english"),
     },
-    /* {
+    {
         code: "da-DK",
         name: t("language.danish"),
     },
-    */
     {
         code: "de-DE",
         name: t("language.german"),
     },
-    /*
     {
         code: "pt-PT",
         name: t("language.portuguese"),
@@ -44,7 +42,7 @@ export const supportedLocales: Locale[] = [
     {
         code: "es-ES",
         name: t("language.spanish"),
-    }, */
+    },
 ];
 
 export const allTremorColours: Color[] = [
