@@ -4,5 +4,5 @@ export interface UserSettings {
     /**
      * The user's unit system setting
      */
-    unitSystem: UserSettingsUnitSystem;
+    unitSystem?: UserSettingsUnitSystem;
 }

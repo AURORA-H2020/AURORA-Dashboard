@@ -348,6 +348,11 @@
         },
         "summary": {
             "noDataAvailable": "Add consumptions to see your summary"
+    },
+    "confirmUnitSystem": {
+      "description": "You do not have a unit system set and are currently using the metric system.",
+      "useMetric": "Keep using metric",
+      "useImperial": "Switch to imperial"
         }
     },
     "common": {

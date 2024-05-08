@@ -1,5 +1,6 @@
 import { ConsumptionPanel } from "@/components/app/consumptionPanel";
 import { ConsumptionSummaryPanel } from "@/components/app/consumptionSummaryPanel";
+import { ConfirmUnitSystem } from "@/components/app/user/confirmUnitSystem";
 import { Grid } from "@radix-ui/themes";
 
 /**
@@ -11,6 +12,8 @@ import { Grid } from "@radix-ui/themes";
  */
 const AccountPage = (): React.ReactNode => {
     return (
+        <>
+            <ConfirmUnitSystem />
         <Grid
             columns={{ initial: "1", md: "2" }}
             gap="8"
@@ -21,6 +24,7 @@ const AccountPage = (): React.ReactNode => {
 
             <ConsumptionPanel />
         </Grid>
+        </>
     );
 };
 
