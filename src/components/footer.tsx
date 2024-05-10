@@ -1,14 +1,14 @@
 "use client";
 
+import { externalLinks } from "@/lib/constants/constants";
+import { Link } from "@/navigation";
 import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { LocaleSwitcher } from "./navigation/localeSwitcher";
 import { Logo } from "./navigation/logo";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
-import { externalLinks } from "@/lib/constants/constants";
 
 /**
  * Renders the footer component.

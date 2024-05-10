@@ -4,10 +4,9 @@ import { EnsureInitialRegistration } from "@/components/hoc/ensureInitialRegistr
 import { EnsureLatestConsent } from "@/components/hoc/ensureLatestConsent";
 import { ProtectAccount } from "@/components/hoc/protectAccount";
 import { Button } from "@/components/ui/button";
-import { usePathname } from "@/navigation";
+import { Link, usePathname } from "@/navigation";
 import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 
 /**
  * Renders the AccountLayout component.

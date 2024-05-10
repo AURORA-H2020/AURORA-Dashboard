@@ -24,9 +24,9 @@ import {
     externalLinks,
     unitSystems,
 } from "@/lib/constants/constants";
+import { Link } from "@/navigation";
 import { Flex, Grid } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
 

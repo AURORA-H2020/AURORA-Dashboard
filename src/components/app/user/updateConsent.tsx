@@ -7,11 +7,11 @@ import {
 } from "@/components/ui/card";
 import { setAcceptedLegalDocumentVersion } from "@/firebase/user/setAcceptedLegalDocumentVersion";
 import { externalLinks } from "@/lib/constants/constants";
+import { Link } from "@/navigation";
 import { Flex, Heading } from "@radix-ui/themes";
 import { User } from "firebase/auth";
 import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
 import { DeleteAccountModal } from "./modals/deleteAccountModal";
 
 /**
