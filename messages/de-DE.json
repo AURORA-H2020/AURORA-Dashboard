@@ -29,7 +29,55 @@
     },
     "auth": {
       "success": "Willkommen bei AURORA!",
-      "error": "Es ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Anmeldedaten."
+      "error": "Es ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Anmeldedaten.",
+      "logout": {
+        "success": "Sie haben sich erfolgreich abgemeldet. Auf Wiedersehen!",
+        "error": "Bei der Abmeldung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
+      }
+    },
+    "consumption": {
+      "addedSuccessfully": "Ihr Verbrauch wurde erfolgreich hinzugefügt",
+      "updatedSuccessfully": "Ihr Verbrauch wurde erfolgreich aktualisiert",
+      "addedError": "Beim Hinzufügen Ihres Verbrauchs ist ein Fehler aufgetreten",
+      "updatedError": "Bei der Aktualisierung Ihres Verbrauchs ist ein Fehler aufgetreten"
+    },
+    "changeEmail": {
+      "success": "Ihre E-Mail wurde erfolgreich aktualisiert",
+      "errorTitle": "Bei der Aktualisierung Ihrer E-Mail ist ein Fehler aufgetreten",
+      "errorDescription": "Bitte überprüfen Sie Ihr aktuelles Passwort und versuchen Sie es erneut."
+    },
+    "changePassword": {
+      "errorTitle": "Bei der Aktualisierung Ihres Passworts ist ein Fehler aufgetreten",
+      "errorDescription": "Bitte überprüfen Sie Ihr aktuelles Passwort und versuchen Sie es erneut.",
+      "success": "Ihr Passwort wurde erfolgreich aktualisiert"
+    },
+    "deleteAccount": {
+      "success": "Ihr Konto wurde gelöscht",
+      "reAuthErrorTitle": "Bitte authentifizieren Sie sich erneut, um Ihr Passwort zu aktualisieren",
+      "reAuthErrorDescription": "Sie können dies tun, indem Sie sich ab- und wieder anmelden.",
+      "generalError": "Beim Löschen Ihres Kontos ist ein Fehler aufgetreten"
+    },
+    "resetPassword": {
+      "successTitle": "Ihr Passwort wurde zurückgesetzt",
+      "successDescription": "Prüfen Sie Ihre E-Mail auf weitere Anweisungen.",
+      "errorTitle": "Beim Zurücksetzen Ihres Passworts ist ein Fehler aufgetreten",
+      "errorDescription": "Bitte überprüfen Sie, ob die von Ihnen angegebene E-Mail-Adresse korrekt ist und Sie ein bestehendes Konto haben."
+    },
+    "deleteConsumption": {
+      "success": "Der Verbrauch wurde gelöscht",
+      "error": "Beim Löschen dieses Verbrauchs ist ein Fehler aufgetreten"
+    },
+    "deleteRecurringConsumption": {
+      "success": "Der wiederkehrende Verbrauch wurde gelöscht",
+      "error": "Beim Löschen dieses wiederkehrenden Verbrauchs ist ein Fehler aufgetreten"
+    },
+    "createProfile": {
+      "success": "Ihr Profil wurde erfolgreich erstellt",
+      "error": "Beim Erstellen Ihres Profils ist ein Fehler aufgetreten"
+    },
+    "updateProfile": {
+      "success": "Ihr Profil wurde erfolgreich aktualisiert",
+      "error": "Es ist ein Fehler bei der Aktualisierung Ihres Profils aufgetreten"
     }
   },
   "button": {
@@ -62,7 +110,8 @@
       "title": "Durchschnittlicher Verbrauch pro Nutzer"
     },
     "main": {
-      "title": "Energy Tracker: Dashboard"
+      "title": "Energy Tracker: Dashboard",
+      "description": "AURORA ist ein fortlaufendes Bürgerforschungsprojekt, und die Daten auf dieser Seite werden ohne Gewähr bereitgestellt."
     },
     "autoReport": {
       "reportSnippets": {
@@ -87,7 +136,10 @@
       "title": "Nicht gefunden",
       "description": "Die von Ihnen gesuchte Seite konnte nicht gefunden werden."
     },
-    "noData": "Keine Daten verfügbar"
+    "noData": "Keine Daten verfügbar",
+    "noConsumptionsFound": "Keine Verbräuche gefunden.",
+    "noRecurringConsumptionsFound": "Keine wiederkehrenden Verbräuche gefunden.",
+    "noConsumptions": "Keine Verbräuche"
   },
   "metadata": {
     "title": "AURORA Energy Tracker: Dashboard",
@@ -105,7 +157,22 @@
       "signInWithGoogle": "Mit Google anmelden",
       "signUpWithGoogle": "Mit Google registrieren",
       "email": "E-Mail",
-      "password": "Passwort"
+      "password": "Passwort",
+      "confirmPassword": "Password bestätigen",
+      "error": {
+        "passwordMismatch": "Die Passwörter stimmen nicht überein",
+        "invalidEmail": "Bitte geben Sie eine gültige E-Mail Adresse ein",
+        "passwordStrength": "Das Passwort muss mindestens 8 Zeichen lang sein, mindestens eine Zahl und mindestens einen Großbuchstaben enthalten"
+      },
+      "newPassword": "Neues Passwort",
+      "confirmNewPassword": "Neues Passwort bestätigen",
+      "currentPassword": "Aktuelles Passwort",
+      "legal": "Dieses Tool wurde im Rahmen des von der EU finanzierten Projekts AURORA Horizon 2020 entwickelt (Nr. <projectNumber>101036418</projectNumber>). Ihre Daten werden von Mitgliedern des Projektkonsortiums verarbeitet und sicher in Google Firebase gespeichert. Ihre Daten werden nur in anonymisierter Form für Forschungszwecke verwendet und niemals ohne Ihre ausdrückliche Zustimmung kommerziell genutzt. Sie können Ihre Daten jederzeit ändern, herunterladen oder löschen oder sich an unseren Support unter <supportEmail>app-support@aurora-h2020.eu</supportEmail> wenden. Indem Sie fortfahren, erklären Sie sich mit den <termsOfService>Nutzungsbedingungen</termsOfService> und der <privacyPolicy>Datenschutzrichtlinie</privacyPolicy> von AURORA einverstanden.",
+      "resetPassword": {
+        "forgotPassword": "Passwort vergessen",
+        "description": "Geben Sie die E-Mail-Adresse an, die Sie für die Registrierung Ihres Kontos verwendet haben. Wir senden Ihnen dann einen Link zum Zurücksetzen des Passworts.",
+        "resetPassword": "Passwort zurücksetzen"
+      }
     },
     "datePicker": {
       "selectDateRange": "Wählen Sie einen gültigen Datumsbereich"
@@ -115,14 +182,217 @@
       "end": "Ende"
     }
   },
+  "app": {
+    "addConsumption": "Verbrauch hinzufügen",
+    "updateConsumption": "Verbrauch bearbeiten",
+    "validation": {
+      "error": {
+        "validValue": "Bitte geben Sie eine gültige Zahl ein",
+        "maxStringLength": "Dieses Feld darf {charLimit} Zeichen nicht überschreiten",
+        "selectAtLeastOneWeekday": "Bitte wählen Sie mindestens einen Wochentag",
+        "selectDayOfMonth": "Bitte wählen Sie einen Tag des Monats",
+        "specifyPrivateOccupancyLevel": "Bitte geben Sie eine Anzahl von Passagieren an",
+        "specifyPublicOccupancyLevel": "Bitte geben Sie einen Auslastungsgrad an",
+        "email": "Bitte geben Sie eine gültige E-Mail Adresse ein",
+        "year": {
+          "after1900": "Bitte geben Sie ein Jahr nach 1900 ein",
+          "inPast": "Bitte geben Sie ein Jahr in der Vergangenheit ein"
+        },
+        "date": {
+          "endAfterStart": "Das Enddatum muss nach dem Startdatum liegen"
+        },
+        "electricity": {
+          "exportedExceedsProduction": "Ihr exportierter Strom darf Ihre Gesamtproduktion nicht übersteigen"
+        },
+        "heating": {
+          "districtHeatingSourceRequired": "Fernwärmequelle ist erforderlich, wenn Fernwärme gewählt wird"
+        }
+      }
+    },
+    "user": {
+      "householdProfile": {
+        "retiredIndividuals": "Personen im Ruhestand",
+        "homeBasedWorkersOrStudents": "Von Zuhause arbeitend / studierend",
+        "homemakers": "Familienfürsorger*innen",
+        "workersOrStudentsOutsideTheHome": "Außerhalb des Zuhauses arbeitend / studierend"
+      },
+      "settings": {
+        "unitSystem": {
+          "imperial": "Imperial",
+          "metric": "Metrisch"
+        }
+      }
+    },
+    "consumption": "Verbrauch",
+    "addRecurringConsumption": "Wiederkehrenden Verbrauch hinzufügen",
+    "consumptions": "Verbräuche",
+    "recurringConsumptions": "Wiederkehrende Verbräuche",
+    "updateRecurringConsumption": "Wiederkehrenden Verbrauch bearbeiten",
+    "form": {
+      "recurringToggleDescription": "Deaktivieren Sie diese Option, um die Aufzeichnung dieses Verbrauchs zu beenden.",
+      "transportDisclaimer": "Bitte fügen Sie keine Fahrten hinzu, die im Namen Ihrer Arbeit erfolgen. Dies gilt nicht für Ihren Arbeitsweg, der dennoch hinzugefügt werden sollte.",
+      "dayOfMonth": "Tag des Monats",
+      "startOfTravel": "Beginn der Fahrt",
+      "transportationType": "Verkehrsmittel",
+      "setCustomFuelConsumption": "Eigenen Kraftstoffverbrauch definieren",
+      "fuelConsumption": "Kraftstoffverbrauch",
+      "occupancy": "Auslastung",
+      "description": "Beschreibung",
+      "publicVehicleOccupancy": {
+        "almostEmpty": "Fast leer",
+        "medium": "Mittlere Auslastung",
+        "nearlyFull": "Nahezu voll"
+      },
+      "frequencyOptions": {
+        "daily": "Täglich",
+        "weekly": "Wöchentlich",
+        "monthly": "Monatlich"
+      },
+      "enabled": "Aktiviert",
+      "disabled": "Deaktiviert",
+      "frequency": "Häufigkeit",
+      "weekdays": "Wochentage",
+      "createdAt": "Erstellt",
+      "updatedAt": "Aktualisiert",
+      "recurringAutomaticDisclaimer": "Dieser Eintrag wurde automatisch über wiederkehrende Verbräuche hinzugefügt.",
+      "endOfTravel": "Ende der Fahrt",
+      "timeOfTravel": "Zeit der Fahrt",
+      "recurringTransportation": "Wiederkehrende Fahrt",
+      "profile": {
+        "editProfile": "Profil bearbeiten",
+        "selectGender": "Wählen Sie Ihr bevorzugtes Geschlecht",
+        "selectCountry": "Wählen Sie Ihr Land",
+        "selectCountryDescription": "Diese Informationen helfen uns, Ihren CO₂-Fußabdruck genauer zu berechnen. Bitte beachten Sie, dass Sie Ihr Land später nicht mehr ändern können.\nCrowdfunding für lokale Photovoltaikanlagen ist derzeit nur für ausgewählte Städte der AURORA-Projektpartner geplant.",
+        "selectCity": "Wählen Sie Ihre Stadt",
+        "selectHomeEnergyLabel": "Wählen Sie das Energieabzeichen Ihres Zuhauses",
+        "selectHouseholdProfile": "Wählen Sie Ihr Haushaltsprofil",
+        "marketingConsentDescription": "Ich möchte Updates über die App und das AURORA-Projekt per E-Mail erhalten.",
+        "saveProfile": "Profil speichern",
+        "selectUnitSystem": "Wählen Sie Ihr bevorzugtes Einheitensystem"
+      },
+      "peopleInHousehold": "Personen im Haushalt",
+      "electricityExported": "Ausgeführte Elektrizität",
+      "costs": "Kosten",
+      "electricitySource": "Stromquelle",
+      "peopleInHouseholdDescription": "Wie viele Personen, einschließlich Ihnen, leben in Ihrem Haushalt?",
+      "electricity": {
+        "dateSelectDescription": "Wählen Sie den Beginn und das Ende dieses Verbrauchs. Sie finden diese Informationen auf Ihrer Stromrechnung.",
+        "electricitySource": "Stromquelle",
+        "electricitySourceDescription": "Wählen Sie die Quelle Ihres Stromverbrauchs aus.",
+        "energyProduced": "Erzeugte Energie",
+        "energyBillDescription": "Diese Information finden Sie auf Ihrer Stromrechnung.",
+        "pvProductionDescription": "Diese Informationen finden Sie in der Regel in einer App oder auf einer Website, die von Ihrem Solar-Installateur bereitgestellt wird.",
+        "gridExported": "In das Netz eingespeiste Energie",
+        "energyExported": "Ausgeführte Energie"
+      },
+      "descriptionHelpText": "Sie können Ihrem Eintrag eine Beschreibung hinzufügen um ihn später leichter zu finden.",
+      "heating": {
+        "heatingFuel": "Heizmittel",
+        "heatingFuelDescription": "Wählen Sie Ihre Heizungsart. Diese Information finden Sie auf Ihrer Heizkostenabrechnung.",
+        "districtHeatingSource": "Fernwärmequelle",
+        "heatingBillDescription": "Diese Information finden Sie auf Ihrer Heizkostenabrechnung.",
+        "dateSelectDescription": "Wählen Sie den Beginn und das Ende dieses Verbrauchs. Sie finden diese Informationen auf Ihrer Heizkostenabrechnung."
+      },
+      "deleteConsumptionDialogTitle": "Sind Sie sicher, dass Sie den Eintrag löschen wollen?"
+    },
+    "filter": {
+      "orderBy": "Sortieren nach",
+      "order": "Reihenfolge"
+    },
+    "totalConsumptions": "Gesamtzahl der Vebräuche",
+    "totalRecurringConsumptions": "Gesamtzahl der widerkehrenden Vebräuche",
+    "labelGuide": {
+      "title": "Wie funktioniert das?",
+      "description": "Ihre Energieabzeichen werden auf der Grundlage Ihres erfassten Verbrauchs und speziell für Ihren Standort berechnet. Das heißt, je mehr Daten Sie im Laufe des Jahres eingeben, desto mehr Ihrer Kohlenstoffemissionen und Ihres Energiebudgets stehen zur Vefügung. Ein Beispiel: Wenn Sie nur Daten für alle Tage im Januar und Dezember eingegeben haben, werden 2/12 des Gesamtbudgets für die Berechnung Ihres Abzeichens verwendet. Die einzige Ausnahme ist der Transport, der nach einer bestimmten Anzahl von jährlichen Einträgen das volle Budget erreicht. Ihr Gesamtbudget ergibt sich aus der Summe Ihrer Budgets für Strom, Heizung und Transport."
+    },
+    "profile": {
+      "yourProfile": "Ihr Profil",
+      "userID": "Benutzer-ID",
+      "city": "Stadt",
+      "country": "Land",
+      "householdProfile": "Haushaltsprofil",
+      "homeEnergyLabel": "Energieausweis des Zuhauses",
+      "gender": "Geschlecht",
+      "yearOfBirth": "Geburtsjahr",
+      "lastName": "Nachname",
+      "firstName": "Vornamen",
+      "createYourProfile": "Erstellen Sie Ihr Profil",
+      "unitSystem": "Einheitensystem"
+    },
+    "account": {
+      "downloadMyData": "Meine Daten herunterladen",
+      "changePassword": "Passwort ändern",
+      "changeEmail": "E-Mail ändern",
+      "account": "Konto",
+      "deleteMyAccount": "Meinen Account löschen",
+      "deletePopup": {
+        "title": "Sind Sie sicher, dass Sie Ihren Account löschen möchten?",
+        "description": "Diese Aktion kann nicht rückgängig gemacht werden. Dadurch wird Ihr Konto dauerhaft gelöscht und Ihre Daten werden von unseren Servern entfernt.",
+        "confirmationDisclaimer": "Ja, ich möchte mein Konto löschen und verstehe, dass dies nicht rückgängig gemacht werden kann."
+      },
+      "rejectConsentDeletePopup": {
+        "title": "Achtung!",
+        "description": "Wenn Sie die neuesten Datenschutzbestimmungen und Nutzungsbedingungen ablehnen, müssen wir Ihr Konto löschen. Beachten Sie, dass wir Ihr Konto nach der Löschung nicht wiederherstellen können."
+      }
+    },
+    "support": {
+      "support": "Support",
+      "getTheApp": "App runterladen",
+      "contactSupport": "Support kontaktieren"
+    },
+    "legal": {
+      "legalInformation": "Rechtliche Informationen",
+      "privacyPolicy": "Datenschutzbestimmungen",
+      "termsOfService": "Nutzungsbedingungen",
+      "imprint": "Impressum",
+      "updatedLegalDocuments": "Wir haben unsere Datenschutzrichtlinien und Nutzungsbedingungen aktualisiert. Bitte prüfen und akzeptieren Sie die neueste Version, um die App weiterhin nutzen zu können."
+    },
+    "summary": {
+      "noDataAvailable": "Fügen Sie Verbräuche hinzu um eine Zusammenfassung zu sehen."
+    },
+    "confirmUnitSystem": {
+      "description": "Sie haben kein Einheitensystem eingestellt und verwenden derzeit das metrische System.",
+      "useMetric": "Bei metrisch bleiben",
+      "useImperial": "Zu imperial wechseln"
+    }
+  },
   "common": {
     "co2emission": "CO<sub>2</sub> Emissionen",
+    "carbonEmissions": "CO₂-Emissionen",
     "energyUsage": "Energieverbrauch",
     "and": "und",
     "placeholder": {
-      "selectValue": "Wählen Sie einen Wert"
+      "selectValue": "Wählen Sie einen Wert",
+      "selectDate": "Wählen Sie ein Datum",
+      "selectLanguage": "Sprache auswählen"
     },
-    "cancel": "Abbrechen"
+    "unsure": "Unsicher",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "duplicate": "Duplizieren",
+    "edit": "Bearbeiten",
+    "overall": "Insgesamt",
+    "weekdayOptions": {
+      "monday": "Montag",
+      "tuesday": "Dienstag",
+      "wednesday": "Mittwoch",
+      "thursday": "Donnerstag",
+      "friday": "Freitag",
+      "saturday": "Samstag",
+      "sunday": "Sonntag"
+    },
+    "calculating": "Berechne...",
+    "in": "in",
+    "preferNotToSay": "Keine Angabe",
+    "reject": "Ablehnen",
+    "accept": "Akzeptieren",
+    "important": "Wichtig",
+    "hours": "Stunden",
+    "minutes": "Minuten",
+    "pagination": {
+      "previous": "Zurück",
+      "next": "Weiter"
+    }
   },
   "country": {
     "allSelectedCountries": "Alle ausgewählten Länder",
@@ -144,7 +414,12 @@
       "dashboard": "Dashboard",
       "about": "Mehr",
       "account": "Account",
-      "logout": "Abmelden"
+      "logout": "Abmelden",
+      "admin": "Admin"
+    },
+    "account": {
+      "home": "Start",
+      "settings": "Einstellungen"
     }
   },
   "language": {
@@ -178,10 +453,48 @@
   "category": {
     "electricity": "Elektrizität",
     "transportation": "Transport",
-    "heating": "Heizen"
+    "heating": "Heizen",
+    "sources": {
+      "default": "Nationales Stromnetz (Standard)",
+      "homePhotovoltaics": "Eigene Photovoltaik",
+      "oil": "Öl",
+      "naturalGas": "Erdgas",
+      "liquifiedPetroGas": "LPG",
+      "biomass": "Biomasse",
+      "locallyProducedBiomass": "Lokal erzeugte Biomasse",
+      "geothermal": "Geothermie",
+      "solarThermal": "Solarthermie",
+      "district": "Fernwärme",
+      "electric": "Elektrische Heizung",
+      "wasteTreatment": "Abfallbehandlung",
+      "coal": "Kohle",
+      "motorcycle": "Treibstoffauto",
+      "fuelCar": "Treibstoffauto",
+      "electricCar": "Elektroauto",
+      "hybridCar": "Hybrid-Auto",
+      "electricMotorcycle": "Elektrisches Motorrad",
+      "electricBus": "Elektrobus",
+      "hybridElectricBus": "Hybrid-Elektrobus",
+      "alternativeFuelBus": "Bus mit alternativem Kraftstoff",
+      "dieselBus": "Dieselbus",
+      "otherBus": "Anderer Bus",
+      "metroTramOrUrbanLightTrain": "U-Bahn, Straßenbahn oder Stadtbahn",
+      "electricPassengerTrain": "Elektrischer Personenzug",
+      "dieselPassengerTrain": "Diesel-Personenzug",
+      "highSpeedTrain": "Hochgeschwindigkeitszug",
+      "plane": "Flugzeug",
+      "electricBike": "Elektrofahrrad",
+      "electricScooter": "Elektroroller",
+      "bike": "Fahrrad",
+      "walking": "Laufen",
+      "defaultGreenEnergy": "Nationales Stromnetz (grüner Anbieter)",
+      "firewood": "Brennholz",
+      "butane": "Butan",
+      "planeIntraEu": "Flugzeug (innerhalb der EU)",
+      "planeExtraEu": "Flugzeug (außerhalb der EU)"
+    }
   },
   "unitLabel": {
-    "eneryUsage": "Energieverbrauch",
     "distance": "Entfernung"
   },
   "month": {
@@ -198,17 +511,12 @@
     "november": "November",
     "december": "Dezember"
   },
-  "app": {
-    "account": {
-      "comingSoon": "Laden Sie Ihre Daten herunter oder löschen Sie Ihr Konto. Wir arbeiten daran, in Zukunft weitere Funktionen zu implementieren.",
-      "myAccount": "Mein Account",
-      "downloadMyData": "Meine Daten herunterladen",
-      "deleteAccount": {
-        "button": "Meinen Account löschen",
-        "title": "Sind Sie sicher, dass Sie Ihren Account löschen möchten?",
-        "description": "Diese Aktion kann nicht rückgängig gemacht werden. Dadurch wird Ihr Konto dauerhaft gelöscht und Ihre Daten werden von unseren Servern entfernt.",
-        "confirm": "Account löschen"
-      }
-    }
+  "city": {
+    "evora": "Évora",
+    "madrid": "Madrid",
+    "forestOfDean": "Forest of Dean",
+    "ljubljana": "Ljubljana",
+    "aarhus": "Aarhus",
+    "otherCity": "Andere Stadt"
   }
 }

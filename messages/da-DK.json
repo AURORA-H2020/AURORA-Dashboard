@@ -1,214 +1,522 @@
 {
-    "about": {
-        "carbonEmissionLabels": {
-            "title": "CO₂-udledningsmærker",
-            "description": "De data, vi bruger til at beregne CO2-udledningsmærket i {countryName}."
-        },
-        "energyExpendedLabels": {
-            "title": "Dine energiforbrugsmærker",
-            "description": "De data, vi bruger til at beregne energiforbrugsmærket i {countryName}."
-        },
-        "metrics": {
-            "title": "Målestandarder",
-            "description": "De data, vi bruger til at beregne CO2-udledning og energiforbrug baseret på brugerdata i {countryName}."
-        },
-        "downloadMetrics": "Download målestandarder",
-        "countryData": {
-            "title": "App-målinger og mærkedata",
-            "description": "For at støtte Open Science offentliggør AURORA hermed de målinger, som Energy Tracker bruger til at beregne <Strong>CO2-udledning</Strong>, <Strong>energiforbrug</Strong> og <Strong>energimærker</Strong>."
-        },
-        "downloads": {
-            "title": "Download vores data",
-            "description": "Vi tilbyder ovenstående målestandarder og labeldata til download."
-        }
+  "about": {
+    "carbonEmissionLabels": {
+      "title": "CO₂-udledningsmærker",
+      "description": "De data, vi bruger til at beregne CO2-udledningsmærket i {countryName}."
     },
-    "toast": {
-        "dataDownload": {
-            "success": "Dine data er blevet downloadet",
-            "error": "Dine data kunne ikke downloades"
-        },
-        "auth": {
-            "success": "Velkommen til AURORA!",
-            "error": "Der opstod en fejl. Tjek venligst dine brugeroplysninger."
-        }
+    "energyExpendedLabels": {
+      "title": "Dine energiforbrugsmærker",
+      "description": "De data, vi bruger til at beregne energiforbrugsmærket i {countryName}."
     },
-    "button": {
-        "downloadPending": "Downloader..."
+    "metrics": {
+      "title": "Målestandarder",
+      "description": "De data, vi bruger til at beregne CO2-udledning og energiforbrug baseret på brugerdata i {countryName}."
     },
-    "dashboard": {
-        "filter": {
-            "allCategories": "Alle kategorier",
-            "selectCountries": "Vælg lande",
-            "invalidData": "Ingen data matcher de valgte filtre.",
-            "absolute": "Total",
-            "relative": "Relativ"
-        },
-        "card": {
-            "userCount": "Samlet antal brugere af appen",
-            "individualConsumptions": "Samlet mændge individuelt forbrug",
-            "invalidDateRange": "Vælg venligst et gyldigt datointerval"
-        },
-        "consumptionTimeline": {
-            "title": "Tidslinje for forbrug: Gennemsnit pr. bruger"
-        },
-        "energylabels": {
-            "title": "Energimærker",
-            "description": "AURORA-projektet har designet et sæt mærker, som giver borgerne en klar forståelse af deres nuværende energiprofil. Et separat sæt mærker er tildelt for energiforbrug og CO2 udledning."
-        },
-        "genderDistribution": {
-            "title": "Kønsfordeling"
-        },
-        "averageCompare": {
-            "title": "Gennemsnitligt forbrug pr. bruger"
-        },
-        "main": {
-            "title": "Energy Tracker: Dashboard"
-        },
-        "autoReport": {
-            "reportSnippets": {
-                "accountsCreated": "I {countries} er der {userCount} oprettet konti.",
-                "genderDistribution": "Af disse brugere identificerer {femaleCount} sig som kvinde, {maleCount} som mand, {nonBinaryCount} som non-binær og {otherCount} som andet.",
-                "totalConsumptions": "I alt har disse brugere oprettet {totalConsumptions} forbrug.",
-                "consumptionBreakdown": "{transportationCount} er relateret til transport, {electricityCount} til elektricitet og {heatingCount} til opvarmning.",
-                "totalEmissions": "Det svarer til i alt {totalEmissions}{unit} CO2 udledninger eller {totalEnergy} kWh energi.",
-                "emissionsByCategory": "{transportationEmissions}{unit} er fra transport ({transportationEnergy} kWh), {electricityEmissions}{unit} fra elektricitet ({electricityEnergy} kWh), og {heatingEmissions}{unit} fra opvarmning ({heatingEnergy} kWh)."
-            },
-            "title": "Rapport"
-        },
-        "snapshots": {
-            "lastUpdated": "De viste data blev sidst opdateret",
-            "selectSnapshot": "Vælg et andet billede",
-            "downloadSnapshot": "Download dette billede"
-        }
+    "downloadMetrics": "Download målestandarder",
+    "countryData": {
+      "title": "App-målinger og mærkedata",
+      "description": "For at støtte Open Science offentliggør AURORA hermed de målinger, som Energy Tracker bruger til at beregne <Strong>CO2-udledning</Strong>, <Strong>energiforbrug</Strong> og <Strong>energimærker</Strong>."
     },
-    "error": {
-        "title": "Der opstod en fejl",
-        "notFound": {
-            "title": "Ikke fundet",
-            "description": "Den side, du leder efter, kunne ikke findes."
-        },
-        "noData": "Ingen data tilgængelig"
-    },
-    "metadata": {
-        "title": "AURORA Energy Tracker: Dashboard",
-        "description": "Se de seneste statistikker i AURORA Energy Trackers mobilapp."
-    },
-    "ui": {
-        "auth": {
-            "orContinueWith": "Eller fortsæt med",
-            "signIn": "Log ind",
-            "signUp": "Tilmeld dig",
-            "signInPrompt": "Log ind på din AURORA Energy Tracker-konto.",
-            "signUpPrompt": "Tilmeld dig AURORA Energy Tracker.",
-            "signInWithApple": "Log ind med Apple",
-            "signUpWithApple": "Tilmeld dig med Apple",
-            "signInWithGoogle": "Log ind med Google",
-            "signUpWithGoogle": "Tilmeld dig med Google",
-            "email": "E-mail",
-            "password": "Adgangskode"
-        },
-        "datePicker": {
-            "selectDateRange": "Vælg et gyldigt datointerval"
-        },
-        "monthPicker": {
-            "start": "Starten",
-            "end": "Slut"
-        }
-    },
-    "common": {
-        "co2emission": "CO<sub>2</sub>-udledninger",
-        "energyUsage": "Energiforbrug",
-        "and": "og",
-        "placeholder": {
-            "selectValue": "Vælg en værdi"
-        },
-        "cancel": "Annuller"
-    },
-    "country": {
-        "allSelectedCountries": "Alle valgte lande",
-        "denmark": "Danmark",
-        "portugal": "Portugal",
-        "slovenia": "Slovenien",
-        "spain": "Spanien",
-        "unitedKingdom": "Storbritannien",
-        "zeuropeOther": "Andre lande i EU"
-    },
-    "footer": {
-        "auroraWebsite": "AURORAs hjemmeside",
-        "iosApp": "iOS-app",
-        "androidApp": "Android-app",
-        "fundingNotice": "Dette projekt har modtaget finansiering fra Den Europæiske Unions forsknings- og innovationsprogram Horizon 2020 under tilskudsaftale nr. 101036418. "
-    },
-    "navigation": {
-        "menu": {
-            "dashboard": "Dashboard",
-            "about": "Om",
-            "account": "Konto",
-            "logout": "Log ud"
-        }
-    },
-    "language": {
-        "english": "Engelsk",
-        "german": "Tysk",
-        "danish": "Dansk",
-        "portuguese": "Portugisisk",
-        "slovenian": "Slovensk",
-        "spanish": "Spansk"
-    },
-    "countrySpecial": {
-        "unitedKingdom": "Storbritannien",
-        "zeuropeOther": "andre lande i EU"
-    },
-    "gender": {
-        "female": "Kvinde",
-        "male": "Mand",
-        "nonBinary": "Ikke-binær",
-        "other": "Andre"
-    },
-    "label": {
-        "aPlus": "Accompllisher",
-        "a": "Ambassadør",
-        "b": "Big Achiever",
-        "c": "Champion",
-        "d": "Driver",
-        "e": "Explorer",
-        "f": "First Mover",
-        "g": "Ground Breaker"
-    },
-    "category": {
-        "electricity": "El",
-        "transportation": "Transport",
-        "heating": "Varme"
-    },
-    "unitLabel": {
-        "eneryUsage": "Energiforbrug",
-        "distance": "Afstand"
-    },
-    "month": {
-        "january": "januar",
-        "february": "februar",
-        "march": "marts",
-        "april": "april",
-        "may": "maj",
-        "june": "juni",
-        "july": "juli",
-        "august": "august",
-        "september": "september",
-        "october": "oktober",
-        "november": "november",
-        "december": "december"
-    },
-    "app": {
-        "account": {
-            "comingSoon": "Download dine data, eller slet din konto. Vi arbejder på at implementere flere funktioner i fremtiden.",
-            "myAccount": "Min konto",
-            "downloadMyData": "Download mine data",
-            "deleteAccount": {
-                "button": "Slet min konto",
-                "title": "Er du sikker på, at du vil slette din konto?",
-                "description": "Denne handling kan ikke fortrydes. Du vil permanent slette din konto og fjerne dine data fra vores servere.",
-                "confirm": "Slet konto"
-            }
-        }
+    "downloads": {
+      "title": "Download vores data",
+      "description": "Vi tilbyder ovenstående målestandarder og labeldata til download."
     }
+  },
+  "toast": {
+    "dataDownload": {
+      "success": "Dine data er blevet downloadet",
+      "error": "Dine data kunne ikke downloades"
+    },
+    "auth": {
+      "success": "Velkommen til AURORA!",
+      "error": "Der opstod en fejl. Tjek venligst dine brugeroplysninger.",
+      "logout": {
+        "success": "",
+        "error": ""
+      }
+    },
+    "consumption": {
+      "addedSuccessfully": "",
+      "updatedSuccessfully": "",
+      "addedError": "",
+      "updatedError": ""
+    },
+    "changeEmail": {
+      "success": "",
+      "errorTitle": "",
+      "errorDescription": ""
+    },
+    "changePassword": {
+      "errorTitle": "",
+      "errorDescription": "",
+      "success": ""
+    },
+    "deleteAccount": {
+      "success": "",
+      "reAuthErrorTitle": "",
+      "reAuthErrorDescription": "",
+      "generalError": ""
+    },
+    "resetPassword": {
+      "successTitle": "",
+      "successDescription": "",
+      "errorTitle": "",
+      "errorDescription": ""
+    },
+    "deleteConsumption": {
+      "success": "",
+      "error": ""
+    },
+    "deleteRecurringConsumption": {
+      "success": "",
+      "error": ""
+    },
+    "createProfile": {
+      "success": "",
+      "error": ""
+    },
+    "updateProfile": {
+      "success": "",
+      "error": ""
+    }
+  },
+  "button": {
+    "downloadPending": "Downloader..."
+  },
+  "dashboard": {
+    "filter": {
+      "allCategories": "Alle kategorier",
+      "selectCountries": "Vælg lande",
+      "invalidData": "Ingen data matcher de valgte filtre.",
+      "absolute": "Total",
+      "relative": "Relativ"
+    },
+    "card": {
+      "userCount": "Samlet antal brugere af appen",
+      "individualConsumptions": "Samlet mændge individuelt forbrug",
+      "invalidDateRange": "Vælg venligst et gyldigt datointerval"
+    },
+    "consumptionTimeline": {
+      "title": "Tidslinje for forbrug: Gennemsnit pr. bruger"
+    },
+    "energylabels": {
+      "title": "Energimærker",
+      "description": "AURORA-projektet har designet et sæt mærker, som giver borgerne en klar forståelse af deres nuværende energiprofil. Et separat sæt mærker er tildelt for energiforbrug og CO2 udledning."
+    },
+    "genderDistribution": {
+      "title": "Kønsfordeling"
+    },
+    "averageCompare": {
+      "title": "Gennemsnitligt forbrug pr. bruger"
+    },
+    "main": {
+      "title": "Energy Tracker: Dashboard",
+      "description": ""
+    },
+    "autoReport": {
+      "reportSnippets": {
+        "accountsCreated": "I {countries} er der {userCount} oprettet konti.",
+        "genderDistribution": "Af disse brugere identificerer {femaleCount} sig som kvinde, {maleCount} som mand, {nonBinaryCount} som non-binær og {otherCount} som andet.",
+        "totalConsumptions": "I alt har disse brugere oprettet {totalConsumptions} forbrug.",
+        "consumptionBreakdown": "{transportationCount} er relateret til transport, {electricityCount} til elektricitet og {heatingCount} til opvarmning.",
+        "totalEmissions": "Det svarer til i alt {totalEmissions}{unit} CO2 udledninger eller {totalEnergy} kWh energi.",
+        "emissionsByCategory": "{transportationEmissions}{unit} er fra transport ({transportationEnergy} kWh), {electricityEmissions}{unit} fra elektricitet ({electricityEnergy} kWh), og {heatingEmissions}{unit} fra opvarmning ({heatingEnergy} kWh)."
+      },
+      "title": "Rapport"
+    },
+    "snapshots": {
+      "lastUpdated": "De viste data blev sidst opdateret",
+      "selectSnapshot": "Vælg et andet billede",
+      "downloadSnapshot": "Download dette billede"
+    }
+  },
+  "error": {
+    "title": "Der opstod en fejl",
+    "notFound": {
+      "title": "Ikke fundet",
+      "description": "Den side, du leder efter, kunne ikke findes."
+    },
+    "noData": "Ingen data tilgængelig",
+    "noConsumptionsFound": "",
+    "noRecurringConsumptionsFound": "",
+    "noConsumptions": ""
+  },
+  "metadata": {
+    "title": "AURORA Energy Tracker: Dashboard",
+    "description": "Se de seneste statistikker i AURORA Energy Trackers mobilapp."
+  },
+  "ui": {
+    "auth": {
+      "orContinueWith": "Eller fortsæt med",
+      "signIn": "Log ind",
+      "signUp": "Tilmeld dig",
+      "signInPrompt": "Log ind på din AURORA Energy Tracker-konto.",
+      "signUpPrompt": "Tilmeld dig AURORA Energy Tracker.",
+      "signInWithApple": "Log ind med Apple",
+      "signUpWithApple": "Tilmeld dig med Apple",
+      "signInWithGoogle": "Log ind med Google",
+      "signUpWithGoogle": "Tilmeld dig med Google",
+      "email": "E-mail",
+      "password": "Adgangskode",
+      "confirmPassword": "Bekræft adgangskode",
+      "error": {
+        "passwordMismatch": "",
+        "invalidEmail": "",
+        "passwordStrength": ""
+      },
+      "newPassword": "Ny adgangskode",
+      "confirmNewPassword": "Bekræft ny adgangskode",
+      "currentPassword": "Nuværende adgangskode",
+      "legal": "",
+      "resetPassword": {
+        "forgotPassword": "Glemt adgangskode",
+        "description": "",
+        "resetPassword": "Nulstil adgangskode"
+      }
+    },
+    "datePicker": {
+      "selectDateRange": "Vælg et gyldigt datointerval"
+    },
+    "monthPicker": {
+      "start": "Starten",
+      "end": "Slut"
+    }
+  },
+  "app": {
+    "addConsumption": "Tilføj forbrug",
+    "updateConsumption": "Rediger forbrug",
+    "validation": {
+      "error": {
+        "validValue": "",
+        "maxStringLength": "",
+        "selectAtLeastOneWeekday": "",
+        "selectDayOfMonth": "",
+        "specifyPrivateOccupancyLevel": "",
+        "specifyPublicOccupancyLevel": "",
+        "email": "",
+        "year": {
+          "after1900": "",
+          "inPast": ""
+        },
+        "date": {
+          "endAfterStart": ""
+        },
+        "electricity": {
+          "exportedExceedsProduction": ""
+        },
+        "heating": {
+          "districtHeatingSourceRequired": ""
+        }
+      }
+    },
+    "user": {
+      "householdProfile": {
+        "retiredIndividuals": "Pensionister",
+        "homeBasedWorkersOrStudents": "Arbejder/studerer hjemmefra",
+        "homemakers": "Hjemmegående",
+        "workersOrStudentsOutsideTheHome": "Arbejder/studerer udenfor hjemmet"
+      },
+      "settings": {
+        "unitSystem": {
+          "imperial": "",
+          "metric": ""
+        }
+      }
+    },
+    "consumption": "Forbrug",
+    "addRecurringConsumption": "",
+    "consumptions": "Forbrug",
+    "recurringConsumptions": "Tilbagevendende forbrug",
+    "updateRecurringConsumption": "",
+    "form": {
+      "recurringToggleDescription": "",
+      "transportDisclaimer": "",
+      "dayOfMonth": "",
+      "startOfTravel": "Rejsestart",
+      "transportationType": "Transporttype",
+      "setCustomFuelConsumption": "",
+      "fuelConsumption": "",
+      "occupancy": "Pladsforhold",
+      "description": "Beskrivelse",
+      "publicVehicleOccupancy": {
+        "almostEmpty": "Næsten tom",
+        "medium": "",
+        "nearlyFull": "Næsten fyldt"
+      },
+      "frequencyOptions": {
+        "daily": "Daglig",
+        "weekly": "Ugentlig",
+        "monthly": "Månedlig"
+      },
+      "enabled": "Aktiveret",
+      "disabled": "Deaktiveret",
+      "frequency": "Hyppighed",
+      "weekdays": "Hverdage",
+      "createdAt": "Oprettet",
+      "updatedAt": "Opdateret",
+      "recurringAutomaticDisclaimer": "Dette indlæg blev automatisk tilføjet via tilbagevendende forbrug.",
+      "endOfTravel": "Rejsens afslutning",
+      "timeOfTravel": "",
+      "recurringTransportation": "",
+      "profile": {
+        "editProfile": "Rediger profil",
+        "selectGender": "",
+        "selectCountry": "",
+        "selectCountryDescription": "",
+        "selectCity": "",
+        "selectHomeEnergyLabel": "",
+        "selectHouseholdProfile": "",
+        "marketingConsentDescription": "Jeg vil gerne modtage opdateringer om appen og AURORA-projektet via e-mail.",
+        "saveProfile": "",
+        "selectUnitSystem": ""
+      },
+      "peopleInHousehold": "Personer i husstanden",
+      "electricityExported": "",
+      "costs": "Omkostninger",
+      "electricitySource": "Strømkilde",
+      "peopleInHouseholdDescription": "Hvor mange personer, inklusiv dig selv, bor der i din husstand?",
+      "electricity": {
+        "dateSelectDescription": "Vælg begyndelsen og slutningen af dette forbrug. Du kan finde disse oplysninger på din elregning.",
+        "electricitySource": "Strømkilde",
+        "electricitySourceDescription": "Vælg den rigtige strømkilde.",
+        "energyProduced": "",
+        "energyBillDescription": "Du kan finde disse oplysninger på din elregning.",
+        "pvProductionDescription": "",
+        "gridExported": "",
+        "energyExported": ""
+      },
+      "descriptionHelpText": "Du kan tilføje en beskrivelse til dit indlæg for at hjælpe med at finde den senere.",
+      "heating": {
+        "heatingFuel": "Brændstof til opvarmning",
+        "heatingFuelDescription": "Vælg din type af opvarmning. Du kan finde disse oplysninger på din varmeregning.",
+        "districtHeatingSource": "Fjernvarmekilde",
+        "heatingBillDescription": "Du kan finde disse oplysninger på din varmeregning.",
+        "dateSelectDescription": "Vælg begyndelsen og slutningen af dette forbrug. Du kan finde disse oplysninger på din varmeregning."
+      },
+      "deleteConsumptionDialogTitle": ""
+    },
+    "filter": {
+      "orderBy": "",
+      "order": ""
+    },
+    "totalConsumptions": "",
+    "totalRecurringConsumptions": "",
+    "labelGuide": {
+      "title": "Hvordan fungere det?",
+      "description": "Dine energimærker beregnes ud fra dit forbrug og er specifikt for din by. Det betyder, at efterhånden som du indtaster data i løbet af året, vil flere af dine CO₂-udledning og energibudgetter blive gjort tilgængelige. For eksempel: Hvis du kun har indtastet data for alle dage i januar og december, vil 2/12 af det samlede budget blive brugt til at beregne din mærker. Den eneste undtagelse er transport, som giver det fulde budget efter et vist antal årlige indlæg. Dit samlede CO₂ budget er baseret på summen af dine el-, varme- og transport forbrug."
+    },
+    "profile": {
+      "yourProfile": "",
+      "userID": "",
+      "city": "By",
+      "country": "Land",
+      "householdProfile": "Husstandsprofil",
+      "homeEnergyLabel": "Energimærke på din bolig",
+      "gender": "Køn",
+      "yearOfBirth": "Fødeår",
+      "lastName": "Efternavn",
+      "firstName": "Fornavn",
+      "createYourProfile": "Opret din profil",
+      "unitSystem": ""
+    },
+    "account": {
+      "downloadMyData": "Download mine data",
+      "changePassword": "Skift adgangskode",
+      "changeEmail": "Skift e-mail",
+      "account": "Konto",
+      "deleteMyAccount": "Slet min konto",
+      "deletePopup": {
+        "title": "Er du sikker på, at du vil slette din konto?",
+        "description": "Denne handling kan ikke fortrydes. Du vil permanent slette din konto og fjerne dine data fra vores servere.",
+        "confirmationDisclaimer": ""
+      },
+      "rejectConsentDeletePopup": {
+        "title": "",
+        "description": "Afvisning af den seneste privatlivspolitik og servicevilkår kræver, at vi sletter din konto. Bemærk at vi ikke kan gendanne din konto efter at have slettet den."
+      }
+    },
+    "support": {
+      "support": "Support",
+      "getTheApp": "",
+      "contactSupport": "Kontakt support"
+    },
+    "legal": {
+      "legalInformation": "Juridiske oplysninger",
+      "privacyPolicy": "Politik om beskyttelse af personlige oplysninger",
+      "termsOfService": "Servicevilkår",
+      "imprint": "Forlæggermærke",
+      "updatedLegalDocuments": ""
+    },
+    "summary": {
+      "noDataAvailable": ""
+    },
+    "confirmUnitSystem": {
+      "description": "",
+      "useMetric": "",
+      "useImperial": ""
+    }
+  },
+  "common": {
+    "co2emission": "CO<sub>2</sub>-udledninger",
+    "carbonEmissions": "CO₂-udledninger",
+    "energyUsage": "Energiforbrug",
+    "and": "og",
+    "placeholder": {
+      "selectValue": "Vælg en værdi",
+      "selectDate": "",
+      "selectLanguage": ""
+    },
+    "unsure": "Usikker",
+    "cancel": "Annuller",
+    "delete": "Slet",
+    "duplicate": "Duplikér",
+    "edit": "Rediger",
+    "overall": "Samlet",
+    "weekdayOptions": {
+      "monday": "mandag",
+      "tuesday": "tirsdag",
+      "wednesday": "onsdag",
+      "thursday": "Torsdag",
+      "friday": "Fredag",
+      "saturday": "lørdag",
+      "sunday": "Søndag"
+    },
+    "calculating": "",
+    "in": "",
+    "preferNotToSay": "Foretrækker ikke at sige noget",
+    "reject": "Afvis",
+    "accept": "Accepter",
+    "important": "Vigtigt",
+    "hours": "",
+    "minutes": "",
+    "pagination": {
+      "previous": "",
+      "next": ""
+    }
+  },
+  "country": {
+    "allSelectedCountries": "Alle valgte lande",
+    "denmark": "Danmark",
+    "portugal": "Portugal",
+    "slovenia": "Slovenien",
+    "spain": "Spanien",
+    "unitedKingdom": "Storbritannien",
+    "zeuropeOther": "Andre lande i EU"
+  },
+  "footer": {
+    "auroraWebsite": "AURORAs hjemmeside",
+    "iosApp": "iOS-app",
+    "androidApp": "Android-app",
+    "fundingNotice": "Dette projekt har modtaget finansiering fra Den Europæiske Unions forsknings- og innovationsprogram Horizon 2020 under tilskudsaftale nr. 101036418. "
+  },
+  "navigation": {
+    "menu": {
+      "dashboard": "Dashboard",
+      "about": "Om",
+      "account": "Konto",
+      "logout": "Log ud",
+      "admin": ""
+    },
+    "account": {
+      "home": "Hjem",
+      "settings": "Indstillinger"
+    }
+  },
+  "language": {
+    "english": "Engelsk",
+    "german": "Tysk",
+    "danish": "Dansk",
+    "portuguese": "Portugisisk",
+    "slovenian": "Slovensk",
+    "spanish": "Spansk"
+  },
+  "countrySpecial": {
+    "unitedKingdom": "Storbritannien",
+    "zeuropeOther": "andre lande i EU"
+  },
+  "gender": {
+    "female": "Kvinde",
+    "male": "Mand",
+    "nonBinary": "Ikke-binær",
+    "other": "Andre"
+  },
+  "label": {
+    "aPlus": "Accompllisher",
+    "a": "Ambassadør",
+    "b": "Big Achiever",
+    "c": "Champion",
+    "d": "Driver",
+    "e": "Explorer",
+    "f": "First Mover",
+    "g": "Ground Breaker"
+  },
+  "category": {
+    "electricity": "El",
+    "transportation": "Transport",
+    "heating": "Varme",
+    "sources": {
+      "default": "",
+      "homePhotovoltaics": "Solceller til hjemmet",
+      "oil": "Olie",
+      "naturalGas": "Naturgas",
+      "liquifiedPetroGas": "LPG (Liquefied Petroleum Gas)",
+      "biomass": "Biomasse",
+      "locallyProducedBiomass": "Lokalt produceret biomasse",
+      "geothermal": "Geotermisk",
+      "solarThermal": "Solvarme",
+      "district": "Fjernvarme",
+      "electric": "Elvarme",
+      "wasteTreatment": "Affaldsforbrænding",
+      "coal": "Kul",
+      "motorcycle": "Brændstofbil",
+      "fuelCar": "Brændstofbil",
+      "electricCar": "Elbil",
+      "hybridCar": "Hybridbil",
+      "electricMotorcycle": "Elmotorcykel ",
+      "electricBus": "Elbus",
+      "hybridElectricBus": "",
+      "alternativeFuelBus": "Bus med alternativ brændstof",
+      "dieselBus": "Dieselbus",
+      "otherBus": "Anden bus",
+      "metroTramOrUrbanLightTrain": "Metro, sporvogn eller letbane",
+      "electricPassengerTrain": "Eltog",
+      "dieselPassengerTrain": "Dieseltog",
+      "highSpeedTrain": "Højhastighedstog",
+      "plane": "",
+      "electricBike": "Elcyckel",
+      "electricScooter": "El-scooter/løbehjul",
+      "bike": "Cykel",
+      "walking": "Gående",
+      "defaultGreenEnergy": "",
+      "firewood": "",
+      "butane": "",
+      "planeIntraEu": "",
+      "planeExtraEu": ""
+    }
+  },
+  "unitLabel": {
+    "distance": "Afstand"
+  },
+  "month": {
+    "january": "januar",
+    "february": "februar",
+    "march": "marts",
+    "april": "april",
+    "may": "maj",
+    "june": "juni",
+    "july": "juli",
+    "august": "august",
+    "september": "september",
+    "october": "oktober",
+    "november": "november",
+    "december": "december"
+  },
+  "city": {
+    "evora": "",
+    "madrid": "",
+    "forestOfDean": "",
+    "ljubljana": "",
+    "aarhus": "",
+    "otherCity": "Anden by"
+  }
 }
