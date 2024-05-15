@@ -46,6 +46,7 @@ const FormDatePicker = ({
     minDate = new Date("1990-01-01"),
     maxDate = new Date("2030-01-01"),
     className,
+    required = false,
 }: {
     field: ControllerRenderProps<any, any>;
     placeholder: string;
@@ -56,12 +57,20 @@ const FormDatePicker = ({
     minDate?: Date;
     maxDate?: Date;
     className?: string;
+    required?: boolean;
 }) => {
     const format = useFormatter();
 
     return (
         <FormItem className={cn(className)}>
-            {label && <FormLabel>{label}</FormLabel>}
+            {label && (
+                <FormLabel>
+                    {label}
+                    {required && (
+                        <span className="bold text-muted-foreground"> *</span>
+                    )}
+                </FormLabel>
+            )}
             <Popover modal={true}>
                 <PopoverTrigger asChild>
                     <FormControl>

@@ -25,12 +25,14 @@ const FormSwitch = ({
     description,
     disabled = false,
     className,
+    required = false,
 }: {
     field: ControllerRenderProps<any, any>;
     label?: string;
     description?: string;
     disabled?: boolean;
     className?: string;
+    required?: boolean;
 }): React.ReactNode => (
     <FormItem
         className={cn(
@@ -39,7 +41,14 @@ const FormSwitch = ({
         )}
     >
         <div className="space-y-0.5">
-            {label && <FormLabel className="text-base">{label}</FormLabel>}
+            {label && (
+                <FormLabel className="text-base">
+                    {label}
+                    {required && (
+                        <span className="bold text-muted-foreground"> *</span>
+                    )}
+                </FormLabel>
+            )}
             {description && <FormDescription>{description}</FormDescription>}
         </div>
         <FormControl>

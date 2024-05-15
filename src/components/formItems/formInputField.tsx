@@ -40,6 +40,7 @@ const FormInputField = ({
     unit,
     optOutLabel,
     disabled = false,
+    required = false,
 }: {
     field: ControllerRenderProps<any, any>;
     inputType: InputTypes;
@@ -51,6 +52,7 @@ const FormInputField = ({
     unit?: string;
     optOutLabel?: string;
     disabled?: boolean;
+    required?: boolean;
 }): React.ReactNode => {
     const [disableField, setDisableField] = useState<boolean>(false);
     const [visible, setVisible] = useState(
@@ -109,7 +111,17 @@ const FormInputField = ({
                     <FormLabel htmlFor={field.name}>{label}</FormLabel>
                 </div>
             ) : (
-                label && <FormLabel>{label}</FormLabel>
+                label && (
+                    <FormLabel>
+                        {label}
+                        {required && (
+                            <span className="bold text-muted-foreground">
+                                {" "}
+                                *
+                            </span>
+                        )}
+                    </FormLabel>
+                )
             )}
             {visible && (
                 <FormControl>

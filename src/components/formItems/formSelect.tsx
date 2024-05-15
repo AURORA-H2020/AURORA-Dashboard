@@ -38,6 +38,7 @@ const FormSelect = ({
     disabled = false,
     optOutLabel,
     className,
+    required = false,
 }: {
     field: ControllerRenderProps<any, any>;
     options: { value: string; label: string }[];
@@ -47,6 +48,7 @@ const FormSelect = ({
     disabled?: boolean;
     optOutLabel?: string;
     className?: string;
+    required?: boolean;
 }) => {
     const [selected, setSelected] = useState<string | undefined | null>(
         field.value || undefined,
@@ -88,7 +90,14 @@ const FormSelect = ({
 
     return (
         <FormItem className={cn(className)}>
-            {label && <FormLabel>{label}</FormLabel>}
+            {label && (
+                <FormLabel>
+                    {label}
+                    {required && (
+                        <span className="bold text-muted-foreground"> *</span>
+                    )}
+                </FormLabel>
+            )}
             <Select
                 onValueChange={handleSelectChange}
                 value={selected as string}

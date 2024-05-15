@@ -25,15 +25,24 @@ const FormTextField = ({
     label,
     description,
     className,
+    required = false,
 }: {
     field: ControllerRenderProps<any, any>;
     placeholder: string;
     label?: string;
     description?: string;
     className?: string;
+    required?: boolean;
 }): React.ReactNode => (
     <FormItem className={cn(className)}>
-        {label && <FormLabel>{label}</FormLabel>}
+        {label && (
+            <FormLabel>
+                {label}
+                {required && (
+                    <span className="bold text-muted-foreground"> *</span>
+                )}
+            </FormLabel>
+        )}
         <FormControl>
             <Textarea
                 placeholder={placeholder}
