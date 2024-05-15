@@ -117,7 +117,14 @@ const RecurringConsumptionView = ({
                         {recurringConsumption.transportation
                             .fuelConsumption && (
                             <ConsumptionTableRow
-                                label={t("app.form.fuelConsumption")}
+                                label={
+                                    !["electricCar", "electricBike"].includes(
+                                        recurringConsumption.transportation
+                                            .transportationType,
+                                    )
+                                        ? t("app.form.fuelConsumption")
+                                        : t("app.form.powerConsumption")
+                                }
                             >
                                 {convertedFuelConsumption?.toString()}
                             </ConsumptionTableRow>

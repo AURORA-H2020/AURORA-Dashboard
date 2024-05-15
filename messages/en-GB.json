@@ -293,7 +293,9 @@
         "heatingBillDescription": "You can find this information on your heating bill.",
         "dateSelectDescription": "Select the beginning and end of this consumption. You can find this information on your heating bill."
       },
-      "deleteConsumptionDialogTitle": "Are you sure you want to delete this entry?"
+      "deleteConsumptionDialogTitle": "Are you sure you want to delete this entry?",
+      "powerConsumption": "Power consumption",
+      "setCustomPowerConsumption": "Set custom power consumption"
     },
     "filter": {
       "orderBy": "Order by",

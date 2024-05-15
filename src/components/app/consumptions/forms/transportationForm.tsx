@@ -220,10 +220,26 @@ const TransportationForm = ({
                                 <FormInputField
                                     field={field}
                                     inputType="number"
-                                    placeholder={t("app.form.fuelConsumption")}
-                                    label={t(
-                                        "app.form.setCustomFuelConsumption",
-                                    )}
+                                    placeholder={
+                                        ![
+                                            "electricCar",
+                                            "electricBike",
+                                        ].includes(formTransportationType)
+                                            ? t("app.form.fuelConsumption")
+                                            : t("app.form.powerConsumption")
+                                    }
+                                    label={
+                                        ![
+                                            "electricCar",
+                                            "electricBike",
+                                        ].includes(formTransportationType)
+                                            ? t(
+                                                  "app.form.setCustomFuelConsumption",
+                                              )
+                                            : t(
+                                                  "app.form.setCustomPowerConsumption",
+                                              )
+                                    }
                                     showSwitch={true}
                                     unit={
                                         [

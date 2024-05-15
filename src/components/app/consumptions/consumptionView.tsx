@@ -242,7 +242,14 @@ const ConsumptionView = ({
 
                         {consumption.transportation.fuelConsumption && (
                             <ConsumptionTableRow
-                                label={t("app.form.fuelConsumption")}
+                                label={
+                                    !["electricCar", "electricBike"].includes(
+                                        consumption.transportation
+                                            .transportationType,
+                                    )
+                                        ? t("app.form.fuelConsumption")
+                                        : t("app.form.powerConsumption")
+                                }
                             >
                                 {convertedFuelConsumption?.toString()}
                             </ConsumptionTableRow>
