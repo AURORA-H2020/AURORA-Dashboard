@@ -272,31 +272,34 @@ export function convertUnit(
     if (unit === "kWh") {
         convertedData = { quantity: value, unit: "kWh" };
     } else if (unit === "L/100km" || unit === "mpg") {
-        // 1 L/100km = 282.481 mpg
-        const conversionFactor = 282.481;
-
         if (unit === "L/100km" && toUnitSystem === "imperial") {
-            convertedData = { quantity: value * conversionFactor, unit: "mpg" };
-        } else if (unit === "mpg" && toUnitSystem === "metric") {
+            const gallonsPerLiter = convert(value, "L").to("gal");
+            const milesPer100Km = convert(100, "km").to("mi");
             convertedData = {
-                quantity: value / conversionFactor,
+                quantity: milesPer100Km / gallonsPerLiter,
+                unit: "mpg",
+            };
+        } else if (unit === "mpg" && toUnitSystem === "metric") {
+            const kilometersPerGallon = convert(value, "mi").to("km");
+            const litersPerGallon = convert(1, "gal").to("L");
+            convertedData = {
+                quantity: (100 * litersPerGallon) / kilometersPerGallon,
                 unit: "L/100km",
             };
         } else {
             convertedData = { quantity: value, unit: unit };
         }
     } else if (unit === "kWh/100km" || unit === "mi/kWh") {
-        // 1 kWh/100km = 62.137119 mi/kWh
-        const conversionFactor = 62.137119;
-
         if (unit === "kWh/100km" && toUnitSystem === "imperial") {
+            const milesPer100Km = convert(100, "km").to("mi");
             convertedData = {
-                quantity: value * conversionFactor,
+                quantity: milesPer100Km / value,
                 unit: "mi/kWh",
             };
         } else if (unit === "mi/kWh" && toUnitSystem === "metric") {
+            const kilometerPerKilowattHour = convert(value, "mi").to("km");
             convertedData = {
-                quantity: value / conversionFactor,
+                quantity: 100 / kilometerPerKilowattHour,
                 unit: "kWh/100km",
             };
         } else {
