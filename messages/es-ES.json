@@ -293,7 +293,9 @@
         "heatingBillDescription": "Puede encontrar esta información en su factura de calefacción.",
         "dateSelectDescription": "Seleccione el inicio y el final de este consumo. Puede encontrar esta información en su factura de calefacción."
       },
-      "deleteConsumptionDialogTitle": ""
+      "deleteConsumptionDialogTitle": "",
+      "powerConsumption": "",
+      "setCustomPowerConsumption": ""
     },
     "filter": {
       "orderBy": "",
@@ -487,7 +489,7 @@
       "electricScooter": "Scooter eléctrico",
       "bike": "Bicicleta",
       "walking": "A pie",
-      "defaultGreenEnergy": "",
+      "defaultGreenProvider": "",
       "firewood": "",
       "butane": "",
       "planeIntraEu": "",

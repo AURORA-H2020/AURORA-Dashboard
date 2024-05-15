@@ -293,7 +293,9 @@
         "heatingBillDescription": "Diese Information finden Sie auf Ihrer Heizkostenabrechnung.",
         "dateSelectDescription": "Wählen Sie den Beginn und das Ende dieses Verbrauchs. Sie finden diese Informationen auf Ihrer Heizkostenabrechnung."
       },
-      "deleteConsumptionDialogTitle": "Sind Sie sicher, dass Sie den Eintrag löschen wollen?"
+      "deleteConsumptionDialogTitle": "Sind Sie sicher, dass Sie den Eintrag löschen wollen?",
+      "powerConsumption": "Stromverbrauch",
+      "setCustomPowerConsumption": "Eigenen Stromverbrauch definieren"
     },
     "filter": {
       "orderBy": "Sortieren nach",
@@ -482,12 +484,12 @@
       "electricPassengerTrain": "Elektrischer Personenzug",
       "dieselPassengerTrain": "Diesel-Personenzug",
       "highSpeedTrain": "Hochgeschwindigkeitszug",
-      "plane": "Flugzeug",
+      "plane": "Flugzeug (Inland)",
       "electricBike": "Elektrofahrrad",
       "electricScooter": "Elektroroller",
       "bike": "Fahrrad",
       "walking": "Laufen",
-      "defaultGreenEnergy": "Nationales Stromnetz (grüner Anbieter)",
+      "defaultGreenProvider": "Nationales Stromnetz (grüner Anbieter)",
       "firewood": "Brennholz",
       "butane": "Butan",
       "planeIntraEu": "Flugzeug (innerhalb der EU)",

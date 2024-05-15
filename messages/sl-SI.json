@@ -293,7 +293,9 @@
         "heatingBillDescription": "Te podatke lahko najdete¸ na računu za ogrevanje.",
         "dateSelectDescription": "Izberi začetek in konec te porabe. Te podatke lahko najdeš na računu za ogrevanje."
       },
-      "deleteConsumptionDialogTitle": ""
+      "deleteConsumptionDialogTitle": "",
+      "powerConsumption": "",
+      "setCustomPowerConsumption": ""
     },
     "filter": {
       "orderBy": "",
@@ -487,7 +489,7 @@
       "electricScooter": "Električni skuter",
       "bike": "Kolo",
       "walking": "Hoja",
-      "defaultGreenEnergy": "",
+      "defaultGreenProvider": "",
       "firewood": "",
       "butane": "",
       "planeIntraEu": "",

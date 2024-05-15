@@ -489,7 +489,7 @@
       "electricScooter": "Electric scooter",
       "bike": "Bike",
       "walking": "Walking",
-            "defaultGreenProvider": "National Grid (green provider)",
+      "defaultGreenProvider": "National Grid (green provider)",
       "firewood": "Firewood",
       "butane": "Butane",
       "planeIntraEu": "Plane (intra EU)",

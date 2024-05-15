@@ -293,7 +293,9 @@
         "heatingBillDescription": "Podes encontrar esta informação na tua fatura de aquecimento.",
         "dateSelectDescription": "Seleciona o início e fim deste consumo. Podes encontrar esta informação na tua fatura de aquecimento."
       },
-      "deleteConsumptionDialogTitle": ""
+      "deleteConsumptionDialogTitle": "",
+      "powerConsumption": "",
+      "setCustomPowerConsumption": ""
     },
     "filter": {
       "orderBy": "",
@@ -487,7 +489,7 @@
       "electricScooter": "Trotinete elétrica",
       "bike": "Bicicleta",
       "walking": "Caminhar",
-      "defaultGreenEnergy": "",
+      "defaultGreenProvider": "",
       "firewood": "",
       "butane": "",
       "planeIntraEu": "",

@@ -293,7 +293,9 @@
         "heatingBillDescription": "Du kan finde disse oplysninger på din varmeregning.",
         "dateSelectDescription": "Vælg begyndelsen og slutningen af dette forbrug. Du kan finde disse oplysninger på din varmeregning."
       },
-      "deleteConsumptionDialogTitle": ""
+      "deleteConsumptionDialogTitle": "",
+      "powerConsumption": "",
+      "setCustomPowerConsumption": ""
     },
     "filter": {
       "orderBy": "",
@@ -487,7 +489,7 @@
       "electricScooter": "El-scooter/løbehjul",
       "bike": "Cykel",
       "walking": "Gående",
-      "defaultGreenEnergy": "",
+      "defaultGreenProvider": "",
       "firewood": "",
       "butane": "",
       "planeIntraEu": "",
