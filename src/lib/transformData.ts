@@ -118,8 +118,6 @@ export function temporalData(
         );
     });
 
-    console.log(temporalData);
-
     temporalData.sort(function (a, b) {
         let keyA = a.date!,
             keyB = b.date!;
