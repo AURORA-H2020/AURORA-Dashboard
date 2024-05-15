@@ -48,7 +48,7 @@ export const consumptionSources: ConsumptionSources = {
         { source: "default", name: t("category.sources.default") },
         {
             source: "defaultGreenProvider",
-            name: t("category.sources.defaultGreenEnergy"),
+            name: t("category.sources.defaultGreenProvider"),
         },
         {
             source: "homePhotovoltaics",
