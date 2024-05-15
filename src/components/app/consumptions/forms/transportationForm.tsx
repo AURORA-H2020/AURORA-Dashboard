@@ -16,7 +16,12 @@ import {
     publicVehicleOccupancies,
     publicVerhicleTypes,
 } from "@/lib/constants/consumptions";
-import { cn, convertUnit, useConvertUnit } from "@/lib/utilities";
+import {
+    cn,
+    convertUnit,
+    isFieldRequired,
+    useConvertUnit,
+} from "@/lib/utilities";
 import { transportationFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Consumption } from "@/models/firestore/consumption/consumption";
@@ -178,6 +183,7 @@ const TransportationForm = ({
                                 placeholder={t("unitLabel.distance")}
                                 label={t("unitLabel.distance")}
                                 unit={distanceUnit}
+                                required={isFieldRequired(formSchema, "value")}
                             />
                         )}
                     />
@@ -196,6 +202,10 @@ const TransportationForm = ({
                                 )}
                                 placeholder={t("app.form.transportationType")}
                                 label={t("app.form.transportationType")}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "transportation.transportationType",
+                                )}
                             />
                         )}
                     />
@@ -223,6 +233,10 @@ const TransportationForm = ({
                                             ? fuelConsumptionUnitElectric
                                             : fuelConsumptionUnitRegular
                                     }
+                                    required={isFieldRequired(
+                                        formSchema,
+                                        "transportation.fuelConsumption",
+                                    )}
                                 />
                             )}
                         />
@@ -238,6 +252,7 @@ const TransportationForm = ({
                                     inputType="number"
                                     placeholder={t("app.form.occupancy")}
                                     label={t("app.form.occupancy")}
+                                    required={true}
                                 />
                             )}
                         />
@@ -258,6 +273,7 @@ const TransportationForm = ({
                                     )}
                                     placeholder={t("app.form.occupancy")}
                                     label={t("app.form.occupancy")}
+                                    required={true}
                                 />
                             )}
                         />
@@ -279,6 +295,10 @@ const TransportationForm = ({
                                         .watch("transportation.dateOfTravelEnd")
                                         ?.toDate() || undefined
                                 }
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "transportation.dateOfTravel",
+                                )}
                             />
                         )}
                     />
@@ -296,6 +316,7 @@ const TransportationForm = ({
                                 minDate={form
                                     .watch("transportation.dateOfTravel")
                                     .toDate()}
+                                required={false}
                             />
                         )}
                     />
@@ -310,6 +331,10 @@ const TransportationForm = ({
                             placeholder={t("app.form.description")}
                             label={t("app.form.description")}
                             description={t("app.form.descriptionHelpText")}
+                            required={isFieldRequired(
+                                formSchema,
+                                "description",
+                            )}
                         />
                     )}
                 />

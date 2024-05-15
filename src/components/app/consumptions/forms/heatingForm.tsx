@@ -10,7 +10,12 @@ import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { addEditConsumption } from "@/firebase/consumption/addEditConsumption";
 import { consumptionSources } from "@/lib/constants/consumptions";
-import { cn, convertUnit, getConsumptionUnit } from "@/lib/utilities";
+import {
+    cn,
+    convertUnit,
+    getConsumptionUnit,
+    isFieldRequired,
+} from "@/lib/utilities";
 import { heatingFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Consumption } from "@/models/firestore/consumption/consumption";
@@ -152,6 +157,10 @@ const HeatingForm = ({
                                 description={t(
                                     "app.form.heating.heatingFuelDescription",
                                 )}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "heating.heatingFuel",
+                                )}
                             />
                         )}
                     />
@@ -175,6 +184,7 @@ const HeatingForm = ({
                                     label={t(
                                         "app.form.heating.districtHeatingSource",
                                     )}
+                                    required={true}
                                 />
                             )}
                         />
@@ -192,6 +202,7 @@ const HeatingForm = ({
                                     "app.form.heating.heatingBillDescription",
                                 )}
                                 unit={valueUnit?.userUnit}
+                                required={isFieldRequired(formSchema, "value")}
                             />
                         )}
                     />
@@ -206,6 +217,10 @@ const HeatingForm = ({
                                 label={t("app.form.peopleInHousehold")}
                                 description={t(
                                     "app.form.peopleInHouseholdDescription",
+                                )}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "heating.householdSize",
                                 )}
                             />
                         )}
@@ -222,6 +237,10 @@ const HeatingForm = ({
                                 placeholder={t("common.placeholder.selectDate")}
                                 label={t("ui.monthPicker.start")}
                                 maxDate={form.watch("heating.endDate").toDate()}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "heating.startDate",
+                                )}
                             />
                         )}
                     />
@@ -240,6 +259,10 @@ const HeatingForm = ({
                                 description={t(
                                     "app.form.heating.dateSelectDescription",
                                 )}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "heating.endDate",
+                                )}
                             />
                         )}
                     />
@@ -256,6 +279,10 @@ const HeatingForm = ({
                                 placeholder={t("app.form.costs")}
                                 label={t("app.form.costs")}
                                 unit={userCountryData?.currencyCode ?? "EUR"}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "heating.costs",
+                                )}
                             />
                         )}
                     />
@@ -269,6 +296,10 @@ const HeatingForm = ({
                                 placeholder={t("app.form.description")}
                                 label={t("app.form.description")}
                                 description={t("app.form.descriptionHelpText")}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "description",
+                                )}
                             />
                         )}
                     />

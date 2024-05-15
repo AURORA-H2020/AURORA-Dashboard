@@ -10,7 +10,7 @@ import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { addEditConsumption } from "@/firebase/consumption/addEditConsumption";
 import { consumptionSources } from "@/lib/constants/consumptions";
-import { cn } from "@/lib/utilities";
+import { cn, isFieldRequired } from "@/lib/utilities";
 import { electricityFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Consumption } from "@/models/firestore/consumption/consumption";
@@ -134,6 +134,10 @@ const ElectricityForm = ({
                                 description={t(
                                     "app.form.electricity.electricitySourceDescription",
                                 )}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "electricity.electricitySource",
+                                )}
                             />
                         )}
                     />
@@ -164,6 +168,7 @@ const ElectricityForm = ({
                                               "app.form.electricity.energyBillDescription",
                                           )
                                 }
+                                required={isFieldRequired(formSchema, "value")}
                             />
                         )}
                     />
@@ -183,6 +188,10 @@ const ElectricityForm = ({
                                         "app.form.electricity.gridExported",
                                     )}
                                     showSwitch={true}
+                                    required={isFieldRequired(
+                                        formSchema,
+                                        "electricity.electricityExported",
+                                    )}
                                 />
                             )}
                         />
@@ -198,6 +207,10 @@ const ElectricityForm = ({
                                 label={t("app.form.peopleInHousehold")}
                                 description={t(
                                     "app.form.peopleInHouseholdDescription",
+                                )}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "electricity.householdSize",
                                 )}
                             />
                         )}
@@ -216,6 +229,10 @@ const ElectricityForm = ({
                                 maxDate={form
                                     .watch("electricity.endDate")
                                     .toDate()}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "electricity.startDate",
+                                )}
                             />
                         )}
                     />
@@ -234,6 +251,10 @@ const ElectricityForm = ({
                                 description={t(
                                     "app.form.electricity.dateSelectDescription",
                                 )}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "electricity.endDate",
+                                )}
                             />
                         )}
                     />
@@ -250,6 +271,10 @@ const ElectricityForm = ({
                                 placeholder={t("app.form.costs")}
                                 label={t("app.form.costs")}
                                 unit={userCountryData?.currencyCode ?? "EUR"}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "electricity.costs",
+                                )}
                             />
                         )}
                     />
@@ -263,6 +288,10 @@ const ElectricityForm = ({
                                 placeholder={t("app.form.description")}
                                 label={t("app.form.description")}
                                 description={t("app.form.descriptionHelpText")}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "description",
+                                )}
                             />
                         )}
                     />

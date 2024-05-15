@@ -16,7 +16,7 @@ import {
     unitSystems,
 } from "@/lib/constants/constants";
 import { labelMappings } from "@/lib/constants/consumptions";
-import { cn } from "@/lib/utilities";
+import { cn, isFieldRequired } from "@/lib/utilities";
 import { userDataFormSchema } from "@/lib/zod/userSchemas";
 import { CityMapping } from "@/models/constants";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
@@ -153,6 +153,10 @@ const UserDataForm = ({
                                 inputType="text"
                                 placeholder={t("app.profile.firstName")}
                                 label={t("app.profile.firstName")}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "firstName",
+                                )}
                             />
                         )}
                     />
@@ -165,6 +169,10 @@ const UserDataForm = ({
                                 inputType="text"
                                 placeholder={t("app.profile.lastName")}
                                 label={t("app.profile.lastName")}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "lastName",
+                                )}
                             />
                         )}
                     />
@@ -178,6 +186,10 @@ const UserDataForm = ({
                                 placeholder={t("app.profile.yearOfBirth")}
                                 label={t("app.profile.yearOfBirth")}
                                 optOutLabel={t("common.preferNotToSay")}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "yearOfBirth",
+                                )}
                             />
                         )}
                     />
@@ -194,6 +206,7 @@ const UserDataForm = ({
                                 placeholder={t("app.form.profile.selectGender")}
                                 label={t("app.profile.gender")}
                                 optOutLabel={t("common.preferNotToSay")}
+                                required={isFieldRequired(formSchema, "gender")}
                             />
                         )}
                     />
@@ -219,6 +232,10 @@ const UserDataForm = ({
                                     description={t(
                                         "app.form.profile.selectCountryDescription",
                                     )}
+                                    required={isFieldRequired(
+                                        formSchema,
+                                        "country",
+                                    )}
                                 />
                             )}
                         />
@@ -242,6 +259,10 @@ const UserDataForm = ({
                                         )}
                                         label={t("app.profile.city")}
                                         optOutLabel={t("city.otherCity")}
+                                        required={isFieldRequired(
+                                            formSchema,
+                                            "city",
+                                        )}
                                     />
                                 )}
                             />
@@ -271,6 +292,10 @@ const UserDataForm = ({
                                 )}
                                 label={t("app.profile.homeEnergyLabel")}
                                 optOutLabel={t("common.preferNotToSay")}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "homeEnergyLabel",
+                                )}
                             />
                         )}
                     />
@@ -290,6 +315,10 @@ const UserDataForm = ({
                                 )}
                                 label={t("app.profile.householdProfile")}
                                 optOutLabel={t("common.preferNotToSay")}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "householdProfile",
+                                )}
                             />
                         )}
                     />
@@ -308,6 +337,10 @@ const UserDataForm = ({
                                     "app.form.profile.selectUnitSystem",
                                 )}
                                 label={t("app.profile.unitSystem")}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "unitSystem",
+                                )}
                             />
                         )}
                     />
@@ -322,6 +355,10 @@ const UserDataForm = ({
                                 field={field}
                                 description={t(
                                     "app.form.profile.marketingConsentDescription",
+                                )}
+                                required={isFieldRequired(
+                                    formSchema,
+                                    "isMarketingConsentAllowed",
                                 )}
                             />
                         )}
