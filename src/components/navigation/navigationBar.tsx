@@ -68,7 +68,7 @@ const NavigationBar = (): React.ReactElement => {
 
     return (
         <Card className="flex items-center gap-4 p-4 md:px-8">
-            <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-md lg:gap-6">
+            <nav className="hidden w-full flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-md lg:gap-6">
                 <Link href="/" className="w-max">
                     <Logo />
                 </Link>
