@@ -218,7 +218,7 @@
       },
       "settings": {
         "unitSystem": {
-          "imperial": "Imperial",
+          "imperial": "Imperial (UK)",
           "metric": "Metrisch"
         }
       }
@@ -355,7 +355,7 @@
     "confirmUnitSystem": {
       "description": "Sie haben kein Einheitensystem eingestellt und verwenden derzeit das metrische System.",
       "useMetric": "Bei metrisch bleiben",
-      "useImperial": "Zu imperial wechseln"
+      "useImperial": "Zu Imperial (UK) wechseln"
     }
   },
   "common": {

@@ -31,53 +31,53 @@
       "success": "¡Bienvenido a AURORA!",
       "error": "Se ha producido un error. Por favor, compruebe sus credenciales.",
       "logout": {
-        "success": "",
-        "error": ""
+        "success": "You successfully logged out. Goodbye!",
+        "error": "An error occured logging you out. Please try again."
       }
     },
     "consumption": {
-      "addedSuccessfully": "",
-      "updatedSuccessfully": "",
-      "addedError": "",
-      "updatedError": ""
+      "addedSuccessfully": "Your consumption was successfully added",
+      "updatedSuccessfully": "Your consumption was successfully updated",
+      "addedError": "An error occured adding your consumption",
+      "updatedError": "An error occured updating your consumption"
     },
     "changeEmail": {
-      "success": "",
-      "errorTitle": "",
-      "errorDescription": ""
+      "success": "Your email was updated successfully",
+      "errorTitle": "An error occurred updating your email",
+      "errorDescription": "Please check your current password and try again."
     },
     "changePassword": {
-      "errorTitle": "",
-      "errorDescription": "",
-      "success": ""
+      "errorTitle": "An error occurred updating your password",
+      "errorDescription": "Please check your current password and try again.",
+      "success": "Your password was updated successfully"
     },
     "deleteAccount": {
-      "success": "",
-      "reAuthErrorTitle": "",
-      "reAuthErrorDescription": "",
-      "generalError": ""
+      "success": "Your account has been deleted",
+      "reAuthErrorTitle": "Please reauthenticate to update your password",
+      "reAuthErrorDescription": "You can do this by logging out and back in.",
+      "generalError": "An error occurred deleting your account"
     },
     "resetPassword": {
-      "successTitle": "",
-      "successDescription": "",
-      "errorTitle": "",
-      "errorDescription": ""
+      "successTitle": "Your password was reset",
+      "successDescription": "Check your email for further instructions.",
+      "errorTitle": "An error occurred resetting your password",
+      "errorDescription": "Please check the email address you provided is accurate and you have an existing account."
     },
     "deleteConsumption": {
-      "success": "",
-      "error": ""
+      "success": "The consumption has been deleted",
+      "error": "An error occurred deleting this consumption"
     },
     "deleteRecurringConsumption": {
-      "success": "",
-      "error": ""
+      "success": "The recurring consumption has been deleted",
+      "error": "An error occurred deleting this recurring consumption"
     },
     "createProfile": {
-      "success": "",
-      "error": ""
+      "success": "Your profile was created successfully",
+      "error": "There was an error creating your profile"
     },
     "updateProfile": {
-      "success": "",
-      "error": ""
+      "success": "Your profile was updated successfully",
+      "error": "There was an error updating your profile"
     }
   },
   "button": {
@@ -111,7 +111,7 @@
     },
     "main": {
       "title": "Rastreador de energía: Cuadro de mandos",
-      "description": ""
+      "description": "AURORA is an ongoing citizen science project and the data on this page is provided without guarantee."
     },
     "autoReport": {
       "reportSnippets": {
@@ -137,9 +137,9 @@
       "description": "No se ha encontrado la página que busca."
     },
     "noData": "No hay datos disponibles",
-    "noConsumptionsFound": "",
-    "noRecurringConsumptionsFound": "",
-    "noConsumptions": ""
+    "noConsumptionsFound": "No consumptions found.",
+    "noRecurringConsumptionsFound": "No recurring consumptions found.",
+    "noConsumptions": "No consumptions"
   },
   "metadata": {
     "title": "Rastreador de energía AURORA: Cuadro de mandos",
@@ -160,17 +160,17 @@
       "password": "Contraseña",
       "confirmPassword": "Confirmar contraseña",
       "error": {
-        "passwordMismatch": "",
-        "invalidEmail": "",
-        "passwordStrength": ""
+        "passwordMismatch": "The passwords did not match",
+        "invalidEmail": "Please enter a valid email address",
+        "passwordStrength": "Password must be at least 8 characters long, contain at least one number and at least one uppercase character"
       },
       "newPassword": "Nueva contraseña",
       "confirmNewPassword": "Confirmar nueva contraseña",
       "currentPassword": "Contraseña actual",
-      "legal": "",
+      "legal": "This tool was developed by the AURORA Horizon 2020 EU-funded project (No. <projectNumber>101036418</projectNumber>). Your data is processed by members of the project consortium and securely stored in Google Firebase. Your data will only be used for research purposes in an anonymised format and never commercially without your explicit consent. You can modify, download or delete your data at any time or reach out to our support under <supportEmail>app-support@aurora-h2020.eu</supportEmail>. By proceeding you agree to AURORA's <termsOfService>Terms of Service</termsOfService> and <privacyPolicy>Privacy Policy</privacyPolicy>.",
       "resetPassword": {
         "forgotPassword": "Olvidé mi contraseña",
-        "description": "",
+        "description": "Provide the email address you used to register your account below. We will send you a password reset link.",
         "resetPassword": "Restablecer contraseña"
       }
     },
@@ -187,25 +187,25 @@
     "updateConsumption": "Editar consumo",
     "validation": {
       "error": {
-        "validValue": "",
-        "maxStringLength": "",
-        "selectAtLeastOneWeekday": "",
-        "selectDayOfMonth": "",
-        "specifyPrivateOccupancyLevel": "",
-        "specifyPublicOccupancyLevel": "",
-        "email": "",
+        "validValue": "Please enter a valid number",
+        "maxStringLength": "This field cannot exceed {charLimit} characters",
+        "selectAtLeastOneWeekday": "Please select at least one weekday",
+        "selectDayOfMonth": "Please select a day of the month",
+        "specifyPrivateOccupancyLevel": "Please specify a number of passengers",
+        "specifyPublicOccupancyLevel": "Please specify an occupancy level",
+        "email": "Please enter a valid email address",
         "year": {
-          "after1900": "",
-          "inPast": ""
+          "after1900": "Please enter a year after 1900",
+          "inPast": "Please enter a year in the past"
         },
         "date": {
-          "endAfterStart": ""
+          "endAfterStart": "End date must be after start date"
         },
         "electricity": {
-          "exportedExceedsProduction": ""
+          "exportedExceedsProduction": "Your exported electricity cannot exceed your total production"
         },
         "heating": {
-          "districtHeatingSourceRequired": ""
+          "districtHeatingSourceRequired": "District Heating Source is required when district heating is selected"
         }
       }
     },
@@ -218,29 +218,29 @@
       },
       "settings": {
         "unitSystem": {
-          "imperial": "",
-          "metric": ""
+          "imperial": "Imperial (UK)",
+          "metric": "Metric"
         }
       }
     },
     "consumption": "Consumo",
-    "addRecurringConsumption": "",
+    "addRecurringConsumption": "Add Recurring Consumption",
     "consumptions": "Consumos",
     "recurringConsumptions": "Consumos recurrentes",
-    "updateRecurringConsumption": "",
+    "updateRecurringConsumption": "Edit Recurring Consumption",
     "form": {
-      "recurringToggleDescription": "",
-      "transportDisclaimer": "",
-      "dayOfMonth": "",
+      "recurringToggleDescription": "Turn this off to stop tracking this consumption.",
+      "transportDisclaimer": "Please do not add travels you make on behalf of your company. This does not include your commute, which should still be added.",
+      "dayOfMonth": "Day of month",
       "startOfTravel": "Inicio del desplazamiento",
       "transportationType": "Tipo de transporte",
-      "setCustomFuelConsumption": "",
-      "fuelConsumption": "",
+      "setCustomFuelConsumption": "Set custom fuel consumption",
+      "fuelConsumption": "Fuel consumption",
       "occupancy": "Ocupación",
       "description": "Descripción",
       "publicVehicleOccupancy": {
         "almostEmpty": "Casi vacío",
-        "medium": "",
+        "medium": "Medium",
         "nearlyFull": "Casi completo"
       },
       "frequencyOptions": {
@@ -256,22 +256,22 @@
       "updatedAt": "Actualizado",
       "recurringAutomaticDisclaimer": "Esta entrada se añadió automáticamente mediante consumos recurrentes.",
       "endOfTravel": "Fin del viaje",
-      "timeOfTravel": "",
-      "recurringTransportation": "",
+      "timeOfTravel": "Time of travel",
+      "recurringTransportation": "Recurring Transportation",
       "profile": {
         "editProfile": "Editar perfil",
-        "selectGender": "",
-        "selectCountry": "",
-        "selectCountryDescription": "",
-        "selectCity": "",
-        "selectHomeEnergyLabel": "",
-        "selectHouseholdProfile": "",
+        "selectGender": "Select your preferred gender",
+        "selectCountry": "Select your country",
+        "selectCountryDescription": "This information helps us to more accurately calculate your carbon footprint. Please note that you can't change your country later. Crowdfunding of local photovoltaic installations is currently only planned for select cities of AURORA project partners.",
+        "selectCity": "Select your city",
+        "selectHomeEnergyLabel": "Select your home energy label",
+        "selectHouseholdProfile": "Select your household profile",
         "marketingConsentDescription": "Querría recibir actualizaciones sobre la app y el proyecto AURORA por email.",
-        "saveProfile": "",
-        "selectUnitSystem": ""
+        "saveProfile": "Save Profile",
+        "selectUnitSystem": "Select the unit system you would like to use"
       },
       "peopleInHousehold": "Personas en el hogar",
-      "electricityExported": "",
+      "electricityExported": "Electricity exported",
       "costs": "Costes",
       "electricitySource": "Fuente de electricidad",
       "peopleInHouseholdDescription": "¿Cuántas personas, incluyendo tú, viven en tu domicilio?",
@@ -279,11 +279,11 @@
         "dateSelectDescription": "Seleccione el inicio y el final de este consumo. Puede encontrar esta información en su factura de la luz.",
         "electricitySource": "Fuente de electricidad",
         "electricitySourceDescription": "Seleccione la fuente de electricidad adecuada.",
-        "energyProduced": "",
+        "energyProduced": "Energy produced",
         "energyBillDescription": "Puede encontrar esta información en su factura de electricidad.",
-        "pvProductionDescription": "",
-        "gridExported": "",
-        "energyExported": ""
+        "pvProductionDescription": "You can usually find this information on an app or website provided by your PV installation contractor.",
+        "gridExported": "Energy exported to the grid",
+        "energyExported": "Energy exported"
       },
       "descriptionHelpText": "Puede añadir una descripción a su entrada para ayudarle a encontrarla más tarde.",
       "heating": {
@@ -293,23 +293,23 @@
         "heatingBillDescription": "Puede encontrar esta información en su factura de calefacción.",
         "dateSelectDescription": "Seleccione el inicio y el final de este consumo. Puede encontrar esta información en su factura de calefacción."
       },
-      "deleteConsumptionDialogTitle": "",
-      "powerConsumption": "",
-      "setCustomPowerConsumption": ""
+      "deleteConsumptionDialogTitle": "Are you sure you want to delete this entry?",
+      "powerConsumption": "Power consumption",
+      "setCustomPowerConsumption": "Set custom power consumption"
     },
     "filter": {
-      "orderBy": "",
-      "order": ""
+      "orderBy": "Order by",
+      "order": "Order"
     },
-    "totalConsumptions": "",
-    "totalRecurringConsumptions": "",
+    "totalConsumptions": "Total consumptions",
+    "totalRecurringConsumptions": "Total recurring consumptions",
     "labelGuide": {
       "title": "¿Cómo funciona?",
       "description": "Sus etiquetas energéticas se calculan en función de su consumo rastreado y son específicas de su ubicación. Esto significa que, a medida que vaya introduciendo datos a lo largo del año, se irán conociendo más datos sobre sus emisiones de carbono y sus presupuestos energéticos. Por ejemplo: Si sólo ha introducido los datos de todos los días de enero y diciembre, se utilizarán 2/12 del presupuesto total para calcular su etiqueta. La única excepción es el transporte, que permite obtener el presupuesto completo a partir de un determinado número de entradas anuales. Su presupuesto global se basa en la suma de sus presupuestos de electricidad, calefacción y transporte."
     },
     "profile": {
-      "yourProfile": "",
-      "userID": "",
+      "yourProfile": "Your Profile",
+      "userID": "User ID",
       "city": "Ciudad",
       "country": "País",
       "householdProfile": "Perfil del domicilio",
@@ -319,7 +319,7 @@
       "lastName": "Apellido",
       "firstName": "Nombre",
       "createYourProfile": "Cree su perfil",
-      "unitSystem": ""
+      "unitSystem": "Unit system"
     },
     "account": {
       "downloadMyData": "Descargar mis datos",
@@ -330,16 +330,16 @@
       "deletePopup": {
         "title": "¿Seguro que quiere eliminar tu cuenta?",
         "description": "Esta acción no se puede deshacer. Esto borrará permanentemente su cuenta y eliminará sus datos de nuestros servidores.",
-        "confirmationDisclaimer": ""
+        "confirmationDisclaimer": "Yes, I want to delete my account and understand that it is lost forever."
       },
       "rejectConsentDeletePopup": {
-        "title": "",
+        "title": "Warning!",
         "description": "Rechazar la Política de privacidad y las Condiciones del servicio más recientes nos obliga a eliminar su cuenta. Tenga en cuenta que no podemos recuperar su cuenta después de eliminarla."
       }
     },
     "support": {
       "support": "Soporte",
-      "getTheApp": "",
+      "getTheApp": "Get the App",
       "contactSupport": "Contactar con soporte"
     },
     "legal": {
@@ -347,15 +347,15 @@
       "privacyPolicy": "Política de privacidad",
       "termsOfService": "Condiciones del servicio",
       "imprint": "Aviso legal",
-      "updatedLegalDocuments": ""
+      "updatedLegalDocuments": "We have updated our Privacy Policy and Terms of Service. Please review and accept the latest version to continue using the app."
     },
     "summary": {
-      "noDataAvailable": ""
+      "noDataAvailable": "Add consumptions to see your summary"
     },
     "confirmUnitSystem": {
-      "description": "",
-      "useMetric": "",
-      "useImperial": ""
+      "description": "You do not have a unit system set and are currently using the metric system.",
+      "useMetric": "Keep using metric",
+      "useImperial": "Switch to imperial (UK)"
     }
   },
   "common": {
@@ -365,8 +365,8 @@
     "and": "y",
     "placeholder": {
       "selectValue": "Seleccione un valor",
-      "selectDate": "",
-      "selectLanguage": ""
+      "selectDate": "Select a date",
+      "selectLanguage": "Select language"
     },
     "unsure": "Inseguro",
     "cancel": "Cancelar",
@@ -383,17 +383,17 @@
       "saturday": "Sábado",
       "sunday": "Domingo"
     },
-    "calculating": "",
-    "in": "",
+    "calculating": "Calculating...",
+    "in": "in",
     "preferNotToSay": "Prefiero no decirlo",
     "reject": "Rechazar",
     "accept": "Aceptar",
     "important": "Importante",
-    "hours": "",
-    "minutes": "",
+    "hours": "Hours",
+    "minutes": "Minutes",
     "pagination": {
-      "previous": "",
-      "next": ""
+      "previous": "Previous",
+      "next": "Next"
     }
   },
   "country": {
@@ -417,7 +417,7 @@
       "about": "Acerca de",
       "account": "Cuenta",
       "logout": "Cierre de sesión",
-      "admin": ""
+      "admin": "Admin"
     },
     "account": {
       "home": "Inicio",
@@ -457,7 +457,7 @@
     "transportation": "Medios de transporte",
     "heating": "Calefacción",
     "sources": {
-      "default": "",
+      "default": "National Grid (standard)",
       "homePhotovoltaics": "Fotovoltaica doméstica",
       "oil": "Gasolina",
       "naturalGas": "Gas natural",
@@ -476,7 +476,7 @@
       "hybridCar": "Coche híbrido",
       "electricMotorcycle": "Moto eléctrica",
       "electricBus": "Autobús eléctrico",
-      "hybridElectricBus": "",
+      "hybridElectricBus": "Hybrid electric bus",
       "alternativeFuelBus": "Autobús de combustible alternativo",
       "dieselBus": "Autobús diesel",
       "otherBus": "Otro autobús",
@@ -484,16 +484,16 @@
       "electricPassengerTrain": "Tren de pasajeros eléctrico ",
       "dieselPassengerTrain": "Tren de pasajeros diesel",
       "highSpeedTrain": "Tren de alta velocidad",
-      "plane": "",
+      "plane": "Plane (domestic)",
       "electricBike": "Bicicleta eléctrica",
       "electricScooter": "Scooter eléctrico",
       "bike": "Bicicleta",
       "walking": "A pie",
-      "defaultGreenProvider": "",
-      "firewood": "",
-      "butane": "",
-      "planeIntraEu": "",
-      "planeExtraEu": ""
+      "defaultGreenProvider": "National Grid (green provider)",
+      "firewood": "Firewood",
+      "butane": "Butane",
+      "planeIntraEu": "Plane (intra EU)",
+      "planeExtraEu": "Plane (extra EU)"
     }
   },
   "unitLabel": {
@@ -514,11 +514,11 @@
     "december": "Diciembre"
   },
   "city": {
-    "evora": "",
-    "madrid": "",
-    "forestOfDean": "",
-    "ljubljana": "",
-    "aarhus": "",
+    "evora": "Évora",
+    "madrid": "Madrid",
+    "forestOfDean": "Forest of Dean",
+    "ljubljana": "Ljubljana",
+    "aarhus": "Aarhus",
     "otherCity": "Otra ciudad"
   }
 }
