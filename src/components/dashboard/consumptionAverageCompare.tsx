@@ -1,19 +1,18 @@
 "use client";
 
+import { LoadingSpinner } from "@/components/ui/loading";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { countriesMapping } from "@/lib/constants/constants";
+import { getMetaDataSummary } from "@/lib/transformData";
+import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
 import { EnergyMode, MetaData, MetaDataSummary } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { Flex, Heading } from "@radix-ui/themes";
+import { BarList } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 
-import { countriesMapping } from "@/lib/constants";
-import { getMetaDataSummary } from "@/lib/transformData";
-import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
-import { BarList } from "@tremor/react";
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
-import LoadingSpinner from "../ui/loading";
-
-export function ConsumptionAverageCompare({
+const ConsumptionAverageCompare = ({
     metaData,
     categories,
     countries,
@@ -23,7 +22,7 @@ export function ConsumptionAverageCompare({
     categories: ConsumptionCategory[];
     countries: string[];
     title: string;
-}): JSX.Element {
+}): React.ReactNode => {
     const t = useTranslations();
 
     const [selectedEnergyMode, setSelectedEnergyMode] =
@@ -135,4 +134,6 @@ export function ConsumptionAverageCompare({
             )}
         </>
     );
-}
+};
+
+export { ConsumptionAverageCompare };

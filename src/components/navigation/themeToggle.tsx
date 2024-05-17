@@ -1,38 +1,39 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { Button } from "../ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * Renders a theme toggle button.
  *
- * @return {JSX.Element} The theme toggle button.
+ * @return {React.ReactElement} The theme toggle button.
  */
-export default function ThemeToggle(): JSX.Element {
+const ThemeToggle = (): React.ReactElement => {
     const [mounted, setMounted] = useState(false);
-    const { theme, setTheme } = useTheme();
+    const { resolvedTheme, setTheme } = useTheme();
 
     useEffect(() => {
         setMounted(true);
     }, []);
 
     if (!mounted) {
-        return (
-            <Button variant="ghost" size="icon">
-                <Moon />
-            </Button>
-        );
+        return <Skeleton className="h-10 w-10" />;
     }
 
     return (
         <Button
             variant="ghost"
             size="icon"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={() =>
+                setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            }
         >
-            {theme === "light" ? <Moon /> : <Sun />}
+            {resolvedTheme === "light" ? <Moon /> : <Sun />}
         </Button>
     );
-}
+};
+
+export { ThemeToggle };

@@ -1,14 +1,12 @@
-import firebase_app from "@/firebase/config";
+import { Card, CardContent } from "@/components/ui/card";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { getLatestCountryFile } from "@/lib/firebaseUtils";
 import { CountryData } from "@/models/countryData";
-import { promises as fs } from "fs";
-
-import { Card, CardContent } from "@/components/ui/card";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { Heading, Strong, Text } from "@radix-ui/themes";
 import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
-import AboutContent from "./about";
-import DataDownloads from "./dataDownloads";
+import { AboutContent } from "./about";
+import { DataDownloads } from "./dataDownloads";
 
 type Props = {
     params: { locale: string };
@@ -21,24 +19,17 @@ type Props = {
  * Firebase in production. Displays app metrics, carbon emissions,
  * energy usage, and labels for each country in a tabbed interface.
  *
- * @return {Promise<JSX.Element>} A promise that resolves with the
- *                                rendered home page component.
+ * @return {Promise<React.ReactNode>} A promise that resolves with the rendered home page component.
  */
-export default async function About({
+const AboutPage = async ({
     params: { locale },
-}: Props): Promise<JSX.Element> {
+}: Props): Promise<React.ReactNode> => {
     unstable_setRequestLocale(locale);
     const t = await getTranslations();
 
     let countryData: CountryData | null;
 
-    if (process.env.TEST_MODE && process.env.TEST_MODE == "true") {
-        const file = await fs.readFile(
-            process.cwd() + "/src/data/countries-1697714246-testing.json",
-            "utf8",
-        );
-        countryData = JSON.parse(file) as CountryData;
-    } else if (firebase_app) {
+    if (firebaseApp) {
         countryData = await getLatestCountryFile(
             FirebaseConstants.buckets.auroraDashboard.folders.countryData.name,
         );
@@ -71,4 +62,6 @@ export default async function About({
             </Card>
         </>
     );
-}
+};
+
+export default AboutPage;

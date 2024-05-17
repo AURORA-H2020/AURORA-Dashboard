@@ -1,24 +1,23 @@
-import firebase_app from "@/firebase/config";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { downloadJsonAsFile } from "@/lib/utilities";
 import { getFunctions, httpsCallable } from "firebase/functions";
-import { FirebaseConstants } from "../firebase-constants";
 
 /**
  * Downloads user data from the specified region and initiates the download process.
  *
  * @return {Promise<void>} A promise that resolves after the download process is completed.
  */
-export const downloadUserData = async () => {
+export const downloadUserData = async (): Promise<void> => {
     try {
-        // Specify the region where the function is deployed
         const functions = getFunctions(
-            firebase_app,
+            firebaseApp,
             FirebaseConstants.preferredCloudFunctionRegion,
         );
         const downloadUserData = httpsCallable(functions, "downloadUserData");
 
         const result = await downloadUserData();
-        const userData = result.data; // The object returned by your callable function
+        const userData = result.data;
 
         if (!userData) {
             throw new Error("No user data returned from the function.");
@@ -27,6 +26,5 @@ export const downloadUserData = async () => {
         await downloadJsonAsFile(userData, "user_data");
     } catch (error) {
         console.error("Error downloading user data:", error);
-        // Display an error message to the user if needed
     }
 };

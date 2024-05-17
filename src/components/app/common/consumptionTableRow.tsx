@@ -1,18 +1,20 @@
 import { TableCell, TableRow } from "@/components/ui/table";
-import { useTranslations } from "next-intl";
+import { cn } from "@/lib/utilities";
 import React from "react";
 
 // Props when `merged` is not provided or false.
 interface ConsumptionTableRowPropsWithoutMerged {
-    label: string;
+    label: string | React.ReactNode;
     children: React.ReactNode;
     merged?: false;
+    className?: string;
 }
 
 // Props when `merged` is true, without the `label`.
 interface ConsumptionTableRowPropsWithMerged {
     children: React.ReactNode;
     merged: true;
+    className?: string;
 }
 
 // Union type of both props scenarios.
@@ -26,21 +28,19 @@ type ConsumptionTableRowProps =
  *
  * @param {ConsumptionTableRowProps} props - Object with
  * children elements, merge flag, and optional label.
- * @return {JSX.Element} A table row element for consumption
+ * @return {React.ReactNode} A table row element for consumption
  * data.
  */
-export default function ConsumptionTableRow(
+const ConsumptionTableRow = (
     props: ConsumptionTableRowProps,
-): JSX.Element {
-    const { children, merged } = props;
+): React.ReactNode => {
+    const { children, merged, className } = props;
     const label = merged ? null : props.label; // label is ignored if merged is true
 
-    const t = useTranslations();
-
     return (
-        <TableRow>
+        <TableRow className={cn(className)}>
             {label && (
-                <TableCell className="font-bold w-[40%]">{t(label)}</TableCell>
+                <TableCell className="font-bold w-[40%]">{label}</TableCell>
             )}
             <TableCell
                 colSpan={merged ? 2 : 1}
@@ -50,4 +50,6 @@ export default function ConsumptionTableRow(
             </TableCell>
         </TableRow>
     );
-}
+};
+
+export { ConsumptionTableRow };

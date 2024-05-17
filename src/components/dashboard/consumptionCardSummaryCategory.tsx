@@ -1,8 +1,8 @@
-import { allTremorColours } from "@/lib/constants";
+import { allTremorColours } from "@/lib/constants/constants";
 import { MetaData } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { DonutChart, Legend } from "@tremor/react";
-import { ReactNode } from "react";
+import { useTranslations } from "next-intl";
 
 /**
  * Generates a summary of consumption by category for a given set of countries.
@@ -13,13 +13,15 @@ import { ReactNode } from "react";
  * @param {ConsumptionCategory} props.category - The category of consumption to summarize.
  * @return {ReactNode} - The JSX element representing the consumption card summary category.
  */
-export default function ConsumptionCardSummaryCategory({
+const ConsumptionCardSummaryCategory = ({
     metaData,
     category,
 }: {
     metaData: MetaData | undefined;
     category: ConsumptionCategory;
-}): ReactNode {
+}): React.ReactElement => {
+    const t = useTranslations();
+
     const dataSet: {
         source: string;
         sourceName: string;
@@ -35,7 +37,7 @@ export default function ConsumptionCardSummaryCategory({
             if (!thisSource) {
                 dataSet.push({
                     source: source.source,
-                    sourceName: source.sourceName,
+                    sourceName: t(`category.sources.${source.source}`),
                     count: 0,
                 });
                 thisSource = dataSet.find((e) => e.source === source.source);
@@ -63,4 +65,6 @@ export default function ConsumptionCardSummaryCategory({
             />
         </>
     );
-}
+};
+
+export { ConsumptionCardSummaryCategory };

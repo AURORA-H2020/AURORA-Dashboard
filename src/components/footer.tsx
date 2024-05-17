@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
-import Logo from "./navigation/logo";
-
+import { externalLinks } from "@/lib/constants/constants";
+import { Link } from "@/navigation";
 import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
-import LocaleSwitcher from "./navigation/localeSwitcher";
+import { LocaleSwitcher } from "./navigation/localeSwitcher";
+import { Logo } from "./navigation/logo";
 import { Button } from "./ui/button";
 import { Card, CardContent } from "./ui/card";
 import { Separator } from "./ui/separator";
@@ -13,9 +13,9 @@ import { Separator } from "./ui/separator";
 /**
  * Renders the footer component.
  *
- * @return {JSX.Element} The rendered footer component.
+ * @return {React.ReactNode} The rendered footer component.
  */
-export default function Footer(): JSX.Element {
+const Footer = (): React.ReactNode => {
     const t = useTranslations();
     return (
         <Card className="items-center">
@@ -36,7 +36,7 @@ export default function Footer(): JSX.Element {
                         className=""
                     >
                         <Button variant="link">
-                            <Link href="https://aurora-h2020.eu">
+                            <Link href={externalLinks.auroraWebsite}>
                                 {t("footer.auroraWebsite")}
                             </Link>
                         </Button>
@@ -45,7 +45,7 @@ export default function Footer(): JSX.Element {
                             className="h-5 hidden md:block"
                         />
                         <Button variant="link">
-                            <Link href="https://apps.apple.com/us/app/aurora-energy-tracker/id1668801198">
+                            <Link href={externalLinks.iosDownload}>
                                 {t("footer.iosApp")}
                             </Link>
                         </Button>
@@ -54,7 +54,7 @@ export default function Footer(): JSX.Element {
                             className="h-5 hidden md:block"
                         />
                         <Button variant="link">
-                            <Link href="https://play.google.com/store/apps/details?id=eu.inscico.aurora_app">
+                            <Link href={externalLinks.androidDownload}>
                                 {t("footer.androidApp")}
                             </Link>
                         </Button>
@@ -71,4 +71,6 @@ export default function Footer(): JSX.Element {
             </CardContent>
         </Card>
     );
-}
+};
+
+export { Footer };

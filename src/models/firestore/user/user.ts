@@ -2,6 +2,7 @@ import { UserGender } from "./user-gender";
 import { UserConsumptionMetadata } from "./user-consumption-metadata";
 import { UserHomeEnergyLabel } from "./user-homeEnergyLabel";
 import { UserHouseholdProfile } from "./user-householdProfile";
+import { UserSettings } from "./user-settings/user-settings";
 
 /**
  * A user
@@ -47,4 +48,16 @@ export interface User {
      * The city in country identifier
      */
     city?: string;
+    /**
+     * Whether marketing consent is provided
+     */
+    isMarketingConsentAllowed?: boolean;
+    /**
+     * The last accepted legal document version
+     */
+    acceptedLegalDocumentVersion?: number;
+    /**
+     * The user settings
+     */
+    settings?: UserSettings;
 }

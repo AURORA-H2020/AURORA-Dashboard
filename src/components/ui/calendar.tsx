@@ -17,6 +17,7 @@ function Calendar({
 }: CalendarProps) {
     return (
         <DayPicker
+            ISOWeek
             showOutsideDays={showOutsideDays}
             className={cn("p-3", className)}
             classNames={{

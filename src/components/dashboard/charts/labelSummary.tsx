@@ -1,6 +1,17 @@
 "use client";
 
-import { countriesMapping, labelMappings } from "@/lib/constants";
+import { LabelInfoModal } from "@/components/app/common/modals/labelInfoModal";
+import { Button } from "@/components/ui/button";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { countriesMapping } from "@/lib/constants/constants";
+import { labelMappings } from "@/lib/constants/consumptions";
 import { annualLabelData } from "@/lib/transformData";
 import {
     getYearsInSummary,
@@ -19,25 +30,6 @@ import { BarChart } from "@tremor/react";
 import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
-import {
-    Dialog,
-    DialogContent,
-    DialogDescription,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from "../ui/dialog";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "../ui/select";
-import { Table, TableBody, TableCell, TableRow } from "../ui/table";
-import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface LabelChartData extends LabelEntries {
     country: string;
@@ -51,9 +43,9 @@ interface LabelChartData extends LabelEntries {
  * @param {ConsumptionCategory[]} categories - the consumption categories
  * @param {string} title - the title of the label summary
  * @param {string} description - the description of the label summary
- * @return {JSX.Element} The rendered label summary component
+ * @return {React.ReactNode} The rendered label summary component
  */
-export function LabelSummary({
+const LabelSummary = ({
     globalSummaryData,
     categories,
     title,
@@ -61,7 +53,7 @@ export function LabelSummary({
     globalSummaryData: GlobalSummary | undefined;
     categories: ConsumptionCategory[];
     title: string;
-}): JSX.Element {
+}): React.ReactNode => {
     const t = useTranslations();
 
     const [transformedData, setTransformedData] = useState<
@@ -146,41 +138,12 @@ export function LabelSummary({
                 align="center"
             >
                 <Heading>{title}</Heading>
-                <Dialog>
-                    <DialogTrigger asChild>
-                        <Button variant="ghost" size="icon">
-                            <Info />
-                        </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                        <DialogHeader>
-                            <DialogTitle>
-                                {t("dashboard.energylabels.title")}
-                            </DialogTitle>
-                            <DialogDescription>
-                                {t("dashboard.energylabels.description")}
-                                <Table className="mt-6">
-                                    <TableBody>
-                                        {labelMappings.map((label) => (
-                                            <TableRow key={label.label}>
-                                                <TableCell className="font-medium">
-                                                    <Badge
-                                                        className={`bg-[${label.color}] hover:bg-[${label.color}] text-white`}
-                                                    >
-                                                        {label.label}
-                                                    </Badge>
-                                                </TableCell>
-                                                <TableCell>
-                                                    {t(label.name)}
-                                                </TableCell>
-                                            </TableRow>
-                                        ))}
-                                    </TableBody>
-                                </Table>
-                            </DialogDescription>
-                        </DialogHeader>
-                    </DialogContent>
-                </Dialog>
+
+                <LabelInfoModal>
+                    <Button variant="ghost" size="icon">
+                        <Info />
+                    </Button>
+                </LabelInfoModal>
             </Flex>
 
             <Flex
@@ -273,4 +236,6 @@ export function LabelSummary({
             />
         </>
     );
-}
+};
+
+export { LabelSummary };

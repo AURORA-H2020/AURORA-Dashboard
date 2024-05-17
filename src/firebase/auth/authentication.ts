@@ -1,4 +1,4 @@
-import firebase_app from "@/firebase/config";
+import { firebaseApp } from "@/firebase/config";
 import {
     GoogleAuthProvider,
     OAuthProvider,
@@ -10,7 +10,7 @@ import {
 } from "firebase/auth";
 
 // Get the authentication instance using the Firebase app
-const auth = getAuth(firebase_app);
+const auth = getAuth(firebaseApp);
 
 /**
  * Asynchronously signs in a user using the specified method.
@@ -21,7 +21,7 @@ const auth = getAuth(firebase_app);
  * @return {Promise<{result: UserCredential | null; error: Error | null}>}
  * An object containing either the UserCredential or an error.
  */
-export default async function authenticate(
+export async function authenticate(
     method: "email-signin" | "email-signup" | "google" | "apple",
     email?: string,
     password?: string,
@@ -40,7 +40,7 @@ export default async function authenticate(
                         password,
                     );
                 } else {
-                    throw new Error(
+                    console.error(
                         "Email and password must be provided for email sign-in",
                     );
                 }
@@ -54,7 +54,7 @@ export default async function authenticate(
                         password,
                     );
                 } else {
-                    throw new Error(
+                    console.error(
                         "Email and password must be provided for email sign-up",
                     );
                 }

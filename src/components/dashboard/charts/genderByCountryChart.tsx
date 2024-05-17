@@ -1,21 +1,20 @@
-import { countriesMapping, genderMappings } from "@/lib/constants";
-import { CalculationMode, MetaData } from "@/models/dashboard-data";
-import { BarChart } from "@tremor/react";
-
-import {
-    valueFormatterAbsolute,
-    valueFormatterPercentage,
-} from "@/lib/utilities";
-import { Flex, Heading } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
-import { useEffect, useState } from "react";
 import {
     Select,
     SelectContent,
     SelectItem,
     SelectTrigger,
     SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
+import { countriesMapping, genderMappings } from "@/lib/constants/constants";
+import {
+    valueFormatterAbsolute,
+    valueFormatterPercentage,
+} from "@/lib/utilities";
+import { CalculationMode, MetaData } from "@/models/dashboard-data";
+import { Flex, Heading } from "@radix-ui/themes";
+import { BarChart } from "@tremor/react";
+import { useTranslations } from "next-intl";
+import { useEffect, useState } from "react";
 
 /**
  * Generate the GenderCardCountry component.
@@ -24,7 +23,7 @@ import {
  * @param {MetaData | undefined} props.metaData - The metadata object, which may be undefined.
  * @param {string[]} props.countries - The list of countries.
  * @param {string} props.title - The title of the component.
- * @return {JSX.Element} The rendered component.
+ * @return {React.ReactNode} The rendered component.
  */
 
 interface ExtendedDemographic {
@@ -32,13 +31,13 @@ interface ExtendedDemographic {
     [key: string]: string;
 }
 
-export function GenderByCountryChart({
+const GenderByCountryChart = ({
     metaData,
     title,
 }: {
     metaData: MetaData | undefined;
     title: string;
-}): JSX.Element {
+}): React.ReactNode => {
     const t = useTranslations();
 
     const [genderData, setGenderData] = useState<
@@ -139,4 +138,6 @@ export function GenderByCountryChart({
             />
         </>
     );
-}
+};
+
+export { GenderByCountryChart };

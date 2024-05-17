@@ -1,14 +1,18 @@
-import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { carbonUnit, countriesMapping } from "@/lib/constants/constants";
 import {
-    citiesMapping,
     consumptionMapping,
-    countriesMapping,
-} from "./constants";
-
+    consumptionSources,
+} from "@/lib/constants/consumptions";
+import { ConsumptionAttributes } from "@/models/constants";
+import { Consumption } from "@/models/firestore/consumption/consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { ConsumptionAttributes } from "@/models/meta-data";
+import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
+import { UserSettingsUnitSystem } from "@/models/firestore/user/user-settings/user-settings-unitSystem";
 import { clsx, type ClassValue } from "clsx";
+import convert from "convert";
+import { useFormatter } from "next-intl";
 import { twMerge } from "tailwind-merge";
+import { z } from "zod";
 
 /**
  * Automatically added by shadcn/ui
@@ -19,57 +23,6 @@ import { twMerge } from "tailwind-merge";
  */
 export function cn(...inputs: ClassValue[]) {
     return twMerge(clsx(inputs));
-}
-
-/**
- * Converts a number of seconds to a Date object representing the corresponding date and time.
- *
- * @param {number} seconds - The number of seconds to convert.
- * @return {Date} The Date object representing the corresponding date and time.
- */
-export function secondsToDateTime(seconds: number): Date {
-    const date = new Date(0);
-    date.setSeconds(seconds);
-    date.setHours(0, 0, 0, 0);
-    return date;
-}
-
-/**
- * Capitalizes the first letter of a string and converts the rest of the string to lowercase.
- *
- * @param {string} string - The input string to be converted.
- * @return {string} - The converted string with the first letter capitalized and the rest in lowercase.
- */
-export function titleCase(string: string): string {
-    const words = string.toLowerCase().split(" ");
-    const titleCaseWords = words.map((word) => {
-        return word.charAt(0).toUpperCase() + word.slice(1);
-    });
-    return titleCaseWords.join(" ");
-}
-
-/**
- * Retrieves the country code and name based on the input ID.
- *
- * @param {string} inputID - The ID of the country.
- * @returns {object} An object containing the country code and name.
- */
-export function country2Name(inputID: string) {
-    const country = countriesMapping.find((country) => country.ID === inputID);
-    const code = country?.code || "00";
-    const name = country?.name || "unknown";
-    return { code, name };
-}
-
-/**
- * Finds the name of a city based on its ID.
- *
- * @param {string} inputID - The ID of the city to find the name for.
- * @return {string} The name of the city if found, otherwise "Other".
- */
-export function city2Name(inputID: string): string {
-    const city = citiesMapping.find((city) => city.ID == inputID);
-    return city ? city.name : "Other";
 }
 
 /**
@@ -89,27 +42,16 @@ export function getMonthShortName(
 }
 
 /**
- * Converts a camel case string to words.
- *
- * @param {string} s - The input string in camel case.
- * @return {string} The converted string with spaces between words.
- */
-export function camelCaseToWords(s: string): string {
-    const result = s.replace(/([A-Z])/g, " $1");
-    return result.charAt(0).toUpperCase() + result.slice(1);
-}
-
-/**
  * Retrieves the consumption attributes for the given consumption category.
  *
  * @param {ConsumptionCategory} ConsumptionCategory - The consumption category to retrieve attributes for
  * @return {ConsumptionAttributes | undefined} The consumption attributes for the given category, or undefined if not found
  */
 export function getConsumptionAttributes(
-    ConsumptionCategory: ConsumptionCategory,
+    consumptionCategory: ConsumptionCategory,
 ): ConsumptionAttributes | undefined {
     const consumptionAttributes = consumptionMapping.find(
-        (c) => c.category == ConsumptionCategory,
+        (c) => c.category == consumptionCategory,
     );
 
     return consumptionAttributes || undefined;
@@ -121,10 +63,16 @@ export function getConsumptionAttributes(
  * @param {number} number - The number to be formatted.
  * @return {string} The formatted number with the unit "kg CO₂".
  */
-export const valueFormatterCarbon = (number: number): string =>
-    `${Intl.NumberFormat("us")
+export const valueFormatterCarbon = (
+    number: number,
+    unitSystem: "metric" | "imperial" = "metric",
+): string => {
+    const unit =
+        unitSystem == "imperial" ? `lb ${carbonUnit}` : `kg ${carbonUnit}`;
+    return `${Intl.NumberFormat("us")
         .format(Math.round(number))
-        .toString()} \n kg CO\u2082`;
+        .toString()} \n ${unit}`;
+};
 
 /**
  * Formats the given number as a string representing energy in kilowatt-hours.
@@ -238,4 +186,248 @@ export function getSortedCountryLabels(countryIds: string[] | undefined) {
         names: countryLabels.map((country) => country.name),
         colors: countryLabels.map((country) => country.color),
     };
+}
+
+/**
+ * Retrieves the consumption unit based on the given consumption and unit system.
+ *
+ * @param {Consumption} consumption - The consumption object.
+ * @param {UserSettingsUnitSystem} unitSystem - The unit system.
+ * @return {{userUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb"; firebaseUnit: "km" | "L" | "kg" | "kWh;}} - The consumption unit.
+ */
+export function getConsumptionUnit(
+    consumption: Consumption,
+    unitSystem: UserSettingsUnitSystem,
+): {
+    userUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb";
+    firebaseUnit: "km" | "L" | "kg" | "kWh";
+} {
+    let userConsumptionUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb" =
+        "kWh";
+    let firebaseConsumptionUnit: "km" | "L" | "kg" | "kWh" = "kWh";
+
+    const category = consumption.category;
+    const source =
+        consumption.electricity?.electricitySource ??
+        consumption.heating?.heatingFuel ??
+        consumption.transportation?.transportationType ??
+        "";
+
+    if (category === "heating") {
+        firebaseConsumptionUnit =
+            consumptionSources.heating.find((c) => c.source == source)?.unit ??
+            "kWh";
+    } else if (category === "transportation") {
+        firebaseConsumptionUnit = "km";
+    }
+
+    if (unitSystem === "imperial") {
+        if (firebaseConsumptionUnit === "km") {
+            userConsumptionUnit = "mi";
+        } else if (firebaseConsumptionUnit === "L") {
+            userConsumptionUnit = "gal";
+        } else if (firebaseConsumptionUnit === "kg") {
+            userConsumptionUnit = "lb";
+        }
+    } else {
+        userConsumptionUnit = firebaseConsumptionUnit;
+    }
+
+    return {
+        userUnit: userConsumptionUnit,
+        firebaseUnit: firebaseConsumptionUnit,
+    };
+}
+
+/**
+ * Converts a given value from one unit to another unit system.
+ *
+ * @param {number} value - The value to be converted.
+ * @param {string} unit - The unit of the given value. It can be one of the following:
+ *                       "km" for kilometers, "mi" for miles, "L" for liters, "gal" for gallons,
+ *                       "kWh" for kilowatt-hours, "kg" for kilograms, "lb" for pounds,
+ *                       "L/100km" for liters per 100 kilometers, "mpg" for miles per gallon,
+ *                       "kWh/100km" for kilowatt-hours per 100 kilometers, or "mi/kWh" for miles per kilowatt-hour.
+ * @param {"imperial" | "metric"} toUnitSystem - The target unit system. It can be either "imperial" or "metric".
+ * @return {{ quantity: number; unit: string }} - The converted value and its unit.
+ */
+export function convertUnit(
+    value: number,
+    unit:
+        | "km"
+        | "mi"
+        | "L"
+        | "gal"
+        | "kWh"
+        | "kg"
+        | "lb"
+        | "L/100km"
+        | "mpg"
+        | "kWh/100km"
+        | "mi/kWh",
+    toUnitSystem: "imperial" | "metric",
+): { quantity: number; unit: string } {
+    let convertedData;
+
+    if (unit === "kWh") {
+        convertedData = { quantity: value, unit: "kWh" };
+    } else if (unit === "L/100km" || unit === "mpg") {
+        if (unit === "L/100km" && toUnitSystem === "imperial") {
+            const gallonsPerLiter = convert(value, "L").to("imperial gallon");
+            const milesPer100Km = convert(100, "km").to("mi");
+            convertedData = {
+                quantity: milesPer100Km / gallonsPerLiter,
+                unit: "mpg",
+            };
+        } else if (unit === "mpg" && toUnitSystem === "metric") {
+            const kilometersPerGallon = convert(value, "mi").to("km");
+            const litersPerGallon = convert(1, "imperial gallon").to("L");
+            convertedData = {
+                quantity: (100 * litersPerGallon) / kilometersPerGallon,
+                unit: "L/100km",
+            };
+        } else {
+            convertedData = { quantity: value, unit: unit };
+        }
+    } else if (unit === "kWh/100km" || unit === "mi/kWh") {
+        if (unit === "kWh/100km" && toUnitSystem === "imperial") {
+            const milesPer100Km = convert(100, "km").to("mi");
+            convertedData = {
+                quantity: milesPer100Km / value,
+                unit: "mi/kWh",
+            };
+        } else if (unit === "mi/kWh" && toUnitSystem === "metric") {
+            const kilometerPerKilowattHour = convert(value, "mi").to("km");
+            convertedData = {
+                quantity: 100 / kilometerPerKilowattHour,
+                unit: "kWh/100km",
+            };
+        } else {
+            convertedData = { quantity: value, unit: unit };
+        }
+    } else if (unit === "L" || unit === "gal") {
+        if (unit === "L" && toUnitSystem === "imperial") {
+            convertedData = {
+                quantity: convert(value, "L").to("imperial gallon"),
+                unit: "gal",
+            };
+        } else if (unit === "gal" && toUnitSystem === "metric") {
+            convertedData = {
+                quantity: convert(value, "imperial gallon").to("L"),
+                unit: "L",
+            };
+        } else {
+            convertedData = { quantity: value, unit: unit };
+        }
+    } else {
+        convertedData = convert(value, unit).to("best", toUnitSystem);
+    }
+
+    return {
+        quantity: convertedData.quantity,
+        unit: convertedData.unit,
+    };
+}
+
+/**
+ * A hook that converts a given value from one unit to another unit system.
+ *
+ * @param {number | undefined} value - The value to be converted.
+ * @param {"km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb" | "L/100km" | "mpg" | "kWh/100km" | "mi/kWh"} unit - The unit of the given value.
+ * @param {"imperial" | "metric"} toUnitSystem - The target unit system.
+ * @param {string} unitSuffix - The suffix to be appended to the unit.
+ * @param {number} digits - The maximum number of fraction digits to be displayed.
+ * @return {{ rawNumber: number; number: string; unit: string; toString(): string } | undefined} - The converted value, number, unit, and a toString method.
+ */
+export function useConvertUnit(
+    value: number | undefined,
+    unit:
+        | "km"
+        | "mi"
+        | "L"
+        | "gal"
+        | "kWh"
+        | "kg"
+        | "lb"
+        | "L/100km"
+        | "mpg"
+        | "kWh/100km"
+        | "mi/kWh",
+    toUnitSystem: "imperial" | "metric",
+    unitSuffix: string = "",
+    digits: number = 1,
+):
+    | { rawNumber: number; number: string; unit: string; toString(): string }
+    | undefined {
+    const format = useFormatter();
+
+    if (!value) return undefined;
+
+    let convertedData = convertUnit(value, unit, toUnitSystem);
+
+    return {
+        rawNumber: convertedData.quantity,
+        number: format.number(convertedData.quantity, {
+            maximumFractionDigits: digits,
+        }),
+        unit: `${convertedData.unit} ${unitSuffix}`,
+        toString() {
+            return `${this.number} ${this.unit}`;
+        },
+    };
+}
+
+/**
+ * Extracts the base schema from the given Zod schema.
+ *
+ * @param {z.ZodTypeAny} schema - The Zod schema to extract the base schema from.
+ * @return {z.ZodObject<any> | null} The base schema if found, otherwise null.
+ */
+function extractBaseSchema(schema: z.ZodTypeAny): z.ZodObject<any> | null {
+    if (schema instanceof z.ZodObject) {
+        return schema;
+    }
+    if (schema instanceof z.ZodOptional) {
+        return extractBaseSchema(schema._def.innerType);
+    }
+    if (schema instanceof z.ZodEffects && schema._def.schema) {
+        return extractBaseSchema(schema._def.schema);
+    }
+    return null;
+}
+
+/**
+ * Checks if a field is required in the given schema.
+ *
+ * @param {z.ZodType<any>} schema - The schema to check against.
+ * @param {string} fieldPath - The name of the field to check.
+ * @return {boolean} Indicates if the field is required.
+ */
+export function isFieldRequired(
+    schema: z.ZodTypeAny,
+    fieldPath: string,
+): boolean {
+    const baseSchema = extractBaseSchema(schema);
+    if (!baseSchema) return true;
+
+    const shape = baseSchema._def.shape();
+    const keys = fieldPath.split(".");
+
+    let currentField = shape;
+    for (const key of keys) {
+        if (!currentField[key]) {
+            return true;
+        }
+
+        if (
+            currentField[key] instanceof z.ZodObject ||
+            currentField[key] instanceof z.ZodEffects
+        ) {
+            currentField = extractBaseSchema(currentField[key])?._def.shape();
+        } else {
+            return !(currentField[key] instanceof z.ZodOptional);
+        }
+    }
+
+    return true;
 }

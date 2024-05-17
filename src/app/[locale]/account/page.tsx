@@ -1,114 +1,31 @@
-"use client";
-
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { deleteAccount } from "@/firebase/firestore/deleteAccount";
-import { downloadUserData } from "@/firebase/firestore/downloadUserData";
-import { Flex, Grid } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
-import { useState } from "react";
-import { toast } from "sonner";
+import { ConsumptionPanel } from "@/components/app/consumptionPanel";
+import { ConsumptionSummaryPanel } from "@/components/app/consumptionSummaryPanel";
+import { ConfirmUnitSystem } from "@/components/app/user/confirmUnitSystem";
+import { Grid } from "@radix-ui/themes";
 
 /**
- * Renders the user settings page with profile and account information.
+ * Renders the account page for authenticated users, displaying user details
+ * and a list of their consumptions. Redirects to the home page if the user
+ * is not authenticated. It fetches user consumption data from Firestore.
  *
- * @return {JSX.Element} The user settings page component
+ * @return {React.ReactNode} The account page component with user information and a list of Consumption components.
  */
-function UserSettings(): JSX.Element {
-    const t = useTranslations();
-
-    const [isDeleteAlertOpen, setDeleteAlertOpen] = useState(false);
-
-    const [downloading, setDownloading] = useState(false);
-    /**
-     * Wrapper function to handle downloading user data.
-     *
-     * @return {Promise<void>} Resolves when user data is downloaded successfully
-     */
-    const downloadUserDataWrapper = async () => {
-        setDownloading(true);
-        try {
-            await downloadUserData();
-            toast.success(t("toast.dataDownload.success"));
-        } catch (error) {
-            // Handle the error
-            console.error("Error downloading user data:", error);
-            toast.error(t("toast.dataDownload.error"));
-        } finally {
-            setDownloading(false);
-        }
-    };
-
-    // Authenticated user content
+const AccountPage = (): React.ReactNode => {
     return (
         <>
+            <ConfirmUnitSystem />
             <Grid
-                columns={{
-                    initial: "1",
-                    sm: "2",
-                }}
-                className="gap-6 mt-6 mb-6"
+                columns={{ initial: "1", md: "2" }}
+                gap="8"
+                className="mt-8"
+                align="start"
             >
-                <Card>
-                    <CardContent className="p-6">
-                        <Flex direction={"column"} className="gap-2">
-                            <Button
-                                variant={"outline"}
-                                onClick={downloadUserDataWrapper}
-                                disabled={downloading}
-                            >
-                                {downloading
-                                    ? t("button.downloadPending")
-                                    : t("app.account.downloadMyData")}
-                            </Button>
-                            <Button
-                                variant="destructive"
-                                onClick={() => setDeleteAlertOpen(true)}
-                            >
-                                {t("app.account.deleteAccount.button")}
-                            </Button>
-                        </Flex>
-                    </CardContent>
-                </Card>
-            </Grid>
+                <ConsumptionSummaryPanel />
 
-            <AlertDialog open={isDeleteAlertOpen}>
-                <AlertDialogContent>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>
-                            {t("app.account.deleteAccount.title")}
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
-                            {t("app.account.deleteAccount.description")}
-                        </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogCancel
-                            onClick={() => setDeleteAlertOpen(false)}
-                        >
-                            {t("common.cancel")}
-                        </AlertDialogCancel>
-                        <AlertDialogAction
-                            variant="destructive"
-                            onClick={deleteAccount}
-                        >
-                            {t("app.account.deleteAccount.confirm")}
-                        </AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
+                <ConsumptionPanel />
+            </Grid>
         </>
     );
-}
+};
 
-export default UserSettings;
+export default AccountPage;

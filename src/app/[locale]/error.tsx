@@ -1,6 +1,6 @@
 "use client";
 
-import PageLayout from "@/components/pageLayout";
+import { PageLayout } from "@/components/pageLayout";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 
@@ -10,13 +10,13 @@ type Props = {
 };
 
 /**
- * Renders an error page with the given error and reset function.
+ * Renders an error page with the given error message and a button to reset.
  *
- * @param {Props} error - the error object
- * @param {Props} reset - the function to reset the error state
- * @return {JSX.Element} the error page component
+ * @param {Props} error - The error object to be displayed.
+ * @param {Function} reset - The function to be called when the reset button is clicked.
+ * @return {React.ReactNode} The JSX element representing the error page.
  */
-export default function Error({ error, reset }: Props) {
+const Error = ({ error, reset }: Props): React.ReactNode => {
     const t = useTranslations();
 
     useEffect(() => {
@@ -42,4 +42,6 @@ export default function Error({ error, reset }: Props) {
             </div>
         </PageLayout>
     );
-}
+};
+
+export default Error;

@@ -1,19 +1,21 @@
 import { Button } from "@/components/ui/button";
-import signIn from "@/firebase/auth/authentication";
-import { useRouter } from "@/navigation";
-import { toast } from "sonner";
-
+import { authenticate } from "@/firebase/auth/authentication";
 import { faApple } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
+import { toast } from "sonner";
 
 /**
- * Renders a sign-in form and handles sign-in through email, Google,
- * or Apple. On successful sign-in, displays a success toast and
- * redirects to the account page.
+ * Renders a button component for authenticating with Apple.
+ *
+ * @param {boolean} isSignIn - Indicates whether the user is signing in. Defaults to true.
+ * @return {React.ReactElement} The button component for authenticating with Apple.
  */
-function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
-    const router = useRouter();
+function AuthenticateWithApple({
+    isSignIn = true,
+}: {
+    isSignIn?: boolean;
+}): React.ReactElement {
     const t = useTranslations();
 
     /**
@@ -21,7 +23,6 @@ function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
      */
     const postSignIn = () => {
         toast.success(t("toast.auth.success"));
-        router.push("/account");
     };
 
     /**
@@ -31,7 +32,7 @@ function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
      */
     async function handleAuthenticateWithApple() {
         try {
-            const { error } = await signIn("apple");
+            const { error } = await authenticate("apple");
             if (error) {
                 // Handle the error appropriately
                 console.error(error);
@@ -48,7 +49,7 @@ function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
 
     return (
         <Button
-            className="w-full my-1"
+            className="w-full"
             onClick={() => handleAuthenticateWithApple()}
         >
             <FontAwesomeIcon icon={faApple} className="mr-2" />
@@ -59,4 +60,4 @@ function AuthenticateWithApple({ isSignIn = true }: { isSignIn?: boolean }) {
     );
 }
 
-export default AuthenticateWithApple;
+export { AuthenticateWithApple };
