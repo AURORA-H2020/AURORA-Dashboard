@@ -273,7 +273,7 @@ export function convertUnit(
         convertedData = { quantity: value, unit: "kWh" };
     } else if (unit === "L/100km" || unit === "mpg") {
         if (unit === "L/100km" && toUnitSystem === "imperial") {
-            const gallonsPerLiter = convert(value, "L").to("gal");
+            const gallonsPerLiter = convert(value, "L").to("imperial gallon");
             const milesPer100Km = convert(100, "km").to("mi");
             convertedData = {
                 quantity: milesPer100Km / gallonsPerLiter,
@@ -281,7 +281,7 @@ export function convertUnit(
             };
         } else if (unit === "mpg" && toUnitSystem === "metric") {
             const kilometersPerGallon = convert(value, "mi").to("km");
-            const litersPerGallon = convert(1, "gal").to("L");
+            const litersPerGallon = convert(1, "imperial gallon").to("L");
             convertedData = {
                 quantity: (100 * litersPerGallon) / kilometersPerGallon,
                 unit: "L/100km",
@@ -301,6 +301,20 @@ export function convertUnit(
             convertedData = {
                 quantity: 100 / kilometerPerKilowattHour,
                 unit: "kWh/100km",
+            };
+        } else {
+            convertedData = { quantity: value, unit: unit };
+        }
+    } else if (unit === "L" || unit === "gal") {
+        if (unit === "L" && toUnitSystem === "imperial") {
+            convertedData = {
+                quantity: convert(value, "L").to("imperial gallon"),
+                unit: "gal",
+            };
+        } else if (unit === "gal" && toUnitSystem === "metric") {
+            convertedData = {
+                quantity: convert(value, "imperial gallon").to("L"),
+                unit: "L",
             };
         } else {
             convertedData = { quantity: value, unit: unit };
