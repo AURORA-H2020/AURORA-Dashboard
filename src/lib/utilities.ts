@@ -361,7 +361,7 @@ export function useConvertUnit(
     | undefined {
     const format = useFormatter();
 
-    if (!value) return undefined;
+    if (value === undefined) return undefined;
 
     let convertedData = convertUnit(value, unit, toUnitSystem);
 
