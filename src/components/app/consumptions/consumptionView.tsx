@@ -69,7 +69,7 @@ const ConsumptionView = ({
                             t("common.calculating")}
                     </ConsumptionTableRow>
                     <ConsumptionTableRow label={t("common.energyUsage")}>
-                        {consumption.energyExpended
+                        {consumption.energyExpended !== undefined
                             ? format.number(consumption.energyExpended, {
                                   maximumFractionDigits: 1,
                               }) + " kWh"
