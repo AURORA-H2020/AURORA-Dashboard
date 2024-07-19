@@ -19,7 +19,7 @@
     },
     "downloads": {
       "title": "Laden Sie unsere Daten herunter",
-      "description": "Wir bieten die oben genannten Metriken und Etikettendaten zum Download an."
+      "description": "Wir bieten die oben aufgeführten Metriken und Abzeichen-Daten zum Download an."
     }
   },
   "toast": {
@@ -101,7 +101,7 @@
     },
     "energylabels": {
       "title": "Energieabzeichen",
-      "description": "Im Rahmen des AURORA-Projekts wurde eine Reihe von Abzeichen entwickelt, die den Bürgern ein klares Verständnis ihres aktuellen Energieprofils vermitteln. Für den Energieverbrauch und die Kohlenstoffemissionen wird ein separater Satz von Etiketten vergeben."
+      "description": "Im Rahmen des AURORA-Projekts wurde eine Reihe von Abzeichen entwickelt, die den Bürgern ein klares Verständnis ihres aktuellen Energieprofils vermitteln. Für den Energieverbrauch und die Kohlenstoffemissionen wird ein separater Satz von Abzeichen vergeben."
     },
     "genderDistribution": {
       "title": "Geschlechterverteilung"
