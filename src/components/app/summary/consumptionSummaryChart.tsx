@@ -2,15 +2,13 @@
 
 import { useFirebaseData } from "@/context/FirebaseContext";
 import { consumptionMapping } from "@/lib/constants/consumptions";
-import {
-    convertUnit,
-    valueFormatterCarbon,
-    valueFormatterEnergy,
-} from "@/lib/utilities";
+import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { UserSettingsUnitSystem } from "@/models/firestore/user/user-settings/user-settings-unitSystem";
 import { BarChart } from "@tremor/react";
+import convert from "convert";
 import { useFormatter, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 
@@ -38,6 +36,16 @@ const findValueByCategory = (
 ): number => {
     const category = categories.find((c) => c.category === categoryToFind);
     return category ? category[measure].total : 0;
+};
+
+const convertChartUnit = (
+    userUnitSystem: UserSettingsUnitSystem,
+    value: number,
+    measure: "carbonEmission" | "energyExpended",
+): number => {
+    if (measure === "carbonEmission" && userUnitSystem === "imperial") {
+        return convert(value, "kg").to("lb");
+    } else return value;
 };
 
 /**
@@ -102,42 +110,43 @@ const ConsumptionSummaryChart = ({
                             consumptionMapping.find(
                                 (e) => e.category === "heating",
                             )?.label,
-                        )]: convertUnit(
+                        )]: convertChartUnit(
+                            userData?.settings?.unitSystem ?? "metric",
                             findValueByCategory(
                                 month.categories,
                                 "heating",
                                 measure,
                             ),
-                            measure === "carbonEmission" ? "kg" : "kWh",
-                            userData?.settings?.unitSystem ?? "metric",
-                        ).quantity,
+                            measure,
+                        ),
                         [t(
                             consumptionMapping.find(
                                 (e) => e.category === "electricity",
                             )?.label,
-                        )]: convertUnit(
+                        )]: convertChartUnit(
+                            userData?.settings?.unitSystem ?? "metric",
                             findValueByCategory(
                                 month.categories,
                                 "electricity",
                                 measure,
                             ),
-                            measure === "carbonEmission" ? "kg" : "kWh",
-                            userData?.settings?.unitSystem ?? "metric",
-                        ).quantity,
+                            measure,
+                        ),
                         [t(
                             consumptionMapping.find(
                                 (e) => e.category === "transportation",
                             )?.label,
-                        )]: convertUnit(
+                        )]: convertChartUnit(
+                            userData?.settings?.unitSystem ?? "metric",
                             findValueByCategory(
                                 month.categories,
                                 "transportation",
                                 measure,
                             ),
-                            measure === "carbonEmission" ? "kg" : "kWh",
-                            userData?.settings?.unitSystem ?? "metric",
-                        ).quantity,
+                            measure,
+                        ),
                     };
+                    console.log(acc);
                     return acc;
                 },
                 baseSummaryData,
