@@ -61,7 +61,7 @@ const FormPasswordField = ({
                         // Add padding-right if the toggle is shown
                         className={cn(
                             showTogglePassword ? "pr-14" : "",
-                            "text-md",
+                            "text-md md:text-sm",
                         )}
                     />
                     {/* Render the toggle button if it is shown */}
