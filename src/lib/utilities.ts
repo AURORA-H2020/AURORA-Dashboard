@@ -156,7 +156,7 @@ export function getYearsInSummary(
     });
 
     // Convert the Set to an Array to return the years
-    return Array.from(yearsSet);
+    return Array.from(yearsSet).sort((a, b) => Number(b) - Number(a));
 }
 
 /**
