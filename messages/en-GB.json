@@ -322,7 +322,14 @@
       "unitSystem": "Unit system"
     },
     "account": {
-      "downloadMyData": "Download My Data",
+      "downloadMyData": {
+        "button": "Download My Data",
+        "description": "Downloads a JSON file with all data stored in your account."
+      },
+      "downloadConsumptions": {
+        "button": "Download Consumptions",
+        "description": "Downloads a CSV file with all your consumptions."
+      },
       "changePassword": "Change Password",
       "changeEmail": "Change Email",
       "account": "Account",

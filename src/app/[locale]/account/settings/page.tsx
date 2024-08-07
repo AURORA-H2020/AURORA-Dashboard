@@ -4,6 +4,7 @@ import { ConsumptionTableRow } from "@/components/app/common/consumptionTableRow
 import { ChangeEmailModal } from "@/components/app/user/modals/changeEmailModal";
 import { ChangePasswordModal } from "@/components/app/user/modals/changePasswordModal";
 import { DeleteAccountModal } from "@/components/app/user/modals/deleteAccountModal";
+import { DownloadDataModal } from "@/components/app/user/modals/downloadDataModal";
 import { EditUserDataModal } from "@/components/app/user/modals/editUserDataModal";
 import { Button } from "@/components/ui/button";
 import {
@@ -17,7 +18,6 @@ import { LoadingSpinner } from "@/components/ui/loading";
 import { Table, TableBody } from "@/components/ui/table";
 import { useAuthContext } from "@/context/AuthContext";
 import { useFirebaseData } from "@/context/FirebaseContext";
-import { downloadUserData } from "@/firebase/firestore/downloadUserData";
 import {
     citiesMappings,
     countriesMapping,
@@ -28,7 +28,6 @@ import { Link } from "@/navigation";
 import { Flex, Grid } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
-import { toast } from "sonner";
 
 /**
  * Renders the user settings page with profile and account information.
@@ -41,32 +40,12 @@ const UserSettingsPage = (): React.ReactNode => {
     const { userData } = useFirebaseData();
 
     const [authProvider, setAuthProvider] = useState<string | null>(null);
-    const [downloading, setDownloading] = useState(false);
 
     useEffect(() => {
         user?.getIdTokenResult().then((idToken) => {
             setAuthProvider(idToken.signInProvider);
         });
     }, [user]);
-
-    /**
-     * Function to handle downloading user data.
-     *
-     * @return {Promise<void>} Resolves when user data is downloaded successfully
-     */
-    const downloadUserDataWrapper = async () => {
-        setDownloading(true);
-        try {
-            await downloadUserData();
-            toast.success(t("toast.dataDownload.success"));
-        } catch (error) {
-            // Handle the error
-            console.error("Error downloading user data:", error);
-            toast.error(t("toast.dataDownload.error"));
-        } finally {
-            setDownloading(false);
-        }
-    };
 
     if (loading || !user || !userData) return <LoadingSpinner />;
 
@@ -120,7 +99,7 @@ const UserSettingsPage = (): React.ReactNode => {
                                 >
                                     {userData.homeEnergyLabel == "unsure"
                                         ? t("common.unsure")
-                                        : userData.homeEnergyLabel ?? ""}
+                                        : (userData.homeEnergyLabel ?? "")}
                                 </ConsumptionTableRow>
                                 <ConsumptionTableRow
                                     label={t("app.profile.householdProfile")}
@@ -201,15 +180,11 @@ const UserSettingsPage = (): React.ReactNode => {
                                     </ChangePasswordModal>
                                 </>
                             )}
-                            <Button
-                                variant={"outline"}
-                                onClick={downloadUserDataWrapper}
-                                disabled={downloading}
-                            >
-                                {downloading
-                                    ? t("button.downloadPending")
-                                    : t("app.account.downloadMyData")}
-                            </Button>
+                            <DownloadDataModal>
+                                <Button variant={"outline"}>
+                                    {t("app.account.downloadMyData.button")}
+                                </Button>
+                            </DownloadDataModal>
                             <DeleteAccountModal>
                                 <Button variant="destructive">
                                     {t("app.account.deleteMyAccount")}
