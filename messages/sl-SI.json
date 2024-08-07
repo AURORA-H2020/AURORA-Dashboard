@@ -322,7 +322,14 @@
       "unitSystem": "Sistem enot"
     },
     "account": {
-      "downloadMyData": "Prenesi moje podatke",
+      "downloadMyData": {
+        "button": "Prenesi moje podatke",
+        "description": "Downloads a JSON file with all data stored in your account."
+      },
+      "downloadConsumptions": {
+        "button": "Download Consumptions",
+        "description": "Downloads a CSV file with all your consumptions."
+      },
       "changePassword": "Sprememba gesla",
       "changeEmail": "Sprememba e-pošte",
       "account": "Račun",

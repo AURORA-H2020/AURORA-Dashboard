@@ -322,7 +322,14 @@
       "unitSystem": "Enhedssystem"
     },
     "account": {
-      "downloadMyData": "Download min data",
+      "downloadMyData": {
+        "button": "Download min data",
+        "description": "Downloads a JSON file with all data stored in your account."
+      },
+      "downloadConsumptions": {
+        "button": "Download Consumptions",
+        "description": "Downloads a CSV file with all your consumptions."
+      },
       "changePassword": "Skift adgangskode",
       "changeEmail": "Skift e-mail",
       "account": "Konto",

@@ -322,7 +322,14 @@
       "unitSystem": "Sistema de unidades"
     },
     "account": {
-      "downloadMyData": "Descarregar os meus dados",
+      "downloadMyData": {
+        "button": "Descarregar os meus dados",
+        "description": "Downloads a JSON file with all data stored in your account."
+      },
+      "downloadConsumptions": {
+        "button": "Download Consumptions",
+        "description": "Downloads a CSV file with all your consumptions."
+      },
       "changePassword": "Alterar Palavra-Passe",
       "changeEmail": "Alterar e-mail",
       "account": "Conta",
