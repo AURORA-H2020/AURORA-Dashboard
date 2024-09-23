@@ -1,4 +1,7 @@
 /** @type {import('tailwindcss').Config} */
+import tailwindAnimate from "tailwindcss-animate";
+import headlessUiTailwind from "@headlessui/tailwindcss";
+
 export const darkMode = ["class"];
 export const content = [
   "./pages/**/*.{ts,tsx}",
@@ -223,9 +226,5 @@ export const safelist = [
     `ui-selected:text-${customColor}`,
   ]),
 ];
-export const plugins = [
-  // Shadcn UI requirement
-  require("tailwindcss-animate"),
-  // Tremor UI requirement
-  require("@headlessui/tailwindcss"),
-];
+
+export const plugins = [tailwindAnimate, headlessUiTailwind];
