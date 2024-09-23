@@ -17,42 +17,38 @@ import { toast } from "sonner";
  * @return {void} No return value
  */
 const DataDownloads = ({
-    countryData,
+  countryData,
 }: {
-    countryData: CountryData | undefined;
+  countryData: CountryData | undefined;
 }) => {
-    const t = useTranslations();
+  const t = useTranslations();
 
-    const [downloading, setDownloading] = useState(false);
-    const downloadWrapper = async (data: Object, fileName: string) => {
-        setDownloading(true);
-        try {
-            await downloadJsonAsFile(data, fileName);
-            toast.success(t("toast.dataDownload.success"));
-        } catch (error) {
-            // Handle the error
-            console.error("Error downloading data:", error);
-            toast.error(t("toast.dataDownload.error"));
-        } finally {
-            setDownloading(false);
-        }
-    };
+  const [downloading, setDownloading] = useState(false);
+  const downloadWrapper = async (data: Object, fileName: string) => {
+    setDownloading(true);
+    try {
+      await downloadJsonAsFile(data, fileName);
+      toast.success(t("toast.dataDownload.success"));
+    } catch (error) {
+      // Handle the error
+      console.error("Error downloading data:", error);
+      toast.error(t("toast.dataDownload.error"));
+    } finally {
+      setDownloading(false);
+    }
+  };
 
-    return (
-        <Flex className="gap-2 mt-4">
-            <Button
-                variant={"outline"}
-                onClick={() =>
-                    downloadWrapper(countryData as Object, "AURORA_metrics")
-                }
-                disabled={downloading}
-            >
-                {downloading
-                    ? t("button.downloadPending")
-                    : t("about.downloadMetrics")}
-            </Button>
-        </Flex>
-    );
+  return (
+    <Flex className="gap-2 mt-4">
+      <Button
+        variant={"outline"}
+        onClick={() => downloadWrapper(countryData as Object, "AURORA_metrics")}
+        disabled={downloading}
+      >
+        {downloading ? t("button.downloadPending") : t("about.downloadMetrics")}
+      </Button>
+    </Flex>
+  );
 };
 
 export { DataDownloads };

@@ -1,36 +1,36 @@
 export interface CountryData {
-    data: {
-        [key: string]: {
-            countryCode: string;
-            currencyCode: string;
-            labels: {
-                carbonEmission: LabelCategories;
-                energyExpended: LabelCategories;
-            };
-            __collections__: {
-                cities: {}[];
-                metrics: {
-                    [key: string]: CountryMetric;
-                }[];
-            };
-        };
-    }[];
+  data: {
+    [key: string]: {
+      countryCode: string;
+      currencyCode: string;
+      labels: {
+        carbonEmission: LabelCategories;
+        energyExpended: LabelCategories;
+      };
+      __collections__: {
+        cities: {}[];
+        metrics: {
+          [key: string]: CountryMetric;
+        }[];
+      };
+    };
+  }[];
 }
 
 interface CountryMetric {
-    electricity: {};
-    heating: {};
-    transportation: {};
+  electricity: {};
+  heating: {};
+  transportation: {};
 }
 
 interface LabelCategories {
-    electricity: LabelData[];
-    heating: LabelData[];
-    transportation: LabelData[];
+  electricity: LabelData[];
+  heating: LabelData[];
+  transportation: LabelData[];
 }
 
 interface LabelData {
-    label: string;
-    maximum: number;
-    minimum: number;
+  label: string;
+  maximum: number;
+  minimum: number;
 }

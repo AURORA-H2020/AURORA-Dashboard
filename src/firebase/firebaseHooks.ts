@@ -1,7 +1,7 @@
 import { firebaseApp } from "@/firebase/config";
 import {
-    ConsumptionWithID,
-    RecurringConsumptionWithID,
+  ConsumptionWithID,
+  RecurringConsumptionWithID,
 } from "@/models/extensions";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { Consumption } from "@/models/firestore/consumption/consumption";
@@ -10,19 +10,19 @@ import { RecurringConsumption } from "@/models/firestore/recurring-consumption/r
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { User } from "firebase/auth";
 import {
-    DocumentData,
-    QuerySnapshot,
-    collection,
-    doc,
-    endBefore,
-    getCountFromServer,
-    getFirestore,
-    limit,
-    limitToLast,
-    onSnapshot,
-    orderBy,
-    query,
-    startAfter,
+  DocumentData,
+  QuerySnapshot,
+  collection,
+  doc,
+  endBefore,
+  getCountFromServer,
+  getFirestore,
+  limit,
+  limitToLast,
+  onSnapshot,
+  orderBy,
+  query,
+  startAfter,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { FirebaseConstants } from "./firebase-constants";
@@ -37,34 +37,34 @@ const firestore = getFirestore(firebaseApp);
  * @return {{ userData: FirebaseUser | null, isLoadingUserData: boolean }} An object containing the fetched user data and a boolean indicating whether the data is currently being loaded.
  */
 export const useFetchUserData = (
-    user: User | null,
-    loading: boolean,
+  user: User | null,
+  loading: boolean,
 ): { userData: FirebaseUser | null; isLoadingUserData: boolean } => {
-    const [userData, setUserData] = useState<FirebaseUser | null>(null);
-    const [isLoadingUserData, setIsLoadingUserData] = useState<boolean>(true);
+  const [userData, setUserData] = useState<FirebaseUser | null>(null);
+  const [isLoadingUserData, setIsLoadingUserData] = useState<boolean>(true);
 
-    useEffect(() => {
-        if (loading || !user) return;
+  useEffect(() => {
+    if (loading || !user) return;
 
-        const docRef = doc(
-            firestore,
-            FirebaseConstants.collections.users.name,
-            user.uid,
-        );
-        const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
-            if (docSnapshot.exists()) {
-                setUserData(docSnapshot.data() as FirebaseUser);
-                setIsLoadingUserData(false);
-            } else {
-                console.error("User document does not exist");
-                setIsLoadingUserData(false);
-            }
-        });
+    const docRef = doc(
+      firestore,
+      FirebaseConstants.collections.users.name,
+      user.uid,
+    );
+    const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        setUserData(docSnapshot.data() as FirebaseUser);
+        setIsLoadingUserData(false);
+      } else {
+        console.error("User document does not exist");
+        setIsLoadingUserData(false);
+      }
+    });
 
-        return unsubscribe;
-    }, [user, loading]);
+    return unsubscribe;
+  }, [user, loading]);
 
-    return { userData, isLoadingUserData };
+  return { userData, isLoadingUserData };
 };
 
 /**
@@ -74,33 +74,33 @@ export const useFetchUserData = (
  * @return {{ isAdmin: boolean, isAdminLoading: boolean }} An object containing the user's admin status and loading state.
  */
 export const useUserRoles = (
-    userId: string | undefined,
+  userId: string | undefined,
 ): { isAdmin: boolean; isAdminLoading: boolean } => {
-    const [isAdmin, setIsAdmin] = useState<boolean>(false);
-    const [isAdminLoading, setIsAdminLoading] = useState<boolean>(true);
+  const [isAdmin, setIsAdmin] = useState<boolean>(false);
+  const [isAdminLoading, setIsAdminLoading] = useState<boolean>(true);
 
-    useEffect(() => {
-        if (!userId) return;
+  useEffect(() => {
+    if (!userId) return;
 
-        const docRef = doc(firestore, "user-roles", userId);
-        const unsubscribe = onSnapshot(
-            docRef,
-            (docSnapshot) => {
-                if (docSnapshot.exists()) {
-                    const data = docSnapshot.data();
-                    setIsAdmin(data?.isAdmin || false);
-                }
-                setIsAdminLoading(false);
-            },
-            () => {
-                setIsAdminLoading(false);
-            },
-        );
+    const docRef = doc(firestore, "user-roles", userId);
+    const unsubscribe = onSnapshot(
+      docRef,
+      (docSnapshot) => {
+        if (docSnapshot.exists()) {
+          const data = docSnapshot.data();
+          setIsAdmin(data?.isAdmin || false);
+        }
+        setIsAdminLoading(false);
+      },
+      () => {
+        setIsAdminLoading(false);
+      },
+    );
 
-        return unsubscribe;
-    }, [userId]);
+    return unsubscribe;
+  }, [userId]);
 
-    return { isAdmin, isAdminLoading };
+  return { isAdmin, isAdminLoading };
 };
 
 /**
@@ -110,30 +110,27 @@ export const useUserRoles = (
  * @return {Object} - An object containing the blacklisted users.
  */
 export const useFetchBlacklistedUsers = (user: User | null) => {
-    const [blacklistedUsers, setBlacklistedUsers] =
-        useState<QuerySnapshot<unknown, DocumentData>>();
+  const [blacklistedUsers, setBlacklistedUsers] =
+    useState<QuerySnapshot<unknown, DocumentData>>();
 
-    useEffect(() => {
-        if (!user) return;
+  useEffect(() => {
+    if (!user) return;
 
-        const collectionRef = collection(
-            firestore,
-            FirebaseConstants.collections.exportUserDataBlacklistedUsers.name,
-        );
+    const collectionRef = collection(
+      firestore,
+      FirebaseConstants.collections.exportUserDataBlacklistedUsers.name,
+    );
 
-        const blacklistedUsersQuery = query(collectionRef);
+    const blacklistedUsersQuery = query(collectionRef);
 
-        const unsubscribe = onSnapshot(
-            blacklistedUsersQuery,
-            (querySnapshot) => {
-                setBlacklistedUsers(querySnapshot);
-            },
-        );
+    const unsubscribe = onSnapshot(blacklistedUsersQuery, (querySnapshot) => {
+      setBlacklistedUsers(querySnapshot);
+    });
 
-        return unsubscribe;
-    }, [user]);
+    return unsubscribe;
+  }, [user]);
 
-    return { blacklistedUsers };
+  return { blacklistedUsers };
 };
 
 /**
@@ -148,63 +145,63 @@ export const useFetchBlacklistedUsers = (user: User | null) => {
  * @return {QuerySnapshot<unknown, DocumentData> | undefined} The user consumptions query snapshot.
  */
 export const useFetchUserConsumptions = ({
-    user,
-    pageSize = 5,
-    lastDoc = undefined,
-    firstDoc = undefined,
-    orderByValue = "createdAt",
+  user,
+  pageSize = 5,
+  lastDoc = undefined,
+  firstDoc = undefined,
+  orderByValue = "createdAt",
 }: {
-    user: User | null;
-    pageSize?: number;
-    lastDoc?: DocumentData | undefined;
-    firstDoc?: DocumentData | undefined;
-    orderByValue?: "createdAt" | "value";
+  user: User | null;
+  pageSize?: number;
+  lastDoc?: DocumentData | undefined;
+  firstDoc?: DocumentData | undefined;
+  orderByValue?: "createdAt" | "value";
 }): QuerySnapshot<unknown, DocumentData> | undefined => {
-    const [userConsumptions, setUserConsumptions] =
-        useState<QuerySnapshot<unknown, DocumentData>>();
+  const [userConsumptions, setUserConsumptions] =
+    useState<QuerySnapshot<unknown, DocumentData>>();
 
-    useEffect(() => {
-        if (!user) return;
+  useEffect(() => {
+    if (!user) return;
 
-        const collectionRef = collection(
-            firestore,
-            FirebaseConstants.collections.users.name,
-            user.uid,
-            FirebaseConstants.collections.users.consumptions.name,
-        );
+    const collectionRef = collection(
+      firestore,
+      FirebaseConstants.collections.users.name,
+      user.uid,
+      FirebaseConstants.collections.users.consumptions.name,
+    );
 
-        let consumptionQuery;
+    let consumptionQuery;
 
-        if (lastDoc) {
-            consumptionQuery = query(
-                collectionRef,
-                orderBy(orderByValue, "desc"),
-                startAfter(lastDoc),
-                limit(pageSize),
-            );
-        } else if (firstDoc) {
-            consumptionQuery = query(
-                collectionRef,
-                orderBy(orderByValue, "desc"),
-                endBefore(firstDoc),
-                limitToLast(pageSize),
-            );
-        } else {
-            consumptionQuery = query(
-                collectionRef,
-                orderBy(orderByValue, "desc"),
-                limit(pageSize),
-            );
-        }
+    if (lastDoc) {
+      consumptionQuery = query(
+        collectionRef,
+        orderBy(orderByValue, "desc"),
+        startAfter(lastDoc),
+        limit(pageSize),
+      );
+    } else if (firstDoc) {
+      consumptionQuery = query(
+        collectionRef,
+        orderBy(orderByValue, "desc"),
+        endBefore(firstDoc),
+        limitToLast(pageSize),
+      );
+    } else {
+      consumptionQuery = query(
+        collectionRef,
+        orderBy(orderByValue, "desc"),
+        limit(pageSize),
+      );
+    }
 
-        const unsubscribe = onSnapshot(consumptionQuery, (querySnapshot) => {
-            setUserConsumptions(querySnapshot);
-        });
+    const unsubscribe = onSnapshot(consumptionQuery, (querySnapshot) => {
+      setUserConsumptions(querySnapshot);
+    });
 
-        return unsubscribe;
-    }, [lastDoc, orderByValue, pageSize, firstDoc, user]);
+    return unsubscribe;
+  }, [lastDoc, orderByValue, pageSize, firstDoc, user]);
 
-    return userConsumptions;
+  return userConsumptions;
 };
 
 /**
@@ -218,65 +215,65 @@ export const useFetchUserConsumptions = ({
  * @return {QuerySnapshot<unknown, DocumentData> | undefined} The user recurring consumptions query snapshot.
  */
 export const useFetchUserRecurringConsumptions = ({
-    user,
-    pageSize = 5,
-    lastDoc = undefined,
-    firstDoc = undefined,
-    orderByValue = "createdAt",
+  user,
+  pageSize = 5,
+  lastDoc = undefined,
+  firstDoc = undefined,
+  orderByValue = "createdAt",
 }: {
-    user: User | null;
-    pageSize?: number;
-    lastDoc?: DocumentData | undefined;
-    firstDoc?: DocumentData | undefined;
-    orderByValue?: "createdAt" | "frequency";
+  user: User | null;
+  pageSize?: number;
+  lastDoc?: DocumentData | undefined;
+  firstDoc?: DocumentData | undefined;
+  orderByValue?: "createdAt" | "frequency";
 }): QuerySnapshot<unknown, DocumentData> | undefined => {
-    const [userRecurringConsumptions, setUserRecurringConsumptions] =
-        useState<QuerySnapshot<unknown, DocumentData>>();
+  const [userRecurringConsumptions, setUserRecurringConsumptions] =
+    useState<QuerySnapshot<unknown, DocumentData>>();
 
-    useEffect(() => {
-        if (!user) return;
+  useEffect(() => {
+    if (!user) return;
 
-        const collectionRef = collection(
-            firestore,
-            FirebaseConstants.collections.users.name,
-            user.uid,
-            FirebaseConstants.collections.users.recurringConsumptions.name,
-        );
-        let recurringConsumptionQuery;
+    const collectionRef = collection(
+      firestore,
+      FirebaseConstants.collections.users.name,
+      user.uid,
+      FirebaseConstants.collections.users.recurringConsumptions.name,
+    );
+    let recurringConsumptionQuery;
 
-        if (lastDoc) {
-            recurringConsumptionQuery = query(
-                collectionRef,
-                orderBy(orderByValue, "desc"),
-                startAfter(lastDoc),
-                limit(pageSize),
-            );
-        } else if (firstDoc) {
-            recurringConsumptionQuery = query(
-                collectionRef,
-                orderBy(orderByValue, "desc"),
-                endBefore(firstDoc),
-                limitToLast(pageSize),
-            );
-        } else {
-            recurringConsumptionQuery = query(
-                collectionRef,
-                orderBy(orderByValue, "desc"),
-                limit(pageSize),
-            );
-        }
+    if (lastDoc) {
+      recurringConsumptionQuery = query(
+        collectionRef,
+        orderBy(orderByValue, "desc"),
+        startAfter(lastDoc),
+        limit(pageSize),
+      );
+    } else if (firstDoc) {
+      recurringConsumptionQuery = query(
+        collectionRef,
+        orderBy(orderByValue, "desc"),
+        endBefore(firstDoc),
+        limitToLast(pageSize),
+      );
+    } else {
+      recurringConsumptionQuery = query(
+        collectionRef,
+        orderBy(orderByValue, "desc"),
+        limit(pageSize),
+      );
+    }
 
-        const unsubscribe = onSnapshot(
-            recurringConsumptionQuery,
-            (querySnapshot) => {
-                setUserRecurringConsumptions(querySnapshot);
-            },
-        );
+    const unsubscribe = onSnapshot(
+      recurringConsumptionQuery,
+      (querySnapshot) => {
+        setUserRecurringConsumptions(querySnapshot);
+      },
+    );
 
-        return unsubscribe;
-    }, [firstDoc, lastDoc, orderByValue, pageSize, user]);
+    return unsubscribe;
+  }, [firstDoc, lastDoc, orderByValue, pageSize, user]);
 
-    return userRecurringConsumptions;
+  return userRecurringConsumptions;
 };
 
 /**
@@ -286,34 +283,34 @@ export const useFetchUserRecurringConsumptions = ({
  * @return {ConsumptionSummary[]} An array of consumption summaries for the user.
  */
 export const useFetchUserConsumptionSummaries = (
-    user: User | null,
+  user: User | null,
 ): ConsumptionSummary[] => {
-    const [userConsumptionSummaries, setUserConsumptionSummaries] = useState<
-        ConsumptionSummary[]
-    >([]);
+  const [userConsumptionSummaries, setUserConsumptionSummaries] = useState<
+    ConsumptionSummary[]
+  >([]);
 
-    useEffect(() => {
-        if (!user) return;
+  useEffect(() => {
+    if (!user) return;
 
-        const collectionRef = collection(
-            firestore,
-            FirebaseConstants.collections.users.name,
-            user.uid,
-            FirebaseConstants.collections.users.consumptionSummaries.name,
-        );
+    const collectionRef = collection(
+      firestore,
+      FirebaseConstants.collections.users.name,
+      user.uid,
+      FirebaseConstants.collections.users.consumptionSummaries.name,
+    );
 
-        const unsubscribe = onSnapshot(collectionRef, (querySnapshot) => {
-            const fetchedSummaries = querySnapshot.docs.map(
-                (doc) => doc.data() as ConsumptionSummary,
-            );
+    const unsubscribe = onSnapshot(collectionRef, (querySnapshot) => {
+      const fetchedSummaries = querySnapshot.docs.map(
+        (doc) => doc.data() as ConsumptionSummary,
+      );
 
-            setUserConsumptionSummaries(fetchedSummaries);
-        });
+      setUserConsumptionSummaries(fetchedSummaries);
+    });
 
-        return unsubscribe;
-    }, [user]);
+    return unsubscribe;
+  }, [user]);
 
-    return userConsumptionSummaries;
+  return userConsumptionSummaries;
 };
 
 /**
@@ -324,39 +321,37 @@ export const useFetchUserConsumptionSummaries = (
  * @return {{ userCountryData: Country | null, isLoadingUserCountryData: boolean }} An object containing the fetched user country data and a boolean indicating whether the data is currently being loaded.
  */
 export const useFetchUserCountryData = (
-    user: User | null,
-    userData: FirebaseUser | null,
+  user: User | null,
+  userData: FirebaseUser | null,
 ): { userCountryData: Country | null; isLoadingUserCountryData: boolean } => {
-    const [userCountryData, setUserCountryData] = useState<Country | null>(
-        null,
+  const [userCountryData, setUserCountryData] = useState<Country | null>(null);
+
+  const [isLoadingUserCountryData, setIsLoadingUserCountryData] =
+    useState<boolean>(true);
+
+  useEffect(() => {
+    if (!user || !userData?.country) return;
+
+    const docRef = doc(
+      firestore,
+      FirebaseConstants.collections.countries.name,
+      userData.country,
     );
 
-    const [isLoadingUserCountryData, setIsLoadingUserCountryData] =
-        useState<boolean>(true);
+    const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
+      if (docSnapshot.exists()) {
+        setUserCountryData(docSnapshot.data() as Country);
+        setIsLoadingUserCountryData(false);
+      } else {
+        console.error("Country document does not exist");
+        setIsLoadingUserCountryData(false);
+      }
+    });
 
-    useEffect(() => {
-        if (!user || !userData?.country) return;
+    return unsubscribe;
+  }, [user, userData?.country]);
 
-        const docRef = doc(
-            firestore,
-            FirebaseConstants.collections.countries.name,
-            userData.country,
-        );
-
-        const unsubscribe = onSnapshot(docRef, (docSnapshot) => {
-            if (docSnapshot.exists()) {
-                setUserCountryData(docSnapshot.data() as Country);
-                setIsLoadingUserCountryData(false);
-            } else {
-                console.error("Country document does not exist");
-                setIsLoadingUserCountryData(false);
-            }
-        });
-
-        return unsubscribe;
-    }, [user, userData?.country]);
-
-    return { userCountryData, isLoadingUserCountryData };
+  return { userCountryData, isLoadingUserCountryData };
 };
 
 /**
@@ -376,149 +371,147 @@ export const useFetchUserCountryData = (
  *  - totalConsumptions: The total number of consumptions for the user.
  */
 export const usePaginatedConsumptions = ({
-    user,
-    pageSize = 5,
+  user,
+  pageSize = 5,
 }: {
-    user: User | null;
-    pageSize: number;
+  user: User | null;
+  pageSize: number;
 }) => {
-    const [lastDoc, setLastDoc] = useState<any>(undefined);
-    const [firstDoc, setFirstDoc] = useState<any>(undefined);
-    const [orderBy, setOrderByValue] = useState<"createdAt" | "value">(
-        "createdAt",
-    );
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [totalConsumptions, setTotalConsumptions] = useState<number>(0);
-    const maxPage = Math.ceil(totalConsumptions / pageSize);
+  const [lastDoc, setLastDoc] = useState<any>(undefined);
+  const [firstDoc, setFirstDoc] = useState<any>(undefined);
+  const [orderBy, setOrderByValue] = useState<"createdAt" | "value">(
+    "createdAt",
+  );
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalConsumptions, setTotalConsumptions] = useState<number>(0);
+  const maxPage = Math.ceil(totalConsumptions / pageSize);
 
-    useEffect(() => {
-        if (!user) return;
-        getCountFromServer(
-            collection(
-                firestore,
-                FirebaseConstants.collections.users.name,
-                user.uid,
-                FirebaseConstants.collections.users.consumptions.name,
-            ),
-        ).then((snapshot) => setTotalConsumptions(snapshot.data().count));
-    }, [user]);
+  useEffect(() => {
+    if (!user) return;
+    getCountFromServer(
+      collection(
+        firestore,
+        FirebaseConstants.collections.users.name,
+        user.uid,
+        FirebaseConstants.collections.users.consumptions.name,
+      ),
+    ).then((snapshot) => setTotalConsumptions(snapshot.data().count));
+  }, [user]);
 
-    const onOrderChange = (order: "createdAt" | "value") => {
-        setLastDoc(undefined);
-        setFirstDoc(undefined);
-        setCurrentPage(1);
-        setOrderByValue(order);
-    };
+  const onOrderChange = (order: "createdAt" | "value") => {
+    setLastDoc(undefined);
+    setFirstDoc(undefined);
+    setCurrentPage(1);
+    setOrderByValue(order);
+  };
 
-    const querySnapshot = useFetchUserConsumptions({
-        user: user,
-        pageSize: pageSize,
-        orderByValue: orderBy,
-        lastDoc: lastDoc,
-        firstDoc: firstDoc,
-    });
+  const querySnapshot = useFetchUserConsumptions({
+    user: user,
+    pageSize: pageSize,
+    orderByValue: orderBy,
+    lastDoc: lastDoc,
+    firstDoc: firstDoc,
+  });
 
-    const fetchNextPage = () => {
-        setCurrentPage((prev) => prev + 1);
-        setFirstDoc(undefined);
-        setLastDoc(querySnapshot?.docs[querySnapshot.docs.length - 1]);
-    };
+  const fetchNextPage = () => {
+    setCurrentPage((prev) => prev + 1);
+    setFirstDoc(undefined);
+    setLastDoc(querySnapshot?.docs[querySnapshot.docs.length - 1]);
+  };
 
-    const fetchPreviousPage = () => {
-        setCurrentPage((prev) => prev - 1);
-        setLastDoc(undefined);
-        setFirstDoc(querySnapshot?.docs[0]);
-    };
+  const fetchPreviousPage = () => {
+    setCurrentPage((prev) => prev - 1);
+    setLastDoc(undefined);
+    setFirstDoc(querySnapshot?.docs[0]);
+  };
 
-    const consumptionPage = querySnapshot?.docs.map((doc) => ({
-        ...(doc.data() as Consumption),
-        id: doc.id,
-    })) as ConsumptionWithID[];
+  const consumptionPage = querySnapshot?.docs.map((doc) => ({
+    ...(doc.data() as Consumption),
+    id: doc.id,
+  })) as ConsumptionWithID[];
 
-    return {
-        fetchNextPage,
-        fetchPreviousPage,
-        consumptionPage,
-        maxPage,
-        currentPage,
-        onOrderChange,
-        orderBy,
-        totalConsumptions,
-    };
+  return {
+    fetchNextPage,
+    fetchPreviousPage,
+    consumptionPage,
+    maxPage,
+    currentPage,
+    onOrderChange,
+    orderBy,
+    totalConsumptions,
+  };
 };
 
 export const usePaginatedRecurringConsumptions = ({
-    user,
-    pageSize = 5,
+  user,
+  pageSize = 5,
 }: {
-    user: User | null;
-    pageSize: number;
+  user: User | null;
+  pageSize: number;
 }) => {
-    const [lastDoc, setLastDoc] = useState<any>(undefined);
-    const [firstDoc, setFirstDoc] = useState<any>(undefined);
-    const [orderBy, setOrderByValue] = useState<"createdAt" | "frequency">(
-        "createdAt",
-    );
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const [totalRecurringConsumptions, setTotalRecurringConsumptions] =
-        useState<number>(0);
-    const maxPage = Math.ceil(totalRecurringConsumptions / pageSize);
+  const [lastDoc, setLastDoc] = useState<any>(undefined);
+  const [firstDoc, setFirstDoc] = useState<any>(undefined);
+  const [orderBy, setOrderByValue] = useState<"createdAt" | "frequency">(
+    "createdAt",
+  );
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [totalRecurringConsumptions, setTotalRecurringConsumptions] =
+    useState<number>(0);
+  const maxPage = Math.ceil(totalRecurringConsumptions / pageSize);
 
-    useEffect(() => {
-        if (!user) return;
+  useEffect(() => {
+    if (!user) return;
 
-        getCountFromServer(
-            collection(
-                firestore,
-                FirebaseConstants.collections.users.name,
-                user.uid,
-                FirebaseConstants.collections.users.recurringConsumptions.name,
-            ),
-        ).then((snapshot) =>
-            setTotalRecurringConsumptions(snapshot.data().count),
-        );
-    }, [user]);
+    getCountFromServer(
+      collection(
+        firestore,
+        FirebaseConstants.collections.users.name,
+        user.uid,
+        FirebaseConstants.collections.users.recurringConsumptions.name,
+      ),
+    ).then((snapshot) => setTotalRecurringConsumptions(snapshot.data().count));
+  }, [user]);
 
-    const onOrderChange = (order: "createdAt" | "frequency") => {
-        setLastDoc(undefined);
-        setFirstDoc(undefined);
-        setCurrentPage(1);
-        setOrderByValue(order);
-    };
+  const onOrderChange = (order: "createdAt" | "frequency") => {
+    setLastDoc(undefined);
+    setFirstDoc(undefined);
+    setCurrentPage(1);
+    setOrderByValue(order);
+  };
 
-    const querySnapshot = useFetchUserRecurringConsumptions({
-        user: user,
-        pageSize: pageSize,
-        orderByValue: orderBy,
-        lastDoc: lastDoc,
-        firstDoc: firstDoc,
-    });
+  const querySnapshot = useFetchUserRecurringConsumptions({
+    user: user,
+    pageSize: pageSize,
+    orderByValue: orderBy,
+    lastDoc: lastDoc,
+    firstDoc: firstDoc,
+  });
 
-    const fetchNextPage = () => {
-        setCurrentPage((prev) => prev + 1);
-        setFirstDoc(undefined);
-        setLastDoc(querySnapshot?.docs[querySnapshot.docs.length - 1]);
-    };
+  const fetchNextPage = () => {
+    setCurrentPage((prev) => prev + 1);
+    setFirstDoc(undefined);
+    setLastDoc(querySnapshot?.docs[querySnapshot.docs.length - 1]);
+  };
 
-    const fetchPreviousPage = () => {
-        setCurrentPage((prev) => prev - 1);
-        setLastDoc(undefined);
-        setFirstDoc(querySnapshot?.docs[0]);
-    };
+  const fetchPreviousPage = () => {
+    setCurrentPage((prev) => prev - 1);
+    setLastDoc(undefined);
+    setFirstDoc(querySnapshot?.docs[0]);
+  };
 
-    const recurringConsumptionPage = querySnapshot?.docs.map((doc) => ({
-        ...(doc.data() as RecurringConsumption),
-        id: doc.id,
-    })) as RecurringConsumptionWithID[];
+  const recurringConsumptionPage = querySnapshot?.docs.map((doc) => ({
+    ...(doc.data() as RecurringConsumption),
+    id: doc.id,
+  })) as RecurringConsumptionWithID[];
 
-    return {
-        fetchNextPage,
-        fetchPreviousPage,
-        recurringConsumptionPage,
-        maxPage,
-        currentPage,
-        onOrderChange,
-        orderBy,
-        totalRecurringConsumptions,
-    };
+  return {
+    fetchNextPage,
+    fetchPreviousPage,
+    recurringConsumptionPage,
+    maxPage,
+    currentPage,
+    onOrderChange,
+    orderBy,
+    totalRecurringConsumptions,
+  };
 };

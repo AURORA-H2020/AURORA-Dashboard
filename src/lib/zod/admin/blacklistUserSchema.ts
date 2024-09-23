@@ -7,10 +7,10 @@ import { z } from "zod";
 const TimestampSchema = z.instanceof(Timestamp);
 
 const blacklistedReasons: BlacklistedReason[] = blacklistedReasonsList.map(
-    (reason) => reason.key,
+  (reason) => reason.key,
 );
 
 export const blacklistUserFormSchema: z.ZodType<BlacklistedUser> = z.object({
-    blacklistedReason: z.enum([blacklistedReasons[0], ...blacklistedReasons]),
-    blacklistedAt: TimestampSchema,
+  blacklistedReason: z.enum([blacklistedReasons[0], ...blacklistedReasons]),
+  blacklistedAt: TimestampSchema,
 });

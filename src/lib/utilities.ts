@@ -1,7 +1,7 @@
 import { carbonUnit, countriesMapping } from "@/lib/constants/constants";
 import {
-    consumptionMapping,
-    consumptionSources,
+  consumptionMapping,
+  consumptionSources,
 } from "@/lib/constants/consumptions";
 import { ConsumptionAttributes } from "@/models/constants";
 import { Consumption } from "@/models/firestore/consumption/consumption";
@@ -22,7 +22,7 @@ import { z } from "zod";
  * @return {string} The merged class names as a single string.
  */
 export function cn(...inputs: ClassValue[]) {
-    return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs));
 }
 
 /**
@@ -32,13 +32,13 @@ export function cn(...inputs: ClassValue[]) {
  * @returns {string} The short name of the month.
  */
 export function getMonthShortName(
-    monthNumber: number,
-    locale = "en-GB",
+  monthNumber: number,
+  locale = "en-GB",
 ): string {
-    const date = new Date(2000, monthNumber - 1, 15);
+  const date = new Date(2000, monthNumber - 1, 15);
 
-    const options: Intl.DateTimeFormatOptions = { month: "short" };
-    return date.toLocaleString(locale, options);
+  const options: Intl.DateTimeFormatOptions = { month: "short" };
+  return date.toLocaleString(locale, options);
 }
 
 /**
@@ -48,13 +48,13 @@ export function getMonthShortName(
  * @return {ConsumptionAttributes | undefined} The consumption attributes for the given category, or undefined if not found
  */
 export function getConsumptionAttributes(
-    consumptionCategory: ConsumptionCategory,
+  consumptionCategory: ConsumptionCategory,
 ): ConsumptionAttributes | undefined {
-    const consumptionAttributes = consumptionMapping.find(
-        (c) => c.category == consumptionCategory,
-    );
+  const consumptionAttributes = consumptionMapping.find(
+    (c) => c.category == consumptionCategory,
+  );
 
-    return consumptionAttributes || undefined;
+  return consumptionAttributes || undefined;
 }
 
 /**
@@ -64,14 +64,14 @@ export function getConsumptionAttributes(
  * @return {string} The formatted number with the unit "kg CO₂".
  */
 export const valueFormatterCarbon = (
-    number: number,
-    unitSystem: "metric" | "imperial" = "metric",
+  number: number,
+  unitSystem: "metric" | "imperial" = "metric",
 ): string => {
-    const unit =
-        unitSystem == "imperial" ? `lb ${carbonUnit}` : `kg ${carbonUnit}`;
-    return `${Intl.NumberFormat("us")
-        .format(Math.round(number))
-        .toString()} \n ${unit}`;
+  const unit =
+    unitSystem == "imperial" ? `lb ${carbonUnit}` : `kg ${carbonUnit}`;
+  return `${Intl.NumberFormat("us")
+    .format(Math.round(number))
+    .toString()} \n ${unit}`;
 };
 
 /**
@@ -81,7 +81,7 @@ export const valueFormatterCarbon = (
  * @return {string} The formatted energy value as a string.
  */
 export const valueFormatterEnergy = (number: number): string =>
-    `${Intl.NumberFormat("us").format(Math.round(number)).toString()} \n kWh`;
+  `${Intl.NumberFormat("us").format(Math.round(number)).toString()} \n kWh`;
 
 /**
  * Formats the absolute value of a number using the US number format.
@@ -90,7 +90,7 @@ export const valueFormatterEnergy = (number: number): string =>
  * @return {string} the formatted absolute value as a string
  */
 export const valueFormatterAbsolute = (number: number): string =>
-    Intl.NumberFormat("us").format(number).toString();
+  Intl.NumberFormat("us").format(number).toString();
 
 /**
  * Formats a number as a percentage value with one decimal place.
@@ -99,13 +99,13 @@ export const valueFormatterAbsolute = (number: number): string =>
  * @return {string} the formatted percentage value
  */
 export const valueFormatterPercentage = (number: number): string => {
-    if (isNaN(number)) {
-        return "N/A";
-    } else
-        return Intl.NumberFormat("us", {
-            style: "percent",
-            maximumFractionDigits: 1,
-        }).format(number);
+  if (isNaN(number)) {
+    return "N/A";
+  } else
+    return Intl.NumberFormat("us", {
+      style: "percent",
+      maximumFractionDigits: 1,
+    }).format(number);
 };
 
 /**
@@ -116,19 +116,19 @@ export const valueFormatterPercentage = (number: number): string => {
  * @return {void}
  */
 export const downloadJsonAsFile = async (object, fileName) => {
-    const dataStr = JSON.stringify(object);
-    const blob = new Blob([dataStr], { type: "application/json" });
-    const url = URL.createObjectURL(blob);
+  const dataStr = JSON.stringify(object);
+  const blob = new Blob([dataStr], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
 
-    // Create a link element, click it, and remove it to start the download
-    const link = document.createElement("a");
-    link.href = url;
-    link.download = `${fileName}.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  // Create a link element, click it, and remove it to start the download
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${fileName}.json`;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 
-    URL.revokeObjectURL(url);
+  URL.revokeObjectURL(url);
 };
 
 /**
@@ -138,25 +138,25 @@ export const downloadJsonAsFile = async (object, fileName) => {
  * @return {string[]} an array of unique years
  */
 export function getYearsInSummary(
-    globalSummaryData: GlobalSummary | undefined,
+  globalSummaryData: GlobalSummary | undefined,
 ): string[] {
-    // Use a Set to store unique years without duplicates
-    const yearsSet = new Set<string>();
+  // Use a Set to store unique years without duplicates
+  const yearsSet = new Set<string>();
 
-    // Traverse the structure to reach the GlobalSummaryCategoryTemporalYear level
-    globalSummaryData?.countries.forEach((country) => {
-        country.cities.forEach((city) => {
-            city.categories.forEach((category) => {
-                category.temporal.forEach((temporalYear) => {
-                    // Add the year to the Set
-                    yearsSet.add(temporalYear.year);
-                });
-            });
+  // Traverse the structure to reach the GlobalSummaryCategoryTemporalYear level
+  globalSummaryData?.countries.forEach((country) => {
+    country.cities.forEach((city) => {
+      city.categories.forEach((category) => {
+        category.temporal.forEach((temporalYear) => {
+          // Add the year to the Set
+          yearsSet.add(temporalYear.year);
         });
+      });
     });
+  });
 
-    // Convert the Set to an Array to return the years
-    return Array.from(yearsSet).sort((a, b) => Number(b) - Number(a));
+  // Convert the Set to an Array to return the years
+  return Array.from(yearsSet).sort((a, b) => Number(b) - Number(a));
 }
 
 /**
@@ -166,26 +166,26 @@ export function getYearsInSummary(
  * @return {{ names: string[]; colors: string[]; }} An object with names and colors of the countries
  */
 export function getSortedCountryLabels(countryIds: string[] | undefined) {
-    if (!countryIds) {
-        return { names: [], colors: [] };
-    }
+  if (!countryIds) {
+    return { names: [], colors: [] };
+  }
 
-    const countryLabels = countryIds.map((countryID) => ({
-        name:
-            countriesMapping.find((country) => country.ID === countryID)
-                ?.name || countryID,
-        id: countryID,
-        color:
-            countriesMapping.find((country) => country.ID === countryID)
-                ?.color || "#000000",
-    }));
+  const countryLabels = countryIds.map((countryID) => ({
+    name:
+      countriesMapping.find((country) => country.ID === countryID)?.name ||
+      countryID,
+    id: countryID,
+    color:
+      countriesMapping.find((country) => country.ID === countryID)?.color ||
+      "#000000",
+  }));
 
-    countryLabels.sort((a, b) => a.name.localeCompare(b.name));
+  countryLabels.sort((a, b) => a.name.localeCompare(b.name));
 
-    return {
-        names: countryLabels.map((country) => country.name),
-        colors: countryLabels.map((country) => country.color),
-    };
+  return {
+    names: countryLabels.map((country) => country.name),
+    colors: countryLabels.map((country) => country.color),
+  };
 }
 
 /**
@@ -196,47 +196,46 @@ export function getSortedCountryLabels(countryIds: string[] | undefined) {
  * @return {{userUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb"; firebaseUnit: "km" | "L" | "kg" | "kWh;}} - The consumption unit.
  */
 export function getConsumptionUnit(
-    consumption: Consumption,
-    unitSystem: UserSettingsUnitSystem,
+  consumption: Consumption,
+  unitSystem: UserSettingsUnitSystem,
 ): {
-    userUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb";
-    firebaseUnit: "km" | "L" | "kg" | "kWh";
+  userUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb";
+  firebaseUnit: "km" | "L" | "kg" | "kWh";
 } {
-    let userConsumptionUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb" =
-        "kWh";
-    let firebaseConsumptionUnit: "km" | "L" | "kg" | "kWh" = "kWh";
+  let userConsumptionUnit: "km" | "mi" | "L" | "gal" | "kWh" | "kg" | "lb" =
+    "kWh";
+  let firebaseConsumptionUnit: "km" | "L" | "kg" | "kWh" = "kWh";
 
-    const category = consumption.category;
-    const source =
-        consumption.electricity?.electricitySource ??
-        consumption.heating?.heatingFuel ??
-        consumption.transportation?.transportationType ??
-        "";
+  const category = consumption.category;
+  const source =
+    consumption.electricity?.electricitySource ??
+    consumption.heating?.heatingFuel ??
+    consumption.transportation?.transportationType ??
+    "";
 
-    if (category === "heating") {
-        firebaseConsumptionUnit =
-            consumptionSources.heating.find((c) => c.source == source)?.unit ??
-            "kWh";
-    } else if (category === "transportation") {
-        firebaseConsumptionUnit = "km";
+  if (category === "heating") {
+    firebaseConsumptionUnit =
+      consumptionSources.heating.find((c) => c.source == source)?.unit ?? "kWh";
+  } else if (category === "transportation") {
+    firebaseConsumptionUnit = "km";
+  }
+
+  if (unitSystem === "imperial") {
+    if (firebaseConsumptionUnit === "km") {
+      userConsumptionUnit = "mi";
+    } else if (firebaseConsumptionUnit === "L") {
+      userConsumptionUnit = "gal";
+    } else if (firebaseConsumptionUnit === "kg") {
+      userConsumptionUnit = "lb";
     }
+  } else {
+    userConsumptionUnit = firebaseConsumptionUnit;
+  }
 
-    if (unitSystem === "imperial") {
-        if (firebaseConsumptionUnit === "km") {
-            userConsumptionUnit = "mi";
-        } else if (firebaseConsumptionUnit === "L") {
-            userConsumptionUnit = "gal";
-        } else if (firebaseConsumptionUnit === "kg") {
-            userConsumptionUnit = "lb";
-        }
-    } else {
-        userConsumptionUnit = firebaseConsumptionUnit;
-    }
-
-    return {
-        userUnit: userConsumptionUnit,
-        firebaseUnit: firebaseConsumptionUnit,
-    };
+  return {
+    userUnit: userConsumptionUnit,
+    firebaseUnit: firebaseConsumptionUnit,
+  };
 }
 
 /**
@@ -252,81 +251,81 @@ export function getConsumptionUnit(
  * @return {{ quantity: number; unit: string }} - The converted value and its unit.
  */
 export function convertUnit(
-    value: number,
-    unit:
-        | "km"
-        | "mi"
-        | "L"
-        | "gal"
-        | "kWh"
-        | "kg"
-        | "lb"
-        | "L/100km"
-        | "mpg"
-        | "kWh/100km"
-        | "mi/kWh",
-    toUnitSystem: "imperial" | "metric",
+  value: number,
+  unit:
+    | "km"
+    | "mi"
+    | "L"
+    | "gal"
+    | "kWh"
+    | "kg"
+    | "lb"
+    | "L/100km"
+    | "mpg"
+    | "kWh/100km"
+    | "mi/kWh",
+  toUnitSystem: "imperial" | "metric",
 ): { quantity: number; unit: string } {
-    let convertedData;
+  let convertedData;
 
-    if (unit === "kWh") {
-        convertedData = { quantity: value, unit: "kWh" };
-    } else if (unit === "L/100km" || unit === "mpg") {
-        if (unit === "L/100km" && toUnitSystem === "imperial") {
-            const gallonsPerLiter = convert(value, "L").to("imperial gallon");
-            const milesPer100Km = convert(100, "km").to("mi");
-            convertedData = {
-                quantity: milesPer100Km / gallonsPerLiter,
-                unit: "mpg",
-            };
-        } else if (unit === "mpg" && toUnitSystem === "metric") {
-            const kilometersPerGallon = convert(value, "mi").to("km");
-            const litersPerGallon = convert(1, "imperial gallon").to("L");
-            convertedData = {
-                quantity: (100 * litersPerGallon) / kilometersPerGallon,
-                unit: "L/100km",
-            };
-        } else {
-            convertedData = { quantity: value, unit: unit };
-        }
-    } else if (unit === "kWh/100km" || unit === "mi/kWh") {
-        if (unit === "kWh/100km" && toUnitSystem === "imperial") {
-            const milesPer100Km = convert(100, "km").to("mi");
-            convertedData = {
-                quantity: milesPer100Km / value,
-                unit: "mi/kWh",
-            };
-        } else if (unit === "mi/kWh" && toUnitSystem === "metric") {
-            const kilometerPerKilowattHour = convert(value, "mi").to("km");
-            convertedData = {
-                quantity: 100 / kilometerPerKilowattHour,
-                unit: "kWh/100km",
-            };
-        } else {
-            convertedData = { quantity: value, unit: unit };
-        }
-    } else if (unit === "L" || unit === "gal") {
-        if (unit === "L" && toUnitSystem === "imperial") {
-            convertedData = {
-                quantity: convert(value, "L").to("imperial gallon"),
-                unit: "gal",
-            };
-        } else if (unit === "gal" && toUnitSystem === "metric") {
-            convertedData = {
-                quantity: convert(value, "imperial gallon").to("L"),
-                unit: "L",
-            };
-        } else {
-            convertedData = { quantity: value, unit: unit };
-        }
+  if (unit === "kWh") {
+    convertedData = { quantity: value, unit: "kWh" };
+  } else if (unit === "L/100km" || unit === "mpg") {
+    if (unit === "L/100km" && toUnitSystem === "imperial") {
+      const gallonsPerLiter = convert(value, "L").to("imperial gallon");
+      const milesPer100Km = convert(100, "km").to("mi");
+      convertedData = {
+        quantity: milesPer100Km / gallonsPerLiter,
+        unit: "mpg",
+      };
+    } else if (unit === "mpg" && toUnitSystem === "metric") {
+      const kilometersPerGallon = convert(value, "mi").to("km");
+      const litersPerGallon = convert(1, "imperial gallon").to("L");
+      convertedData = {
+        quantity: (100 * litersPerGallon) / kilometersPerGallon,
+        unit: "L/100km",
+      };
     } else {
-        convertedData = convert(value, unit).to("best", toUnitSystem);
+      convertedData = { quantity: value, unit: unit };
     }
+  } else if (unit === "kWh/100km" || unit === "mi/kWh") {
+    if (unit === "kWh/100km" && toUnitSystem === "imperial") {
+      const milesPer100Km = convert(100, "km").to("mi");
+      convertedData = {
+        quantity: milesPer100Km / value,
+        unit: "mi/kWh",
+      };
+    } else if (unit === "mi/kWh" && toUnitSystem === "metric") {
+      const kilometerPerKilowattHour = convert(value, "mi").to("km");
+      convertedData = {
+        quantity: 100 / kilometerPerKilowattHour,
+        unit: "kWh/100km",
+      };
+    } else {
+      convertedData = { quantity: value, unit: unit };
+    }
+  } else if (unit === "L" || unit === "gal") {
+    if (unit === "L" && toUnitSystem === "imperial") {
+      convertedData = {
+        quantity: convert(value, "L").to("imperial gallon"),
+        unit: "gal",
+      };
+    } else if (unit === "gal" && toUnitSystem === "metric") {
+      convertedData = {
+        quantity: convert(value, "imperial gallon").to("L"),
+        unit: "L",
+      };
+    } else {
+      convertedData = { quantity: value, unit: unit };
+    }
+  } else {
+    convertedData = convert(value, unit).to("best", toUnitSystem);
+  }
 
-    return {
-        quantity: convertedData.quantity,
-        unit: convertedData.unit,
-    };
+  return {
+    quantity: convertedData.quantity,
+    unit: convertedData.unit,
+  };
 }
 
 /**
@@ -340,41 +339,41 @@ export function convertUnit(
  * @return {{ rawNumber: number; number: string; unit: string; toString(): string } | undefined} - The converted value, number, unit, and a toString method.
  */
 export function useConvertUnit(
-    value: number | undefined,
-    unit:
-        | "km"
-        | "mi"
-        | "L"
-        | "gal"
-        | "kWh"
-        | "kg"
-        | "lb"
-        | "L/100km"
-        | "mpg"
-        | "kWh/100km"
-        | "mi/kWh",
-    toUnitSystem: "imperial" | "metric",
-    unitSuffix: string = "",
-    digits: number = 1,
+  value: number | undefined,
+  unit:
+    | "km"
+    | "mi"
+    | "L"
+    | "gal"
+    | "kWh"
+    | "kg"
+    | "lb"
+    | "L/100km"
+    | "mpg"
+    | "kWh/100km"
+    | "mi/kWh",
+  toUnitSystem: "imperial" | "metric",
+  unitSuffix: string = "",
+  digits: number = 1,
 ):
-    | { rawNumber: number; number: string; unit: string; toString(): string }
-    | undefined {
-    const format = useFormatter();
+  | { rawNumber: number; number: string; unit: string; toString(): string }
+  | undefined {
+  const format = useFormatter();
 
-    if (value === undefined) return undefined;
+  if (value === undefined) return undefined;
 
-    let convertedData = convertUnit(value, unit, toUnitSystem);
+  let convertedData = convertUnit(value, unit, toUnitSystem);
 
-    return {
-        rawNumber: convertedData.quantity,
-        number: format.number(convertedData.quantity, {
-            maximumFractionDigits: digits,
-        }),
-        unit: `${convertedData.unit} ${unitSuffix}`,
-        toString() {
-            return `${this.number} ${this.unit}`;
-        },
-    };
+  return {
+    rawNumber: convertedData.quantity,
+    number: format.number(convertedData.quantity, {
+      maximumFractionDigits: digits,
+    }),
+    unit: `${convertedData.unit} ${unitSuffix}`,
+    toString() {
+      return `${this.number} ${this.unit}`;
+    },
+  };
 }
 
 /**
@@ -384,16 +383,16 @@ export function useConvertUnit(
  * @return {z.ZodObject<any> | null} The base schema if found, otherwise null.
  */
 function extractBaseSchema(schema: z.ZodTypeAny): z.ZodObject<any> | null {
-    if (schema instanceof z.ZodObject) {
-        return schema;
-    }
-    if (schema instanceof z.ZodOptional) {
-        return extractBaseSchema(schema._def.innerType);
-    }
-    if (schema instanceof z.ZodEffects && schema._def.schema) {
-        return extractBaseSchema(schema._def.schema);
-    }
-    return null;
+  if (schema instanceof z.ZodObject) {
+    return schema;
+  }
+  if (schema instanceof z.ZodOptional) {
+    return extractBaseSchema(schema._def.innerType);
+  }
+  if (schema instanceof z.ZodEffects && schema._def.schema) {
+    return extractBaseSchema(schema._def.schema);
+  }
+  return null;
 }
 
 /**
@@ -404,30 +403,30 @@ function extractBaseSchema(schema: z.ZodTypeAny): z.ZodObject<any> | null {
  * @return {boolean} Indicates if the field is required.
  */
 export function isFieldRequired(
-    schema: z.ZodTypeAny,
-    fieldPath: string,
+  schema: z.ZodTypeAny,
+  fieldPath: string,
 ): boolean {
-    const baseSchema = extractBaseSchema(schema);
-    if (!baseSchema) return true;
+  const baseSchema = extractBaseSchema(schema);
+  if (!baseSchema) return true;
 
-    const shape = baseSchema._def.shape();
-    const keys = fieldPath.split(".");
+  const shape = baseSchema._def.shape();
+  const keys = fieldPath.split(".");
 
-    let currentField = shape;
-    for (const key of keys) {
-        if (!currentField[key]) {
-            return true;
-        }
-
-        if (
-            currentField[key] instanceof z.ZodObject ||
-            currentField[key] instanceof z.ZodEffects
-        ) {
-            currentField = extractBaseSchema(currentField[key])?._def.shape();
-        } else {
-            return !(currentField[key] instanceof z.ZodOptional);
-        }
+  let currentField = shape;
+  for (const key of keys) {
+    if (!currentField[key]) {
+      return true;
     }
 
-    return true;
+    if (
+      currentField[key] instanceof z.ZodObject ||
+      currentField[key] instanceof z.ZodEffects
+    ) {
+      currentField = extractBaseSchema(currentField[key])?._def.shape();
+    } else {
+      return !(currentField[key] instanceof z.ZodOptional);
+    }
+  }
+
+  return true;
 }

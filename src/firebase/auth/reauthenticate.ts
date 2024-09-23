@@ -1,7 +1,7 @@
 import {
-    EmailAuthProvider,
-    User,
-    reauthenticateWithCredential,
+  EmailAuthProvider,
+  User,
+  reauthenticateWithCredential,
 } from "firebase/auth";
 
 /**
@@ -12,25 +12,25 @@ import {
  * @return {Promise<{ success: boolean, reauthUser
  */
 export async function reauthenticateUser(
-    user: User,
-    password?: string,
+  user: User,
+  password?: string,
 ): Promise<{ success: boolean; reauthUser: User | null }> {
-    let success = false;
-    let reauthUser: User | null = null;
+  let success = false;
+  let reauthUser: User | null = null;
 
-    if (user.email && password) {
-        const credential = EmailAuthProvider.credential(user.email, password);
-        await reauthenticateWithCredential(user, credential)
-            .then((reauth) => {
-                success = true;
-                reauthUser = reauth.user;
-            })
-            .catch((error) => {
-                console.error("Error reauthenticating user: ", error);
-            });
-    } else {
-        throw new Error("User is not logged in.");
-    }
+  if (user.email && password) {
+    const credential = EmailAuthProvider.credential(user.email, password);
+    await reauthenticateWithCredential(user, credential)
+      .then((reauth) => {
+        success = true;
+        reauthUser = reauth.user;
+      })
+      .catch((error) => {
+        console.error("Error reauthenticating user: ", error);
+      });
+  } else {
+    throw new Error("User is not logged in.");
+  }
 
-    return { success, reauthUser };
+  return { success, reauthUser };
 }

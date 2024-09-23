@@ -1,5 +1,6 @@
 import { PageLayout } from "@/components/pageLayout";
 import { useTranslations } from "next-intl";
+import { ReactNode } from "react";
 
 // Note that `app/[locale]/[...rest]/page.tsx`
 // is necessary for this page to render.
@@ -7,16 +8,16 @@ import { useTranslations } from "next-intl";
 /**
  * Renders the NotFoundPage component.
  *
- * @return {React.ReactNode} The rendered NotFoundPage component.
+ * @return {ReactNode} The rendered NotFoundPage component.
  */
-const NotFoundPage = (): React.ReactNode => {
-    const t = useTranslations();
+const NotFoundPage = (): ReactNode => {
+  const t = useTranslations();
 
-    return (
-        <PageLayout title={t("error.notFound.title")}>
-            <p className="max-w-[460px]">{t("error.notFound.description")}</p>
-        </PageLayout>
-    );
+  return (
+    <PageLayout title={t("error.notFound.title")}>
+      <p className="max-w-[460px]">{t("error.notFound.description")}</p>
+    </PageLayout>
+  );
 };
 
 export default NotFoundPage;

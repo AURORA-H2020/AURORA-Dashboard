@@ -1,24 +1,21 @@
 "use client";
 
 import { ProtectAdmin } from "@/components/hoc/protectAdmin";
+import { ReactNode } from "react";
 
 /**
  * Renders the AccountLayout component.
  *
  * @param {Object} props - The props object.
- * @param {React.ReactNode} props.children - The children to be rendered.
- * @return {React.ReactNode} The rendered AccountLayout component.
+ * @param {ReactNode} props.children - The children to be rendered.
+ * @return {ReactNode} The rendered AccountLayout component.
  */
-const AccountLayout = ({
-    children,
-}: {
-    children: React.ReactNode;
-}): React.ReactNode => {
-    return (
-        <ProtectAdmin>
-            <div>{children}</div>
-        </ProtectAdmin>
-    );
+const AccountLayout = ({ children }: { children: ReactNode }): ReactNode => {
+  return (
+    <ProtectAdmin>
+      <div>{children}</div>
+    </ProtectAdmin>
+  );
 };
 
 export default AccountLayout;

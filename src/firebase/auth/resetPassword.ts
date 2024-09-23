@@ -10,17 +10,17 @@ const auth = getAuth(firebaseApp);
  * @return {Promise<{ success: boolean }>} Object indicating the success of the password reset operation.
  */
 export async function resetPassword(
-    email: string,
+  email: string,
 ): Promise<{ success: boolean }> {
-    let success = false;
+  let success = false;
 
-    await sendPasswordResetEmail(auth, email)
-        .then(() => {
-            success = true;
-        })
-        .catch((error) => {
-            console.error("Error resetting password: ", error);
-        });
+  await sendPasswordResetEmail(auth, email)
+    .then(() => {
+      success = true;
+    })
+    .catch((error) => {
+      console.error("Error resetting password: ", error);
+    });
 
-    return { success };
+  return { success };
 }

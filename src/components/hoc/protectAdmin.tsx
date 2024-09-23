@@ -2,7 +2,7 @@ import { LoadingSpinner } from "@/components/ui/loading";
 import { useAuthContext } from "@/context/AuthContext";
 import { useUserRoles } from "@/firebase/firebaseHooks";
 import { useRouter } from "@/navigation";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 /**
  * Higher order component (HOC) that protects an admin route.
@@ -11,31 +11,31 @@ import { useEffect } from "react";
  * If the loading is in progress, a loading spinner will be rendered instead of the children.
  *
  * @param {Object} props - The component props.
- * @param {React.ReactNode} props.children - The child components to render.
- * @return {React.ReactNode} The rendered component.
+ * @param {ReactNode} props.children - The child components to render.
+ * @return {ReactNode} The rendered component.
  */
 export const ProtectAdmin = ({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
-}): React.ReactNode => {
-    const { user, loading } = useAuthContext();
-    const { isAdmin, isAdminLoading } = useUserRoles(user?.uid);
-    const router = useRouter();
+  children: ReactNode;
+}): ReactNode => {
+  const { user, loading } = useAuthContext();
+  const { isAdmin, isAdminLoading } = useUserRoles(user?.uid);
+  const router = useRouter();
 
-    useEffect(() => {
-        if (!loading && !isAdminLoading && !isAdmin) {
-            router.push("/account");
-        }
-    }, [loading, isAdminLoading, isAdmin, router]);
-
-    if (loading || isAdminLoading) {
-        return <LoadingSpinner />;
+  useEffect(() => {
+    if (!loading && !isAdminLoading && !isAdmin) {
+      router.push("/account");
     }
+  }, [loading, isAdminLoading, isAdmin, router]);
 
-    if (user && isAdmin) {
-        return <>{children}</>;
-    }
-
+  if (loading || isAdminLoading) {
     return <LoadingSpinner />;
+  }
+
+  if (user && isAdmin) {
+    return <>{children}</>;
+  }
+
+  return <LoadingSpinner />;
 };

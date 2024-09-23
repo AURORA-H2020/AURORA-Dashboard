@@ -9,22 +9,22 @@ import { getFunctions, httpsCallable } from "firebase/functions";
  * @return {Promise<void>} A promise that resolves after the download process is completed.
  */
 export const downloadUserData = async (): Promise<void> => {
-    try {
-        const functions = getFunctions(
-            firebaseApp,
-            FirebaseConstants.preferredCloudFunctionRegion,
-        );
-        const downloadUserData = httpsCallable(functions, "downloadUserData");
+  try {
+    const functions = getFunctions(
+      firebaseApp,
+      FirebaseConstants.preferredCloudFunctionRegion,
+    );
+    const downloadUserData = httpsCallable(functions, "downloadUserData");
 
-        const result = await downloadUserData();
-        const userData = result.data;
+    const result = await downloadUserData();
+    const userData = result.data;
 
-        if (!userData) {
-            throw new Error("No user data returned from the function.");
-        }
-
-        await downloadJsonAsFile(userData, "user_data");
-    } catch (error) {
-        console.error("Error downloading user data:", error);
+    if (!userData) {
+      throw new Error("No user data returned from the function.");
     }
+
+    await downloadJsonAsFile(userData, "user_data");
+  } catch (error) {
+    console.error("Error downloading user data:", error);
+  }
 };

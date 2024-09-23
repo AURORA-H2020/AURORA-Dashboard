@@ -6,19 +6,19 @@ import { User } from "./firestore/user/user";
 
 // Extend the Consumption type to include the `id` property
 export interface ConsumptionWithID extends Consumption {
-    id: string;
+  id: string;
 }
 
 export interface RecurringConsumptionWithID extends RecurringConsumption {
-    id: string;
+  id: string;
 }
 
 export interface ExtendedUser extends User {
-    consumptions: Consumption[];
-    recurringConsumptions: RecurringConsumption[];
-    consumptionSummaries: ConsumptionSummary[];
+  consumptions: Consumption[];
+  recurringConsumptions: RecurringConsumption[];
+  consumptionSummaries: ConsumptionSummary[];
 }
 
 export interface BackupUserData {
-    [key: string]: ExtendedUser;
+  [key: string]: ExtendedUser;
 }

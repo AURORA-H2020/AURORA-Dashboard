@@ -17,70 +17,67 @@ import { ReactNode } from "react";
  * @return {ReactNode} The rendered component.
  */
 const ConfirmUnitSystem = (): ReactNode => {
-    const t = useTranslations();
-    const { userData, isLoadingUserData } = useFirebaseData();
-    const { user } = useAuthContext();
+  const t = useTranslations();
+  const { userData, isLoadingUserData } = useFirebaseData();
+  const { user } = useAuthContext();
 
-    const unitSystem: UserSettingsUnitSystem | undefined =
-        userData?.settings?.unitSystem;
+  const unitSystem: UserSettingsUnitSystem | undefined =
+    userData?.settings?.unitSystem;
 
-    if (isLoadingUserData || unitSystem) {
-        return null;
+  if (isLoadingUserData || unitSystem) {
+    return null;
+  }
+
+  /**
+   * Sets the unit system for the user.
+   *
+   * @param {UserSettingsUnitSystem} unitSystem - The unit system to be set.
+   * @return {void} This function does not return anything.
+   */
+  const setUnitSystem = (unitSystem: UserSettingsUnitSystem): void => {
+    if (userData && user) {
+      if (!userData.settings) {
+        userData.settings = {};
+      }
+      userData.settings.unitSystem = unitSystem;
+
+      addEditUserData(userData, user);
     }
+  };
 
-    /**
-     * Sets the unit system for the user.
-     *
-     * @param {UserSettingsUnitSystem} unitSystem - The unit system to be set.
-     * @return {void} This function does not return anything.
-     */
-    const setUnitSystem = (unitSystem: UserSettingsUnitSystem): void => {
-        if (userData && user) {
-            if (!userData.settings) {
-                userData.settings = {};
-            }
-            userData.settings.unitSystem = unitSystem;
-
-            addEditUserData(userData, user);
-        }
-    };
-
-    return (
-        <BorderBox className="mt-4">
-            <Flex
-                justify="between"
-                align="center"
-                gap="4"
-                className="flex-wrap md:flex-nowrap"
-            >
-                <Flex gap="4" align="center">
-                    <CircleHelp className="flex-shrink-0" />
-                    <Text>{t("app.confirmUnitSystem.description")}</Text>
-                </Flex>
-                <Flex
-                    gap="2"
-                    className="w-full md:w-auto flex-wrap sm:flex-nowrap"
-                >
-                    <Button
-                        size="sm"
-                        variant="outline"
-                        className="w-full sm:w-1/2"
-                        onClick={() => setUnitSystem("metric")}
-                    >
-                        {t("app.confirmUnitSystem.useMetric")}
-                    </Button>
-                    <Button
-                        size="sm"
-                        variant="outline"
-                        className="w-full sm:w-1/2"
-                        onClick={() => setUnitSystem("imperial")}
-                    >
-                        {t("app.confirmUnitSystem.useImperial")}
-                    </Button>
-                </Flex>
-            </Flex>
-        </BorderBox>
-    );
+  return (
+    <BorderBox className="mt-4">
+      <Flex
+        justify="between"
+        align="center"
+        gap="4"
+        className="flex-wrap md:flex-nowrap"
+      >
+        <Flex gap="4" align="center">
+          <CircleHelp className="flex-shrink-0" />
+          <Text>{t("app.confirmUnitSystem.description")}</Text>
+        </Flex>
+        <Flex gap="2" className="w-full md:w-auto flex-wrap sm:flex-nowrap">
+          <Button
+            size="sm"
+            variant="outline"
+            className="w-full sm:w-1/2"
+            onClick={() => setUnitSystem("metric")}
+          >
+            {t("app.confirmUnitSystem.useMetric")}
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            className="w-full sm:w-1/2"
+            onClick={() => setUnitSystem("imperial")}
+          >
+            {t("app.confirmUnitSystem.useImperial")}
+          </Button>
+        </Flex>
+      </Flex>
+    </BorderBox>
+  );
 };
 
 export { ConfirmUnitSystem };

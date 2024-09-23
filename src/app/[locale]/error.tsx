@@ -2,11 +2,11 @@
 
 import { PageLayout } from "@/components/pageLayout";
 import { useTranslations } from "next-intl";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 type Props = {
-    error: Error;
-    reset(): void;
+  error: Error;
+  reset(): void;
 };
 
 /**
@@ -14,34 +14,34 @@ type Props = {
  *
  * @param {Props} error - The error object to be displayed.
  * @param {Function} reset - The function to be called when the reset button is clicked.
- * @return {React.ReactNode} The JSX element representing the error page.
+ * @return {ReactNode} The JSX element representing the error page.
  */
-const Error = ({ error, reset }: Props): React.ReactNode => {
-    const t = useTranslations();
+const Error = ({ error, reset }: Props): ReactNode => {
+  const t = useTranslations();
 
-    useEffect(() => {
-        console.error(error);
-    }, [error]);
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
 
-    return (
-        <PageLayout title={t("error.title")}>
-            <div>
-                {/**  t("error.description") */}
-                {t.rich("error.description", {
-                    p: (chunks) => <p className="mt-4">{chunks}</p>,
-                    retry: (chunks) => (
-                        <button
-                            className="text-white underline underline-offset-2"
-                            onClick={reset}
-                            type="button"
-                        >
-                            {chunks}
-                        </button>
-                    ),
-                })}
-            </div>
-        </PageLayout>
-    );
+  return (
+    <PageLayout title={t("error.title")}>
+      <div>
+        {/**  t("error.description") */}
+        {t.rich("error.description", {
+          p: (chunks) => <p className="mt-4">{chunks}</p>,
+          retry: (chunks) => (
+            <button
+              className="text-white underline underline-offset-2"
+              onClick={reset}
+              type="button"
+            >
+              {chunks}
+            </button>
+          ),
+        })}
+      </div>
+    </PageLayout>
+  );
 };
 
 export default Error;

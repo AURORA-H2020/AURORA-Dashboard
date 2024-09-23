@@ -1,6 +1,7 @@
 import { useAuthContext } from "@/context/AuthContext";
 import { AuthForm } from "@/components/auth/authForm";
 import { LoadingSpinner } from "@/components/ui/loading";
+import { ReactNode } from "react";
 
 /**
  * Higher order component (HOC) that protects an account based route.
@@ -9,27 +10,27 @@ import { LoadingSpinner } from "@/components/ui/loading";
  * If the loading is in progress, a spinner will be rendered instead of the children.
  *
  * @param {Object} props - The component props.
- * @param {React.ReactNode} props.children - The child components to render.
- * @return {React.ReactNode} The rendered component.
+ * @param {ReactNode} props.children - The child components to render.
+ * @return {ReactNode} The rendered component.
  */
 export const ProtectAccount = ({
-    children,
+  children,
 }: {
-    children: React.ReactNode;
-}): React.ReactNode => {
-    const { user, loading } = useAuthContext();
+  children: ReactNode;
+}): ReactNode => {
+  const { user, loading } = useAuthContext();
 
-    // If the user is not authenticated and the loading is not in progress,
-    // render the auth form instead of the children.
-    if (!user && !loading) {
-        return <AuthForm />;
-    }
+  // If the user is not authenticated and the loading is not in progress,
+  // render the auth form instead of the children.
+  if (!user && !loading) {
+    return <AuthForm />;
+  }
 
-    // If the loading is in progress, render a spinner instead of the children.
-    if (loading) {
-        return <LoadingSpinner />;
-    }
+  // If the loading is in progress, render a spinner instead of the children.
+  if (loading) {
+    return <LoadingSpinner />;
+  }
 
-    // If the user is authenticated, render the children.
-    return children;
+  // If the user is authenticated, render the children.
+  return children;
 };

@@ -5,11 +5,11 @@ import { Consumption } from "@/models/firestore/consumption/consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { User } from "firebase/auth";
 import {
-    addDoc,
-    collection,
-    doc,
-    getFirestore,
-    setDoc,
+  addDoc,
+  collection,
+  doc,
+  getFirestore,
+  setDoc,
 } from "firebase/firestore";
 
 // Initialize Firestore
@@ -23,46 +23,46 @@ const firestore = getFirestore(firebaseApp);
  * @return {Consumption} The consumption object with invalid values removed.
  */
 function removeInvalidValues(
-    consumption: Consumption,
-    category: ConsumptionCategory,
+  consumption: Consumption,
+  category: ConsumptionCategory,
 ): Consumption {
-    const keysToCheck = [
-        "costs",
-        "districtHeatingSource",
-        "privateVehicleOccupancy",
-        "publicVehicleOccupancy",
-        "dateOfTravelEnd",
-        "fuelConsumption",
-        "electricityExported",
-    ];
-    keysToCheck.forEach((key) => {
-        if (
-            consumption.hasOwnProperty(category) &&
-            consumption[category]?.hasOwnProperty(key)
-        ) {
-            const value = consumption[category]![key];
-            if (
-                value === undefined ||
-                value === "" ||
-                value === null ||
-                Number.isNaN(value)
-            ) {
-                delete consumption[category]![key];
-            }
-        }
-    });
-
+  const keysToCheck = [
+    "costs",
+    "districtHeatingSource",
+    "privateVehicleOccupancy",
+    "publicVehicleOccupancy",
+    "dateOfTravelEnd",
+    "fuelConsumption",
+    "electricityExported",
+  ];
+  keysToCheck.forEach((key) => {
     if (
-        consumption.hasOwnProperty("description") &&
-        (consumption.description === undefined ||
-            consumption.description === "" ||
-            consumption.description === null ||
-            Number.isNaN(consumption.description))
+      Object.prototype.hasOwnProperty.call(consumption, category) &&
+      Object.prototype.hasOwnProperty.call(consumption[category], key)
     ) {
-        delete consumption.description;
+      const value = consumption[category]![key];
+      if (
+        value === undefined ||
+        value === "" ||
+        value === null ||
+        Number.isNaN(value)
+      ) {
+        delete consumption[category]![key];
+      }
     }
+  });
 
-    return consumption;
+  if (
+    Object.prototype.hasOwnProperty.call(consumption, "description") &&
+    (consumption.description === undefined ||
+      consumption.description === "" ||
+      consumption.description === null ||
+      Number.isNaN(consumption.description))
+  ) {
+    delete consumption.description;
+  }
+
+  return consumption;
 }
 
 /**
@@ -73,47 +73,43 @@ function removeInvalidValues(
  * @return {Consumption} The consumption data with units converted based on the user's unit system.
  */
 function convertUnits(
-    consumption: Consumption,
-    userUnitSystem: "metric" | "imperial",
+  consumption: Consumption,
+  userUnitSystem: "metric" | "imperial",
 ): Consumption {
-    const valueUserUnit = getConsumptionUnit(
-        consumption,
-        userUnitSystem,
-    ).userUnit;
-    consumption.value = convertUnit(
-        consumption.value,
-        valueUserUnit,
-        "metric",
-    ).quantity;
+  const valueUserUnit = getConsumptionUnit(
+    consumption,
+    userUnitSystem,
+  ).userUnit;
+  consumption.value = convertUnit(
+    consumption.value,
+    valueUserUnit,
+    "metric",
+  ).quantity;
 
-    /**
-     * Specific for transportation
-     */
+  /**
+   * Specific for transportation
+   */
+  if (
+    consumption.transportation &&
+    consumption.transportation.fuelConsumption
+  ) {
+    let fuelConsumptionUserUnit =
+      userUnitSystem === "metric" ? "L/100km" : "mpg";
     if (
-        consumption.transportation &&
-        consumption.transportation.fuelConsumption
+      ["electricCar", "electricBike"].includes(
+        consumption.transportation.transportationType,
+      )
     ) {
-        let fuelConsumptionUserUnit =
-            userUnitSystem === "metric" ? "L/100km" : "mpg";
-        if (
-            ["electricCar", "electricBike"].includes(
-                consumption.transportation.transportationType,
-            )
-        ) {
-            fuelConsumptionUserUnit =
-                userUnitSystem === "metric" ? "kWh/100km" : "mi/kWh";
-        }
-        consumption.transportation.fuelConsumption = convertUnit(
-            consumption.transportation.fuelConsumption,
-            fuelConsumptionUserUnit as
-                | "L/100km"
-                | "mpg"
-                | "kWh/100km"
-                | "mi/kWh",
-            "metric",
-        ).quantity;
+      fuelConsumptionUserUnit =
+        userUnitSystem === "metric" ? "kWh/100km" : "mi/kWh";
     }
-    return consumption;
+    consumption.transportation.fuelConsumption = convertUnit(
+      consumption.transportation.fuelConsumption,
+      fuelConsumptionUserUnit as "L/100km" | "mpg" | "kWh/100km" | "mi/kWh",
+      "metric",
+    ).quantity;
+  }
+  return consumption;
 }
 
 /**
@@ -127,37 +123,37 @@ function convertUnits(
  * @return {Promise<{ success: boolean }>} An object indicating the success of the operation.
  */
 export const addEditConsumption = async (
-    consumption: Consumption,
-    category: ConsumptionCategory,
-    user: User,
-    userUnitSystem: "metric" | "imperial",
-    consumptionId?: string,
+  consumption: Consumption,
+  category: ConsumptionCategory,
+  user: User,
+  userUnitSystem: "metric" | "imperial",
+  consumptionId?: string,
 ): Promise<{ success: boolean }> => {
-    let success = false;
-    consumption = removeInvalidValues(consumption, category);
-    consumption = convertUnits(consumption, userUnitSystem);
+  let success = false;
+  consumption = removeInvalidValues(consumption, category);
+  consumption = convertUnits(consumption, userUnitSystem);
 
-    if (user) {
-        const consumptionRef = collection(
-            firestore,
-            FirebaseConstants.collections.users.name,
-            user.uid,
-            FirebaseConstants.collections.users.consumptions.name,
-        );
-        try {
-            if (consumptionId) {
-                const docRef = doc(consumptionRef, consumptionId);
-                await setDoc(docRef, consumption);
-            } else {
-                await addDoc(consumptionRef, consumption);
-            }
-            success = true;
-        } catch (error) {
-            console.error("Error writing document: ", error);
-        }
-    } else {
-        throw new Error("User is not logged in.");
+  if (user) {
+    const consumptionRef = collection(
+      firestore,
+      FirebaseConstants.collections.users.name,
+      user.uid,
+      FirebaseConstants.collections.users.consumptions.name,
+    );
+    try {
+      if (consumptionId) {
+        const docRef = doc(consumptionRef, consumptionId);
+        await setDoc(docRef, consumption);
+      } else {
+        await addDoc(consumptionRef, consumption);
+      }
+      success = true;
+    } catch (error) {
+      console.error("Error writing document: ", error);
     }
+  } else {
+    throw new Error("User is not logged in.");
+  }
 
-    return { success };
+  return { success };
 };

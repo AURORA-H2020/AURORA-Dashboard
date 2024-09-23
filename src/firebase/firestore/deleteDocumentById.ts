@@ -15,29 +15,29 @@ const firestore = getFirestore(firebaseApp);
  * @throws {Error} - Throws an error if the user is not logged in.
  */
 export const deleteDocumentById = async (
-    user: User | null,
-    documentId: string,
-    collectionName: "consumptions" | "recurring-consumptions",
+  user: User | null,
+  documentId: string,
+  collectionName: "consumptions" | "recurring-consumptions",
 ): Promise<{ success: boolean }> => {
-    let success = false;
-    if (user) {
-        const consumptionRef = collection(
-            firestore,
-            FirebaseConstants.collections.users.name,
-            user.uid,
-            collectionName,
-        );
-        try {
-            const docRef = doc(consumptionRef, documentId);
-            await deleteDoc(docRef);
-            success = true;
-            console.log(`Document at ${collectionName}/${documentId} deleted`);
-        } catch (error) {
-            console.error("Error deleting document: ", error);
-        }
-    } else {
-        throw new Error("User is not logged in.");
+  let success = false;
+  if (user) {
+    const consumptionRef = collection(
+      firestore,
+      FirebaseConstants.collections.users.name,
+      user.uid,
+      collectionName,
+    );
+    try {
+      const docRef = doc(consumptionRef, documentId);
+      await deleteDoc(docRef);
+      success = true;
+      console.log(`Document at ${collectionName}/${documentId} deleted`);
+    } catch (error) {
+      console.error("Error deleting document: ", error);
     }
+  } else {
+    throw new Error("User is not logged in.");
+  }
 
-    return { success };
+  return { success };
 };
