@@ -58,6 +58,7 @@ const NavigationBar = (): ReactElement => {
     { title: t("navigation.menu.dashboard"), path: "/" },
     { title: t("navigation.menu.about"), path: "/about" },
     { title: t("navigation.menu.account"), path: "/account" },
+    { title: "Solar Power", path: "pv-data" },
   ];
 
   const loggedInMenus = [
