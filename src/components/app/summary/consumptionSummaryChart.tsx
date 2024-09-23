@@ -119,7 +119,6 @@ const ConsumptionSummaryChart = ({
             measure,
           ),
         };
-        console.log(acc);
         return acc;
       }, baseSummaryData);
 
