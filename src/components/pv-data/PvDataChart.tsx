@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/chart";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
 import { usePathname, useRouter } from "@/navigation";
+import { useFormatter } from "next-intl";
 import { useMemo } from "react";
 import {
   Bar,
@@ -25,16 +26,19 @@ const PvDataChart = ({
   chartConfig,
   xDataKey,
   unit,
+  decimals = 0,
 }: {
   chartData: any[];
   chartType: "bar" | "line";
   chartConfig: ChartConfig;
   xDataKey: string;
   unit?: string;
+  decimals?: number;
 }) => {
   const pathname = usePathname();
   const router = useRouter();
   const createQueryString = useCreateQueryString();
+  const format = useFormatter();
 
   const ChartComponent = useMemo(
     () => (chartType === "bar" ? BarChart : LineChart),
@@ -43,7 +47,7 @@ const PvDataChart = ({
 
   const tooltipFormatter = (value: any) => {
     if (typeof value !== "number") return value;
-    return `${Math.floor(value)}${unit ? ` ${unit}` : ""}`;
+    return `${format.number(value, { maximumFractionDigits: decimals })}${unit ? ` ${unit}` : ""}`;
   };
 
   return (
@@ -65,7 +69,7 @@ const PvDataChart = ({
               cursor={"pointer"}
               onClick={(data) =>
                 router.push(
-                  pathname + "?" + createQueryString("date", data[xDataKey]),
+                  pathname + "?" + createQueryString("date", data["date"]),
                 )
               }
             />
