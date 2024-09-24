@@ -59,11 +59,12 @@ const HomePage = async ({
   if (globalSummaryData && fileList) {
     return (
       <div>
-        <Heading as="h1">{t("dashboard.main.title")}</Heading>
+        <Heading as="h1" className="mb-8">
+          {t("dashboard.main.title")}
+        </Heading>
 
-        <div className="mt-8">
-          <Dashboard globalSummaryData={globalSummaryData} />
-        </div>
+        <Dashboard globalSummaryData={globalSummaryData} />
+
         <SelectDashboardSource
           files={fileList}
           currentFileDate={globalSummaryData?.date}
