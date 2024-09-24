@@ -1,6 +1,9 @@
 import { PvDataChart } from "@/components/pv-data/PvDataChart";
 import { ChartConfig } from "@/components/ui/chart";
 import { validSites } from "@/lib/constants/apiConstants";
+import { PvDataGrid } from "./PvDataGrid";
+import { ProductionSummary } from "./ProductionSummary";
+import { PvPanelDetails } from "./PvPanelDetails";
 
 interface QpvApiResponse {
   data: {
@@ -16,10 +19,6 @@ const CurrentDayPvData = async ({
   site: string | undefined;
   date: string | undefined;
 }) => {
-  /*   const currentDate = dateToKebabCase(
-    new Date(new Date().setDate(new Date().getDate() - 1)),
-  ); */
-
   if (!site || !date || (site && !validSites.map((e) => e.id).includes(site))) {
     return <>Invalid</>;
   }
@@ -45,8 +44,13 @@ const CurrentDayPvData = async ({
 
   const { data: rawData } = (await response.json()) as QpvApiResponse;
 
+  if (!rawData || rawData.length === 0) {
+    return <>No data available</>;
+  }
+
   const data = rawData.map((item) => ({
     ...item,
+    PAC: item.PAC / 4,
     time: new Date(item.date_time).toLocaleTimeString([], {
       hour: "2-digit",
       minute: "2-digit",
@@ -55,18 +59,38 @@ const CurrentDayPvData = async ({
 
   const chartConfig = {
     PAC: {
-      label: "PAC",
+      label: "Energy",
       color: "hsl(var(--chart-1))",
     },
   } satisfies ChartConfig;
 
   return (
-    <PvDataChart
-      chartType="line"
-      chartData={data}
-      chartConfig={chartConfig}
-      xDataKey="time"
-    />
+    <PvDataGrid
+      timeframe={date}
+      dataPanels={
+        <PvDataGrid.DataPanels>
+          <PvDataGrid.DataPanel>
+            <PvPanelDetails site={site} />
+          </PvDataGrid.DataPanel>
+          <PvDataGrid.DataPanel>
+            <ProductionSummary
+              site={site}
+              dimension="day"
+              production={data.reduce((n, { PAC }) => n + PAC, 0) / 4}
+            />
+          </PvDataGrid.DataPanel>
+        </PvDataGrid.DataPanels>
+      }
+    >
+      <PvDataChart
+        chartType="line"
+        chartData={data}
+        chartConfig={chartConfig}
+        xDataKey="time"
+        unit="kWh"
+        decimals={1}
+      />
+    </PvDataGrid>
   );
 };
 

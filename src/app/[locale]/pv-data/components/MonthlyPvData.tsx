@@ -1,6 +1,9 @@
 import { PvDataChart } from "@/components/pv-data/PvDataChart";
 import { ChartConfig } from "@/components/ui/chart";
 import { validSites } from "@/lib/constants/apiConstants";
+import { PvDataGrid } from "./PvDataGrid";
+import { PvPanelDetails } from "./PvPanelDetails";
+import { ProductionSummary } from "./ProductionSummary";
 
 interface QpvApiResponse {
   data: {
@@ -33,22 +36,53 @@ const MonthlyPvData = async ({ site }: { site: string | undefined }) => {
     },
   });
 
-  const { data } = (await response.json()) as QpvApiResponse;
+  const { data: rawData } = (await response.json()) as QpvApiResponse;
+
+  if (!rawData || rawData.length === 0) {
+    return <>No data available</>;
+  }
+
+  const data = rawData.map((item) => ({
+    ...item,
+    pretty_date: new Date(item.date).toLocaleDateString([], {
+      month: "short",
+      day: "numeric",
+    }),
+  }));
 
   const chartConfig = {
     Ep: {
-      label: "Ep",
+      label: "Energy",
       color: "hsl(var(--chart-1))",
     },
   } satisfies ChartConfig;
 
   return (
-    <PvDataChart
-      chartType="bar"
-      chartData={data}
-      chartConfig={chartConfig}
-      xDataKey="date"
-    />
+    <PvDataGrid
+      timeframe={"September 2024"}
+      dataPanels={
+        <PvDataGrid.DataPanels>
+          <PvDataGrid.DataPanel>
+            <PvPanelDetails site={site} />
+          </PvDataGrid.DataPanel>
+          <PvDataGrid.DataPanel>
+            <ProductionSummary
+              site={site}
+              dimension="month"
+              production={data.reduce((n, { Ep }) => n + Ep, 0)}
+            />
+          </PvDataGrid.DataPanel>
+        </PvDataGrid.DataPanels>
+      }
+    >
+      <PvDataChart
+        chartType="bar"
+        chartData={data}
+        chartConfig={chartConfig}
+        xDataKey="pretty_date"
+        unit="kWh"
+      />
+    </PvDataGrid>
   );
 };
 
