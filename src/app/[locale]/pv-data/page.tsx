@@ -1,33 +1,37 @@
 import { LoadingSpinner } from "@/components/ui/loading";
 import { Suspense } from "react";
-import MonthlyPvData from "./components/MonthlyPvData";
-import { SiteTabs } from "./components/SiteTabs";
 import CurrentDayPvData from "./components/CurrentDayPvData";
-import { Heading } from "@radix-ui/themes";
+import MonthlyPvData from "./components/MonthlyPvData";
+import { SiteOverview } from "./components/SiteOverview";
+import { SiteTabs } from "./components/SiteTabs";
 
-const pvDataPage = ({
+export default function PvDataPage({
   searchParams,
 }: {
   searchParams?: { site: string; date: string };
-}) => {
+}) {
   const { site, date } = searchParams || {};
 
   return (
-    <div className="flex flex-col gap-4">
-      <Heading>Solar Power Production</Heading>
-      <SiteTabs />
-      {!site && <p>Select a site</p>}
-      {site && (
-        <Suspense fallback={<LoadingSpinner />}>
-          {!date ? (
-            <MonthlyPvData site={site} />
-          ) : (
-            <CurrentDayPvData site={site} date={date} />
-          )}
-        </Suspense>
+    <div className="py-8">
+      <h1 className="mb-8 text-3xl font-bold text-primary">
+        Solar Power Production
+      </h1>
+      {!site ? (
+        <SiteOverview />
+      ) : (
+        <div className="space-y-8">
+          <SiteTabs />
+
+          <Suspense fallback={<LoadingSpinner className="h-64 w-full" />}>
+            {!date ? (
+              <MonthlyPvData site={site} />
+            ) : (
+              <CurrentDayPvData site={site} date={date} />
+            )}
+          </Suspense>
+        </div>
       )}
     </div>
   );
-};
-
-export default pvDataPage;
+}
