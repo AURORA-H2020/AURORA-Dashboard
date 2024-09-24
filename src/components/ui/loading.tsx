@@ -1,12 +1,19 @@
+import { cn } from "@/lib/utilities";
 import React from "react";
 
 interface LoadingButtonProps {
   children?: React.ReactNode;
+  className?: string;
 }
 
-const LoadingSpinner: React.FC<LoadingButtonProps> = ({ children }) => {
+const LoadingSpinner: React.FC<LoadingButtonProps> = ({
+  children,
+  className,
+}) => {
   return (
-    <div className="flex items-center justify-center h-[400px]">
+    <div
+      className={cn("flex items-center justify-center h-[400px]", className)}
+    >
       <svg
         aria-hidden="true"
         className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-white"
