@@ -2,7 +2,7 @@ import { PvDataChart } from "@/components/pv-data/PvDataChart";
 import { ChartConfig } from "@/components/ui/chart";
 import { validSites } from "@/lib/constants/apiConstants";
 import { PvDataGrid } from "./PvDataGrid";
-import { ProductionSummary } from "./ProductionSummary";
+import { ProductionSummary } from "./PvPanelProductionSummary";
 import { PvPanelDetails } from "./PvPanelDetails";
 
 interface QpvApiResponse {
