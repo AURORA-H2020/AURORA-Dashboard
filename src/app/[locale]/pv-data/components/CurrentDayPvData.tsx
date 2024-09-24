@@ -76,7 +76,7 @@ const CurrentDayPvData = async ({
             <ProductionSummary
               site={site}
               dimension="day"
-              production={data.reduce((n, { PAC }) => n + PAC, 0) / 4}
+              production={data.reduce((n, { PAC }) => n + PAC, 0)}
             />
           </PvDataGrid.DataPanel>
         </PvDataGrid.DataPanels>
