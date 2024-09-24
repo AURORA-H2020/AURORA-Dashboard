@@ -41,7 +41,8 @@ const SiteTabs = () => {
       {date && (
         <Button asChild variant="outline">
           <Link href={pathname + "?" + createQueryString("date", null)}>
-            <ArrowLeft /> Overview
+            <ArrowLeft className="mr-1" />
+            Overview
           </Link>
         </Button>
       )}
