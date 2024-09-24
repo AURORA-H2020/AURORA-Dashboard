@@ -4,6 +4,7 @@ import CurrentDayPvData from "./components/CurrentDayPvData";
 import MonthlyPvData from "./components/MonthlyPvData";
 import { SiteOverview } from "./components/SiteOverview";
 import { SiteTabs } from "./components/SiteTabs";
+import { Heading } from "@radix-ui/themes";
 
 export default function PvDataPage({
   searchParams,
@@ -13,10 +14,10 @@ export default function PvDataPage({
   const { site, date } = searchParams || {};
 
   return (
-    <div className="py-8">
-      <h1 className="mb-8 text-3xl font-bold text-primary">
+    <div>
+      <Heading as="h1" className="mb-8">
         Solar Power Production
-      </h1>
+      </Heading>
       {!site ? (
         <SiteOverview />
       ) : (
