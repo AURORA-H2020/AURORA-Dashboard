@@ -16,6 +16,7 @@ import {
   FactoryIcon,
   MapPinIcon,
   SunIcon,
+  Wallet,
 } from "lucide-react";
 
 const PvPanelDetails = ({ site }: { site: string }) => {
@@ -47,27 +48,29 @@ const PvPanelDetails = ({ site }: { site: string }) => {
   ];
 
   return (
-    <Card className="overflow-hidden transition-shadow hover:shadow-lg bg-primary/5">
+    <Card className="overflow-hidden bg-primary/5">
       <CardHeader>
         <CardTitle className="flex items-center text-xl font-semibold">
-          <SunIcon className="mr-2 h-5 w-5 text-yellow-500" />
+          <SunIcon className="mr-2 size-5 text-yellow-500" />
           Solar Panel Information
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-6">
+      <CardContent className="px-6">
         <div className="flex flex-col gap-4">
           {details.map(({ icon: Icon, label, value }) => (
             <div key={label} className="flex items-center gap-2">
-              <Icon className="h-5 w-5 text-primary" />
-              <span className="text-sm font-semibold">{label}:</span>
-              <span className="text-sm">{value}</span>
+              <Icon className="size-5 text-primary" />
+              <span className="font-semibold">{label}:</span>
+              <span className="">{value}</span>
             </div>
           ))}
         </div>
       </CardContent>
       <CardFooter className="p-4">
-        <Button className="w-full" variant="default">
-          <Link href={siteDetails.investLink}>How to invest?</Link>
+        <Button className="w-full flex" variant="default" asChild>
+          <Link href={siteDetails.investLink}>
+            <Wallet className="size-5 mr-2" /> How to invest?
+          </Link>
         </Button>
       </CardFooter>
     </Card>
