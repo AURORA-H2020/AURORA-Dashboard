@@ -1,7 +1,7 @@
 import { InitialRegistration } from "@/components/app/user/initialRegistration";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { useAuthContext } from "@/context/AuthContext";
-import { useFirebaseData } from "@/context/FirebaseContext";
+import { useAuthContext } from "@/providers/context/authContext";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { ReactNode } from "react";
 
 /**

@@ -1,8 +1,8 @@
-import { carbonUnit, countriesMapping } from "@/lib/constants/constants";
+import { carbonUnit, countriesMapping } from "@/lib/constants/common-constants";
 import {
   consumptionMapping,
   consumptionSources,
-} from "@/lib/constants/consumptions";
+} from "@/lib/constants/consumption-constants";
 import { ConsumptionAttributes } from "@/models/constants";
 import { Consumption } from "@/models/firestore/consumption/consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";

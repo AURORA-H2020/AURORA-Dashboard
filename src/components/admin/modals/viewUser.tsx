@@ -20,13 +20,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useAuthContext } from "@/context/AuthContext";
-import { unBlacklistUser } from "@/firebase/admin/handleBlacklist";
-import { blacklistedReasonsList } from "@/lib/constants/admin";
+import { unBlacklistUser } from "@/firebase/admin/handle-blacklist";
+import { blacklistedReasonsList } from "@/lib/constants/admin-constants";
 import { cn } from "@/lib/utilities";
 import { ExtendedUser } from "@/models/extensions";
 import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
+import { useAuthContext } from "@/providers/context/authContext";
 import { Flex, Grid } from "@radix-ui/themes";
 import { useFormatter } from "next-intl";
 import { forwardRef, ReactNode, useEffect, useMemo, useState } from "react";
@@ -93,7 +93,7 @@ const ViewUserModal = forwardRef(
                 <DialogTitle>User: {uid}</DialogTitle>
                 <Button
                   variant="outline"
-                  className="w-24 mr-8"
+                  className="mr-8 w-24"
                   onClick={() =>
                     navigator.clipboard
                       .writeText(`users/${uid}`)

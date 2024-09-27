@@ -1,25 +1,26 @@
 "use client";
 
 import { BorderBox } from "@/components/app/common/borderBox";
-import { FormInputField } from "@/components/formItems/formInputField";
-import { FormSelect } from "@/components/formItems/formSelect";
-import { FormSwitch } from "@/components/formItems/formSwitch";
+import { FormInputField } from "@/components/form-items/formInputField";
+import { FormSelect } from "@/components/form-items/formSelect";
+import { FormSwitch } from "@/components/form-items/formSwitch";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
-import { useAuthContext } from "@/context/AuthContext";
 import { firebaseApp } from "@/firebase/config";
-import { addEditUserData } from "@/firebase/user/addEditUserData";
+import { addEditUserData } from "@/firebase/user/add-edit-user-data";
 import {
   countriesMapping,
   genderMappings,
   householdProfiles,
   unitSystems,
-} from "@/lib/constants/constants";
-import { labelMappings } from "@/lib/constants/consumptions";
+} from "@/lib/constants/common-constants";
+import { labelMappings } from "@/lib/constants/consumption-constants";
 import { cn, isFieldRequired } from "@/lib/utilities";
 import { userDataFormSchema } from "@/lib/zod/userSchemas";
 import { CityMapping } from "@/models/constants";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
+import { useAuthContext } from "@/providers/context/authContext";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
 import {
@@ -37,19 +38,16 @@ import { z } from "zod";
  * Renders a form for user data submission.
  *
  * @param {Object} props - The component props.
- * @param {FirebaseUser | null} props.userData - The user data object.
  * @param {(success: boolean) => void} props.onFormSubmit - The callback function to handle form submission.
  * @param {boolean} props.isNewUser - Indicates if the user is new.
  * @param {string} props.className - The CSS class name for the form.
  * @return {ReactNode} The rendered form component.
  */
 const UserDataForm = ({
-  userData,
   onFormSubmit,
   isNewUser = false,
   className,
 }: {
-  userData?: FirebaseUser | null;
   onFormSubmit?: (_success: boolean) => void;
   isNewUser?: boolean;
   className?: string;
@@ -60,6 +58,8 @@ const UserDataForm = ({
   const { user } = useAuthContext() as {
     user: User;
   };
+
+  const { userData } = useFirebaseData();
 
   const initialFormData: DefaultValues<FirebaseUser> = {
     firstName: userData?.firstName || undefined,
@@ -141,7 +141,7 @@ const UserDataForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn(className, "flex flex-col gap-4 w-full")}
+        className={cn(className, "flex w-full flex-col gap-4")}
       >
         <BorderBox>
           <FormField

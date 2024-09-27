@@ -2,12 +2,13 @@ import {
   genderMappings,
   homeEnergyLabels,
   householdProfiles,
-} from "@/lib/constants/constants";
-import { passwordSchema } from "@/lib/zod/common";
+} from "@/lib/constants/common-constants";
+import { passwordSchema, TimestampSchema } from "@/lib/zod/common";
 import { User } from "@/models/firestore/user/user";
 import { UserGender } from "@/models/firestore/user/user-gender";
 import { UserHomeEnergyLabel } from "@/models/firestore/user/user-homeEnergyLabel";
 import { UserHouseholdProfile } from "@/models/firestore/user/user-householdProfile";
+import { UserPvInvestment } from "@/models/firestore/user/user-pv-investment/user-pv-investment";
 import { z } from "zod";
 
 const userGenders: UserGender[] = genderMappings.map((gender) => gender.key);
@@ -85,3 +86,26 @@ export const userChangePasswordSchema = (
         });
       }
     });
+
+export const userPvInvestmentSchema = (
+  t: (_arg: string, _val?: any) => string,
+): z.ZodType<UserPvInvestment> =>
+  z.object({
+    investment: z.coerce
+      .number()
+      .max(100000, {
+        message: t("app.validation.error.validValue"),
+      })
+      .min(1, { message: t("app.validation.error.validValue") }),
+    share: z.coerce
+      .number()
+      .max(1000, {
+        message: t("app.validation.error.validValue"),
+      })
+      .min(1, { message: t("app.validation.error.validValue") }),
+    investmentDate: TimestampSchema,
+    note: z.string().max(500).optional(),
+    city: z.string(),
+    createdAt: TimestampSchema,
+    updatedAt: TimestampSchema,
+  });

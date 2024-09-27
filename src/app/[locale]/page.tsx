@@ -1,11 +1,11 @@
-import { Dashboard } from "@/app/[locale]/dashboard";
+import { Dashboard } from "@/components/dashboard/dashboard";
 import { SelectDashboardSource } from "@/components/dashboard/selectDashboardSource";
 import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import {
   firebaseStorageDownloadFile,
   firebaseStorageListDashboardFiles,
-} from "@/lib/firebaseUtils";
+} from "@/firebase/firebase-utils";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Heading, Text } from "@radix-ui/themes";
 import { promises as fs } from "fs";
@@ -70,8 +70,8 @@ const HomePage = async ({
           currentFileDate={globalSummaryData?.date}
           globalSummaryData={globalSummaryData}
         />
-        <div className="text-center w-full">
-          <Text className="text-muted-foreground italic">
+        <div className="w-full text-center">
+          <Text className="italic text-muted-foreground">
             {t("dashboard.main.description")}
           </Text>
         </div>

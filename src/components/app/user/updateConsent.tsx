@@ -5,8 +5,8 @@ import {
   CardFooter,
   CardHeader,
 } from "@/components/ui/card";
-import { setAcceptedLegalDocumentVersion } from "@/firebase/user/setAcceptedLegalDocumentVersion";
-import { externalLinks } from "@/lib/constants/constants";
+import { setAcceptedLegalDocumentVersion } from "@/firebase/user/set-accepted-legal-document-version";
+import { externalLinks } from "@/lib/constants/common-constants";
 import { Link } from "@/navigation";
 import { Flex, Heading } from "@radix-ui/themes";
 import { User } from "firebase/auth";
@@ -51,12 +51,20 @@ const UpdateConsent = ({
               {t("app.legal.updatedLegalDocuments")}
             </div>
             <Button variant="outline" asChild>
-              <Link href={externalLinks.privacyPolicy}>
+              <Link
+                target="_blank"
+                rel="noopener"
+                href={externalLinks.privacyPolicy}
+              >
                 {t("app.legal.privacyPolicy")}
               </Link>
             </Button>
             <Button variant="outline">
-              <Link href={externalLinks.termsOfService}>
+              <Link
+                target="_blank"
+                rel="noopener"
+                href={externalLinks.termsOfService}
+              >
                 {t("app.legal.termsOfService")}
               </Link>
             </Button>

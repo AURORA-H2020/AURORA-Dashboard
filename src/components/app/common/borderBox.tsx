@@ -17,8 +17,8 @@ const BorderBox = ({
   className?: string;
 }): ReactNode => {
   return (
-    <div className={cn(className, "rounded-lg border p-4")}>
-      <div className="space-y-4">{children}</div>
+    <div className={cn(className, "space-y-4 rounded-lg border p-4")}>
+      {children}
     </div>
   );
 };

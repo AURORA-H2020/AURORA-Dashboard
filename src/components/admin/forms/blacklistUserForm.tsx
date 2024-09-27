@@ -1,13 +1,13 @@
-import { FormSelect } from "@/components/formItems/formSelect";
+import { FormSelect } from "@/components/form-items/formSelect";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
-import { useAuthContext } from "@/context/AuthContext";
-import { blacklistUser } from "@/firebase/admin/handleBlacklist";
-import { blacklistedReasonsList } from "@/lib/constants/admin";
+import { blacklistUser } from "@/firebase/admin/handle-blacklist";
+import { blacklistedReasonsList } from "@/lib/constants/admin-constants";
 import { cn } from "@/lib/utilities";
 import { blacklistUserFormSchema } from "@/lib/zod/admin/blacklistUserSchema";
 import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
+import { useAuthContext } from "@/providers/context/authContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
 import { Timestamp } from "firebase/firestore";
@@ -67,7 +67,7 @@ const BlacklistUserForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn(className, "flex flex-col gap-4 w-full")}
+        className={cn(className, "flex w-full flex-col gap-4")}
       >
         <FormField
           control={form.control}

@@ -6,7 +6,7 @@ import { TransportationForm } from "@/components/app/consumptions/forms/transpor
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { consumptionMapping } from "@/lib/constants/consumptions";
+import { consumptionMapping } from "@/lib/constants/consumption-constants";
 import { cn } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
@@ -55,7 +55,7 @@ const AddEditConsumptionModal = forwardRef(
               >
                 {!consumption && (
                   <div className="overflow-x-auto">
-                    <TabsList className="w-full my-6">
+                    <TabsList className="my-6 w-full">
                       {consumptionMapping.map((consumption) => (
                         <TabsTrigger
                           key={consumption.category}

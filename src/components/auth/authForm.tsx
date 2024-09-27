@@ -2,10 +2,10 @@
 
 import { BorderBox } from "@/components/app/common/borderBox";
 import { ResetPasswordModal } from "@/components/app/user/modals/resetPasswordModal";
-import { AuthenticateWithApple } from "@/components/auth/authOptions/authenticateWithApple";
-import { AuthenticateWithGoogle } from "@/components/auth/authOptions/authenticateWithGoogle";
-import { SignInWithEmail } from "@/components/auth/authOptions/signInWithEmail";
-import { SignUpWithEmail } from "@/components/auth/authOptions/signUpWithEmail";
+import { AuthenticateWithApple } from "@/components/auth/auth-options/authenticateWithApple";
+import { AuthenticateWithGoogle } from "@/components/auth/auth-options/authenticateWithGoogle";
+import { SignInWithEmail } from "@/components/auth/auth-options/signInWithEmail";
+import { SignUpWithEmail } from "@/components/auth/auth-options/signUpWithEmail";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,7 +15,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { externalLinks } from "@/lib/constants/constants";
+import { externalLinks } from "@/lib/constants/common-constants";
 import { Flex, Grid, Link } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
@@ -67,7 +67,7 @@ export const AuthForm = () => {
     <Flex justify="center">
       <Tabs
         defaultValue="email-signin"
-        className="w-[400px] flex gap-4 flex-col"
+        className="flex w-[400px] flex-col gap-4"
       >
         <TabsList className="w-full">
           <TabsTrigger value="email-signin" className="w-1/2">
@@ -109,16 +109,40 @@ export const AuthForm = () => {
         <BorderBox className="text-sm text-muted-foreground">
           {t.rich("ui.auth.legal", {
             projectNumber: (chunks) => (
-              <Link href={externalLinks.cordisPage}>{chunks}</Link>
+              <Link
+                target="_blank"
+                rel="noopener"
+                href={externalLinks.cordisPage}
+              >
+                {chunks}
+              </Link>
             ),
             supportEmail: (chunks) => (
-              <Link href={externalLinks.supportEmail}>{chunks}</Link>
+              <Link
+                target="_blank"
+                rel="noopener"
+                href={externalLinks.supportEmail}
+              >
+                {chunks}
+              </Link>
             ),
             termsOfService: (chunks) => (
-              <Link href={externalLinks.termsOfService}>{chunks}</Link>
+              <Link
+                target="_blank"
+                rel="noopener"
+                href={externalLinks.termsOfService}
+              >
+                {chunks}
+              </Link>
             ),
             privacyPolicy: (chunks) => (
-              <Link href={externalLinks.privacyPolicy}>{chunks}</Link>
+              <Link
+                target="_blank"
+                rel="noopener"
+                href={externalLinks.privacyPolicy}
+              >
+                {chunks}
+              </Link>
             ),
           })}
         </BorderBox>

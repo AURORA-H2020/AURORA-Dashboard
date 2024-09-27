@@ -19,7 +19,7 @@ const Logo = (): ReactElement => {
   }, []);
 
   if (!mounted) {
-    return <Skeleton className="h-10 w-32 mr-3" />;
+    return <Skeleton className="mr-3 h-10 w-32" />;
   }
 
   return (
@@ -32,7 +32,7 @@ const Logo = (): ReactElement => {
       alt="AURORA Logo"
       height={100}
       width={100}
-      className="object-scale-down h-10 w-32 mr-3"
+      className="mr-3 h-10 w-32 object-scale-down"
     />
   );
 };

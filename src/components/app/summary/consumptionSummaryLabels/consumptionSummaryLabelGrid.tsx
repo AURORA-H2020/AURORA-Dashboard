@@ -1,7 +1,7 @@
 "use client";
 
 import { ConsumptionSummaryLabel } from "@/components/app/summary/consumptionSummaryLabels/consumptionSummaryLabel";
-import { consumptionMapping } from "@/lib/constants/consumptions";
+import { consumptionMapping } from "@/lib/constants/consumption-constants";
 import { cn } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { Grid } from "@radix-ui/themes";
@@ -50,7 +50,7 @@ const ConsumptionSummaryLabelGrid = ({
             value={category[measure].total}
             measure={measure}
             year={consumptionSummary.year}
-            icon={consumptionAttributes?.icon}
+            Icon={consumptionAttributes?.icon}
           />
         );
       })}

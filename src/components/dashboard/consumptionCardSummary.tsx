@@ -1,10 +1,10 @@
 import { Alert, AlertTitle } from "@/components/ui/alert";
-import { categories } from "@/lib/constants/consumptions";
+import { categories } from "@/lib/constants/consumption-constants";
 import { getConsumptionAttributes } from "@/lib/utilities";
 import { MetaData } from "@/models/dashboard-data";
 import { Strong } from "@radix-ui/themes";
 import { useFormatter, useTranslations } from "next-intl";
-import { cloneElement, ReactNode } from "react";
+import { ReactNode } from "react";
 
 /**
  * Renders a summary of consumption card data based on the provided metaData.
@@ -38,11 +38,11 @@ const ConsumptionCardSummary = ({
             key={data.category}
             className={`my-2 bg-opacity-20 bg-[${consumptionAttributes?.colorPrimary}] border-[${consumptionAttributes?.colorPrimary}] text-[${consumptionAttributes?.colorPrimary}]`}
           >
-            {cloneElement(consumptionAttributes?.icon ?? <></>, {
-              style: {
-                color: consumptionAttributes?.colorPrimary,
-              },
-            })}
+            {consumptionAttributes?.icon ? (
+              <consumptionAttributes.icon
+                color={consumptionAttributes?.colorPrimary}
+              />
+            ) : null}
             <AlertTitle>
               {t(consumptionAttributes?.label)}:{" "}
               <Strong>{format.number(data.count ?? 0)}</Strong>

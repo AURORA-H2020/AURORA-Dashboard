@@ -78,6 +78,14 @@
     "updateProfile": {
       "success": "Your profile was updated successfully",
       "error": "There was an error updating your profile"
+    },
+    "pvInvestment": {
+      "success": "Your investment data was updated successfully",
+      "error": "There was an error updating your investment data"
+    },
+    "deletePvInvestment": {
+      "success": "The investment entry has been deleted",
+      "error": "An error occurred deleting this investment entry"
     }
   },
   "button": {
@@ -295,7 +303,16 @@
       },
       "deleteConsumptionDialogTitle": "Are you sure you want to delete this entry?",
       "powerConsumption": "Power consumption",
-      "setCustomPowerConsumption": "Set custom power consumption"
+      "setCustomPowerConsumption": "Set custom power consumption",
+      "pvInvestment": {
+        "edit": "Edit Investment",
+        "save": "Save Investment",
+        "add": "Add Investment",
+        "share": "Share",
+        "investmentDate": "Investment Date",
+        "investment": "Investment",
+        "note": "Note"
+      }
     },
     "filter": {
       "orderBy": "Order by",
@@ -424,11 +441,14 @@
       "about": "About",
       "account": "Account",
       "logout": "Logout",
-      "admin": "Admin"
+      "admin": "Admin",
+      "solarPower": "Solar Power",
+      "pvInvestment": "Investment"
     },
     "account": {
       "home": "Home",
-      "settings": "Settings"
+      "settings": "Settings",
+      "pvPage": "Solar Power"
     }
   },
   "language": {

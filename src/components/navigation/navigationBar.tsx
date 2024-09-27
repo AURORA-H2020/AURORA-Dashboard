@@ -17,10 +17,10 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useAuthContext } from "@/context/AuthContext";
 import { logout } from "@/firebase/auth/logout";
-import { useUserRoles } from "@/firebase/firebaseHooks";
+import { useUserRoles } from "@/firebase/hooks/user-hooks";
 import { Link, usePathname } from "@/navigation";
+import { useAuthContext } from "@/providers/context/authContext";
 import { CircleUser, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
@@ -58,11 +58,12 @@ const NavigationBar = (): ReactElement => {
     { title: t("navigation.menu.dashboard"), path: "/" },
     { title: t("navigation.menu.about"), path: "/about" },
     { title: t("navigation.menu.account"), path: "/account" },
-    { title: "Solar Power", path: "pv-data" },
+    { title: t("navigation.menu.solarPower"), path: "/pv-data" },
   ];
 
   const loggedInMenus = [
     { title: t("navigation.menu.account"), path: "/account" },
+    { title: t("navigation.menu.pvInvestment"), path: "/account/pv" },
     { title: t("navigation.account.settings"), path: "/account/settings" },
   ];
 
@@ -70,7 +71,7 @@ const NavigationBar = (): ReactElement => {
 
   return (
     <Card className="flex items-center gap-4 p-4 md:px-8">
-      <nav className="hidden w-full flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-md lg:gap-6">
+      <nav className="md:text-md hidden w-full flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 lg:gap-6">
         <Link href="/" className="w-max">
           <Logo />
         </Link>
@@ -123,7 +124,7 @@ const NavigationBar = (): ReactElement => {
           </nav>
         </SheetContent>
       </Sheet>
-      <div className="flex w-full justify-end items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
+      <div className="flex items-center justify-end gap-4 md:ml-auto md:gap-2 lg:gap-4">
         <ThemeToggle />
         {user && (
           <DropdownMenu>

@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore";
 import { z } from "zod";
 
 const passwordSchema = (t: (_arg: string) => string) =>
@@ -23,4 +24,6 @@ const passwordSchema = (t: (_arg: string) => string) =>
       },
     );
 
-export { passwordSchema };
+const TimestampSchema = z.instanceof(Timestamp);
+
+export { passwordSchema, TimestampSchema };

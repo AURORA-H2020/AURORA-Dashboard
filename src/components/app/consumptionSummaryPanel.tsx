@@ -12,9 +12,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useFirebaseData } from "@/context/FirebaseContext";
 import { cn } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { Box, Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import { BarChart4, Info } from "lucide-react";
 import { useTranslations } from "next-intl";

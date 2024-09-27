@@ -12,11 +12,11 @@ const LoadingSpinner: React.FC<LoadingButtonProps> = ({
 }) => {
   return (
     <div
-      className={cn("flex items-center justify-center h-[400px]", className)}
+      className={cn("flex h-[400px] items-center justify-center", className)}
     >
       <svg
         aria-hidden="true"
-        className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-gray-600 dark:fill-white"
+        className="h-8 w-8 animate-spin fill-gray-600 text-gray-200 dark:fill-white dark:text-gray-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"

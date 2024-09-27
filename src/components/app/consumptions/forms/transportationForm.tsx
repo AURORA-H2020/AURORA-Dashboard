@@ -1,21 +1,19 @@
 import { BorderBox } from "@/components/app/common/borderBox";
-import { FormDatePicker } from "@/components/formItems/formDatePicker";
-import { FormInputField } from "@/components/formItems/formInputField";
-import { FormSelect } from "@/components/formItems/formSelect";
-import { FormTextField } from "@/components/formItems/formTextField";
+import { FormDatePicker } from "@/components/form-items/formDatePicker";
+import { FormInputField } from "@/components/form-items/formInputField";
+import { FormSelect } from "@/components/form-items/formSelect";
+import { FormTextField } from "@/components/form-items/formTextField";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
-import { useAuthContext } from "@/context/AuthContext";
-import { useFirebaseData } from "@/context/FirebaseContext";
-import { addEditConsumption } from "@/firebase/consumption/addEditConsumption";
+import { addEditConsumption } from "@/firebase/consumption/add-edit-consumption";
 import {
   consumptionSources,
   fuelConsumptionEnabledTransportationTypes,
   privateVehicleTypes,
   publicVehicleOccupancies,
   publicVerhicleTypes,
-} from "@/lib/constants/consumptions";
+} from "@/lib/constants/consumption-constants";
 import {
   cn,
   convertUnit,
@@ -25,6 +23,8 @@ import {
 import { transportationFormSchema } from "@/lib/zod/consumptionSchemas";
 import { ConsumptionWithID } from "@/models/extensions";
 import { Consumption } from "@/models/firestore/consumption/consumption";
+import { useAuthContext } from "@/providers/context/authContext";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Timestamp } from "firebase/firestore";
 import { useTranslations } from "next-intl";
@@ -165,7 +165,7 @@ const TransportationForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn(className, "flex flex-col gap-4 w-full")}
+        className={cn(className, "flex w-full flex-col gap-4")}
       >
         <BorderBox className="text-sm text-muted-foreground">
           {t("app.form.transportDisclaimer")}

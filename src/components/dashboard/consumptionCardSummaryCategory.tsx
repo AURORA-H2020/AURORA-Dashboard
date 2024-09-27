@@ -1,4 +1,4 @@
-import { allTremorColours } from "@/lib/constants/constants";
+import { allTremorColours } from "@/lib/constants/common-constants";
 import { MetaData } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { DonutChart, Legend } from "@tremor/react";

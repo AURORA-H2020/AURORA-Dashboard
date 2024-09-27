@@ -3,7 +3,8 @@ import {
   privateVehicleTypes,
   publicVehicleOccupancies,
   publicVerhicleTypes,
-} from "@/lib/constants/consumptions";
+} from "@/lib/constants/consumption-constants";
+import { TimestampSchema } from "@/lib/zod/common";
 import { Consumption } from "@/models/firestore/consumption/consumption";
 import { ConsumptionElectricitySource } from "@/models/firestore/consumption/electricity/consumption-electricity-source";
 import { ConsumptionDistrictHeatingSource } from "@/models/firestore/consumption/heating/consumption-district-heating-source";
@@ -12,8 +13,6 @@ import { ConsumptionTransportationPublicVehicleOccupancy } from "@/models/firest
 import { ConsumptionTransportationType } from "@/models/firestore/consumption/transportation/consumption-transportation-type";
 import { Timestamp } from "firebase/firestore";
 import { z } from "zod";
-
-const TimestampSchema = z.instanceof(Timestamp);
 
 const electricitySources: ConsumptionElectricitySource[] =
   consumptionSources.electricity.map((source) => source.source);

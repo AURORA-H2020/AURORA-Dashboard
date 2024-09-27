@@ -1,5 +1,5 @@
-import { genderMappings } from "@/lib/constants/constants";
-import { labelMappings } from "@/lib/constants/consumptions";
+import { genderMappings } from "@/lib/constants/common-constants";
+import { labelMappings } from "@/lib/constants/consumption-constants";
 import { getMonthShortName } from "@/lib/utilities";
 import {
   CalculationMode,

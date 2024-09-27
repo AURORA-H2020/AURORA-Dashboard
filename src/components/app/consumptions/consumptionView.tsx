@@ -1,10 +1,10 @@
 import { ConsumptionTableRow } from "@/components/app/common/consumptionTableRow";
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
-import { useFirebaseData } from "@/context/FirebaseContext";
-import { carbonUnit } from "@/lib/constants/constants";
-import { consumptionMapping } from "@/lib/constants/consumptions";
+import { carbonUnit } from "@/lib/constants/common-constants";
+import { consumptionMapping } from "@/lib/constants/consumption-constants";
 import { getConsumptionUnit, useConvertUnit } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { useFormatter, useTranslations } from "next-intl";
 import { ReactNode } from "react";
 
@@ -244,7 +244,7 @@ const ConsumptionView = ({
         </Table>
       )}
 
-      <Table className="mt-4 mb-4 table-fixed">
+      <Table className="mb-4 mt-4 table-fixed">
         <TableBody>
           <ConsumptionTableRow label={t("app.form.createdAt")}>
             {format.dateTime(consumption.createdAt.toDate(), {

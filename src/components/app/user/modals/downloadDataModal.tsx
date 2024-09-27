@@ -9,12 +9,12 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { useAuthContext } from "@/context/AuthContext";
-import { downloadUserData } from "@/firebase/firestore/downloadUserData";
+import { downloadUserData } from "@/firebase/firestore/download-user-data";
 import {
   downloadCsv,
   getUserConsumptionsAsCsv,
 } from "@/lib/downloadFiles/downloadConsumptionCsv";
+import { useAuthContext } from "@/providers/context/authContext";
 import { Flex, Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { ReactNode, useState } from "react";

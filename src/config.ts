@@ -1,4 +1,4 @@
-import { supportedLocales } from "@/lib/constants/constants";
+import { supportedLocales } from "@/lib/constants/common-constants";
 
 export const locales = supportedLocales.map((locale) => locale.code);
 

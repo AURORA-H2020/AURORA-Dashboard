@@ -1,10 +1,10 @@
+import CurrentDayPvData from "@/components/pv-data/charts/currentDayPvData";
+import MonthlyPvData from "@/components/pv-data/charts/monthlyPvData";
+import { SiteOverview } from "@/components/pv-data/sites/siteOverview";
+import { SiteTabs } from "@/components/pv-data/sites/siteTabs";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { Suspense } from "react";
-import CurrentDayPvData from "./components/CurrentDayPvData";
-import MonthlyPvData from "./components/MonthlyPvData";
-import { SiteOverview } from "./components/SiteOverview";
-import { SiteTabs } from "./components/SiteTabs";
 import { Heading } from "@radix-ui/themes";
+import { Suspense } from "react";
 
 export default function PvDataPage({
   searchParams,

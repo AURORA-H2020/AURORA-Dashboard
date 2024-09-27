@@ -2,9 +2,9 @@
 
 import { UpdateConsent } from "@/components/app/user/updateConsent";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { useAuthContext } from "@/context/AuthContext";
-import { useFirebaseData } from "@/context/FirebaseContext";
 import { firebaseApp } from "@/firebase/config";
+import { useAuthContext } from "@/providers/context/authContext";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 import {
   fetchAndActivate,
   getRemoteConfig,

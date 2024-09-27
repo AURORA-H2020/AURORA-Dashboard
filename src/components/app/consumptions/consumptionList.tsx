@@ -15,9 +15,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { useAuthContext } from "@/context/AuthContext";
-import { usePaginatedConsumptions } from "@/firebase/firebaseHooks";
+import { usePaginatedConsumptions } from "@/firebase/hooks/consumption-hooks";
 import { cn } from "@/lib/utilities";
+import { useAuthContext } from "@/providers/context/authContext";
 import { Flex, Grid, Strong } from "@radix-ui/themes";
 import { ArrowUpDown } from "lucide-react";
 import { useTranslations } from "next-intl";

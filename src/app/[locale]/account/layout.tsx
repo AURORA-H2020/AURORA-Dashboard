@@ -28,12 +28,18 @@ const AccountSettingsLayout = ({
     <ProtectAccount>
       <EnsureInitialRegistration>
         <EnsureLatestConsent>
-          <Flex className="gap-2 justify-center">
+          <Flex className="mb-8 justify-center gap-2">
             <Button
               variant={pathname === "/account" ? "default" : "outline"}
               asChild
             >
               <Link href={"/account"}>{t("navigation.account.home")}</Link>
+            </Button>
+            <Button
+              variant={pathname === "/account/pv" ? "default" : "outline"}
+              asChild
+            >
+              <Link href={"/account/pv"}>{t("navigation.account.pvPage")}</Link>
             </Button>
             <Button
               variant={pathname === "/account/settings" ? "default" : "outline"}

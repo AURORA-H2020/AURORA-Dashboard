@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { supportedLocales } from "@/lib/constants/constants";
+import { supportedLocales } from "@/lib/constants/common-constants";
 import { usePathname, useRouter } from "@/navigation";
 import { useLocale, useTranslations } from "next-intl";
 import { ReactElement, useTransition } from "react";

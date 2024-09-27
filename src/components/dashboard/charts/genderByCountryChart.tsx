@@ -5,7 +5,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { countriesMapping, genderMappings } from "@/lib/constants/constants";
+import {
+  countriesMapping,
+  genderMappings,
+} from "@/lib/constants/common-constants";
 import {
   valueFormatterAbsolute,
   valueFormatterPercentage,
@@ -96,7 +99,7 @@ const GenderByCountryChart = ({
 
       <Flex
         direction={{ initial: "column", xs: "row" }}
-        className="gap-6 mt-6 mb-6"
+        className="mb-6 mt-6 gap-6"
       >
         <Select
           value={calculationMode}

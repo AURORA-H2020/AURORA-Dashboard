@@ -1,4 +1,4 @@
-import { countriesMapping } from "@/lib/constants/constants";
+import { countriesMapping } from "@/lib/constants/common-constants";
 import { MetaData } from "@/models/dashboard-data";
 import { DonutChart, Legend } from "@tremor/react";
 import { useTranslations } from "next-intl";

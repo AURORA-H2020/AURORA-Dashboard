@@ -1,7 +1,7 @@
 import { LoadingSpinner } from "@/components/ui/loading";
-import { useAuthContext } from "@/context/AuthContext";
-import { useUserRoles } from "@/firebase/firebaseHooks";
+import { useUserRoles } from "@/firebase/hooks/user-hooks";
 import { useRouter } from "@/navigation";
+import { useAuthContext } from "@/providers/context/authContext";
 import { ReactNode, useEffect } from "react";
 
 /**

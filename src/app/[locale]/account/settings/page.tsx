@@ -16,15 +16,15 @@ import {
 } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading";
 import { Table, TableBody } from "@/components/ui/table";
-import { useAuthContext } from "@/context/AuthContext";
-import { useFirebaseData } from "@/context/FirebaseContext";
 import {
   citiesMappings,
   countriesMapping,
   externalLinks,
   unitSystems,
-} from "@/lib/constants/constants";
+} from "@/lib/constants/common-constants";
 import { Link } from "@/navigation";
+import { useAuthContext } from "@/providers/context/authContext";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { Flex, Grid } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { ReactNode, useEffect, useState } from "react";
@@ -61,7 +61,7 @@ const UserSettingsPage = (): ReactNode => {
         initial: "1",
         sm: "2",
       }}
-      className="gap-6 mt-6 mb-6"
+      className="mb-6 gap-6"
     >
       <Flex direction={"column"} className="gap-6">
         <Card>
@@ -170,13 +170,17 @@ const UserSettingsPage = (): ReactNode => {
           <CardContent>
             <Flex direction={"column"} className="gap-2">
               <Button variant={"outline"} asChild>
-                <Link href={externalLinks.appDownload}>
+                <Link
+                  target="_blank"
+                  rel="noopener"
+                  href={externalLinks.appDownload}
+                >
                   {t("app.support.getTheApp")}
                 </Link>
               </Button>
 
               <Button variant={"outline"} asChild>
-                <Link href={supportLink.href}>
+                <Link target="_blank" rel="noopener" href={supportLink.href}>
                   {t("app.support.contactSupport")}
                 </Link>
               </Button>
@@ -190,19 +194,31 @@ const UserSettingsPage = (): ReactNode => {
           <CardContent>
             <Flex direction={"column"} className="gap-2">
               <Button variant={"outline"} asChild>
-                <Link href={externalLinks.imprint}>
+                <Link
+                  target="_blank"
+                  rel="noopener"
+                  href={externalLinks.imprint}
+                >
                   {t("app.legal.imprint")}
                 </Link>
               </Button>
 
               <Button variant={"outline"} asChild>
-                <Link href={externalLinks.privacyPolicy}>
+                <Link
+                  target="_blank"
+                  rel="noopener"
+                  href={externalLinks.privacyPolicy}
+                >
                   {t("app.legal.privacyPolicy")}
                 </Link>
               </Button>
 
               <Button variant={"outline"} asChild>
-                <Link href={externalLinks.termsOfService}>
+                <Link
+                  target="_blank"
+                  rel="noopener"
+                  href={externalLinks.termsOfService}
+                >
                   {t("app.legal.termsOfService")}
                 </Link>
               </Button>

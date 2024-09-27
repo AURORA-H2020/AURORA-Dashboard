@@ -3,14 +3,12 @@ import {
   privateVehicleTypes,
   publicVehicleOccupancies,
   publicVerhicleTypes,
-} from "@/lib/constants/consumptions";
+} from "@/lib/constants/consumption-constants";
+import { TimestampSchema } from "@/lib/zod/common";
 import { ConsumptionTransportationPublicVehicleOccupancy } from "@/models/firestore/consumption/transportation/consumption-transportation-public-vehicle-occupancy";
 import { ConsumptionTransportationType } from "@/models/firestore/consumption/transportation/consumption-transportation-type";
 import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
-import { Timestamp } from "firebase/firestore";
 import { z } from "zod";
-
-const TimestampSchema = z.instanceof(Timestamp);
 
 const transportationTypes: ConsumptionTransportationType[] =
   consumptionSources.transportation.map((source) => source.source);

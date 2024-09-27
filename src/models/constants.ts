@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { LucideIcon } from "lucide-react";
 import { ConsumptionCategory } from "./firestore/consumption/consumption-category";
 import { ConsumptionElectricitySource } from "./firestore/consumption/electricity/consumption-electricity-source";
 import { ConsumptionDistrictHeatingSource } from "./firestore/consumption/heating/consumption-district-heating-source";
@@ -31,7 +31,7 @@ export interface ConsumptionSources {
 }
 
 export interface ConsumptionAttributes {
-  icon: ReactElement;
+  icon: LucideIcon;
   category: ConsumptionCategory;
   label: string;
   colorPrimary: string;

@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { useAuthContext } from "@/context/AuthContext";
-import { deleteAccount } from "@/firebase/firestore/deleteAccount";
+import { deleteAccount } from "@/firebase/firestore/delete-account";
+import { useAuthContext } from "@/providers/context/authContext";
 import { Flex } from "@radix-ui/themes";
 import { User } from "firebase/auth";
 import { useTranslations } from "next-intl";

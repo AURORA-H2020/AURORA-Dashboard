@@ -10,8 +10,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { countriesMapping } from "@/lib/constants/constants";
-import { labelMappings } from "@/lib/constants/consumptions";
+import { countriesMapping } from "@/lib/constants/common-constants";
+import { labelMappings } from "@/lib/constants/consumption-constants";
 import { annualLabelData } from "@/lib/transformData";
 import {
   getYearsInSummary,
@@ -149,7 +149,7 @@ const LabelSummary = ({
 
       <Flex
         direction={{ initial: "column", sm: "row" }}
-        className="gap-2 gap-x-4 mt-6"
+        className="mt-6 gap-2 gap-x-4"
       >
         <Tabs value={selectedEnergyMode} onValueChange={handleEnergyModeChange}>
           <div className="overflow-x-auto">

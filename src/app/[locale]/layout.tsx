@@ -1,8 +1,8 @@
-import { Providers } from "@/app/[locale]/providers";
 import { Footer } from "@/components/footer";
 import { NavigationBar } from "@/components/navigation/navigationBar";
 import { locales } from "@/config";
 import { cn } from "@/lib/utilities";
+import { Providers } from "@/providers/providers";
 import "@radix-ui/themes/styles.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -100,13 +100,13 @@ const RootLayout = async ({
           enableSystem
           disableTransitionOnChange
         >
-          <header className="max-w-screen-xl items-center justify-between mx-auto p-4">
+          <header className="mx-auto max-w-screen-xl items-center justify-between p-4">
             <NavigationBar />
           </header>
-          <main className="max-w-screen-xl items-center justify-between mx-auto p-4">
+          <main className="mx-auto max-w-screen-xl items-center justify-between p-4">
             {children}
           </main>
-          <footer className="max-w-screen-xl items-center justify-between mx-auto p-4 self-end">
+          <footer className="mx-auto max-w-screen-xl items-center justify-between self-end p-4">
             <Footer />
           </footer>
         </Providers>

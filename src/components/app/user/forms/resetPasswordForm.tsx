@@ -1,8 +1,8 @@
-import { FormInputField } from "@/components/formItems/formInputField";
+import { FormInputField } from "@/components/form-items/formInputField";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
-import { resetPassword } from "@/firebase/auth/resetPassword";
+import { resetPassword } from "@/firebase/auth/reset-password";
 import { cn } from "@/lib/utilities";
 import { passwordResetSchema } from "@/lib/zod/authSchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -55,7 +55,7 @@ const ResetPasswordForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn(className, "flex flex-col gap-4 w-full mt-4")}
+        className={cn(className, "mt-4 flex w-full flex-col gap-4")}
       >
         <FormField
           control={form.control}

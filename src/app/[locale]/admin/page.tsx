@@ -2,11 +2,11 @@
 
 import { UsersTable } from "@/components/admin/usersTable";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { useAuthContext } from "@/context/AuthContext";
-import { useFetchBlacklistedUsers } from "@/firebase/firebaseHooks";
-import { getLatestUserData } from "@/lib/firebaseUtils";
+import { getLatestUserData } from "@/firebase/firebase-utils";
+import { useFetchBlacklistedUsers } from "@/firebase/hooks/user-hooks";
 import { BackupUserData } from "@/models/extensions";
 import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
+import { useAuthContext } from "@/providers/context/authContext";
 import { ReactNode, useEffect, useState } from "react";
 
 /**

@@ -3,7 +3,7 @@
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { MonthPicker } from "@/components/ui/month-picker";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { countriesMapping } from "@/lib/constants/constants";
+import { countriesMapping } from "@/lib/constants/common-constants";
 import { temporalData } from "@/lib/transformData";
 import {
   getSortedCountryLabels,
@@ -90,7 +90,7 @@ const ConsumptionTimelineChart = ({
       </Flex>
       <Flex
         direction={{ initial: "column", sm: "row" }}
-        className="gap-2 gap-x-4 mt-6"
+        className="mt-6 gap-2 gap-x-4"
       >
         <Tabs value={selectedEnergyMode} onValueChange={handleEnergyModeChange}>
           <div className="overflow-x-auto">
@@ -123,7 +123,7 @@ const ConsumptionTimelineChart = ({
 
       {dateRange?.from && dateRange?.to && dateRange.from < dateRange.to ? (
         <LineChart
-          className="h-80 mt-8"
+          className="mt-8 h-80"
           showAnimation={true}
           data={transformedData}
           index="dateString"

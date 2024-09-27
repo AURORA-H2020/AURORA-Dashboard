@@ -2,8 +2,8 @@
 
 import { ConsumptionList } from "@/components/app/consumptions/consumptionList";
 import { AddEditConsumptionModal } from "@/components/app/consumptions/modals/addEditConsumptionModal";
-import { AddEditRecurringConsumptionModal } from "@/components/app/recurringConsumptions/modals/addEditRecurringConsumptionModal";
-import { RecurringConsumptionList } from "@/components/app/recurringConsumptions/recurringConsumptionList";
+import { AddEditRecurringConsumptionModal } from "@/components/app/recurring-consumptions/modals/addEditRecurringConsumptionModal";
+import { RecurringConsumptionList } from "@/components/app/recurring-consumptions/recurringConsumptionList";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utilities";

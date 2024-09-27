@@ -8,7 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
-import { labelMappings } from "@/lib/constants/consumptions";
+import { labelMappings } from "@/lib/constants/consumption-constants";
 import { Text } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";

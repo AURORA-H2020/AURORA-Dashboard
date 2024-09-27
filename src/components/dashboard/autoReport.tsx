@@ -4,7 +4,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { carbonUnitWeight, countriesMapping } from "@/lib/constants/constants";
+import {
+  carbonUnitWeight,
+  countriesMapping,
+} from "@/lib/constants/common-constants";
 import { getMetaDataSummary } from "@/lib/transformData";
 import { MetaData } from "@/models/dashboard-data";
 import { Heading, Text } from "@radix-ui/themes";

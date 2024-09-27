@@ -15,12 +15,7 @@ const AccountPage = (): ReactNode => {
   return (
     <>
       <ConfirmUnitSystem />
-      <Grid
-        columns={{ initial: "1", md: "2" }}
-        gap="8"
-        className="mt-8"
-        align="start"
-      >
+      <Grid columns={{ initial: "1", md: "2" }} gap="8" align="start">
         <ConsumptionSummaryPanel />
 
         <ConsumptionPanel />

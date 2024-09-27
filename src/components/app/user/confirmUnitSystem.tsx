@@ -2,10 +2,10 @@
 
 import { BorderBox } from "@/components/app/common/borderBox";
 import { Button } from "@/components/ui/button";
-import { useAuthContext } from "@/context/AuthContext";
-import { useFirebaseData } from "@/context/FirebaseContext";
-import { addEditUserData } from "@/firebase/user/addEditUserData";
+import { addEditUserData } from "@/firebase/user/add-edit-user-data";
 import { UserSettingsUnitSystem } from "@/models/firestore/user/user-settings/user-settings-unitSystem";
+import { useAuthContext } from "@/providers/context/authContext";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { Flex, Text } from "@radix-ui/themes";
 import { CircleHelp } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -57,7 +57,7 @@ const ConfirmUnitSystem = (): ReactNode => {
           <CircleHelp className="flex-shrink-0" />
           <Text>{t("app.confirmUnitSystem.description")}</Text>
         </Flex>
-        <Flex gap="2" className="w-full md:w-auto flex-wrap sm:flex-nowrap">
+        <Flex gap="2" className="w-full flex-wrap sm:flex-nowrap md:w-auto">
           <Button
             size="sm"
             variant="outline"

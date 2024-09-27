@@ -1,14 +1,14 @@
 "use client";
 
 import { BorderBox } from "@/components/app/common/borderBox";
-import { FormPasswordField } from "@/components/formItems/formPasswordField";
+import { FormPasswordField } from "@/components/form-items/formPasswordField";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
 import { Form, FormField } from "@/components/ui/form";
-import { useAuthContext } from "@/context/AuthContext";
-import { changePassword } from "@/firebase/user/changePassword";
+import { changePassword } from "@/firebase/user/change-password";
 import { cn } from "@/lib/utilities";
 import { userChangePasswordSchema } from "@/lib/zod/userSchemas";
+import { useAuthContext } from "@/providers/context/authContext";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
 import { useTranslations } from "next-intl";
@@ -62,7 +62,7 @@ const ChangePasswordForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={cn(className, "flex flex-col gap-4 w-full mt-4")}
+        className={cn(className, "mt-4 flex w-full flex-col gap-4")}
       >
         <FormField
           control={form.control}

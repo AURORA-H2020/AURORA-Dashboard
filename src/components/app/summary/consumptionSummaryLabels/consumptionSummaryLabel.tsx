@@ -6,11 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useFirebaseData } from "@/context/FirebaseContext";
-import { carbonUnit } from "@/lib/constants/constants";
-import { labelMappings } from "@/lib/constants/consumptions";
+import { carbonUnit } from "@/lib/constants/common-constants";
+import { labelMappings } from "@/lib/constants/consumption-constants";
 import { useConvertUnit } from "@/lib/utilities";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { Flex, Grid } from "@radix-ui/themes";
+import { LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
 
@@ -22,7 +23,7 @@ import { ReactElement } from "react";
  * @param {number} value - The numerical value.
  * @param {"carbonEmission" | "energyExpended"} measure - The type of measure.
  * @param {number} year - The year associated with the label.
- * @param {ReactElement} [icon] - The icon element.
+ * @param {LucideIcon} [icon] - The icon element.
  * @param {string} [color="foreground"] - The color of the label.
  * @return {ReactElement} The rendered consumption summary label component.
  */
@@ -32,7 +33,7 @@ const ConsumptionSummaryLabel = ({
   value,
   measure,
   year,
-  icon,
+  Icon,
   color = "foreground",
 }: {
   category: string;
@@ -40,7 +41,7 @@ const ConsumptionSummaryLabel = ({
   value: number;
   measure: "carbonEmission" | "energyExpended";
   year: number;
-  icon?: ReactElement;
+  Icon?: LucideIcon;
   color?: string;
 }): ReactElement => {
   const t = useTranslations();
@@ -59,7 +60,7 @@ const ConsumptionSummaryLabel = ({
 
   return (
     <Card
-      className={`bg-[${labelColor}] border-[${labelColor}] bg-opacity-30 border-opacity-50`}
+      className={`bg-[${labelColor}] border-[${labelColor}] border-opacity-50 bg-opacity-30`}
     >
       <CardHeader>
         <Flex gap="4" justify="between" align="center">
@@ -73,7 +74,11 @@ const ConsumptionSummaryLabel = ({
               </Badge>
             </CardTitle>
           </Grid>
-          {icon && <div className={`text-[${color}]`}>{icon}</div>}
+          {Icon && (
+            <div className={`text-[${color}]`}>
+              <Icon />
+            </div>
+          )}
         </Flex>
       </CardHeader>
       <CardContent>

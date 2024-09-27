@@ -2,7 +2,7 @@
 
 import { LoadingSpinner } from "@/components/ui/loading";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { countriesMapping } from "@/lib/constants/constants";
+import { countriesMapping } from "@/lib/constants/common-constants";
 import { getMetaDataSummary } from "@/lib/transformData";
 import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
 import { EnergyMode, MetaData, MetaDataSummary } from "@/models/dashboard-data";
@@ -86,7 +86,7 @@ const ConsumptionAverageCompare = ({
       </Flex>
       <Flex
         direction={{ initial: "column", sm: "row" }}
-        className="gap-2 gap-x-4 mt-6"
+        className="mt-6 gap-2 gap-x-4"
       >
         <Tabs value={selectedEnergyMode} onValueChange={handleEnergyModeChange}>
           <div className="overflow-x-auto">

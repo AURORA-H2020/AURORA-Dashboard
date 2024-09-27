@@ -1,6 +1,6 @@
 "use client";
 
-import { externalLinks } from "@/lib/constants/constants";
+import { externalLinks } from "@/lib/constants/common-constants";
 import { Link } from "@/navigation";
 import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
@@ -25,9 +25,9 @@ const Footer = (): ReactNode => {
           direction={{ initial: "column", sm: "row" }}
           justify="between"
           align="center"
-          className="gap-2 gap-x-4 mt-6"
+          className="mt-6 gap-2 gap-x-4"
         >
-          <Link href="/" className="flex items-center mb-4 sm:mb-0">
+          <Link href="/" className="mb-4 flex items-center sm:mb-0">
             <Logo />
           </Link>
           <Flex
@@ -37,17 +37,31 @@ const Footer = (): ReactNode => {
             className=""
           >
             <Button variant="link">
-              <Link href={externalLinks.auroraWebsite}>
+              <Link
+                target="_blank"
+                rel="noopener"
+                href={externalLinks.auroraWebsite}
+              >
                 {t("footer.auroraWebsite")}
               </Link>
             </Button>
-            <Separator orientation="vertical" className="h-5 hidden md:block" />
+            <Separator orientation="vertical" className="hidden h-5 md:block" />
             <Button variant="link">
-              <Link href={externalLinks.iosDownload}>{t("footer.iosApp")}</Link>
+              <Link
+                target="_blank"
+                rel="noopener"
+                href={externalLinks.iosDownload}
+              >
+                {t("footer.iosApp")}
+              </Link>
             </Button>
-            <Separator orientation="vertical" className="h-5 hidden md:block" />
+            <Separator orientation="vertical" className="hidden h-5 md:block" />
             <Button variant="link">
-              <Link href={externalLinks.androidDownload}>
+              <Link
+                target="_blank"
+                rel="noopener"
+                href={externalLinks.androidDownload}
+              >
                 {t("footer.androidApp")}
               </Link>
             </Button>
@@ -56,7 +70,7 @@ const Footer = (): ReactNode => {
           <LocaleSwitcher />
         </Flex>
         <Separator className="my-6" />
-        <span className="text-sm text-gray-500 text-center dark:text-gray-400 flex justify-center">
+        <span className="flex justify-center text-center text-sm text-gray-500 dark:text-gray-400">
           <span className="max-w-md">{t("footer.fundingNotice")}</span>
         </span>
       </CardContent>

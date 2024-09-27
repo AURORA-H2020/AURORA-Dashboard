@@ -1,4 +1,4 @@
-import { monthNames } from "@/lib/constants/constants";
+import { monthNames } from "@/lib/constants/common-constants";
 import { Flex, Text } from "@radix-ui/themes";
 import { CalendarIcon } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
@@ -83,7 +83,7 @@ const MonthPicker = ({ dateRange, validYears, onChange }): ReactElement => {
         </PopoverTrigger>
         <PopoverContent className="w-auto p-6" align="start">
           <Text>{t("ui.monthPicker.start")}</Text>
-          <Flex className="gap-6 mb-6">
+          <Flex className="mb-6 gap-6">
             <Select onValueChange={setStartMonth} value={startMonth}>
               <SelectTrigger className="w-[120px]">
                 <SelectValue placeholder="Month" />

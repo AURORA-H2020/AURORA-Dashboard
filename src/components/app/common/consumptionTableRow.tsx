@@ -37,7 +37,7 @@ const ConsumptionTableRow = (props: ConsumptionTableRowProps): ReactNode => {
 
   return (
     <TableRow className={cn(className)}>
-      {label && <TableCell className="font-bold w-[40%]">{label}</TableCell>}
+      {label && <TableCell className="w-[40%] font-bold">{label}</TableCell>}
       <TableCell
         colSpan={merged ? 2 : 1}
         className={merged ? "text-center" : ""}
