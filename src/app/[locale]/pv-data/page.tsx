@@ -9,9 +9,9 @@ import { Suspense } from "react";
 export default function PvDataPage({
   searchParams,
 }: {
-  searchParams?: { site: string; date: string };
+  searchParams?: { site: string; date: string; month: string };
 }) {
-  const { site, date } = searchParams || {};
+  const { site, date, month } = searchParams || {};
 
   return (
     <div>
@@ -26,7 +26,7 @@ export default function PvDataPage({
 
           <Suspense fallback={<LoadingSpinner className="h-64 w-full" />}>
             {!date ? (
-              <MonthlyPvData site={site} />
+              <MonthlyPvData site={site} month={month} />
             ) : (
               <CurrentDayPvData site={site} date={date} />
             )}

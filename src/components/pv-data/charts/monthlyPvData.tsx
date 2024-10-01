@@ -5,6 +5,8 @@ import { ProductionSummary } from "@/components/pv-data/panels/pvPanelProduction
 import { ChartConfig } from "@/components/ui/chart";
 import { validSites } from "@/lib/constants/api-constants";
 import { Heading } from "@radix-ui/themes";
+import { monthNames } from "@/lib/constants/common-constants";
+import { getTranslations } from "next-intl/server";
 
 interface QpvApiResponse {
   data: {
@@ -13,9 +15,34 @@ interface QpvApiResponse {
   }[];
 }
 
-const MonthlyPvData = async ({ site }: { site: string | undefined }) => {
+const getDaysInMonth = (monthString: string): number => {
+  const [year, month] = monthString.split("-").map(Number);
+
+  // Create a Date object for the first day of the next month
+  const nextMonth = new Date(year, month, 1);
+
+  // Subtract one day to get the last day of the current month
+  const lastDayOfMonth = new Date(nextMonth.getTime() - 1);
+
+  return lastDayOfMonth.getDate();
+};
+
+const MonthlyPvData = async ({
+  site,
+  month,
+}: {
+  site: string | undefined;
+  month: string | undefined;
+}) => {
+  const t = await getTranslations();
+
   if (!site || (site && !validSites.map((e) => e.id).includes(site))) {
     return <>Invalid</>;
+  }
+
+  const dateRegex = /^\d{4}-(0[1-9]|1[0-2])$/;
+  if (!month || !dateRegex.test(month)) {
+    return <>Select a month</>;
   }
 
   const apiUrl = new URL(
@@ -24,8 +51,8 @@ const MonthlyPvData = async ({ site }: { site: string | undefined }) => {
 
   const searchParams = new URLSearchParams({
     device: "GL",
-    ini_date: "2024-09-11",
-    end_date: "2024-09-19",
+    ini_date: `${month}-01`,
+    end_date: `${month}-${getDaysInMonth(month)}`,
     vars: "Ep",
     page: "1",
   });
@@ -45,6 +72,7 @@ const MonthlyPvData = async ({ site }: { site: string | undefined }) => {
 
   const data = rawData.map((item) => ({
     ...item,
+    Ep: item.Ep / 1000, // Convert from Wh to kWh
     pretty_date: new Date(item.date).toLocaleDateString([], {
       month: "short",
       day: "numeric",
@@ -67,7 +95,7 @@ const MonthlyPvData = async ({ site }: { site: string | undefined }) => {
           </PvDataGrid.DataPanel>
           <PvDataGrid.DataPanel>
             <ProductionSummary
-              title="Production"
+              title={`Production in ${t(monthNames[new Date(month).getMonth()])}`}
               production={data.reduce((n, { Ep }) => n + Ep, 0)}
             />
           </PvDataGrid.DataPanel>
@@ -75,15 +103,24 @@ const MonthlyPvData = async ({ site }: { site: string | undefined }) => {
       }
     >
       <div className="flex flex-col gap-4">
-        <Heading>Production in September 2024</Heading>
+        <Heading className="mb-4">
+          Production in{" "}
+          {t(monthNames[new Date(month).getMonth()]) +
+            " " +
+            new Date(month).getFullYear()}
+        </Heading>
         <PvDataChart
           chartType="bar"
           chartData={data}
           chartConfig={chartConfig}
           xDataKey="pretty_date"
           unit="kWh"
+          decimals={2}
           useOnClick
         />
+        <p className="text-center text-sm text-muted-foreground">
+          Select a bar to see a breakdown for a specific day.
+        </p>
       </div>
     </PvDataGrid>
   );
