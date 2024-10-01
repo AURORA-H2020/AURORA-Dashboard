@@ -8,6 +8,7 @@ import { Link, usePathname } from "@/navigation";
 import { ArrowLeft } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
+import MonthSelect from "./monthSelect";
 
 const SiteTabs = () => {
   const pathname = usePathname();
@@ -42,9 +43,12 @@ const SiteTabs = () => {
         <Button asChild variant="outline">
           <Link href={pathname + "?" + createQueryString("date", null)}>
             <ArrowLeft className="mr-1" />
-            Overview
+            Go back
           </Link>
         </Button>
+      )}
+      {!date && (
+        <MonthSelect earliestDate={new Date(validSites[0].installationDate)} />
       )}
     </div>
   );
