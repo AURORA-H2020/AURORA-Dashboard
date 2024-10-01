@@ -20,7 +20,14 @@ const CurrentDayPvData = async ({
   site: string | undefined;
   date: string | undefined;
 }) => {
-  if (!site || !date || (site && !validSites.map((e) => e.id).includes(site))) {
+  const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
+
+  if (
+    !site ||
+    !date ||
+    !dateRegex.test(date) ||
+    (site && !validSites.map((e) => e.id).includes(site))
+  ) {
     return <>Invalid</>;
   }
 
@@ -75,20 +82,21 @@ const CurrentDayPvData = async ({
           <PvDataGrid.DataPanel>
             <ProductionSummary
               title="Production"
+              unit="Wh"
               production={data.reduce((n, { PAC }) => n + PAC, 0)}
             />
           </PvDataGrid.DataPanel>
         </PvDataGrid.DataPanels>
       }
     >
-      <Heading>Production for {date}</Heading>
+      <Heading className="mb-4">Production for {date}</Heading>
       <PvDataChart
         chartType="line"
         chartData={data}
         chartConfig={chartConfig}
         xDataKey="time"
-        unit="kWh"
-        decimals={1}
+        unit="Wh"
+        decimals={2}
       />
     </PvDataGrid>
   );
