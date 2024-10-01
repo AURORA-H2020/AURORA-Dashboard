@@ -94,7 +94,7 @@ const PvPage = () => {
         }
         footer={
           <PvDataGrid.Footer>
-            <div className="items-top flex justify-between">
+            <div className="items-top flex justify-between gap-4">
               <p className="text-sm text-muted-foreground">
                 Your investment in your local AURORA solar power installations
                 helps reduce your carbon footprint. Here you can see a breakdown
