@@ -92,7 +92,7 @@ const NavigationBar = (): ReactElement => {
             >
               <Logo />
             </Link>
-            {userMenuLinks.map((item, idx) => {
+            {navigationLinks.map((item, idx) => {
               const isActive =
                 pathname === item.path || pathname.startsWith(`${item.path}/`);
 
