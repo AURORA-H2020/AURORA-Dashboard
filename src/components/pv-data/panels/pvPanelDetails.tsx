@@ -8,42 +8,79 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { validSites } from "@/lib/constants/api-constants";
-import { Link } from "@/navigation";
+import { LoadingSpinner } from "@/components/ui/loading";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Link } from "@/i18n/routing";
+import {
+  citiesMappings,
+  countriesMapping,
+} from "@/lib/constants/common-constants";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 import {
   BatteryChargingIcon,
   CalendarIcon,
+  CpuIcon,
   FactoryIcon,
+  LucideIcon,
   MapPinIcon,
+  SquareArrowOutUpRight,
   SunIcon,
-  Wallet,
 } from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
+import React from "react";
 
 const PvPanelDetails = ({ site }: { site: string }) => {
-  const siteDetails = validSites.find((s) => s.id === site);
+  const format = useFormatter();
+  const t = useTranslations();
+  const { pvPlants, isLoadingPvPlants } = useFirebaseData();
+
+  if (!pvPlants && isLoadingPvPlants) return <LoadingSpinner />;
+
+  const siteDetails = pvPlants && pvPlants.find((s) => s.plantId === site);
 
   if (!siteDetails) return null;
 
-  const details = [
+  const country = countriesMapping.find((c) => c.ID === siteDetails.country);
+  const city = citiesMappings.find((c) => c.ID === siteDetails.city);
+  const location = [t(country?.name), t(city?.name)].join(", ");
+
+  const details: Array<{
+    icon: LucideIcon;
+    label: string;
+    value: string | number | undefined;
+  }> = [
     {
       icon: BatteryChargingIcon,
-      label: "Capacity",
-      value: siteDetails.capacity,
+      label: t("dashboard.pv.capacity"),
+      value: `${siteDetails.capacity} kW`,
     },
     {
       icon: MapPinIcon,
-      label: "Location",
-      value: `${siteDetails.country}, ${siteDetails.city}`,
+      label: t("dashboard.pv.location"),
+      value: location,
     },
     {
       icon: FactoryIcon,
-      label: "Manufacturer",
+      label: t("dashboard.pv.manufacturer"),
       value: siteDetails.manufacturer,
     },
     {
+      icon: CpuIcon,
+      label: t("dashboard.pv.technology"),
+      value: siteDetails.technology,
+    },
+    {
       icon: CalendarIcon,
-      label: "Installation Date",
-      value: siteDetails.installationDate,
+      label: t("dashboard.pv.productionStart"),
+      value:
+        siteDetails.installationDate &&
+        format.dateTime(siteDetails.installationDate.toDate(), {
+          dateStyle: "long",
+        }),
     },
   ];
 
@@ -52,27 +89,39 @@ const PvPanelDetails = ({ site }: { site: string }) => {
       <CardHeader>
         <CardTitle className="flex items-center text-xl font-semibold">
           <SunIcon className="mr-2 size-5 text-yellow-500" />
-          Solar Panel Information
+          {t("dashboard.pv.solarPanelInformation")}
         </CardTitle>
       </CardHeader>
       <CardContent className="px-6">
-        <div className="flex flex-col gap-4">
-          {details.map(({ icon: Icon, label, value }) => (
-            <div key={label} className="flex items-center gap-2">
-              <Icon className="size-5 text-primary" />
-              <span className="font-semibold">{label}:</span>
-              <span className="">{value}</span>
-            </div>
-          ))}
+        <div className="grid grid-cols-[auto_1fr] gap-4">
+          {details.map(({ icon: Icon, label, value }) => {
+            if (!value) return null;
+            return (
+              <React.Fragment key={label}>
+                <Tooltip delayDuration={0}>
+                  <TooltipTrigger className="">
+                    <Icon className="size-5 text-primary" aria-hidden="true" />
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p className="font-semibold">{label}</p>
+                  </TooltipContent>
+                  <div className="break-words text-left">{value}</div>
+                </Tooltip>
+              </React.Fragment>
+            );
+          })}
         </div>
       </CardContent>
-      <CardFooter className="p-4">
-        <Button className="flex w-full" variant="default" asChild>
-          <Link href={siteDetails.investLink}>
-            <Wallet className="mr-2 size-5" /> How to invest?
-          </Link>
-        </Button>
-      </CardFooter>
+      {siteDetails.infoURL && (
+        <CardFooter className="p-4">
+          <Button className="flex w-full" variant="default" asChild>
+            <Link target="_blank" rel="noopener" href={siteDetails.infoURL}>
+              <span>{t("dashboard.pv.howToInvest")}</span>
+              <SquareArrowOutUpRight className="ml-2 size-4" />
+            </Link>
+          </Button>
+        </CardFooter>
+      )}
     </Card>
   );
 };
