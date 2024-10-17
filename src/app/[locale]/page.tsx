@@ -71,7 +71,7 @@ const HomePage = async ({
           globalSummaryData={globalSummaryData}
         />
         <div className="w-full text-center">
-          <Text className="italic text-muted-foreground">
+          <Text className="text-sm italic text-muted-foreground">
             {t("dashboard.main.description")}
           </Text>
         </div>
