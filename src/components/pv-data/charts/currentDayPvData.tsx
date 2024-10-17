@@ -107,22 +107,24 @@ const CurrentDayPvData = async ({
         </PvDataGrid.DataPanels>
       }
     >
-      <Heading className="mb-4">
-        {t("common.productionFor")}{" "}
-        {format.dateTime(new Date(date), {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-      </Heading>
-      <PvDataChart
-        chartType="line"
-        chartData={data}
-        chartConfig={chartConfig}
-        xDataKey="time"
-        unit="Wh"
-        decimals={2}
-      />
+      <div className="flex flex-col gap-4">
+        <Heading className="mb-4">
+          {t("common.productionFor")}{" "}
+          {format.dateTime(new Date(date), {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </Heading>
+        <PvDataChart
+          chartType="line"
+          chartData={data}
+          chartConfig={chartConfig}
+          xDataKey="time"
+          unit="Wh"
+          decimals={2}
+        />
+      </div>
     </PvDataGrid>
   );
 };

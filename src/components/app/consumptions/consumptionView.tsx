@@ -67,24 +67,26 @@ const ConsumptionView = ({
 
   return (
     <>
-      <Alert className="mb-4 flex gap-4 bg-primary/5">
-        <div>
-          <SunriseIcon className="size-10" color="#eab308" />
-        </div>
-        <div className="flex w-full flex-col gap-4">
-          <AlertDescription className="flex flex-col gap-2">
-            <div className="w-full">
-              {t("app.form.pvInvestment.automaticGenerationDisclaimer")}
-            </div>
-          </AlertDescription>
+      {isPvInvestment && (
+        <Alert className="mb-4 flex gap-4 bg-primary/5">
+          <div>
+            <SunriseIcon className="size-10" color="#eab308" />
+          </div>
+          <div className="flex w-full flex-col gap-4">
+            <AlertDescription className="flex flex-col gap-2">
+              <div className="w-full">
+                {t("app.form.pvInvestment.automaticGenerationDisclaimer")}
+              </div>
+            </AlertDescription>
 
-          <Button size="sm" variant="outline" asChild className="self-end">
-            <Link href="/account/pv">
-              {t("app.form.pvInvestment.manageInvestment")}
-            </Link>
-          </Button>
-        </div>
-      </Alert>
+            <Button size="sm" variant="outline" asChild className="self-end">
+              <Link href="/account/pv">
+                {t("app.form.pvInvestment.manageInvestment")}
+              </Link>
+            </Button>
+          </div>
+        </Alert>
+      )}
       <Table className="mt-4 table-fixed">
         <TableBody>
           <ConsumptionTableRow
