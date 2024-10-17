@@ -78,6 +78,14 @@
     "updateProfile": {
       "success": "O seu perfil foi atualizado com sucesso",
       "error": "Ocorreu um erro ao atualizar o seu perfil"
+    },
+    "pvInvestment": {
+      "success": "Your investment data was updated successfully",
+      "error": "There was an error updating your investment data"
+    },
+    "deletePvInvestment": {
+      "success": "The investment entry has been deleted",
+      "error": "An error occurred deleting this investment entry"
     }
   },
   "button": {
@@ -128,6 +136,19 @@
       "lastUpdated": "Os dados apresentados foram atualizados pela última vez a",
       "selectSnapshot": "Selecionar um momento diferente ",
       "downloadSnapshot": "Descarregar este momento"
+    },
+    "pv": {
+      "howToInvest": "How to invest?",
+      "solarPanelInformation": "Solar Panel Information",
+      "productionStart": "Production Start",
+      "technology": "Technology",
+      "manufacturer": "Manufacturer",
+      "location": "Location",
+      "capacity": "Capacity",
+      "noActiveInstallation": "No active solar power installations found",
+      "selectBarToSeeDailyBreakdown": "Select a bar to see a breakdown for a specific day.",
+      "unsupportedRegionMessage": "This feature is currently not supported in your region.",
+      "solarPowerProduction": "Solar Power Production"
     }
   },
   "error": {
@@ -295,7 +316,24 @@
       },
       "deleteConsumptionDialogTitle": "Tem a certeza de que pretende apagar esta entrada?",
       "powerConsumption": "Consumo de energia\n",
-      "setCustomPowerConsumption": "Definir consumo de energia personalizado"
+      "setCustomPowerConsumption": "Definir consumo de energia personalizado",
+      "pvInvestment": {
+        "edit": "Edit Investment",
+        "save": "Save Investment",
+        "add": "Add Investment",
+        "share": "Share",
+        "investmentDate": "Investment Date",
+        "investment": "Investment",
+        "note": "Note",
+        "installationSite": "Installation Site",
+        "automaticGenerationDisclaimer": "This entry was created by your PV investment. It will update automatically with the latest data.",
+        "manageInvestment": "Manage Investment",
+        "editInvestmentDisclaimer": "If you made an additional investment at a later date, please add a new investment instead. Editing your existing investments may result in inaccurate tracking.",
+        "addInvestmentDisclaimer": "Entering your investment data is exclussively for recording purposes. This does not formulate an actual investment or binding order in any form.",
+        "noteDescription": "Add a note to your investment for personal reference",
+        "investmentDescription": "The amount of money you invested",
+        "shareDescription": "How much of the solar panel installation's capacity your investment corresponds to. You should find this information in the documents you received when you made your investment."
+      }
     },
     "filter": {
       "orderBy": "Ordenar por",
@@ -363,6 +401,23 @@
       "description": "Não tem um sistema de unidades definido e está atualmente a utilizar o sistema métrico.",
       "useMetric": "Continuar a utilizar o sistema métrico",
       "useImperial": "Mudar para imperial (Reino Unido)"
+    },
+    "pv": {
+      "yourProduction": "Your Production",
+      "totalProduction": "Total Production",
+      "featureGuide": {
+        "body": "Your investment in your local AURORA solar power installations helps reduce your carbon footprint. Here you can see a breakdown of the total energy produced by the installation (Total Production) and your investment's contribution (Your Production). Your contribution is automatically added as an offset to your profile at the end of each month to help you reach near-zero emissions.",
+        "title": "How does it work?"
+      },
+      "seeFullData": "See full data",
+      "productionInLast30Days": "Production in the last 30 days",
+      "showProductionSinceFirstInvestment": "Show production since your first investment",
+      "showLifetime": "Show lifetime",
+      "yourInvestment": "Your Investments",
+      "multipleInvestmentsDisclaimer": "Adding multiple investments is only necessary if you later buy additional shares.",
+      "yourLatestInvestment": "Your Latest Investment",
+      "recordYourInvestment": "Record your Investment",
+      "allInvestments": "All Investments"
     }
   },
   "common": {
@@ -401,7 +456,19 @@
     "pagination": {
       "previous": "Anterior",
       "next": "Seguinte"
-    }
+    },
+    "production": "Production",
+    "viewData": "View Data",
+    "inactive": "Inactive",
+    "active": "Active",
+    "productionIn": "Production in",
+    "productionFor": "Production for",
+    "productionSince": "Production since",
+    "download": "Download",
+    "since": "Since",
+    "notApplicable": "Not applicable",
+    "goBack": "Go back",
+    "energy": "Energy"
   },
   "country": {
     "allSelectedCountries": "Todos os países selecionados",
@@ -424,10 +491,11 @@
       "about": "Sobre",
       "account": "Conta",
       "logout": "Sair",
-      "admin": "Administrador"
+      "admin": "Administrador",
+      "solarPower": "Solar Power",
+      "pvInvestment": "Investment"
     },
     "account": {
-      "home": "Casa",
       "settings": "Definições"
     }
   },
@@ -500,8 +568,10 @@
       "firewood": "Lenha",
       "butane": "Butano",
       "planeIntraEu": "Avião (intra-UE)",
-      "planeExtraEu": "Avião (extra UE)"
-    }
+      "planeExtraEu": "Avião (extra UE)",
+      "pvInvestment": "PV Investment"
+    },
+    "pvInvestment": "Electricity (PV)"
   },
   "unitLabel": {
     "distance": "Distância"
