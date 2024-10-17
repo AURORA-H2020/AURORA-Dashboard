@@ -1,7 +1,9 @@
 "use client";
 
+import { UpdatePvData } from "@/components/admin/updatePvData";
 import { UsersTable } from "@/components/admin/usersTable";
 import { LoadingSpinner } from "@/components/ui/loading";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getLatestUserData } from "@/firebase/firebase-utils";
 import { useFetchBlacklistedUsers } from "@/firebase/hooks/user-hooks";
 import { BackupUserData } from "@/models/extensions";
@@ -54,7 +56,20 @@ const AdminPage = (): ReactNode => {
   }
 
   // If the data is available, render the UsersTable component with the user data and blacklist data
-  return <UsersTable userData={userData} blacklistData={blacklistData} />;
+  return (
+    <Tabs defaultValue="pv">
+      <TabsList>
+        <TabsTrigger value="pv">Account</TabsTrigger>
+        <TabsTrigger value="users">Password</TabsTrigger>
+      </TabsList>
+      <TabsContent value="pv">
+        <UpdatePvData />
+      </TabsContent>
+      <TabsContent value="users">
+        <UsersTable userData={userData} blacklistData={blacklistData} />
+      </TabsContent>
+    </Tabs>
+  );
 };
 
 export default AdminPage;
