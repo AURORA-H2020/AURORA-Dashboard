@@ -54,6 +54,10 @@ export const consumptionSources: ConsumptionSources = {
       source: "homePhotovoltaics",
       name: t("category.sources.homePhotovoltaics"),
     },
+    {
+      source: "pvInvestment",
+      name: t("category.sources.pvInvestment"),
+    },
   ],
   heating: [
     { source: "oil", name: t("category.sources.oil"), unit: "L" },
