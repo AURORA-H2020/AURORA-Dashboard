@@ -106,6 +106,7 @@ export const userPvInvestmentSchema = (
     investmentDate: TimestampSchema,
     note: z.string().max(500).optional(),
     city: z.string(),
+    pvPlant: z.string(),
     createdAt: TimestampSchema,
     updatedAt: TimestampSchema,
   });
