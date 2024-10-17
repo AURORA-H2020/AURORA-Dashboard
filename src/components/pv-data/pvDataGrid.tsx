@@ -41,10 +41,11 @@ const DataPanels = ({ children }: DataPanelsProps) => {
 
 type DataPanelProps = {
   children: ReactNode;
+  className?: string;
 };
 
-const DataPanel = ({ children }: DataPanelProps) => {
-  return <div>{children}</div>;
+const DataPanel = ({ children, className }: DataPanelProps) => {
+  return <div className={className}>{children}</div>;
 };
 
 type FooterProps = {
