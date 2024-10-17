@@ -4,19 +4,22 @@ import { SiteOverview } from "@/components/pv-data/sites/siteOverview";
 import { SiteTabs } from "@/components/pv-data/sites/siteTabs";
 import { LoadingSpinner } from "@/components/ui/loading";
 import { Heading } from "@radix-ui/themes";
+import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
-export default function PvDataPage({
+const PvDataPage = async ({
   searchParams,
 }: {
   searchParams?: { site: string; date: string; month: string };
-}) {
+}) => {
+  const t = await getTranslations();
+
   const { site, date, month } = searchParams || {};
 
   return (
     <div>
       <Heading as="h1" className="mb-8">
-        Solar Power Production
+        {t("dashboard.pv.solarPowerProduction")}
       </Heading>
       {!site ? (
         <SiteOverview />
@@ -35,4 +38,6 @@ export default function PvDataPage({
       )}
     </div>
   );
-}
+};
+
+export default PvDataPage;
