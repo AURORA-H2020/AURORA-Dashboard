@@ -16,12 +16,17 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { deleteDocumentById } from "@/firebase/firestore/delete-document-by-id";
 import { UserPvInvestmentWithID } from "@/models/extensions";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { Flex } from "@radix-ui/themes";
-import { PencilIcon, Trash2Icon } from "lucide-react";
+import { CircleHelpIcon, PencilIcon, Trash2Icon } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { ReactNode, useState } from "react";
 import { toast } from "sonner";
@@ -82,23 +87,27 @@ const ViewPvInvestmentModal = ({
         <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader className="flex flex-col gap-4">
-            <DialogTitle>Your Investments</DialogTitle>
-            <div className="flex flex-col gap-1">
+            <DialogTitle>{t("app.pv.yourInvestment")}</DialogTitle>
+            <div className="flex gap-2">
               <AddEditPvInvestmentModal>
-                <Button variant="default">
+                <Button variant="default" className="w-full">
                   {t("app.form.pvInvestment.add")}
                 </Button>
               </AddEditPvInvestmentModal>
-              <span className="text-xs text-muted-foreground">
-                Adding multiple investments is only necessary if you later buy
-                additional shares.
-              </span>
+              <Tooltip delayDuration={0}>
+                <TooltipTrigger className="text-muted-foreground">
+                  <CircleHelpIcon />
+                </TooltipTrigger>
+                <TooltipContent className="max-w-[250px]">
+                  <p>{t("app.pv.multipleInvestmentsDisclaimer")}</p>
+                </TooltipContent>
+              </Tooltip>
             </div>
           </DialogHeader>
           <ScrollArea className="max-h-[80vh]">
             {pvInvestments?.map((pvInvestment) => (
               <>
-                <div className="my-2 flex items-center justify-between gap-4 rounded-lg border p-4">
+                <div className="my-2 flex items-center justify-between gap-4 rounded-lg border bg-primary/5 p-4">
                   <div className="flex flex-col">
                     {details(pvInvestment).map((detail) => (
                       <div key={detail.label}>
