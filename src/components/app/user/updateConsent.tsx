@@ -6,8 +6,8 @@ import {
   CardHeader,
 } from "@/components/ui/card";
 import { setAcceptedLegalDocumentVersion } from "@/firebase/user/set-accepted-legal-document-version";
+import { Link } from "@/i18n/routing";
 import { externalLinks } from "@/lib/constants/common-constants";
-import { Link } from "@/navigation";
 import { Flex, Heading } from "@radix-ui/themes";
 import { User } from "firebase/auth";
 import { Info } from "lucide-react";

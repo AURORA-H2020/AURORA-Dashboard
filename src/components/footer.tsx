@@ -1,7 +1,7 @@
 "use client";
 
 import { externalLinks } from "@/lib/constants/common-constants";
-import { Link } from "@/navigation";
+import { Link } from "@/i18n/routing";
 import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";

@@ -7,8 +7,8 @@ import {
   ChartLegendContent,
   ChartTooltipContent,
 } from "@/components/ui/chart";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
-import { usePathname, useRouter } from "@/navigation";
 import { useFormatter } from "next-intl";
 import { useMemo } from "react";
 import {

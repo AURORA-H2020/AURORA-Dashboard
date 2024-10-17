@@ -9,8 +9,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { validSites } from "@/lib/constants/api-constants";
+import { Link, usePathname } from "@/i18n/routing";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
-import { Link, usePathname } from "@/navigation";
 import { Building2, Earth } from "lucide-react";
 
 const SiteOverview = () => {

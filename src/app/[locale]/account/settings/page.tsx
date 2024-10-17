@@ -16,13 +16,13 @@ import {
 } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading";
 import { Table, TableBody } from "@/components/ui/table";
+import { Link } from "@/i18n/routing";
 import {
   citiesMappings,
   countriesMapping,
   externalLinks,
   unitSystems,
 } from "@/lib/constants/common-constants";
-import { Link } from "@/navigation";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { Flex, Grid } from "@radix-ui/themes";

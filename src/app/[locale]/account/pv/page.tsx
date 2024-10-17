@@ -14,8 +14,8 @@ import {
   useFetchPlantPvData,
   useFetchPvPlants,
 } from "@/firebase/hooks/pv-hooks";
+import { Link } from "@/i18n/routing";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
-import { Link } from "@/navigation";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { Heading } from "@radix-ui/themes";
 import { useFormatter } from "next-intl";

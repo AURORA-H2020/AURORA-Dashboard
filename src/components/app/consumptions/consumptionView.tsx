@@ -1,5 +1,6 @@
 import { ConsumptionTableRow } from "@/components/app/common/consumptionTableRow";
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
+import { Link } from "@/i18n/routing";
 import { carbonUnit } from "@/lib/constants/common-constants";
 import { consumptionMapping } from "@/lib/constants/consumption-constants";
 import { getConsumptionUnit, useConvertUnit } from "@/lib/utilities";

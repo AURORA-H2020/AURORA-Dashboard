@@ -8,9 +8,9 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { cn, downloadJsonAsFile } from "@/lib/utilities";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { usePathname, useRouter } from "@/navigation";
 import { PopoverClose } from "@radix-ui/react-popover";
 import { Flex, Strong, Text } from "@radix-ui/themes";
 import { HistoryIcon } from "lucide-react";

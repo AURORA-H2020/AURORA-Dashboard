@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/sheet";
 import { logout } from "@/firebase/auth/logout";
 import { useUserRoles } from "@/firebase/hooks/user-hooks";
-import { Link, usePathname } from "@/navigation";
+import { Link, usePathname } from "@/i18n/routing";
 import { useAuthContext } from "@/providers/context/authContext";
 import { CircleUser, Menu } from "lucide-react";
 import { useTranslations } from "next-intl";

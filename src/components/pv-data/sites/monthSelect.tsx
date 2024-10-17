@@ -7,9 +7,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { monthNames } from "@/lib/constants/common-constants";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
-import { usePathname, useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

@@ -3,8 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { validSites } from "@/lib/constants/api-constants";
+import { Link, usePathname } from "@/i18n/routing";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
-import { Link, usePathname } from "@/navigation";
 import { ArrowLeft } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";

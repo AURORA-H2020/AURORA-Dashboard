@@ -12,8 +12,8 @@ import {
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useFetchPvPlants } from "@/firebase/hooks/pv-hooks";
+import { Link } from "@/i18n/routing";
 import { UserPvInvestmentWithID } from "@/models/extensions";
-import { Link } from "@/navigation";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { TriangleAlertIcon } from "lucide-react";
 import { useTranslations } from "next-intl";

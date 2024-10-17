@@ -1,14 +1,16 @@
 import { Footer } from "@/components/footer";
 import { NavigationBar } from "@/components/navigation/navigationBar";
-import { locales } from "@/config";
 import { cn } from "@/lib/utilities";
 import { Providers } from "@/providers/providers";
 import "@radix-ui/themes/styles.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import {
+  getMessages,
+  getTranslations,
+  unstable_setRequestLocale,
+} from "next-intl/server";
 import { Inter } from "next/font/google";
-import { notFound } from "next/navigation";
 import { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -23,9 +25,9 @@ type Props = {
  *
  * @return {Array} an array of objects containing the locale
  */
-export const generateStaticParams = async () => {
+/* export const generateStaticParams = async () => {
   return locales.map((locale) => ({ locale }));
-};
+}; */
 
 /**
  * Generate metadata based on the provided locale.
@@ -60,12 +62,7 @@ const RootLayout = async ({
 }: Props): Promise<ReactNode> => {
   unstable_setRequestLocale(locale);
 
-  let messages;
-  try {
-    messages = (await import(`../../../messages/${locale}.json`)).default;
-  } catch (error) {
-    notFound();
-  }
+  const messages = await getMessages();
 
   return (
     <html lang={locale}>

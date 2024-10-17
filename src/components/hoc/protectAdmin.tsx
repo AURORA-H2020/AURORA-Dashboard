@@ -1,6 +1,6 @@
 import { LoadingSpinner } from "@/components/ui/loading";
 import { useUserRoles } from "@/firebase/hooks/user-hooks";
-import { useRouter } from "@/navigation";
+import { useRouter } from "@/i18n/routing";
 import { useAuthContext } from "@/providers/context/authContext";
 import { ReactNode, useEffect } from "react";
 
