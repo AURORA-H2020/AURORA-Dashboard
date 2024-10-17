@@ -26,7 +26,9 @@ export const getAllApiData = async (
       firebaseApp,
       FirebaseConstants.preferredCloudFunctionRegion,
     );
-    connectFunctionsEmulator(functions, "127.0.0.1", 5001);
+    if (process.env.NEXT_PUBLIC_TEST_MODE === "true") {
+      connectFunctionsEmulator(functions, "127.0.0.1", 5001);
+    }
 
     const getAllApiData = httpsCallable(functions, "getAllApiData");
 
