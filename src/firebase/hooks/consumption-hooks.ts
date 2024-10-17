@@ -240,6 +240,8 @@ export const usePaginatedConsumptions = ({
 
   useEffect(() => {
     if (!user) return;
+    // getCountFromServer seems broken with firebase emulator, but working in production
+    if (process.env.NODE_ENV === "development") return;
     getCountFromServer(
       collection(
         firestore,
@@ -330,7 +332,8 @@ export const usePaginatedRecurringConsumptions = ({
 
   useEffect(() => {
     if (!user) return;
-
+    // getCountFromServer seems broken with firebase emulator, but working in production
+    if (process.env.NODE_ENV === "development") return;
     getCountFromServer(
       collection(
         firestore,
