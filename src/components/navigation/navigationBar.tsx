@@ -20,8 +20,9 @@ import {
 import { logout } from "@/firebase/auth/logout";
 import { useUserRoles } from "@/firebase/hooks/user-hooks";
 import { Link, usePathname } from "@/i18n/routing";
+import { navigationLinks, userMenuLinks } from "@/lib/menus";
 import { useAuthContext } from "@/providers/context/authContext";
-import { CircleUser, Menu } from "lucide-react";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { CircleUserIcon, MenuIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
@@ -39,6 +40,7 @@ const NavigationBar = (): ReactElement => {
 
   const { user } = useAuthContext();
   const { isAdmin } = useUserRoles(user?.uid);
+  const { userCityData } = useFirebaseData();
 
   /**
    * Logs the user out and redirects them to the home page.
@@ -55,29 +57,13 @@ const NavigationBar = (): ReactElement => {
     });
   };
 
-  const menuItems = [
-    { title: t("navigation.menu.dashboard"), path: "/" },
-    { title: t("navigation.menu.about"), path: "/about" },
-    { title: t("navigation.menu.account"), path: "/account" },
-    { title: t("navigation.menu.solarPower"), path: "/pv-data" },
-  ];
-
-  const loggedInMenus = [
-    { title: t("navigation.menu.account"), path: "/account" },
-    { title: t("navigation.menu.pvInvestment"), path: "/account/pv" },
-    { title: t("navigation.account.settings"), path: "/account/settings" },
-  ];
-
-  const adminMenus = [{ title: t("navigation.menu.admin"), path: "/admin" }];
-
   return (
-    <Card className="flex items-center gap-4 p-4 md:px-8">
-      <nav className="md:text-md hidden w-full flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 lg:gap-6">
+    <Card className="flex items-center justify-between gap-4 p-4 md:px-8">
+      <nav className="text-md hidden w-full flex-col gap-6 text-lg font-semibold md:flex md:flex-row md:items-center">
         <Link href="/" className="w-max">
           <Logo />
         </Link>
-        {menuItems.map((item, idx) => {
-          // Check if the current pathname is active.
+        {navigationLinks.map((item, idx) => {
           const isActive =
             pathname === item.path || pathname.startsWith(`${item.path}/`);
 
@@ -87,7 +73,7 @@ const NavigationBar = (): ReactElement => {
               href={item.path}
               className={`${isActive ? "text-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground`}
             >
-              {item.title}
+              {t(item.title)}
             </Link>
           );
         })}
@@ -95,7 +81,7 @@ const NavigationBar = (): ReactElement => {
       <Sheet>
         <SheetTrigger asChild>
           <Button variant="outline" size="icon" className="shrink-0 md:hidden">
-            <Menu className="h-5 w-5" />
+            <MenuIcon className="h-5 w-5" />
           </Button>
         </SheetTrigger>
         <SheetContent side="left">
@@ -106,8 +92,7 @@ const NavigationBar = (): ReactElement => {
             >
               <Logo />
             </Link>
-            {menuItems.map((item, idx) => {
-              // Check if the current pathname is active.
+            {userMenuLinks.map((item, idx) => {
               const isActive =
                 pathname === item.path || pathname.startsWith(`${item.path}/`);
 
@@ -117,7 +102,7 @@ const NavigationBar = (): ReactElement => {
                     href={item.path}
                     className={`${isActive ? "text-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground`}
                   >
-                    {item.title}
+                    {t(item.title)}
                   </Link>
                 </SheetClose>
               );
@@ -127,36 +112,41 @@ const NavigationBar = (): ReactElement => {
       </Sheet>
       <div className="flex items-center justify-end gap-4 md:ml-auto md:gap-2 lg:gap-4">
         <ThemeToggle />
-        {user && (
+        {user ? (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
-                <CircleUser className="h-5 w-5" />
                 <CircleUserIcon className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              {loggedInMenus.map((menu, idx) => (
-                <Link href={menu.path} key={`${idx}`}>
-                  <DropdownMenuItem>{menu.title}</DropdownMenuItem>
-                </Link>
-              ))}
-              {isAdmin && (
-                <>
-                  <DropdownMenuSeparator />
-                  {adminMenus.map((menu, idx) => (
-                    <Link href={menu.path} key={`${idx}`}>
-                      <DropdownMenuItem>{menu.title}</DropdownMenuItem>
-                    </Link>
-                  ))}
-                </>
-              )}
+              {userMenuLinks.map((item, idx) => {
+                if (item.isAdmin && !isAdmin) return;
+                if (
+                  userCityData &&
+                  userCityData.hasPhotovoltaics === false &&
+                  item.path === "/account/pv"
+                )
+                  return;
+                return (
+                  <Link href={item.path} key={`${idx}`}>
+                    <DropdownMenuItem>{t(item.title)}</DropdownMenuItem>
+                  </Link>
+                );
+              })}
+
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout}>
                 {t("navigation.menu.logout")}
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+        ) : (
+          <Button variant="secondary" size="icon" className="rounded-full">
+            <Link href={"/account"}>
+              <CircleUserIcon className="h-5 w-5" />
+            </Link>
+          </Button>
         )}
       </div>
     </Card>

@@ -1,7 +1,7 @@
 "use client";
 
-import { externalLinks } from "@/lib/constants/common-constants";
 import { Link } from "@/i18n/routing";
+import { footerLinks } from "@/lib/menus";
 import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
@@ -34,43 +34,20 @@ const Footer = (): ReactNode => {
             direction={{ initial: "column", sm: "row" }}
             justify="between"
             align="center"
-            className=""
           >
-            <Button variant="link">
-              <Link
-                target="_blank"
-                rel="noopener"
-                href={externalLinks.auroraWebsite}
-              >
-                {t("footer.auroraWebsite")}
-              </Link>
-            </Button>
-            <Separator orientation="vertical" className="hidden h-5 md:block" />
-            <Button variant="link">
-              <Link
-                target="_blank"
-                rel="noopener"
-                href={externalLinks.iosDownload}
-              >
-                {t("footer.iosApp")}
-              </Link>
-            </Button>
-            <Separator orientation="vertical" className="hidden h-5 md:block" />
-            <Button variant="link">
-              <Link
-                target="_blank"
-                rel="noopener"
-                href={externalLinks.androidDownload}
-              >
-                {t("footer.androidApp")}
-              </Link>
-            </Button>
+            {footerLinks.map((item, index) => (
+              <Button key={index} variant="link">
+                <Link target="_blank" rel="noopener" href={item.path}>
+                  {t(item.title)}
+                </Link>
+              </Button>
+            ))}
           </Flex>
 
           <LocaleSwitcher />
         </Flex>
         <Separator className="my-6" />
-        <span className="flex justify-center text-center text-sm text-gray-500 dark:text-gray-400">
+        <span className="flex justify-center text-center text-sm text-muted-foreground">
           <span className="max-w-md">{t("footer.fundingNotice")}</span>
         </span>
       </CardContent>
