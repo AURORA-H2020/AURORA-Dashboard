@@ -7,7 +7,7 @@ import { UserSettingsUnitSystem } from "@/models/firestore/user/user-settings/us
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { Flex, Text } from "@radix-ui/themes";
-import { CircleHelp } from "lucide-react";
+import { CircleHelpIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
 
@@ -54,7 +54,7 @@ const ConfirmUnitSystem = (): ReactNode => {
         className="flex-wrap md:flex-nowrap"
       >
         <Flex gap="4" align="center">
-          <CircleHelp className="flex-shrink-0" />
+          <CircleHelpIcon className="flex-shrink-0" />
           <Text>{t("app.confirmUnitSystem.description")}</Text>
         </Flex>
         <Flex gap="2" className="w-full flex-wrap sm:flex-nowrap md:w-auto">

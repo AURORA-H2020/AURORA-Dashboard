@@ -22,6 +22,7 @@ import { useUserRoles } from "@/firebase/hooks/user-hooks";
 import { Link, usePathname } from "@/i18n/routing";
 import { useAuthContext } from "@/providers/context/authContext";
 import { CircleUser, Menu } from "lucide-react";
+import { CircleUserIcon, MenuIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
 import { toast } from "sonner";
@@ -131,6 +132,7 @@ const NavigationBar = (): ReactElement => {
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
                 <CircleUser className="h-5 w-5" />
+                <CircleUserIcon className="h-5 w-5" />
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">

@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Moon, Sun } from "lucide-react";
+import { MoonIcon, SunIcon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { ReactElement, useEffect, useState } from "react";
 
@@ -29,7 +29,7 @@ const ThemeToggle = (): ReactElement => {
       size="icon"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
-      {resolvedTheme === "light" ? <Moon /> : <Sun />}
+      {resolvedTheme === "light" ? <MoonIcon /> : <SunIcon />}
     </Button>
   );
 };

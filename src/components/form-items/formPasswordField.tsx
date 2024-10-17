@@ -8,7 +8,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utilities";
 import { Strong } from "@radix-ui/themes";
-import { Eye, EyeOff } from "lucide-react";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
 import { ReactNode, useState } from "react";
 import { ControllerRenderProps } from "react-hook-form";
 
@@ -75,7 +75,7 @@ const FormPasswordField = ({
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {/* Render the eye or eye off icon based on the state */}
-                {showPassword ? <EyeOff /> : <Eye />}
+                {showPassword ? <EyeOffIcon /> : <EyeIcon />}
               </Button>
             </div>
           )}

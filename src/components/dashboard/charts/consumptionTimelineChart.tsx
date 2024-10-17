@@ -16,7 +16,7 @@ import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Flex, Heading } from "@radix-ui/themes";
 import { LineChart } from "@tremor/react";
-import { Info } from "lucide-react";
+import { InfoIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { ReactNode, SetStateAction, useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
@@ -141,7 +141,7 @@ const ConsumptionTimelineChart = ({
         />
       ) : (
         <Alert variant={"destructive"}>
-          <Info className="h-4 w-4" />
+          <InfoIcon className="h-4 w-4" />
           <AlertTitle>{t("dashboard.card.invalidDateRange")}</AlertTitle>
         </Alert>
       )}

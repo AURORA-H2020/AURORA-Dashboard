@@ -16,7 +16,7 @@ import { cn } from "@/lib/utilities";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { Box, Flex, Grid, Heading, Text } from "@radix-ui/themes";
-import { BarChart4, Info } from "lucide-react";
+import { BarChart4Icon, InfoIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ReactElement, useEffect, useState } from "react";
 import { PlaceholderCard } from "./common/placeholderCard";
@@ -61,7 +61,7 @@ const ConsumptionSummaryPanel = ({
 
   if (!selectedConsumptionSummary) {
     return (
-      <PlaceholderCard icon={<BarChart4 />}>
+      <PlaceholderCard Icon={BarChart4Icon}>
         {t("app.summary.noDataAvailable")}
       </PlaceholderCard>
     );
@@ -119,7 +119,7 @@ const ConsumptionSummaryPanel = ({
         </Flex>
         <LabelInfoModal>
           <Button variant="ghost" size="icon">
-            <Info />
+            <InfoIcon />
           </Button>
         </LabelInfoModal>
       </Flex>

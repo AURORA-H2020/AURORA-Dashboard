@@ -19,7 +19,7 @@ import { usePaginatedRecurringConsumptions } from "@/firebase/hooks/consumption-
 import { cn } from "@/lib/utilities";
 import { useAuthContext } from "@/providers/context/authContext";
 import { Flex, Grid, Strong } from "@radix-ui/themes";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowUpDownIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
 
@@ -69,7 +69,7 @@ const RecurringConsumptionList = ({
         <DropdownMenu>
           <DropdownMenuTrigger asChild className="w-[180px]">
             <Button variant="outline" size="sm" className="h-7 gap-1 text-sm">
-              <ArrowUpDown className="h-3.5 w-3.5" />
+              <ArrowUpDownIcon className="h-3.5 w-3.5" />
               <span>{t("app.filter.order")}</span>
             </Button>
           </DropdownMenuTrigger>
