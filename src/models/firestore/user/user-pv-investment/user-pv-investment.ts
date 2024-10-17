@@ -18,6 +18,10 @@ export interface UserPvInvestment {
    */
   city: string;
   /**
+   * The PV installation ID
+   */
+  pvPlant: string;
+  /**
    * The user's note about the investment
    */
   note?: string;
