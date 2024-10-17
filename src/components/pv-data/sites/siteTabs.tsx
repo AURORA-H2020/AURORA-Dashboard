@@ -2,22 +2,30 @@
 
 import { Button } from "@/components/ui/button";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Link, usePathname } from "@/i18n/routing";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
 import { PvPlantWithID } from "@/models/extensions";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { ArrowLeftIcon } from "lucide-react";
+import { ArrowLeftIcon, CalendarDaysIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import MonthSelect from "./monthSelect";
+import { cn } from "@/lib/utilities";
 
 const SiteTabs = () => {
   const t = useTranslations();
 
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const site = searchParams.get("site");
   const date = searchParams.get("date");
@@ -41,31 +49,36 @@ const SiteTabs = () => {
   const createQueryString = useCreateQueryString();
 
   return (
-    <div className="flex justify-between gap-4">
+    <div
+      className={cn(
+        "flex flex-col justify-start gap-2 sm:flex-row sm:justify-between",
+        date && "flex-row",
+      )}
+    >
       {isLoadingPvPlants && <LoadingSpinner className="mx-auto h-10 w-8" />}
       {pvPlants && (
-        <Tabs
+        <Select
           defaultValue={activeTab}
           value={activeTab}
-          onValueChange={setActiveTab}
+          onValueChange={(value) => {
+            router.replace(pathname + "?" + createQueryString("site", value));
+            setActiveTab(value);
+          }}
         >
-          <TabsList>
+          <SelectTrigger className="w-full sm:w-[200px]">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
             {pvPlants.map((plant) => (
-              <TabsTrigger key={plant.id} value={plant.plantId} asChild>
-                <Link
-                  href={
-                    pathname + "?" + createQueryString("site", plant.plantId)
-                  }
-                >
-                  {plant.name}
-                </Link>
-              </TabsTrigger>
+              <SelectItem key={plant.id} value={plant.plantId}>
+                {plant.name}
+              </SelectItem>
             ))}
-          </TabsList>
-        </Tabs>
+          </SelectContent>
+        </Select>
       )}
       {date && (
-        <Button asChild variant="outline">
+        <Button asChild variant="outline" className="w-fit self-end">
           <Link href={pathname + "?" + createQueryString("date", null)}>
             <ArrowLeftIcon className="mr-1" />
             {t("common.goBack")}
@@ -73,7 +86,12 @@ const SiteTabs = () => {
         </Button>
       )}
       {!date && currentPlant && currentPlant.installationDate && (
-        <MonthSelect earliestDate={currentPlant.installationDate.toDate()} />
+        <div className="flex items-center gap-4">
+          <span className="text-muted-foreground">
+            <CalendarDaysIcon className="size-6" />
+          </span>
+          <MonthSelect earliestDate={currentPlant.installationDate.toDate()} />
+        </div>
       )}
     </div>
   );
