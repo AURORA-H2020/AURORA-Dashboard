@@ -5,11 +5,15 @@ import {
   useFetchUserCityData,
   useFetchUserCountryData,
 } from "@/firebase/hooks/location-hooks";
-import { useFetchUserPvInvestments } from "@/firebase/hooks/pv-hooks";
+import {
+  useFetchPvPlants,
+  useFetchUserPvInvestments,
+} from "@/firebase/hooks/pv-hooks";
 import { useFetchUserData } from "@/firebase/hooks/user-hooks";
 import {
   CountryCityWithID,
   CountryWithID,
+  PvPlantWithID,
   UserPvInvestmentWithID,
 } from "@/models/extensions";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
@@ -27,6 +31,8 @@ interface FirebaseDataContextValue {
   isLoadingUserCityData: boolean;
   pvInvestments: UserPvInvestmentWithID[] | null;
   isLoadingPvInvestments: boolean;
+  pvPlants: PvPlantWithID[];
+  isLoadingPvPlants: boolean;
   // userConsumptions: ConsumptionWithID[];
   // userRecurringConsumptions: RecurringConsumptionWithID[];
 }
@@ -64,6 +70,8 @@ export const FirebaseDataProvider: FC<{
   const { pvInvestments, isLoadingPvInvestments } =
     useFetchUserPvInvestments(user);
 
+  const { pvPlants, isLoadingPvPlants } = useFetchPvPlants();
+
   /* const userConsumptions = useFetchUserConsumptions({ user: user })?.docs.map(
         (doc) => ({
             ...(doc.data() as Consumption),
@@ -90,6 +98,8 @@ export const FirebaseDataProvider: FC<{
         isLoadingUserCityData,
         pvInvestments,
         isLoadingPvInvestments,
+        pvPlants,
+        isLoadingPvPlants,
         // userConsumptions,
         // userRecurringConsumptions,
       }}
