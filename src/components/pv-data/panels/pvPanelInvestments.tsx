@@ -58,7 +58,9 @@ const PvPanelInvestments = () => {
       <CardHeader>
         <CardTitle className="flex items-center text-xl font-semibold">
           <FileCheck2Icon className="mr-2 size-5 text-primary" />
-          {hasInvestments ? "Your Latest Investment" : "Record your Investment"}
+          {hasInvestments
+            ? t("app.pv.yourLatestInvestment")
+            : t("app.pv.recordYourInvestment")}
         </CardTitle>
       </CardHeader>
       {hasInvestments && (
@@ -87,7 +89,7 @@ const PvPanelInvestments = () => {
         {hasInvestments && (
           <ViewPvInvestmentModal>
             <Button variant={"outline"} className="w-full">
-              All Investments
+              {t("app.pv.allInvestments")}
             </Button>
           </ViewPvInvestmentModal>
         )}
