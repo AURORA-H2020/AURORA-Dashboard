@@ -30,7 +30,10 @@ export const useFetchUserCountryData = (
     useState<boolean>(true);
 
   useEffect(() => {
-    if (!user || !userData?.country) return;
+    if (!user || !userData?.country) {
+      setIsLoadingUserCountryData(false);
+      return;
+    }
 
     const docRef = doc(
       firestore,
@@ -79,7 +82,10 @@ export const useFetchUserCityData = (
     useState<boolean>(true);
 
   useEffect(() => {
-    if (!user || !userData?.country || !userData?.city) return;
+    if (!user || !userData?.country || !userData?.city) {
+      setIsLoadingUserCityData(false);
+      return;
+    }
 
     const docRef = doc(
       firestore,
