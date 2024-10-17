@@ -42,10 +42,12 @@ const PvInvestmentForm = ({
   const t = useTranslations();
   const formSchema = userPvInvestmentSchema(t);
 
-  const { userData } = useFirebaseData();
+  const { userData, pvPlants } = useFirebaseData();
   const { user } = useAuthContext() as {
     user: User;
   };
+
+  const pvPlant = pvPlants.find((p) => p.city === userData?.city);
 
   const { userCountryData } = useFirebaseData();
 
@@ -54,6 +56,7 @@ const PvInvestmentForm = ({
     share: pvInvestment?.share || undefined,
     investmentDate: pvInvestment?.investmentDate || undefined,
     city: pvInvestment?.city || userData?.city || undefined,
+    pvPlant: pvPlant?.id || undefined,
     note: pvInvestment?.note || undefined,
     createdAt: pvInvestment?.createdAt || Timestamp.now(),
     updatedAt: Timestamp.now(),
@@ -99,6 +102,7 @@ const PvInvestmentForm = ({
                 unit={userCountryData?.currencyCode ?? "EUR"}
                 placeholder={t("app.form.pvInvestment.investment")}
                 label={t("app.form.pvInvestment.investment")}
+                description={t("app.form.pvInvestment.investmentDescription")}
                 required={isFieldRequired(formSchema, "investment")}
               />
             )}
@@ -113,6 +117,7 @@ const PvInvestmentForm = ({
                 unit="kW"
                 placeholder={t("app.form.pvInvestment.share")}
                 label={t("app.form.pvInvestment.share")}
+                description={t("app.form.pvInvestment.shareDescription")}
                 required={isFieldRequired(formSchema, "share")}
               />
             )}
@@ -127,6 +132,7 @@ const PvInvestmentForm = ({
                 label={t("app.form.pvInvestment.investmentDate")}
                 required={isFieldRequired(formSchema, "investmentDate")}
                 maxDate={new Date()}
+                minDate={pvPlant?.installationDate?.toDate()}
               />
             )}
           />
@@ -138,7 +144,7 @@ const PvInvestmentForm = ({
                 field={field}
                 placeholder={t("app.form.pvInvestment.note")}
                 label={t("app.form.pvInvestment.note")}
-                description="Note description"
+                description={t("app.form.pvInvestment.noteDescription")}
                 required={isFieldRequired(formSchema, "note")}
               />
             )}
