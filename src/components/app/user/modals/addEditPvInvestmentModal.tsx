@@ -15,7 +15,7 @@ import { useFetchPvPlants } from "@/firebase/hooks/pv-hooks";
 import { Link } from "@/i18n/routing";
 import { UserPvInvestmentWithID } from "@/models/extensions";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { TriangleAlertIcon } from "lucide-react";
+import { SquareArrowOutUpRight, TriangleAlertIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ReactNode, useState } from "react";
 
@@ -52,18 +52,14 @@ const AddEditPvInvestmentModal = ({
           </DialogTitle>
         </DialogHeader>
         <ScrollArea className="max-h-[80vh]">
-          <Alert className="mb-4">
+          <Alert className="mb-4 bg-destructive/10">
             <TriangleAlertIcon className="size-4" />
-            <AlertTitle>Important!</AlertTitle>
+            <AlertTitle>{t("common.important")}!</AlertTitle>
             <AlertDescription className="flex flex-col gap-2">
               <div className="w-full">
                 {pvInvestment
-                  ? `If you made an additional investment at a later date, please
-                  add a new investment instead. Editing your existing
-                  investments may result in inaccurate tracking.`
-                  : `Entering your investment data is exclussively for recording
-                purposes. This does not formulate an actual investment or
-                binding order in any form.`}
+                  ? t("app.form.pvInvestment.editInvestmentDisclaimer")
+                  : t("app.form.pvInvestment.addInvestmentDisclaimer")}
               </div>
               {pvPlant && !pvInvestment && (
                 <Button
@@ -77,7 +73,8 @@ const AddEditPvInvestmentModal = ({
                     rel="noopener"
                     href={pvPlant.infoURL ?? "#"}
                   >
-                    How to invest?
+                    <span>{t("dashboard.pv.howToInvest")}</span>
+                    <SquareArrowOutUpRight className="ml-2 size-4" />
                   </Link>
                 </Button>
               )}
