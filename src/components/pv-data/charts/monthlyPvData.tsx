@@ -1,12 +1,14 @@
-import { PvDataGrid } from "@/components/pv-data/pvDataGrid";
+import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import { PvDataChart } from "@/components/pv-data/charts/pvDataChart";
+import { DownloadPvData } from "@/components/pv-data/download/downloadPvData";
 import { PvPanelDetails } from "@/components/pv-data/panels/pvPanelDetails";
 import { ProductionSummary } from "@/components/pv-data/panels/pvPanelProductionSummary";
+import { PvDataGrid } from "@/components/pv-data/pvDataGrid";
 import { ChartConfig } from "@/components/ui/chart";
-import { validSites } from "@/lib/constants/api-constants";
-import { Heading } from "@radix-ui/themes";
+import { LoadingSpinner } from "@/components/ui/loading";
 import { monthNames } from "@/lib/constants/common-constants";
-import { getTranslations } from "next-intl/server";
+import { Heading } from "@radix-ui/themes";
+import { getFormatter, getTranslations } from "next-intl/server";
 
 interface QpvApiResponse {
   data: {
@@ -27,6 +29,23 @@ const getDaysInMonth = (monthString: string): number => {
   return lastDayOfMonth.getDate();
 };
 
+const validateMonth = (month: string | undefined): month is string => {
+  const dateRegex = /^\d{4}-(0[1-9]|1[0-2])$/;
+  if (typeof month !== "string" || !dateRegex.test(month)) {
+    return false;
+  }
+
+  return true;
+};
+
+const validateSite = (site: string | undefined): site is string => {
+  if (typeof site !== "string") {
+    return false;
+  }
+
+  return true;
+};
+
 const MonthlyPvData = async ({
   site,
   month,
@@ -35,14 +54,10 @@ const MonthlyPvData = async ({
   month: string | undefined;
 }) => {
   const t = await getTranslations();
+  const format = await getFormatter();
 
-  if (!site || (site && !validSites.map((e) => e.id).includes(site))) {
-    return <>Invalid</>;
-  }
-
-  const dateRegex = /^\d{4}-(0[1-9]|1[0-2])$/;
-  if (!month || !dateRegex.test(month)) {
-    return <>Select a month</>;
+  if (!validateMonth(month) || !validateSite(site)) {
+    return <LoadingSpinner />;
   }
 
   const apiUrl = new URL(
@@ -67,13 +82,13 @@ const MonthlyPvData = async ({
   const { data: rawData } = (await response.json()) as QpvApiResponse;
 
   if (!rawData || rawData.length === 0) {
-    return <>No data available</>;
+    return <PlaceholderCard>{t("error.noData")}</PlaceholderCard>;
   }
 
   const data = rawData.map((item) => ({
     ...item,
-    Ep: item.Ep / 1000, // Convert from Wh to kWh
-    pretty_date: new Date(item.date).toLocaleDateString([], {
+    Ep: item.Ep,
+    pretty_date: format.dateTime(new Date(item.date), {
       month: "short",
       day: "numeric",
     }),
@@ -81,7 +96,7 @@ const MonthlyPvData = async ({
 
   const chartConfig = {
     Ep: {
-      label: "Energy",
+      label: t("common.energy"),
       color: "hsl(var(--chart-1))",
     },
   } satisfies ChartConfig;
@@ -95,19 +110,19 @@ const MonthlyPvData = async ({
           </PvDataGrid.DataPanel>
           <PvDataGrid.DataPanel>
             <ProductionSummary
-              title={`Production in ${t(monthNames[new Date(month).getMonth()])}`}
+              title={`${t("common.productionIn")} ${t(monthNames[new Date(month).getMonth()])}`}
               production={data.reduce((n, { Ep }) => n + Ep, 0)}
             />
+          </PvDataGrid.DataPanel>
+          <PvDataGrid.DataPanel className="text-right">
+            <DownloadPvData data={rawData} filename={`pv-data-${month}`} />
           </PvDataGrid.DataPanel>
         </PvDataGrid.DataPanels>
       }
     >
       <div className="flex flex-col gap-4">
         <Heading className="mb-4">
-          Production in{" "}
-          {t(monthNames[new Date(month).getMonth()]) +
-            " " +
-            new Date(month).getFullYear()}
+          {`${t("common.productionIn")} ${t(monthNames[new Date(month).getMonth()])} ${new Date(month).getFullYear()}`}
         </Heading>
         <PvDataChart
           chartType="bar"
@@ -119,7 +134,7 @@ const MonthlyPvData = async ({
           useOnClick
         />
         <p className="text-center text-sm text-muted-foreground">
-          Select a bar to see a breakdown for a specific day.
+          {t("dashboard.pv.selectBarToSeeDailyBreakdown")}
         </p>
       </div>
     </PvDataGrid>
