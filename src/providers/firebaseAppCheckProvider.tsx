@@ -11,7 +11,7 @@ import { ReactNode, useEffect } from "react";
  * @param {ReactNode} children - The children nodes.
  * @return {ReactNode} The rendered children.
  */
-export const FirebaseAppCheckProvider = ({
+const FirebaseAppCheckProvider = ({
   children,
 }: {
   children: ReactNode;
@@ -38,3 +38,5 @@ export const FirebaseAppCheckProvider = ({
 
   return <>{children}</>;
 };
+
+export { FirebaseAppCheckProvider };

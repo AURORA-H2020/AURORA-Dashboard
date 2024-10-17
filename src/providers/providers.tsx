@@ -4,12 +4,13 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthContextProvider } from "@/providers/context/authContext";
 import { FirebaseDataProvider } from "@/providers/context/firebaseContext";
-import { FirebaseAppCheckProvider } from "@/providers/firebaseAppCheckProvider";
+
 import { Theme } from "@radix-ui/themes";
 import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 import type { ThemeProviderProps } from "next-themes/dist/types";
 import { ReactNode } from "react";
+import { FirebaseAppCheckProvider } from "./FirebaseAppCheckProvider";
 
 /**
  * Renders the Providers component.
