@@ -2,21 +2,20 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart3Icon } from "lucide-react";
-import { useFormatter } from "next-intl";
+import { useFormatter, useTranslations } from "next-intl";
 
 type ProductionSummaryProps = {
   title: string;
   production: number;
   productionStart?: Date;
-  unit?: "kWh" | "Wh";
 };
 
 export function ProductionSummary({
   title,
   production,
   productionStart,
-  unit = "kWh",
 }: ProductionSummaryProps) {
+  const t = useTranslations();
   const format = useFormatter();
 
   return (
@@ -32,12 +31,12 @@ export function ProductionSummary({
           {format.number(production, {
             maximumFractionDigits: production > 10 ? 0 : 1,
           })}{" "}
-          <span className="text-2xl">{unit}</span>
+          <span className="text-2xl">kWh</span>
         </div>
 
         {productionStart && (
           <span className="text-sm font-semibold text-muted-foreground">
-            Since{" "}
+            {t("common.since")}{" "}
             <span>
               {format.dateTime(productionStart, {
                 day: "numeric",
