@@ -3,17 +3,17 @@
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utilities";
 import { Flex, Text } from "@radix-ui/themes";
-import { HelpCircle } from "lucide-react";
-import { cloneElement, ReactElement, ReactNode } from "react";
+import { CircleHelpIcon, LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 
 const PlaceholderCard = ({
   children,
   className,
-  icon = <HelpCircle />,
+  Icon = CircleHelpIcon,
 }: {
   children: ReactNode;
   className?: string;
-  icon?: ReactElement;
+  Icon?: LucideIcon;
 }): ReactNode => {
   const size = 50;
 
@@ -22,7 +22,7 @@ const PlaceholderCard = ({
       <CardHeader>
         <CardTitle className="text-muted-foreground">
           <Flex direction="column" gap="4" align="center">
-            {cloneElement(icon, { size })}
+            <Icon size={size} />
             <Text size="5">{children}</Text>
           </Flex>
         </CardTitle>
