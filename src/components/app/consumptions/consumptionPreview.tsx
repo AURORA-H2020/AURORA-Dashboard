@@ -28,12 +28,12 @@ import { ConsumptionWithID } from "@/models/extensions";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { Flex, Text } from "@radix-ui/themes";
+import { FileQuestionIcon, Sunrise } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { ReactNode, useState } from "react";
 import { toast } from "sonner";
 import { ConsumptionView } from "./consumptionView";
 import { AddEditConsumptionModal } from "./modals/addEditConsumptionModal";
-import { FileQuestionIcon } from "lucide-react";
 
 /**
  * Renders a preview of a consumption object with interactive
@@ -68,7 +68,13 @@ const ConsumptionPreview = ({
     carbonUnit,
   );
 
+  const isPvInvestment =
+    consumption.electricity?.electricitySource === "pvInvestment";
+
   const consumptionAttributes = getConsumptionAttributes(consumption.category);
+  if (consumptionAttributes && isPvInvestment) {
+    consumptionAttributes.icon = Sunrise;
+  }
 
   // State to manage the visibility of the modal
   const [isModalOpen, setModalOpen] = useState(false);
@@ -127,7 +133,9 @@ const ConsumptionPreview = ({
 
               <Flex direction={"column"}>
                 <Text className="font-bold">
-                  {t(`category.${consumption.category}`)}
+                  {isPvInvestment
+                    ? t("category.pvInvestment")
+                    : t(`category.${consumption.category}`)}
                 </Text>
                 <Text className="text-sm text-muted-foreground">
                   {consumption.createdAt
@@ -160,7 +168,11 @@ const ConsumptionPreview = ({
       <Dialog open={isModalOpen} onOpenChange={() => setModalOpen(false)}>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader>
-            <DialogTitle>{t(`category.${consumption.category}`)}</DialogTitle>
+            <DialogTitle>
+              {isPvInvestment
+                ? t("category.pvInvestment")
+                : t(`category.${consumption.category}`)}
+            </DialogTitle>
           </DialogHeader>
           <ScrollArea className="max-h-[80vh]">
             <ConsumptionView consumption={consumption} />
@@ -173,17 +185,19 @@ const ConsumptionPreview = ({
                 >
                   {t("common.delete")}
                 </Button>
-                <Flex className="gap-2">
-                  <AddEditConsumptionModal consumption={consumption}>
-                    <Button variant="outline">{t("common.edit")}</Button>
-                  </AddEditConsumptionModal>
-                  <AddEditConsumptionModal
-                    consumption={consumption}
-                    isDuplication={true}
-                  >
-                    <Button variant="outline">{t("common.duplicate")}</Button>
-                  </AddEditConsumptionModal>
-                </Flex>
+                {isPvInvestment ? null : (
+                  <Flex className="gap-2">
+                    <AddEditConsumptionModal consumption={consumption}>
+                      <Button variant="outline">{t("common.edit")}</Button>
+                    </AddEditConsumptionModal>
+                    <AddEditConsumptionModal
+                      consumption={consumption}
+                      isDuplication={true}
+                    >
+                      <Button variant="outline">{t("common.duplicate")}</Button>
+                    </AddEditConsumptionModal>
+                  </Flex>
+                )}
               </Flex>
             </DialogFooter>
           </ScrollArea>

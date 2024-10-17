@@ -1,4 +1,6 @@
 import { ConsumptionTableRow } from "@/components/app/common/consumptionTableRow";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Button } from "@/components/ui/button";
 import { Table, TableBody, TableCaption } from "@/components/ui/table";
 import { Link } from "@/i18n/routing";
 import { carbonUnit } from "@/lib/constants/common-constants";
@@ -6,6 +8,7 @@ import { consumptionMapping } from "@/lib/constants/consumption-constants";
 import { getConsumptionUnit, useConvertUnit } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
+import { SunriseIcon } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
 import { ReactNode } from "react";
 
@@ -24,7 +27,8 @@ const ConsumptionView = ({
   const t = useTranslations();
   const format = useFormatter();
 
-  const { userData, userCountryData } = useFirebaseData();
+  const { userData, userCountryData, pvPlants, pvInvestments } =
+    useFirebaseData();
 
   const convertedValue = useConvertUnit(
     consumption.value,
@@ -50,12 +54,37 @@ const ConsumptionView = ({
     userData?.settings?.unitSystem ?? "metric",
   );
 
+  const isPvInvestment =
+    consumption.electricity?.electricitySource === "pvInvestment";
+
   const consumptionAttributes = consumptionMapping.find(
     (c) => c.category == consumption.category,
   );
+  if (consumptionAttributes && isPvInvestment) {
+    // t("common.production")
+    consumptionAttributes.unitLabel = "common.production";
+  }
 
   return (
     <>
+      <Alert className="mb-4 flex gap-4 bg-primary/5">
+        <div>
+          <SunriseIcon className="size-10" color="#eab308" />
+        </div>
+        <div className="flex w-full flex-col gap-4">
+          <AlertDescription className="flex flex-col gap-2">
+            <div className="w-full">
+              {t("app.form.pvInvestment.automaticGenerationDisclaimer")}
+            </div>
+          </AlertDescription>
+
+          <Button size="sm" variant="outline" asChild className="self-end">
+            <Link href="/account/pv">
+              {t("app.form.pvInvestment.manageInvestment")}
+            </Link>
+          </Button>
+        </div>
+      </Alert>
       <Table className="mt-4 table-fixed">
         <TableBody>
           <ConsumptionTableRow
@@ -67,13 +96,30 @@ const ConsumptionView = ({
           <ConsumptionTableRow label={t("common.carbonEmissions")}>
             {convertedCarbonEmissions?.toString() ?? t("common.calculating")}
           </ConsumptionTableRow>
-          <ConsumptionTableRow label={t("common.energyUsage")}>
-            {consumption.energyExpended !== undefined
-              ? format.number(consumption.energyExpended, {
-                  maximumFractionDigits: 1,
-                }) + " kWh"
-              : t("common.calculating")}
-          </ConsumptionTableRow>
+          {!isPvInvestment && (
+            <ConsumptionTableRow label={t("common.energyUsage")}>
+              {consumption.energyExpended !== undefined
+                ? format.number(consumption.energyExpended, {
+                    maximumFractionDigits: 1,
+                  }) + " kWh"
+                : t("common.calculating")}
+            </ConsumptionTableRow>
+          )}
+          {isPvInvestment && pvInvestments && (
+            <ConsumptionTableRow
+              label={t("app.form.pvInvestment.installationSite")}
+            >
+              {
+                pvPlants.find(
+                  (p) =>
+                    p.id ===
+                    pvInvestments.find(
+                      (i) => i.id === consumption.generatedByPvInvestmentId,
+                    )?.pvPlant,
+                )?.name
+              }
+            </ConsumptionTableRow>
+          )}
         </TableBody>
       </Table>
 
@@ -93,10 +139,11 @@ const ConsumptionView = ({
                 {consumption.electricity.electricityExported + " kWh"}
               </ConsumptionTableRow>
             )}
-
-            <ConsumptionTableRow label={t("app.form.peopleInHousehold")}>
-              {consumption.electricity.householdSize}
-            </ConsumptionTableRow>
+            {!isPvInvestment && (
+              <ConsumptionTableRow label={t("app.form.peopleInHousehold")}>
+                {consumption.electricity.householdSize}
+              </ConsumptionTableRow>
+            )}
             <ConsumptionTableRow label={t("app.form.electricitySource")}>
               {t(
                 `category.sources.${consumption.electricity.electricitySource}`,
