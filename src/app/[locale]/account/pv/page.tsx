@@ -147,23 +147,24 @@ const PvPage = () => {
         {firstInvestmentDate && (
           <>
             <div className="mb-6 flex flex-col gap-4">
-              <Heading>
+              <Heading className="break-words">
                 {showLifetime
                   ? `${t("common.productionSince")} ${format.dateTime(firstInvestmentDate.toDate(), { year: "numeric", month: "long", day: "numeric" })}`
                   : t("app.pv.productionInLast30Days")}
               </Heading>
-              <div className="mb-4 flex items-center justify-between">
+              <div className="sm: mb-4 flex flex-col justify-start gap-2 sm:flex-row sm:items-center sm:justify-between">
+                {/* sm:flex-row sm:justify-between */}
                 <Tabs
                   value={productionDisplay}
                   onValueChange={(value) =>
                     setProductionDisplay(value as "total" | "personal")
                   }
                 >
-                  <TabsList>
-                    <TabsTrigger value="personal">
+                  <TabsList className="w-full">
+                    <TabsTrigger value="personal" className="w-full">
                       {t("app.pv.yourProduction")}
                     </TabsTrigger>
-                    <TabsTrigger value="total">
+                    <TabsTrigger value="total" className="w-full">
                       {t("app.pv.totalProduction")}
                     </TabsTrigger>
                   </TabsList>

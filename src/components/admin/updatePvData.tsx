@@ -37,10 +37,12 @@ const UpdatePvData = () => {
           <CardHeader>
             <CardTitle>{pvPlant.name}</CardTitle>
           </CardHeader>
-          <CardContent className="flex flex-col">
+          <CardContent className="flex flex-col gap-2">
             {Object.keys(pvPlant).map((key) => (
               <div key={key}>
-                {key.toString()}: {pvPlant[key].toString()}
+                <span className="font-bold">{key.toString()}</span>
+                <br />
+                {pvPlant[key].toString()}
               </div>
             ))}
             <Button

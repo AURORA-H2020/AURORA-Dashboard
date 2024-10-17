@@ -55,8 +55,8 @@ const PvDataChart = ({
   };
 
   return (
-    <ChartContainer config={chartConfig} className="min-h-[200px] w-full">
-      <ChartComponent data={chartData} barGap={-10}>
+    <ChartContainer config={chartConfig} className="min-h-[100px] w-full">
+      <ChartComponent data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis dataKey={xDataKey} tickLine={false} axisLine={false} />
         <YAxis tickLine={false} axisLine={false} unit={"kWh"} />

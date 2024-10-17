@@ -59,8 +59,8 @@ const AdminPage = (): ReactNode => {
   return (
     <Tabs defaultValue="pv">
       <TabsList>
-        <TabsTrigger value="pv">Account</TabsTrigger>
-        <TabsTrigger value="users">Password</TabsTrigger>
+        <TabsTrigger value="pv">PV Data</TabsTrigger>
+        <TabsTrigger value="users">Users</TabsTrigger>
       </TabsList>
       <TabsContent value="pv">
         <UpdatePvData />
