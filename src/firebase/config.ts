@@ -2,6 +2,7 @@ import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { FirebaseApp, getApp, getApps, initializeApp } from "firebase/app";
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
+import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
 import { connectStorageEmulator, getStorage } from "firebase/storage";
 
 // Firebase configuration
@@ -36,6 +37,10 @@ if (process.env.NEXT_PUBLIC_TEST_MODE === "true") {
   // Authentication Emulator
   const auth = getAuth(firebaseApp);
   connectAuthEmulator(auth, "http://localhost:9099");
+
+  // Function Emulator
+  const functions = getFunctions(firebaseApp);
+  connectFunctionsEmulator(functions, "localhost", 5001);
 }
 
 export { firebaseApp };
