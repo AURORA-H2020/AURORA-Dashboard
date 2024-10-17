@@ -80,8 +80,8 @@ export const useFetchUserPvInvestments = (
 export const useFetchPlantPvData = (
   plant: string | undefined,
   toDate?: Timestamp | undefined,
-): { pvData: PvPlantData[] | null; isLoadingPvData: boolean } => {
-  const [pvData, setPvData] = useState<PvPlantData[] | null>(null);
+): { pvData: PvPlantData[]; isLoadingPvData: boolean } => {
+  const [pvData, setPvData] = useState<PvPlantData[]>([]);
 
   const [isLoadingPvData, setIsLoadingPvData] = useState<boolean>(true);
 
@@ -133,8 +133,8 @@ export const useFetchPlantPvData = (
 export const useFetchPvPlants = (
   city?: string,
   country?: string,
-): { pvPlants: PvPlantWithID[] | null; isLoadingPvPlants: boolean } => {
-  const [pvPlants, setPvPlants] = useState<PvPlantWithID[] | null>(null);
+): { pvPlants: PvPlantWithID[]; isLoadingPvPlants: boolean } => {
+  const [pvPlants, setPvPlants] = useState<PvPlantWithID[]>([]);
 
   const [isLoadingPvPlants, setIsLoadingPvPlants] = useState<boolean>(true);
 
@@ -149,7 +149,7 @@ export const useFetchPvPlants = (
     const addWhereClause = (
       field: string,
       operator: WhereFilterOp,
-      value: string,
+      value: string | number | boolean,
     ) => {
       q = query(q, where(field, operator, value));
     };
