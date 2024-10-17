@@ -1,6 +1,7 @@
 "use client";
 
 import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthContextProvider } from "@/providers/context/authContext";
 import { FirebaseDataProvider } from "@/providers/context/firebaseContext";
 import { FirebaseAppCheckProvider } from "@/providers/firebaseAppCheckProvider";
@@ -35,8 +36,10 @@ const Providers = ({
           <FirebaseDataProvider>
             <Theme>
               <NextThemesProvider {...props}>
-                {children}
-                <Toaster richColors />
+                <TooltipProvider>
+                  {children}
+                  <Toaster richColors />
+                </TooltipProvider>
               </NextThemesProvider>
             </Theme>
           </FirebaseDataProvider>
