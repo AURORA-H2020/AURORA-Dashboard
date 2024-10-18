@@ -53,7 +53,7 @@ const SiteTabs = () => {
   return (
     <div
       className={cn(
-        "flex flex-col justify-start gap-2 sm:flex-row sm:justify-between",
+        "flex flex-col justify-start gap-2 md:flex-row md:justify-between",
         date && "flex-row",
       )}
     >
@@ -67,7 +67,7 @@ const SiteTabs = () => {
             setActiveTab(value);
           }}
         >
-          <SelectTrigger className="w-full sm:w-[200px]">
+          <SelectTrigger className="w-full md:w-[200px]">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -88,7 +88,7 @@ const SiteTabs = () => {
         </Button>
       )}
       {!date && currentPlant && currentPlant.installationDate && month && (
-        <div className="flex items-center justify-between gap-4 md:justify-end">
+        <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center sm:justify-end sm:gap-4">
           <div className="flex items-center gap-2">
             <span className="text-muted-foreground">
               <CalendarDaysIcon className="size-6" />
@@ -97,8 +97,11 @@ const SiteTabs = () => {
               earliestDate={currentPlant.installationDate.toDate()}
             />
           </div>
-          <Separator orientation="vertical" className="h-[80%]" />
-          <Button asChild variant="outline" className="self-end">
+          <Separator
+            orientation="vertical"
+            className="hidden h-[80%] sm:block"
+          />
+          <Button asChild variant="outline" className="w-fit sm:self-end">
             <Link href={pathname + "?" + createQueryString("month", null)}>
               <RocketIcon className="mr-2 size-5" />
               {t("common.sinceStart")}
