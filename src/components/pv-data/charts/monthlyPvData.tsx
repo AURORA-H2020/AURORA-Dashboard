@@ -112,7 +112,10 @@ const MonthlyPvData = async ({
           xDataKey="pretty_date"
           unit="kWh"
           decimals={2}
-          useOnClick
+          useOnClick={{
+            path: "date",
+            valueKey: "date",
+          }}
         />
         <p className="text-center text-sm text-muted-foreground">
           {t("dashboard.pv.selectBarToSeeDailyBreakdown")}

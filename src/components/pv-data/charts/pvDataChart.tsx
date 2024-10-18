@@ -29,7 +29,7 @@ const PvDataChart = ({
   xDataKey,
   unit,
   decimals = 0,
-  useOnClick = false,
+  useOnClick,
 }: {
   chartData: any[];
   chartType: "bar" | "line";
@@ -37,7 +37,7 @@ const PvDataChart = ({
   xDataKey: string;
   unit?: string;
   decimals?: number;
-  useOnClick?: boolean;
+  useOnClick?: { path: string; valueKey: string };
 }) => {
   const pathname = usePathname();
   const router = useRouter();
@@ -75,7 +75,12 @@ const PvDataChart = ({
               onClick={(data) => {
                 if (!useOnClick) return;
                 router.push(
-                  pathname + "?" + createQueryString("date", data["date"]),
+                  pathname +
+                    "?" +
+                    createQueryString(
+                      useOnClick.path,
+                      data[useOnClick.valueKey],
+                    ),
                 );
               }}
             />
