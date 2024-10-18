@@ -140,9 +140,14 @@ const ViewPvInvestmentModal = ({
                   <AlertDialogContent>
                     <AlertDialogHeader>
                       <AlertDialogTitle>
-                        {t("app.form.deleteConsumptionDialogTitle")}
+                        {t(
+                          "app.form.pvInvestment.deleteInvestmentDialog.title",
+                        )}
                       </AlertDialogTitle>
                     </AlertDialogHeader>
+
+                    {t("app.form.pvInvestment.deleteInvestmentDialog.body")}
+
                     <AlertDialogFooter>
                       <Flex justify="between" className="gap-4">
                         <Button
