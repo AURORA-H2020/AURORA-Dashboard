@@ -15,7 +15,7 @@ const downloadFile = async (path: string): Promise<any> => {
   const storageRef = ref(firebaseStorage, path);
 
   const downloadURL = await getDownloadURL(storageRef);
-  const response = await fetch(downloadURL, {});
+  const response = await fetch(downloadURL, { next: { revalidate: 3600 } });
   const downloadedFile = await response.json();
 
   return downloadedFile;

@@ -64,6 +64,9 @@ const CurrentDayPvData = async ({
     headers: {
       Authorization: `Bearer ${process.env.PV_API_TOKEN}`,
     },
+    next: {
+      revalidate: 3600,
+    },
   });
 
   const { data: rawData } = (await response.json()) as QpvApiResponse;
