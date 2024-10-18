@@ -15,12 +15,12 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { deleteDocumentById } from "@/firebase/firestore/delete-document-by-id";
 import { UserPvInvestmentWithID } from "@/models/extensions";
 import { useAuthContext } from "@/providers/context/authContext";
@@ -94,14 +94,14 @@ const ViewPvInvestmentModal = ({
                   {t("app.form.pvInvestment.add")}
                 </Button>
               </AddEditPvInvestmentModal>
-              <Tooltip delayDuration={0}>
-                <TooltipTrigger className="text-muted-foreground">
+              <Popover>
+                <PopoverTrigger className="text-muted-foreground">
                   <CircleHelpIcon />
-                </TooltipTrigger>
-                <TooltipContent className="max-w-[250px]">
+                </PopoverTrigger>
+                <PopoverContent className="max-w-[250px] text-sm">
                   <p>{t("app.pv.multipleInvestmentsDisclaimer")}</p>
-                </TooltipContent>
-              </Tooltip>
+                </PopoverContent>
+              </Popover>
             </div>
           </DialogHeader>
           <ScrollArea className="max-h-[80vh]">

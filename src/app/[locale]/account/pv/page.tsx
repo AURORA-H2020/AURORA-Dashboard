@@ -10,13 +10,13 @@ import { Button } from "@/components/ui/button";
 import { ChartConfig } from "@/components/ui/chart";
 import { Label } from "@/components/ui/label";
 import { LoadingSpinner } from "@/components/ui/loading";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import {
   useFetchPlantPvData,
   useFetchPvPlants,
@@ -170,14 +170,14 @@ const PvPage = () => {
                   </TabsList>
                 </Tabs>
                 <div className="flex items-center space-x-2">
-                  <Tooltip delayDuration={0}>
-                    <TooltipTrigger className="text-muted-foreground">
+                  <Popover>
+                    <PopoverTrigger className="text-muted-foreground">
                       <CircleHelpIcon className="size-5" />
-                    </TooltipTrigger>
-                    <TooltipContent>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-[200px] text-sm">
                       <p>{t("app.pv.showProductionSinceFirstInvestment")}</p>
-                    </TooltipContent>
-                  </Tooltip>
+                    </PopoverContent>
+                  </Popover>
                   <Label htmlFor="show-lifetime">
                     {t("app.pv.showLifetime")}
                   </Label>
