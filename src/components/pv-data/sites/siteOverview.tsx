@@ -22,12 +22,13 @@ import {
   countriesMapping,
 } from "@/lib/constants/common-constants";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
+import { dateToKebabCase } from "@/lib/utilities";
 import { PvPlantWithID } from "@/models/extensions";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import {
   BatteryChargingIcon,
   Building2Icon,
-  CalendarIcon,
+  CalendarArrowUp,
   EarthIcon,
   LucideIcon,
   ZapIcon,
@@ -77,12 +78,16 @@ const SiteOverview = () => {
       value: `${site.capacity} kW`,
     },
     {
-      icon: CalendarIcon,
+      icon: CalendarArrowUp,
       label: t("dashboard.pv.productionStart"),
       value: site.installationDate
-        ? format.dateTime(site.installationDate.toDate(), {
-            dateStyle: "long",
-          })
+        ? `${t("common.since")} ${format.dateTime(
+            site.installationDate.toDate(),
+            {
+              month: "short",
+              year: "2-digit",
+            },
+          )}`
         : t("common.notApplicable"),
     },
   ];

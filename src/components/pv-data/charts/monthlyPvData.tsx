@@ -111,7 +111,7 @@ const MonthlyPvData = async ({
           chartConfig={chartConfig}
           xDataKey="pretty_date"
           unit="kWh"
-          decimals={2}
+          decimals={1}
           useOnClick={{
             path: "date",
             valueKey: "date",

@@ -103,7 +103,7 @@ const CurrentDayPvData = async ({
           chartConfig={chartConfig}
           xDataKey="time"
           unit="Wh"
-          decimals={2}
+          decimals={1}
         />
       </div>
     </PvDataGrid>

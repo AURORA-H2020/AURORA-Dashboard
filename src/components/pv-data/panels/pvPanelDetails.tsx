@@ -22,7 +22,7 @@ import {
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import {
   BatteryChargingIcon,
-  CalendarIcon,
+  CalendarArrowUp,
   CpuIcon,
   FactoryIcon,
   LucideIcon,
@@ -46,7 +46,7 @@ const PvPanelDetails = ({ site }: { site: string }) => {
 
   const country = countriesMapping.find((c) => c.ID === siteDetails.country);
   const city = citiesMappings.find((c) => c.ID === siteDetails.city);
-  const location = [t(country?.name), t(city?.name)].join(", ");
+  const location = [t(city?.name), t(country?.name)].join(", ");
 
   const details: Array<{
     icon: LucideIcon;
@@ -74,7 +74,7 @@ const PvPanelDetails = ({ site }: { site: string }) => {
       value: siteDetails.technology,
     },
     {
-      icon: CalendarIcon,
+      icon: CalendarArrowUp,
       label: t("dashboard.pv.productionStart"),
       value:
         siteDetails.installationDate &&
