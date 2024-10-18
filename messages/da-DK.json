@@ -149,7 +149,8 @@
       "selectBarToSeeDailyBreakdown": "Select a bar to see a breakdown for a specific day.",
       "unsupportedRegionMessage": "This feature is currently not supported in your region.",
       "solarPowerProduction": "Solar Power Production",
-      "unsupportedSearchParams": "Unsupported search parameters"
+      "unsupportedSearchParams": "Unsupported search parameters",
+      "lifetimeProduction": "Lifetime Production"
     }
   },
   "error": {
@@ -329,7 +330,7 @@
         "installationSite": "Installation Site",
         "automaticGenerationDisclaimer": "This entry was created by your PV investment. It will update automatically with the latest data.",
         "manageInvestment": "Manage Investment",
-        "editInvestmentDisclaimer": "If you made an additional investment at a later date, please add a new investment instead. Editing your existing investments may result in inaccurate tracking.",
+        "editInvestmentDisclaimer": "If you have made additional investments at a later date, please add a new investment instead. Editing your existing investments may result in inaccurate tracking.",
         "addInvestmentDisclaimer": "Entering your investment data is exclussively for recording purposes. This does not formulate an actual investment or binding order in any form.",
         "noteDescription": "Add a note to your investment for personal reference",
         "investmentDescription": "The amount of money you invested",
@@ -415,9 +416,9 @@
         "title": "How does it work?"
       },
       "seeFullData": "See full data",
-      "productionInLast30Days": "Production in the last 30 days",
+      "productionInLast30Days": "Production in the past 30 days",
       "showProductionSinceFirstInvestment": "Show production since your first investment",
-      "showLifetime": "Show lifetime",
+      "showLifetime": "Since Investment",
       "yourInvestment": "Your Investments",
       "multipleInvestmentsDisclaimer": "Adding multiple investments is only necessary if you later buy additional shares.",
       "yourLatestInvestment": "Your Latest Investment",
@@ -473,7 +474,8 @@
     "since": "Since",
     "notApplicable": "Not applicable",
     "goBack": "Go back",
-    "energy": "Energy"
+    "energy": "Energy",
+    "sinceStart": "Since start"
   },
   "country": {
     "allSelectedCountries": "Alle valgte lande",

@@ -138,7 +138,7 @@
       "downloadSnapshot": "Diesen Snapshot herunterladen"
     },
     "pv": {
-      "howToInvest": "Wie kann man investieren?",
+      "howToInvest": "Wie kann ich investieren?",
       "solarPanelInformation": "Informationen zum Solarmodul",
       "productionStart": "Beginn der Produktion",
       "technology": "Technologie",
@@ -149,7 +149,8 @@
       "selectBarToSeeDailyBreakdown": "Wählen Sie einen Balken, um eine Aufschlüsselung für einen bestimmten Tag zu sehen.",
       "unsupportedRegionMessage": "Diese Funktion wird derzeit in Ihrer Region nicht unterstützt.",
       "solarPowerProduction": "Solarenergieproduktion",
-      "unsupportedSearchParams": "Nicht unterstützte Suchparameter"
+      "unsupportedSearchParams": "Nicht unterstützte Suchparameter",
+      "lifetimeProduction": "Gesamtproduktion"
     }
   },
   "error": {
@@ -417,7 +418,7 @@
       "seeFullData": "Alle Daten zeigen",
       "productionInLast30Days": "Produktion in den letzten 30 Tagen",
       "showProductionSinceFirstInvestment": "Produktion seit Ihrer ersten Investition anzeigen",
-      "showLifetime": "Gesamtzeitraum",
+      "showLifetime": "Seit Investition",
       "yourInvestment": "Ihre Investitionen",
       "multipleInvestmentsDisclaimer": "Das Hinzufügen mehrerer Investitionen ist nur dann erforderlich, wenn Sie später in zusätzliche Anteile investieren.",
       "yourLatestInvestment": "Ihre letzte Investition",
@@ -473,7 +474,8 @@
     "since": "Seit",
     "notApplicable": "Nicht zutreffend",
     "goBack": "Zurück",
-    "energy": "Energie"
+    "energy": "Energie",
+    "sinceStart": "Seit Beginn"
   },
   "country": {
     "allSelectedCountries": "Alle ausgewählten Länder",
