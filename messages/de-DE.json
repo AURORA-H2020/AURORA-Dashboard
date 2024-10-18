@@ -148,7 +148,8 @@
       "noActiveInstallation": "Keine aktiven Solaranlagen gefunden",
       "selectBarToSeeDailyBreakdown": "Wählen Sie einen Balken, um eine Aufschlüsselung für einen bestimmten Tag zu sehen.",
       "unsupportedRegionMessage": "Diese Funktion wird derzeit in Ihrer Region nicht unterstützt.",
-      "solarPowerProduction": "Solarenergieproduktion"
+      "solarPowerProduction": "Solarenergieproduktion",
+      "unsupportedSearchParams": "Nicht unterstützte Suchparameter"
     }
   },
   "error": {
@@ -332,7 +333,11 @@
         "addInvestmentDisclaimer": "Die Eingabe Ihrer Anlagedaten dient ausschliesslich der Erfassung. Dies stellt keine tatsächliche Investition oder verbindliche Bestellung in irgendeiner Form dar.",
         "noteDescription": "Fügen Sie eine Notiz zu Ihrer Investition als persönliche Referenz hinzu",
         "investmentDescription": "Der von Ihnen investierte Geldbetrag",
-        "shareDescription": "Wie viel der Kapazität der Solaranlage Ihre Investition ausmacht. Diese Informationen finden Sie in den Unterlagen, die Sie bei Ihrer Investition erhalten haben."
+        "shareDescription": "Wie viel der Kapazität der Solaranlage Ihre Investition ausmacht. Diese Informationen finden Sie in den Unterlagen, die Sie bei Ihrer Investition erhalten haben.",
+        "deleteInvestmentDialog": {
+          "title": "Sind Sie sicher, dass Sie diese Investition löschen wollen?",
+          "body": "Das Löschen einer Investition entfernt nicht automatisch den zugehörigen Verbrauchseintrag aus Ihrem Profil, sondern verhindert, dass bestehende Einträge aktualisiert werden."
+        }
       }
     },
     "filter": {
@@ -406,7 +411,7 @@
       "yourProduction": "Ihre Produktion",
       "totalProduction": "Produktion insgesamt",
       "featureGuide": {
-        "body": "Ihre Investition in Ihre lokale AURORA-Solaranlage trägt dazu bei, Ihren ökologischen Fußabdruck zu verringern. Hier sehen Sie eine Aufschlüsselung der gesamten von der Anlage erzeugten Energie (Produktion insgesamt) und den Beitrag Ihrer Investition (Ihre Produktion). Ihr Beitrag wird automatisch am Ende eines jeden Monats als Ausgleich zu Ihrem Profil hinzugefügt, um Ihnen zu helfen, Ihre Emissionen nahezu auf Null zu reduzieren.",
+        "body": "Ihre Investition in Ihre lokale AURORA-Solaranlage trägt dazu bei, Ihren ökologischen Fußabdruck zu verringern. Hier sehen Sie eine Aufschlüsselung der gesamten von der Anlage erzeugten Energie (Produktion insgesamt) und den Beitrag Ihrer Investition (Ihre Produktion). Ihr Beitrag wird jeden Freitag Morgen automatisch als Ausgleich zu Ihrem Profil hinzugefügt, um Ihnen zu helfen, Ihre Emissionen nahezu auf Null zu reduzieren.",
         "title": "Wie funktioniert das?"
       },
       "seeFullData": "Alle Daten zeigen",
