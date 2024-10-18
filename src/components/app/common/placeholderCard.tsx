@@ -1,5 +1,3 @@
-"use client";
-
 import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utilities";
 import { Flex, Text } from "@radix-ui/themes";
