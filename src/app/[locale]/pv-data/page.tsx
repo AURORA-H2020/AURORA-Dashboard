@@ -1,11 +1,10 @@
-import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import CurrentDayPvData from "@/components/pv-data/charts/currentDayPvData";
+import LifetimePvData from "@/components/pv-data/charts/lifetimePvData";
 import MonthlyPvData from "@/components/pv-data/charts/monthlyPvData";
 import { SiteOverview } from "@/components/pv-data/sites/siteOverview";
 import { SiteTabs } from "@/components/pv-data/sites/siteTabs";
 import { LoadingSpinner } from "@/components/ui/loading";
 import { Heading } from "@radix-ui/themes";
-import { OctagonAlert } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 
@@ -60,9 +59,7 @@ const PvDataPage = async ({
               validateMonth(month) ? (
                 <MonthlyPvData site={site} month={month} />
               ) : (
-                <PlaceholderCard Icon={OctagonAlert}>
-                  {t("dashboard.pv.unsupportedSearchParams")}
-                </PlaceholderCard>
+                <LifetimePvData site={site} />
               )
             ) : (
               <CurrentDayPvData site={site} date={date} />

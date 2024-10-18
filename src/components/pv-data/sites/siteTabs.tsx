@@ -11,14 +11,15 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
-import { cn } from "@/lib/utilities";
+import { cn, dateToKebabCase } from "@/lib/utilities";
 import { PvPlantWithID } from "@/models/extensions";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { ArrowLeftIcon, CalendarDaysIcon } from "lucide-react";
+import { ArrowLeftIcon, CalendarDaysIcon, RocketIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import MonthSelect from "./monthSelect";
+import { Separator } from "@/components/ui/separator";
 
 const SiteTabs = () => {
   const t = useTranslations();
@@ -29,6 +30,7 @@ const SiteTabs = () => {
 
   const site = searchParams.get("site");
   const date = searchParams.get("date");
+  const month = searchParams.get("month");
 
   const { pvPlants, isLoadingPvPlants } = useFirebaseData();
 
@@ -85,13 +87,43 @@ const SiteTabs = () => {
           </Link>
         </Button>
       )}
-      {!date && currentPlant && currentPlant.installationDate && (
-        <div className="flex items-center gap-4">
-          <span className="text-muted-foreground">
-            <CalendarDaysIcon className="size-6" />
-          </span>
-          <MonthSelect earliestDate={currentPlant.installationDate.toDate()} />
+      {!date && currentPlant && currentPlant.installationDate && month && (
+        <div className="flex items-center justify-between gap-4 md:justify-end">
+          <div className="flex items-center gap-2">
+            <span className="text-muted-foreground">
+              <CalendarDaysIcon className="size-6" />
+            </span>
+            <MonthSelect
+              earliestDate={currentPlant.installationDate.toDate()}
+            />
+          </div>
+          <Separator orientation="vertical" className="h-[80%]" />
+          <Button asChild variant="outline" className="self-end">
+            <Link href={pathname + "?" + createQueryString("month", null)}>
+              <RocketIcon className="mr-2 size-5" />
+              {t("common.sinceStart")}
+            </Link>
+          </Button>
         </div>
+      )}
+      {site && !month && !date && (
+        <Button asChild variant="outline" className="w-fit self-end">
+          <Link
+            href={
+              pathname +
+              "?" +
+              createQueryString(
+                "month",
+                dateToKebabCase(new Date(), {
+                  excludeDay: true,
+                }),
+              )
+            }
+          >
+            <ArrowLeftIcon className="mr-1" />
+            {t("common.goBack")}
+          </Link>
+        </Button>
       )}
     </div>
   );

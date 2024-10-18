@@ -134,7 +134,16 @@ const SiteOverview = () => {
               disabled={!site.active}
             >
               <Link
-                href={pathname + "?" + createQueryString("site", site.plantId)}
+                href={
+                  pathname +
+                  "?" +
+                  createQueryString("site", site.plantId) +
+                  "&" +
+                  createQueryString(
+                    "month",
+                    dateToKebabCase(new Date(), { excludeDay: true }),
+                  )
+                }
                 className="flex w-full items-center justify-center"
               >
                 {t("common.viewData")}
