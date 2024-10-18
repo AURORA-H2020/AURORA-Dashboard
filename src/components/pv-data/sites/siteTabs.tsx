@@ -1,7 +1,6 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { LoadingSpinner } from "@/components/ui/loading";
 import {
   Select,
   SelectContent,
@@ -9,8 +8,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
+import { cn } from "@/lib/utilities";
 import { PvPlantWithID } from "@/models/extensions";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { ArrowLeftIcon, CalendarDaysIcon } from "lucide-react";
@@ -18,7 +19,6 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import MonthSelect from "./monthSelect";
-import { cn } from "@/lib/utilities";
 
 const SiteTabs = () => {
   const t = useTranslations();
@@ -55,8 +55,8 @@ const SiteTabs = () => {
         date && "flex-row",
       )}
     >
-      {isLoadingPvPlants && <LoadingSpinner className="mx-auto h-10 w-8" />}
-      {pvPlants && (
+      {isLoadingPvPlants && <Skeleton className="h-10 w-full" />}
+      {!isLoadingPvPlants && pvPlants && (
         <Select
           defaultValue={activeTab}
           value={activeTab}
