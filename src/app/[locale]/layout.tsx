@@ -97,14 +97,16 @@ const RootLayout = async ({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="mx-auto flex min-h-[100svh] max-w-screen-xl flex-col gap-8 p-4">
-            <header className="w-full">
-              <NavigationBar />
-            </header>
-            <main className="w-full">{children}</main>
-            <footer className="mt-auto w-full self-end">
-              <Footer />
-            </footer>
+          <div className="w-svw">
+            <div className="mx-auto flex min-h-[100svh] max-w-screen-xl flex-col gap-8 p-4">
+              <header className="w-full">
+                <NavigationBar />
+              </header>
+              <main className="w-full">{children}</main>
+              <footer className="mt-auto w-full self-end">
+                <Footer />
+              </footer>
+            </div>
           </div>
         </Providers>
         <Analytics />
