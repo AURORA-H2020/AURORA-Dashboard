@@ -5,7 +5,6 @@ import { PvPanelDetails } from "@/components/pv-data/panels/pvPanelDetails";
 import { ProductionSummary } from "@/components/pv-data/panels/pvPanelProductionSummary";
 import { PvDataGrid } from "@/components/pv-data/pvDataGrid";
 import { ChartConfig } from "@/components/ui/chart";
-import { LoadingSpinner } from "@/components/ui/loading";
 import { Heading } from "@radix-ui/themes";
 import { getFormatter, getTranslations } from "next-intl/server";
 
@@ -16,36 +15,15 @@ interface QpvApiResponse {
   }[];
 }
 
-const validateDate = (month: string | undefined): month is string => {
-  const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
-  if (typeof month !== "string" || !dateRegex.test(month)) {
-    return false;
-  }
-
-  return true;
-};
-
-const validateSite = (site: string | undefined): site is string => {
-  if (typeof site !== "string") {
-    return false;
-  }
-
-  return true;
-};
-
 const CurrentDayPvData = async ({
   site,
   date,
 }: {
-  site: string | undefined;
-  date: string | undefined;
+  site: string;
+  date: string;
 }) => {
   const t = await getTranslations();
   const format = await getFormatter();
-
-  if (!validateDate(date) || !validateSite(site)) {
-    return <LoadingSpinner />;
-  }
 
   const apiUrl = new URL(
     `${process.env.PV_API_BASE_URL}/v1/plants/${site}/get-kpi`,

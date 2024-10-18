@@ -148,7 +148,8 @@
       "noActiveInstallation": "No active solar power installations found",
       "selectBarToSeeDailyBreakdown": "Select a bar to see a breakdown for a specific day.",
       "unsupportedRegionMessage": "This feature is currently not supported in your region.",
-      "solarPowerProduction": "Solar Power Production"
+      "solarPowerProduction": "Solar Power Production",
+      "unsupportedSearchParams": "Unsupported search parameters"
     }
   },
   "error": {
@@ -410,7 +411,7 @@
       "yourProduction": "Your Production",
       "totalProduction": "Total Production",
       "featureGuide": {
-        "body": "Your investment in your local AURORA solar power installations helps reduce your carbon footprint. Here you can see a breakdown of the total energy produced by the installation (Total Production) and your investment's contribution (Your Production). Your contribution is automatically added as an offset to your profile at the end of each month to help you reach near-zero emissions.",
+        "body": "Your investment in your local AURORA solar power installations helps reduce your carbon footprint. Here you can see a breakdown of the total energy produced by the installation (Total Production) and your investment's contribution (Your Production). Your contribution is automatically added as an offset to your profile each Friday morning to help you reach near-zero emissions.",
         "title": "How does it work?"
       },
       "seeFullData": "See full data",
