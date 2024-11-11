@@ -14,6 +14,7 @@ import {
   BlocksIcon,
   CalendarIcon,
   FileCheck2Icon,
+  LeafIcon,
   WalletIcon,
 } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
@@ -32,7 +33,19 @@ const PvPanelInvestments = () => {
         {
           icon: WalletIcon,
           label: t("app.form.pvInvestment.investment"),
-          value: `${pvInvestments[0].investment} ${userCountryData?.currencyCode ?? "EUR"}`,
+          value: `${pvInvestments[0].investmentPrice} ${userCountryData?.currencyCode ?? "EUR"}`,
+        },
+        {
+          icon: LeafIcon,
+          label: t("app.form.pvInvestment.capacity"),
+          value:
+            pvInvestments[0].investmentCapacity &&
+            `${format.number(pvInvestments[0].investmentCapacity, { maximumFractionDigits: 1 })} kW`,
+        },
+        {
+          icon: BlocksIcon,
+          label: t("app.form.pvInvestment.share"),
+          value: pvInvestments[0].share && `${pvInvestments[0].share}`,
         },
         {
           icon: CalendarIcon,
@@ -40,11 +53,6 @@ const PvPanelInvestments = () => {
           value:
             pvInvestments[0].investmentDate &&
             format.dateTime(pvInvestments[0].investmentDate.toDate()),
-        },
-        {
-          icon: BlocksIcon,
-          label: t("app.form.pvInvestment.share"),
-          value: pvInvestments[0].share && `${pvInvestments[0].share} kW`,
         },
       ]) ||
     [];

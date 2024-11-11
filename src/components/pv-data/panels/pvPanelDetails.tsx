@@ -56,7 +56,9 @@ const PvPanelDetails = ({ site }: { site: string }) => {
     {
       icon: BatteryChargingIcon,
       label: t("dashboard.pv.capacity"),
-      value: `${siteDetails.capacity} kW`,
+      value:
+        siteDetails.capacity &&
+        `${format.number(siteDetails.capacity, { maximumFractionDigits: 1 })} kW`,
     },
     {
       icon: MapPinIcon,

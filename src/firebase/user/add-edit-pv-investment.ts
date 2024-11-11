@@ -30,7 +30,14 @@ const firestore = getFirestore(firebaseApp);
  * @return {UserPvData} - The updated PV investment data with invalid values removed.
  */
 function removeInvalidValues(pvInvestment: UserPvInvestment): UserPvInvestment {
-  const keysToCheck = ["investment", "share", "investmentDate", "note", "city"];
+  const keysToCheck = [
+    "investmentCapacity",
+    "investmentPrice",
+    "share",
+    "investmentDate",
+    "note",
+    "city",
+  ];
   keysToCheck.forEach((key) => {
     if (Object.prototype.hasOwnProperty.call(pvInvestment, key)) {
       const value = pvInvestment[key];

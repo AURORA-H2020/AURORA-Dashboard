@@ -49,10 +49,9 @@ const PvInvestmentForm = ({
 
   const pvPlant = pvPlants.find((p) => p.city === userData?.city);
 
-  const { userCountryData } = useFirebaseData();
-
   const initialFormData: DefaultValues<UserPvInvestment> = {
-    investment: pvInvestment?.investment || undefined,
+    investmentPrice: pvInvestment?.investmentPrice || undefined,
+    investmentCapacity: pvInvestment?.investmentCapacity || undefined,
     share: pvInvestment?.share || undefined,
     investmentDate: pvInvestment?.investmentDate || undefined,
     city: pvInvestment?.city || userData?.city || undefined,
@@ -94,27 +93,11 @@ const PvInvestmentForm = ({
         <BorderBox>
           <FormField
             control={form.control}
-            name="investment"
-            render={({ field }) => (
-              <FormInputField
-                field={field}
-                inputType="number"
-                unit={userCountryData?.currencyCode ?? "EUR"}
-                placeholder={t("app.form.pvInvestment.investment")}
-                label={t("app.form.pvInvestment.investment")}
-                description={t("app.form.pvInvestment.investmentDescription")}
-                required={isFieldRequired(formSchema, "investment")}
-              />
-            )}
-          />
-          <FormField
-            control={form.control}
             name="share"
             render={({ field }) => (
               <FormInputField
                 field={field}
                 inputType="number"
-                unit="kW"
                 placeholder={t("app.form.pvInvestment.share")}
                 label={t("app.form.pvInvestment.share")}
                 description={t("app.form.pvInvestment.shareDescription")}

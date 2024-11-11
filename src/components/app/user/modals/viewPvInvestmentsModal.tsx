@@ -53,11 +53,17 @@ const ViewPvInvestmentModal = ({
   const details = (pvInvestment: UserPvInvestmentWithID) => [
     {
       label: t("app.form.pvInvestment.investment"),
-      value: `${pvInvestment.investment} ${userCountryData?.currencyCode ?? "EUR"}`,
+      value: `${pvInvestment.investmentPrice} ${userCountryData?.currencyCode ?? "EUR"}`,
+    },
+    {
+      label: t("app.form.pvInvestment.capacity"),
+      value:
+        pvInvestment.investmentCapacity &&
+        `${pvInvestment.investmentCapacity} kW`,
     },
     {
       label: t("app.form.pvInvestment.share"),
-      value: pvInvestment.share && `${pvInvestment.share} kW`,
+      value: pvInvestment.share && `${pvInvestment.share}`,
     },
     {
       label: t("app.form.pvInvestment.investmentDate"),

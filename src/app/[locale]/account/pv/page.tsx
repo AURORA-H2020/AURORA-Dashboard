@@ -60,8 +60,12 @@ const PvPage = () => {
           ? d.Ep
           : ((pvInvestments
               ?.filter((i) => i.investmentDate <= d.date)
-              .reduce((acc, { share }) => acc + share, 0) ?? 0) /
-              100) *
+              .reduce(
+                (acc, { investmentCapacity }) =>
+                  acc + (investmentCapacity ?? 0),
+                0,
+              ) ?? 0) /
+              (pvPlant.capacity ?? 1)) *
             d.Ep,
       pretty_date: format.dateTime(d.date.toDate(), {
         month: "numeric",

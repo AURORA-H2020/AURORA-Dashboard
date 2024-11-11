@@ -91,12 +91,8 @@ export const userPvInvestmentSchema = (
   t: (_arg: string, _val?: any) => string,
 ): z.ZodType<UserPvInvestment> =>
   z.object({
-    investment: z.coerce
-      .number()
-      .max(100000, {
-        message: t("app.validation.error.validValue"),
-      })
-      .min(1, { message: t("app.validation.error.validValue") }),
+    investmentPrice: z.number().optional(),
+    investmentCapacity: z.number().optional(),
     share: z.coerce
       .number()
       .max(1000, {
