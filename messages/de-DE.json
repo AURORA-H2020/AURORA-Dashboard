@@ -332,13 +332,15 @@
         "manageInvestment": "Investitionen verwalten",
         "editInvestmentDisclaimer": "Wenn Sie zu einem späteren Zeitpunkt eine zusätzliche Investition getätigt haben, fügen Sie bitte stattdessen eine neue Investition hinzu. Die Bearbeitung Ihrer bestehenden Investitionen kann zu einer ungenauen Erfassung führen.",
         "addInvestmentDisclaimer": "Die Eingabe Ihrer Anlagedaten dient ausschliesslich der Erfassung. Dies stellt keine tatsächliche Investition oder verbindliche Bestellung in irgendeiner Form dar.",
-        "noteDescription": "Fügen Sie eine Notiz zu Ihrer Investition als persönliche Referenz hinzu",
+        "noteDescription": "Fügen Sie eine Notiz zu Ihrer Investition als persönliche Referenz hinzu.",
         "investmentDescription": "Der von Ihnen investierte Geldbetrag",
         "shareDescription": "Wie viel der Kapazität der Solaranlage Ihre Investition ausmacht. Diese Informationen finden Sie in den Unterlagen, die Sie bei Ihrer Investition erhalten haben.",
         "deleteInvestmentDialog": {
           "title": "Sind Sie sicher, dass Sie diese Investition löschen wollen?",
           "body": "Das Löschen einer Investition entfernt nicht automatisch den zugehörigen Verbrauchseintrag aus Ihrem Profil, sondern verhindert, dass bestehende Einträge aktualisiert werden."
-        }
+        },
+        "capacity": "Kapazität",
+        "investmentDateDescription": "Der Tag, an dem Sie die Investition getätigt haben."
       }
     },
     "filter": {
@@ -417,9 +419,9 @@
       },
       "seeFullData": "Alle Daten zeigen",
       "productionInLast30Days": "Produktion in den letzten 30 Tagen",
-      "showProductionSinceFirstInvestment": "Produktion seit Ihrer ersten Investition anzeigen",
+      "showProductionSinceFirstInvestment": "Produktion seit Ihrer ersten Investition anzeigen.",
       "showLifetime": "Seit Investition",
-      "yourInvestment": "Ihre Investitionen",
+      "yourInvestments": "Ihre Investitionen",
       "multipleInvestmentsDisclaimer": "Das Hinzufügen mehrerer Investitionen ist nur dann erforderlich, wenn Sie später in zusätzliche Anteile investieren.",
       "yourLatestInvestment": "Ihre letzte Investition",
       "recordYourInvestment": "Erfassen Sie Ihre Investition",
