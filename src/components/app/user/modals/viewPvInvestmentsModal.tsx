@@ -53,17 +53,19 @@ const ViewPvInvestmentModal = ({
   const details = (pvInvestment: UserPvInvestmentWithID) => [
     {
       label: t("app.form.pvInvestment.investment"),
-      value: `${pvInvestment.investmentPrice} ${userCountryData?.currencyCode ?? "EUR"}`,
+      value:
+        pvInvestment.investmentPrice &&
+        `${format.number(pvInvestment.investmentPrice)} ${userCountryData?.currencyCode ?? "EUR"}`,
     },
     {
       label: t("app.form.pvInvestment.capacity"),
       value:
         pvInvestment.investmentCapacity &&
-        `${pvInvestment.investmentCapacity} kW`,
+        `${format.number(pvInvestment.investmentCapacity, { maximumFractionDigits: 0 })} kW`,
     },
     {
       label: t("app.form.pvInvestment.share"),
-      value: pvInvestment.share && `${pvInvestment.share}`,
+      value: pvInvestment.share && `${format.number(pvInvestment.share)}`,
     },
     {
       label: t("app.form.pvInvestment.investmentDate"),
@@ -93,7 +95,7 @@ const ViewPvInvestmentModal = ({
         <DialogTrigger asChild>{children}</DialogTrigger>
         <DialogContent className="sm:max-w-lg">
           <DialogHeader className="flex flex-col gap-4">
-            <DialogTitle>{t("app.pv.yourInvestment")}</DialogTitle>
+            <DialogTitle>{t("app.pv.yourInvestments")}</DialogTitle>
             <div className="flex gap-2">
               <AddEditPvInvestmentModal>
                 <Button variant="default" className="w-full">

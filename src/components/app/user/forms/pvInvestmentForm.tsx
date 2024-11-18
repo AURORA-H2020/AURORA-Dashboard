@@ -113,6 +113,9 @@ const PvInvestmentForm = ({
                 field={field}
                 placeholder={t("app.form.pvInvestment.investmentDate")}
                 label={t("app.form.pvInvestment.investmentDate")}
+                description={t(
+                  "app.form.pvInvestment.investmentDateDescription",
+                )}
                 required={isFieldRequired(formSchema, "investmentDate")}
                 maxDate={new Date()}
                 minDate={pvPlant?.installationDate?.toDate()}

@@ -33,7 +33,9 @@ const PvPanelInvestments = () => {
         {
           icon: WalletIcon,
           label: t("app.form.pvInvestment.investment"),
-          value: `${pvInvestments[0].investmentPrice} ${userCountryData?.currencyCode ?? "EUR"}`,
+          value:
+            pvInvestments[0].investmentPrice &&
+            `${format.number(pvInvestments[0].investmentPrice)} ${userCountryData?.currencyCode ?? "EUR"}`,
         },
         {
           icon: LeafIcon,
