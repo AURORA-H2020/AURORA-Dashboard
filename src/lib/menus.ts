@@ -16,11 +16,11 @@ export const navigationLinks = [
 
 export const userMenuLinks = [
   { title: t("navigation.menu.account"), path: "/account", isAdmin: false },
-  {
+  /* {
     title: t("navigation.menu.pvInvestment"),
     path: "/account/pv",
     isAdmin: false,
-  },
+  }, */
   {
     title: t("navigation.account.settings"),
     path: "/account/settings",
