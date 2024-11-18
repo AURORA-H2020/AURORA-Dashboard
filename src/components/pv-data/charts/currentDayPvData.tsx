@@ -55,7 +55,7 @@ const CurrentDayPvData = async ({
 
   const data = rawData.map((item) => ({
     ...item,
-    PAC: item.PAC / 4,
+    PAC: item.PAC,
     time: format.dateTime(new Date(item.date_time), {
       hour: "numeric",
       minute: "numeric",
@@ -79,7 +79,8 @@ const CurrentDayPvData = async ({
           <PvDataGrid.DataPanel>
             <ProductionSummary
               title={t("common.production")}
-              production={data.reduce((n, { PAC }) => n + PAC, 0)}
+              production={data.reduce((n, { PAC }) => n + PAC / 4, 0)}
+              unit="kWh"
             />
           </PvDataGrid.DataPanel>
           <PvDataGrid.DataPanel className="text-right">
@@ -102,7 +103,7 @@ const CurrentDayPvData = async ({
           chartData={data}
           chartConfig={chartConfig}
           xDataKey="time"
-          unit="Wh"
+          unit="kW"
           decimals={1}
         />
       </div>

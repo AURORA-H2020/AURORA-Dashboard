@@ -59,7 +59,7 @@ const PvDataChart = ({
       <ChartComponent data={chartData}>
         <CartesianGrid vertical={false} />
         <XAxis dataKey={xDataKey} tickLine={false} axisLine={false} />
-        <YAxis tickLine={false} axisLine={false} unit={"kWh"} />
+        <YAxis tickLine={false} axisLine={false} unit={` ${unit}`} />
         <Tooltip
           content={<ChartTooltipContent formatter={tooltipFormatter} />}
         />
