@@ -146,7 +146,7 @@
       "location": "Location",
       "capacity": "Capacity",
       "noActiveInstallation": "No active solar power installations found",
-      "selectBarToSeeDailyBreakdown": "Select a bar to see a breakdown for a specific day.",
+      "selectBarToSeeDailyBreakdown": "Select a bar to show a breakdown for a specific day.",
       "unsupportedRegionMessage": "This feature is currently not supported in your region.",
       "solarPowerProduction": "Solar Power Production",
       "unsupportedSearchParams": "Unsupported search parameters",
@@ -323,7 +323,7 @@
         "edit": "Edit Investment",
         "save": "Save Investment",
         "add": "Add Investment",
-        "share": "Share",
+        "share": "Shares",
         "investmentDate": "Investment Date",
         "investment": "Investment",
         "note": "Note",
@@ -332,13 +332,15 @@
         "manageInvestment": "Manage Investment",
         "editInvestmentDisclaimer": "If you have made additional investments at a later date, please add a new investment instead. Editing your existing investments may result in inaccurate tracking.",
         "addInvestmentDisclaimer": "Entering your investment data is exclussively for recording purposes. This does not formulate an actual investment or binding order in any form.",
-        "noteDescription": "Add a note to your investment for personal reference",
+        "noteDescription": "Add a note to your investment for personal reference.",
         "investmentDescription": "The amount of money you invested",
         "shareDescription": "How much of the solar panel installation's capacity your investment corresponds to. You should find this information in the documents you received when you made your investment.",
         "deleteInvestmentDialog": {
           "title": "Are you sure you want to delete this investment?",
           "body": "Deleting an investment does not automatically remove the associated consumption entry from your profile, but prevents existing entries to be updated."
-        }
+        },
+        "capacity": "Capacity",
+        "investmentDateDescription": "The day you made the investment on."
       }
     },
     "filter": {
@@ -417,9 +419,9 @@
       },
       "seeFullData": "See full data",
       "productionInLast30Days": "Production in the past 30 days",
-      "showProductionSinceFirstInvestment": "Show production since your first investment",
+      "showProductionSinceFirstInvestment": "Show production since your first investment.",
       "showLifetime": "Since Investment",
-      "yourInvestment": "Your Investments",
+      "yourInvestments": "Your Investments",
       "multipleInvestmentsDisclaimer": "Adding multiple investments is only necessary if you later buy additional shares.",
       "yourLatestInvestment": "Your Latest Investment",
       "recordYourInvestment": "Record your Investment",
