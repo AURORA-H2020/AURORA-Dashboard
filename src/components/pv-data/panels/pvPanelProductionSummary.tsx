@@ -8,12 +8,14 @@ type ProductionSummaryProps = {
   title: string;
   production: number;
   productionStart?: Date;
+  unit?: "kWh" | "kW";
 };
 
 export function ProductionSummary({
   title,
   production,
   productionStart,
+  unit = "kWh",
 }: ProductionSummaryProps) {
   const t = useTranslations();
   const format = useFormatter();
@@ -31,7 +33,7 @@ export function ProductionSummary({
           {format.number(production, {
             maximumFractionDigits: production > 10 ? 0 : 1,
           })}{" "}
-          <span className="text-2xl">kWh</span>
+          <span className="text-2xl">{unit}</span>
         </div>
 
         {productionStart && (
