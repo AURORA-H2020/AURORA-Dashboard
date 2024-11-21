@@ -80,12 +80,12 @@
       "error": "Der opstod en fejl ved opdatering af din profil"
     },
     "pvInvestment": {
-      "success": "Your investment data was updated successfully",
-      "error": "There was an error updating your investment data"
+      "success": "Dine investeringsdata blev opdateret med succes",
+      "error": "Der opstod en fejl ved opdateringen af dine investeringsdata"
     },
     "deletePvInvestment": {
-      "success": "The investment entry has been deleted",
-      "error": "An error occurred deleting this investment entry"
+      "success": "Indlægget om investering er blevet slettet",
+      "error": "Der opstod en fejl ved sletning af denne indlæg om investering."
     }
   },
   "button": {
@@ -119,7 +119,7 @@
     },
     "main": {
       "title": "Energy Tracker: Dashboard",
-      "description": "AURORA er et igangværende borgervidenskabeligt projekt, og dataene på denne side leveres uden garanti."
+      "description": "AURORA er et igangværende citizen science projekt, og dataene på denne side leveres uden garanti."
     },
     "autoReport": {
       "reportSnippets": {
@@ -138,19 +138,19 @@
       "downloadSnapshot": "Download dette billede"
     },
     "pv": {
-      "howToInvest": "How to invest?",
-      "solarPanelInformation": "Solar Panel Information",
-      "productionStart": "Production Start",
-      "technology": "Technology",
-      "manufacturer": "Manufacturer",
-      "location": "Location",
-      "capacity": "Capacity",
-      "noActiveInstallation": "No active solar power installations found",
-      "selectBarToSeeDailyBreakdown": "Select a bar to show a breakdown for a specific day.",
-      "unsupportedRegionMessage": "This feature is currently not supported in your region.",
-      "solarPowerProduction": "Solar Power Production",
-      "unsupportedSearchParams": "Unsupported search parameters",
-      "lifetimeProduction": "Lifetime Production"
+      "howToInvest": "Hvordan investerer man?",
+      "solarPanelInformation": "Oplysinger om solceller",
+      "productionStart": "Produktionsstart dato",
+      "technology": "Teknologi",
+      "manufacturer": "Solceller producent\n",
+      "location": "Placering",
+      "capacity": "Kapacitet",
+      "noActiveInstallation": "Ingen aktive solcelleanlæg fundet",
+      "selectBarToSeeDailyBreakdown": "Vælg en bjælke for at få vist en opdeling for en bestemt dag.",
+      "unsupportedRegionMessage": "Denne funktion er i øjeblikket ikke understøttet i din region.",
+      "solarPowerProduction": "Produktion af solcelleanlægget",
+      "unsupportedSearchParams": "Søgeparametre, der ikke understøttes",
+      "lifetimeProduction": "Livstidsproduktion"
     }
   },
   "error": {
@@ -299,7 +299,7 @@
       "electricitySource": "Strømkilde",
       "peopleInHouseholdDescription": "Hvor mange personer, inklusiv dig selv, bor der i din husstand?",
       "electricity": {
-        "dateSelectDescription": "Vælg begyndelsen og slutningen af dette forbrug. Du kan finde disse oplysninger på din elregning.",
+        "dateSelectDescription": "Vælg startdato og slutdato for dette forbrug. Du kan finde disse oplysninger på din elregning.",
         "electricitySource": "Strømkilde",
         "electricitySourceDescription": "Vælg den rigtige strømkilde.",
         "energyProduced": "Produceret energi",
@@ -314,38 +314,38 @@
         "heatingFuelDescription": "Vælg din type af opvarmning. Du kan finde disse oplysninger på din varmeregning.",
         "districtHeatingSource": "Fjernvarmekilde",
         "heatingBillDescription": "Du kan finde disse oplysninger på din varmeregning.",
-        "dateSelectDescription": "Vælg begyndelsen og slutningen af dette forbrug. Du kan finde disse oplysninger på din varmeregning."
+        "dateSelectDescription": "Vælg startdato og slutdato for dette forbrug. Du kan finde disse oplysninger på din varmeregning."
       },
       "deleteConsumptionDialogTitle": "Er du sikker på, at du vil slette denne post?",
       "powerConsumption": "Strømforbrug",
       "setCustomPowerConsumption": "Indstil brugerdefineret strømforbrug",
       "pvInvestment": {
-        "edit": "Edit Investment",
-        "save": "Save Investment",
-        "add": "Add Investment",
-        "share": "Shares",
-        "investmentDate": "Investment Date",
-        "investment": "Investment",
-        "note": "Note",
-        "installationSite": "Installation Site",
-        "automaticGenerationDisclaimer": "This entry was created by your PV investment. It will update automatically with the latest data.",
-        "manageInvestment": "Manage Investment",
-        "editInvestmentDisclaimer": "If you have made additional investments at a later date, please add a new investment instead. Editing your existing investments may result in inaccurate tracking.",
-        "addInvestmentDisclaimer": "Entering your investment data is exclussively for recording purposes. This does not formulate an actual investment or binding order in any form.",
-        "noteDescription": "Add a note to your investment for personal reference.",
-        "investmentDescription": "The amount of money you invested",
-        "shareDescription": "How much of the solar panel installation's capacity your investment corresponds to. You should find this information in the documents you received when you made your investment.",
+        "edit": "Rediger investering",
+        "save": "Gem investering",
+        "add": "Tilføj investering",
+        "share": "Andele",
+        "investmentDate": "Investeringsdato",
+        "investment": "Investering",
+        "note": "Bemærk",
+        "installationSite": "Installationssted",
+        "automaticGenerationDisclaimer": "Denne post blev oprettet af din solceller-investering. Den opdateres automatisk med de nyeste data.",
+        "manageInvestment": "Administrer investeringer",
+        "editInvestmentDisclaimer": "Hvis du har foretaget yderligere investeringer på et senere tidspunkt, skal du tilføje en ny investering i stedet. Hvis du redigerer dine eksisterende investeringer, kan det resultere i unøjagtig sporing.",
+        "addInvestmentDisclaimer": "Indtastning af dine investeringsdata er udelukkende til registreringsformål. Dette formulerer ikke en faktisk investering eller bindende ordre i nogen form.",
+        "noteDescription": "Tilføj en note til din investering til personlig brug.",
+        "investmentDescription": "Det beløb, du har investeret",
+        "shareDescription": "Hvor mange andele din investering svarer til. Du bør finde disse oplysninger i de dokumenter, du modtog, da du foretog din investering.",
         "deleteInvestmentDialog": {
-          "title": "Are you sure you want to delete this investment?",
-          "body": "Deleting an investment does not automatically remove the associated consumption entry from your profile, but prevents existing entries to be updated."
+          "title": "Er du sikker på, at du vil slette denne investering?",
+          "body": "Hvis du sletter en investering, fjernes den tilknyttede forbrugspost ikke automatisk fra din profil, men det forhindrer, at eksisterende poster opdateres."
         },
-        "capacity": "Capacity",
-        "investmentDateDescription": "The day you made the investment on."
+        "capacity": "Kapacitet",
+        "investmentDateDescription": "Den dag, du foretog investeringen."
       }
     },
     "filter": {
       "orderBy": "Sortér efter",
-      "order": "Sortér"
+      "order": "Bestil"
     },
     "totalConsumptions": "Samlet forbrug",
     "totalRecurringConsumptions": "Samlet tilbagevendende forbrug",
@@ -370,11 +370,11 @@
     "account": {
       "downloadMyData": {
         "button": "Download min data",
-        "description": "Downloads a JSON file with all data stored in your account."
+        "description": "Downloader en JSON-fil med alle data, der er gemt på din konto."
       },
       "downloadConsumptions": {
-        "button": "Download Consumptions",
-        "description": "Downloads a CSV file with all your consumptions."
+        "button": "Download forbrugsindlægene",
+        "description": "Downloader en CSV-fil med alle dine forbrug."
       },
       "changePassword": "Skift adgangskode",
       "changeEmail": "Skift e-mail",
@@ -411,21 +411,21 @@
       "useImperial": "Skift til imperial enheder (UK)"
     },
     "pv": {
-      "yourProduction": "Your Production",
-      "totalProduction": "Total Production",
+      "yourProduction": "Din produktion",
+      "totalProduction": "Samlet produktion",
       "featureGuide": {
-        "body": "Your investment in your local AURORA solar power installations helps reduce your carbon footprint. Here you can see a breakdown of the total energy produced by the installation (Total Production) and your investment's contribution (Your Production). Your contribution is automatically added as an offset to your profile each Friday morning to help you reach near-zero emissions.",
-        "title": "How does it work?"
+        "body": "Din investering i AURORAs lokale solcelleanlæg er med til at reducere dit CO2-aftryk. Her kan du se en oversigt over den samlede energiproduktion fra anlægget (samlet produktion) og din andeles bidrag (din produktion). Dit bidrag tilføjes automatisk til din profil hver fredag morgen for at hjælpe dig med at nå en udledning tæt på nul.",
+        "title": "Hvordan fungerer det?"
       },
-      "seeFullData": "See full data",
-      "productionInLast30Days": "Production in the past 30 days",
-      "showProductionSinceFirstInvestment": "Show production since your first investment.",
-      "showLifetime": "Since Investment",
-      "yourInvestments": "Your Investments",
-      "multipleInvestmentsDisclaimer": "Adding multiple investments is only necessary if you later buy additional shares.",
-      "yourLatestInvestment": "Your Latest Investment",
-      "recordYourInvestment": "Record your Investment",
-      "allInvestments": "All Investments"
+      "seeFullData": "Se alle data",
+      "productionInLast30Days": "Strømproduktion inden for de seneste 30 dage",
+      "showProductionSinceFirstInvestment": "Vis strømproduktionen siden din første investering.",
+      "showLifetime": "Siden investering",
+      "yourInvestments": "Dine investeringer",
+      "multipleInvestmentsDisclaimer": "Det er kun nødvendigt at tilføje flere investeringer, hvis du senere køber yderligere andele.",
+      "yourLatestInvestment": "Din seneste investering",
+      "recordYourInvestment": "Registrer din investering",
+      "allInvestments": "Alle investeringer"
     }
   },
   "common": {
@@ -465,19 +465,19 @@
       "previous": "Tidligere",
       "next": "Næste"
     },
-    "production": "Production",
-    "viewData": "View Data",
-    "inactive": "Inactive",
-    "active": "Active",
-    "productionIn": "Production in",
-    "productionFor": "Production for",
-    "productionSince": "Production since",
+    "production": "Produktion",
+    "viewData": "Vis data",
+    "inactive": "Inaktiv",
+    "active": "Aktiv",
+    "productionIn": "Produktion i",
+    "productionFor": "Produktion for",
+    "productionSince": "Produktion siden",
     "download": "Download",
-    "since": "Since",
-    "notApplicable": "Not applicable",
-    "goBack": "Go back",
-    "energy": "Energy",
-    "sinceStart": "Since start"
+    "since": "Siden",
+    "notApplicable": "Ikke relevant",
+    "goBack": "Tilbage",
+    "energy": "Energi",
+    "sinceStart": "Siden starten"
   },
   "country": {
     "allSelectedCountries": "Alle valgte lande",
@@ -501,8 +501,8 @@
       "account": "Konto",
       "logout": "Log ud",
       "admin": "Administrator",
-      "solarPower": "Solar Power",
-      "pvInvestment": "Investment"
+      "solarPower": "Solenergi",
+      "pvInvestment": "Investering"
     },
     "account": {
       "settings": "Indstillinger"
@@ -552,7 +552,7 @@
       "solarThermal": "Solvarme",
       "district": "Fjernvarme",
       "electric": "Elvarme",
-      "wasteTreatment": "Affaldsforbrænding",
+      "wasteTreatment": "Affaldsbehandling",
       "coal": "Kul",
       "motorcycle": "Fossilbil",
       "fuelCar": "Fossilbil",
@@ -573,14 +573,14 @@
       "electricScooter": "El-scooter/løbehjul",
       "bike": "Cykel",
       "walking": "Gående",
-      "defaultGreenProvider": "elnettet (grøn el)",
+      "defaultGreenProvider": "elnettet (grøn strøm)",
       "firewood": "Brænde",
       "butane": "Butan",
       "planeIntraEu": "Fly (inden for EU)",
       "planeExtraEu": "Fly (uden for EU)",
-      "pvInvestment": "PV Investment"
+      "pvInvestment": "solceller investering"
     },
-    "pvInvestment": "Electricity (PV)"
+    "pvInvestment": "Elektricitet (solceller)"
   },
   "unitLabel": {
     "distance": "Afstand"

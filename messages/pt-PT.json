@@ -80,12 +80,12 @@
       "error": "Ocorreu um erro ao atualizar o seu perfil"
     },
     "pvInvestment": {
-      "success": "Your investment data was updated successfully",
-      "error": "There was an error updating your investment data"
+      "success": "Os seus dados de investimento foram atualizados com sucesso",
+      "error": "Ocorreu um erro ao atualizar os seus dados de investimento"
     },
     "deletePvInvestment": {
-      "success": "The investment entry has been deleted",
-      "error": "An error occurred deleting this investment entry"
+      "success": "A entrada de investimento foi eliminada",
+      "error": "Ocorreu um erro ao eliminar esta entrada de investimento"
     }
   },
   "button": {
@@ -138,19 +138,19 @@
       "downloadSnapshot": "Descarregar este momento"
     },
     "pv": {
-      "howToInvest": "How to invest?",
-      "solarPanelInformation": "Solar Panel Information",
-      "productionStart": "Production Start",
-      "technology": "Technology",
-      "manufacturer": "Manufacturer",
-      "location": "Location",
-      "capacity": "Capacity",
-      "noActiveInstallation": "No active solar power installations found",
-      "selectBarToSeeDailyBreakdown": "Select a bar to show a breakdown for a specific day.",
-      "unsupportedRegionMessage": "This feature is currently not supported in your region.",
-      "solarPowerProduction": "Solar Power Production",
-      "unsupportedSearchParams": "Unsupported search parameters",
-      "lifetimeProduction": "Lifetime Production"
+      "howToInvest": "Como investir?",
+      "solarPanelInformation": "Informações sobre painéis solares",
+      "productionStart": "Início da produção",
+      "technology": "Tecnologia",
+      "manufacturer": "Fabricante",
+      "location": "Localização",
+      "capacity": "Capacidade",
+      "noActiveInstallation": "Não foram encontradas instalações de energia solar ativas",
+      "selectBarToSeeDailyBreakdown": "Selecione uma barra para mostrar uma discriminação para um dia específico.",
+      "unsupportedRegionMessage": "Esta funcionalidade não é atualmente suportada na sua região.",
+      "solarPowerProduction": "Produção de energia solar",
+      "unsupportedSearchParams": "Parâmetros de pesquisa não suportados",
+      "lifetimeProduction": "Produção vitalícia"
     }
   },
   "error": {
@@ -320,27 +320,27 @@
       "powerConsumption": "Consumo de energia\n",
       "setCustomPowerConsumption": "Definir consumo de energia personalizado",
       "pvInvestment": {
-        "edit": "Edit Investment",
-        "save": "Save Investment",
-        "add": "Add Investment",
-        "share": "Shares",
-        "investmentDate": "Investment Date",
-        "investment": "Investment",
-        "note": "Note",
-        "installationSite": "Installation Site",
-        "automaticGenerationDisclaimer": "This entry was created by your PV investment. It will update automatically with the latest data.",
-        "manageInvestment": "Manage Investment",
-        "editInvestmentDisclaimer": "If you have made additional investments at a later date, please add a new investment instead. Editing your existing investments may result in inaccurate tracking.",
-        "addInvestmentDisclaimer": "Entering your investment data is exclussively for recording purposes. This does not formulate an actual investment or binding order in any form.",
-        "noteDescription": "Add a note to your investment for personal reference.",
-        "investmentDescription": "The amount of money you invested",
-        "shareDescription": "How much of the solar panel installation's capacity your investment corresponds to. You should find this information in the documents you received when you made your investment.",
+        "edit": "Editar Investimento",
+        "save": "Poupar investimento",
+        "add": "Adicionar investimento",
+        "share": "Ações",
+        "investmentDate": "Data do investimento",
+        "investment": "Investimento",
+        "note": "Nota",
+        "installationSite": "Local de instalação",
+        "automaticGenerationDisclaimer": "Esta entrada foi criada pelo seu investimento em PV. Será atualizada automaticamente com os dados mais recentes.",
+        "manageInvestment": "Gerir o investimento",
+        "editInvestmentDisclaimer": "Se tiver efetuado investimentos adicionais numa data posterior, adicione um novo investimento. A edição dos seus investimentos existentes pode resultar num registo incorreto.",
+        "addInvestmentDisclaimer": "A introdução dos seus dados de investimento serve exclusivamente para efeitos de registo. Tal não constitui um investimento efetivo ou uma ordem vinculativa sob qualquer forma.",
+        "noteDescription": "Adicione uma nota ao seu investimento para referência pessoal.",
+        "investmentDescription": "O montante de dinheiro investido",
+        "shareDescription": "A que parte da capacidade da instalação de painéis solares corresponde o seu investimento. Esta informação encontra-se nos documentos que recebeu quando efetuou o seu investimento.",
         "deleteInvestmentDialog": {
-          "title": "Are you sure you want to delete this investment?",
-          "body": "Deleting an investment does not automatically remove the associated consumption entry from your profile, but prevents existing entries to be updated."
+          "title": "Tem a certeza de que pretende eliminar este investimento?",
+          "body": "A eliminação de um investimento não elimina automaticamente a entrada de consumo associada do seu perfil, mas impede que as entradas existentes sejam atualizadas."
         },
-        "capacity": "Capacity",
-        "investmentDateDescription": "The day you made the investment on."
+        "capacity": "Capacidade",
+        "investmentDateDescription": "O dia em que fez o investimento."
       }
     },
     "filter": {
@@ -370,11 +370,11 @@
     "account": {
       "downloadMyData": {
         "button": "Descarregar os meus dados",
-        "description": "Downloads a JSON file with all data stored in your account."
+        "description": "Descarrega um ficheiro JSON com todos os dados armazenados na sua conta."
       },
       "downloadConsumptions": {
-        "button": "Download Consumptions",
-        "description": "Downloads a CSV file with all your consumptions."
+        "button": "Descarregar os consumos",
+        "description": "Descarrega um ficheiro CSV com todos os seus consumos."
       },
       "changePassword": "Alterar Palavra-Passe",
       "changeEmail": "Alterar e-mail",
@@ -411,21 +411,21 @@
       "useImperial": "Mudar para imperial (Reino Unido)"
     },
     "pv": {
-      "yourProduction": "Your Production",
-      "totalProduction": "Total Production",
+      "yourProduction": "A sua produção",
+      "totalProduction": "Produção total",
       "featureGuide": {
-        "body": "Your investment in your local AURORA solar power installations helps reduce your carbon footprint. Here you can see a breakdown of the total energy produced by the installation (Total Production) and your investment's contribution (Your Production). Your contribution is automatically added as an offset to your profile each Friday morning to help you reach near-zero emissions.",
-        "title": "How does it work?"
+        "body": "O seu investimento nas instalações locais de energia solar AURORA ajuda a reduzir a sua pegada de carbono. Aqui pode ver a repartição da energia total produzida pela instalação (Produção total) e a contribuição do seu investimento (A sua produção). A sua contribuição é automaticamente adicionada como uma compensação ao seu perfil todas as sextas-feiras de manhã para o ajudar a atingir emissões quase nulas.",
+        "title": "Como é que funciona?"
       },
-      "seeFullData": "See full data",
-      "productionInLast30Days": "Production in the past 30 days",
-      "showProductionSinceFirstInvestment": "Show production since your first investment.",
-      "showLifetime": "Since Investment",
-      "yourInvestments": "Your Investments",
-      "multipleInvestmentsDisclaimer": "Adding multiple investments is only necessary if you later buy additional shares.",
-      "yourLatestInvestment": "Your Latest Investment",
-      "recordYourInvestment": "Record your Investment",
-      "allInvestments": "All Investments"
+      "seeFullData": "Ver dados completos",
+      "productionInLast30Days": "Produção nos últimos 30 dias",
+      "showProductionSinceFirstInvestment": "Mostrar a produção desde o seu primeiro investimento.",
+      "showLifetime": "Desde o investimento",
+      "yourInvestments": "Os seus investimentos",
+      "multipleInvestmentsDisclaimer": "A adição de múltiplos investimentos só é necessária se mais tarde comprar ações adicionais.",
+      "yourLatestInvestment": "O seu último investimento",
+      "recordYourInvestment": "Registar o seu investimento",
+      "allInvestments": "Todos os investimentos"
     }
   },
   "common": {
@@ -465,19 +465,19 @@
       "previous": "Anterior",
       "next": "Seguinte"
     },
-    "production": "Production",
-    "viewData": "View Data",
-    "inactive": "Inactive",
-    "active": "Active",
-    "productionIn": "Production in",
-    "productionFor": "Production for",
-    "productionSince": "Production since",
-    "download": "Download",
-    "since": "Since",
-    "notApplicable": "Not applicable",
-    "goBack": "Go back",
-    "energy": "Energy",
-    "sinceStart": "Since start"
+    "production": "Produção",
+    "viewData": "Ver dados",
+    "inactive": "Inativo",
+    "active": "Ativo",
+    "productionIn": "Produção em",
+    "productionFor": "Produção para",
+    "productionSince": "Produção desde",
+    "download": "Descarregar",
+    "since": "Desde",
+    "notApplicable": "Não aplicável",
+    "goBack": "Voltar atrás",
+    "energy": "Energia",
+    "sinceStart": "Desde o início"
   },
   "country": {
     "allSelectedCountries": "Todos os países selecionados",
@@ -501,8 +501,8 @@
       "account": "Conta",
       "logout": "Sair",
       "admin": "Administrador",
-      "solarPower": "Solar Power",
-      "pvInvestment": "Investment"
+      "solarPower": "Energia solar",
+      "pvInvestment": "Investimento"
     },
     "account": {
       "settings": "Definições"
@@ -578,9 +578,9 @@
       "butane": "Butano",
       "planeIntraEu": "Avião (intra-UE)",
       "planeExtraEu": "Avião (extra UE)",
-      "pvInvestment": "PV Investment"
+      "pvInvestment": "Investimento fotovoltaico"
     },
-    "pvInvestment": "Electricity (PV)"
+    "pvInvestment": "Eletricidade (PV)"
   },
   "unitLabel": {
     "distance": "Distância"
