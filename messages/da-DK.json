@@ -84,8 +84,8 @@
       "error": "Der opstod en fejl ved opdateringen af dine investeringsdata"
     },
     "deletePvInvestment": {
-      "success": "Indlægget om investering er blevet slettet",
-      "error": "Der opstod en fejl ved sletning af denne indlæg om investering."
+      "success": "Investeringsindtastningen er blevet slettet",
+      "error": "Der opstod en fejl ved sletning af denne investering."
     }
   },
   "button": {
@@ -146,11 +146,11 @@
       "location": "Placering",
       "capacity": "Kapacitet",
       "noActiveInstallation": "Ingen aktive solcelleanlæg fundet",
-      "selectBarToSeeDailyBreakdown": "Vælg en bjælke for at få vist en opdeling for en bestemt dag.",
+      "selectBarToSeeDailyBreakdown": "Vælg et felt for at få vist en opdeling for en bestemt dag.",
       "unsupportedRegionMessage": "Denne funktion er i øjeblikket ikke understøttet i din region.",
-      "solarPowerProduction": "Produktion af solcelleanlægget",
-      "unsupportedSearchParams": "Søgeparametre, der ikke understøttes",
-      "lifetimeProduction": "Livstidsproduktion"
+      "solarPowerProduction": "Fremstillet af solcelleanlæg",
+      "unsupportedSearchParams": "Ikke-understøttede søgeparametre",
+      "lifetimeProduction": "Totale produktion"
     }
   },
   "error": {
@@ -285,7 +285,7 @@
         "editProfile": "Rediger profil",
         "selectGender": "Vælg dit foretrukne køn",
         "selectCountry": "Vælg dit land",
-        "selectCountryDescription": "Disse oplysninger hjælper os med at beregne dit CO2-aftryk mere nøjagtigt. Bemærk, at du ikke kan ændre dit land senere. Crowdfunding af lokale solcelleanlæg er i øjeblikket kun planlagt for udvalgte byer hos AURORAs projektpartnere.",
+        "selectCountryDescription": "Disse oplysninger hjælper os med at beregne dit CO2-aftryk mere nøjagtigt. Du kan ikke ændre dit land senere. Crowdfunding af lokale solcelleanlæg er i øjeblikket kun planlagt for udvalgte byer hos AURORAs projektpartnere.",
         "selectCity": "Vælg din by",
         "selectHomeEnergyLabel": "Vælg energimærke på din bolig",
         "selectHouseholdProfile": "Vælg din husstandsprofil",
@@ -328,10 +328,10 @@
         "investment": "Investering",
         "note": "Bemærk",
         "installationSite": "Installationssted",
-        "automaticGenerationDisclaimer": "Denne post blev oprettet af din solceller-investering. Den opdateres automatisk med de nyeste data.",
+        "automaticGenerationDisclaimer": "Denne post blev oprettet af din solceller-investering. Den opdateres automatisk med nyeste data.",
         "manageInvestment": "Administrer investeringer",
-        "editInvestmentDisclaimer": "Hvis du har foretaget yderligere investeringer på et senere tidspunkt, skal du tilføje en ny investering i stedet. Hvis du redigerer dine eksisterende investeringer, kan det resultere i unøjagtig sporing.",
-        "addInvestmentDisclaimer": "Indtastning af dine investeringsdata er udelukkende til registreringsformål. Dette formulerer ikke en faktisk investering eller bindende ordre i nogen form.",
+        "editInvestmentDisclaimer": "Hvis du har foretaget yderligere investeringer på et senere tidspunkt, skal du tilføje en ny investering i stedet. Hvis du redigerer dine eksisterende investeringer, kan det resultere i unøjagtig data.",
+        "addInvestmentDisclaimer": "Indtastning af investeringsdata er udelukkende til registreringsformål. Det laver ikke en faktisk investering eller bindende ordre.",
         "noteDescription": "Tilføj en note til din investering til personlig brug.",
         "investmentDescription": "Det beløb, du har investeret",
         "shareDescription": "Hvor mange andele din investering svarer til. Du bør finde disse oplysninger i de dokumenter, du modtog, da du foretog din investering.",
@@ -351,7 +351,7 @@
     "totalRecurringConsumptions": "Samlet tilbagevendende forbrug",
     "labelGuide": {
       "title": "Hvordan fungere det?",
-      "description": "Dine energimærker beregnes ud fra dit forbrug og er specifikt for din by. Det betyder, at efterhånden som du indtaster data i løbet af året, vil flere af dine CO₂-udledninger og energibudgetter blive gjort tilgængelige. For eksempel: Hvis du kun har indtastet data for alle dage i januar og december, vil 2/12 af det samlede budget blive brugt til at beregne din mærker. Den eneste undtagelse er transport, som giver det fulde budget efter et vist antal årlige indlæg. Dit samlede CO₂ budget er baseret på summen af dine el-, varme- og transport forbrug."
+      "description": "Dine energimærker beregnes ud fra dit forbrug og er specifikt for din lokation. Når du begynder at indtaster data, vil flere af dine CO₂-udledninger og energibudgetter blive gjort tilgængelige. Hvis du, for eksempel, kun har indtastet data for alle dage i januar og december, vil 2/12 af det samlede budget blive brugt til at beregne din mærker. Den eneste undtagelse er transport, som giver det fulde overblik efter et vist antal årlige indtastninger. Dit samlede CO₂-budget er baseret på summen af dine el-, varme- og transport forbrug."
     },
     "profile": {
       "yourProfile": "Din profil",
@@ -373,7 +373,7 @@
         "description": "Downloader en JSON-fil med alle data, der er gemt på din konto."
       },
       "downloadConsumptions": {
-        "button": "Download forbrugsindlægene",
+        "button": "Download forbrug",
         "description": "Downloader en CSV-fil med alle dine forbrug."
       },
       "changePassword": "Skift adgangskode",
@@ -399,7 +399,7 @@
       "legalInformation": "Juridiske oplysninger",
       "privacyPolicy": "Politik om beskyttelse af personlige oplysninger",
       "termsOfService": "Servicevilkår",
-      "imprint": "Forlæggermærke",
+      "imprint": "Aftryk",
       "updatedLegalDocuments": "Vi har opdateret vores privatlivspolitik og servicevilkår. Læs og accepter den seneste version for at fortsætte med at bruge appen."
     },
     "summary": {
