@@ -80,12 +80,12 @@
       "error": "Pri posodabljanju profila je prišlo do napake"
     },
     "pvInvestment": {
-      "success": "Your investment data was updated successfully",
-      "error": "There was an error updating your investment data"
+      "success": "Tvoji podatki o naložbah so bili uspešno posodobljeni",
+      "error": "Pri posodabljanju tvojih naložbenih podatkov je prišlo do napake"
     },
     "deletePvInvestment": {
-      "success": "The investment entry has been deleted",
-      "error": "An error occurred deleting this investment entry"
+      "success": "Vnos naložbe je bil izbrisan",
+      "error": "Pri brisanju tega vnosa naložbe je prišlo do napake"
     }
   },
   "button": {
@@ -138,19 +138,19 @@
       "downloadSnapshot": "Prenesi ta posnetek"
     },
     "pv": {
-      "howToInvest": "How to invest?",
-      "solarPanelInformation": "Solar Panel Information",
-      "productionStart": "Production Start",
-      "technology": "Technology",
-      "manufacturer": "Manufacturer",
-      "location": "Location",
-      "capacity": "Capacity",
-      "noActiveInstallation": "No active solar power installations found",
-      "selectBarToSeeDailyBreakdown": "Select a bar to show a breakdown for a specific day.",
-      "unsupportedRegionMessage": "This feature is currently not supported in your region.",
-      "solarPowerProduction": "Solar Power Production",
-      "unsupportedSearchParams": "Unsupported search parameters",
-      "lifetimeProduction": "Lifetime Production"
+      "howToInvest": "Kako investirati?",
+      "solarPanelInformation": "Informacije o fotovoltaičnih panelih",
+      "productionStart": "Začetek proizvodnje",
+      "technology": "Tehnologija",
+      "manufacturer": "Proizvajalec",
+      "location": "Lokacija",
+      "capacity": "Zmogljivost",
+      "noActiveInstallation": "Aktivnih sončnih elektrarn ni bilo najdenih.",
+      "selectBarToSeeDailyBreakdown": "Izberi vrstico za prikaz razčlenitve na določen dan.",
+      "unsupportedRegionMessage": "Ta funkcija trenutno ni podprta v tvoji regiji.",
+      "solarPowerProduction": "Proizvodnja sončne energije",
+      "unsupportedSearchParams": "Nepodprti parametri iskanja",
+      "lifetimeProduction": "Proizvodnja v življenjski dobi"
     }
   },
   "error": {
@@ -320,27 +320,27 @@
       "powerConsumption": "Poraba energije",
       "setCustomPowerConsumption": "Nastavitev porabe energije po meri",
       "pvInvestment": {
-        "edit": "Edit Investment",
-        "save": "Save Investment",
-        "add": "Add Investment",
-        "share": "Shares",
-        "investmentDate": "Investment Date",
-        "investment": "Investment",
-        "note": "Note",
-        "installationSite": "Installation Site",
-        "automaticGenerationDisclaimer": "This entry was created by your PV investment. It will update automatically with the latest data.",
-        "manageInvestment": "Manage Investment",
-        "editInvestmentDisclaimer": "If you have made additional investments at a later date, please add a new investment instead. Editing your existing investments may result in inaccurate tracking.",
-        "addInvestmentDisclaimer": "Entering your investment data is exclussively for recording purposes. This does not formulate an actual investment or binding order in any form.",
-        "noteDescription": "Add a note to your investment for personal reference.",
-        "investmentDescription": "The amount of money you invested",
-        "shareDescription": "How much of the solar panel installation's capacity your investment corresponds to. You should find this information in the documents you received when you made your investment.",
+        "edit": "Urejanje naložb",
+        "save": "Shrani naložbo",
+        "add": "Dodaj naložbo",
+        "share": "Deleži",
+        "investmentDate": "Datum naložbe",
+        "investment": "Naložba",
+        "note": "Opomba",
+        "installationSite": "Mesto namestitve",
+        "automaticGenerationDisclaimer": "Ta vnos je bil ustvarjen s tvojo naložbo v PV. Samodejno se posodablja z najnovejšimi podatki.",
+        "manageInvestment": "Upravljanje naložb",
+        "editInvestmentDisclaimer": "Če si naknadno izvedel dodatne naložbe dodaj novo naložbo. Urejanje obstoječih naložb lahko povzroči netočno sledenje.",
+        "addInvestmentDisclaimer": "Vnos podatkov o naložbah je namenjen izključno evidentiranju. S tem se ne oblikuje dejanska naložba ali zavezujoče naročilo v kakršni koli obliki.",
+        "noteDescription": "Dodaj opombo k svoji naložbi za osebno evidenco.",
+        "investmentDescription": "Znesek vloženega denarja",
+        "shareDescription": "Kolikšen del zmogljivosti sončne elektrarne predstavlja tvoja naložba. To informacijo najdeš v dokumentih, ki si jih prejel ob naložbi.",
         "deleteInvestmentDialog": {
-          "title": "Are you sure you want to delete this investment?",
-          "body": "Deleting an investment does not automatically remove the associated consumption entry from your profile, but prevents existing entries to be updated."
+          "title": "Si prepričan, da želiš izbrisati to naložbo?",
+          "body": "Brisanje naložbe ne odstrani povezanega vnosa porabe iz tvojega profila, vendar prepreči posodobitev obstoječih vnosov."
         },
-        "capacity": "Capacity",
-        "investmentDateDescription": "The day you made the investment on."
+        "capacity": "Zmogljivost",
+        "investmentDateDescription": "Dan, ko ste izvedli naložbo."
       }
     },
     "filter": {
@@ -370,11 +370,11 @@
     "account": {
       "downloadMyData": {
         "button": "Prenesi moje podatke",
-        "description": "Downloads a JSON file with all data stored in your account."
+        "description": "Prenesi datoteko JSON z vsemi podatki, shranjenimi v tvojem računu."
       },
       "downloadConsumptions": {
-        "button": "Download Consumptions",
-        "description": "Downloads a CSV file with all your consumptions."
+        "button": "Prenesi Potrošnje",
+        "description": "Prenesite datoteko CSV z vsemi tvojimi porabi."
       },
       "changePassword": "Sprememba gesla",
       "changeEmail": "Sprememba e-pošte",
@@ -411,21 +411,21 @@
       "useImperial": "Preklop na imperialno (Velika Britanija)"
     },
     "pv": {
-      "yourProduction": "Your Production",
-      "totalProduction": "Total Production",
+      "yourProduction": "Tvoja proizvodnja",
+      "totalProduction": "Celotna proizvodnja",
       "featureGuide": {
-        "body": "Your investment in your local AURORA solar power installations helps reduce your carbon footprint. Here you can see a breakdown of the total energy produced by the installation (Total Production) and your investment's contribution (Your Production). Your contribution is automatically added as an offset to your profile each Friday morning to help you reach near-zero emissions.",
-        "title": "How does it work?"
+        "body": "Tvoja naložba v lokalno sončno elektrarno AURORA pomaga zmanjšati tvoj ogljični odtis. Tukaj si lahko ogledaš razčlenitev celotne energije, ki jo proizvede elektrarna (skupna proizvodnja), in prispevek tvoje naložbe (tvoja proizvodnja). Tvoj prispevek se vsak petek zjutraj samodejno doda kot kompenzacija v tvoj profil in ti pomaga doseči skoraj ničelne emisije.",
+        "title": "Kako to deluje?"
       },
-      "seeFullData": "See full data",
-      "productionInLast30Days": "Production in the past 30 days",
-      "showProductionSinceFirstInvestment": "Show production since your first investment.",
-      "showLifetime": "Since Investment",
-      "yourInvestments": "Your Investments",
-      "multipleInvestmentsDisclaimer": "Adding multiple investments is only necessary if you later buy additional shares.",
-      "yourLatestInvestment": "Your Latest Investment",
-      "recordYourInvestment": "Record your Investment",
-      "allInvestments": "All Investments"
+      "seeFullData": "Oglejte si celotne podatke",
+      "productionInLast30Days": "Proizvodnja v zadnjih 30 dneh",
+      "showProductionSinceFirstInvestment": "Prikažite proizvodnjo od prve naložbe.",
+      "showLifetime": "Od naložbe",
+      "yourInvestments": "Tvoje naložbe",
+      "multipleInvestmentsDisclaimer": "Dodajanje več naložb je potrebno le, če naknadno kupiš dodatne deleže.",
+      "yourLatestInvestment": "Tvoja najnovejša naložba",
+      "recordYourInvestment": "Evidentiraj svojo naložbo",
+      "allInvestments": "Vse naložbe"
     }
   },
   "common": {
@@ -465,19 +465,19 @@
       "previous": "Prejšnji",
       "next": "Naslednji"
     },
-    "production": "Production",
-    "viewData": "View Data",
-    "inactive": "Inactive",
-    "active": "Active",
-    "productionIn": "Production in",
-    "productionFor": "Production for",
-    "productionSince": "Production since",
-    "download": "Download",
-    "since": "Since",
-    "notApplicable": "Not applicable",
-    "goBack": "Go back",
-    "energy": "Energy",
-    "sinceStart": "Since start"
+    "production": "Proizvodnja",
+    "viewData": "Prikaži podatke",
+    "inactive": "Neaktivno",
+    "active": "Aktivno",
+    "productionIn": "Proizvodnja v",
+    "productionFor": "Proizvodnja za",
+    "productionSince": "Proizvodnja od",
+    "download": "Prenesi",
+    "since": "Od",
+    "notApplicable": "Se ne uporablja",
+    "goBack": "Pojdi nazaj",
+    "energy": "Energija",
+    "sinceStart": "Od začetka"
   },
   "country": {
     "allSelectedCountries": "Vse izbrane države",
@@ -501,8 +501,8 @@
       "account": "Račun",
       "logout": "Odjava",
       "admin": "Administrator",
-      "solarPower": "Solar Power",
-      "pvInvestment": "Investment"
+      "solarPower": "Sončna energija",
+      "pvInvestment": "Naložba"
     },
     "account": {
       "settings": "Nastavitve"
@@ -578,9 +578,9 @@
       "butane": "Butan",
       "planeIntraEu": "Letalo (znotraj EU)",
       "planeExtraEu": "Letalo (izven EU)",
-      "pvInvestment": "PV Investment"
+      "pvInvestment": "Naložba v fotovoltaiko"
     },
-    "pvInvestment": "Electricity (PV)"
+    "pvInvestment": "Električna energija (PV)"
   },
   "unitLabel": {
     "distance": "Razdalja"
