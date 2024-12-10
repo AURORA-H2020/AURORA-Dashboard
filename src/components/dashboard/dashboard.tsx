@@ -47,10 +47,20 @@ const Dashboard = ({
   const t = useTranslations();
 
   // Options available for country multiselect
-  const options: Option[] = countriesMapping.map((country) => ({
-    value: country.ID,
-    label: t(country.name),
-  }));
+  const options: Option[] = countriesMapping
+    .map((country) => {
+      const availableCountries = globalSummaryData?.countries.map((country) => {
+        return country.countryID;
+      });
+
+      if (availableCountries?.includes(country.ID)) {
+        return {
+          value: country.ID,
+          label: t(country.name),
+        };
+      }
+    })
+    .filter(Boolean) as Option[];
 
   // State to keep track of country multiselect
   const [selectedCountries, setSelectedCountries] = useState<Option[]>(options);
