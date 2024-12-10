@@ -20,7 +20,8 @@
     "downloads": {
       "title": "Descargar nuestros datos",
       "description": "Ofrecemos las métricas anteriores y los datos de las etiquetas para su descarga."
-    }
+    },
+    "selectCountry": "Select a country"
   },
   "toast": {
     "dataDownload": {
@@ -323,7 +324,7 @@
         "edit": "Editar Inversión",
         "save": "Ahorrar inversión",
         "add": "Añadir inversión",
-        "share": "Acciones",
+        "shares": "Shares",
         "investmentDate": "Fecha de inversión",
         "investment": "Inversión",
         "note": "Nota",
@@ -340,7 +341,8 @@
           "body": "La supresión de una inversión no elimina automáticamente la entrada de consumo asociada de su perfil, pero impide que se actualicen las entradas existentes."
         },
         "capacity": "Capacidad",
-        "investmentDateDescription": "El día en que hizo la inversión."
+        "investmentDateDescription": "El día en que hizo la inversión.",
+        "share": "Acciones"
       }
     },
     "filter": {

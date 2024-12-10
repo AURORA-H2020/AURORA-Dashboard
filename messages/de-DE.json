@@ -20,7 +20,8 @@
     "downloads": {
       "title": "Laden Sie unsere Daten herunter",
       "description": "Wir bieten die oben aufgeführten Metriken und Abzeichen-Daten zum Download an."
-    }
+    },
+    "selectCountry": "Wählen Sie ein Land"
   },
   "toast": {
     "dataDownload": {
@@ -323,7 +324,7 @@
         "edit": "Investition bearbeiten",
         "save": "Investitionen speichern",
         "add": "Investitionen hinzufügen",
-        "share": "Anteile",
+        "shares": "Anteile",
         "investmentDate": "Investitionsdatum",
         "investment": "Investition",
         "note": "Notiz",
@@ -340,7 +341,8 @@
           "body": "Das Löschen einer Investition entfernt nicht automatisch den zugehörigen Verbrauchseintrag aus Ihrem Profil, sondern verhindert, dass bestehende Einträge aktualisiert werden."
         },
         "capacity": "Kapazität",
-        "investmentDateDescription": "Der Tag, an dem Sie die Investition getätigt haben."
+        "investmentDateDescription": "Der Tag, an dem Sie die Investition getätigt haben.",
+        "share": "Anteil"
       }
     },
     "filter": {
