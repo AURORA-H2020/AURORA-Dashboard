@@ -4,11 +4,9 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthContextProvider } from "@/providers/context/authContext";
 import { FirebaseDataProvider } from "@/providers/context/firebaseContext";
-
 import { Theme } from "@radix-ui/themes";
 import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
-import { ThemeProvider as NextThemesProvider } from "next-themes";
-import type { ThemeProviderProps } from "next-themes/dist/types";
+import { ThemeProvider, ThemeProviderProps } from "next-themes";
 import { ReactNode } from "react";
 import { FirebaseAppCheckProvider } from "./FirebaseAppCheckProvider";
 
@@ -36,12 +34,12 @@ const Providers = ({
         <AuthContextProvider>
           <FirebaseDataProvider>
             <Theme>
-              <NextThemesProvider {...props}>
+              <ThemeProvider {...props}>
                 <TooltipProvider>
                   {children}
                   <Toaster richColors />
                 </TooltipProvider>
-              </NextThemesProvider>
+              </ThemeProvider>
             </Theme>
           </FirebaseDataProvider>
         </AuthContextProvider>
