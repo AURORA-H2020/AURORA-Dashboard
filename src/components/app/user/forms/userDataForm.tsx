@@ -17,7 +17,6 @@ import {
 import { labelMappings } from "@/lib/constants/consumption-constants";
 import { cn, isFieldRequired } from "@/lib/utilities";
 import { userDataFormSchema } from "@/lib/zod/userSchemas";
-import { CityMapping } from "@/models/constants";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
@@ -29,7 +28,7 @@ import {
   getValue,
 } from "firebase/remote-config";
 import { useTranslations } from "next-intl";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect } from "react";
 import { DefaultValues, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -120,22 +119,17 @@ const UserDataForm = ({
   }, [form, isNewUser]);
 
   const selectedCountry = form.watch("country");
-  const [availableCities, setAvailableCities] = useState<CityMapping[]>([]);
 
   useEffect(() => {
     if (!isNewUser) return;
 
-    if (selectedCountry) {
-      const country = countriesMapping.find(
-        (country) => country.ID === selectedCountry,
-      );
-
-      if (country) {
-        setAvailableCities(country.cities);
-      }
-    }
     form.setValue("city", undefined);
-  }, [form, isNewUser, selectedCountry]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isNewUser, selectedCountry]);
+
+  const availableCities = countriesMapping.find(
+    (country) => country.ID === selectedCountry,
+  )?.cities;
 
   return (
     <Form {...form}>
@@ -222,7 +216,7 @@ const UserDataForm = ({
               )}
             />
 
-            {availableCities.length > 0 && (
+            {availableCities && availableCities.length > 0 && (
               <FormField
                 control={form.control}
                 name="city"
