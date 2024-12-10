@@ -8,7 +8,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import {
   getMessages,
   getTranslations,
-  unstable_setRequestLocale,
+  setRequestLocale,
 } from "next-intl/server";
 import { Inter } from "next/font/google";
 import { ReactNode } from "react";
@@ -60,7 +60,7 @@ const RootLayout = async ({
   children,
   params: { locale },
 }: Props): Promise<ReactNode> => {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
 
   const messages = await getMessages();
 

@@ -9,7 +9,7 @@ import {
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Heading, Text } from "@radix-ui/themes";
 import { promises as fs } from "fs";
-import { getTranslations, unstable_setRequestLocale } from "next-intl/server";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ReactNode } from "react";
 
 type Props = {
@@ -26,7 +26,7 @@ const HomePage = async ({
   params: { locale },
   searchParams,
 }: Props): Promise<ReactNode> => {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const t = await getTranslations();
 
   let globalSummaryData: GlobalSummary | undefined;
