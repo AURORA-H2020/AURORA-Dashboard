@@ -324,7 +324,7 @@
         "edit": "Edit Investment",
         "save": "Save Investment",
         "add": "Add Investment",
-        "share": "Shares",
+        "shares": "Shares",
         "investmentDate": "Investment Date",
         "investment": "Investment",
         "note": "Note",
@@ -341,7 +341,8 @@
           "body": "Deleting an investment does not automatically remove the associated consumption entry from your profile, but prevents existing entries to be updated."
         },
         "capacity": "Capacity",
-        "investmentDateDescription": "The day you made the investment on."
+        "investmentDateDescription": "The day you made the investment on.",
+        "share": "Share"
       }
     },
     "filter": {

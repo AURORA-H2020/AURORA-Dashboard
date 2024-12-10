@@ -42,7 +42,7 @@ const PvInvestmentForm = ({
   const t = useTranslations();
   const formSchema = userPvInvestmentSchema(t);
 
-  const { userData, pvPlants } = useFirebaseData();
+  const { userData, pvPlants, userCountryData } = useFirebaseData();
   const { user } = useAuthContext() as {
     user: User;
   };
@@ -98,13 +98,15 @@ const PvInvestmentForm = ({
               <FormInputField
                 field={field}
                 inputType="number"
-                description={t("app.form.pvInvestment.shareDescription")}
                 placeholder={t("app.form.pvInvestment.shares")}
                 label={t("app.form.pvInvestment.shares")}
+                description={`${t("app.form.pvInvestment.shareDescription")} `}
                 required={isFieldRequired(formSchema, "share")}
               />
             )}
           />
+          <span className="text-sm font-semibold text-muted-foreground">{`1 ${t("app.form.pvInvestment.share")} = ${pvPlant?.kwPerShare} kW (${pvPlant?.pricePerShare} ${userCountryData?.currencyCode ?? "EUR"})`}</span>
+
           <FormField
             control={form.control}
             name="investmentDate"
