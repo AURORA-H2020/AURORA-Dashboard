@@ -20,7 +20,8 @@
     "downloads": {
       "title": "Download our data",
       "description": "We offer the above metrics and label data for download."
-    }
+    },
+    "selectCountry": "Select a country"
   },
   "toast": {
     "dataDownload": {
