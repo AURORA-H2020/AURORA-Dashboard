@@ -46,7 +46,7 @@ const PvPanelInvestments = () => {
         },
         {
           icon: BlocksIcon,
-          label: t("app.form.pvInvestment.share"),
+          label: t("app.form.pvInvestment.shares"),
           value: pvInvestments[0].share && `${pvInvestments[0].share}`,
         },
         {

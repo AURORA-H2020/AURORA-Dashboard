@@ -64,7 +64,7 @@ const ViewPvInvestmentModal = ({
         `${format.number(pvInvestment.investmentCapacity, { maximumFractionDigits: 0 })} kW`,
     },
     {
-      label: t("app.form.pvInvestment.share"),
+      label: t("app.form.pvInvestment.shares"),
       value: pvInvestment.share && `${format.number(pvInvestment.share)}`,
     },
     {

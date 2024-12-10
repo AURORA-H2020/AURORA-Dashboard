@@ -98,9 +98,9 @@ const PvInvestmentForm = ({
               <FormInputField
                 field={field}
                 inputType="number"
-                placeholder={t("app.form.pvInvestment.share")}
-                label={t("app.form.pvInvestment.share")}
                 description={t("app.form.pvInvestment.shareDescription")}
+                placeholder={t("app.form.pvInvestment.shares")}
+                label={t("app.form.pvInvestment.shares")}
                 required={isFieldRequired(formSchema, "share")}
               />
             )}
