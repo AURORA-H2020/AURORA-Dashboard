@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getAllApiData } from "@/firebase/firestore/get-all-api-data";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { useState } from "react";
 import { toast } from "sonner";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 
 const UpdatePvData = () => {
   interface FirebaseResponse {
