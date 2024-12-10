@@ -39,16 +39,18 @@ const AboutPage = async ({ params: { locale } }: Props): Promise<ReactNode> => {
   return (
     <>
       <Card>
-        <CardContent className="p-6">
-          <Heading>{t("about.countryData.title")}</Heading>
-          <Text>
-            {
-              // t("about.countryData.description")
-              t.rich("about.countryData.description", {
-                Strong: (chunks) => <Strong>{chunks}</Strong>,
-              })
-            }
-          </Text>
+        <CardContent className="flex flex-col gap-8 p-6">
+          <div>
+            <Heading>{t("about.countryData.title")}</Heading>
+            <Text>
+              {
+                // t("about.countryData.description")
+                t.rich("about.countryData.description", {
+                  Strong: (chunks) => <Strong>{chunks}</Strong>,
+                })
+              }
+            </Text>
+          </div>
           {countryData && <AboutContent countryData={countryData} />}
         </CardContent>
       </Card>
