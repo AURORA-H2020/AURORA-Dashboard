@@ -81,7 +81,7 @@ const LifetimePvData = async ({ site }: { site: string }) => {
   const chartConfig = {
     Ep: {
       label: t("common.energy"),
-      color: "hsl(var(--chart-1))",
+      color: "hsl(var(--primary))",
     },
   } satisfies ChartConfig;
 

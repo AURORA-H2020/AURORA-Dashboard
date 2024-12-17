@@ -81,7 +81,7 @@ const PvPage = () => {
         productionDisplay === "personal"
           ? t("app.pv.yourProduction")
           : t("app.pv.totalProduction"),
-      color: "hsl(var(--chart-1))",
+      color: "hsl(var(--primary))",
     },
   } satisfies ChartConfig;
 

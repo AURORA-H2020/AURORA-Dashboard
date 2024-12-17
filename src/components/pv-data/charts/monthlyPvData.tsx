@@ -78,7 +78,7 @@ const MonthlyPvData = async ({
   const chartConfig = {
     Ep: {
       label: t("common.energy"),
-      color: "hsl(var(--chart-1))",
+      color: "hsl(var(--primary))",
     },
   } satisfies ChartConfig;
 
