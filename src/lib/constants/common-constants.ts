@@ -193,7 +193,7 @@ export const countriesMapping: CountryMapping[] = [
     ID: "5wbHPir4QnwmhyW41aNl",
     name: t("country.greece"),
     nameSpecial: t("country.greece"),
-    code: "EL",
+    code: "GR",
     color: "sky-400",
     cities: [],
   },
