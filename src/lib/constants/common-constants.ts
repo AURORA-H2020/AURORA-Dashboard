@@ -136,7 +136,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "Np14pFuMvjqK5clkT60f",
     name: t("country.austria"),
-    nameSpecial: t("countrySpecial.austria"),
+    nameSpecial: t("country.austria"),
     code: "AT",
     color: "amber-400",
     cities: [],
@@ -144,7 +144,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "MvHZs2T6bsGxycGkWySM",
     name: t("country.belgium"),
-    nameSpecial: t("countrySpecial.belgium"),
+    nameSpecial: t("country.belgium"),
     code: "BE",
     color: "yellow-400",
     cities: [],
@@ -152,7 +152,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "BKHnojYHaAx6ey9EX7NP",
     name: t("country.bulgaria"),
-    nameSpecial: t("countrySpecial.bulgaria"),
+    nameSpecial: t("country.bulgaria"),
     code: "BG",
     color: "lime-400",
     cities: [],
@@ -160,7 +160,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "Qk9croEJzAtQtgikR9wK",
     name: t("country.cyprus"),
-    nameSpecial: t("countrySpecial.cyprus"),
+    nameSpecial: t("country.cyprus"),
     code: "CY",
     color: "teal-400",
     cities: [],
@@ -168,7 +168,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "NFbnOR0w7TKJCO0jvRb0",
     name: t("country.czechia"),
-    nameSpecial: t("countrySpecial.czechia"),
+    nameSpecial: t("country.czechia"),
     code: "CZ",
     color: "blue-400",
     cities: [],
@@ -176,7 +176,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "eBuT4EF66xOfUKAGYszP",
     name: t("country.germany"),
-    nameSpecial: t("countrySpecial.germany"),
+    nameSpecial: t("country.germany"),
     code: "DE",
     color: "slate-500",
     cities: [],
@@ -184,7 +184,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "vIGlS0gaIX2ie9A3GQT7",
     name: t("country.estonia"),
-    nameSpecial: t("countrySpecial.estonia"),
+    nameSpecial: t("country.estonia"),
     code: "EE",
     color: "cyan-300",
     cities: [],
@@ -192,7 +192,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "5wbHPir4QnwmhyW41aNl",
     name: t("country.greece"),
-    nameSpecial: t("countrySpecial.greece"),
+    nameSpecial: t("country.greece"),
     code: "EL",
     color: "sky-400",
     cities: [],
@@ -200,7 +200,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "WjTo7nwcFeuDj2unieco",
     name: t("country.finland"),
-    nameSpecial: t("countrySpecial.finland"),
+    nameSpecial: t("country.finland"),
     code: "FI",
     color: "green-400",
     cities: [],
@@ -208,7 +208,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "3zdua3Y7PommT7DCjZGN",
     name: t("country.france"),
-    nameSpecial: t("countrySpecial.france"),
+    nameSpecial: t("country.france"),
     code: "FR",
     color: "indigo-400",
     cities: [],
@@ -216,7 +216,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "tkr09Fm2Ozadh06E1DiG",
     name: t("country.croatia"),
-    nameSpecial: t("countrySpecial.croatia"),
+    nameSpecial: t("country.croatia"),
     code: "HR",
     color: "purple-400",
     cities: [],
@@ -224,7 +224,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "xhnMmrqJf9PAuabUZQhF",
     name: t("country.hungary"),
-    nameSpecial: t("countrySpecial.hungary"),
+    nameSpecial: t("country.hungary"),
     code: "HU",
     color: "violet-400",
     cities: [],
@@ -232,7 +232,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "vPLPJJlvkhROm6o6nkkj",
     name: t("country.ireland"),
-    nameSpecial: t("countrySpecial.ireland"),
+    nameSpecial: t("country.ireland"),
     code: "IE",
     color: "emerald-300",
     cities: [],
@@ -240,7 +240,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "i0ZMvzKCaTXFPqz77JPE",
     name: t("country.italy"),
-    nameSpecial: t("countrySpecial.italy"),
+    nameSpecial: t("country.italy"),
     code: "IT",
     color: "red-400",
     cities: [],
@@ -248,7 +248,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "6tYU60J8PFPhMZFK1oL1",
     name: t("country.lithuania"),
-    nameSpecial: t("countrySpecial.lithuania"),
+    nameSpecial: t("country.lithuania"),
     code: "LT",
     color: "amber-300",
     cities: [],
@@ -256,7 +256,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "nSUR6c7wbwppy4rI1q6B",
     name: t("country.luxembourg"),
-    nameSpecial: t("countrySpecial.luxembourg"),
+    nameSpecial: t("country.luxembourg"),
     code: "LU",
     color: "blue-300",
     cities: [],
@@ -264,7 +264,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "4SxwCIZuG7gzLSKzv5v7",
     name: t("country.latvia"),
-    nameSpecial: t("countrySpecial.latvia"),
+    nameSpecial: t("country.latvia"),
     code: "LV",
     color: "green-300",
     cities: [],
@@ -272,7 +272,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "DOWGOHHllCbea3L5DTgs",
     name: t("country.malta"),
-    nameSpecial: t("countrySpecial.malta"),
+    nameSpecial: t("country.malta"),
     code: "MT",
     color: "yellow-300",
     cities: [],
@@ -280,7 +280,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "4ncQGhd9i6xhGfK0cTFO",
     name: t("country.netherlands"),
-    nameSpecial: t("countrySpecial.netherlands"),
+    nameSpecial: t("country.netherlands"),
     code: "NL",
     color: "orange-300",
     cities: [],
@@ -288,7 +288,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "Tj41759VGg6EMgGh2qtc",
     name: t("country.poland"),
-    nameSpecial: t("countrySpecial.poland"),
+    nameSpecial: t("country.poland"),
     code: "PL",
     color: "rose-300",
     cities: [],
@@ -296,7 +296,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "jn6USXVBwpRQFkaJ9QTM",
     name: t("country.romania"),
-    nameSpecial: t("countrySpecial.romania"),
+    nameSpecial: t("country.romania"),
     code: "RO",
     color: "pink-300",
     cities: [],
@@ -304,7 +304,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "IZThZ0TfpkAaiXGyWM4M",
     name: t("country.sweden"),
-    nameSpecial: t("countrySpecial.sweden"),
+    nameSpecial: t("country.sweden"),
     code: "SE",
     color: "sky-300",
     cities: [],
@@ -312,7 +312,7 @@ export const countriesMapping: CountryMapping[] = [
   {
     ID: "6joWNP9JhgVANMZ5CYsm",
     name: t("country.slovakia"),
-    nameSpecial: t("countrySpecial.slovakia"),
+    nameSpecial: t("country.slovakia"),
     code: "SK",
     color: "purple-300",
     cities: [],
