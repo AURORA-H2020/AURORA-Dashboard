@@ -21,7 +21,7 @@
       "title": "Descargar nuestros datos",
       "description": "Ofrecemos las métricas anteriores y los datos de las etiquetas para su descarga."
     },
-    "selectCountry": "Select a country"
+    "selectCountry": "Seleccione un país"
   },
   "toast": {
     "dataDownload": {
@@ -324,7 +324,7 @@
         "edit": "Editar Inversión",
         "save": "Ahorrar inversión",
         "add": "Añadir inversión",
-        "shares": "Shares",
+        "shares": "Acciones",
         "investmentDate": "Fecha de inversión",
         "investment": "Inversión",
         "note": "Nota",
@@ -488,7 +488,30 @@
     "slovenia": "Eslovenia",
     "spain": "España",
     "unitedKingdom": "Reino Unido",
-    "zeuropeOther": "Otros en la UE"
+    "zeuropeOther": "Otros en la UE",
+    "austria": "Austria",
+    "belgium": "Bélgica",
+    "bulgaria": "Bulgaria",
+    "cyprus": "Chipre",
+    "czechia": "Chequia",
+    "germany": "Alemania",
+    "estonia": "Estonia",
+    "greece": "Grecia",
+    "finland": "Finlandia",
+    "france": "Francia",
+    "croatia": "Croacia",
+    "hungary": "Hungría",
+    "ireland": "Irlanda",
+    "italy": "Italia",
+    "lithuania": "Lituania",
+    "luxembourg": "Luxemburgo",
+    "latvia": "Letonia",
+    "malta": "Malta",
+    "netherlands": "Países Bajos",
+    "poland": "Polonia",
+    "romania": "Rumanía",
+    "sweden": "Suecia",
+    "slovakia": "Eslovaquia"
   },
   "footer": {
     "auroraWebsite": "Sitio web de AURORA",

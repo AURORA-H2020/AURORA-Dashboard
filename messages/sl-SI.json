@@ -21,7 +21,7 @@
       "title": "Prenesi naše podatke",
       "description": "Zgornje metrike in podatke o oznakah lahko prenesete."
     },
-    "selectCountry": "Select a country"
+    "selectCountry": "Izberite državo"
   },
   "toast": {
     "dataDownload": {
@@ -324,7 +324,7 @@
         "edit": "Urejanje naložb",
         "save": "Shrani naložbo",
         "add": "Dodaj naložbo",
-        "shares": "Shares",
+        "shares": "Delnice",
         "investmentDate": "Datum naložbe",
         "investment": "Naložba",
         "note": "Opomba",
@@ -488,7 +488,30 @@
     "slovenia": "Slovenija",
     "spain": "Španija",
     "unitedKingdom": "Združeno kraljestvo",
-    "zeuropeOther": "Ostali v EU"
+    "zeuropeOther": "Ostali v EU",
+    "austria": "Avstrija",
+    "belgium": "Belgija",
+    "bulgaria": "Bolgarija",
+    "cyprus": "Ciper",
+    "czechia": "Češka",
+    "germany": "Nemčija",
+    "estonia": "Estonija",
+    "greece": "Grčija",
+    "finland": "Finska",
+    "france": "Francija",
+    "croatia": "Hrvaška",
+    "hungary": "Madžarska",
+    "ireland": "Irska",
+    "italy": "Italija",
+    "lithuania": "Litva",
+    "luxembourg": "Luksemburg",
+    "latvia": "Latvija",
+    "malta": "Malta",
+    "netherlands": "Nizozemska",
+    "poland": "Poljska",
+    "romania": "Romunija",
+    "sweden": "Švedska",
+    "slovakia": "Slovaška"
   },
   "footer": {
     "auroraWebsite": "Spletna stran AURORA",
