@@ -28,19 +28,19 @@ if (!getApps().length) {
 if (process.env.NEXT_PUBLIC_TEST_MODE === "true") {
   // Firestore Emulator
   const firestore = getFirestore(firebaseApp);
-  connectFirestoreEmulator(firestore, "localhost", 8080);
+  connectFirestoreEmulator(firestore, "127.0.0.1", 8080);
 
   // Storage Emulator
   const storage = getStorage(firebaseApp);
-  connectStorageEmulator(storage, "localhost", 9199);
+  connectStorageEmulator(storage, "127.0.0.1", 9199);
 
   // Authentication Emulator
   const auth = getAuth(firebaseApp);
-  connectAuthEmulator(auth, "http://localhost:9099");
+  connectAuthEmulator(auth, "http://127.0.0.1:9099");
 
   // Function Emulator
   const functions = getFunctions(firebaseApp);
-  connectFunctionsEmulator(functions, "localhost", 5001);
+  connectFunctionsEmulator(functions, "127.0.0.1", 5001);
 }
 
 export { firebaseApp };
