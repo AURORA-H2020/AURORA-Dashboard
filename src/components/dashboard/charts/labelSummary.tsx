@@ -1,6 +1,7 @@
 "use client";
 
 import { LabelInfoModal } from "@/components/app/common/modals/labelInfoModal";
+import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -14,6 +15,7 @@ import { countriesMapping } from "@/lib/constants/common-constants";
 import { labelMappings } from "@/lib/constants/consumption-constants";
 import { annualLabelData } from "@/lib/transformData";
 import {
+  cn,
   getYearsInSummary,
   valueFormatterAbsolute,
   valueFormatterPercentage,
@@ -131,6 +133,13 @@ const LabelSummary = ({
     t,
   ]);
 
+  if (!transformedData || transformedData?.length < 1)
+    return (
+      <PlaceholderCard>
+        <p>{t("error.noData")}</p>
+      </PlaceholderCard>
+    );
+
   return (
     <>
       <Flex
@@ -203,7 +212,8 @@ const LabelSummary = ({
         </Flex>
       </Flex>
       <BarChart
-        className="mt-4"
+        className={cn("mt-4")}
+        style={{ height: `${transformedData.length * 50}px` }}
         yAxisWidth={80}
         showAnimation={true}
         data={transformedData ?? []}

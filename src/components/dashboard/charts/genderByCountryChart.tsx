@@ -1,3 +1,4 @@
+import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import {
   Select,
   SelectContent,
@@ -10,6 +11,7 @@ import {
   genderMappings,
 } from "@/lib/constants/common-constants";
 import {
+  cn,
   valueFormatterAbsolute,
   valueFormatterPercentage,
 } from "@/lib/utilities";
@@ -93,6 +95,13 @@ const GenderByCountryChart = ({
     setGenderData(updatedData);
   }, [metaData, calculationMode, t]);
 
+  if (!genderData || genderData?.length < 1)
+    return (
+      <PlaceholderCard>
+        <p>{t("error.noData")}</p>
+      </PlaceholderCard>
+    );
+
   return (
     <>
       <Heading>{title}</Heading>
@@ -121,7 +130,8 @@ const GenderByCountryChart = ({
         </Select>
       </Flex>
       <BarChart
-        className="mt-4"
+        className={cn("mt-4")}
+        style={{ height: `${genderData.length * 50}px` }}
         yAxisWidth={80}
         showAnimation={true}
         data={genderData ?? []}
