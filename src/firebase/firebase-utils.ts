@@ -2,7 +2,15 @@ import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { CountryData } from "@/models/country-data";
 import { BackupUserData } from "@/models/extensions";
-import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
+import {
+  getDownloadURL,
+  getStorage,
+  list,
+  listAll,
+  ref,
+  StorageReference,
+} from "firebase/storage";
+import { unstable_cache } from "next/cache";
 
 /**
  * Downloads a file from Firebase Storage.
@@ -27,15 +35,22 @@ const downloadFile = async (path: string): Promise<any> => {
  * @param {string | undefined} path - The path to the directory in Firebase Storage.
  * @return {Promise<string[] | undefined>} A promise that resolves to an array of dashboard file names or undefined in case of an error.
  */
-export const firebaseStorageListDashboardFiles = async (
-  path: string | undefined,
-): Promise<string[] | undefined> => {
+export const firebaseStorageListDashboardFiles = unstable_cache(
+  async (path: string | undefined): Promise<string[] | undefined> => {
   const firebaseStorage = getStorage(firebaseApp);
   const storageRef = ref(firebaseStorage, path);
 
   try {
-    const res = await listAll(storageRef);
-    const summaryFiles = res.items
+      let allResults: StorageReference[] = [];
+      let pageToken: string | undefined = undefined;
+
+      do {
+        const res = await list(storageRef, { maxResults: 100, pageToken });
+        allResults = allResults.concat(res.items);
+        pageToken = res.nextPageToken;
+      } while (pageToken);
+
+      const summaryFiles = allResults
       .filter((itemRef) => itemRef.name.startsWith("summarised-export"))
       .sort((a, b) => a.name.localeCompare(b.name)); // Alphabetical sort
 
@@ -44,7 +59,8 @@ export const firebaseStorageListDashboardFiles = async (
     console.error(error);
     return undefined; // In case of error, return undefined
   }
-};
+  },
+);
 
 /**
  * Downloads a file from Firebase Storage based on the provided file name and path.

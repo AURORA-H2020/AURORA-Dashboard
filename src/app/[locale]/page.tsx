@@ -17,6 +17,9 @@ type Props = {
   searchParams: { [key: string]: string | string[] | undefined };
 };
 
+// Revalidate the page every 12 hours
+export const revalidate = 3600 * 12;
+
 /**
  * Asynchronous function that represents the Home component.
  *
