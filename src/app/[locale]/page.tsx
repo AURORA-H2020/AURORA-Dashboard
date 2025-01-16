@@ -1,6 +1,5 @@
 import { Dashboard } from "@/components/dashboard/dashboard";
 import { SelectDashboardSource } from "@/components/dashboard/selectDashboardSource";
-import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import {
   firebaseStorageDownloadFile,
@@ -8,7 +7,6 @@ import {
 } from "@/firebase/firebase-utils";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { Heading, Text } from "@radix-ui/themes";
-import { promises as fs } from "fs";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ReactNode } from "react";
 
@@ -35,28 +33,20 @@ const HomePage = async ({
   let globalSummaryData: GlobalSummary | undefined;
   let fileList: string[] | undefined;
 
-  if (process.env.TEST_MODE === "true") {
-    const file = await fs.readFile(
-      process.cwd() + "/src/data/summarised-export.json",
-      "utf8",
-    );
-    globalSummaryData = JSON.parse(file);
-  } else if (firebaseApp) {
-    fileList =
-      (await firebaseStorageListDashboardFiles(
-        FirebaseConstants.buckets.auroraDashboard.folders.dashboardData.name,
-      )) || [];
+  fileList =
+    (await firebaseStorageListDashboardFiles(
+      FirebaseConstants.buckets.auroraDashboard.folders.dashboardData.name,
+    )) || [];
 
-    const currentFile: string =
-      searchParams?.file?.toString() || fileList[fileList.length - 1];
+  const currentFile: string =
+    searchParams?.file?.toString() || fileList[fileList.length - 1];
 
-    if (fileList.includes(currentFile)) {
-      globalSummaryData = (await firebaseStorageDownloadFile(
-        currentFile,
-        FirebaseConstants.buckets.auroraDashboard.folders.dashboardData.name ||
-          "",
-      )) as GlobalSummary;
-    }
+  if (fileList.includes(currentFile)) {
+    globalSummaryData = (await firebaseStorageDownloadFile(
+      currentFile,
+      FirebaseConstants.buckets.auroraDashboard.folders.dashboardData.name ||
+        "",
+    )) as GlobalSummary;
   }
 
   if (globalSummaryData && fileList) {
