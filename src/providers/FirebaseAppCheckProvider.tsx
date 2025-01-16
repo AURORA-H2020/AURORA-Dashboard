@@ -18,7 +18,7 @@ const FirebaseAppCheckProvider = ({
 }): ReactNode => {
   useEffect(() => {
     try {
-      if (process.env.NEXT_PUBLIC_TEST_MODE === "true") {
+      if (process.env.NEXT_PUBLIC_USE_EMULATOR === "true") {
         Object.assign(window, {
           FIREBASE_APPCHECK_DEBUG_TOKEN:
             process.env.NEXT_PUBLIC_APP_CHECK_DEBUG_TOKEN,

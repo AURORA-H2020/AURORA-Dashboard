@@ -25,7 +25,7 @@ if (!getApps().length) {
 }
 
 // Check if we are in development and if so, connect to Firebase emulators
-if (process.env.NEXT_PUBLIC_TEST_MODE === "true") {
+if (process.env.NEXT_PUBLIC_USE_EMULATOR === "true") {
   // Firestore Emulator
   const firestore = getFirestore(firebaseApp);
   connectFirestoreEmulator(firestore, "127.0.0.1", 8080);
