@@ -1,20 +1,14 @@
 export interface CountryData {
-  data: CountryDataCountry[];
-}
-
-export interface CountryDataCountry {
   countryCode: string;
   currencyCode: string;
+  id: string;
   labels: {
     carbonEmission: LabelCategories;
     energyExpended: LabelCategories;
   };
-  __collections__: {
-    cities: {}[];
-    metrics: {
-      [key: string]: CountryMetric;
-    }[];
-  };
+  metrics: {
+    [key: string]: CountryMetric;
+  }[];
 }
 
 interface CountryMetric {

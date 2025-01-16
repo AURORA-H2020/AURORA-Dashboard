@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { countriesMapping } from "@/lib/constants/common-constants";
-import { CountryData, CountryDataCountry } from "@/models/country-data";
+import { CountryData } from "@/models/country-data";
 import { Flex, Grid, Heading, Text } from "@radix-ui/themes";
 import { Earth } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -25,7 +25,7 @@ import { ReactNode, useState } from "react";
 const AboutContent = ({
   countryData,
 }: {
-  countryData: CountryData | undefined;
+  countryData: CountryData[] | undefined;
 }): ReactNode => {
   const t = useTranslations();
 
@@ -33,14 +33,22 @@ const AboutContent = ({
     { code: string; ID: string } | undefined
   >(undefined);
 
+  const [selectedCountryData, setSelectedCountryData] = useState<
+    CountryData | undefined
+  >(undefined);
+
   const handleSelect = (value: string) => {
     const country = countriesMapping.find((c) => c.code === value);
     if (!country) return;
 
+    if (countryData) {
+      setSelectedCountryData(countryData.find((c) => c.id === country.ID));
+    }
+
     setSelectedCountry({ code: country.code, ID: country.ID });
   };
 
-  if (!countryData?.data) return;
+  if (!countryData || countryData?.length < 1) return;
 
   return (
     <div className="flex flex-col gap-4">
@@ -49,19 +57,20 @@ const AboutContent = ({
           <SelectValue placeholder={t("about.selectCountry")} />
         </SelectTrigger>
         <SelectContent>
-          {Object.entries(countryData.data).map(
-            ([key, country]: [string, CountryDataCountry]) => {
-              return (
-                <SelectItem key={key} value={country.countryCode}>
-                  {t(countriesMapping.find((c) => c.ID === key)?.name)}
-                </SelectItem>
-              );
-            },
-          )}
+          {countriesMapping.map((country) => {
+            const hasCountryData = countryData.find((c) => c.id === country.ID);
+            if (!hasCountryData) return;
+
+            return (
+              <SelectItem key={country.code} value={country.code}>
+                {t(country.name)}
+              </SelectItem>
+            );
+          })}
         </SelectContent>
       </Select>
 
-      {selectedCountry ? (
+      {selectedCountry && selectedCountryData ? (
         <Grid
           columns={{ initial: "1", md: "3" }}
           className="mt-8 gap-2 max-md:space-y-4 md:space-x-4"
@@ -77,9 +86,7 @@ const AboutContent = ({
               })}
             </Text>
 
-            <AboutJson
-              data={countryData.data[selectedCountry.ID]?.labels.carbonEmission}
-            />
+            <AboutJson data={selectedCountryData.labels.carbonEmission} />
           </Flex>
           <Flex direction={"column"}>
             <Heading>{t("about.energyExpendedLabels.title")}</Heading>
@@ -91,9 +98,7 @@ const AboutContent = ({
                 ),
               })}
             </Text>
-            <AboutJson
-              data={countryData.data[selectedCountry.ID]?.labels.energyExpended}
-            />
+            <AboutJson data={selectedCountryData.labels.energyExpended} />
           </Flex>
           <Flex direction={"column"}>
             <Heading>{t("about.metrics.title")}</Heading>
@@ -105,12 +110,7 @@ const AboutContent = ({
                 ),
               })}
             </Text>
-            <AboutJson
-              data={
-                countryData.data[selectedCountry.ID]["__collections__"]
-                  ?.metrics["1.0.0"]
-              }
-            />
+            <AboutJson data={selectedCountryData.metrics} />
           </Flex>
         </Grid>
       ) : (

@@ -37,10 +37,10 @@ const downloadFile = async (path: string): Promise<any> => {
  */
 export const firebaseStorageListDashboardFiles = unstable_cache(
   async (path: string | undefined): Promise<string[] | undefined> => {
-  const firebaseStorage = getStorage(firebaseApp);
-  const storageRef = ref(firebaseStorage, path);
+    const firebaseStorage = getStorage(firebaseApp);
+    const storageRef = ref(firebaseStorage, path);
 
-  try {
+    try {
       let allResults: StorageReference[] = [];
       let pageToken: string | undefined = undefined;
 
@@ -51,14 +51,14 @@ export const firebaseStorageListDashboardFiles = unstable_cache(
       } while (pageToken);
 
       const summaryFiles = allResults
-      .filter((itemRef) => itemRef.name.startsWith("summarised-export"))
-      .sort((a, b) => a.name.localeCompare(b.name)); // Alphabetical sort
+        .filter((itemRef) => itemRef.name.startsWith("summarised-export"))
+        .sort((a, b) => a.name.localeCompare(b.name)); // Alphabetical sort
 
-    return summaryFiles.map((itemRef) => itemRef.name);
-  } catch (error) {
-    console.error(error);
-    return undefined; // In case of error, return undefined
-  }
+      return summaryFiles.map((itemRef) => itemRef.name);
+    } catch (error) {
+      console.error(error);
+      return undefined; // In case of error, return undefined
+    }
   },
 );
 
@@ -84,14 +84,15 @@ export const firebaseStorageDownloadFile = async (
  */
 export const getLatestCountryFile = async (
   path: string,
-): Promise<CountryData | null> => {
+): Promise<CountryData[] | null> => {
   const firebaseStorage = getStorage(firebaseApp);
   const storageRef = ref(firebaseStorage, path);
 
   try {
     const res = await listAll(storageRef);
+
     const summaryFiles = res.items
-      .filter((itemRef) => itemRef.name.startsWith("countries"))
+      .filter((itemRef) => itemRef.name.startsWith("aurora-countries"))
       .sort((a, b) => a.name.localeCompare(b.name)); // Alphabetical sort
 
     // The latest file will be the last one after sorting

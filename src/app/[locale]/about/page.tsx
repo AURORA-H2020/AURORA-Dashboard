@@ -26,7 +26,7 @@ const AboutPage = async ({ params: { locale } }: Props): Promise<ReactNode> => {
   setRequestLocale(locale);
   const t = await getTranslations();
 
-  let countryData: CountryData | null;
+  let countryData: CountryData[] | null;
 
   if (firebaseApp) {
     countryData = await getLatestCountryFile(

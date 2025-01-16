@@ -18,7 +18,7 @@ import { toast } from "sonner";
 const DataDownloads = ({
   countryData,
 }: {
-  countryData: CountryData | undefined;
+  countryData: CountryData[] | undefined;
 }) => {
   const t = useTranslations();
 
