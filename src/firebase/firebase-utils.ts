@@ -59,7 +59,7 @@ export const firebaseStorageListDashboardFiles = unstable_cache(
       console.error(error);
       return undefined; // In case of error, return undefined
     }
-  },
+  }, ["firebaseStorageListDashboardFiles"], { revalidate: 3600 * 12}
 );
 
 /**
