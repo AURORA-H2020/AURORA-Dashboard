@@ -11,7 +11,7 @@ import { cn } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { useTranslations } from "next-intl";
-import { forwardRef, ReactNode, useState } from "react";
+import { ReactNode, forwardRef, useState } from "react";
 
 const AddEditConsumptionModal = forwardRef(
   (

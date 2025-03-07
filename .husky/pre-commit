@@ -1,2 +1,2 @@
-npm run pretty
+npm run format
 npm run lint

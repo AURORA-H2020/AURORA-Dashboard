@@ -1,7 +1,7 @@
 import { firebaseApp } from "@/firebase/config";
 import {
-  initializeAppCheck,
   ReCaptchaEnterpriseProvider,
+  initializeAppCheck,
 } from "firebase/app-check";
 import { ReactNode, useEffect } from "react";
 

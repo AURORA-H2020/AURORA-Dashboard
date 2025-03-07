@@ -3,11 +3,11 @@ import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { Consumption } from "@/models/firestore/consumption/consumption";
 import { User } from "firebase/auth";
 import {
+  Timestamp,
   collection,
   getDocs,
   getFirestore,
   query,
-  Timestamp,
 } from "firebase/firestore";
 
 const fetchAllUserConsumptions = async (user: User): Promise<Consumption[]> => {

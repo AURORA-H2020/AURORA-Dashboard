@@ -1,6 +1,6 @@
 "use client";
 
-import Error from "next/error";
+import ErrorComponent from "next/error";
 import { useRouter } from "next/navigation";
 import { ReactElement, useEffect } from "react";
 
@@ -28,7 +28,7 @@ const NotFound = (): ReactElement => {
   return (
     <html lang="en">
       <body>
-        <Error
+        <ErrorComponent
           statusCode={404}
           title="Page not found. Redirecting to dashboard."
         />

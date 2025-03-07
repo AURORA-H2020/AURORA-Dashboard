@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore";
-import { RecurringConsumptionFrequency } from "./recurring-consumption-frequency";
 import { ConsumptionCategory } from "../consumption/consumption-category";
+import { RecurringConsumptionFrequency } from "./recurring-consumption-frequency";
 import { RecurringConsumptionTransportation } from "./recurring-consumption-transportation";
 
 /**

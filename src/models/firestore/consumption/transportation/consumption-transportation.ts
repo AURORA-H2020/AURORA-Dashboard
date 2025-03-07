@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore";
-import { ConsumptionTransportationType } from "./consumption-transportation-type";
 import { ConsumptionTransportationPublicVehicleOccupancy } from "./consumption-transportation-public-vehicle-occupancy";
+import { ConsumptionTransportationType } from "./consumption-transportation-type";
 
 /**
  * A consumption transportation

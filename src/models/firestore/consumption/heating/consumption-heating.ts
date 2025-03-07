@@ -1,6 +1,6 @@
 import { Timestamp } from "firebase/firestore";
-import { ConsumptionHeatingFuel } from "./consumption-heating-fuel";
 import { ConsumptionDistrictHeatingSource } from "./consumption-district-heating-source";
+import { ConsumptionHeatingFuel } from "./consumption-heating-fuel";
 
 /**
  * A consumption heating

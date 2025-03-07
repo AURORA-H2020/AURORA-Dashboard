@@ -16,7 +16,7 @@ type Props = {
  * @param {Function} reset - The function to be called when the reset button is clicked.
  * @return {ReactNode} The JSX element representing the error page.
  */
-const Error = ({ error, reset }: Props): ReactNode => {
+const ErrorPage = ({ error, reset }: Props): ReactNode => {
   const t = useTranslations();
 
   useEffect(() => {
@@ -44,4 +44,4 @@ const Error = ({ error, reset }: Props): ReactNode => {
   );
 };
 
-export default Error;
+export default ErrorPage;
