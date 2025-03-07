@@ -1,5 +1,4 @@
 import { firebaseApp } from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { RecommendationWithId } from "@/models/extensions";
 import { Recommendation } from "@/models/firestore/recommendation/recommendation";
 import { User } from "firebase/auth";
@@ -7,6 +6,7 @@ import {
   DocumentData,
   QuerySnapshot,
   collection,
+  doc,
   endBefore,
   getCountFromServer,
   getFirestore,
@@ -15,11 +15,68 @@ import {
   onSnapshot,
   orderBy,
   query,
+  setDoc,
   startAfter,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { FirebaseConstants } from "../firebase-constants";
 
 const firestore = getFirestore(firebaseApp);
+
+/**
+ * Custom hook to fetch a single recommendation by ID
+ */
+export const useRecommendation = (
+  user: User | null,
+  recommendationId: string,
+) => {
+  const [recommendation, setRecommendation] =
+    useState<RecommendationWithId | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
+
+  useEffect(() => {
+    if (!user || !recommendationId) {
+      setIsLoading(false);
+      return;
+    }
+
+    setIsLoading(true);
+    const recommendationRef = doc(
+      firestore,
+      "users",
+      user.uid,
+      "recommendations",
+      recommendationId,
+    );
+
+    const unsubscribe = onSnapshot(
+      recommendationRef,
+      (docSnap) => {
+        if (docSnap.exists()) {
+          const recommendationData = docSnap.data() as Recommendation;
+          setRecommendation({
+            ...recommendationData,
+            id: docSnap.id,
+          });
+        } else {
+          setError(new Error("Recommendation not found"));
+          setRecommendation(null);
+        }
+        setIsLoading(false);
+      },
+      (err) => {
+        console.error("Error fetching recommendation:", err);
+        setError(err);
+        setIsLoading(false);
+      },
+    );
+
+    return () => unsubscribe();
+  }, [user, recommendationId]);
+
+  return { recommendation, isLoading, error };
+};
 
 export const useFetchUserRecommendations = ({
   user,
@@ -81,6 +138,9 @@ export const useFetchUserRecommendations = ({
   return userRecommendations;
 };
 
+/**
+ * Custom hook to fetch paginated recommendations with filtering options
+ */
 export const usePaginatedRecommendations = ({
   user,
   pageSize = 5,
@@ -153,4 +213,36 @@ export const usePaginatedRecommendations = ({
     orderBy,
     totalRecommendations,
   };
+};
+
+export const setRecommendationReadStatus = async ({
+  recommendationId,
+  user,
+  isRead,
+}: {
+  recommendationId: string;
+  user: User;
+  isRead: boolean;
+}): Promise<{ success: boolean }> => {
+  let success = false;
+
+  if (user) {
+    const recommendationsRef = collection(
+      firestore,
+      FirebaseConstants.collections.users.name,
+      user.uid,
+      FirebaseConstants.collections.users.recommendations.name,
+    );
+    try {
+      const docRef = doc(recommendationsRef, recommendationId);
+      await setDoc(docRef, { isRead, updatedAt: new Date() }, { merge: true });
+      success = true;
+    } catch (error) {
+      console.error("Error setting recommendation read status: ", error);
+    }
+  } else {
+    throw new Error("User is not logged in.");
+  }
+
+  return { success };
 };
