@@ -17,7 +17,11 @@ const firestore = getFirestore(firebaseApp);
 export const deleteDocumentById = async (
   user: User | null,
   documentId: string,
-  collectionName: "consumptions" | "recurring-consumptions" | "pv-investments",
+  collectionName:
+    | "consumptions"
+    | "recurring-consumptions"
+    | "pv-investments"
+    | "recommendations",
 ): Promise<{ success: boolean }> => {
   let success = false;
   if (user) {

@@ -27,6 +27,9 @@ export const FirebaseConstants = {
       pvInvestments: {
         name: "pv-investments",
       },
+      recommendations: {
+        name: "recommendations",
+      },
     },
     userRoles: {
       name: "user-roles",
