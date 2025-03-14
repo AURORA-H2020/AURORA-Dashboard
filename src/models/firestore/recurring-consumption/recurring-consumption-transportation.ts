@@ -1,5 +1,5 @@
-import { ConsumptionTransportationPublicVehicleOccupancy } from "../consumption/transportation/consumption-transportation-public-vehicle-occupancy";
-import { ConsumptionTransportationType } from "../consumption/transportation/consumption-transportation-type";
+import type { ConsumptionTransportationPublicVehicleOccupancy } from "../consumption/transportation/consumption-transportation-public-vehicle-occupancy";
+import type { ConsumptionTransportationType } from "../consumption/transportation/consumption-transportation-type";
 
 /**
  * A recurring consumption transportation

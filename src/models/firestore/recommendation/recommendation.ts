@@ -1,9 +1,17 @@
-import { Timestamp } from "firebase/firestore";
+import type { Timestamp } from "firebase/firestore";
 
 /**
- * A recommendation
+ * A recommendation for improving the user's energy behavior
  */
 export interface Recommendation {
+  /**
+   * The notification ID as provided by the recommender system
+   */
+  id: string;
+  /**
+   * The recomendation type as provided by the recommender system
+   */
+  type: string;
   /**
    * The creation date
    */
@@ -19,11 +27,19 @@ export interface Recommendation {
   /**
    * The title of the recommendation
    */
-  title: string;
+  title?: string;
   /**
-   * The recommendation
+   * The recommendation message
    */
-  recommendation: string;
+  message: string;
+  /**
+   * The rationale for sending the recommendation
+   */
+  rationale: string;
+  /**
+   * The priority of the recommendation
+   */
+  priority: number;
   /**
    * Optional link to an external resource
    */

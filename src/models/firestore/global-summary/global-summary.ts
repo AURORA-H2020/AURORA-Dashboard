@@ -1,4 +1,4 @@
-import { GlobalSummaryCountry } from "./country/global-summary-country";
+import type { GlobalSummaryCountry } from "./country/global-summary-country";
 
 export interface GlobalSummary {
   date: number; // Date of snapshot.
