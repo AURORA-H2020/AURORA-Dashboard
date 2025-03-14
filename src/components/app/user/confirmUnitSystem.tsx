@@ -37,7 +37,9 @@ const ConfirmUnitSystem = (): ReactNode => {
   const setUnitSystem = (unitSystem: UserSettingsUnitSystem): void => {
     if (userData && user) {
       if (!userData.settings) {
-        userData.settings = {};
+        userData.settings = {
+          unitSystem: unitSystem,
+        };
       }
       userData.settings.unitSystem = unitSystem;
 
