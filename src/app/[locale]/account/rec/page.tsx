@@ -1,5 +1,7 @@
+import { RecommendationsList } from "@/components/app/recommendations/recommendationList";
+
 const RecommendationsPage = () => {
-  return null;
+  return <RecommendationsList />;
 };
 
 export default RecommendationsPage;

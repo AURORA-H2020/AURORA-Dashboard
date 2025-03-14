@@ -87,6 +87,13 @@
     "deletePvInvestment": {
       "success": "The investment entry has been deleted",
       "error": "An error occurred deleting this investment entry"
+    },
+    "recommendationMarkedAsUnread": "Recommendation marked unread",
+    "recommendationMarkedAsRead": "Recommendation marked read",
+    "recommendationUpdateError": "An error occured updating the recommendation",
+    "deleteRecommendation": {
+      "success": "Your recommendation was successfully deleted",
+      "error": "An error occured deleting your recommendation"
     }
   },
   "button": {
@@ -150,7 +157,6 @@
       "selectBarToSeeDailyBreakdown": "Select a bar to show a breakdown for a specific day.",
       "unsupportedRegionMessage": "This feature is currently not supported in your region.",
       "solarPowerProduction": "Solar Power Production",
-      "unsupportedSearchParams": "Unsupported search parameters",
       "lifetimeProduction": "Lifetime Production"
     }
   },
@@ -163,7 +169,8 @@
     "noData": "No data available",
     "noConsumptionsFound": "No consumptions found.",
     "noRecurringConsumptionsFound": "No recurring consumptions found.",
-    "noConsumptions": "No consumptions"
+    "noConsumptions": "No consumptions",
+    "reset": "Reset"
   },
   "metadata": {
     "title": "AURORA Energy Tracker: Dashboard",
@@ -334,7 +341,6 @@
         "editInvestmentDisclaimer": "If you have made additional investments at a later date, please add a new investment instead. Editing your existing investments may result in inaccurate tracking.",
         "addInvestmentDisclaimer": "Entering your investment data is exclussively for recording purposes. This does not formulate an actual investment or binding order in any form.",
         "noteDescription": "Add a note to your investment for personal reference.",
-        "investmentDescription": "The amount of money you invested",
         "shareDescription": "How much of the solar panel installation's capacity your investment corresponds to. You should find this information in the documents you received when you made your investment.",
         "deleteInvestmentDialog": {
           "title": "Are you sure you want to delete this investment?",
@@ -428,7 +434,25 @@
       "yourLatestInvestment": "Your Latest Investment",
       "recordYourInvestment": "Record your Investment",
       "allInvestments": "All Investments"
-    }
+    },
+    "recommendations": {
+      "recommendation": "Recommendation",
+      "recommendations": "Recommendations",
+      "highPriority": "high priority",
+      "mediumPriority": "medium priority",
+      "lowPriority": "low priority",
+      "learnMore": "Learn more",
+      "rationaleTitle": "Rational",
+      "notifyAt": "Notify On",
+      "markAsUnread": "Mark unread",
+      "markAsRead": "Mark read",
+      "read": "Read",
+      "unread": "Unread",
+      "noRecommendations": "No recommendations found",
+      "deleteRecommendationDialogTitle": "Are you sure you want to delete this recommendation?",
+      "deleteRecommendationDialogDescription": "Deleted recommendations may reappear after some time if they are still relevant for you."
+    },
+    "totalRecommendations": "Total recommendations"
   },
   "common": {
     "co2emission": "CO<sub>2</sub> Emissions",
@@ -479,7 +503,8 @@
     "notApplicable": "Not applicable",
     "goBack": "Go back",
     "energy": "Energy",
-    "sinceStart": "Since start"
+    "sinceStart": "Since start",
+    "view": "View"
   },
   "country": {
     "allSelectedCountries": "All selected countries",
@@ -527,7 +552,8 @@
       "logout": "Logout",
       "admin": "Admin",
       "solarPower": "Solar Power",
-      "pvInvestment": "Investment"
+      "pvInvestment": "Investment",
+      "recommendations": "Recommendations"
     },
     "account": {
       "settings": "Settings"

@@ -1,27 +1,27 @@
 "use client";
 
-import {
-  AlertDialog,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { deleteDocumentById } from "@/firebase/firestore/delete-document-by-id";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { setRecommendationReadStatus } from "@/firebase/hooks/recommendations-hooks";
 import { cn } from "@/lib/utilities";
 import { RecommendationWithId } from "@/models/extensions";
 import { useAuthContext } from "@/providers/context/authContext";
 import { Flex, Text } from "@radix-ui/themes";
-import { CheckCircleIcon, CircleDashedIcon, Trash2Icon } from "lucide-react";
+import { CheckCircleIcon, CircleDashedIcon } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ReactNode, useState } from "react";
+import { ReactNode } from "react";
 import { toast } from "sonner";
+import { RecommendationView } from "./recommendationView";
 
 /**
  * Renders a preview of a recommendation object with interactive
@@ -42,23 +42,6 @@ const RecommendationPreview = ({
   const { user } = useAuthContext();
   const currentId = pathname.split("/").pop();
   const isActive = currentId === recommendation.id;
-
-  // State to manage the visibility of the delete confirmation
-  const [isAlertOpen, setAlertOpen] = useState(false);
-
-  const handleDelete = async () => {
-    setAlertOpen(false);
-
-    deleteDocumentById(user, recommendation.id, "recommendations").then(
-      (success) => {
-        if (success) {
-          toast.success(t("toast.deleteRecommendation.success"));
-        } else {
-          toast.error(t("toast.deleteRecommendation.error"));
-        }
-      },
-    );
-  };
 
   const setReadStatus = async (isRead: boolean) => {
     if (!user || !recommendation.id) return;
@@ -95,16 +78,17 @@ const RecommendationPreview = ({
             <Flex justify="between" align="center">
               <div className="flex justify-between w-full">
                 <Text className="font-medium line-clamp-1">
-                  {recommendation.title}
+                  {recommendation.title ??
+                    t("app.recommendations.recommendation")}
                 </Text>
 
                 {recommendation.isRead ? (
                   <Badge
                     variant="outline"
-                    className="flex items-center gap-1 ml-1"
+                    className="flex items-center gap-1 ml-1 size-6 p-0"
                     onClick={() => setReadStatus(!recommendation.isRead)}
                   >
-                    <CheckCircleIcon className="h-3 w-3" />
+                    <CheckCircleIcon className="h-3 w-3 mx-auto my-auto" />
                     <span className="sr-only">
                       {t("app.recommendations.read")}
                     </span>
@@ -112,10 +96,10 @@ const RecommendationPreview = ({
                 ) : (
                   <Badge
                     variant="secondary"
-                    className="flex items-center gap-1 ml-1 bg-primary text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground"
+                    className="flex items-center gap-1 ml-1 bg-primary text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground size-6 p-0"
                     onClick={() => setReadStatus(!recommendation.isRead)}
                   >
-                    <CircleDashedIcon className="h-3 w-3" />
+                    <CircleDashedIcon className="h-3 w-3 mx-auto my-auto" />
                     <span className="sr-only">
                       {t("app.recommendations.unread")}
                     </span>
@@ -124,63 +108,43 @@ const RecommendationPreview = ({
               </div>
             </Flex>
 
-            <Text className="text-sm text-muted-foreground line-clamp-2">
-              {recommendation.recommendation}
-            </Text>
+            <div className="flex gap-4 w-full justify-between">
+              <div className="flex flex-col gap-4">
+                <Text className="text-sm text-muted-foreground line-clamp-2">
+                  {recommendation.message}
+                </Text>
 
-            <Text size="1" className="text-muted-foreground">
-              {createdDate}
-            </Text>
+                <Text size="1" className="text-muted-foreground">
+                  {createdDate}
+                </Text>
+              </div>
 
-            <Flex align="center" justify="between">
-              <Flex className="gap-1">
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="h-7 w-7 text-destructive"
-                  onClick={() => setAlertOpen(true)}
-                >
-                  <span className="sr-only">{t("common.delete")}</span>
-                  <Trash2Icon className="h-4 w-4" />
-                </Button>
-                <Button variant="ghost" size="sm" className="h-7" asChild>
-                  <Link href={`/account/rec/${recommendation.id}`}>
-                    {t("common.view")}
-                  </Link>
-                </Button>
+              <Flex align="center" justify="between">
+                <Flex className="gap-1">
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button size="sm" variant="outline">
+                        {t("common.view")}
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>
+                          {recommendation.title ??
+                            t("app.recommendations.recommendation")}
+                        </DialogTitle>
+                      </DialogHeader>
+                      <ScrollArea className="max-h-[80vh]">
+                        <RecommendationView recommendation={recommendation} />
+                      </ScrollArea>
+                    </DialogContent>
+                  </Dialog>
+                </Flex>
               </Flex>
-            </Flex>
+            </div>
           </Flex>
         </CardContent>
       </Card>
-
-      <AlertDialog open={isAlertOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              {t("app.recommendations.deleteRecommendationDialogTitle")}
-            </AlertDialogTitle>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <Flex justify="between" className="gap-4">
-              <Button
-                onClick={() => setAlertOpen(false)}
-                variant="outline"
-                className="w-full"
-              >
-                {t("common.cancel")}
-              </Button>
-              <Button
-                variant="destructive"
-                onClick={handleDelete}
-                className="w-full"
-              >
-                {t("common.delete")}
-              </Button>
-            </Flex>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </>
   );
 };
