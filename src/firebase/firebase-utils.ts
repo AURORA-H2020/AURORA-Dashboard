@@ -61,7 +61,7 @@ export const firebaseStorageListDashboardFiles = unstable_cache(
     }
   },
   ["firebaseStorageListDashboardFiles"],
-  { revalidate: 3600 * 12 },
+  { revalidate: 3600 },
 );
 
 /**
