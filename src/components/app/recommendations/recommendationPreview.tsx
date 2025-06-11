@@ -43,6 +43,10 @@ const RecommendationPreview = ({
   const currentId = pathname.split("/").pop();
   const isActive = currentId === recommendation.id;
 
+  const recommendationTitle = recommendation.title
+    ? recommendation.title
+    : t("app.recommendations.recommendation");
+
   const setReadStatus = async (isRead: boolean) => {
     if (!user || !recommendation.id) return;
 
@@ -78,8 +82,7 @@ const RecommendationPreview = ({
             <Flex justify="between" align="center">
               <div className="flex justify-between w-full">
                 <Text className="font-medium line-clamp-1">
-                  {recommendation.title ??
-                    t("app.recommendations.recommendation")}
+                  {recommendationTitle}
                 </Text>
 
                 {recommendation.isRead ? (
@@ -129,10 +132,7 @@ const RecommendationPreview = ({
                     </DialogTrigger>
                     <DialogContent>
                       <DialogHeader>
-                        <DialogTitle>
-                          {recommendation.title ??
-                            t("app.recommendations.recommendation")}
-                        </DialogTitle>
+                        <DialogTitle>{recommendationTitle}</DialogTitle>
                       </DialogHeader>
                       <ScrollArea className="max-h-[80vh]">
                         <RecommendationView recommendation={recommendation} />
