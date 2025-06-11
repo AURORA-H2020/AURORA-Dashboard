@@ -39,9 +39,8 @@ export const updateRecommendations = async (): Promise<
 
     return result.data as FirebaseResponse;
   } catch (error) {
-    return {
-      success: false,
-      error,
-    };
+    throw new Error(
+      `${error instanceof Error ? error.message : String(error)}`,
+    );
   }
 };

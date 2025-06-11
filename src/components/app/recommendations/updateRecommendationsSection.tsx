@@ -16,20 +16,15 @@ const UpdateRecommendationsSection = () => {
 
   const updateRecommendationsWrapper = async () => {
     setUpdatingRecommendations(true);
-    let response: FirebaseResponse | undefined = undefined;
-    try {
-      response = await updateRecommendations();
-    } catch (error) {
-      // Handle the error
-      console.error("Error updating recommendations:", error);
-    } finally {
-      setUpdatingRecommendations(false);
-      if (response?.success) {
-        toast.success("Recommendations updated successfully.");
-      } else {
-        toast.error(`Error updating recommendations: ${response?.error}`);
-      }
-    }
+
+    toast.promise(updateRecommendations() as Promise<FirebaseResponse>, {
+      loading: "Updating recommendations...",
+      success: "Recommendations updated successfully.",
+      error: (error) => `Error updating recommendations: ${error}`,
+      finally: () => {
+        setUpdatingRecommendations(false);
+      },
+    });
   };
 
   return (
