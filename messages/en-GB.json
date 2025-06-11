@@ -94,7 +94,10 @@
     "deleteRecommendation": {
       "success": "Your recommendation was successfully deleted",
       "error": "An error occured deleting your recommendation"
-    }
+    },
+    "deletingRecommendation": "Deleting recommendation...",
+    "markingRecommendationAsRead": "Marking recommendation read...",
+    "markingRecommendationAsUnread": "Marking recommendation unread..."
   },
   "button": {
     "downloadPending": "Downloading..."
