@@ -1,6 +1,5 @@
 "use client";
 
-import { BorderBox } from "@/components/app/common/borderBox";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -9,11 +8,10 @@ import {
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { deleteDocumentById } from "@/firebase/firestore/delete-document-by-id";
 import { setRecommendationReadStatus } from "@/firebase/hooks/recommendations-hooks";
-import { cn } from "@/lib/utilities";
 import { Recommendation } from "@/models/firestore/recommendation/recommendation";
 import { useAuthContext } from "@/providers/context/authContext";
 import { Flex, Text } from "@radix-ui/themes";
@@ -41,36 +39,39 @@ const RecommendationView = ({
   const handleDelete = async () => {
     setAlertOpen(false);
 
-    deleteDocumentById(user, recommendation.id, "recommendations").then(
-      (success) => {
-        if (success) {
-          toast.success(t("toast.deleteRecommendation.success"));
-        } else {
-          toast.error(t("toast.deleteRecommendation.error"));
-        }
+    toast.promise(
+      deleteDocumentById(user, recommendation.id, "recommendations"),
+      {
+        loading: t("toast.deletingRecommendation"),
+        success: t("toast.deleteRecommendation.success"),
+        error: t("toast.deleteRecommendation.error"),
       },
     );
   };
 
   const setReadStatus = async (isRead: boolean) => {
     if (!user || !recommendation.id) return;
-
     setIsUpdating(true);
-    try {
-      await setRecommendationReadStatus({
+
+    toast.promise(
+      setRecommendationReadStatus({
         recommendationId: recommendation.id,
         user,
         isRead,
-      });
-      isRead
-        ? toast.success(t("toast.recommendationMarkedAsUnread"))
-        : toast.success(t("toast.recommendationMarkedAsRead"));
-    } catch (err) {
-      toast.error(t("toast.recommendationUpdateError"));
-      console.error("Error updating recommendation:", err);
-    } finally {
-      setIsUpdating(false);
-    }
+      }),
+      {
+        loading: isRead
+          ? t("toast.markingRecommendationAsUnread")
+          : t("toast.markingRecommendationAsRead"),
+        success: isRead
+          ? t("toast.recommendationMarkedAsUnread")
+          : t("toast.recommendationMarkedAsRead"),
+        error: t("toast.recommendationUpdateError"),
+        finally: () => {
+          setIsUpdating(false);
+        },
+      },
+    );
   };
 
   return (
@@ -81,7 +82,10 @@ const RecommendationView = ({
             ? t("app.recommendations.read")
             : t("app.recommendations.unread")}
         </Badge>
-        {recommendation.priority && (
+        <Badge variant="outline">
+          {format.dateTime(recommendation.createdAt?.toDate())}
+        </Badge>
+        {/* {recommendation.priority && (
           <Badge
             className={cn(
               recommendation.priority === 1 &&
@@ -98,7 +102,7 @@ const RecommendationView = ({
                 ? t("app.recommendations.mediumPriority")
                 : t("app.recommendations.lowPriority")}
           </Badge>
-        )}
+        )} */}
       </div>
 
       <Separator />
@@ -109,16 +113,23 @@ const RecommendationView = ({
 
       {recommendation.link && (
         <Flex justify="end">
-          <Button className="gap-2" variant="outline" asChild>
-            <Link href={recommendation.link} target="_blank" rel="noopener">
-              {t("app.recommendations.learnMore")}
-              <ExternalLinkIcon className="h-4 w-4" />
-            </Link>
-          </Button>
+          <Link
+            href={recommendation.link}
+            target="_blank"
+            rel="noopener"
+            className={buttonVariants({
+              variant: "default",
+              size: "sm",
+              className: "flex items-center gap-2",
+            })}
+          >
+            {t("app.recommendations.learnMore")}
+            <ExternalLinkIcon className="h-4 w-4" />
+          </Link>
         </Flex>
       )}
 
-      {recommendation.rationale && (
+      {/* {recommendation.rationale && (
         <>
           <BorderBox className="bg-muted/50 text-muted-foreground text-sm">
             <div className="flex flex-col gap-2">
@@ -131,9 +142,9 @@ const RecommendationView = ({
             </div>
           </BorderBox>
         </>
-      )}
+      )} */}
 
-      <BorderBox className="text-sm">
+      {/* <BorderBox className="text-sm">
         <div className="grid grid-cols-3 gap-2 xs:grid-cols-1">
           <div>
             <p className="font-bold">{t("app.form.createdAt")}</p>
@@ -154,11 +165,12 @@ const RecommendationView = ({
             </div>
           )}
         </div>
-      </BorderBox>
-      <div className="flex gap-2">
+      </BorderBox> */}
+
+      {/* <div className="flex gap-2">
         <Badge variant="outline">ID: {recommendation.id}</Badge>
         <Badge variant="outline">Type: {recommendation.type}</Badge>
-      </div>
+      </div> */}
       <div className="flex gap-2 justify-between">
         <Button
           variant="outline"
