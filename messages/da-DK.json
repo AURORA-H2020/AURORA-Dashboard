@@ -150,7 +150,7 @@
       "selectBarToSeeDailyBreakdown": "Vælg et felt for at få vist en opdeling for en bestemt dag.",
       "unsupportedRegionMessage": "Denne funktion er i øjeblikket ikke understøttet i din region.",
       "solarPowerProduction": "Fremstillet af solcelleanlæg",
-      "unsupportedSearchParams": "Ikke-understøttede søgeparametre",
+      "unsupportedSearchParams": "Unsupported search parameters",
       "lifetimeProduction": "Totale produktion"
     }
   },
@@ -334,7 +334,7 @@
         "editInvestmentDisclaimer": "Hvis du har foretaget yderligere investeringer på et senere tidspunkt, skal du tilføje en ny investering i stedet. Hvis du redigerer dine eksisterende investeringer, kan det resultere i unøjagtig data.",
         "addInvestmentDisclaimer": "Indtastning af investeringsdata er udelukkende til registreringsformål. Det laver ikke en faktisk investering eller bindende ordre.",
         "noteDescription": "Tilføj en note til din investering til personlig brug.",
-        "investmentDescription": "Det beløb, du har investeret",
+        "investmentDescription": "The amount of money you invested",
         "shareDescription": "Hvor mange andele din investering svarer til. Du bør finde disse oplysninger i de dokumenter, du modtog, da du foretog din investering.",
         "deleteInvestmentDialog": {
           "title": "Er du sikker på, at du vil slette denne investering?",
@@ -479,7 +479,9 @@
     "notApplicable": "Ikke relevant",
     "goBack": "Tilbage",
     "energy": "Energi",
-    "sinceStart": "Siden starten"
+    "sinceStart": "Siden starten",
+    "view": "View",
+    "power": "Kraft"
   },
   "country": {
     "allSelectedCountries": "Alle valgte lande",

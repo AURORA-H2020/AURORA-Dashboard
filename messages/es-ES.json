@@ -150,7 +150,7 @@
       "selectBarToSeeDailyBreakdown": "Seleccione una barra para ver el desglose de un día concreto.",
       "unsupportedRegionMessage": "Esta función no está disponible en su región.",
       "solarPowerProduction": "Producción de energía solar",
-      "unsupportedSearchParams": "Parámetros de búsqueda no admitidos",
+      "unsupportedSearchParams": "Unsupported search parameters",
       "lifetimeProduction": "Producción para toda la vida"
     }
   },
@@ -334,7 +334,7 @@
         "editInvestmentDisclaimer": "Si ha realizado inversiones adicionales posteriormente, añada una nueva inversión. Editar sus inversiones existentes puede dar lugar a un seguimiento inexacto.",
         "addInvestmentDisclaimer": "La introducción de sus datos de inversión se realiza exclusivamente a efectos de registro. No se trata de una inversión real ni de una orden vinculante de ningún tipo.",
         "noteDescription": "Añada una nota a su inversión para referencia personal.",
-        "investmentDescription": "La cantidad de dinero que invirtió",
+        "investmentDescription": "The amount of money you invested",
         "shareDescription": "A qué parte de la capacidad de la instalación de paneles solares corresponde su inversión. Encontrará esta información en los documentos que recibió al realizar tu inversión.",
         "deleteInvestmentDialog": {
           "title": "¿Está seguro de que desea eliminar esta inversión?",
@@ -479,7 +479,9 @@
     "notApplicable": "No aplicable",
     "goBack": "Volver atrás",
     "energy": "Energía",
-    "sinceStart": "Desde el inicio"
+    "sinceStart": "Desde el inicio",
+    "view": "View",
+    "power": "Potencia"
   },
   "country": {
     "allSelectedCountries": "Todos los países seleccionados",

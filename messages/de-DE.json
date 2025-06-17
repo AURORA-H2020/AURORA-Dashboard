@@ -479,7 +479,9 @@
     "notApplicable": "Nicht zutreffend",
     "goBack": "Zurück",
     "energy": "Energie",
-    "sinceStart": "Seit Beginn"
+    "sinceStart": "Seit Beginn",
+    "view": "Anzeigen",
+    "power": "Leistung"
   },
   "country": {
     "allSelectedCountries": "Alle ausgewählten Länder",

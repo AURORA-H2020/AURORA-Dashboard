@@ -150,7 +150,7 @@
       "selectBarToSeeDailyBreakdown": "Izberi vrstico za prikaz razčlenitve na določen dan.",
       "unsupportedRegionMessage": "Ta funkcija trenutno ni podprta v tvoji regiji.",
       "solarPowerProduction": "Proizvodnja sončne energije",
-      "unsupportedSearchParams": "Nepodprti parametri iskanja",
+      "unsupportedSearchParams": "Unsupported search parameters",
       "lifetimeProduction": "Proizvodnja v življenjski dobi"
     }
   },
@@ -334,7 +334,7 @@
         "editInvestmentDisclaimer": "Če si naknadno izvedel dodatne naložbe dodaj novo naložbo. Urejanje obstoječih naložb lahko povzroči netočno sledenje.",
         "addInvestmentDisclaimer": "Vnos podatkov o naložbah je namenjen izključno evidentiranju. S tem se ne oblikuje dejanska naložba ali zavezujoče naročilo v kakršni koli obliki.",
         "noteDescription": "Dodaj opombo k svoji naložbi za osebno evidenco.",
-        "investmentDescription": "Znesek vloženega denarja",
+        "investmentDescription": "The amount of money you invested",
         "shareDescription": "Kolikšen del zmogljivosti sončne elektrarne predstavlja tvoja naložba. To informacijo najdeš v dokumentih, ki si jih prejel ob naložbi.",
         "deleteInvestmentDialog": {
           "title": "Si prepričan, da želiš izbrisati to naložbo?",
@@ -479,7 +479,9 @@
     "notApplicable": "Se ne uporablja",
     "goBack": "Pojdi nazaj",
     "energy": "Energija",
-    "sinceStart": "Od začetka"
+    "sinceStart": "Od začetka",
+    "view": "View",
+    "power": "Moč"
   },
   "country": {
     "allSelectedCountries": "Vse izbrane države",
