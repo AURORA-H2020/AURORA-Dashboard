@@ -479,7 +479,9 @@
     "notApplicable": "Not applicable",
     "goBack": "Go back",
     "energy": "Energy",
-    "sinceStart": "Since start"
+    "sinceStart": "Since start",
+    "view": "View",
+    "power": "Power"
   },
   "country": {
     "allSelectedCountries": "All selected countries",
