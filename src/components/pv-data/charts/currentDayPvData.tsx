@@ -64,7 +64,7 @@ const CurrentDayPvData = async ({
 
   const chartConfig = {
     PAC: {
-      label: t("common.energy"),
+      label: t("common.power"),
       color: "hsl(var(--primary))",
     },
   } satisfies ChartConfig;
