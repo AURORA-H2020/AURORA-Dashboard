@@ -87,7 +87,17 @@
     "deletePvInvestment": {
       "success": "Der Investitionseintrag wurde gelöscht",
       "error": "Beim Löschen dieses Investitionseintrags ist ein Fehler aufgetreten"
-    }
+    },
+    "recommendationMarkedAsUnread": "Empfehlung als ungelesen markiert",
+    "recommendationMarkedAsRead": "Empfehlung als gelesen markiert",
+    "recommendationUpdateError": "Bei der Aktualisierung der Empfehlung ist ein Fehler aufgetreten",
+    "deleteRecommendation": {
+      "success": "Ihre Empfehlung wurde erfolgreich gelöscht",
+      "error": "Beim Löschen Ihrer Empfehlung ist ein Fehler aufgetreten"
+    },
+    "deletingRecommendation": "Empfehlung wird gelöscht...",
+    "markingRecommendationAsRead": "Empfehlung wird als gelesen markiert...",
+    "markingRecommendationAsUnread": "Empfehlung wird als ungelesen markiert..."
   },
   "button": {
     "downloadPending": "Herunterladen..."
@@ -163,7 +173,8 @@
     "noData": "Keine Daten verfügbar",
     "noConsumptionsFound": "Keine Verbräuche gefunden.",
     "noRecurringConsumptionsFound": "Keine wiederkehrenden Verbräuche gefunden.",
-    "noConsumptions": "Keine Verbräuche"
+    "noConsumptions": "Keine Verbräuche",
+    "reset": "Zurücksetzen"
   },
   "metadata": {
     "title": "AURORA Energy Tracker: Dashboard",
@@ -428,7 +439,29 @@
       "yourLatestInvestment": "Ihre letzte Investition",
       "recordYourInvestment": "Erfassen Sie Ihre Investition",
       "allInvestments": "Alle Investitionen"
-    }
+    },
+    "recommendations": {
+      "info": {
+        "primary": "Um Sie bei der Verbesserung Ihres Energieverhaltens zu unterstützen, bietet AURORA Ihnen personalisierte Empfehlungen auf der Grundlage Ihrer Energieverbrauchsdaten.",
+        "secondary": "Die Empfehlungen werden regelmäßig aktualisiert, wenn Sie weitere Daten eingeben."
+      },
+      "recommendation": "Empfehlung",
+      "recommendations": "Empfehlungen",
+      "highPriority": "hohe Priorität",
+      "mediumPriority": "mittlere Priorität",
+      "lowPriority": "geringe Priorität",
+      "learnMore": "Mehr erfahren",
+      "rationaleTitle": "Rationale",
+      "notifyAt": "Benachrichtigen am",
+      "markAsUnread": "Ungelesen markieren",
+      "markAsRead": "Gelesen markieren",
+      "read": "Gelesen",
+      "unread": "Ungelesen",
+      "noRecommendations": "Keine Empfehlungen gefunden",
+      "deleteRecommendationDialogTitle": "Sind Sie sicher, dass Sie diese Empfehlung löschen möchten?",
+      "deleteRecommendationDialogDescription": "Gelöschte Empfehlungen können nach einiger Zeit wieder auftauchen, wenn sie für Sie noch relevant sind."
+    },
+    "totalRecommendations": "Empfehlungen insgesamt"
   },
   "common": {
     "co2emission": "CO<sub>2</sub> Emissionen",
@@ -479,7 +512,9 @@
     "notApplicable": "Nicht zutreffend",
     "goBack": "Zurück",
     "energy": "Energie",
-    "sinceStart": "Seit Beginn"
+    "sinceStart": "Seit Beginn",
+    "power": "Leistung",
+    "view": "Anzeigen"
   },
   "country": {
     "allSelectedCountries": "Alle ausgewählten Länder",
@@ -527,7 +562,8 @@
       "logout": "Abmelden",
       "admin": "Admin",
       "solarPower": "Solarenergie",
-      "pvInvestment": "Investition"
+      "pvInvestment": "Investition",
+      "recommendations": "Empfehlungen"
     },
     "account": {
       "settings": "Einstellungen"

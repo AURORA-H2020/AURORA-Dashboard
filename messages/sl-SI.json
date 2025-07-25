@@ -87,7 +87,17 @@
     "deletePvInvestment": {
       "success": "Vnos naložbe je bil izbrisan",
       "error": "Pri brisanju tega vnosa naložbe je prišlo do napake"
-    }
+    },
+    "recommendationMarkedAsUnread": "Recommendation marked unread",
+    "recommendationMarkedAsRead": "Recommendation marked read",
+    "recommendationUpdateError": "An error occured updating the recommendation",
+    "deleteRecommendation": {
+      "success": "Your recommendation was successfully deleted",
+      "error": "An error occured deleting your recommendation"
+    },
+    "deletingRecommendation": "Deleting recommendation...",
+    "markingRecommendationAsRead": "Marking recommendation read...",
+    "markingRecommendationAsUnread": "Marking recommendation unread..."
   },
   "button": {
     "downloadPending": "Prenašanje..."
@@ -150,7 +160,7 @@
       "selectBarToSeeDailyBreakdown": "Izberi vrstico za prikaz razčlenitve na določen dan.",
       "unsupportedRegionMessage": "Ta funkcija trenutno ni podprta v tvoji regiji.",
       "solarPowerProduction": "Proizvodnja sončne energije",
-      "unsupportedSearchParams": "Nepodprti parametri iskanja",
+      "unsupportedSearchParams": "Unsupported search parameters",
       "lifetimeProduction": "Proizvodnja v življenjski dobi"
     }
   },
@@ -163,7 +173,8 @@
     "noData": "Podatki niso na voljo",
     "noConsumptionsFound": "Porabe niso bile ugotovljene.",
     "noRecurringConsumptionsFound": "Ponavljajoče se porabe niso bile ugotovljene.",
-    "noConsumptions": "Brez porabe"
+    "noConsumptions": "Brez porabe",
+    "reset": "Reset"
   },
   "metadata": {
     "title": "AURORA Energy Tracker: Nadzorna plošča",
@@ -334,7 +345,7 @@
         "editInvestmentDisclaimer": "Če si naknadno izvedel dodatne naložbe dodaj novo naložbo. Urejanje obstoječih naložb lahko povzroči netočno sledenje.",
         "addInvestmentDisclaimer": "Vnos podatkov o naložbah je namenjen izključno evidentiranju. S tem se ne oblikuje dejanska naložba ali zavezujoče naročilo v kakršni koli obliki.",
         "noteDescription": "Dodaj opombo k svoji naložbi za osebno evidenco.",
-        "investmentDescription": "Znesek vloženega denarja",
+        "investmentDescription": "The amount of money you invested",
         "shareDescription": "Kolikšen del zmogljivosti sončne elektrarne predstavlja tvoja naložba. To informacijo najdeš v dokumentih, ki si jih prejel ob naložbi.",
         "deleteInvestmentDialog": {
           "title": "Si prepričan, da želiš izbrisati to naložbo?",
@@ -428,7 +439,29 @@
       "yourLatestInvestment": "Tvoja najnovejša naložba",
       "recordYourInvestment": "Evidentiraj svojo naložbo",
       "allInvestments": "Vse naložbe"
-    }
+    },
+    "recommendations": {
+      "info": {
+        "primary": "To help you improve your energy behaviour, AURORA provides you with personalised recommendations based on your energy usage data.",
+        "secondary": "Recommendations are updated regularly as you enter more data."
+      },
+      "recommendation": "Recommendation",
+      "recommendations": "Recommendations",
+      "highPriority": "high priority",
+      "mediumPriority": "medium priority",
+      "lowPriority": "low priority",
+      "learnMore": "Learn more",
+      "rationaleTitle": "Rational",
+      "notifyAt": "Notify On",
+      "markAsUnread": "Mark unread",
+      "markAsRead": "Mark read",
+      "read": "Read",
+      "unread": "Unread",
+      "noRecommendations": "No recommendations found",
+      "deleteRecommendationDialogTitle": "Are you sure you want to delete this recommendation?",
+      "deleteRecommendationDialogDescription": "Deleted recommendations may reappear after some time if they are still relevant for you."
+    },
+    "totalRecommendations": "Total recommendations"
   },
   "common": {
     "co2emission": "Emisije<sub>CO2</sub> ",
@@ -479,7 +512,9 @@
     "notApplicable": "Se ne uporablja",
     "goBack": "Pojdi nazaj",
     "energy": "Energija",
-    "sinceStart": "Od začetka"
+    "sinceStart": "Od začetka",
+    "power": "Moč",
+    "view": "View"
   },
   "country": {
     "allSelectedCountries": "Vse izbrane države",
@@ -527,7 +562,8 @@
       "logout": "Odjava",
       "admin": "Administrator",
       "solarPower": "Sončna energija",
-      "pvInvestment": "Naložba"
+      "pvInvestment": "Naložba",
+      "recommendations": "Recommendations"
     },
     "account": {
       "settings": "Nastavitve"

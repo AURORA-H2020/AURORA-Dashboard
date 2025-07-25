@@ -87,7 +87,17 @@
     "deletePvInvestment": {
       "success": "A entrada de investimento foi eliminada",
       "error": "Ocorreu um erro ao eliminar esta entrada de investimento"
-    }
+    },
+    "recommendationMarkedAsUnread": "Recommendation marked unread",
+    "recommendationMarkedAsRead": "Recommendation marked read",
+    "recommendationUpdateError": "An error occured updating the recommendation",
+    "deleteRecommendation": {
+      "success": "Your recommendation was successfully deleted",
+      "error": "An error occured deleting your recommendation"
+    },
+    "deletingRecommendation": "Deleting recommendation...",
+    "markingRecommendationAsRead": "Marking recommendation read...",
+    "markingRecommendationAsUnread": "Marking recommendation unread..."
   },
   "button": {
     "downloadPending": "A descarregar..."
@@ -150,7 +160,7 @@
       "selectBarToSeeDailyBreakdown": "Selecione uma barra para mostrar uma discriminação para um dia específico.",
       "unsupportedRegionMessage": "Esta funcionalidade não é atualmente suportada na sua região.",
       "solarPowerProduction": "Produção de energia solar",
-      "unsupportedSearchParams": "Parâmetros de pesquisa não suportados",
+      "unsupportedSearchParams": "Unsupported search parameters",
       "lifetimeProduction": "Produção vitalícia"
     }
   },
@@ -163,7 +173,8 @@
     "noData": "Não existem dados disponíveis",
     "noConsumptionsFound": "Não foram encontrados consumos.",
     "noRecurringConsumptionsFound": "Não foram encontrados consumos recorrentes.",
-    "noConsumptions": "Sem consumos"
+    "noConsumptions": "Sem consumos",
+    "reset": "Reset"
   },
   "metadata": {
     "title": "AURORA Energy Tracker: Painel de controlo",
@@ -334,7 +345,7 @@
         "editInvestmentDisclaimer": "Se tiver efetuado investimentos adicionais numa data posterior, adicione um novo investimento. A edição dos seus investimentos existentes pode resultar num registo incorreto.",
         "addInvestmentDisclaimer": "A introdução dos seus dados de investimento serve exclusivamente para efeitos de registo. Tal não constitui um investimento efetivo ou uma ordem vinculativa sob qualquer forma.",
         "noteDescription": "Adicione uma nota ao seu investimento para referência pessoal.",
-        "investmentDescription": "O montante de dinheiro investido",
+        "investmentDescription": "The amount of money you invested",
         "shareDescription": "A que parte da capacidade da instalação de painéis solares corresponde o seu investimento. Esta informação encontra-se nos documentos que recebeu quando efetuou o seu investimento.",
         "deleteInvestmentDialog": {
           "title": "Tem a certeza de que pretende eliminar este investimento?",
@@ -428,7 +439,29 @@
       "yourLatestInvestment": "O seu último investimento",
       "recordYourInvestment": "Registar o seu investimento",
       "allInvestments": "Todos os investimentos"
-    }
+    },
+    "recommendations": {
+      "info": {
+        "primary": "To help you improve your energy behaviour, AURORA provides you with personalised recommendations based on your energy usage data.",
+        "secondary": "Recommendations are updated regularly as you enter more data."
+      },
+      "recommendation": "Recommendation",
+      "recommendations": "Recommendations",
+      "highPriority": "high priority",
+      "mediumPriority": "medium priority",
+      "lowPriority": "low priority",
+      "learnMore": "Learn more",
+      "rationaleTitle": "Rational",
+      "notifyAt": "Notify On",
+      "markAsUnread": "Mark unread",
+      "markAsRead": "Mark read",
+      "read": "Read",
+      "unread": "Unread",
+      "noRecommendations": "No recommendations found",
+      "deleteRecommendationDialogTitle": "Are you sure you want to delete this recommendation?",
+      "deleteRecommendationDialogDescription": "Deleted recommendations may reappear after some time if they are still relevant for you."
+    },
+    "totalRecommendations": "Total recommendations"
   },
   "common": {
     "co2emission": "Emissões<sub>de CO2</sub> ",
@@ -479,7 +512,9 @@
     "notApplicable": "Não aplicável",
     "goBack": "Voltar atrás",
     "energy": "Energia",
-    "sinceStart": "Desde o início"
+    "sinceStart": "Desde o início",
+    "power": "Potência",
+    "view": "View"
   },
   "country": {
     "allSelectedCountries": "Todos os países selecionados",
@@ -527,7 +562,8 @@
       "logout": "Sair",
       "admin": "Administrador",
       "solarPower": "Energia solar",
-      "pvInvestment": "Investimento"
+      "pvInvestment": "Investimento",
+      "recommendations": "Recommendations"
     },
     "account": {
       "settings": "Definições"
