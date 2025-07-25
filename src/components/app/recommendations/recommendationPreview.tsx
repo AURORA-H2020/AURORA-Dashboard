@@ -57,8 +57,8 @@ const RecommendationPreview = ({
         isRead,
       });
       isRead
-        ? toast.success(t("toast.recommendationMarkedAsUnread"))
-        : toast.success(t("toast.recommendationMarkedAsRead"));
+        ? toast.success(t("toast.recommendationMarkedAsRead"))
+        : toast.success(t("toast.recommendationMarkedAsUnread"));
     } catch (err) {
       toast.error(t("toast.recommendationUpdateError"));
       console.error("Error updating recommendation:", err);
@@ -70,82 +70,80 @@ const RecommendationPreview = ({
     : "";
 
   return (
-    <>
-      <Card
-        className={cn(
-          "transition-all hover:border-primary/50",
-          isActive && "border-primary bg-primary/5",
-        )}
-      >
-        <CardContent className="px-4 py-3">
-          <Flex direction="column" gap="2">
-            <Flex justify="between" align="center">
-              <div className="flex justify-between w-full">
-                <Text className="font-medium line-clamp-1">
-                  {recommendationTitle}
-                </Text>
+    <Card
+      className={cn(
+        "transition-all hover:border-primary/50",
+        isActive && "border-primary bg-primary/5",
+      )}
+    >
+      <CardContent className="px-4 py-3">
+        <Flex direction="column" gap="2">
+          <Flex justify="between" align="center">
+            <div className="flex justify-between w-full">
+              <Text className="font-medium line-clamp-1">
+                {recommendationTitle}
+              </Text>
 
-                {recommendation.isRead ? (
-                  <Badge
-                    variant="outline"
-                    className="flex items-center gap-1 ml-1 size-6 p-0"
-                    onClick={() => setReadStatus(!recommendation.isRead)}
-                  >
-                    <CheckCircleIcon className="h-3 w-3 mx-auto my-auto" />
-                    <span className="sr-only">
-                      {t("app.recommendations.read")}
-                    </span>
-                  </Badge>
-                ) : (
-                  <Badge
-                    variant="secondary"
-                    className="flex items-center gap-1 ml-1 bg-primary text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground size-6 p-0"
-                    onClick={() => setReadStatus(!recommendation.isRead)}
-                  >
-                    <CircleDashedIcon className="h-3 w-3 mx-auto my-auto" />
-                    <span className="sr-only">
-                      {t("app.recommendations.unread")}
-                    </span>
-                  </Badge>
-                )}
-              </div>
-            </Flex>
-
-            <div className="flex gap-4 w-full justify-between">
-              <div className="flex flex-col gap-4">
-                <Text className="text-sm text-muted-foreground line-clamp-2">
-                  {recommendation.message}
-                </Text>
-
-                <Text size="1" className="text-muted-foreground">
-                  {createdDate}
-                </Text>
-              </div>
-
-              <Flex align="center" justify="between">
-                <Flex className="gap-1">
-                  <Dialog>
-                    <DialogTrigger asChild>
-                      <Button size="sm" variant="outline">
-                        {t("common.view")}
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>{recommendationTitle}</DialogTitle>
-                      </DialogHeader>
-                      <ScrollArea className="max-h-[80vh]">
-                        <RecommendationView recommendation={recommendation} />
-                      </ScrollArea>
-                    </DialogContent>
-                  </Dialog>
-                </Flex>
-              </Flex>
+              {recommendation.isRead ? (
+                <Badge
+                  variant="outline"
+                  className="flex items-center gap-1 ml-1 size-6 p-0"
+                  onClick={() => setReadStatus(!recommendation.isRead)}
+                >
+                  <CheckCircleIcon className="h-3 w-3 mx-auto my-auto" />
+                  <span className="sr-only">
+                    {t("app.recommendations.read")}
+                  </span>
+                </Badge>
+              ) : (
+                <Badge
+                  variant="secondary"
+                  className="flex items-center gap-1 ml-1 bg-primary text-primary-foreground hover:bg-primary/80 hover:text-primary-foreground size-6 p-0"
+                  onClick={() => setReadStatus(!recommendation.isRead)}
+                >
+                  <CircleDashedIcon className="h-3 w-3 mx-auto my-auto" />
+                  <span className="sr-only">
+                    {t("app.recommendations.unread")}
+                  </span>
+                </Badge>
+              )}
             </div>
           </Flex>
-        </CardContent>
-      </Card>
-    </>
+
+          <div className="flex gap-4 w-full justify-between">
+            <div className="flex flex-col gap-4">
+              <Text className="text-sm text-muted-foreground line-clamp-2">
+                {recommendation.message}
+              </Text>
+
+              <Text size="1" className="text-muted-foreground">
+                {createdDate}
+              </Text>
+            </div>
+
+            <Flex align="center" justify="between">
+              <Flex className="gap-1">
+                <Dialog>
+                  <DialogTrigger asChild>
+                    <Button size="sm" variant="outline">
+                      {t("common.view")}
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>{recommendationTitle}</DialogTitle>
+                    </DialogHeader>
+                    <ScrollArea className="max-h-[80vh]">
+                      <RecommendationView recommendation={recommendation} />
+                    </ScrollArea>
+                  </DialogContent>
+                </Dialog>
+              </Flex>
+            </Flex>
+          </div>
+        </Flex>
+      </CardContent>
+    </Card>
   );
 };
 
