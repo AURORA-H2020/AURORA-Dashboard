@@ -441,6 +441,10 @@
       "allInvestments": "All Investments"
     },
     "recommendations": {
+      "info": {
+        "primary": "To help you improve your energy behaviour, AURORA provides you with personalised recommendations based on your energy usage data.",
+        "secondary": "Recommendations are updated regularly as you enter more data."
+      },
       "recommendation": "Recommendation",
       "recommendations": "Recommendations",
       "highPriority": "high priority",
