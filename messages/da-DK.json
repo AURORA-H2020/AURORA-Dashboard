@@ -88,16 +88,16 @@
       "success": "Investeringsindtastningen er blevet slettet",
       "error": "Der opstod en fejl ved sletning af denne investering."
     },
-    "recommendationMarkedAsUnread": "Recommendation marked unread",
-    "recommendationMarkedAsRead": "Recommendation marked read",
-    "recommendationUpdateError": "An error occured updating the recommendation",
+    "recommendationMarkedAsUnread": "Anbefaling markeret som ulæst",
+    "recommendationMarkedAsRead": "Anbefaling markeret som læst",
+    "recommendationUpdateError": "Der opstod en fejl ved opdatering af anbefalingen",
     "deleteRecommendation": {
-      "success": "Your recommendation was successfully deleted",
-      "error": "An error occured deleting your recommendation"
+      "success": "Din anbefaling blev slettet",
+      "error": "Der opstod en fejl ved sletning af din anbefaling"
     },
-    "deletingRecommendation": "Deleting recommendation...",
-    "markingRecommendationAsRead": "Marking recommendation read...",
-    "markingRecommendationAsUnread": "Marking recommendation unread..."
+    "deletingRecommendation": "Sletter anbefaling...",
+    "markingRecommendationAsRead": "Markerer anbefaling som læst...",
+    "markingRecommendationAsUnread": "Markerer anbefaling som ulæst..."
   },
   "button": {
     "downloadPending": "Downloader..."
@@ -160,7 +160,7 @@
       "selectBarToSeeDailyBreakdown": "Vælg et felt for at få vist en opdeling for en bestemt dag.",
       "unsupportedRegionMessage": "Denne funktion er i øjeblikket ikke understøttet i din region.",
       "solarPowerProduction": "Fremstillet af solcelleanlæg",
-      "unsupportedSearchParams": "Unsupported search parameters",
+      "unsupportedSearchParams": "Søgeparametre, der ikke understøttes",
       "lifetimeProduction": "Totale produktion"
     }
   },
@@ -174,7 +174,7 @@
     "noConsumptionsFound": "Ingen forbrug fundet.",
     "noRecurringConsumptionsFound": "Ingen tilbagevendende forbrug fundet.",
     "noConsumptions": "Ingen forbrug",
-    "reset": "Reset"
+    "reset": "Nulstil"
   },
   "metadata": {
     "title": "AURORA Energy Tracker: Dashboard",
@@ -345,7 +345,7 @@
         "editInvestmentDisclaimer": "Hvis du har foretaget yderligere investeringer på et senere tidspunkt, skal du tilføje en ny investering i stedet. Hvis du redigerer dine eksisterende investeringer, kan det resultere i unøjagtig data.",
         "addInvestmentDisclaimer": "Indtastning af investeringsdata er udelukkende til registreringsformål. Det laver ikke en faktisk investering eller bindende ordre.",
         "noteDescription": "Tilføj en note til din investering til personlig brug.",
-        "investmentDescription": "The amount of money you invested",
+        "investmentDescription": "Det beløb, du har investeret",
         "shareDescription": "Hvor mange andele din investering svarer til. Du bør finde disse oplysninger i de dokumenter, du modtog, da du foretog din investering.",
         "deleteInvestmentDialog": {
           "title": "Er du sikker på, at du vil slette denne investering?",
@@ -442,26 +442,26 @@
     },
     "recommendations": {
       "info": {
-        "primary": "To help you improve your energy behaviour, AURORA provides you with personalised recommendations based on your energy usage data.",
-        "secondary": "Recommendations are updated regularly as you enter more data."
+        "primary": "For at hjælpe dig med at forbedre din energiadfærd giver AURORA dig personlige anbefalinger baseret på dine energiforbrugsdata.",
+        "secondary": "Anbefalingerne opdateres regelmæssigt, efterhånden som du indtaster flere data."
       },
-      "recommendation": "Recommendation",
-      "recommendations": "Recommendations",
-      "highPriority": "high priority",
-      "mediumPriority": "medium priority",
-      "lowPriority": "low priority",
-      "learnMore": "Learn more",
-      "rationaleTitle": "Rational",
-      "notifyAt": "Notify On",
-      "markAsUnread": "Mark unread",
-      "markAsRead": "Mark read",
-      "read": "Read",
-      "unread": "Unread",
-      "noRecommendations": "No recommendations found",
-      "deleteRecommendationDialogTitle": "Are you sure you want to delete this recommendation?",
-      "deleteRecommendationDialogDescription": "Deleted recommendations may reappear after some time if they are still relevant for you."
+      "recommendation": "Anbefaling",
+      "recommendations": "Anbefalinger",
+      "highPriority": "høj prioritet",
+      "mediumPriority": "mellemhøj prioritet",
+      "lowPriority": "lav prioritet",
+      "learnMore": "Læs mere",
+      "rationaleTitle": "Rationel",
+      "notifyAt": "Giv besked om",
+      "markAsUnread": "Marker ulæst",
+      "markAsRead": "Marker læst",
+      "read": "Læst",
+      "unread": "Ulæst",
+      "noRecommendations": "Ingen anbefalinger fundet",
+      "deleteRecommendationDialogTitle": "Er du sikker på, at du vil slette denne anbefaling?",
+      "deleteRecommendationDialogDescription": "Slettede anbefalinger kan dukke op igen efter et stykke tid, hvis de stadig er relevante for dig."
     },
-    "totalRecommendations": "Total recommendations"
+    "totalRecommendations": "Anbefalinger i alt"
   },
   "common": {
     "co2emission": "CO<sub>2</sub>-udledninger",
@@ -513,8 +513,8 @@
     "goBack": "Tilbage",
     "energy": "Energi",
     "sinceStart": "Siden starten",
-    "power": "Kraft",
-    "view": "View"
+    "power": "Strøm",
+    "view": "Vis"
   },
   "country": {
     "allSelectedCountries": "Alle valgte lande",
@@ -563,7 +563,7 @@
       "admin": "Administrator",
       "solarPower": "Solenergi",
       "pvInvestment": "Investering",
-      "recommendations": "Recommendations"
+      "recommendations": "Anbefalinger"
     },
     "account": {
       "settings": "Indstillinger"

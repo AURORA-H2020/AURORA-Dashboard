@@ -88,16 +88,16 @@
       "success": "Se ha suprimido el asiento de inversión",
       "error": "Se ha producido un error al eliminar este asiento de inversión"
     },
-    "recommendationMarkedAsUnread": "Recommendation marked unread",
-    "recommendationMarkedAsRead": "Recommendation marked read",
-    "recommendationUpdateError": "An error occured updating the recommendation",
+    "recommendationMarkedAsUnread": "Recomendación marcada como no leída",
+    "recommendationMarkedAsRead": "Recomendación marcada como leída",
+    "recommendationUpdateError": "Se ha producido un error al actualizar la recomendación",
     "deleteRecommendation": {
-      "success": "Your recommendation was successfully deleted",
-      "error": "An error occured deleting your recommendation"
+      "success": "Su recomendación se ha eliminado correctamente",
+      "error": "Se ha producido un error al borrar su recomendación"
     },
-    "deletingRecommendation": "Deleting recommendation...",
-    "markingRecommendationAsRead": "Marking recommendation read...",
-    "markingRecommendationAsUnread": "Marking recommendation unread..."
+    "deletingRecommendation": "Borrando recomendación...",
+    "markingRecommendationAsRead": "Marcando recomendación como leída...",
+    "markingRecommendationAsUnread": "Marcando recomendación como no leída..."
   },
   "button": {
     "downloadPending": "Descargando..."
@@ -160,7 +160,7 @@
       "selectBarToSeeDailyBreakdown": "Seleccione una barra para ver el desglose de un día concreto.",
       "unsupportedRegionMessage": "Esta función no está disponible en su región.",
       "solarPowerProduction": "Producción de energía solar",
-      "unsupportedSearchParams": "Unsupported search parameters",
+      "unsupportedSearchParams": "Parámetros de búsqueda no admitidos",
       "lifetimeProduction": "Producción para toda la vida"
     }
   },
@@ -174,7 +174,7 @@
     "noConsumptionsFound": "No se han encontrado consumos.",
     "noRecurringConsumptionsFound": "No se han encontrado consumos recurrentes.",
     "noConsumptions": "Sin consumos",
-    "reset": "Reset"
+    "reset": "Restablecer"
   },
   "metadata": {
     "title": "Rastreador de energía AURORA: Cuadro de mandos",
@@ -345,7 +345,7 @@
         "editInvestmentDisclaimer": "Si ha realizado inversiones adicionales posteriormente, añada una nueva inversión. Editar sus inversiones existentes puede dar lugar a un seguimiento inexacto.",
         "addInvestmentDisclaimer": "La introducción de sus datos de inversión se realiza exclusivamente a efectos de registro. No se trata de una inversión real ni de una orden vinculante de ningún tipo.",
         "noteDescription": "Añada una nota a su inversión para referencia personal.",
-        "investmentDescription": "The amount of money you invested",
+        "investmentDescription": "La cantidad de dinero que invirtió",
         "shareDescription": "A qué parte de la capacidad de la instalación de paneles solares corresponde su inversión. Encontrará esta información en los documentos que recibió al realizar tu inversión.",
         "deleteInvestmentDialog": {
           "title": "¿Está seguro de que desea eliminar esta inversión?",
@@ -442,26 +442,26 @@
     },
     "recommendations": {
       "info": {
-        "primary": "To help you improve your energy behaviour, AURORA provides you with personalised recommendations based on your energy usage data.",
-        "secondary": "Recommendations are updated regularly as you enter more data."
+        "primary": "Para ayudarle a mejorar su comportamiento energético, AURORA le ofrece recomendaciones personalizadas basadas en sus datos de consumo de energía.",
+        "secondary": "Las recomendaciones se actualizan periódicamente a medida que se introducen más datos."
       },
-      "recommendation": "Recommendation",
-      "recommendations": "Recommendations",
-      "highPriority": "high priority",
-      "mediumPriority": "medium priority",
-      "lowPriority": "low priority",
-      "learnMore": "Learn more",
-      "rationaleTitle": "Rational",
-      "notifyAt": "Notify On",
-      "markAsUnread": "Mark unread",
-      "markAsRead": "Mark read",
-      "read": "Read",
-      "unread": "Unread",
-      "noRecommendations": "No recommendations found",
-      "deleteRecommendationDialogTitle": "Are you sure you want to delete this recommendation?",
-      "deleteRecommendationDialogDescription": "Deleted recommendations may reappear after some time if they are still relevant for you."
+      "recommendation": "Recomendación",
+      "recommendations": "Recomendaciones",
+      "highPriority": "prioridad alta",
+      "mediumPriority": "prioridad media",
+      "lowPriority": "prioridad baja",
+      "learnMore": "Más información",
+      "rationaleTitle": "Racional",
+      "notifyAt": "Notificar",
+      "markAsUnread": "Marcar como no leído",
+      "markAsRead": "Marcar como leído",
+      "read": "Leído",
+      "unread": "Sin leer",
+      "noRecommendations": "No se han encontrado recomendaciones",
+      "deleteRecommendationDialogTitle": "¿Está seguro de que desea eliminar esta recomendación?",
+      "deleteRecommendationDialogDescription": "Las recomendaciones eliminadas pueden reaparecer después de algún tiempo si siguen siendo relevantes para usted."
     },
-    "totalRecommendations": "Total recommendations"
+    "totalRecommendations": "Total de recomendaciones"
   },
   "common": {
     "co2emission": "Emisiones de<sub>CO2</sub> ",
@@ -514,7 +514,7 @@
     "energy": "Energía",
     "sinceStart": "Desde el inicio",
     "power": "Potencia",
-    "view": "View"
+    "view": "Ver"
   },
   "country": {
     "allSelectedCountries": "Todos los países seleccionados",
@@ -563,7 +563,7 @@
       "admin": "Admin",
       "solarPower": "Energía solar",
       "pvInvestment": "Inversión",
-      "recommendations": "Recommendations"
+      "recommendations": "Recomendaciones"
     },
     "account": {
       "settings": "Ajustes"
