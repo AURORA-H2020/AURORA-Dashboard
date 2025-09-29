@@ -22,6 +22,11 @@ export const userMenuLinks = [
     isAdmin: false,
   },
   {
+    title: t("navigation.menu.recommendations"),
+    path: "/account/rec",
+    isAdmin: false,
+  },
+  {
     title: t("navigation.account.settings"),
     path: "/account/settings",
     isAdmin: false,

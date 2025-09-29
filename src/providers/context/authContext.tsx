@@ -1,11 +1,11 @@
 "use client";
 
 import { firebaseApp } from "@/firebase/config";
-import { getAuth, onAuthStateChanged, User } from "firebase/auth";
+import { User, getAuth, onAuthStateChanged } from "firebase/auth";
 import {
-  createContext,
   FC,
   ReactNode,
+  createContext,
   useContext,
   useEffect,
   useState,

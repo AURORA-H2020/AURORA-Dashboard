@@ -23,12 +23,12 @@ import { RecurringConsumptionWithID } from "@/models/extensions";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { Flex, Text } from "@radix-ui/themes";
+import { FileQuestionIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ReactNode, useState } from "react";
 import { toast } from "sonner";
 import { AddEditRecurringConsumptionModal } from "./modals/addEditRecurringConsumptionModal";
 import { RecurringConsumptionView } from "./recurringConsumptionView";
-import { FileQuestionIcon } from "lucide-react";
 
 /**
  * Renders a preview of a consumption object with interactive

@@ -29,7 +29,7 @@ import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consu
 import { useAuthContext } from "@/providers/context/authContext";
 import { Flex, Grid } from "@radix-ui/themes";
 import { useFormatter } from "next-intl";
-import { forwardRef, ReactNode, useEffect, useMemo, useState } from "react";
+import { ReactNode, forwardRef, useEffect, useMemo, useState } from "react";
 import { toast } from "sonner";
 import { BlacklistUserModal } from "./blacklistUser";
 

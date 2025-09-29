@@ -3,7 +3,7 @@ import {
   homeEnergyLabels,
   householdProfiles,
 } from "@/lib/constants/common-constants";
-import { passwordSchema, TimestampSchema } from "@/lib/zod/common";
+import { TimestampSchema, passwordSchema } from "@/lib/zod/common";
 import { User } from "@/models/firestore/user/user";
 import { UserGender } from "@/models/firestore/user/user-gender";
 import { UserHomeEnergyLabel } from "@/models/firestore/user/user-homeEnergyLabel";

@@ -18,7 +18,7 @@ import {
 } from "@/models/extensions";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
-import { createContext, FC, ReactNode, useContext } from "react";
+import { FC, ReactNode, createContext, useContext } from "react";
 import { useAuthContext } from "./authContext";
 
 interface FirebaseDataContextValue {

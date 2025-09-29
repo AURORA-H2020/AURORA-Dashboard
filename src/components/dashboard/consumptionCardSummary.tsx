@@ -36,7 +36,7 @@ const ConsumptionCardSummary = ({
         return (
           <Alert
             key={data.category}
-            className={`my-2 bg-opacity-20 bg-[${consumptionAttributes?.colorPrimary}] border-[${consumptionAttributes?.colorPrimary}] text-[${consumptionAttributes?.colorPrimary}]`}
+            className={`my-2 bg-[${consumptionAttributes?.colorPrimary}] bg-opacity-20 border-[${consumptionAttributes?.colorPrimary}] text-[${consumptionAttributes?.colorPrimary}]`}
           >
             {consumptionAttributes?.icon ? (
               <consumptionAttributes.icon

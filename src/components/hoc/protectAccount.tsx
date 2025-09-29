@@ -1,6 +1,6 @@
-import { useAuthContext } from "@/providers/context/authContext";
 import { AuthForm } from "@/components/auth/authForm";
 import { LoadingSpinner } from "@/components/ui/loading";
+import { useAuthContext } from "@/providers/context/authContext";
 import { ReactNode } from "react";
 
 /**

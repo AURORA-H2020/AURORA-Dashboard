@@ -8,7 +8,7 @@ import { Consumption } from "@/models/firestore/consumption/consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { UserSettingsUnitSystem } from "@/models/firestore/user/user-settings/user-settings-unitSystem";
-import { clsx, type ClassValue } from "clsx";
+import { type ClassValue, clsx } from "clsx";
 import convert from "convert";
 import { useFormatter } from "next-intl";
 import { twMerge } from "tailwind-merge";

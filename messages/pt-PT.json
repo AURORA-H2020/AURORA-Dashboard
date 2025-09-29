@@ -87,7 +87,17 @@
     "deletePvInvestment": {
       "success": "A entrada de investimento foi eliminada",
       "error": "Ocorreu um erro ao eliminar esta entrada de investimento"
-    }
+    },
+    "recommendationMarkedAsUnread": "Recomendação marcada como não lida",
+    "recommendationMarkedAsRead": "Recomendação com a seguinte redação",
+    "recommendationUpdateError": "Ocorreu um erro ao atualizar a recomendação",
+    "deleteRecommendation": {
+      "success": "A sua recomendação foi eliminada com êxito",
+      "error": "Ocorreu um erro ao eliminar a sua recomendação"
+    },
+    "deletingRecommendation": "Eliminar a recomendação...",
+    "markingRecommendationAsRead": "Recomendação marcada como lida...",
+    "markingRecommendationAsUnread": "Recomendação marcada como não lida..."
   },
   "button": {
     "downloadPending": "A descarregar..."
@@ -163,7 +173,8 @@
     "noData": "Não existem dados disponíveis",
     "noConsumptionsFound": "Não foram encontrados consumos.",
     "noRecurringConsumptionsFound": "Não foram encontrados consumos recorrentes.",
-    "noConsumptions": "Sem consumos"
+    "noConsumptions": "Sem consumos",
+    "reset": "Reiniciar"
   },
   "metadata": {
     "title": "AURORA Energy Tracker: Painel de controlo",
@@ -324,7 +335,7 @@
         "edit": "Editar Investimento",
         "save": "Poupar investimento",
         "add": "Adicionar investimento",
-        "shares": "Acções",
+        "shares": "Partilhas",
         "investmentDate": "Data do investimento",
         "investment": "Investimento",
         "note": "Nota",
@@ -428,7 +439,29 @@
       "yourLatestInvestment": "O seu último investimento",
       "recordYourInvestment": "Registar o seu investimento",
       "allInvestments": "Todos os investimentos"
-    }
+    },
+    "recommendations": {
+      "info": {
+        "primary": "Para o ajudar a melhorar o seu comportamento energético, o AURORA fornece-lhe recomendações personalizadas com base nos seus dados de utilização de energia.",
+        "secondary": "As recomendações são atualizadas regularmente à medida que são introduzidos mais dados."
+      },
+      "recommendation": "Recomendação",
+      "recommendations": "Recomendações",
+      "highPriority": "alta prioridade",
+      "mediumPriority": "prioridade média",
+      "lowPriority": "baixa prioridade",
+      "learnMore": "Saiba mais",
+      "rationaleTitle": "Racional",
+      "notifyAt": "Notificar",
+      "markAsUnread": "Marcar como não lido",
+      "markAsRead": "Marcar como lido",
+      "read": "Lido",
+      "unread": "Não lido",
+      "noRecommendations": "Não foram encontradas recomendações",
+      "deleteRecommendationDialogTitle": "Tem a certeza de que pretende eliminar esta recomendação?",
+      "deleteRecommendationDialogDescription": "As recomendações eliminadas podem reaparecer após algum tempo se ainda forem relevantes para si."
+    },
+    "totalRecommendations": "Total de recomendações"
   },
   "common": {
     "co2emission": "Emissões<sub>de CO2</sub> ",
@@ -480,8 +513,8 @@
     "goBack": "Voltar atrás",
     "energy": "Energia",
     "sinceStart": "Desde o início",
-    "view": "View",
-    "power": "Potência"
+    "power": "Potência",
+    "view": "Ver"
   },
   "country": {
     "allSelectedCountries": "Todos os países selecionados",
@@ -529,7 +562,8 @@
       "logout": "Sair",
       "admin": "Administrador",
       "solarPower": "Energia solar",
-      "pvInvestment": "Investimento"
+      "pvInvestment": "Investimento",
+      "recommendations": "Recomendações"
     },
     "account": {
       "settings": "Definições"

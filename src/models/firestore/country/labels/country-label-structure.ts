@@ -1,4 +1,4 @@
-import { CountryLabelValues } from "./country-label-values";
+import type { CountryLabelValues } from "./country-label-values";
 
 /**
  * A country label structure

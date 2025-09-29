@@ -1,5 +1,5 @@
-import { Timestamp } from "firebase/firestore";
-import { ConsumptionElectricitySource } from "./consumption-electricity-source";
+import type { Timestamp } from "firebase/firestore";
+import type { ConsumptionElectricitySource } from "./consumption-electricity-source";
 
 /**
  * A consumption electricity
@@ -10,17 +10,17 @@ export interface ConsumptionElectricity {
    */
   costs?: number;
   /**
-   * The size of the household
+   * The size of the household in number of people
    */
   householdSize: number;
   /**
    * The electricity type
    * Optional to support legacy consumptions before this property was introduced
+   * @see {@link ConsumptionElectricitySource}
    */
   electricitySource?: ConsumptionElectricitySource;
   /**
-   * The electricity type
-   * Optional to support legacy consumptions before this property was introduced
+   * The exported electricity for home PV in kWh
    */
   electricityExported?: number;
   /**

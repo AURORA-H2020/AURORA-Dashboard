@@ -1,4 +1,4 @@
-import { RecurringConsumptionFrequencyUnit } from "./recurring-consumption-frequency-unit";
+import type { RecurringConsumptionFrequencyUnit } from "./recurring-consumption-frequency-unit";
 
 /**
  * A recurring consumption frequency

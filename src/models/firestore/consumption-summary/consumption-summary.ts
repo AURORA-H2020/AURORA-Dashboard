@@ -1,6 +1,6 @@
-import { ConsumptionSummaryLabeledConsumption } from "./consumption-summary-labeled-consumption";
-import { Timestamp } from "firebase/firestore";
-import { ConsumptionCategory } from "../consumption/consumption-category";
+import type { Timestamp } from "firebase/firestore";
+import type { ConsumptionCategory } from "../consumption/consumption-category";
+import type { ConsumptionSummaryLabeledConsumption } from "./consumption-summary-labeled-consumption";
 
 /**
  * A consumption summary

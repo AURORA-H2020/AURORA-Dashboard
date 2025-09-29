@@ -1,6 +1,6 @@
+import headlessUiTailwind from "@headlessui/tailwindcss";
 /** @type {import('tailwindcss').Config} */
 import tailwindAnimate from "tailwindcss-animate";
-import headlessUiTailwind from "@headlessui/tailwindcss";
 
 export const darkMode = ["class"];
 export const content = [

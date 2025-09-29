@@ -24,10 +24,14 @@ const GenderCardSummary = ({
   let countNonBinary = 0;
   let countOther = 0;
 
-  metaData?.forEach((country) => (countFemale += country.genders.female));
-  metaData?.forEach((country) => (countMale += country.genders.male));
-  metaData?.forEach((country) => (countNonBinary += country.genders.nonBinary));
-  metaData?.forEach((country) => (countOther += country.genders.other));
+  if (metaData) {
+    for (const country of metaData) {
+      countFemale += country.genders.female;
+      countMale += country.genders.male;
+      countNonBinary += country.genders.nonBinary;
+      countOther += country.genders.other;
+    }
+  }
 
   let dataSet = [
     {

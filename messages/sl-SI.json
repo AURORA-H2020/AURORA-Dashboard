@@ -87,7 +87,17 @@
     "deletePvInvestment": {
       "success": "Vnos naložbe je bil izbrisan",
       "error": "Pri brisanju tega vnosa naložbe je prišlo do napake"
-    }
+    },
+    "recommendationMarkedAsUnread": "Priporočilo označeno kot neprebrano",
+    "recommendationMarkedAsRead": "Priporočilo označeno kot prebrano",
+    "recommendationUpdateError": "Pri posodabljanju priporočila je prišlo do napake",
+    "deleteRecommendation": {
+      "success": "Vaše priporočilo je bilo uspešno izbrisano",
+      "error": "Pri brisanju vašega priporočila je prišlo do napake"
+    },
+    "deletingRecommendation": "Brisanje priporočila...",
+    "markingRecommendationAsRead": "Označevanje priporočila kot prebranega...",
+    "markingRecommendationAsUnread": "Označevanje priporočila kot neprebranega..."
   },
   "button": {
     "downloadPending": "Prenašanje..."
@@ -163,7 +173,8 @@
     "noData": "Podatki niso na voljo",
     "noConsumptionsFound": "Porabe niso bile ugotovljene.",
     "noRecurringConsumptionsFound": "Ponavljajoče se porabe niso bile ugotovljene.",
-    "noConsumptions": "Brez porabe"
+    "noConsumptions": "Brez porabe",
+    "reset": "Ponastavitev"
   },
   "metadata": {
     "title": "AURORA Energy Tracker: Nadzorna plošča",
@@ -342,7 +353,7 @@
         },
         "capacity": "Zmogljivost",
         "investmentDateDescription": "Dan, ko ste izvedli naložbo.",
-        "share": "Deleži"
+        "share": "Delež"
       }
     },
     "filter": {
@@ -428,7 +439,29 @@
       "yourLatestInvestment": "Tvoja najnovejša naložba",
       "recordYourInvestment": "Evidentiraj svojo naložbo",
       "allInvestments": "Vse naložbe"
-    }
+    },
+    "recommendations": {
+      "info": {
+        "primary": "Da bi vam pomagala izboljšati vaše ravnanje z energijo, vam AURORA na podlagi vaših podatkov o porabi energije pošilja prilagojena priporočila.",
+        "secondary": "Priporočila se redno posodabljajo na podlagi vnešenih podatkov."
+      },
+      "recommendation": "Priporočilo",
+      "recommendations": "Priporočila",
+      "highPriority": "visoka prioriteta",
+      "mediumPriority": "srednja prioriteta",
+      "lowPriority": "nizka prioriteta",
+      "learnMore": "Preberite več",
+      "rationaleTitle": "Racionalno",
+      "notifyAt": "Obvesti ob",
+      "markAsUnread": "Označi kot neprebrano",
+      "markAsRead": "Označi kot prebrano",
+      "read": "Prebrano",
+      "unread": "Neprebrano",
+      "noRecommendations": "Ni priporočil",
+      "deleteRecommendationDialogTitle": "Ste prepričani, da želite izbrisati to priporočilo?",
+      "deleteRecommendationDialogDescription": "Izbrisana priporočila se lahko čez nekaj časa ponovno pojavijo, če so za vas še vedno pomembna."
+    },
+    "totalRecommendations": "Skupno število priporočil"
   },
   "common": {
     "co2emission": "Emisije<sub>CO2</sub> ",
@@ -480,8 +513,8 @@
     "goBack": "Pojdi nazaj",
     "energy": "Energija",
     "sinceStart": "Od začetka",
-    "view": "View",
-    "power": "Moč"
+    "power": "Moč",
+    "view": "pogled"
   },
   "country": {
     "allSelectedCountries": "Vse izbrane države",
@@ -529,7 +562,8 @@
       "logout": "Odjava",
       "admin": "Administrator",
       "solarPower": "Sončna energija",
-      "pvInvestment": "Naložba"
+      "pvInvestment": "Naložba",
+      "recommendations": "Priporočila"
     },
     "account": {
       "settings": "Nastavitve"

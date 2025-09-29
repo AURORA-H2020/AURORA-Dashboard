@@ -1,8 +1,9 @@
-import { UserConsumptionMetadata } from "./user-consumption-metadata";
-import { UserGender } from "./user-gender";
-import { UserHomeEnergyLabel } from "./user-homeEnergyLabel";
-import { UserHouseholdProfile } from "./user-householdProfile";
-import { UserSettings } from "./user-settings/user-settings";
+import type { UserConsumptionMetadata } from "./user-consumption-metadata";
+import type { UserGender } from "./user-gender";
+import type { UserHomeEnergyLabel } from "./user-homeEnergyLabel";
+import type { UserHouseholdProfile } from "./user-householdProfile";
+import { UserRecommenderMetadata } from "./user-recommender-metadata";
+import type { UserSettings } from "./user-settings/user-settings";
 
 /**
  * A user
@@ -40,6 +41,10 @@ export interface User {
    * The consumption summary metadata
    */
   consumptionSummaryMeta?: UserConsumptionMetadata;
+  /**
+   * The recommender system metadata
+   */
+  recommenderMeta?: UserRecommenderMetadata;
   /**
    * The country identifier
    */

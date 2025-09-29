@@ -1,7 +1,7 @@
-import { Timestamp } from "firebase/firestore";
-import { RecurringConsumptionFrequency } from "./recurring-consumption-frequency";
-import { ConsumptionCategory } from "../consumption/consumption-category";
-import { RecurringConsumptionTransportation } from "./recurring-consumption-transportation";
+import type { Timestamp } from "firebase/firestore";
+import type { ConsumptionCategory } from "../consumption/consumption-category";
+import type { RecurringConsumptionFrequency } from "./recurring-consumption-frequency";
+import type { RecurringConsumptionTransportation } from "./recurring-consumption-transportation";
 
 /**
  * A recurring consumption

@@ -1,5 +1,5 @@
-import { GlobalSummaryCategory } from "./category/global-summary-category";
-import { GlobalSummaryDemographicCategory } from "./demographic-category/global-summary-demographic-category";
+import type { GlobalSummaryCategory } from "./category/global-summary-category";
+import type { GlobalSummaryDemographicCategory } from "./demographic-category/global-summary-demographic-category";
 
 export interface GlobalSummaryCity {
   cityID: string | undefined;

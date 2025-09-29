@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Separator } from "@/components/ui/separator";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
@@ -19,7 +20,6 @@ import { useTranslations } from "next-intl";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import MonthSelect from "./monthSelect";
-import { Separator } from "@/components/ui/separator";
 
 const SiteTabs = () => {
   const t = useTranslations();

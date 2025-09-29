@@ -1,4 +1,4 @@
-import { Timestamp } from "firebase/firestore";
+import type { Timestamp } from "firebase/firestore";
 
 /**
  * A PV data entry captured from an API
@@ -10,7 +10,7 @@ export interface PvPlantData {
    */
   date: Timestamp;
   /**
-   * The energy production
+   * The energy production in Wh
    */
   Ep: number;
 }

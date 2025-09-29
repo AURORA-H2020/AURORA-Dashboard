@@ -1,11 +1,11 @@
-import { Popover, PopoverContent, PopoverTrigger } from "./popover";
-import { Button } from "./button";
-import { CalendarIcon } from "lucide-react";
 import { format } from "date-fns";
-import { Calendar } from "./calendar";
+import { CalendarIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { SetStateAction } from "react";
 import { DateRange } from "react-day-picker";
+import { Button } from "./button";
+import { Calendar } from "./calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
 const DatePicker = ({ dateRange, onChange }) => {
   const handleChange = (dateRange: SetStateAction<DateRange | undefined>) => {
