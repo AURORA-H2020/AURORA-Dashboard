@@ -100,15 +100,15 @@ const SiteOverview = () => {
           className="overflow-hidden bg-primary/5 transition-shadow hover:shadow-lg"
         >
           <CardHeader className="pb-0">
-            <CardTitle className="flex justify-between text-xl font-semibold">
-              {site.name}
+            <CardTitle className="flex justify-between gap-2 text-xl font-semibold">
+              <span className="line-clamp-1">{site.name}</span>
               {site.active ? (
-                <Badge className="space-x-2 font-bold">
+                <Badge className="shrink-0 space-x-2 font-bold">
                   <span>{t("common.active")}</span>{" "}
                   <ZapIcon className="size-4" />
                 </Badge>
               ) : (
-                <Badge className="space-x-2 bg-muted-foreground font-bold">
+                <Badge className="shrink-0 space-x-2 bg-muted-foreground font-bold">
                   <span>{t("common.inactive")}</span>{" "}
                   <ZapOffIcon className="size-4" />
                 </Badge>
