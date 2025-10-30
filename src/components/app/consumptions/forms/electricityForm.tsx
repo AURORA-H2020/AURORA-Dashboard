@@ -206,7 +206,7 @@ const ElectricityForm = ({
                 field={field}
                 placeholder={t("common.placeholder.selectDate")}
                 label={t("ui.monthPicker.start")}
-                maxDate={form.watch("electricity.endDate").toDate()}
+                maxDate={form.watch("electricity.endDate")?.toDate()}
                 required={isFieldRequired(formSchema, "electricity.startDate")}
               />
             )}
@@ -220,7 +220,7 @@ const ElectricityForm = ({
                 field={field}
                 placeholder={t("common.placeholder.selectDate")}
                 label={t("ui.monthPicker.end")}
-                minDate={form.watch("electricity.startDate").toDate()}
+                minDate={form.watch("electricity.startDate")?.toDate()}
                 description={t("app.form.electricity.dateSelectDescription")}
                 required={isFieldRequired(formSchema, "electricity.endDate")}
               />
