@@ -122,16 +122,23 @@ const TransportationForm = ({
 
   useEffect(() => {
     if (
+      formTransportationType &&
       !fuelConsumptionEnabledTransportationTypes.includes(
         formTransportationType,
       )
     ) {
       form.setValue("transportation.fuelConsumption", undefined);
     }
-    if (!privateVehicleTypes.includes(formTransportationType)) {
+    if (
+      formTransportationType &&
+      !privateVehicleTypes.includes(formTransportationType)
+    ) {
       form.setValue("transportation.privateVehicleOccupancy", undefined);
     }
-    if (!publicVerhicleTypes.includes(formTransportationType)) {
+    if (
+      formTransportationType &&
+      !publicVerhicleTypes.includes(formTransportationType)
+    ) {
       form.setValue("transportation.publicVehicleOccupancy", undefined);
     }
   }, [formTransportationType, form]);
@@ -206,81 +213,84 @@ const TransportationForm = ({
             )}
           />
 
-          {fuelConsumptionEnabledTransportationTypes.includes(
-            formTransportationType,
-          ) && (
-            <FormField
-              control={form.control}
-              name="transportation.fuelConsumption"
-              render={({ field }) => (
-                <FormInputField
-                  field={field}
-                  inputType="number"
-                  placeholder={
-                    !["electricCar", "electricBike"].includes(
-                      formTransportationType,
-                    )
-                      ? t("app.form.fuelConsumption")
-                      : t("app.form.powerConsumption")
-                  }
-                  label={
-                    !["electricCar", "electricBike"].includes(
-                      formTransportationType,
-                    )
-                      ? t("app.form.setCustomFuelConsumption")
-                      : t("app.form.setCustomPowerConsumption")
-                  }
-                  showSwitch={true}
-                  unit={
-                    ["electricCar", "electricBike"].includes(
-                      formTransportationType,
-                    )
-                      ? fuelConsumptionUnitElectric
-                      : fuelConsumptionUnitRegular
-                  }
-                  required={isFieldRequired(
-                    formSchema,
-                    "transportation.fuelConsumption",
-                  )}
-                />
-              )}
-            />
-          )}
+          {formTransportationType &&
+            fuelConsumptionEnabledTransportationTypes.includes(
+              formTransportationType,
+            ) && (
+              <FormField
+                control={form.control}
+                name="transportation.fuelConsumption"
+                render={({ field }) => (
+                  <FormInputField
+                    field={field}
+                    inputType="number"
+                    placeholder={
+                      !["electricCar", "electricBike"].includes(
+                        formTransportationType,
+                      )
+                        ? t("app.form.fuelConsumption")
+                        : t("app.form.powerConsumption")
+                    }
+                    label={
+                      !["electricCar", "electricBike"].includes(
+                        formTransportationType,
+                      )
+                        ? t("app.form.setCustomFuelConsumption")
+                        : t("app.form.setCustomPowerConsumption")
+                    }
+                    showSwitch={true}
+                    unit={
+                      ["electricCar", "electricBike"].includes(
+                        formTransportationType,
+                      )
+                        ? fuelConsumptionUnitElectric
+                        : fuelConsumptionUnitRegular
+                    }
+                    required={isFieldRequired(
+                      formSchema,
+                      "transportation.fuelConsumption",
+                    )}
+                  />
+                )}
+              />
+            )}
 
-          {privateVehicleTypes.includes(formTransportationType) && (
-            <FormField
-              control={form.control}
-              name="transportation.privateVehicleOccupancy"
-              render={({ field }) => (
-                <FormInputField
-                  field={field}
-                  inputType="number"
-                  placeholder={t("app.form.occupancy")}
-                  label={t("app.form.occupancy")}
-                  required={true}
-                />
-              )}
-            />
-          )}
+          {formTransportationType &&
+            privateVehicleTypes.includes(formTransportationType) && (
+              <FormField
+                control={form.control}
+                name="transportation.privateVehicleOccupancy"
+                render={({ field }) => (
+                  <FormInputField
+                    field={field}
+                    inputType="number"
+                    placeholder={t("app.form.occupancy")}
+                    label={t("app.form.occupancy")}
+                    required={true}
+                  />
+                )}
+              />
+            )}
 
-          {publicVerhicleTypes.includes(formTransportationType) && (
-            <FormField
-              control={form.control}
-              name="transportation.publicVehicleOccupancy"
-              render={({ field }) => (
-                <FormSelect
-                  field={field}
-                  options={publicVehicleOccupancies.map((occupancy) => ({
-                    value: occupancy.key,
-                    label: t(occupancy.label),
-                  }))}
-                  placeholder={t("app.form.occupancy")}
-                  label={t("app.form.occupancy")}
-                  required={true}
-                />
-              )}
-            />
-          )}
+          {formTransportationType &&
+            publicVerhicleTypes.includes(formTransportationType) && (
+              <FormField
+                control={form.control}
+                name="transportation.publicVehicleOccupancy"
+                render={({ field }) => (
+                  <FormSelect
+                    field={field}
+                    options={publicVehicleOccupancies.map((occupancy) => ({
+                      value: occupancy.key,
+                      label: t(occupancy.label),
+                    }))}
+                    placeholder={t("app.form.occupancy")}
+                    label={t("app.form.occupancy")}
+                    required={true}
+                  />
+                )}
+              />
+            )}
         </BorderBox>
 
         <BorderBox>
@@ -315,7 +325,7 @@ const TransportationForm = ({
                 label={t("app.form.endOfTravel")}
                 showTimePicker={true}
                 showClearButton={true}
-                minDate={form.watch("transportation.dateOfTravel").toDate()}
+                minDate={form.watch("transportation.dateOfTravel")?.toDate()}
                 required={false}
               />
             )}

@@ -216,7 +216,7 @@ const HeatingForm = ({
                 field={field}
                 placeholder={t("common.placeholder.selectDate")}
                 label={t("ui.monthPicker.start")}
-                maxDate={form.watch("heating.endDate").toDate()}
+                maxDate={form.watch("heating.endDate")?.toDate()}
                 required={isFieldRequired(formSchema, "heating.startDate")}
               />
             )}
@@ -230,7 +230,7 @@ const HeatingForm = ({
                 field={field}
                 placeholder={t("common.placeholder.selectDate")}
                 label={t("ui.monthPicker.end")}
-                minDate={form.watch("heating.startDate").toDate()}
+                minDate={form.watch("heating.startDate")?.toDate()}
                 description={t("app.form.heating.dateSelectDescription")}
                 required={isFieldRequired(formSchema, "heating.endDate")}
               />
