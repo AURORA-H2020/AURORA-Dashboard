@@ -1,9 +1,9 @@
 "use client";
 
-import { Skeleton } from "@/components/ui/skeleton";
-import { useTheme } from "next-themes";
 import Image from "next/image";
+import { useTheme } from "next-themes";
 import { ReactElement, useEffect, useState } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 /**
  * Renders the logo component.

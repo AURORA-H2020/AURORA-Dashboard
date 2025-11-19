@@ -1,3 +1,7 @@
+import { Strong } from "@radix-ui/themes";
+import { EyeIcon, EyeOffIcon } from "lucide-react";
+import { ReactNode, useState } from "react";
+import { ControllerRenderProps } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   FormControl,
@@ -7,10 +11,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utilities";
-import { Strong } from "@radix-ui/themes";
-import { EyeIcon, EyeOffIcon } from "lucide-react";
-import { ReactNode, useState } from "react";
-import { ControllerRenderProps } from "react-hook-form";
 
 /**
  * FormPasswordField component.

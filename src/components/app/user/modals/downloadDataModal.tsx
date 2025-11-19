@@ -1,5 +1,9 @@
 "use client";
 
+import { Flex, Text } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
+import { ReactNode, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -15,10 +19,6 @@ import {
   getUserConsumptionsAsCsv,
 } from "@/lib/downloadFiles/downloadConsumptionCsv";
 import { useAuthContext } from "@/providers/context/authContext";
-import { Flex, Text } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
-import { ReactNode, useState } from "react";
-import { toast } from "sonner";
 
 /**
  * Renders a modal component for download the user's data.

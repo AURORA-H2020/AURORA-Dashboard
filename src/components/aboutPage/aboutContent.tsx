@@ -1,5 +1,9 @@
 "use client";
 
+import { Flex, Grid, Heading, Text } from "@radix-ui/themes";
+import { Earth } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ReactNode, useState } from "react";
 import { AboutJson } from "@/components/aboutPage/jsonView";
 import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import {
@@ -11,10 +15,6 @@ import {
 } from "@/components/ui/select";
 import { countriesMapping } from "@/lib/constants/common-constants";
 import { CountryData } from "@/models/country-data";
-import { Flex, Grid, Heading, Text } from "@radix-ui/themes";
-import { Earth } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { ReactNode, useState } from "react";
 
 /**
  * Renders a JSON view of the provided data.

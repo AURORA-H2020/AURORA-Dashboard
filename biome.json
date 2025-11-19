@@ -1,9 +1,20 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-  "vcs": { "enabled": false, "clientKind": "git", "useIgnoreFile": false },
+  "$schema": "https://biomejs.dev/schemas/2.3.6/schema.json",
+  "vcs": {
+    "enabled": true,
+    "clientKind": "git",
+    "useIgnoreFile": true
+  },
   "files": {
     "ignoreUnknown": false,
-    "ignore": ["node_modules", ".next", "public", ".vercel", "src/data"]
+    "includes": [
+      "**",
+      "!node_modules",
+      "!.next",
+      "!public",
+      "!.vercel",
+      "!src/data"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -13,23 +24,21 @@
     "lineEnding": "lf",
     "lineWidth": 80,
     "attributePosition": "auto",
-    "ignore": [
-      "**/.prettierignore",
-      "**/public/",
-      "**/.gitignore",
-      "**/.husky/"
+    "includes": [
+      "**",
+      "!**/.prettierignore",
+      "!**/public/",
+      "!**/.gitignore",
+      "!**/.husky/"
     ]
   },
-  "organizeImports": { "enabled": true },
   "linter": {
     "enabled": true,
     "rules": {
       "recommended": false,
       "complexity": {
         "noExtraBooleanCast": "error",
-        "noMultipleSpacesInRegularExpressionLiterals": "error",
-        "noUselessCatch": "error",
-        "noWith": "error"
+        "noUselessCatch": "error"
       },
       "correctness": {
         "noConstAssign": "error",
@@ -39,7 +48,6 @@
         "noGlobalObjectCalls": "error",
         "noInnerDeclarations": "error",
         "noInvalidConstructorSuper": "error",
-        "noNewSymbol": "error",
         "noNonoctalDecimalEscape": "error",
         "noPrecisionLoss": "error",
         "noSelfAssign": "error",
@@ -79,8 +87,7 @@
         "noShadowRestrictedNames": "error",
         "noSparseArray": "error",
         "noUnsafeNegation": "error",
-        "useGetterReturn": "error",
-        "useValidTypeof": "error"
+        "useGetterReturn": "error"
       }
     }
   },
@@ -98,14 +105,17 @@
       "attributePosition": "auto"
     }
   },
-  "overrides": [
-    {
-      "include": ["src/components/ui/**/*.tsx"],
-      "linter": { "rules": { "correctness": { "noEmptyPattern": "off" } } }
-    },
-    {
-      "include": ["src/components/ui/**/*.tsx"],
-      "linter": { "rules": { "correctness": { "noEmptyPattern": "off" } } }
+  "css": {
+    "parser": {
+      "tailwindDirectives": true
     }
-  ]
+  },
+  "assist": {
+    "enabled": true,
+    "actions": {
+      "source": {
+        "organizeImports": "on"
+      }
+    }
+  }
 }

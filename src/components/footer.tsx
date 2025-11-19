@@ -1,10 +1,10 @@
 "use client";
 
-import { Link } from "@/i18n/routing";
-import { footerLinks } from "@/lib/menus";
 import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
+import { Link } from "@/i18n/routing";
+import { footerLinks } from "@/lib/menus";
 import { LocaleSwitcher } from "./navigation/localeSwitcher";
 import { Logo } from "./navigation/logo";
 import { Button } from "./ui/button";

@@ -1,6 +1,6 @@
-import { supportedLocales } from "@/lib/constants/common-constants";
 import { createSharedPathnamesNavigation } from "next-intl/navigation";
 import { defineRouting } from "next-intl/routing";
+import { supportedLocales } from "@/lib/constants/common-constants";
 
 export const routing = defineRouting({
   // A list of all locales that are supported

@@ -1,3 +1,6 @@
+import { Text } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
+import { ReactNode } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
   Dialog,
@@ -9,9 +12,6 @@ import {
 } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { labelMappings } from "@/lib/constants/consumption-constants";
-import { Text } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
-import { ReactNode } from "react";
 
 /**
  * Renders a modal component that displays information about labels.

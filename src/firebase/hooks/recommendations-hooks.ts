@@ -1,11 +1,7 @@
-import { firebaseApp } from "@/firebase/config";
-import { RecommendationWithId } from "@/models/extensions";
-import { Recommendation } from "@/models/firestore/recommendation/recommendation";
 import { User } from "firebase/auth";
 import {
-  DocumentData,
-  QuerySnapshot,
   collection,
+  DocumentData,
   doc,
   endBefore,
   getCountFromServer,
@@ -14,11 +10,15 @@ import {
   limitToLast,
   onSnapshot,
   orderBy,
+  QuerySnapshot,
   query,
   setDoc,
   startAfter,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { firebaseApp } from "@/firebase/config";
+import { RecommendationWithId } from "@/models/extensions";
+import { Recommendation } from "@/models/firestore/recommendation/recommendation";
 import { FirebaseConstants } from "../firebase-constants";
 
 const firestore = getFirestore(firebaseApp);

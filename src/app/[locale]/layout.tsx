@@ -5,12 +5,12 @@ import { Providers } from "@/providers/providers";
 import "@radix-ui/themes/styles.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Inter } from "next/font/google";
 import {
   getMessages,
   getTranslations,
   setRequestLocale,
 } from "next-intl/server";
-import { Inter } from "next/font/google";
 import { ReactNode } from "react";
 
 const inter = Inter({ subsets: ["latin"] });

@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { ReactNode, useState } from "react";
 import { UserDataForm } from "@/components/app/user/forms/userDataForm";
 import {
   Dialog,
@@ -9,8 +11,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useTranslations } from "next-intl";
-import { ReactNode, useState } from "react";
 
 /**
  * Renders the Edit User Data Modal component.

@@ -1,16 +1,16 @@
 "use client";
 
-import { UpdateConsent } from "@/components/app/user/updateConsent";
-import { LoadingSpinner } from "@/components/ui/loading";
-import { firebaseApp } from "@/firebase/config";
-import { useAuthContext } from "@/providers/context/authContext";
-import { useFirebaseData } from "@/providers/context/firebaseContext";
 import {
   fetchAndActivate,
   getRemoteConfig,
   getValue,
 } from "firebase/remote-config";
 import { ReactNode, useEffect, useState } from "react";
+import { UpdateConsent } from "@/components/app/user/updateConsent";
+import { LoadingSpinner } from "@/components/ui/loading";
+import { firebaseApp } from "@/firebase/config";
+import { useAuthContext } from "@/providers/context/authContext";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 
 /**
  * Component to ensure the latest consent from the user before rendering the children.

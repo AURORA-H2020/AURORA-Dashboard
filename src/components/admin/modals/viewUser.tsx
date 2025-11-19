@@ -1,5 +1,9 @@
 "use client";
 
+import { Flex, Grid } from "@radix-ui/themes";
+import { useFormatter } from "next-intl";
+import { forwardRef, ReactNode, useEffect, useMemo, useState } from "react";
+import { toast } from "sonner";
 import { BorderBox } from "@/components/app/common/borderBox";
 import { ConsumptionSummaryChart } from "@/components/app/summary/consumptionSummaryChart";
 import { Button } from "@/components/ui/button";
@@ -27,10 +31,6 @@ import { ExtendedUser } from "@/models/extensions";
 import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { useAuthContext } from "@/providers/context/authContext";
-import { Flex, Grid } from "@radix-ui/themes";
-import { useFormatter } from "next-intl";
-import { ReactNode, forwardRef, useEffect, useMemo, useState } from "react";
-import { toast } from "sonner";
 import { BlacklistUserModal } from "./blacklistUser";
 
 const ViewUserModal = forwardRef(

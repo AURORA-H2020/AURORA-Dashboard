@@ -1,11 +1,10 @@
-import { MetaData } from "@/models/dashboard-data";
-import { Icon, Metric } from "@tremor/react";
-import { ElementType, ReactNode } from "react";
-
-import { cn } from "@/lib/utilities";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { Flex, Text } from "@radix-ui/themes";
+import { Icon, Metric } from "@tremor/react";
 import { useFormatter } from "next-intl";
+import { ElementType, ReactNode } from "react";
+import { cn } from "@/lib/utilities";
+import { MetaData } from "@/models/dashboard-data";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 
 /**
  * Generates a detailed card component with specified metadata, measure, categories, title, and optional icon.

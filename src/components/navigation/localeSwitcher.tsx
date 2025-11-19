@@ -1,5 +1,7 @@
 "use client";
 
+import { useLocale, useTranslations } from "next-intl";
+import { ReactElement, useTransition } from "react";
 import {
   Select,
   SelectContent,
@@ -9,8 +11,6 @@ import {
 } from "@/components/ui/select";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { supportedLocales } from "@/lib/constants/common-constants";
-import { useLocale, useTranslations } from "next-intl";
-import { ReactElement, useTransition } from "react";
 
 /**
  * Renders a locale switcher component that allows the user to select a different locale.

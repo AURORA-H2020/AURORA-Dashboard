@@ -1,9 +1,9 @@
 "use client";
 
+import { ReactNode } from "react";
 import { DataTable } from "@/components/ui/data-table";
 import { BackupUserData } from "@/models/extensions";
 import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
-import { ReactNode } from "react";
 import { columns } from "./columns";
 
 export type UserRow = {

@@ -1,8 +1,9 @@
 "use client";
 
+import { Command as CommandPrimitive } from "cmdk";
 import { X } from "lucide-react";
 import * as React from "react";
-
+import { useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
   Command,
@@ -12,8 +13,6 @@ import {
   CommandList,
 } from "@/components/ui/command";
 import { cn } from "@/lib/utilities";
-import { Command as CommandPrimitive } from "cmdk";
-import { useEffect } from "react";
 
 export interface Option {
   value: string;

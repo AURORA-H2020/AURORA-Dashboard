@@ -1,17 +1,7 @@
-import { firebaseApp } from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
-import {
-  ConsumptionWithID,
-  RecurringConsumptionWithID,
-} from "@/models/extensions";
-import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
-import { Consumption } from "@/models/firestore/consumption/consumption";
-import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 import { User } from "firebase/auth";
 import {
-  DocumentData,
-  QuerySnapshot,
   collection,
+  DocumentData,
   endBefore,
   getCountFromServer,
   getFirestore,
@@ -19,10 +9,20 @@ import {
   limitToLast,
   onSnapshot,
   orderBy,
+  QuerySnapshot,
   query,
   startAfter,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
+import {
+  ConsumptionWithID,
+  RecurringConsumptionWithID,
+} from "@/models/extensions";
+import { Consumption } from "@/models/firestore/consumption/consumption";
+import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
+import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 
 const firestore = getFirestore(firebaseApp);
 

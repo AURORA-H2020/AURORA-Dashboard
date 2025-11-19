@@ -1,4 +1,4 @@
-import { User, deleteUser } from "firebase/auth";
+import { deleteUser, User } from "firebase/auth";
 
 /**
  * Deletes the current user account if it exists, and handles success and error cases.

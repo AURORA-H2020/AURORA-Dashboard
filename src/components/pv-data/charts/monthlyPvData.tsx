@@ -1,3 +1,5 @@
+import { Heading } from "@radix-ui/themes";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import { PvDataChart } from "@/components/pv-data/charts/pvDataChart";
 import { DownloadPvData } from "@/components/pv-data/download/downloadPvData";
@@ -6,8 +8,6 @@ import { ProductionSummary } from "@/components/pv-data/panels/pvPanelProduction
 import { PvDataGrid } from "@/components/pv-data/pvDataGrid";
 import { ChartConfig } from "@/components/ui/chart";
 import { monthNames } from "@/lib/constants/common-constants";
-import { Heading } from "@radix-ui/themes";
-import { getFormatter, getTranslations } from "next-intl/server";
 
 interface QpvApiResponse {
   data: {

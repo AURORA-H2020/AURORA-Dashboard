@@ -1,5 +1,10 @@
 "use client";
 
+import { Flex, Text } from "@radix-ui/themes";
+import { FileQuestionIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ReactNode, useState } from "react";
+import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -22,11 +27,6 @@ import { getConsumptionAttributes, useConvertUnit } from "@/lib/utilities";
 import { RecurringConsumptionWithID } from "@/models/extensions";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { Flex, Text } from "@radix-ui/themes";
-import { FileQuestionIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { ReactNode, useState } from "react";
-import { toast } from "sonner";
 import { AddEditRecurringConsumptionModal } from "./modals/addEditRecurringConsumptionModal";
 import { RecurringConsumptionView } from "./recurringConsumptionView";
 

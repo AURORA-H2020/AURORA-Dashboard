@@ -1,5 +1,10 @@
 "use client";
 
+import { Flex, Heading } from "@radix-ui/themes";
+import { BarChart } from "@tremor/react";
+import { Info } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ReactNode, useEffect, useState } from "react";
 import { LabelInfoModal } from "@/components/app/common/modals/labelInfoModal";
 import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import { Button } from "@/components/ui/button";
@@ -27,11 +32,6 @@ import {
 } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { Flex, Heading } from "@radix-ui/themes";
-import { BarChart } from "@tremor/react";
-import { Info } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { ReactNode, useEffect, useState } from "react";
 
 interface LabelChartData extends LabelEntries {
   country: string;

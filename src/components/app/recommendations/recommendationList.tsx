@@ -1,5 +1,7 @@
 "use client";
 
+import { Flex, Strong, Text } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
 import { BorderBox } from "@/components/app/common/borderBox";
 import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import { SimplePagination } from "@/components/app/common/simplePagination";
@@ -7,8 +9,6 @@ import { RecommendationPreview } from "@/components/app/recommendations/recommen
 import { LoadingSpinner } from "@/components/ui/loading";
 import { usePaginatedRecommendations } from "@/firebase/hooks/recommendations-hooks";
 import { useAuthContext } from "@/providers/context/authContext";
-import { Flex, Strong, Text } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
 import { UpdateRecommendationsSection } from "./updateRecommendationsSection";
 
 const RecommendationsList = () => {

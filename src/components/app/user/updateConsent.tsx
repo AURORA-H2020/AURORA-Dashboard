@@ -1,3 +1,8 @@
+import { Flex, Heading } from "@radix-ui/themes";
+import { User } from "firebase/auth";
+import { Info } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ReactElement } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -8,11 +13,6 @@ import {
 import { setAcceptedLegalDocumentVersion } from "@/firebase/user/set-accepted-legal-document-version";
 import { Link } from "@/i18n/routing";
 import { externalLinks } from "@/lib/constants/common-constants";
-import { Flex, Heading } from "@radix-ui/themes";
-import { User } from "firebase/auth";
-import { Info } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { ReactElement } from "react";
 import { DeleteAccountModal } from "./modals/deleteAccountModal";
 
 /**

@@ -1,10 +1,10 @@
+import { User } from "firebase/auth";
+import { doc, getFirestore, onSnapshot } from "firebase/firestore";
+import { useEffect, useState } from "react";
 import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { CountryCityWithID, CountryWithID } from "@/models/extensions";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
-import { User } from "firebase/auth";
-import { doc, getFirestore, onSnapshot } from "firebase/firestore";
-import { useEffect, useState } from "react";
 
 const firestore = getFirestore(firebaseApp);
 

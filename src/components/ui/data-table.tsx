@@ -3,18 +3,18 @@
 import {
   ColumnDef,
   ColumnFiltersState,
-  InitialTableState,
-  PaginationState,
-  SortingState,
-  VisibilityState,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
+  InitialTableState,
+  PaginationState,
+  SortingState,
   useReactTable,
+  VisibilityState,
 } from "@tanstack/react-table";
-
+import React from "react";
 import {
   Table,
   TableBody,
@@ -23,7 +23,6 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import React from "react";
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableViewOptions } from "./data-table-view-options";
 

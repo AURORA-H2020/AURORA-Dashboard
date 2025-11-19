@@ -1,10 +1,10 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Flex, Heading } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { UserDataForm } from "./forms/userDataForm";
 import { DeleteAccountModal } from "./modals/deleteAccountModal";
 

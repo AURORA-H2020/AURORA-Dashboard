@@ -1,5 +1,10 @@
 "use client";
 
+import { Flex, Text } from "@radix-ui/themes";
+import { FileQuestionIcon, Sunrise } from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
+import { ReactNode, useState } from "react";
+import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -27,11 +32,6 @@ import {
 import { ConsumptionWithID } from "@/models/extensions";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { Flex, Text } from "@radix-ui/themes";
-import { FileQuestionIcon, Sunrise } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
-import { ReactNode, useState } from "react";
-import { toast } from "sonner";
 import { ConsumptionView } from "./consumptionView";
 import { AddEditConsumptionModal } from "./modals/addEditConsumptionModal";
 

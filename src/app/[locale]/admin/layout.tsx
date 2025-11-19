@@ -1,7 +1,7 @@
 "use client";
 
-import { ProtectAdmin } from "@/components/hoc/protectAdmin";
 import { ReactNode } from "react";
+import { ProtectAdmin } from "@/components/hoc/protectAdmin";
 
 /**
  * Renders the AccountLayout component.

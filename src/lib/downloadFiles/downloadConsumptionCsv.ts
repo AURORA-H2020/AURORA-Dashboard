@@ -1,14 +1,14 @@
-import { firebaseApp } from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
-import { Consumption } from "@/models/firestore/consumption/consumption";
 import { User } from "firebase/auth";
 import {
-  Timestamp,
   collection,
   getDocs,
   getFirestore,
   query,
+  Timestamp,
 } from "firebase/firestore";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { Consumption } from "@/models/firestore/consumption/consumption";
 
 const fetchAllUserConsumptions = async (user: User): Promise<Consumption[]> => {
   const firestore = getFirestore(firebaseApp);

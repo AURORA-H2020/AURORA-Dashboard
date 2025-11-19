@@ -1,5 +1,6 @@
 "use client";
 
+import { createContext, FC, ReactNode, useContext } from "react";
 import { useFetchUserConsumptionSummaries } from "@/firebase/hooks/consumption-hooks";
 import {
   useFetchUserCityData,
@@ -18,7 +19,6 @@ import {
 } from "@/models/extensions";
 import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
-import { FC, ReactNode, createContext, useContext } from "react";
 import { useAuthContext } from "./authContext";
 
 interface FirebaseDataContextValue {

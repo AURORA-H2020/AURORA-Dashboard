@@ -1,12 +1,12 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { downloadJsonAsFile } from "@/lib/utilities";
-import { CountryData } from "@/models/country-data";
 import { Flex } from "@radix-ui/themes";
 import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { downloadJsonAsFile } from "@/lib/utilities";
+import { CountryData } from "@/models/country-data";
 
 /**
  * Function for handling data downloads.

@@ -1,5 +1,8 @@
 "use client";
 
+import { Flex, Grid } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
+import { ReactNode, useEffect, useState } from "react";
 import { ConsumptionTableRow } from "@/components/app/common/consumptionTableRow";
 import { ChangeEmailModal } from "@/components/app/user/modals/changeEmailModal";
 import { ChangePasswordModal } from "@/components/app/user/modals/changePasswordModal";
@@ -25,9 +28,6 @@ import {
 } from "@/lib/constants/common-constants";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { Flex, Grid } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
-import { ReactNode, useEffect, useState } from "react";
 
 /**
  * Renders the user settings page with profile and account information.

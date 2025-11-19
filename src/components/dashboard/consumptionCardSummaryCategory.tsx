@@ -1,9 +1,9 @@
-import { allTremorColours } from "@/lib/constants/common-constants";
-import { MetaData } from "@/models/dashboard-data";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { DonutChart, Legend } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
+import { allTremorColours } from "@/lib/constants/common-constants";
+import { MetaData } from "@/models/dashboard-data";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 
 /**
  * Generates a summary of consumption by category for a given set of countries.

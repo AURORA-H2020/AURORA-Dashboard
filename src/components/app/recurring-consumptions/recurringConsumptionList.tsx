@@ -1,5 +1,9 @@
 "use client";
 
+import { Flex, Grid, Strong } from "@radix-ui/themes";
+import { ArrowUpDownIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ReactNode } from "react";
 import { BorderBox } from "@/components/app/common/borderBox";
 import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import { SimplePagination } from "@/components/app/common/simplePagination";
@@ -18,10 +22,6 @@ import { LoadingSpinner } from "@/components/ui/loading";
 import { usePaginatedRecurringConsumptions } from "@/firebase/hooks/consumption-hooks";
 import { cn } from "@/lib/utilities";
 import { useAuthContext } from "@/providers/context/authContext";
-import { Flex, Grid, Strong } from "@radix-ui/themes";
-import { ArrowUpDownIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { ReactNode } from "react";
 
 /**
  * Renders a list of Recurring Consumption components.

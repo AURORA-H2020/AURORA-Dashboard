@@ -1,3 +1,4 @@
+import { DateRange } from "react-day-picker";
 import { genderMappings } from "@/lib/constants/common-constants";
 import { labelMappings } from "@/lib/constants/consumption-constants";
 import { getMonthShortName } from "@/lib/utilities";
@@ -13,7 +14,6 @@ import {
 } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { DateRange } from "react-day-picker";
 
 /**
  * Retrieves temporal data based on the provided parameters.

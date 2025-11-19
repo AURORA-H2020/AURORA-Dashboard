@@ -1,5 +1,9 @@
 "use client";
 
+import { Box, Flex, Grid } from "@radix-ui/themes";
+import { BlocksIcon, Info, UsersIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ReactNode, useEffect, useState } from "react";
 import { AutoReport } from "@/components/dashboard/autoReport";
 import { ConsumptionTimelineChart } from "@/components/dashboard/charts/consumptionTimelineChart";
 import { CountryUsersPieChart } from "@/components/dashboard/charts/countryUsersPieChart";
@@ -28,10 +32,6 @@ import { getMetaData } from "@/lib/transformData";
 import { MetaData } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { Box, Flex, Grid } from "@radix-ui/themes";
-import { BlocksIcon, Info, UsersIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { ReactNode, useEffect, useState } from "react";
 
 /**
  * Renders the Dashboard component.

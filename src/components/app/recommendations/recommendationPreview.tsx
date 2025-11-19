@@ -1,5 +1,11 @@
 "use client";
 
+import { Flex, Text } from "@radix-ui/themes";
+import { CheckCircleIcon, CircleDashedIcon } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useFormatter, useTranslations } from "next-intl";
+import { ReactNode } from "react";
+import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -15,12 +21,6 @@ import { setRecommendationReadStatus } from "@/firebase/hooks/recommendations-ho
 import { cn } from "@/lib/utilities";
 import { RecommendationWithId } from "@/models/extensions";
 import { useAuthContext } from "@/providers/context/authContext";
-import { Flex, Text } from "@radix-ui/themes";
-import { CheckCircleIcon, CircleDashedIcon } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
-import { ReactNode } from "react";
-import { toast } from "sonner";
 import { RecommendationView } from "./recommendationView";
 
 /**

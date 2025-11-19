@@ -1,5 +1,9 @@
 "use client";
 
+import { Heading } from "@radix-ui/themes";
+import { CircleHelpIcon, ZapOffIcon } from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
+import { useState } from "react";
 import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import { PvDataChart } from "@/components/pv-data/charts/pvDataChart";
 import { PvPanelDetails } from "@/components/pv-data/panels/pvPanelDetails";
@@ -24,10 +28,6 @@ import {
 import { Link } from "@/i18n/routing";
 import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { Heading } from "@radix-ui/themes";
-import { CircleHelpIcon, ZapOffIcon } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
-import { useState } from "react";
 
 const PvPage = () => {
   const t = useTranslations();

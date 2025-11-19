@@ -1,8 +1,8 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BarChart3Icon } from "lucide-react";
 import { useFormatter, useTranslations } from "next-intl";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 type ProductionSummaryProps = {
   title: string;

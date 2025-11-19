@@ -1,5 +1,11 @@
 "use client";
 
+import { Flex, Heading } from "@radix-ui/themes";
+import { LineChart } from "@tremor/react";
+import { InfoIcon } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { ReactNode, SetStateAction, useEffect, useState } from "react";
+import { DateRange } from "react-day-picker";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { MonthPicker } from "@/components/ui/month-picker";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -14,12 +20,6 @@ import {
 import { EnergyMode, TimelineData } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { Flex, Heading } from "@radix-ui/themes";
-import { LineChart } from "@tremor/react";
-import { InfoIcon } from "lucide-react";
-import { useLocale, useTranslations } from "next-intl";
-import { ReactNode, SetStateAction, useEffect, useState } from "react";
-import { DateRange } from "react-day-picker";
 
 /**
  * Renders a Consumption Timeline Chart with various controls for energy mode, calculation mode, and date range.

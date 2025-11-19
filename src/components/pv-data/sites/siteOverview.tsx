@@ -1,5 +1,15 @@
 "use client";
 
+import {
+  BatteryChargingIcon,
+  Building2Icon,
+  CalendarArrowUp,
+  EarthIcon,
+  LucideIcon,
+  ZapIcon,
+  ZapOffIcon,
+} from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
 import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -25,16 +35,6 @@ import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
 import { dateToKebabCase } from "@/lib/utilities";
 import { PvPlantWithID } from "@/models/extensions";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import {
-  BatteryChargingIcon,
-  Building2Icon,
-  CalendarArrowUp,
-  EarthIcon,
-  LucideIcon,
-  ZapIcon,
-  ZapOffIcon,
-} from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
 
 const SiteOverview = () => {
   const t = useTranslations();

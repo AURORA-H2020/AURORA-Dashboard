@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { forwardRef, ReactNode, useState } from "react";
 import { ElectricityForm } from "@/components/app/consumptions/forms/electricityForm";
 import { HeatingForm } from "@/components/app/consumptions/forms/heatingForm";
 import { TransportationForm } from "@/components/app/consumptions/forms/transportationForm";
@@ -10,8 +12,6 @@ import { consumptionMapping } from "@/lib/constants/consumption-constants";
 import { cn } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { useTranslations } from "next-intl";
-import { ReactNode, forwardRef, useState } from "react";
 
 const AddEditConsumptionModal = forwardRef(
   (

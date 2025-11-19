@@ -1,3 +1,6 @@
+import { Heading, Text } from "@radix-ui/themes";
+import { useFormatter, useTranslations } from "next-intl";
+import { ReactNode } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -10,9 +13,6 @@ import {
 } from "@/lib/constants/common-constants";
 import { getMetaDataSummary } from "@/lib/transformData";
 import { MetaData } from "@/models/dashboard-data";
-import { Heading, Text } from "@radix-ui/themes";
-import { useFormatter, useTranslations } from "next-intl";
-import { ReactNode } from "react";
 
 /**
  * Renders an auto-generated report based on the provided metaData.

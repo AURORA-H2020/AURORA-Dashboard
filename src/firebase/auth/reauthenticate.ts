@@ -1,7 +1,7 @@
 import {
   EmailAuthProvider,
-  User,
   reauthenticateWithCredential,
+  User,
 } from "firebase/auth";
 
 /**

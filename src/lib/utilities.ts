@@ -1,3 +1,8 @@
+import { type ClassValue, clsx } from "clsx";
+import convert from "convert";
+import { useFormatter } from "next-intl";
+import { twMerge } from "tailwind-merge";
+import { z } from "zod";
 import { carbonUnit, countriesMapping } from "@/lib/constants/common-constants";
 import {
   consumptionMapping,
@@ -8,11 +13,6 @@ import { Consumption } from "@/models/firestore/consumption/consumption";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 import { UserSettingsUnitSystem } from "@/models/firestore/user/user-settings/user-settings-unitSystem";
-import { type ClassValue, clsx } from "clsx";
-import convert from "convert";
-import { useFormatter } from "next-intl";
-import { twMerge } from "tailwind-merge";
-import { z } from "zod";
 
 /**
  * Automatically added by shadcn/ui

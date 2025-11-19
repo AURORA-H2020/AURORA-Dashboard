@@ -1,5 +1,9 @@
 "use client";
 
+import { CircleUserIcon, MenuIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ReactElement } from "react";
+import { toast } from "sonner";
 import { Logo } from "@/components/navigation/logo";
 import { ThemeToggle } from "@/components/navigation/themeToggle";
 import { Button } from "@/components/ui/button";
@@ -23,10 +27,6 @@ import { Link, usePathname } from "@/i18n/routing";
 import { navigationLinks, userMenuLinks } from "@/lib/menus";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { CircleUserIcon, MenuIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { ReactElement } from "react";
-import { toast } from "sonner";
 
 /**
  * Renders the navigation bar component.

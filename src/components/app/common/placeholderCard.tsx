@@ -1,8 +1,8 @@
-import { Card, CardHeader, CardTitle } from "@/components/ui/card";
-import { cn } from "@/lib/utilities";
 import { Flex, Text } from "@radix-ui/themes";
 import { CircleHelpIcon, LucideIcon } from "lucide-react";
 import { ReactNode } from "react";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
+import { cn } from "@/lib/utilities";
 
 const PlaceholderCard = ({
   children,

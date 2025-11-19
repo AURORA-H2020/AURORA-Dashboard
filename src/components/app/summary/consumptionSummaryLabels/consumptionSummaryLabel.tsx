@@ -1,3 +1,7 @@
+import { Flex, Grid } from "@radix-ui/themes";
+import { LucideIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ReactElement } from "react";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -10,10 +14,6 @@ import { carbonUnit } from "@/lib/constants/common-constants";
 import { labelMappings } from "@/lib/constants/consumption-constants";
 import { useConvertUnit } from "@/lib/utilities";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { Flex, Grid } from "@radix-ui/themes";
-import { LucideIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { ReactElement } from "react";
 
 /**
  * Renders a consumption summary label with category, label, value, measure, year, icon, and color.

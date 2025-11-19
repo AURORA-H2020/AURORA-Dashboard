@@ -1,5 +1,12 @@
 "use client";
 
+import { PopoverClose } from "@radix-ui/react-popover";
+import { Flex, Strong, Text } from "@radix-ui/themes";
+import { HistoryIcon } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { useFormatter, useTranslations } from "next-intl";
+import { ReactElement, useCallback, useState } from "react";
+import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,13 +18,6 @@ import {
 import { usePathname, useRouter } from "@/i18n/routing";
 import { cn, downloadJsonAsFile } from "@/lib/utilities";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { PopoverClose } from "@radix-ui/react-popover";
-import { Flex, Strong, Text } from "@radix-ui/themes";
-import { HistoryIcon } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
-import { ReactElement, useCallback, useState } from "react";
-import { toast } from "sonner";
 
 /**
  * Renders the SelectDashboardSource component with file selection, date handling, and data download functionality.

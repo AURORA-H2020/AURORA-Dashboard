@@ -1,3 +1,5 @@
+import { useId, useState } from "react";
+import { ControllerRenderProps } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   FormDescription,
@@ -13,8 +15,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utilities";
-import { useId, useState } from "react";
-import { ControllerRenderProps } from "react-hook-form";
 
 /**
  * Renders a form select component with options and optional opt-out label.

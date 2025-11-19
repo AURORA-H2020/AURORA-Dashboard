@@ -1,5 +1,8 @@
 "use client";
 
+import { Flex, Grid, Link } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
+import { ReactNode } from "react";
 import { BorderBox } from "@/components/app/common/borderBox";
 import { ResetPasswordModal } from "@/components/app/user/modals/resetPasswordModal";
 import { AuthenticateWithApple } from "@/components/auth/auth-options/authenticateWithApple";
@@ -16,9 +19,6 @@ import {
 } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { externalLinks } from "@/lib/constants/common-constants";
-import { Flex, Grid, Link } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
-import { ReactNode } from "react";
 
 /**
  * Renders the authentication options based on the sign-in state.

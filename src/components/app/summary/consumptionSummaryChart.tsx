@@ -1,16 +1,16 @@
 "use client";
 
-import { consumptionMapping } from "@/lib/constants/consumption-constants";
-import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
-import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
-import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { UserSettingsUnitSystem } from "@/models/firestore/user/user-settings/user-settings-unitSystem";
-import { useFirebaseData } from "@/providers/context/firebaseContext";
 import { BarChart } from "@tremor/react";
 import convert from "convert";
 import { useFormatter, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { consumptionMapping } from "@/lib/constants/consumption-constants";
+import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { ConsumptionSummary } from "@/models/firestore/consumption-summary/consumption-summary";
+import { ConsumptionSummaryLabeledConsumption } from "@/models/firestore/consumption-summary/consumption-summary-labeled-consumption";
+import { UserSettingsUnitSystem } from "@/models/firestore/user/user-settings/user-settings-unitSystem";
+import { useFirebaseData } from "@/providers/context/firebaseContext";
 
 interface CurrentSummary {
   month: number;
