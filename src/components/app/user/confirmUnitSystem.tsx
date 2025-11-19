@@ -1,15 +1,15 @@
 "use client";
 
+import { Flex, Text } from "@radix-ui/themes";
+import { CircleHelpIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
+import { ReactNode } from "react";
 import { BorderBox } from "@/components/app/common/borderBox";
 import { Button } from "@/components/ui/button";
 import { addEditUserData } from "@/firebase/user/add-edit-user-data";
 import { UserSettingsUnitSystem } from "@/models/firestore/user/user-settings/user-settings-unitSystem";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { Flex, Text } from "@radix-ui/themes";
-import { CircleHelpIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
-import { ReactNode } from "react";
 
 /**
  * Renders a component that confirms the unit system for the user.

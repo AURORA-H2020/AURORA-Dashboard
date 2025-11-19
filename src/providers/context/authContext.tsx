@@ -1,15 +1,15 @@
 "use client";
 
-import { firebaseApp } from "@/firebase/config";
-import { User, getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import {
+  createContext,
   FC,
   ReactNode,
-  createContext,
   useContext,
   useEffect,
   useState,
 } from "react";
+import { firebaseApp } from "@/firebase/config";
 
 interface AuthContextValue {
   user: User | null;

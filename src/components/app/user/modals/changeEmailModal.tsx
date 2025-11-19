@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { ReactNode, useState } from "react";
 import { ChangeEmailForm } from "@/components/app/user/forms/changeEmailForm";
 import {
   Dialog,
@@ -8,8 +10,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { useTranslations } from "next-intl";
-import { ReactNode, useState } from "react";
 
 /**
  * Renders a modal component for changing the user's email.

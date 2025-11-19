@@ -1,3 +1,9 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import { ReactElement } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 import { FormInputField } from "@/components/form-items/formInputField";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
@@ -5,12 +11,6 @@ import { Form, FormField } from "@/components/ui/form";
 import { resetPassword } from "@/firebase/auth/reset-password";
 import { cn } from "@/lib/utilities";
 import { passwordResetSchema } from "@/lib/zod/authSchemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
-import { ReactElement } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
 
 /**
  * Renders a form for resetting a user's password.

@@ -1,5 +1,5 @@
-import { reauthenticateUser } from "@/firebase/auth/reauthenticate";
 import { User, updatePassword } from "firebase/auth";
+import { reauthenticateUser } from "@/firebase/auth/reauthenticate";
 
 /**
  * Updates the user's password after reauthentication with current password.

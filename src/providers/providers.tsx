@@ -1,13 +1,13 @@
 "use client";
 
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { AuthContextProvider } from "@/providers/context/authContext";
-import { FirebaseDataProvider } from "@/providers/context/firebaseContext";
 import { Theme } from "@radix-ui/themes";
 import { AbstractIntlMessages, NextIntlClientProvider } from "next-intl";
 import { ThemeProvider, ThemeProviderProps } from "next-themes";
 import { ReactNode } from "react";
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthContextProvider } from "@/providers/context/authContext";
+import { FirebaseDataProvider } from "@/providers/context/firebaseContext";
 import { FirebaseAppCheckProvider } from "./FirebaseAppCheckProvider";
 
 /**

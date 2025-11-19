@@ -1,3 +1,5 @@
+import { ReactNode, useId, useState } from "react";
+import { ControllerRenderProps } from "react-hook-form";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
   FormControl,
@@ -9,8 +11,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { cn } from "@/lib/utilities";
-import { ReactNode, useId, useState } from "react";
-import { ControllerRenderProps } from "react-hook-form";
 
 type InputTypes = "number" | "text" | "email";
 

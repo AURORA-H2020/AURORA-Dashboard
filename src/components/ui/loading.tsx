@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utilities";
 import React from "react";
+import { cn } from "@/lib/utilities";
 
 interface LoadingButtonProps {
   children?: React.ReactNode;

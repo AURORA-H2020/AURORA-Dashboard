@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { ReactElement } from "react";
 import {
   Pagination,
   PaginationContent,
@@ -8,8 +10,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
-import { useTranslations } from "next-intl";
-import { ReactElement } from "react";
 
 /**
  * Renders a simple pagination component.

@@ -1,12 +1,12 @@
+import { Heading } from "@radix-ui/themes";
+import { getTranslations } from "next-intl/server";
+import { Suspense } from "react";
 import CurrentDayPvData from "@/components/pv-data/charts/currentDayPvData";
 import LifetimePvData from "@/components/pv-data/charts/lifetimePvData";
 import MonthlyPvData from "@/components/pv-data/charts/monthlyPvData";
 import { SiteOverview } from "@/components/pv-data/sites/siteOverview";
 import { SiteTabs } from "@/components/pv-data/sites/siteTabs";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { Heading } from "@radix-ui/themes";
-import { getTranslations } from "next-intl/server";
-import { Suspense } from "react";
 
 const validateMonth = (month: string | undefined): month is string => {
   const dateRegex = /^\d{4}-(0[1-9]|1[0-2])$/;

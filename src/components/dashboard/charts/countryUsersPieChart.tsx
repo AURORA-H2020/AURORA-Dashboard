@@ -1,8 +1,8 @@
-import { countriesMapping } from "@/lib/constants/common-constants";
-import { MetaData } from "@/models/dashboard-data";
 import { DonutChart, Legend } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
+import { countriesMapping } from "@/lib/constants/common-constants";
+import { MetaData } from "@/models/dashboard-data";
 
 /**
  * Renders a GenderCardSummary component.

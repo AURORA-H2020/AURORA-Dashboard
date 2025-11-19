@@ -1,3 +1,9 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
+import { ReactElement } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+import * as z from "zod";
 import { FormInputField } from "@/components/form-items/formInputField";
 import { FormPasswordField } from "@/components/form-items/formPasswordField";
 import { Button } from "@/components/ui/button";
@@ -5,12 +11,6 @@ import { Form, FormField } from "@/components/ui/form";
 import { authenticate } from "@/firebase/auth/authentication";
 import { cn } from "@/lib/utilities";
 import { loginSchema } from "@/lib/zod/authSchemas";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslations } from "next-intl";
-import { ReactElement } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import * as z from "zod";
 
 /**
  * Renders a sign-in form and handles sign-in through email. On successful sign-in, displays a success toast and

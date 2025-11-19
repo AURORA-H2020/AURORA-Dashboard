@@ -1,3 +1,6 @@
+import { Heading, Strong, Text } from "@radix-ui/themes";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ReactNode } from "react";
 import { AboutContent } from "@/components/aboutPage/aboutContent";
 import { DataDownloads } from "@/components/aboutPage/dataDownloads";
 import { Card, CardContent } from "@/components/ui/card";
@@ -5,9 +8,6 @@ import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
 import { getLatestCountryFile } from "@/firebase/firebase-utils";
 import { CountryData } from "@/models/country-data";
-import { Heading, Strong, Text } from "@radix-ui/themes";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ReactNode } from "react";
 
 type Props = {
   params: { locale: string };

@@ -1,16 +1,16 @@
 "use client";
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { cn } from "@/lib/utilities";
 import { Clock } from "lucide-react";
 import { useTranslations } from "next-intl";
 import React from "react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utilities";
 import {
-  TimePickerType,
   getArrowByType,
   getDateByType,
   setDateByType,
+  TimePickerType,
 } from "./time-picker-utils";
 
 export interface TimePickerInputProps

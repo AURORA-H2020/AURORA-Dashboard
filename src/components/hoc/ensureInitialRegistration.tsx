@@ -1,8 +1,8 @@
+import { ReactNode } from "react";
 import { InitialRegistration } from "@/components/app/user/initialRegistration";
 import { LoadingSpinner } from "@/components/ui/loading";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { ReactNode } from "react";
 
 /**
  * Ensures that the user has completed the initial registration process before rendering the children components.
@@ -26,7 +26,7 @@ export const EnsureInitialRegistration = ({
 
   if (
     !userData ||
-    !Object.prototype.hasOwnProperty.call(userData, "country") ||
+    !Object.hasOwn(userData, "country") ||
     userData?.country === undefined
   ) {
     return <InitialRegistration />;

@@ -1,5 +1,5 @@
-import { cn } from "@/lib/utilities";
 import { ReactNode } from "react";
+import { cn } from "@/lib/utilities";
 
 /**
  * Renders a border box component with rounded corners and a border.

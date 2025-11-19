@@ -1,9 +1,9 @@
-import { firebaseApp } from "@/firebase/config";
 import {
-  ReCaptchaEnterpriseProvider,
   initializeAppCheck,
+  ReCaptchaEnterpriseProvider,
 } from "firebase/app-check";
 import { ReactNode, useEffect } from "react";
+import { firebaseApp } from "@/firebase/config";
 
 /**
  * Initializes Firebase App Check with ReCaptchaEnterpriseProvider.

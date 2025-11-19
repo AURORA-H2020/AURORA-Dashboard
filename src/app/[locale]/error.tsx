@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { ReactNode, useEffect } from "react";
 import { PageLayout } from "@/components/pageLayout";
 import { Button } from "@/components/ui/button";
 import {
@@ -9,8 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { useTranslations } from "next-intl";
-import { ReactNode, useEffect } from "react";
 
 type Props = {
   error: Error;

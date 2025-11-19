@@ -1,8 +1,8 @@
+import { Grid } from "@radix-ui/themes";
+import { ReactNode } from "react";
 import { ConsumptionPanel } from "@/components/app/consumptionPanel";
 import { ConsumptionSummaryPanel } from "@/components/app/consumptionSummaryPanel";
 import { ConfirmUnitSystem } from "@/components/app/user/confirmUnitSystem";
-import { Grid } from "@radix-ui/themes";
-import { ReactNode } from "react";
 
 /**
  * Renders the account page for authenticated users, displaying user details

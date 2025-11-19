@@ -1,5 +1,7 @@
 "use client";
 
+import { useTranslations } from "next-intl";
+import { ReactNode } from "react";
 import { EnsureInitialRegistration } from "@/components/hoc/ensureInitialRegistration";
 import { EnsureLatestConsent } from "@/components/hoc/ensureLatestConsent";
 import { ProtectAccount } from "@/components/hoc/protectAccount";
@@ -16,8 +18,6 @@ import { Link, usePathname, useRouter } from "@/i18n/routing";
 import { userMenuLinks } from "@/lib/menus";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { useTranslations } from "next-intl";
-import { ReactNode } from "react";
 
 /**
  * Renders the AccountLayout component.

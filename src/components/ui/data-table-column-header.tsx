@@ -1,7 +1,7 @@
-import { cn } from "@/lib/utilities";
 import { Column } from "@tanstack/react-table";
 import { ArrowDown, ArrowUp, ArrowUpDown, EyeOff } from "lucide-react";
 import { HTMLAttributes } from "react";
+import { cn } from "@/lib/utilities";
 import { Button } from "./button";
 import {
   DropdownMenu,

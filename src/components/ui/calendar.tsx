@@ -55,8 +55,10 @@ function Calendar({
         ...classNames,
       }}
       components={{
+        // biome-ignore-start lint/correctness/noEmptyPattern: Override icons
         IconLeft: ({}) => <ChevronLeft className="h-4 w-4" />,
         IconRight: ({}) => <ChevronRight className="h-4 w-4" />,
+        // biome-ignore-end lint/correctness/noEmptyPattern: Override icons
       }}
       {...props}
     />

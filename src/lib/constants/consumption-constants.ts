@@ -1,3 +1,4 @@
+import { CarFront, ThermometerSnowflake, Zap } from "lucide-react";
 import {
   ConsumptionAttributes,
   ConsumptionSources,
@@ -6,7 +7,6 @@ import {
   RecurringConsumptionFrequencyUnitMapping,
 } from "@/models/constants";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { CarFront, ThermometerSnowflake, Zap } from "lucide-react";
 
 /**
  * Simple wrapper function to get translatable strings picked up by i18n-parser

@@ -1,3 +1,8 @@
+import { Flex } from "@radix-ui/themes";
+import { User } from "firebase/auth";
+import { useTranslations } from "next-intl";
+import { ReactNode, useState } from "react";
+import { toast } from "sonner";
 import { BorderBox } from "@/components/app/common/borderBox";
 import {
   AlertDialog,
@@ -14,11 +19,6 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { deleteAccount } from "@/firebase/firestore/delete-account";
 import { useAuthContext } from "@/providers/context/authContext";
-import { Flex } from "@radix-ui/themes";
-import { User } from "firebase/auth";
-import { useTranslations } from "next-intl";
-import { ReactNode, useState } from "react";
-import { toast } from "sonner";
 
 /**
  * Renders the DeleteAccountModal component.

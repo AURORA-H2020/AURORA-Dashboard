@@ -1,5 +1,17 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { User } from "firebase/auth";
+import {
+  fetchAndActivate,
+  getRemoteConfig,
+  getValue,
+} from "firebase/remote-config";
+import { useTranslations } from "next-intl";
+import { ReactNode, useEffect } from "react";
+import { DefaultValues, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 import { BorderBox } from "@/components/app/common/borderBox";
 import { FormInputField } from "@/components/form-items/formInputField";
 import { FormSelect } from "@/components/form-items/formSelect";
@@ -20,18 +32,6 @@ import { userDataFormSchema } from "@/lib/zod/userSchemas";
 import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "firebase/auth";
-import {
-  fetchAndActivate,
-  getRemoteConfig,
-  getValue,
-} from "firebase/remote-config";
-import { useTranslations } from "next-intl";
-import { ReactNode, useEffect } from "react";
-import { DefaultValues, useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
 
 /**
  * Renders a form for user data submission.

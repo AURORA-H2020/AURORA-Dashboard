@@ -1,5 +1,15 @@
 "use client";
 
+import { Flex, Text } from "@radix-ui/themes";
+import {
+  CheckCircleIcon,
+  CircleDashedIcon,
+  ExternalLinkIcon,
+} from "lucide-react";
+import Link from "next/link";
+import { useFormatter, useTranslations } from "next-intl";
+import { useState } from "react";
+import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -14,20 +24,12 @@ import { deleteDocumentById } from "@/firebase/firestore/delete-document-by-id";
 import { setRecommendationReadStatus } from "@/firebase/hooks/recommendations-hooks";
 import { Recommendation } from "@/models/firestore/recommendation/recommendation";
 import { useAuthContext } from "@/providers/context/authContext";
-import { Flex, Text } from "@radix-ui/themes";
-import {
-  CheckCircleIcon,
-  CircleDashedIcon,
-  ExternalLinkIcon,
-} from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
-import Link from "next/link";
-import { useState } from "react";
-import { toast } from "sonner";
 
 const RecommendationView = ({
   recommendation,
-}: { recommendation: Recommendation }) => {
+}: {
+  recommendation: Recommendation;
+}) => {
   const { user } = useAuthContext();
   const t = useTranslations();
   const [isUpdating, setIsUpdating] = useState(false);

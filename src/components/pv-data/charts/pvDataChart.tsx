@@ -1,14 +1,5 @@
 "use client";
 
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartLegend,
-  ChartLegendContent,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
-import { usePathname, useRouter } from "@/i18n/routing";
-import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
 import { useFormatter } from "next-intl";
 import { useMemo } from "react";
 import {
@@ -21,6 +12,15 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
+import {
+  ChartConfig,
+  ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import { usePathname, useRouter } from "@/i18n/routing";
+import { useCreateQueryString } from "@/lib/hooks/useCreateQueryString";
 
 const PvDataChart = ({
   chartData,

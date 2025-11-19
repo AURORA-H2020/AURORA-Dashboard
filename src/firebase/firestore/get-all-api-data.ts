@@ -1,10 +1,10 @@
-import { firebaseApp } from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
 import {
   connectFunctionsEmulator,
   getFunctions,
   httpsCallable,
 } from "firebase/functions";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
 
 interface FirebaseResponse {
   success: boolean;

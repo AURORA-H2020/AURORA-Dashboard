@@ -1,13 +1,13 @@
-import { firebaseApp } from "@/firebase/config";
 import {
-  GoogleAuthProvider,
-  OAuthProvider,
-  UserCredential,
   createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   getAuth,
+  OAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
+  UserCredential,
 } from "firebase/auth";
+import { firebaseApp } from "@/firebase/config";
 
 // Get the authentication instance using the Firebase app
 const auth = getAuth(firebaseApp);

@@ -1,8 +1,3 @@
-import { firebaseApp } from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
-import { convertUnit, getConsumptionUnit } from "@/lib/utilities";
-import { Consumption } from "@/models/firestore/consumption/consumption";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 import { User } from "firebase/auth";
 import {
   addDoc,
@@ -11,6 +6,11 @@ import {
   getFirestore,
   setDoc,
 } from "firebase/firestore";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { convertUnit, getConsumptionUnit } from "@/lib/utilities";
+import { Consumption } from "@/models/firestore/consumption/consumption";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 
 // Initialize Firestore
 const firestore = getFirestore(firebaseApp);
@@ -37,8 +37,9 @@ function removeInvalidValues(
   ];
   keysToCheck.forEach((key) => {
     if (
-      Object.prototype.hasOwnProperty.call(consumption, category) &&
-      Object.prototype.hasOwnProperty.call(consumption[category], key)
+      Object.hasOwn(consumption, category) &&
+      consumption[category] &&
+      Object.hasOwn(consumption[category], key)
     ) {
       const value = consumption[category]![key];
       if (
@@ -53,7 +54,7 @@ function removeInvalidValues(
   });
 
   if (
-    Object.prototype.hasOwnProperty.call(consumption, "description") &&
+    Object.hasOwn(consumption, "description") &&
     (consumption.description === undefined ||
       consumption.description === "" ||
       consumption.description === null ||

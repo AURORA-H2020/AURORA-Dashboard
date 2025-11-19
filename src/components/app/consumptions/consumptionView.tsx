@@ -1,3 +1,6 @@
+import { SunriseIcon } from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
+import { ReactNode } from "react";
 import { ConsumptionTableRow } from "@/components/app/common/consumptionTableRow";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
@@ -8,9 +11,6 @@ import { consumptionMapping } from "@/lib/constants/consumption-constants";
 import { getConsumptionUnit, useConvertUnit } from "@/lib/utilities";
 import { ConsumptionWithID } from "@/models/extensions";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { SunriseIcon } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
-import { ReactNode } from "react";
 
 /**
  * Renders a view displaying various attributes of a user's consumption

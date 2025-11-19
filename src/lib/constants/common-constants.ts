@@ -1,3 +1,4 @@
+import { Color } from "@tremor/react";
 import {
   CountryMapping,
   GenderMapping,
@@ -8,7 +9,6 @@ import {
   Weekdays,
 } from "@/models/constants";
 import { CalculationMode, EnergyMode } from "@/models/dashboard-data";
-import { Color } from "@tremor/react";
 import { labelMappings } from "./consumption-constants";
 
 /**

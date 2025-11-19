@@ -1,6 +1,3 @@
-import { firebaseApp } from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
-import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
 import { User } from "firebase/auth";
 import {
   collection,
@@ -9,6 +6,9 @@ import {
   getFirestore,
   setDoc,
 } from "firebase/firestore";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { BlacklistedUser } from "@/models/firestore/_export-user-data-blacklisted-users/blacklisted-user";
 
 const firestore = getFirestore(firebaseApp);
 

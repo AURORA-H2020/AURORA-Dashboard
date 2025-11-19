@@ -1,5 +1,17 @@
 "use client";
 
+import {
+  BatteryChargingIcon,
+  CalendarArrowUp,
+  CpuIcon,
+  FactoryIcon,
+  LucideIcon,
+  MapPinIcon,
+  SquareArrowOutUpRight,
+  SunIcon,
+} from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
+import React from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -20,18 +32,6 @@ import {
   countriesMapping,
 } from "@/lib/constants/common-constants";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import {
-  BatteryChargingIcon,
-  CalendarArrowUp,
-  CpuIcon,
-  FactoryIcon,
-  LucideIcon,
-  MapPinIcon,
-  SquareArrowOutUpRight,
-  SunIcon,
-} from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
-import React from "react";
 
 const PvPanelDetails = ({ site }: { site: string }) => {
   const format = useFormatter();

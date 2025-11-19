@@ -1,3 +1,11 @@
+import {
+  BlocksIcon,
+  CalendarIcon,
+  FileCheck2Icon,
+  LeafIcon,
+  WalletIcon,
+} from "lucide-react";
+import { useFormatter, useTranslations } from "next-intl";
 import { AddEditPvInvestmentModal } from "@/components/app/user/modals/addEditPvInvestmentModal";
 import { ViewPvInvestmentModal } from "@/components/app/user/modals/viewPvInvestmentsModal";
 import { Button } from "@/components/ui/button";
@@ -10,14 +18,6 @@ import {
 } from "@/components/ui/card";
 import { LoadingSpinner } from "@/components/ui/loading";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import {
-  BlocksIcon,
-  CalendarIcon,
-  FileCheck2Icon,
-  LeafIcon,
-  WalletIcon,
-} from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
 
 const PvPanelInvestments = () => {
   const t = useTranslations();

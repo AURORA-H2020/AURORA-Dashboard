@@ -1,17 +1,17 @@
-import { firebaseApp } from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
-import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { User } from "firebase/auth";
 import {
-  DocumentData,
-  QuerySnapshot,
   collection,
+  DocumentData,
   doc,
   getFirestore,
   onSnapshot,
+  QuerySnapshot,
   query,
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { User as FirebaseUser } from "@/models/firestore/user/user";
 
 const firestore = getFirestore(firebaseApp);
 

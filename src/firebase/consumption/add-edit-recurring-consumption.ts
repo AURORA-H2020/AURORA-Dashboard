@@ -1,8 +1,3 @@
-import { firebaseApp } from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
-import { convertUnit } from "@/lib/utilities";
-import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
-import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 import { User } from "firebase/auth";
 import {
   addDoc,
@@ -11,6 +6,11 @@ import {
   getFirestore,
   setDoc,
 } from "firebase/firestore";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { convertUnit } from "@/lib/utilities";
+import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
+import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
 
 const firestore = getFirestore(firebaseApp);
 
@@ -32,8 +32,8 @@ function removeInvalidValues(
   ];
   transportationKeys.forEach((key) => {
     if (
-      Object.prototype.hasOwnProperty.call(recurringConsumption, category) &&
-      Object.prototype.hasOwnProperty.call(recurringConsumption[category], key)
+      Object.hasOwn(recurringConsumption, category) &&
+      Object.hasOwn(recurringConsumption[category], key)
     ) {
       const value = recurringConsumption[category]![key];
       if (
@@ -50,8 +50,8 @@ function removeInvalidValues(
   const frequencyKeys = ["weekdays", "dayOfMonth"];
   frequencyKeys.forEach((key) => {
     if (
-      Object.prototype.hasOwnProperty.call(recurringConsumption, "frequency") &&
-      Object.prototype.hasOwnProperty.call(recurringConsumption.frequency, key)
+      Object.hasOwn(recurringConsumption, "frequency") &&
+      Object.hasOwn(recurringConsumption.frequency, key)
     ) {
       const value = recurringConsumption.frequency[key];
       if (
@@ -67,7 +67,7 @@ function removeInvalidValues(
   });
 
   if (
-    Object.prototype.hasOwnProperty.call(recurringConsumption, "description") &&
+    Object.hasOwn(recurringConsumption, "description") &&
     (recurringConsumption.description === undefined ||
       recurringConsumption.description === "" ||
       recurringConsumption.description === null ||

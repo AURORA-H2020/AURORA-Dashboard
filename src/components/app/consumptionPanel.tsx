@@ -1,5 +1,8 @@
 "use client";
 
+import { Flex } from "@radix-ui/themes";
+import { useTranslations } from "next-intl";
+import { ReactElement } from "react";
 import { ConsumptionList } from "@/components/app/consumptions/consumptionList";
 import { AddEditConsumptionModal } from "@/components/app/consumptions/modals/addEditConsumptionModal";
 import { AddEditRecurringConsumptionModal } from "@/components/app/recurring-consumptions/modals/addEditRecurringConsumptionModal";
@@ -7,9 +10,6 @@ import { RecurringConsumptionList } from "@/components/app/recurring-consumption
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utilities";
-import { Flex } from "@radix-ui/themes";
-import { useTranslations } from "next-intl";
-import { ReactElement } from "react";
 
 /**
  * Renders a panel for managing consumptions and recurring consumptions.

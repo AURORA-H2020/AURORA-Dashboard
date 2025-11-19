@@ -1,3 +1,10 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { User } from "firebase/auth";
+import { useTranslations } from "next-intl";
+import { ReactElement } from "react";
+import { DefaultValues, useForm } from "react-hook-form";
+import { toast } from "sonner";
+import { z } from "zod";
 import { FormInputField } from "@/components/form-items/formInputField";
 import { FormPasswordField } from "@/components/form-items/formPasswordField";
 import { Button } from "@/components/ui/button";
@@ -7,13 +14,6 @@ import { changeEmail } from "@/firebase/user/change-email";
 import { cn } from "@/lib/utilities";
 import { userChangeEmailSchema } from "@/lib/zod/userSchemas";
 import { useAuthContext } from "@/providers/context/authContext";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { User } from "firebase/auth";
-import { useTranslations } from "next-intl";
-import { ReactElement } from "react";
-import { DefaultValues, useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
 
 /**
  * Renders a form for changing the user's email address.

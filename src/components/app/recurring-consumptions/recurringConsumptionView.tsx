@@ -1,13 +1,13 @@
 "use client";
 
+import { useFormatter, useTranslations } from "next-intl";
+import { ReactNode } from "react";
 import { ConsumptionTableRow } from "@/components/app/common/consumptionTableRow";
 import { Table, TableBody } from "@/components/ui/table";
 import { weekdays } from "@/lib/constants/common-constants";
 import { useConvertUnit } from "@/lib/utilities";
 import { RecurringConsumptionWithID } from "@/models/extensions";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
-import { useFormatter, useTranslations } from "next-intl";
-import { ReactNode } from "react";
 
 /**
  * Renders a view displaying various attributes of a user's consumption

@@ -1,3 +1,6 @@
+import { Heading, Text } from "@radix-ui/themes";
+import { getTranslations, setRequestLocale } from "next-intl/server";
+import { ReactNode } from "react";
 import { Dashboard } from "@/components/dashboard/dashboard";
 import { SelectDashboardSource } from "@/components/dashboard/selectDashboardSource";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
@@ -6,9 +9,6 @@ import {
   firebaseStorageListDashboardFiles,
 } from "@/firebase/firebase-utils";
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
-import { Heading, Text } from "@radix-ui/themes";
-import { getTranslations, setRequestLocale } from "next-intl/server";
-import { ReactNode } from "react";
 
 type Props = {
   params: { locale: string; searchParams?: URLSearchParams };

@@ -1,3 +1,7 @@
+import { Flex, Heading } from "@radix-ui/themes";
+import { BarChart } from "@tremor/react";
+import { useTranslations } from "next-intl";
+import { ReactNode, useEffect, useState } from "react";
 import { PlaceholderCard } from "@/components/app/common/placeholderCard";
 import {
   Select,
@@ -16,10 +20,6 @@ import {
   valueFormatterPercentage,
 } from "@/lib/utilities";
 import { CalculationMode, MetaData } from "@/models/dashboard-data";
-import { Flex, Heading } from "@radix-ui/themes";
-import { BarChart } from "@tremor/react";
-import { useTranslations } from "next-intl";
-import { ReactNode, useEffect, useState } from "react";
 
 /**
  * Generate the GenderCardCountry component.

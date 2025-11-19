@@ -1,3 +1,5 @@
+import { ReactNode, useEffect, useState } from "react";
+import { ControllerRenderProps } from "react-hook-form";
 import {
   FormControl,
   FormDescription,
@@ -7,8 +9,6 @@ import {
 } from "@/components/ui/form";
 import { MultipleSelector, Option } from "@/components/ui/multiple-selector";
 import { cn } from "@/lib/utilities";
-import { ReactNode, useEffect, useState } from "react";
-import { ControllerRenderProps } from "react-hook-form";
 
 /**
  * Renders a form component for selecting multiple options.

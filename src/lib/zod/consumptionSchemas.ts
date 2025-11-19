@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+import { z } from "zod";
 import {
   consumptionSources,
   privateVehicleTypes,
@@ -11,8 +13,6 @@ import { ConsumptionDistrictHeatingSource } from "@/models/firestore/consumption
 import { ConsumptionHeatingFuel } from "@/models/firestore/consumption/heating/consumption-heating-fuel";
 import { ConsumptionTransportationPublicVehicleOccupancy } from "@/models/firestore/consumption/transportation/consumption-transportation-public-vehicle-occupancy";
 import { ConsumptionTransportationType } from "@/models/firestore/consumption/transportation/consumption-transportation-type";
-import { Timestamp } from "firebase/firestore";
-import { z } from "zod";
 
 const electricitySources: ConsumptionElectricitySource[] =
   consumptionSources.electricity.map((source) => source.source);

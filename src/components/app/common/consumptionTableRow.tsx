@@ -1,6 +1,6 @@
+import { ReactNode } from "react";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { cn } from "@/lib/utilities";
-import { ReactNode } from "react";
 
 // Props when `merged` is not provided or false.
 interface ConsumptionTableRowPropsWithoutMerged {

@@ -1,3 +1,4 @@
+import { z } from "zod";
 import {
   consumptionSources,
   privateVehicleTypes,
@@ -8,7 +9,6 @@ import { TimestampSchema } from "@/lib/zod/common";
 import { ConsumptionTransportationPublicVehicleOccupancy } from "@/models/firestore/consumption/transportation/consumption-transportation-public-vehicle-occupancy";
 import { ConsumptionTransportationType } from "@/models/firestore/consumption/transportation/consumption-transportation-type";
 import { RecurringConsumption } from "@/models/firestore/recurring-consumption/recurring-consumption";
-import { z } from "zod";
 
 const transportationTypes: ConsumptionTransportationType[] =
   consumptionSources.transportation.map((source) => source.source);

@@ -1,6 +1,3 @@
-import { firebaseApp } from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
-import { UserPvInvestment } from "@/models/firestore/user/user-pv-investment/user-pv-investment";
 import { User } from "firebase/auth";
 import {
   addDoc,
@@ -9,6 +6,9 @@ import {
   getFirestore,
   setDoc,
 } from "firebase/firestore";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { UserPvInvestment } from "@/models/firestore/user/user-pv-investment/user-pv-investment";
 
 const firestore = getFirestore(firebaseApp);
 
@@ -39,7 +39,7 @@ function removeInvalidValues(pvInvestment: UserPvInvestment): UserPvInvestment {
     "city",
   ];
   keysToCheck.forEach((key) => {
-    if (Object.prototype.hasOwnProperty.call(pvInvestment, key)) {
+    if (Object.hasOwn(pvInvestment, key)) {
       const value = pvInvestment[key];
       if (
         value === undefined ||

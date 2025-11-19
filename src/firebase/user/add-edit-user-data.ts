@@ -1,6 +1,3 @@
-import { firebaseApp } from "@/firebase/config";
-import { FirebaseConstants } from "@/firebase/firebase-constants";
-import { User as FirebaseUser } from "@/models/firestore/user/user";
 import { User } from "firebase/auth";
 import {
   collection,
@@ -9,6 +6,9 @@ import {
   getFirestore,
   setDoc,
 } from "firebase/firestore";
+import { firebaseApp } from "@/firebase/config";
+import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { User as FirebaseUser } from "@/models/firestore/user/user";
 
 const firestore = getFirestore(firebaseApp);
 
@@ -28,7 +28,7 @@ function removeInvalidValues(userData: FirebaseUser): FirebaseUser {
     "acceptedLegalDocumentVersion",
   ];
   keysToCheck.forEach((key) => {
-    if (Object.prototype.hasOwnProperty.call(userData, key)) {
+    if (Object.hasOwn(userData, key)) {
       const value = userData[key];
       if (
         value === undefined ||

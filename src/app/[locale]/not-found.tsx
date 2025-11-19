@@ -1,6 +1,6 @@
-import { PageLayout } from "@/components/pageLayout";
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
+import { PageLayout } from "@/components/pageLayout";
 
 // Note that `app/[locale]/[...rest]/page.tsx`
 // is necessary for this page to render.

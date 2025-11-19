@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
-import { authenticate } from "@/firebase/auth/authentication";
 import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
 import { toast } from "sonner";
+import { Button } from "@/components/ui/button";
+import { authenticate } from "@/firebase/auth/authentication";
 
 /**
  * Renders a button component that handles authentication with Google.
