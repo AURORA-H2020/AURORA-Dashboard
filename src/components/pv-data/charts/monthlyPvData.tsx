@@ -8,6 +8,7 @@ import { ProductionSummary } from "@/components/pv-data/panels/pvPanelProduction
 import { PvDataGrid } from "@/components/pv-data/pvDataGrid";
 import { ChartConfig } from "@/components/ui/chart";
 import { monthNames } from "@/lib/constants/common-constants";
+import { fetchPvApi } from "@/lib/pvApi";
 
 interface QpvApiResponse {
   data: {
@@ -38,10 +39,6 @@ const MonthlyPvData = async ({
   const t = await getTranslations();
   const format = await getFormatter();
 
-  const apiUrl = new URL(
-    `${process.env.PV_API_BASE_URL}/v1/plants/${site}/get-kpi-1d`,
-  );
-
   const searchParams = new URLSearchParams({
     device: "GL",
     ini_date: `${month}-01`,
@@ -50,17 +47,12 @@ const MonthlyPvData = async ({
     page: "1",
   });
 
-  const response = await fetch(apiUrl + "?" + searchParams, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${process.env.PV_API_TOKEN}`,
-    },
-    next: {
-      revalidate: 3600,
-    },
-  });
-
-  const { data: rawData } = (await response.json()) as QpvApiResponse;
+  const response = await fetchPvApi<QpvApiResponse>(
+    site,
+    "get-kpi-1d",
+    searchParams,
+  );
+  const rawData = response?.data;
 
   if (!rawData || rawData.length === 0) {
     return <PlaceholderCard>{t("error.noData")}</PlaceholderCard>;
