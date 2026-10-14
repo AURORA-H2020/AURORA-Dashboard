@@ -36,7 +36,7 @@ const LifetimePvData = async ({ site }: { site: string }) => {
 
   const startDate = plantConf?.general?.data?.[0]?.PVET_start_date;
 
-  if (!startDate) {
+  if (!startDate || Number.isNaN(new Date(startDate).getTime())) {
     return <PlaceholderCard>{t("error.noData")}</PlaceholderCard>;
   }
 
@@ -57,7 +57,7 @@ const LifetimePvData = async ({ site }: { site: string }) => {
   );
   const rawData = response?.data;
 
-  if (!rawData || rawData.length === 0) {
+  if (!Array.isArray(rawData) || rawData.length === 0) {
     return <PlaceholderCard>{t("error.noData")}</PlaceholderCard>;
   }
 

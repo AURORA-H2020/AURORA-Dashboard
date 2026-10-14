@@ -51,11 +51,12 @@ const RecommendationPreview = ({
     if (!user || !recommendation.id) return;
 
     try {
-      await setRecommendationReadStatus({
+      const { success } = await setRecommendationReadStatus({
         recommendationId: recommendation.id,
         user,
         isRead,
       });
+      if (!success) throw new Error("Error updating recommendation");
       isRead
         ? toast.success(t("toast.recommendationMarkedAsRead"))
         : toast.success(t("toast.recommendationMarkedAsUnread"));

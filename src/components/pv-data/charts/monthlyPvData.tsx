@@ -54,7 +54,7 @@ const MonthlyPvData = async ({
   );
   const rawData = response?.data;
 
-  if (!rawData || rawData.length === 0) {
+  if (!Array.isArray(rawData) || rawData.length === 0) {
     return <PlaceholderCard>{t("error.noData")}</PlaceholderCard>;
   }
 

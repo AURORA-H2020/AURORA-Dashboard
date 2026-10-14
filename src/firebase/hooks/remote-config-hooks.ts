@@ -1,4 +1,5 @@
 import {
+  ensureInitialized,
   fetchAndActivate,
   getRemoteConfig,
   getValue,
@@ -26,12 +27,15 @@ export const useLatestLegalDocumentsVersion = (): {
 
   useEffect(() => {
     const remoteConfig = getRemoteConfig(firebaseApp);
+    remoteConfig.settings.fetchTimeoutMillis = 10000;
 
     fetchAndActivate(remoteConfig)
       .catch((error) => {
         console.error("Error fetching remote config: ", error);
       })
-      .finally(() => {
+      .finally(async () => {
+        // Make sure cached values are loaded if fetching failed
+        await ensureInitialized(remoteConfig).catch(() => undefined);
         const version = getValue(
           remoteConfig,
           "latestLegalDocumentsVersion",

@@ -1,4 +1,8 @@
 import { FirebaseApp, getApp, getApps, initializeApp } from "firebase/app";
+import {
+  initializeAppCheck,
+  ReCaptchaEnterpriseProvider,
+} from "firebase/app-check";
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
 import { connectFunctionsEmulator, getFunctions } from "firebase/functions";
@@ -22,6 +26,27 @@ if (!getApps().length) {
   firebaseApp = initializeApp(firebaseConfig);
 } else {
   firebaseApp = getApp();
+}
+
+// Initialize App Check in the browser before any Firebase service is used
+if (typeof window !== "undefined") {
+  try {
+    if (process.env.NEXT_PUBLIC_USE_EMULATOR === "true") {
+      Object.assign(window, {
+        FIREBASE_APPCHECK_DEBUG_TOKEN:
+          process.env.NEXT_PUBLIC_APP_CHECK_DEBUG_TOKEN,
+      });
+    }
+
+    initializeAppCheck(firebaseApp, {
+      provider: new ReCaptchaEnterpriseProvider(
+        process.env.NEXT_PUBLIC_RECAPTCHA_ENTERPRISE_KEY as string,
+      ),
+      isTokenAutoRefreshEnabled: true,
+    });
+  } catch (error) {
+    console.error("Failed to initialize Firebase App Check:", error);
+  }
 }
 
 // Check if we are in development and if so, connect to Firebase emulators

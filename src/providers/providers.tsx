@@ -8,7 +8,6 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthContextProvider } from "@/providers/context/authContext";
 import { FirebaseDataProvider } from "@/providers/context/firebaseContext";
-import { FirebaseAppCheckProvider } from "./FirebaseAppCheckProvider";
 
 /**
  * Renders the Providers component.
@@ -30,20 +29,18 @@ const Providers = ({
       messages={messages}
       timeZone="Europe/Berlin"
     >
-      <FirebaseAppCheckProvider>
-        <AuthContextProvider>
-          <FirebaseDataProvider>
-            <Theme>
-              <ThemeProvider {...props}>
-                <TooltipProvider>
-                  {children}
-                  <Toaster richColors />
-                </TooltipProvider>
-              </ThemeProvider>
-            </Theme>
-          </FirebaseDataProvider>
-        </AuthContextProvider>
-      </FirebaseAppCheckProvider>
+      <AuthContextProvider>
+        <FirebaseDataProvider>
+          <Theme>
+            <ThemeProvider {...props}>
+              <TooltipProvider>
+                {children}
+                <Toaster richColors />
+              </TooltipProvider>
+            </ThemeProvider>
+          </Theme>
+        </FirebaseDataProvider>
+      </AuthContextProvider>
     </NextIntlClientProvider>
   );
 };

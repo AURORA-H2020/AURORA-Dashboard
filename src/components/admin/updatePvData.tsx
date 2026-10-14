@@ -28,8 +28,12 @@ const UpdatePvData = () => {
       if (response?.success) {
         toast.success("PV data updated");
       } else {
+        const error = response?.error;
         toast.error("Error updating PV data", {
-          description: String(response?.error ?? "Unknown error"),
+          description:
+            error instanceof Error
+              ? error.message
+              : JSON.stringify(error ?? "Unknown error"),
         });
       }
     }

@@ -74,7 +74,9 @@ const AdminPage = (): ReactNode => {
         {userData ? (
           <UsersTable userData={userData} blacklistData={blacklistData} />
         ) : (
-          <p className="text-muted-foreground">No user data backup found.</p>
+          <p className="text-muted-foreground">
+            No user data backup found or it could not be loaded.
+          </p>
         )}
       </TabsContent>
     </Tabs>

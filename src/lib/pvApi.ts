@@ -1,12 +1,15 @@
 /**
- * Checks that a PV plant ID only contains characters that are safe to use as
- * a single URL path segment.
+ * Checks that a PV plant ID only contains URL-safe characters and is not a
+ * relative path segment, so it stays a single URL path segment.
  *
  * @param {string | undefined} site - The PV plant ID from the search params.
  * @return {boolean} Whether the site is a valid PV plant ID.
  */
 export const isValidPvSite = (site: string | undefined): site is string =>
-  typeof site === "string" && /^[A-Za-z0-9_-]+$/.test(site);
+  typeof site === "string" &&
+  /^[A-Za-z0-9._~-]+$/.test(site) &&
+  site !== "." &&
+  site !== "..";
 
 /**
  * Fetches data for a PV plant from the PV API. Must only be called from
