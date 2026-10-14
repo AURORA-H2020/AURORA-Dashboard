@@ -213,7 +213,7 @@ const LabelSummary = ({
       <CategoryBarChart
         className="mt-4"
         style={{ height: `${transformedData.length * 50 + 80}px` }}
-        yAxisWidth={80}
+        yAxisWidth={110}
         data={transformedData ?? []}
         index="country"
         categories={labelMappings.map((label) => label.label)}
@@ -224,7 +224,7 @@ const LabelSummary = ({
             : valueFormatterPercentage
         }
         stacked
-        relative
+        relative={calculationMode === "relative"}
         layout="vertical"
       />
     </>

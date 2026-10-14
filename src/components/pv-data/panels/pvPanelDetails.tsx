@@ -47,7 +47,9 @@ const PvPanelDetails = ({ site }: { site: string }) => {
 
   const country = countriesMapping.find((c) => c.ID === siteDetails.country);
   const city = citiesMappings.find((c) => c.ID === siteDetails.city);
-  const location = [t(city?.name ?? ""), t(country?.name ?? "")].join(", ");
+  const location = [city && t(city.name), country && t(country.name)]
+    .filter(Boolean)
+    .join(", ");
 
   const details: Array<{
     icon: LucideIcon;

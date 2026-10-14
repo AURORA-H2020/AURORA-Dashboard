@@ -204,7 +204,12 @@ const CategoryLineChart = ({
     >
       <LineChart data={data} margin={{ left: 0, right: 8 }}>
         <CartesianGrid vertical={false} />
-        <XAxis dataKey={index} tickLine={false} axisLine={false} />
+        <XAxis
+          dataKey={index}
+          tickLine={false}
+          axisLine={false}
+          interval="preserveStartEnd"
+        />
         <YAxis
           tickLine={false}
           axisLine={false}

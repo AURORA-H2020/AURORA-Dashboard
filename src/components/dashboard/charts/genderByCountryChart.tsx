@@ -131,7 +131,7 @@ const GenderByCountryChart = ({
       <CategoryBarChart
         className="mt-4"
         style={{ height: `${genderData.length * 50 + 80}px` }}
-        yAxisWidth={80}
+        yAxisWidth={110}
         data={genderData ?? []}
         index="country"
         categories={genderMappings.map((gender) => t(gender.label))}
@@ -142,7 +142,7 @@ const GenderByCountryChart = ({
             : valueFormatterPercentage
         }
         stacked
-        relative
+        relative={calculationMode === "relative"}
         layout="vertical"
       />
     </>
