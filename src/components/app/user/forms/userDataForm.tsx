@@ -2,11 +2,6 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User } from "firebase/auth";
-import {
-  fetchAndActivate,
-  getRemoteConfig,
-  getValue,
-} from "firebase/remote-config";
 import { useTranslations } from "next-intl";
 import { ReactNode, useEffect } from "react";
 import { DefaultValues, useForm } from "react-hook-form";
@@ -18,7 +13,7 @@ import { FormSelect } from "@/components/form-items/formSelect";
 import { FormSwitch } from "@/components/form-items/formSwitch";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
-import { firebaseApp } from "@/firebase/config";
+import { useLatestLegalDocumentsVersion } from "@/firebase/hooks/remote-config-hooks";
 import { addEditUserData } from "@/firebase/user/add-edit-user-data";
 import {
   countriesMapping,
@@ -104,19 +99,17 @@ const UserDataForm = ({
     }
   };
 
-  useEffect(() => {
-    if (isNewUser) {
-      const remoteConfig = getRemoteConfig(firebaseApp);
+  const { latestLegalDocumentsVersion, isLoadingLatestLegalDocumentsVersion } =
+    useLatestLegalDocumentsVersion();
 
-      fetchAndActivate(remoteConfig).then(() => {
-        const latestVersion = getValue(
-          remoteConfig,
-          "latestLegalDocumentsVersion",
-        ).asNumber();
-        form.setValue("acceptedLegalDocumentVersion", latestVersion);
-      });
+  useEffect(() => {
+    if (isNewUser && latestLegalDocumentsVersion) {
+      form.setValue(
+        "acceptedLegalDocumentVersion",
+        latestLegalDocumentsVersion,
+      );
     }
-  }, [form, isNewUser]);
+  }, [form, isNewUser, latestLegalDocumentsVersion]);
 
   const selectedCountry = form.watch("country");
 
@@ -317,7 +310,12 @@ const UserDataForm = ({
           />
         )}
 
-        <Button type="submit">{t("app.form.profile.saveProfile")}</Button>
+        <Button
+          type="submit"
+          disabled={isNewUser && isLoadingLatestLegalDocumentsVersion}
+        >
+          {t("app.form.profile.saveProfile")}
+        </Button>
       </form>
     </Form>
   );

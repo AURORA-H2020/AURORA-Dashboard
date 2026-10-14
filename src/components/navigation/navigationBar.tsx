@@ -138,7 +138,12 @@ const NavigationBar = (): ReactElement => {
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <Button variant="secondary" size="icon" className="rounded-full">
+          <Button
+            variant="secondary"
+            size="icon"
+            className="rounded-full"
+            asChild
+          >
             <Link href={"/account"}>
               <CircleUserIcon className="h-5 w-5" />
             </Link>
