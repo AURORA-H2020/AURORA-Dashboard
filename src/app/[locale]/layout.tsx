@@ -21,15 +21,6 @@ type Props = {
 };
 
 /**
- * Generates static parameters based on locales.
- *
- * @return {Array} an array of objects containing the locale
- */
-/* export const generateStaticParams = async () => {
-  return locales.map((locale) => ({ locale }));
-}; */
-
-/**
  * Generate metadata based on the provided locale.
  *
  * @param {Omit<Props, "children">} params - Object containing the locale parameter

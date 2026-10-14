@@ -160,7 +160,6 @@
       "selectBarToSeeDailyBreakdown": "Selecione uma barra para mostrar uma discriminação para um dia específico.",
       "unsupportedRegionMessage": "Esta funcionalidade não é atualmente suportada na sua região.",
       "solarPowerProduction": "Produção de energia solar",
-      "unsupportedSearchParams": "Unsupported search parameters",
       "lifetimeProduction": "Produção vitalícia"
     }
   },
@@ -345,7 +344,6 @@
         "editInvestmentDisclaimer": "Se tiver efetuado investimentos adicionais numa data posterior, adicione um novo investimento. A edição dos seus investimentos existentes pode resultar num registo incorreto.",
         "addInvestmentDisclaimer": "A introdução dos seus dados de investimento serve exclusivamente para efeitos de registo. Tal não constitui um investimento efetivo ou uma ordem vinculativa sob qualquer forma.",
         "noteDescription": "Adicione uma nota ao seu investimento para referência pessoal.",
-        "investmentDescription": "The amount of money you invested",
         "shareDescription": "A que parte da capacidade da instalação de painéis solares corresponde o seu investimento. Esta informação encontra-se nos documentos que recebeu quando efetuou o seu investimento.",
         "deleteInvestmentDialog": {
           "title": "Tem a certeza de que pretende eliminar este investimento?",

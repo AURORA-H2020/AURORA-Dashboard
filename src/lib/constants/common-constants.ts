@@ -8,7 +8,6 @@ import {
   UnitSystem,
   Weekdays,
 } from "@/models/constants";
-import { CalculationMode, EnergyMode } from "@/models/dashboard-data";
 import { labelMappings } from "./consumption-constants";
 
 /**
@@ -330,22 +329,11 @@ export const genderMappings: GenderMapping[] = [
   { key: "other", label: t("gender.other"), color: "slate-700" },
 ];
 
-// TODO: Change to carbonEmissions and energyExpended
-export const energyModes: EnergyMode[] = ["carbon", "energy"];
-export const calculationModes: CalculationMode[] = ["absolute", "relative"];
-
 export const carbonUnitWeight = (
   unitSystem: "metric" | "imperial" = "metric",
 ): string => `${unitSystem == "imperial" ? "lb" : "kg"} ${carbonUnit}`;
 
 export const carbonUnit = "CO\u2082";
-
-export const kiloGramNumberFormatter = Intl.NumberFormat("en-GB", {
-  notation: "compact",
-  style: "unit",
-  unit: "kilogram",
-  unitDisplay: "short",
-});
 
 export const householdProfiles: HouseholdProfile[] = [
   {

@@ -23,61 +23,6 @@ import { FirebaseConstants } from "../firebase-constants";
 
 const firestore = getFirestore(firebaseApp);
 
-/**
- * Custom hook to fetch a single recommendation by ID
- */
-export const useRecommendation = (
-  user: User | null,
-  recommendationId: string,
-) => {
-  const [recommendation, setRecommendation] =
-    useState<RecommendationWithId | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    if (!user || !recommendationId) {
-      setIsLoading(false);
-      return;
-    }
-
-    setIsLoading(true);
-    const recommendationRef = doc(
-      firestore,
-      "users",
-      user.uid,
-      "recommendations",
-      recommendationId,
-    );
-
-    const unsubscribe = onSnapshot(
-      recommendationRef,
-      (docSnap) => {
-        if (docSnap.exists()) {
-          const recommendationData = docSnap.data() as Recommendation;
-          setRecommendation({
-            ...recommendationData,
-            id: docSnap.id,
-          });
-        } else {
-          setError(new Error("Recommendation not found"));
-          setRecommendation(null);
-        }
-        setIsLoading(false);
-      },
-      (err) => {
-        console.error("Error fetching recommendation:", err);
-        setError(err);
-        setIsLoading(false);
-      },
-    );
-
-    return () => unsubscribe();
-  }, [user, recommendationId]);
-
-  return { recommendation, isLoading, error };
-};
-
 export const useFetchUserRecommendations = ({
   user,
   pageSize = 5,

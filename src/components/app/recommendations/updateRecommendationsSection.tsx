@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "use-intl";
+import { useTranslations } from "next-intl";
 import { BorderBox } from "../common/borderBox";
 
 const UpdateRecommendationsSection = () => {
