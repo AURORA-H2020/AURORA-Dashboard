@@ -81,7 +81,7 @@ const AboutContent = ({
               {t("about.carbonEmissionLabels.description", {
                 countryName: t(
                   countriesMapping.find((c) => c.ID === selectedCountry.ID)
-                    ?.nameSpecial,
+                    ?.nameSpecial ?? "",
                 ),
               })}
             </Text>
@@ -94,7 +94,7 @@ const AboutContent = ({
               {t("about.energyExpendedLabels.description", {
                 countryName: t(
                   countriesMapping.find((c) => c.ID === selectedCountry.ID)
-                    ?.nameSpecial,
+                    ?.nameSpecial ?? "",
                 ),
               })}
             </Text>
@@ -106,7 +106,7 @@ const AboutContent = ({
               {t("about.metrics.description", {
                 countryName: t(
                   countriesMapping.find((c) => c.ID === selectedCountry.ID)
-                    ?.nameSpecial,
+                    ?.nameSpecial ?? "",
                 ),
               })}
             </Text>

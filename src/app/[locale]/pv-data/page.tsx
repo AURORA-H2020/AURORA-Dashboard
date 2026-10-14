@@ -31,11 +31,11 @@ const validateDate = (date: string | undefined): date is string => {
 const PvDataPage = async ({
   searchParams,
 }: {
-  searchParams?: { site: string; date: string; month: string };
+  searchParams: Promise<{ site?: string; date?: string; month?: string }>;
 }) => {
   const t = await getTranslations();
 
-  const { site, date, month } = searchParams || {};
+  const { site, date, month } = await searchParams;
 
   return (
     <div>

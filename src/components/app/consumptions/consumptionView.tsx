@@ -90,7 +90,7 @@ const ConsumptionView = ({
       <Table className="mt-4 table-fixed">
         <TableBody>
           <ConsumptionTableRow
-            label={t(consumptionAttributes?.unitLabel) ?? ""}
+            label={t(consumptionAttributes?.unitLabel ?? "") ?? ""}
           >
             {convertedValue?.toString() ?? t("common.calculating")}
           </ConsumptionTableRow>

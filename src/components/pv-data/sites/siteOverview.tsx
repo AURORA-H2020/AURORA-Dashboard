@@ -65,12 +65,12 @@ const SiteOverview = () => {
     {
       icon: EarthIcon,
       label: t("app.profile.country"),
-      value: t(countriesMapping.find((c) => c.ID === site.country)?.name),
+      value: t(countriesMapping.find((c) => c.ID === site.country)?.name ?? ""),
     },
     {
       icon: Building2Icon,
       label: t("app.profile.city"),
-      value: t(citiesMappings.find((c) => c.ID === site.city)?.name),
+      value: t(citiesMappings.find((c) => c.ID === site.city)?.name ?? ""),
     },
     {
       icon: BatteryChargingIcon,

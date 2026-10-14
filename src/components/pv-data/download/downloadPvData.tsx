@@ -30,9 +30,9 @@ const DownloadPvData = ({
   const siteDetails = pvPlants && pvPlants.find((s) => s.plantId === site);
 
   const jsonData = {
-    city: t(citiesMappings.find((c) => c.ID === siteDetails?.city)?.name),
+    city: t(citiesMappings.find((c) => c.ID === siteDetails?.city)?.name ?? ""),
     country: t(
-      countriesMapping.find((c) => c.ID === siteDetails?.country)?.name,
+      countriesMapping.find((c) => c.ID === siteDetails?.country)?.name ?? "",
     ),
     countryCode: countriesMapping.find((c) => c.ID === siteDetails?.country)
       ?.code,

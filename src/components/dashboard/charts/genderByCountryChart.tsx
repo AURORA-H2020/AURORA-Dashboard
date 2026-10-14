@@ -79,13 +79,13 @@ const GenderByCountryChart = ({
       return {
         country: t(countryName),
         key: countryName,
-        [t(genderMappings.find((e) => e.key === "male")?.label)]:
+        [t(genderMappings.find((e) => e.key === "male")?.label ?? "")]:
           calculateOutput(country.genders.male),
-        [t(genderMappings.find((e) => e.key === "female")?.label)]:
+        [t(genderMappings.find((e) => e.key === "female")?.label ?? "")]:
           calculateOutput(country.genders.female),
-        [t(genderMappings.find((e) => e.key === "nonBinary")?.label)]:
+        [t(genderMappings.find((e) => e.key === "nonBinary")?.label ?? "")]:
           calculateOutput(country.genders.nonBinary),
-        [t(genderMappings.find((e) => e.key === "other")?.label)]:
+        [t(genderMappings.find((e) => e.key === "other")?.label ?? "")]:
           calculateOutput(country.genders.other),
       };
     });

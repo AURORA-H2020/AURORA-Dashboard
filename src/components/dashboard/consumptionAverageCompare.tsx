@@ -59,7 +59,7 @@ const ConsumptionAverageCompare = ({
     );
 
     return {
-      name: t(countriesMapping.find((e) => e.ID === country)?.name),
+      name: t(countriesMapping.find((e) => e.ID === country)?.name ?? ""),
       color: countriesMapping.find((e) => e.ID === country)?.color || "white",
       countryKey: countriesMapping.find((e) => e.ID === country)?.name || "",
       value: getAverage(categories, metaDataSummary, selectedEnergyMode),

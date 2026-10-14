@@ -76,13 +76,16 @@ const ConsumptionSummaryChart = ({
         monthName: format.dateTime(new Date(2000, index, 15), {
           month: "short",
         }),
-        [t(consumptionMapping.find((e) => e.category === "heating")?.label)]: 0,
         [t(
-          consumptionMapping.find((e) => e.category === "electricity")?.label,
+          consumptionMapping.find((e) => e.category === "heating")?.label ?? "",
+        )]: 0,
+        [t(
+          consumptionMapping.find((e) => e.category === "electricity")?.label ??
+            "",
         )]: 0,
         [t(
           consumptionMapping.find((e) => e.category === "transportation")
-            ?.label,
+            ?.label ?? "",
         )]: 0,
       }));
     };
@@ -97,14 +100,17 @@ const ConsumptionSummaryChart = ({
           monthName: format.dateTime(new Date(2000, month.number - 1, 15), {
             month: "short",
           }),
-          [t(consumptionMapping.find((e) => e.category === "heating")?.label)]:
-            convertChartUnit(
-              userData?.settings?.unitSystem ?? "metric",
-              findValueByCategory(month.categories, "heating", measure),
-              measure,
-            ),
           [t(
-            consumptionMapping.find((e) => e.category === "electricity")?.label,
+            consumptionMapping.find((e) => e.category === "heating")?.label ??
+              "",
+          )]: convertChartUnit(
+            userData?.settings?.unitSystem ?? "metric",
+            findValueByCategory(month.categories, "heating", measure),
+            measure,
+          ),
+          [t(
+            consumptionMapping.find((e) => e.category === "electricity")
+              ?.label ?? "",
           )]: convertChartUnit(
             userData?.settings?.unitSystem ?? "metric",
             findValueByCategory(month.categories, "electricity", measure),
@@ -112,7 +118,7 @@ const ConsumptionSummaryChart = ({
           ),
           [t(
             consumptionMapping.find((e) => e.category === "transportation")
-              ?.label,
+              ?.label ?? "",
           )]: convertChartUnit(
             userData?.settings?.unitSystem ?? "metric",
             findValueByCategory(month.categories, "transportation", measure),

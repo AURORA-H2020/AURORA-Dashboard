@@ -11,12 +11,12 @@ import {
 import { GlobalSummary } from "@/models/firestore/global-summary/global-summary";
 
 type Props = {
-  params: { locale: string; searchParams?: URLSearchParams };
-  searchParams: { [key: string]: string | string[] | undefined };
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 // Revalidate the page every 12 hours
-export const revalidate = 3600 * 12;
+export const revalidate = 43200;
 
 /**
  * Asynchronous function that represents the Home component.
@@ -24,9 +24,11 @@ export const revalidate = 3600 * 12;
  * @return {Promise<ReactNode>} The JSX element representing the Home component.
  */
 const HomePage = async ({
-  params: { locale },
+  params,
   searchParams,
 }: Props): Promise<ReactNode> => {
+  const { locale } = await params;
+  const { file } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations();
 
@@ -38,8 +40,7 @@ const HomePage = async ({
       FirebaseConstants.buckets.auroraDashboard.folders.dashboardData.name,
     )) || [];
 
-  const currentFile: string =
-    searchParams?.file?.toString() || fileList[fileList.length - 1];
+  const currentFile: string = file?.toString() || fileList[fileList.length - 1];
 
   if (fileList.includes(currentFile)) {
     globalSummaryData = (await firebaseStorageDownloadFile(

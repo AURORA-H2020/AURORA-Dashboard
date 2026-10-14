@@ -10,7 +10,7 @@ import { getLatestCountryFile } from "@/firebase/firebase-utils";
 import { CountryData } from "@/models/country-data";
 
 type Props = {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
 
 /**
@@ -22,7 +22,8 @@ type Props = {
  *
  * @return {Promise<ReactNode>} A promise that resolves with the rendered home page component.
  */
-const AboutPage = async ({ params: { locale } }: Props): Promise<ReactNode> => {
+const AboutPage = async ({ params }: Props): Promise<ReactNode> => {
+  const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations();
 
