@@ -210,6 +210,7 @@ const MultipleSelector = React.forwardRef<
       }
     }, [value]);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: upstream shadcn component
     useEffect(() => {
       /** If `onSearch` is provided, do not trigger options updated. */
       if (!arrayOptions || onSearch) {

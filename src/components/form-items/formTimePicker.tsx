@@ -34,6 +34,7 @@ const FormTimePicker = ({
   const [date, setDate] = useState<Date | undefined>(new Date());
 
   // When the component mounts, set the initial date
+  // biome-ignore lint/correctness/useExhaustiveDependencies: only initialise from the field value on mount
   useEffect(() => {
     if (!field.value) return;
 
@@ -43,7 +44,6 @@ const FormTimePicker = ({
     if (picker === "seconds") date.setSeconds(field.value);
 
     setDate(date);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   /**

@@ -93,6 +93,7 @@ const HeatingForm = ({
 
   const formHeatingFuel = form.watch("heating.heatingFuel");
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: recalculate the unit when the heating fuel changes
   useEffect(() => {
     setValueUnit(
       getConsumptionUnit(

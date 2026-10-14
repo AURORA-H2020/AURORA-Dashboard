@@ -63,13 +63,13 @@ const NavigationBar = (): ReactElement => {
         <Link href="/" className="w-max">
           <Logo />
         </Link>
-        {navigationLinks.map((item, idx) => {
+        {navigationLinks.map((item) => {
           const isActive =
             pathname === item.path || pathname.startsWith(`${item.path}/`);
 
           return (
             <Link
-              key={`${idx}`}
+              key={item.path}
               href={item.path}
               className={`${isActive ? "text-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground`}
             >
@@ -92,12 +92,12 @@ const NavigationBar = (): ReactElement => {
             >
               <Logo />
             </Link>
-            {navigationLinks.map((item, idx) => {
+            {navigationLinks.map((item) => {
               const isActive =
                 pathname === item.path || pathname.startsWith(`${item.path}/`);
 
               return (
-                <SheetClose key={`${idx}`} asChild>
+                <SheetClose key={item.path} asChild>
                   <Link
                     href={item.path}
                     className={`${isActive ? "text-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground`}
@@ -120,7 +120,7 @@ const NavigationBar = (): ReactElement => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              {userMenuLinks.map((item, idx) => {
+              {userMenuLinks.map((item) => {
                 if (item.isAdmin && !isAdmin) return;
                 if (
                   userCityData &&
@@ -129,7 +129,7 @@ const NavigationBar = (): ReactElement => {
                 )
                   return;
                 return (
-                  <Link href={item.path} key={`${idx}`}>
+                  <Link href={item.path} key={item.path}>
                     <DropdownMenuItem>{t(item.title)}</DropdownMenuItem>
                   </Link>
                 );

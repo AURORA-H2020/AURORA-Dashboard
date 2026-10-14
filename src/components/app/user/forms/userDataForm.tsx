@@ -120,11 +120,11 @@ const UserDataForm = ({
 
   const selectedCountry = form.watch("country");
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: reset the city whenever the selected country changes
   useEffect(() => {
     if (!isNewUser) return;
 
     form.setValue("city", undefined);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNewUser, selectedCountry]);
 
   const availableCities = countriesMapping.find(

@@ -43,10 +43,10 @@ const MonthSelect = ({ earliestDate }: { earliestDate: Date }) => {
 
   const validYears = getYearsBetween(earliestDate);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: only sync the URL when month or year change
   useEffect(() => {
     const queryMonth = `${year}-${(monthNames.indexOf(month) + 1).toString().padStart(2, "0")}`;
     router.replace(pathname + "?" + createQueryString("month", queryMonth));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [month, year]);
 
   return (

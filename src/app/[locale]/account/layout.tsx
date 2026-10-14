@@ -44,7 +44,7 @@ const AccountSettingsLayout = ({
       <EnsureInitialRegistration>
         <EnsureLatestConsent>
           <div className="hidden justify-start gap-2 md:flex">
-            {userMenuLinks.map((item, index) => {
+            {userMenuLinks.map((item) => {
               if (item.isAdmin && !isAdmin) return;
               if (
                 userCityData &&
@@ -54,7 +54,7 @@ const AccountSettingsLayout = ({
                 return;
               return (
                 <Button
-                  key={index}
+                  key={item.path}
                   variant={pathname === item.path ? "default" : "outline"}
                   asChild
                 >
@@ -73,10 +73,10 @@ const AccountSettingsLayout = ({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                {userMenuLinks.map((item, index) => {
+                {userMenuLinks.map((item) => {
                   if (item.isAdmin && !isAdmin) return;
                   return (
-                    <SelectItem key={index} value={item.path}>
+                    <SelectItem key={item.path} value={item.path}>
                       {t(item.title)}
                     </SelectItem>
                   );

@@ -38,6 +38,7 @@ const FormMultiSelect = ({
 }): ReactNode => {
   const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: only initialise from the field value on mount
   useEffect(() => {
     if (!field.value) return;
 
@@ -45,7 +46,6 @@ const FormMultiSelect = ({
       field.value.includes(Number(option.value)),
     );
     setSelectedOptions(selectedOptions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleOnChange = (selectedOptions: Option[]) => {
