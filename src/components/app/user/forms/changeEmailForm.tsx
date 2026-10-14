@@ -49,7 +49,11 @@ const ChangeEmailForm = ({
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     changeEmail(user, data.currentPassword, data.email).then((result) => {
       if (result.success) {
-        toast.success(t("toast.changeEmail.success"));
+        toast.success(t("toast.changeEmail.successTitle"), {
+          description: t("toast.changeEmail.successDescription", {
+            email: data.email,
+          }),
+        });
       } else
         toast.error(t("toast.changeEmail.errorTitle"), {
           description: t("toast.changeEmail.errorDescription"),

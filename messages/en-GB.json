@@ -42,7 +42,8 @@
       "updatedError": "An error occured updating your consumption"
     },
     "changeEmail": {
-      "success": "Your email was updated successfully",
+      "successTitle": "Please confirm your new email address",
+      "successDescription": "We sent a link to {email}. Your email address will change once you open it.",
       "errorTitle": "An error occurred updating your email",
       "errorDescription": "Please check your current password and try again."
     },

@@ -42,7 +42,8 @@
       "updatedError": "Bei der Aktualisierung Ihres Verbrauchs ist ein Fehler aufgetreten"
     },
     "changeEmail": {
-      "success": "Ihre E-Mail wurde erfolgreich aktualisiert",
+      "successTitle": "Bitte bestätigen Sie Ihre neue E-Mail-Adresse",
+      "successDescription": "Wir haben einen Link an {email} gesendet. Ihre E-Mail-Adresse wird geändert, sobald Sie ihn öffnen.",
       "errorTitle": "Bei der Aktualisierung Ihrer E-Mail ist ein Fehler aufgetreten",
       "errorDescription": "Bitte überprüfen Sie Ihr aktuelles Passwort und versuchen Sie es erneut."
     },

@@ -42,7 +42,8 @@
       "updatedError": "Se ha producido un error al actualizar su consumo"
     },
     "changeEmail": {
-      "success": "Su correo electrónico se ha actualizado correctamente",
+      "successTitle": "Confirme su nueva dirección de correo electrónico",
+      "successDescription": "Hemos enviado un enlace a {email}. Su correo electrónico se cambiará cuando lo abra.",
       "errorTitle": "Se ha producido un error al actualizar su correo electrónico",
       "errorDescription": "Compruebe su contraseña actual e inténtelo de nuevo."
     },

@@ -42,7 +42,8 @@
       "updatedError": "Pri posodabljanju porabe je prišlo do napake"
     },
     "changeEmail": {
-      "success": "Tvoj e-poštni naslov je bil uspešno posodobljen",
+      "successTitle": "Potrdi svoj novi e-poštni naslov",
+      "successDescription": "Na {email} smo poslali povezavo. Tvoj e-poštni naslov se bo spremenil, ko jo odpreš.",
       "errorTitle": "Pri posodabljanju tvoje e-pošte je prišlo do napake",
       "errorDescription": "Preveri svoje trenutno geslo in poskusi znova."
     },

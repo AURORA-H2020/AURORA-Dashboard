@@ -42,7 +42,8 @@
       "updatedError": "Der opstod en fejl ved opdatering af dit forbrug"
     },
     "changeEmail": {
-      "success": "Din e-mail adresse er blevet opdateret",
+      "successTitle": "Bekræft venligst din nye e-mail adresse",
+      "successDescription": "Vi har sendt et link til {email}. Din e-mail adresse bliver ændret, når du åbner det.",
       "errorTitle": "Der opstod en fejl ved opdatering af din e-mail adresse",
       "errorDescription": "Tjek venligst din nuværende adgangskode og prøv igen."
     },
