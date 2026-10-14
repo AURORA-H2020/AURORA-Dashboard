@@ -27,12 +27,13 @@ This repository contains the **Web Application** and **Interactive Dashboard** f
 
 The AURORA Web App & Dashboard is built with modern web technologies, leveraging **Next.js** for the framework and **Firebase** for backend services.
 
-*   **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+*   **Framework**: [Next.js 16](https://nextjs.org/) (App Router) with [React 19](https://react.dev/)
 *   **Language**: [TypeScript](https://www.typescriptlang.org/)
 *   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-*   **UI Components**: [Radix UI](https://www.radix-ui.com/), [Tremor](https://www.tremor.so/) (for charts & dashboard)
+*   **UI Components**: [shadcn/ui](https://ui.shadcn.com/) and [Radix UI](https://www.radix-ui.com/), with [Recharts](https://recharts.org/) for charts
 *   **Icons**: [Lucide React](https://lucide.dev/), [FontAwesome](https://fontawesome.com/)
 *   **Forms & Validation**: [React Hook Form](https://react-hook-form.com/), [Zod](https://zod.dev/)
+*   **Linting & Formatting**: [Biome](https://biomejs.dev/)
 *   **Backend / Cloud**:
     *   [Firebase Authentication](https://firebase.google.com/docs/auth)
     *   [Firebase Firestore](https://firebase.google.com/docs/firestore)
@@ -42,7 +43,7 @@ The AURORA Web App & Dashboard is built with modern web technologies, leveraging
 ## Installation & Setup
 
 ### Prerequisites
-*   [Node.js](https://nodejs.org/) (v20.0.0 or later)
+*   [Node.js](https://nodejs.org/) (v20.9.0 or later)
 *   [npm](https://www.npmjs.com/)
 
 ### Getting Started
