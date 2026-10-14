@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { CSSProperties, ReactNode } from "react";
 import {
   Bar,
@@ -43,29 +44,22 @@ const buildChartConfig = (
   );
 
 /**
- * Renders a tooltip row with a colour indicator, the category name and the
- * formatted value.
+ * Shown instead of a chart when there is no data to plot.
  */
-const tooltipRow =
-  (valueFormatter: ValueFormatter) =>
-  (
-    value: unknown,
-    name: unknown,
-    item: { color?: string; payload?: { fill?: string } },
-  ): ReactNode => (
-    <div className="flex w-full items-center justify-between gap-4">
-      <div className="flex items-center gap-1.5">
-        <div
-          className="h-2.5 w-2.5 shrink-0 rounded-[2px]"
-          style={{ backgroundColor: item.color ?? item.payload?.fill }}
-        />
-        <span className="text-muted-foreground">{String(name)}</span>
-      </div>
-      <span className="font-mono font-medium tabular-nums text-foreground">
-        {valueFormatter(Number(value))}
-      </span>
+const EmptyChart = ({ className }: { className?: string }): ReactNode => {
+  const t = useTranslations();
+
+  return (
+    <div
+      className={cn(
+        "flex h-40 w-full items-center justify-center rounded-md border border-dashed text-sm text-muted-foreground",
+        className,
+      )}
+    >
+      {t("error.noData")}
     </div>
   );
+};
 
 /**
  * Bar chart with one bar (or bar segment, if stacked) per category.
@@ -105,11 +99,25 @@ const CategoryBarChart = ({
   className?: string;
   style?: CSSProperties;
 }): ReactNode => {
+  if (data.length === 0) return <EmptyChart className={className} />;
+
   const chartConfig = buildChartConfig(categories, colors);
   const isVertical = layout === "vertical";
-  const axisValueFormatter = relative
+  const valueAxisFormatter = relative
     ? (value: number) => `${Math.round(value * 100)}%`
     : valueFormatter;
+
+  // recharts only finds axes that are direct children, so no fragments here
+  const valueAxisProps = {
+    tickLine: false,
+    axisLine: false,
+    tickFormatter: valueAxisFormatter,
+  };
+  const categoryAxisProps = {
+    dataKey: index,
+    tickLine: false,
+    axisLine: false,
+  };
 
   return (
     <ChartContainer
@@ -125,35 +133,20 @@ const CategoryBarChart = ({
       >
         <CartesianGrid vertical={isVertical} horizontal={!isVertical} />
         {isVertical ? (
-          <>
-            <XAxis
-              type="number"
-              tickLine={false}
-              axisLine={false}
-              tickFormatter={axisValueFormatter}
-            />
-            <YAxis
-              type="category"
-              dataKey={index}
-              tickLine={false}
-              axisLine={false}
-              width={yAxisWidth}
-            />
-          </>
+          <XAxis type="number" {...valueAxisProps} />
         ) : (
-          <>
-            <XAxis dataKey={index} tickLine={false} axisLine={false} />
-            <YAxis
-              tickLine={false}
-              axisLine={false}
-              width={yAxisWidth}
-              tickFormatter={axisValueFormatter}
-            />
-          </>
+          <XAxis {...categoryAxisProps} />
+        )}
+        {isVertical ? (
+          <YAxis type="category" width={yAxisWidth} {...categoryAxisProps} />
+        ) : (
+          <YAxis width={yAxisWidth} {...valueAxisProps} />
         )}
         <ChartTooltip
           content={
-            <ChartTooltipContent formatter={tooltipRow(valueFormatter)} />
+            <ChartTooltipContent
+              formatter={(value) => valueFormatter(Number(value))}
+            />
           }
         />
         {showLegend && (
@@ -200,6 +193,8 @@ const CategoryLineChart = ({
   showLegend?: boolean;
   className?: string;
 }): ReactNode => {
+  if (data.length === 0) return <EmptyChart className={className} />;
+
   const chartConfig = buildChartConfig(categories, colors);
 
   return (
@@ -218,7 +213,9 @@ const CategoryLineChart = ({
         />
         <ChartTooltip
           content={
-            <ChartTooltipContent formatter={tooltipRow(valueFormatter)} />
+            <ChartTooltipContent
+              formatter={(value) => valueFormatter(Number(value))}
+            />
           }
         />
         {showLegend && (
@@ -231,7 +228,8 @@ const CategoryLineChart = ({
             dataKey={category}
             stroke={chartConfig[category].color}
             strokeWidth={2}
-            dot={false}
+            // Show dots when there is a single point, which has no line
+            dot={data.length === 1}
           />
         ))}
       </LineChart>
@@ -262,47 +260,57 @@ const CategoryPieChart = ({
   valueFormatter?: ValueFormatter;
   className?: string;
 }): ReactNode => {
+  if (data.length === 0) return <EmptyChart className={className} />;
+
   const names = data.map((entry) =>
     String((entry as Record<string, unknown>)[index]),
   );
   const chartConfig = buildChartConfig(names, colors);
 
   return (
-    <ChartContainer
-      config={chartConfig}
-      className={cn("aspect-auto h-64 w-full", className)}
-    >
-      <PieChart>
-        <ChartTooltip
-          content={
-            <ChartTooltipContent
-              hideLabel
-              nameKey={index}
-              formatter={tooltipRow(valueFormatter)}
+    <div className={cn("flex flex-col gap-3", className)}>
+      <ChartContainer config={chartConfig} className="aspect-square h-48">
+        <PieChart>
+          <ChartTooltip
+            content={
+              <ChartTooltipContent
+                hideLabel
+                nameKey={index}
+                formatter={(value) => valueFormatter(Number(value))}
+              />
+            }
+          />
+          <Pie
+            data={data}
+            dataKey={category}
+            nameKey={index}
+            strokeWidth={2}
+            stroke="hsl(var(--background))"
+          >
+            {names.map((name) => (
+              <Cell key={name} fill={chartConfig[name].color} />
+            ))}
+          </Pie>
+        </PieChart>
+      </ChartContainer>
+      <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs">
+        {names.map((name) => (
+          <div key={name} className="flex items-center gap-1.5">
+            <div
+              className="h-2 w-2 shrink-0 rounded-[2px]"
+              style={{ backgroundColor: chartConfig[name].color }}
             />
-          }
-        />
-        <Pie
-          data={data}
-          dataKey={category}
-          nameKey={index}
-          strokeWidth={2}
-          stroke="hsl(var(--background))"
-        >
-          {names.map((name) => (
-            <Cell key={name} fill={chartConfig[name].color} />
-          ))}
-        </Pie>
-        <ChartLegend
-          content={<ChartLegendContent nameKey={index} className="flex-wrap" />}
-        />
-      </PieChart>
-    </ChartContainer>
+            {name}
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 
 /**
- * Horizontal list of labelled bars, sized relative to the largest value.
+ * Horizontal list of labelled bars, sorted by value and sized relative to
+ * the largest value.
  *
  * @param props.data - The entries to show, each with a name, value and optional colour.
  */
@@ -315,30 +323,38 @@ const BarList = ({
   valueFormatter?: ValueFormatter;
   className?: string;
 }): ReactNode => {
-  const maxValue = Math.max(...data.map((entry) => entry.value), 0);
+  const sortedData = [...data].sort((a, b) => b.value - a.value);
+  const maxValue = Math.max(...sortedData.map((entry) => entry.value), 0);
 
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      {data.map((entry) => (
-        <div
-          key={entry.name}
-          className="flex items-center justify-between gap-6 text-sm"
-        >
-          <div className="relative flex h-8 flex-1 items-center">
-            <div
-              className="absolute inset-y-0 left-0 rounded opacity-40 transition-all"
-              style={{
-                width: `${maxValue > 0 ? (entry.value / maxValue) * 100 : 0}%`,
-                backgroundColor: entry.color ?? "hsl(var(--primary))",
-              }}
-            />
-            <span className="relative truncate px-2">{entry.name}</span>
+      {sortedData.map((entry) => {
+        const width =
+          maxValue > 0 && entry.value > 0
+            ? Math.max((entry.value / maxValue) * 100, 2)
+            : 0;
+
+        return (
+          <div
+            key={entry.name}
+            className="flex items-center justify-between gap-6 text-sm"
+          >
+            <div className="relative flex h-8 flex-1 items-center">
+              <div
+                className="absolute inset-y-0 left-0 rounded opacity-40 transition-all"
+                style={{
+                  width: `${width}%`,
+                  backgroundColor: entry.color ?? "hsl(var(--primary))",
+                }}
+              />
+              <span className="relative truncate px-2">{entry.name}</span>
+            </div>
+            <span className="whitespace-nowrap tabular-nums">
+              {valueFormatter(entry.value)}
+            </span>
           </div>
-          <span className="whitespace-nowrap tabular-nums">
-            {valueFormatter(entry.value)}
-          </span>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 };

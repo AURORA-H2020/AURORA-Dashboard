@@ -60,7 +60,7 @@ const ConsumptionAverageCompare = ({
 
     return {
       name: t(countriesMapping.find((e) => e.ID === country)?.name ?? ""),
-      color: countriesMapping.find((e) => e.ID === country)?.color || "white",
+      color: countriesMapping.find((e) => e.ID === country)?.color || "#94a3b8",
       countryKey: countriesMapping.find((e) => e.ID === country)?.name || "",
       value: getAverage(categories, metaDataSummary, selectedEnergyMode),
     };
@@ -74,7 +74,7 @@ const ConsumptionAverageCompare = ({
     dataset.push({
       name: t("country.allSelectedCountries"),
       countryKey: "global",
-      color: "slate-800",
+      color: "#1e293b", // slate-800
       value: getAverage(categories, globalAverages, selectedEnergyMode),
     });
   }

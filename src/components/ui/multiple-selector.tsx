@@ -431,6 +431,7 @@ const MultipleSelector = React.forwardRef<
                             <CommandItem
                               key={option.value}
                               value={option.value}
+                              keywords={[String(option.label)]}
                               disabled={option.disable}
                               onMouseDown={(e) => {
                                 e.preventDefault();
