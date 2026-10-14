@@ -45,7 +45,7 @@ const SiteOverview = () => {
 
   const { pvPlants, isLoadingPvPlants } = useFirebaseData();
 
-  if (!pvPlants && isLoadingPvPlants) return <LoadingSpinner />;
+  if (isLoadingPvPlants) return <LoadingSpinner />;
 
   if (pvPlants.length === 0) {
     return (

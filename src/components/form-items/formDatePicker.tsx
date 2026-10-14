@@ -1,3 +1,4 @@
+import { addYears } from "date-fns";
 import { Timestamp } from "firebase/firestore";
 import { CalendarIcon, XIcon } from "lucide-react";
 import { useFormatter } from "next-intl";
@@ -33,7 +34,7 @@ import { cn } from "@/lib/utilities";
  * @param showTimePicker - Whether or not to show a TimePicker below the Calendar (defaults to false)
  * @param showClearButton - Whether or not to show a clear button to clear the selected date (defaults to false)
  * @param minDate - The minimum selectable date (defaults to 1990-01-01)
- * @param maxDate - The maximum selectable date (defaults to 2030-01-01)
+ * @param maxDate - The maximum selectable date (defaults to five years from today)
  * @param className - Additional CSS class names to apply to the component
  */
 const FormDatePicker = ({
@@ -44,7 +45,7 @@ const FormDatePicker = ({
   showTimePicker = false,
   showClearButton = false,
   minDate = new Date("1990-01-01"),
-  maxDate = new Date("2030-01-01"),
+  maxDate = addYears(new Date(), 5),
   className,
   required = false,
 }: {

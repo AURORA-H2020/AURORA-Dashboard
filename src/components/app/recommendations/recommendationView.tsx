@@ -22,6 +22,7 @@ import { Button, buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { deleteDocumentById } from "@/firebase/firestore/delete-document-by-id";
 import { setRecommendationReadStatus } from "@/firebase/hooks/recommendations-hooks";
+import { isHttpUrl } from "@/lib/utilities";
 import { Recommendation } from "@/models/firestore/recommendation/recommendation";
 import { useAuthContext } from "@/providers/context/authContext";
 
@@ -113,7 +114,7 @@ const RecommendationView = ({
         <p className="whitespace-pre-wrap">{recommendation.message}</p>
       </div>
 
-      {recommendation.link && (
+      {isHttpUrl(recommendation.link) && (
         <Flex justify="end">
           <Link
             href={recommendation.link}

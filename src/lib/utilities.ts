@@ -444,3 +444,19 @@ export const dateToKebabCase = (
   }
   return `${year}-${month}-${day}`;
 };
+
+/**
+ * Checks whether a URL is an absolute http(s) URL, so it is safe to use as a link target.
+ *
+ * @param {string | undefined} url - The URL to check.
+ * @return {boolean} Whether the URL uses the http or https protocol.
+ */
+export const isHttpUrl = (url: string | undefined): url is string => {
+  if (!url) return false;
+  try {
+    const { protocol } = new URL(url);
+    return protocol === "http:" || protocol === "https:";
+  } catch {
+    return false;
+  }
+};

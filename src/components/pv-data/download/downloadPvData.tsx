@@ -25,7 +25,7 @@ const DownloadPvData = ({
 
   const { pvPlants, isLoadingPvPlants } = useFirebaseData();
 
-  if (!pvPlants && isLoadingPvPlants) return null;
+  if (isLoadingPvPlants) return null;
 
   const siteDetails = pvPlants && pvPlants.find((s) => s.plantId === site);
 

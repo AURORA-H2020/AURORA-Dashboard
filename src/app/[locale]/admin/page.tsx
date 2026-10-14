@@ -29,6 +29,7 @@ const AdminPage = (): ReactNode => {
 
   // Hook to fetch the latest user data from Firestore
   const [userData, setUserData] = useState<BackupUserData | null>(null);
+  const [isLoadingUserData, setIsLoadingUserData] = useState<boolean>(true);
 
   // Hook to fetch the list of blacklisted users from Firestore
   const blacklistedUsers =
@@ -45,13 +46,17 @@ const AdminPage = (): ReactNode => {
     if (!user) {
       return;
     }
-    getLatestUserData().then((data) => {
-      setUserData(data as BackupUserData);
-    });
+    getLatestUserData()
+      .then((data) => {
+        setUserData(data);
+      })
+      .finally(() => {
+        setIsLoadingUserData(false);
+      });
   }, [user]);
 
-  // If the data is still being fetched or if the user data is not available, show a loading spinner
-  if (loading || !userData) {
+  // If the data is still being fetched, show a loading spinner
+  if (loading || isLoadingUserData) {
     return <LoadingSpinner />;
   }
 
@@ -66,7 +71,11 @@ const AdminPage = (): ReactNode => {
         <UpdatePvData />
       </TabsContent>
       <TabsContent value="users">
-        <UsersTable userData={userData} blacklistData={blacklistData} />
+        {userData ? (
+          <UsersTable userData={userData} blacklistData={blacklistData} />
+        ) : (
+          <p className="text-muted-foreground">No user data backup found.</p>
+        )}
       </TabsContent>
     </Tabs>
   );
