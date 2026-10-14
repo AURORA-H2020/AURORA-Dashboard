@@ -32,7 +32,6 @@
       "success": "¡Bienvenido a AURORA!",
       "error": "Se ha producido un error. Por favor, compruebe sus credenciales.",
       "logout": {
-        "success": "Ha cerrado la sesión correctamente. Hasta pronto!",
         "error": "Se ha producido un error al cerrar la sesión. Por favor, inténtelo de nuevo."
       }
     },

@@ -43,15 +43,11 @@ const NavigationBar = (): ReactElement => {
   const { userCityData } = useFirebaseData();
 
   /**
-   * Logs the user out and redirects them to the home page.
-   *
-   * @return {Promise<void>} A promise that resolves when the user is logged out and redirected.
+   * Logs the user out. On success the page reloads, so only failures are shown.
    */
   const handleLogout = () => {
     logout().then((success) => {
-      if (success) {
-        toast.success(t("toast.auth.logout.success"));
-      } else {
+      if (!success) {
         toast.error(t("toast.auth.logout.error"));
       }
     });

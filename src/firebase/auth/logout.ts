@@ -5,21 +5,19 @@ import { firebaseApp } from "@/firebase/config";
 const auth = getAuth(firebaseApp);
 
 /**
- * Asynchronously logs out the user and refreshes the page.
+ * Asynchronously logs out the user and, on success, refreshes the page.
  *
- * @return {Promise<boolean>} A Promise that resolves when the logout process is complete.
+ * @return {Promise<boolean>} A Promise that resolves to false if the logout failed.
  */
 export async function logout(): Promise<boolean> {
   return await signOut(auth)
     .then(() => {
+      // Refresh the page to clear data from local storage
+      window.location.reload();
       return true;
     })
     .catch((error) => {
       console.error("Logout failed", error);
       return false;
-    })
-    .finally(() => {
-      // Refresh the page to clear data from local storage
-      window.location.reload();
     });
 }

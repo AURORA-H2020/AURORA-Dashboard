@@ -32,7 +32,6 @@
       "success": "Dobrodošli v AURORI!",
       "error": "Prišlo je do napake. Preverite svoja pooblastila.",
       "logout": {
-        "success": "Uspešno si se odjavil. Na svidenje!",
         "error": "Pri odjavi je prišlo do napake. Prosimo, ponovi poskus."
       }
     },

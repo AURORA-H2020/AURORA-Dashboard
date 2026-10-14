@@ -32,7 +32,6 @@
       "success": "Velkommen til AURORA!",
       "error": "Der opstod en fejl. Tjek venligst dine brugeroplysninger.",
       "logout": {
-        "success": "Du er logget ud. Farvel og tak!",
         "error": "Der opstod en fejl, da du blev logget ud. Prøv venligst igen."
       }
     },

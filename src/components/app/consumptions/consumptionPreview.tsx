@@ -99,13 +99,15 @@ const ConsumptionPreview = ({
     setAlertOpen(false);
     setModalOpen(false);
 
-    deleteDocumentById(user, consumption.id, "consumptions").then((success) => {
-      if (success) {
-        toast.success(t("toast.deleteConsumption.success"));
-      } else {
-        toast.error(t("toast.deleteConsumption.error"));
-      }
-    });
+    deleteDocumentById(user, consumption.id, "consumptions").then(
+      ({ success }) => {
+        if (success) {
+          toast.success(t("toast.deleteConsumption.success"));
+        } else {
+          toast.error(t("toast.deleteConsumption.error"));
+        }
+      },
+    );
   };
 
   return (

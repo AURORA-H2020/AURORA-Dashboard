@@ -79,7 +79,7 @@ const ViewPvInvestmentModal = ({
     setIsAlertOpen(false);
 
     deleteDocumentById(user, pvInvestment.id, "pv-investments").then(
-      (success) => {
+      ({ success }) => {
         if (success) {
           toast.success(t("toast.deletePvInvestment.success"));
         } else {
