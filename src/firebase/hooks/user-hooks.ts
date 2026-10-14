@@ -66,16 +66,19 @@ export const useUserRoles = (
   const [isAdminLoading, setIsAdminLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    if (!userId) return;
+    if (!userId) {
+      setIsAdmin(false);
+      setIsAdminLoading(false);
+      return;
+    }
+
+    setIsAdminLoading(true);
 
     const docRef = doc(firestore, "user-roles", userId);
     const unsubscribe = onSnapshot(
       docRef,
       (docSnapshot) => {
-        if (docSnapshot.exists()) {
-          const data = docSnapshot.data();
-          setIsAdmin(data?.isAdmin || false);
-        }
+        setIsAdmin(docSnapshot.data()?.isAdmin || false);
         setIsAdminLoading(false);
       },
       () => {
