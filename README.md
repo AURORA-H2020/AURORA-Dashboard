@@ -2,9 +2,6 @@
 
 # AURORA Web App & Dashboard
 
-[![Upload Localizations to LingoHub](https://github.com/AURORA-H2020/AURORA-Dashboard/actions/workflows/upload_localizations_to_lingo_hub.yml/badge.svg)](https://github.com/AURORA-H2020/AURORA-Dashboard/actions/workflows/upload_localizations_to_lingo_hub.yml)
-[![Import Localizations from LingoHub](https://github.com/AURORA-H2020/AURORA-Dashboard/actions/workflows/import_localizations_from_lingo_hub.yml/badge.svg)](https://github.com/AURORA-H2020/AURORA-Dashboard/actions/workflows/import_localizations_from_lingo_hub.yml)
-
 **[Website](https://www.aurora-h2020.eu/) | [Dashboard](https://dashboard.aurora-h2020.eu)**
 
 ## About the Project
@@ -77,6 +74,10 @@ The AURORA Web App & Dashboard is built with modern web technologies, leveraging
     npm run dev
     ```
     Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Translations
+
+Translations live in `messages/` as one JSON file per locale. `messages/en-GB.json` is the source of truth: add or change keys there first, then make the same change in every other locale file so all files keep the same set of keys.
 
 ## Project Structure
 
