@@ -1,5 +1,4 @@
 import { Flex, Text } from "@radix-ui/themes";
-import { Icon, Metric } from "@tremor/react";
 import { useFormatter } from "next-intl";
 import { ElementType, ReactNode } from "react";
 import { cn } from "@/lib/utilities";
@@ -22,7 +21,7 @@ const DetailedCard = ({
   measure,
   categories,
   title,
-  icon,
+  icon: Icon,
   className = "",
 }: {
   metaData: MetaData | undefined;
@@ -48,11 +47,11 @@ const DetailedCard = ({
 
   return (
     <Flex className={cn(className, "space-x-6")} justify="start">
-      {icon && <Icon icon={icon} size="lg" />}
+      {Icon && <Icon className="h-9 w-9 shrink-0 p-1.5 text-primary" />}
 
       <div>
         <Text>{title}</Text>
-        <Metric>{format.number(metricValue)}</Metric>
+        <p className="text-3xl font-semibold">{format.number(metricValue)}</p>
       </div>
     </Flex>
   );

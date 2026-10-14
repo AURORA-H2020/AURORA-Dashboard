@@ -1,9 +1,9 @@
 "use client";
 
 import { Flex, Heading } from "@radix-ui/themes";
-import { BarList } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { ReactNode, useState } from "react";
+import { BarList } from "@/components/charts/categoryCharts";
 import { LoadingSpinner } from "@/components/ui/loading";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { countriesMapping } from "@/lib/constants/common-constants";
@@ -114,7 +114,6 @@ const ConsumptionAverageCompare = ({
         <BarList
           className="mt-4"
           data={dataset}
-          showAnimation={true}
           valueFormatter={
             selectedEnergyMode == "carbon"
               ? valueFormatterCarbon

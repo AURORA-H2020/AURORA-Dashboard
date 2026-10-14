@@ -1,9 +1,9 @@
 "use client";
 
-import { BarChart } from "@tremor/react";
 import convert from "convert";
 import { useFormatter, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { CategoryBarChart } from "@/components/charts/categoryCharts";
 import { consumptionMapping } from "@/lib/constants/consumption-constants";
 import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
@@ -135,7 +135,7 @@ const ConsumptionSummaryChart = ({
   }, [measure, consumptionSummary, format, t, userData]);
 
   return (
-    <BarChart
+    <CategoryBarChart
       className="mt-4"
       data={currentSummary ?? []}
       index="monthName"
@@ -147,7 +147,7 @@ const ConsumptionSummaryChart = ({
               valueFormatterCarbon(value, userData?.settings?.unitSystem)
           : valueFormatterEnergy
       }
-      stack={true}
+      stacked
     />
   );
 };

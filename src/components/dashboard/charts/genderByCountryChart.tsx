@@ -1,8 +1,8 @@
 import { Flex, Heading } from "@radix-ui/themes";
-import { BarChart } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { ReactNode, useEffect, useState } from "react";
 import { PlaceholderCard } from "@/components/app/common/placeholderCard";
+import { CategoryBarChart } from "@/components/charts/categoryCharts";
 import {
   Select,
   SelectContent,
@@ -15,7 +15,6 @@ import {
   genderMappings,
 } from "@/lib/constants/common-constants";
 import {
-  cn,
   valueFormatterAbsolute,
   valueFormatterPercentage,
 } from "@/lib/utilities";
@@ -129,11 +128,10 @@ const GenderByCountryChart = ({
           </SelectContent>
         </Select>
       </Flex>
-      <BarChart
-        className={cn("mt-4")}
-        style={{ height: `${genderData.length * 50}px` }}
+      <CategoryBarChart
+        className="mt-4"
+        style={{ height: `${genderData.length * 50 + 80}px` }}
         yAxisWidth={80}
-        showAnimation={true}
         data={genderData ?? []}
         index="country"
         categories={genderMappings.map((gender) => t(gender.label))}
@@ -143,11 +141,9 @@ const GenderByCountryChart = ({
             ? valueFormatterAbsolute
             : valueFormatterPercentage
         }
-        maxValue={calculationMode === "absolute" ? undefined : 1}
-        stack={true}
-        relative={true}
+        stacked
+        relative
         layout="vertical"
-        showLegend={true}
       />
     </>
   );

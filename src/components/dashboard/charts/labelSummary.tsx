@@ -1,12 +1,12 @@
 "use client";
 
 import { Flex, Heading } from "@radix-ui/themes";
-import { BarChart } from "@tremor/react";
 import { Info } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { ReactNode, useEffect, useState } from "react";
 import { LabelInfoModal } from "@/components/app/common/modals/labelInfoModal";
 import { PlaceholderCard } from "@/components/app/common/placeholderCard";
+import { CategoryBarChart } from "@/components/charts/categoryCharts";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -20,7 +20,6 @@ import { countriesMapping } from "@/lib/constants/common-constants";
 import { labelMappings } from "@/lib/constants/consumption-constants";
 import { annualLabelData } from "@/lib/transformData";
 import {
-  cn,
   getYearsInSummary,
   valueFormatterAbsolute,
   valueFormatterPercentage,
@@ -211,11 +210,10 @@ const LabelSummary = ({
           </Select>
         </Flex>
       </Flex>
-      <BarChart
-        className={cn("mt-4")}
-        style={{ height: `${transformedData.length * 50}px` }}
+      <CategoryBarChart
+        className="mt-4"
+        style={{ height: `${transformedData.length * 50 + 80}px` }}
         yAxisWidth={80}
-        showAnimation={true}
         data={transformedData ?? []}
         index="country"
         categories={labelMappings.map((label) => label.label)}
@@ -225,11 +223,9 @@ const LabelSummary = ({
             ? valueFormatterAbsolute
             : valueFormatterPercentage
         }
-        maxValue={calculationMode === "absolute" ? undefined : 1}
-        stack={true}
-        relative={true}
+        stacked
+        relative
         layout="vertical"
-        showLegend={true}
       />
     </>
   );
