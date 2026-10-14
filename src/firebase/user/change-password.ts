@@ -22,7 +22,6 @@ export const changePassword = async (
       if (reauth.success && reauth.reauthUser) {
         await updatePassword(reauth.reauthUser, newPassword)
           .then(() => {
-            console.log("Password updated successfully");
             success = true;
           })
           .catch((error) => {

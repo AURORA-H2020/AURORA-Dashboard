@@ -85,7 +85,7 @@ const RecurringConsumptionPreview = ({
       user,
       recurringConsumption.id,
       "recurring-consumptions",
-    ).then((success) => {
+    ).then(({ success }) => {
       if (success) {
         toast.success(t("toast.deleteRecurringConsumption.success"));
       } else {

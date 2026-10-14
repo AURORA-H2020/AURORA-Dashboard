@@ -25,17 +25,17 @@ const DownloadPvData = ({
 
   const { pvPlants, isLoadingPvPlants } = useFirebaseData();
 
-  if (!pvPlants && isLoadingPvPlants) return null;
+  if (isLoadingPvPlants) return null;
 
   const siteDetails = pvPlants && pvPlants.find((s) => s.plantId === site);
 
+  const city = citiesMappings.find((c) => c.ID === siteDetails?.city);
+  const country = countriesMapping.find((c) => c.ID === siteDetails?.country);
+
   const jsonData = {
-    city: t(citiesMappings.find((c) => c.ID === siteDetails?.city)?.name),
-    country: t(
-      countriesMapping.find((c) => c.ID === siteDetails?.country)?.name,
-    ),
-    countryCode: countriesMapping.find((c) => c.ID === siteDetails?.country)
-      ?.code,
+    city: city ? t(city.name) : undefined,
+    country: country ? t(country.name) : undefined,
+    countryCode: country?.code,
     name: siteDetails?.name,
     installationDate: siteDetails?.installationDate,
     plantId: siteDetails?.plantId,

@@ -1,9 +1,9 @@
 "use client";
 
 import { Flex, Heading } from "@radix-ui/themes";
-import { BarList } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { ReactNode, useState } from "react";
+import { BarList } from "@/components/charts/categoryCharts";
 import { LoadingSpinner } from "@/components/ui/loading";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { countriesMapping } from "@/lib/constants/common-constants";
@@ -59,8 +59,8 @@ const ConsumptionAverageCompare = ({
     );
 
     return {
-      name: t(countriesMapping.find((e) => e.ID === country)?.name),
-      color: countriesMapping.find((e) => e.ID === country)?.color || "white",
+      name: t(countriesMapping.find((e) => e.ID === country)?.name ?? ""),
+      color: countriesMapping.find((e) => e.ID === country)?.color || "#94a3b8",
       countryKey: countriesMapping.find((e) => e.ID === country)?.name || "",
       value: getAverage(categories, metaDataSummary, selectedEnergyMode),
     };
@@ -74,7 +74,7 @@ const ConsumptionAverageCompare = ({
     dataset.push({
       name: t("country.allSelectedCountries"),
       countryKey: "global",
-      color: "slate-800",
+      color: "#1e293b", // slate-800
       value: getAverage(categories, globalAverages, selectedEnergyMode),
     });
   }
@@ -114,7 +114,6 @@ const ConsumptionAverageCompare = ({
         <BarList
           className="mt-4"
           data={dataset}
-          showAnimation={true}
           valueFormatter={
             selectedEnergyMode == "carbon"
               ? valueFormatterCarbon

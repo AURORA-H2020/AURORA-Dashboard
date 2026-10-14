@@ -32,7 +32,6 @@
       "success": "Willkommen bei AURORA!",
       "error": "Es ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Anmeldedaten.",
       "logout": {
-        "success": "Sie haben sich erfolgreich abgemeldet. Auf Wiedersehen!",
         "error": "Bei der Abmeldung ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut."
       }
     },
@@ -43,7 +42,8 @@
       "updatedError": "Bei der Aktualisierung Ihres Verbrauchs ist ein Fehler aufgetreten"
     },
     "changeEmail": {
-      "success": "Ihre E-Mail wurde erfolgreich aktualisiert",
+      "successTitle": "Bitte bestätigen Sie Ihre neue E-Mail-Adresse",
+      "successDescription": "Wir haben einen Link an {email} gesendet. Ihre E-Mail-Adresse wird geändert, sobald Sie ihn öffnen.",
       "errorTitle": "Bei der Aktualisierung Ihrer E-Mail ist ein Fehler aufgetreten",
       "errorDescription": "Bitte überprüfen Sie Ihr aktuelles Passwort und versuchen Sie es erneut."
     },
@@ -160,7 +160,6 @@
       "selectBarToSeeDailyBreakdown": "Wählen Sie einen Balken, um eine Aufschlüsselung für einen bestimmten Tag zu sehen.",
       "unsupportedRegionMessage": "Diese Funktion wird derzeit in Ihrer Region nicht unterstützt.",
       "solarPowerProduction": "Solarenergieproduktion",
-      "unsupportedSearchParams": "Nicht unterstützte Suchparameter",
       "lifetimeProduction": "Gesamtproduktion"
     }
   },
@@ -345,7 +344,6 @@
         "editInvestmentDisclaimer": "Wenn Sie zu einem späteren Zeitpunkt eine zusätzliche Investition getätigt haben, fügen Sie bitte stattdessen eine neue Investition hinzu. Die Bearbeitung Ihrer bestehenden Investitionen kann zu einer ungenauen Erfassung führen.",
         "addInvestmentDisclaimer": "Die Eingabe Ihrer Anlagedaten dient ausschliesslich der Erfassung. Dies stellt keine tatsächliche Investition oder verbindliche Bestellung in irgendeiner Form dar.",
         "noteDescription": "Fügen Sie eine Notiz zu Ihrer Investition als persönliche Referenz hinzu.",
-        "investmentDescription": "Der von Ihnen investierte Geldbetrag",
         "shareDescription": "Wie viel der Kapazität der Solaranlage Ihre Investition ausmacht. Diese Informationen finden Sie in den Unterlagen, die Sie bei Ihrer Investition erhalten haben.",
         "deleteInvestmentDialog": {
           "title": "Sind Sie sicher, dass Sie diese Investition löschen wollen?",

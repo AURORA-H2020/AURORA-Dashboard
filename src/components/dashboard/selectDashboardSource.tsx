@@ -55,7 +55,10 @@ export const SelectDashboardSource = ({
 
   const [date, setDate] = useState<Date | undefined>(new Date(currentFileDate));
 
-  const handleDateChange = (selectedDate) => {
+  const handleDateChange = (selectedDate: Date | undefined) => {
+    // Clicking the already selected date deselects it, keep the current file
+    if (!selectedDate) return;
+
     const thisFile = validDates.find((validDate) => {
       return (
         selectedDate.getDate() === validDate?.date.getDate() &&
@@ -63,8 +66,10 @@ export const SelectDashboardSource = ({
         selectedDate.getFullYear() === validDate?.date.getFullYear()
       );
     });
-    router.push(pathname + "?" + createQueryString("file", thisFile?.file));
-    setDate(thisFile?.date);
+    if (!thisFile) return;
+
+    router.push(pathname + "?" + createQueryString("file", thisFile.file));
+    setDate(thisFile.date);
   };
 
   const extractDate = (filename) => {

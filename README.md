@@ -2,9 +2,6 @@
 
 # AURORA Web App & Dashboard
 
-[![Upload Localizations to LingoHub](https://github.com/AURORA-H2020/AURORA-Dashboard/actions/workflows/upload_localizations_to_lingo_hub.yml/badge.svg)](https://github.com/AURORA-H2020/AURORA-Dashboard/actions/workflows/upload_localizations_to_lingo_hub.yml)
-[![Import Localizations from LingoHub](https://github.com/AURORA-H2020/AURORA-Dashboard/actions/workflows/import_localizations_from_lingo_hub.yml/badge.svg)](https://github.com/AURORA-H2020/AURORA-Dashboard/actions/workflows/import_localizations_from_lingo_hub.yml)
-
 **[Website](https://www.aurora-h2020.eu/) | [Dashboard](https://dashboard.aurora-h2020.eu)**
 
 ## About the Project
@@ -30,12 +27,13 @@ This repository contains the **Web Application** and **Interactive Dashboard** f
 
 The AURORA Web App & Dashboard is built with modern web technologies, leveraging **Next.js** for the framework and **Firebase** for backend services.
 
-*   **Framework**: [Next.js 14](https://nextjs.org/) (App Router)
+*   **Framework**: [Next.js 16](https://nextjs.org/) (App Router) with [React 19](https://react.dev/)
 *   **Language**: [TypeScript](https://www.typescriptlang.org/)
 *   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-*   **UI Components**: [Radix UI](https://www.radix-ui.com/), [Tremor](https://www.tremor.so/) (for charts & dashboard)
+*   **UI Components**: [shadcn/ui](https://ui.shadcn.com/) and [Radix UI](https://www.radix-ui.com/), with [Recharts](https://recharts.org/) for charts
 *   **Icons**: [Lucide React](https://lucide.dev/), [FontAwesome](https://fontawesome.com/)
 *   **Forms & Validation**: [React Hook Form](https://react-hook-form.com/), [Zod](https://zod.dev/)
+*   **Linting & Formatting**: [Biome](https://biomejs.dev/)
 *   **Backend / Cloud**:
     *   [Firebase Authentication](https://firebase.google.com/docs/auth)
     *   [Firebase Firestore](https://firebase.google.com/docs/firestore)
@@ -45,7 +43,7 @@ The AURORA Web App & Dashboard is built with modern web technologies, leveraging
 ## Installation & Setup
 
 ### Prerequisites
-*   [Node.js](https://nodejs.org/) (v20.0.0 or later)
+*   [Node.js](https://nodejs.org/) (v20.9.0 or later)
 *   [npm](https://www.npmjs.com/)
 
 ### Getting Started
@@ -77,6 +75,10 @@ The AURORA Web App & Dashboard is built with modern web technologies, leveraging
     npm run dev
     ```
     Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Translations
+
+Translations live in `messages/` as one JSON file per locale. `messages/en-GB.json` is the source of truth: add or change keys there first, then make the same change in every other locale file so all files keep the same set of keys.
 
 ## Project Structure
 

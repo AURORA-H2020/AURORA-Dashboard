@@ -78,6 +78,7 @@ const ChartStyle = ({ id, config }: { id: string; config: ChartConfig }) => {
 
   return (
     <style
+      // biome-ignore lint/security/noDangerouslySetInnerHtml: CSS built from the static chart config
       dangerouslySetInnerHTML={{
         __html: Object.entries(THEMES)
           .map(
@@ -235,7 +236,7 @@ const ChartTooltipContent = React.forwardRef<
                         {itemConfig?.label || item.name}
                       </span>
                     </div>
-                    {item.value && (
+                    {item.value !== undefined && (
                       <span className="ml-1 font-medium tabular-nums text-foreground">
                         {formatter && item.name
                           ? formatter(
@@ -361,9 +362,9 @@ function getPayloadConfigFromPayload(
 
 export {
   ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
   ChartLegend,
   ChartLegendContent,
   ChartStyle,
+  ChartTooltip,
+  ChartTooltipContent,
 };

@@ -35,8 +35,8 @@ const Footer = (): ReactNode => {
             justify="between"
             align="center"
           >
-            {footerLinks.map((item, index) => (
-              <Button key={index} variant="link">
+            {footerLinks.map((item) => (
+              <Button key={item.path} variant="link" asChild>
                 <Link target="_blank" rel="noopener" href={item.path}>
                   {t(item.title)}
                 </Link>

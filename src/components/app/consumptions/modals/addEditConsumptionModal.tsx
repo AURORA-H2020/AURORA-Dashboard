@@ -5,7 +5,7 @@ import { forwardRef, ReactNode, useState } from "react";
 import { ElectricityForm } from "@/components/app/consumptions/forms/electricityForm";
 import { HeatingForm } from "@/components/app/consumptions/forms/heatingForm";
 import { TransportationForm } from "@/components/app/consumptions/forms/transportationForm";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { consumptionMapping } from "@/lib/constants/consumption-constants";
@@ -46,6 +46,11 @@ const AddEditConsumptionModal = forwardRef(
         </div>
         <Dialog open={isModalOpen} onOpenChange={handleCloseModal}>
           <DialogContent className="sm:max-w-lg">
+            <DialogTitle className="sr-only">
+              {consumption && !isDuplication
+                ? t("app.updateConsumption")
+                : t("app.addConsumption")}
+            </DialogTitle>
             <ScrollArea className="max-h-[80vh]">
               <Tabs
                 value={currentTab}

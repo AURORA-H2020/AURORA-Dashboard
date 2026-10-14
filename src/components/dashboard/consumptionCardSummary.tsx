@@ -44,7 +44,7 @@ const ConsumptionCardSummary = ({
               />
             ) : null}
             <AlertTitle>
-              {t(consumptionAttributes?.label)}:{" "}
+              {t(consumptionAttributes?.label ?? "")}:{" "}
               <Strong>{format.number(data.count ?? 0)}</Strong>
             </AlertTitle>
           </Alert>

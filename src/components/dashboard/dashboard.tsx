@@ -112,7 +112,7 @@ const Dashboard = ({
 
     // Update the state with the filtered data
     setMetaData(updatedMetaData);
-  }, [selectedCountries, globalSummaryData, selectedCategories]);
+  }, [selectedCountries, globalSummaryData]);
 
   return (
     <>

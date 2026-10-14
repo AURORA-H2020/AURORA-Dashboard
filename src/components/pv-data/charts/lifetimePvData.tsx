@@ -7,6 +7,7 @@ import { PvPanelDetails } from "@/components/pv-data/panels/pvPanelDetails";
 import { ProductionSummary } from "@/components/pv-data/panels/pvPanelProductionSummary";
 import { PvDataGrid } from "@/components/pv-data/pvDataGrid";
 import { ChartConfig } from "@/components/ui/chart";
+import { fetchPvApi } from "@/lib/pvApi";
 import { dateToKebabCase } from "@/lib/utilities";
 
 interface QpvApiResponse {
@@ -16,32 +17,28 @@ interface QpvApiResponse {
   }[];
 }
 
+interface QpvPlantConfResponse {
+  general: {
+    data: {
+      PVET_start_date: string;
+    }[];
+  };
+}
+
 const LifetimePvData = async ({ site }: { site: string }) => {
   const t = await getTranslations();
   const format = await getFormatter();
 
-  const res = await fetch(
-    `${process.env.PV_API_BASE_URL}/v1/plants/${site}/engine-plant-conf`,
-    {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${process.env.PV_API_TOKEN}`,
-      },
-      next: {
-        revalidate: 3600,
-      },
-    },
+  const plantConf = await fetchPvApi<QpvPlantConfResponse>(
+    site,
+    "engine-plant-conf",
   );
 
-  const {
-    general: { data: generalData },
-  } = await res.json();
+  const startDate = plantConf?.general?.data?.[0]?.PVET_start_date;
 
-  const startDate = generalData[0].PVET_start_date;
-
-  const apiUrl = new URL(
-    `${process.env.PV_API_BASE_URL}/v1/plants/${site}/get-kpi-lt`,
-  );
+  if (!startDate || Number.isNaN(new Date(startDate).getTime())) {
+    return <PlaceholderCard>{t("error.noData")}</PlaceholderCard>;
+  }
 
   const searchParams = new URLSearchParams({
     device: "GL",
@@ -53,19 +50,14 @@ const LifetimePvData = async ({ site }: { site: string }) => {
     vars: "Ep",
   });
 
-  const response = await fetch(apiUrl + "?" + searchParams, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${process.env.PV_API_TOKEN}`,
-    },
-    next: {
-      revalidate: 3600,
-    },
-  });
+  const response = await fetchPvApi<QpvApiResponse>(
+    site,
+    "get-kpi-lt",
+    searchParams,
+  );
+  const rawData = response?.data;
 
-  const { data: rawData } = (await response.json()) as QpvApiResponse;
-
-  if (!rawData || rawData.length === 0) {
+  if (!Array.isArray(rawData) || rawData.length === 0) {
     return <PlaceholderCard>{t("error.noData")}</PlaceholderCard>;
   }
 

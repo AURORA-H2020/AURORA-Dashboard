@@ -1,4 +1,3 @@
-import { Color } from "@tremor/react";
 import {
   CountryMapping,
   GenderMapping,
@@ -8,7 +7,6 @@ import {
   UnitSystem,
   Weekdays,
 } from "@/models/constants";
-import { CalculationMode, EnergyMode } from "@/models/dashboard-data";
 import { labelMappings } from "./consumption-constants";
 
 /**
@@ -45,28 +43,24 @@ export const supportedLocales: Locale[] = [
   },
 ];
 
-export const allTremorColours: Color[] = [
-  "red",
-  "orange",
-  "amber",
-  "yellow",
-  "lime",
-  "green",
-  "emerald",
-  "teal",
-  "cyan",
-  "sky",
-  "blue",
-  "indigo",
-  "violet",
-  "purple",
-  "fuchsia",
-  "pink",
-  "rose",
-  "rose",
-  "rose",
-  "rose",
-  "rose",
+export const chartColours: string[] = [
+  "#ef4444", // red-500
+  "#f97316", // orange-500
+  "#f59e0b", // amber-500
+  "#eab308", // yellow-500
+  "#84cc16", // lime-500
+  "#22c55e", // green-500
+  "#10b981", // emerald-500
+  "#14b8a6", // teal-500
+  "#06b6d4", // cyan-500
+  "#0ea5e9", // sky-500
+  "#3b82f6", // blue-500
+  "#6366f1", // indigo-500
+  "#8b5cf6", // violet-500
+  "#a855f7", // purple-500
+  "#d946ef", // fuchsia-500
+  "#ec4899", // pink-500
+  "#f43f5e", // rose-500
 ];
 
 export const externalLinks = {
@@ -90,7 +84,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.denmark"),
     nameSpecial: t("country.denmark"),
     code: "DK",
-    color: "emerald-400",
+    color: "#34d399",
     cities: [{ ID: "Au1oUV9pAEtSCu04cfCX", name: t("city.aarhus") }],
   },
   {
@@ -98,7 +92,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.portugal"),
     nameSpecial: t("country.portugal"),
     code: "PT",
-    color: "cyan-500",
+    color: "#06b6d4",
     cities: [{ ID: "YIyf65PquFxluWhAAo5C", name: t("city.evora") }],
   },
   {
@@ -106,7 +100,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.slovenia"),
     nameSpecial: t("country.slovenia"),
     code: "SI",
-    color: "pink-500",
+    color: "#ec4899",
     cities: [{ ID: "FJyeCLprBuOqacpvu3LJ", name: t("city.ljubljana") }],
   },
   {
@@ -114,7 +108,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.spain"),
     nameSpecial: t("country.spain"),
     code: "ES",
-    color: "rose-500",
+    color: "#f43f5e",
     cities: [{ ID: "1VSD4m6qVbOZLot7SFoQ", name: t("city.madrid") }],
   },
   {
@@ -122,7 +116,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.unitedKingdom"),
     nameSpecial: t("countrySpecial.unitedKingdom"),
     code: "UK",
-    color: "orange-500",
+    color: "#f97316",
     cities: [{ ID: "OAiIuFNocG4c0kOBtBvr", name: t("city.forestOfDean") }],
   },
   {
@@ -130,7 +124,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.zeuropeOther"),
     nameSpecial: t("countrySpecial.zeuropeOther"),
     code: "EU",
-    color: "stone-400",
+    color: "#a8a29e",
     cities: [],
   },
   {
@@ -138,7 +132,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.austria"),
     nameSpecial: t("country.austria"),
     code: "AT",
-    color: "amber-400",
+    color: "#fbbf24",
     cities: [],
   },
   {
@@ -146,7 +140,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.belgium"),
     nameSpecial: t("country.belgium"),
     code: "BE",
-    color: "yellow-400",
+    color: "#facc15",
     cities: [],
   },
   {
@@ -154,7 +148,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.bulgaria"),
     nameSpecial: t("country.bulgaria"),
     code: "BG",
-    color: "lime-400",
+    color: "#a3e635",
     cities: [],
   },
   {
@@ -162,7 +156,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.cyprus"),
     nameSpecial: t("country.cyprus"),
     code: "CY",
-    color: "teal-400",
+    color: "#2dd4bf",
     cities: [],
   },
   {
@@ -170,7 +164,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.czechia"),
     nameSpecial: t("country.czechia"),
     code: "CZ",
-    color: "blue-400",
+    color: "#60a5fa",
     cities: [],
   },
   {
@@ -178,7 +172,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.germany"),
     nameSpecial: t("country.germany"),
     code: "DE",
-    color: "slate-500",
+    color: "#64748b",
     cities: [],
   },
   {
@@ -186,7 +180,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.estonia"),
     nameSpecial: t("country.estonia"),
     code: "EE",
-    color: "cyan-300",
+    color: "#67e8f9",
     cities: [],
   },
   {
@@ -194,7 +188,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.greece"),
     nameSpecial: t("country.greece"),
     code: "GR",
-    color: "sky-400",
+    color: "#38bdf8",
     cities: [],
   },
   {
@@ -202,7 +196,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.finland"),
     nameSpecial: t("country.finland"),
     code: "FI",
-    color: "green-400",
+    color: "#4ade80",
     cities: [],
   },
   {
@@ -210,7 +204,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.france"),
     nameSpecial: t("country.france"),
     code: "FR",
-    color: "indigo-400",
+    color: "#818cf8",
     cities: [],
   },
   {
@@ -218,7 +212,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.croatia"),
     nameSpecial: t("country.croatia"),
     code: "HR",
-    color: "purple-400",
+    color: "#c084fc",
     cities: [],
   },
   {
@@ -226,7 +220,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.hungary"),
     nameSpecial: t("country.hungary"),
     code: "HU",
-    color: "violet-400",
+    color: "#a78bfa",
     cities: [],
   },
   {
@@ -234,7 +228,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.ireland"),
     nameSpecial: t("country.ireland"),
     code: "IE",
-    color: "emerald-300",
+    color: "#6ee7b7",
     cities: [],
   },
   {
@@ -242,7 +236,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.italy"),
     nameSpecial: t("country.italy"),
     code: "IT",
-    color: "red-400",
+    color: "#f87171",
     cities: [],
   },
   {
@@ -250,7 +244,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.lithuania"),
     nameSpecial: t("country.lithuania"),
     code: "LT",
-    color: "amber-300",
+    color: "#fcd34d",
     cities: [],
   },
   {
@@ -258,7 +252,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.luxembourg"),
     nameSpecial: t("country.luxembourg"),
     code: "LU",
-    color: "blue-300",
+    color: "#93c5fd",
     cities: [],
   },
   {
@@ -266,7 +260,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.latvia"),
     nameSpecial: t("country.latvia"),
     code: "LV",
-    color: "green-300",
+    color: "#86efac",
     cities: [],
   },
   {
@@ -274,7 +268,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.malta"),
     nameSpecial: t("country.malta"),
     code: "MT",
-    color: "yellow-300",
+    color: "#fde047",
     cities: [],
   },
   {
@@ -282,7 +276,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.netherlands"),
     nameSpecial: t("country.netherlands"),
     code: "NL",
-    color: "orange-300",
+    color: "#fdba74",
     cities: [],
   },
   {
@@ -290,7 +284,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.poland"),
     nameSpecial: t("country.poland"),
     code: "PL",
-    color: "rose-300",
+    color: "#fda4af",
     cities: [],
   },
   {
@@ -298,7 +292,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.romania"),
     nameSpecial: t("country.romania"),
     code: "RO",
-    color: "pink-300",
+    color: "#f9a8d4",
     cities: [],
   },
   {
@@ -306,7 +300,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.sweden"),
     nameSpecial: t("country.sweden"),
     code: "SE",
-    color: "sky-300",
+    color: "#7dd3fc",
     cities: [],
   },
   {
@@ -314,7 +308,7 @@ export const countriesMapping: CountryMapping[] = [
     name: t("country.slovakia"),
     nameSpecial: t("country.slovakia"),
     code: "SK",
-    color: "purple-300",
+    color: "#d8b4fe",
     cities: [],
   },
 ].sort((a, b) => a.name.localeCompare(b.name));
@@ -324,28 +318,17 @@ export const citiesMappings = countriesMapping
   .reduce((acc, val) => acc.concat(val), []);
 
 export const genderMappings: GenderMapping[] = [
-  { key: "female", label: t("gender.female"), color: "slate-400" },
-  { key: "male", label: t("gender.male"), color: "slate-500" },
-  { key: "nonBinary", label: t("gender.nonBinary"), color: "slate-600" },
-  { key: "other", label: t("gender.other"), color: "slate-700" },
+  { key: "female", label: t("gender.female"), color: "#94a3b8" },
+  { key: "male", label: t("gender.male"), color: "#64748b" },
+  { key: "nonBinary", label: t("gender.nonBinary"), color: "#475569" },
+  { key: "other", label: t("gender.other"), color: "#334155" },
 ];
-
-// TODO: Change to carbonEmissions and energyExpended
-export const energyModes: EnergyMode[] = ["carbon", "energy"];
-export const calculationModes: CalculationMode[] = ["absolute", "relative"];
 
 export const carbonUnitWeight = (
   unitSystem: "metric" | "imperial" = "metric",
 ): string => `${unitSystem == "imperial" ? "lb" : "kg"} ${carbonUnit}`;
 
 export const carbonUnit = "CO\u2082";
-
-export const kiloGramNumberFormatter = Intl.NumberFormat("en-GB", {
-  notation: "compact",
-  style: "unit",
-  unit: "kilogram",
-  unitDisplay: "short",
-});
 
 export const householdProfiles: HouseholdProfile[] = [
   {

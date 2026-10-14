@@ -35,7 +35,7 @@ const SiteTabs = () => {
   const { pvPlants, isLoadingPvPlants } = useFirebaseData();
 
   const [activeTab, setActiveTab] = useState(
-    site || (pvPlants && pvPlants[0].plantId) || undefined,
+    site || pvPlants[0]?.plantId || undefined,
   );
 
   const [currentPlant, setCurrentPlant] = useState<PvPlantWithID | undefined>(

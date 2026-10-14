@@ -3,7 +3,6 @@ import {
   collection,
   DocumentData,
   endBefore,
-  getCountFromServer,
   getFirestore,
   limit,
   limitToLast,
@@ -16,6 +15,7 @@ import {
 import { useEffect, useState } from "react";
 import { firebaseApp } from "@/firebase/config";
 import { FirebaseConstants } from "@/firebase/firebase-constants";
+import { useUserSubcollectionCount } from "@/firebase/hooks/collection-count-hooks";
 import {
   ConsumptionWithID,
   RecurringConsumptionWithID,
@@ -235,22 +235,6 @@ export const usePaginatedConsumptions = ({
     "createdAt",
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalConsumptions, setTotalConsumptions] = useState<number>(0);
-  const maxPage = Math.ceil(totalConsumptions / pageSize);
-
-  useEffect(() => {
-    if (!user) return;
-    // getCountFromServer seems broken with firebase emulator, but working in production
-    if (process.env.NODE_ENV === "development") return;
-    getCountFromServer(
-      collection(
-        firestore,
-        FirebaseConstants.collections.users.name,
-        user.uid,
-        FirebaseConstants.collections.users.consumptions.name,
-      ),
-    ).then((snapshot) => setTotalConsumptions(snapshot.data().count));
-  }, [user]);
 
   const onOrderChange = (order: "createdAt" | "value") => {
     setLastDoc(undefined);
@@ -266,6 +250,13 @@ export const usePaginatedConsumptions = ({
     lastDoc: lastDoc,
     firstDoc: firstDoc,
   });
+
+  const totalConsumptions = useUserSubcollectionCount(
+    user,
+    FirebaseConstants.collections.users.consumptions.name,
+    querySnapshot,
+  );
+  const maxPage = Math.ceil(totalConsumptions / pageSize);
 
   const fetchNextPage = () => {
     setCurrentPage((prev) => prev + 1);
@@ -326,23 +317,6 @@ export const usePaginatedRecurringConsumptions = ({
     "createdAt",
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalRecurringConsumptions, setTotalRecurringConsumptions] =
-    useState<number>(0);
-  const maxPage = Math.ceil(totalRecurringConsumptions / pageSize);
-
-  useEffect(() => {
-    if (!user) return;
-    // getCountFromServer seems broken with firebase emulator, but working in production
-    if (process.env.NODE_ENV === "development") return;
-    getCountFromServer(
-      collection(
-        firestore,
-        FirebaseConstants.collections.users.name,
-        user.uid,
-        FirebaseConstants.collections.users.recurringConsumptions.name,
-      ),
-    ).then((snapshot) => setTotalRecurringConsumptions(snapshot.data().count));
-  }, [user]);
 
   const onOrderChange = (order: "createdAt" | "frequency") => {
     setLastDoc(undefined);
@@ -358,6 +332,13 @@ export const usePaginatedRecurringConsumptions = ({
     lastDoc: lastDoc,
     firstDoc: firstDoc,
   });
+
+  const totalRecurringConsumptions = useUserSubcollectionCount(
+    user,
+    FirebaseConstants.collections.users.recurringConsumptions.name,
+    querySnapshot,
+  );
+  const maxPage = Math.ceil(totalRecurringConsumptions / pageSize);
 
   const fetchNextPage = () => {
     setCurrentPage((prev) => prev + 1);

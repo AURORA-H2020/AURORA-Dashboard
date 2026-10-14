@@ -22,11 +22,20 @@ const UpdatePvData = () => {
     try {
       response = await getAllApiData(plantId);
     } catch (error) {
-      // Handle the error
-      console.error("Error downloading user data:", error);
+      console.error("Error updating PV data:", error);
     } finally {
       setUpdatingPvData(false);
-      toast.success(JSON.stringify(response));
+      if (response?.success) {
+        toast.success("PV data updated");
+      } else {
+        const error = response?.error;
+        toast.error("Error updating PV data", {
+          description:
+            error instanceof Error
+              ? error.message
+              : JSON.stringify(error ?? "Unknown error"),
+        });
+      }
     }
   };
 
@@ -42,7 +51,7 @@ const UpdatePvData = () => {
               <div key={key}>
                 <span className="font-bold">{key.toString()}</span>
                 <br />
-                {pvPlant[key].toString()}
+                {String(pvPlant[key])}
               </div>
             ))}
             <Button

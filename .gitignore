@@ -40,6 +40,3 @@ next-env.d.ts
 
 # translation backup messages
 messages/*_old.json
-
-# LingoHub
-.lingohub

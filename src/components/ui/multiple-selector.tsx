@@ -210,6 +210,7 @@ const MultipleSelector = React.forwardRef<
       }
     }, [value]);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: upstream shadcn component
     useEffect(() => {
       /** If `onSearch` is provided, do not trigger options updated. */
       if (!arrayOptions || onSearch) {
@@ -430,6 +431,7 @@ const MultipleSelector = React.forwardRef<
                             <CommandItem
                               key={option.value}
                               value={option.value}
+                              keywords={[String(option.label)]}
                               disabled={option.disable}
                               onMouseDown={(e) => {
                                 e.preventDefault();

@@ -59,7 +59,7 @@ const AutoReport = ({
         (countryID) =>
           t(
             countriesMapping.find((country) => country.ID === countryID)
-              ?.nameSpecial,
+              ?.nameSpecial ?? "",
           ) || countryID,
       );
 
@@ -147,7 +147,9 @@ const AutoReport = ({
           {selectedCountryIds.map((countryID) => (
             <AccordionItem key={countryID} value={countryID}>
               <AccordionTrigger>
-                {t(countriesMapping.find((e) => e.ID === countryID)?.name)}
+                {t(
+                  countriesMapping.find((e) => e.ID === countryID)?.name ?? "",
+                )}
               </AccordionTrigger>
               <AccordionContent>{report([countryID])}</AccordionContent>
             </AccordionItem>

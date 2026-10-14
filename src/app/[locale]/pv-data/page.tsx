@@ -7,6 +7,7 @@ import MonthlyPvData from "@/components/pv-data/charts/monthlyPvData";
 import { SiteOverview } from "@/components/pv-data/sites/siteOverview";
 import { SiteTabs } from "@/components/pv-data/sites/siteTabs";
 import { LoadingSpinner } from "@/components/ui/loading";
+import { isValidPvSite } from "@/lib/pvApi";
 
 const validateMonth = (month: string | undefined): month is string => {
   const dateRegex = /^\d{4}-(0[1-9]|1[0-2])$/;
@@ -17,38 +18,31 @@ const validateMonth = (month: string | undefined): month is string => {
   return true;
 };
 
-const validateDate = (month: string | undefined): month is string => {
+const validateDate = (date: string | undefined): date is string => {
   const dateRegex = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/;
-  if (typeof month !== "string" || !dateRegex.test(month)) {
+  if (typeof date !== "string" || !dateRegex.test(date)) {
     return false;
   }
 
-  return true;
-};
-
-const validateSite = (site: string | undefined): site is string => {
-  if (typeof site !== "string") {
-    return false;
-  }
-
-  return true;
+  // Reject dates that do not exist, e.g. 2024-02-31
+  return new Date(`${date}T00:00:00Z`).toISOString().startsWith(date);
 };
 
 const PvDataPage = async ({
   searchParams,
 }: {
-  searchParams?: { site: string; date: string; month: string };
+  searchParams: Promise<{ site?: string; date?: string; month?: string }>;
 }) => {
   const t = await getTranslations();
 
-  const { site, date, month } = searchParams || {};
+  const { site, date, month } = await searchParams;
 
   return (
     <div>
       <Heading as="h1" className="mb-8">
         {t("dashboard.pv.solarPowerProduction")}
       </Heading>
-      {!validateSite(site) ? (
+      {!isValidPvSite(site) ? (
         <SiteOverview />
       ) : (
         <div className="space-y-8">

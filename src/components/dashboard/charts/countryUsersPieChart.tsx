@@ -1,16 +1,15 @@
-import { DonutChart, Legend } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { ReactNode } from "react";
+import { CategoryPieChart } from "@/components/charts/categoryCharts";
 import { countriesMapping } from "@/lib/constants/common-constants";
 import { MetaData } from "@/models/dashboard-data";
 
 /**
- * Renders a GenderCardSummary component.
+ * Renders a pie chart of the number of users per country.
  *
  * @param {Object} props - The component props.
- * @param {MetaData | undefined} props.metaData - The metadata object containing gender data.
- * @param {string[]} props.countries - The list of countries to filter the metadata by.
- * @return {ReactNode} The rendered GenderCardSummary component.
+ * @param {MetaData | undefined} props.metaData - The metadata object containing the user counts.
+ * @return {ReactNode} The rendered CountryUsersPieChart component.
  */
 const CountryUsersPieChart = ({
   metaData,
@@ -35,22 +34,13 @@ const CountryUsersPieChart = ({
   dataSet?.sort((a, b) => a.key.localeCompare(b.key));
 
   return (
-    <>
-      <DonutChart
-        className="mt-6"
-        variant="pie"
-        data={dataSet ?? []}
-        showAnimation={true}
-        category="count"
-        index="country"
-        colors={dataSet?.map((e) => e.color ?? "") ?? []}
-      />
-      <Legend
-        className="mt-3"
-        categories={dataSet?.map((e) => e.country) ?? []}
-        colors={dataSet?.map((e) => e.color) ?? []}
-      />
-    </>
+    <CategoryPieChart
+      className="mt-6"
+      data={dataSet ?? []}
+      category="count"
+      index="country"
+      colors={dataSet?.map((e) => e.color ?? "") ?? []}
+    />
   );
 };
 

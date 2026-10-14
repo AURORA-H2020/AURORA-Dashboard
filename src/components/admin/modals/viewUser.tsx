@@ -263,7 +263,7 @@ const ViewUserModal = forwardRef(
               {blacklistData ? (
                 <Button
                   onClick={() =>
-                    unBlacklistUser(loggedInUser, uid).then((success) =>
+                    unBlacklistUser(loggedInUser, uid).then(({ success }) =>
                       success
                         ? toast.success("User unblacklisted")
                         : toast.error("Error unblacklisting user"),

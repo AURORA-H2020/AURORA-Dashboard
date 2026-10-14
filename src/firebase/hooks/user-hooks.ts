@@ -62,8 +62,12 @@ export const useFetchUserData = (
 export const useUserRoles = (
   userId: string | undefined,
 ): { isAdmin: boolean; isAdminLoading: boolean } => {
-  const [isAdmin, setIsAdmin] = useState<boolean>(false);
-  const [isAdminLoading, setIsAdminLoading] = useState<boolean>(true);
+  // Remember which user the role belongs to, so a stale role is never used
+  // while the role of a newly signed-in user is loading
+  const [userRole, setUserRole] = useState<{
+    userId?: string;
+    isAdmin: boolean;
+  }>({ isAdmin: false });
 
   useEffect(() => {
     if (!userId) return;
@@ -72,21 +76,26 @@ export const useUserRoles = (
     const unsubscribe = onSnapshot(
       docRef,
       (docSnapshot) => {
-        if (docSnapshot.exists()) {
-          const data = docSnapshot.data();
-          setIsAdmin(data?.isAdmin || false);
-        }
-        setIsAdminLoading(false);
+        setUserRole({
+          userId,
+          isAdmin: docSnapshot.data()?.isAdmin || false,
+        });
       },
       () => {
-        setIsAdminLoading(false);
+        setUserRole({ userId, isAdmin: false });
       },
     );
 
     return unsubscribe;
   }, [userId]);
 
-  return { isAdmin, isAdminLoading };
+  if (!userId) {
+    return { isAdmin: false, isAdminLoading: false };
+  }
+
+  const isAdminLoading = userRole.userId !== userId;
+
+  return { isAdmin: !isAdminLoading && userRole.isAdmin, isAdminLoading };
 };
 
 /**

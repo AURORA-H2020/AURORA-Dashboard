@@ -1,11 +1,14 @@
 import { Footer } from "@/components/footer";
 import { NavigationBar } from "@/components/navigation/navigationBar";
+import { routing } from "@/i18n/routing";
 import { cn } from "@/lib/utilities";
 import { Providers } from "@/providers/providers";
 import "@radix-ui/themes/styles.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Inter } from "next/font/google";
+import { notFound } from "next/navigation";
+import { hasLocale } from "next-intl";
 import {
   getMessages,
   getTranslations,
@@ -17,17 +20,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 type Props = {
   children: ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 };
-
-/**
- * Generates static parameters based on locales.
- *
- * @return {Array} an array of objects containing the locale
- */
-/* export const generateStaticParams = async () => {
-  return locales.map((locale) => ({ locale }));
-}; */
 
 /**
  * Generate metadata based on the provided locale.
@@ -36,11 +30,12 @@ type Props = {
  * @return {Promise<{ title: string, description: string }>} Object with title and description metadata
  */
 export const generateMetadata = async ({
-  params: { locale },
+  params,
 }: Omit<Props, "children">): Promise<{
   title: string;
   description: string;
 }> => {
+  const { locale } = await params;
   const t = await getTranslations({ locale });
 
   return {
@@ -56,10 +51,12 @@ export const generateMetadata = async ({
  * @param {string} locale - the locale parameter
  * @return {ReactNode} the rendered HTML layout
  */
-const RootLayout = async ({
-  children,
-  params: { locale },
-}: Props): Promise<ReactNode> => {
+const RootLayout = async ({ children, params }: Props): Promise<ReactNode> => {
+  const { locale } = await params;
+  if (!hasLocale(routing.locales, locale)) {
+    notFound();
+  }
+
   setRequestLocale(locale);
 
   const messages = await getMessages();

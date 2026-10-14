@@ -1,7 +1,7 @@
-import { DonutChart, Legend } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { ReactElement } from "react";
-import { allTremorColours } from "@/lib/constants/common-constants";
+import { CategoryPieChart } from "@/components/charts/categoryCharts";
+import { chartColours } from "@/lib/constants/common-constants";
 import { MetaData } from "@/models/dashboard-data";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
 
@@ -49,22 +49,13 @@ const ConsumptionCardSummaryCategory = ({
   });
 
   return (
-    <>
-      <DonutChart
-        className="mt-6"
-        variant="pie"
-        data={dataSet}
-        showAnimation={true}
-        category="count"
-        index="sourceName"
-        colors={allTremorColours}
-      />
-      <Legend
-        className="mt-3"
-        categories={dataSet.map((e) => e.sourceName)}
-        colors={allTremorColours}
-      />
-    </>
+    <CategoryPieChart
+      className="mt-6"
+      data={dataSet}
+      category="count"
+      index="sourceName"
+      colors={chartColours}
+    />
   );
 };
 

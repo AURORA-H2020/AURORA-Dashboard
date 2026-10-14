@@ -15,7 +15,6 @@ export const deleteAccount = async (
   if (user) {
     await deleteUser(user)
       .then(() => {
-        console.log("User account deleted");
         success = true;
         window.location.reload(); // Refresh the page
       })

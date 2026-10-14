@@ -1,9 +1,9 @@
 "use client";
 
-import { BarChart } from "@tremor/react";
 import convert from "convert";
 import { useFormatter, useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
+import { CategoryBarChart } from "@/components/charts/categoryCharts";
 import { consumptionMapping } from "@/lib/constants/consumption-constants";
 import { valueFormatterCarbon, valueFormatterEnergy } from "@/lib/utilities";
 import { ConsumptionCategory } from "@/models/firestore/consumption/consumption-category";
@@ -76,13 +76,16 @@ const ConsumptionSummaryChart = ({
         monthName: format.dateTime(new Date(2000, index, 15), {
           month: "short",
         }),
-        [t(consumptionMapping.find((e) => e.category === "heating")?.label)]: 0,
         [t(
-          consumptionMapping.find((e) => e.category === "electricity")?.label,
+          consumptionMapping.find((e) => e.category === "heating")?.label ?? "",
+        )]: 0,
+        [t(
+          consumptionMapping.find((e) => e.category === "electricity")?.label ??
+            "",
         )]: 0,
         [t(
           consumptionMapping.find((e) => e.category === "transportation")
-            ?.label,
+            ?.label ?? "",
         )]: 0,
       }));
     };
@@ -97,14 +100,17 @@ const ConsumptionSummaryChart = ({
           monthName: format.dateTime(new Date(2000, month.number - 1, 15), {
             month: "short",
           }),
-          [t(consumptionMapping.find((e) => e.category === "heating")?.label)]:
-            convertChartUnit(
-              userData?.settings?.unitSystem ?? "metric",
-              findValueByCategory(month.categories, "heating", measure),
-              measure,
-            ),
           [t(
-            consumptionMapping.find((e) => e.category === "electricity")?.label,
+            consumptionMapping.find((e) => e.category === "heating")?.label ??
+              "",
+          )]: convertChartUnit(
+            userData?.settings?.unitSystem ?? "metric",
+            findValueByCategory(month.categories, "heating", measure),
+            measure,
+          ),
+          [t(
+            consumptionMapping.find((e) => e.category === "electricity")
+              ?.label ?? "",
           )]: convertChartUnit(
             userData?.settings?.unitSystem ?? "metric",
             findValueByCategory(month.categories, "electricity", measure),
@@ -112,7 +118,7 @@ const ConsumptionSummaryChart = ({
           ),
           [t(
             consumptionMapping.find((e) => e.category === "transportation")
-              ?.label,
+              ?.label ?? "",
           )]: convertChartUnit(
             userData?.settings?.unitSystem ?? "metric",
             findValueByCategory(month.categories, "transportation", measure),
@@ -129,7 +135,7 @@ const ConsumptionSummaryChart = ({
   }, [measure, consumptionSummary, format, t, userData]);
 
   return (
-    <BarChart
+    <CategoryBarChart
       className="mt-4"
       data={currentSummary ?? []}
       index="monthName"
@@ -141,7 +147,7 @@ const ConsumptionSummaryChart = ({
               valueFormatterCarbon(value, userData?.settings?.unitSystem)
           : valueFormatterEnergy
       }
-      stack={true}
+      stacked
     />
   );
 };

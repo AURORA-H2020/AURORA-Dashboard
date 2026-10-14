@@ -1,11 +1,11 @@
 "use client";
 
 import { Flex, Heading } from "@radix-ui/themes";
-import { LineChart } from "@tremor/react";
 import { InfoIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { ReactNode, SetStateAction, useEffect, useState } from "react";
 import { DateRange } from "react-day-picker";
+import { CategoryLineChart } from "@/components/charts/categoryCharts";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { MonthPicker } from "@/components/ui/month-picker";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -122,9 +122,8 @@ const ConsumptionTimelineChart = ({
       </Flex>
 
       {dateRange?.from && dateRange?.to && dateRange.from < dateRange.to ? (
-        <LineChart
-          className="mt-8 h-80"
-          showAnimation={true}
+        <CategoryLineChart
+          className="mt-8"
           data={transformedData}
           index="dateString"
           categories={getSortedCountryLabels(includedCountryIds).names.map(
@@ -136,7 +135,6 @@ const ConsumptionTimelineChart = ({
               ? valueFormatterCarbon
               : valueFormatterEnergy
           }
-          showLegend={true}
           yAxisWidth={60}
         />
       ) : (

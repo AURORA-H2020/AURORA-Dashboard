@@ -32,7 +32,6 @@
       "success": "¡Bienvenido a AURORA!",
       "error": "Se ha producido un error. Por favor, compruebe sus credenciales.",
       "logout": {
-        "success": "Ha cerrado la sesión correctamente. Hasta pronto!",
         "error": "Se ha producido un error al cerrar la sesión. Por favor, inténtelo de nuevo."
       }
     },
@@ -43,7 +42,8 @@
       "updatedError": "Se ha producido un error al actualizar su consumo"
     },
     "changeEmail": {
-      "success": "Su correo electrónico se ha actualizado correctamente",
+      "successTitle": "Confirme su nueva dirección de correo electrónico",
+      "successDescription": "Hemos enviado un enlace a {email}. Su correo electrónico se cambiará cuando lo abra.",
       "errorTitle": "Se ha producido un error al actualizar su correo electrónico",
       "errorDescription": "Compruebe su contraseña actual e inténtelo de nuevo."
     },
@@ -160,7 +160,6 @@
       "selectBarToSeeDailyBreakdown": "Seleccione una barra para ver el desglose de un día concreto.",
       "unsupportedRegionMessage": "Esta función no está disponible en su región.",
       "solarPowerProduction": "Producción de energía solar",
-      "unsupportedSearchParams": "Unsupported search parameters",
       "lifetimeProduction": "Producción para toda la vida"
     }
   },
@@ -345,7 +344,6 @@
         "editInvestmentDisclaimer": "Si ha realizado inversiones adicionales posteriormente, añada una nueva inversión. Editar sus inversiones existentes puede dar lugar a un seguimiento inexacto.",
         "addInvestmentDisclaimer": "La introducción de sus datos de inversión se realiza exclusivamente a efectos de registro. No se trata de una inversión real ni de una orden vinculante de ningún tipo.",
         "noteDescription": "Añada una nota a su inversión para referencia personal.",
-        "investmentDescription": "The amount of money you invested",
         "shareDescription": "A qué parte de la capacidad de la instalación de paneles solares corresponde su inversión. Encontrará esta información en los documentos que recibió al realizar tu inversión.",
         "deleteInvestmentDialog": {
           "title": "¿Está seguro de que desea eliminar esta inversión?",

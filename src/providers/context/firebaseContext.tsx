@@ -33,8 +33,6 @@ interface FirebaseDataContextValue {
   isLoadingPvInvestments: boolean;
   pvPlants: PvPlantWithID[];
   isLoadingPvPlants: boolean;
-  // userConsumptions: ConsumptionWithID[];
-  // userRecurringConsumptions: RecurringConsumptionWithID[];
 }
 
 const FirebaseDataContext = createContext<FirebaseDataContextValue | undefined>(
@@ -72,20 +70,6 @@ export const FirebaseDataProvider: FC<{
 
   const { pvPlants, isLoadingPvPlants } = useFetchPvPlants();
 
-  /* const userConsumptions = useFetchUserConsumptions({ user: user })?.docs.map(
-        (doc) => ({
-            ...(doc.data() as Consumption),
-            id: doc.id,
-        }),
-    ) as ConsumptionWithID[];
-
-    const userRecurringConsumptions = useFetchUserRecurringConsumptions({
-        user: user,
-    })?.docs.map((doc) => ({
-        ...(doc.data() as RecurringConsumption),
-        id: doc.id,
-    })) as RecurringConsumptionWithID[]; */
-
   return (
     <FirebaseDataContext.Provider
       value={{
@@ -100,8 +84,6 @@ export const FirebaseDataProvider: FC<{
         isLoadingPvInvestments,
         pvPlants,
         isLoadingPvPlants,
-        // userConsumptions,
-        // userRecurringConsumptions,
       }}
     >
       {children}

@@ -99,19 +99,20 @@ const UserSettingsPage = (): ReactNode => {
                 <ConsumptionTableRow label={t("app.profile.country")}>
                   {t(
                     countriesMapping.find((e) => e.ID === userData.country)
-                      ?.name,
+                      ?.name ?? "",
                   ) ?? ""}
                 </ConsumptionTableRow>
                 <ConsumptionTableRow label={t("app.profile.city")}>
                   {t(
-                    citiesMappings.find((e) => e.ID === userData.city)?.name,
+                    citiesMappings.find((e) => e.ID === userData.city)?.name ??
+                      "",
                   ) ?? ""}
                 </ConsumptionTableRow>
                 <ConsumptionTableRow label={t("app.profile.unitSystem")}>
                   {t(
                     unitSystems.find(
                       (e) => e.key === userData.settings?.unitSystem,
-                    )?.label,
+                    )?.label ?? "",
                   ) ?? t("app.user.settings.unitSystem.metric")}
                 </ConsumptionTableRow>
                 <ConsumptionTableRow label={t("app.profile.userID")}>

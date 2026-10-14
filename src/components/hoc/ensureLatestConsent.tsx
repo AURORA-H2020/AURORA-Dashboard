@@ -1,19 +1,15 @@
 "use client";
 
-import {
-  fetchAndActivate,
-  getRemoteConfig,
-  getValue,
-} from "firebase/remote-config";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode } from "react";
 import { UpdateConsent } from "@/components/app/user/updateConsent";
 import { LoadingSpinner } from "@/components/ui/loading";
-import { firebaseApp } from "@/firebase/config";
+import { useLatestLegalDocumentsVersion } from "@/firebase/hooks/remote-config-hooks";
 import { useAuthContext } from "@/providers/context/authContext";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 
 /**
  * Component to ensure the latest consent from the user before rendering the children.
+ * If the latest legal documents version cannot be determined, the children are rendered.
  *
  * @param {ReactNode} children - The components to be rendered.
  * @return {ReactNode} The rendered children or UpdateConsent component.
@@ -23,25 +19,19 @@ export const EnsureLatestConsent = ({
 }: {
   children: ReactNode;
 }): ReactNode => {
-  const remoteConfig = getRemoteConfig(firebaseApp);
   const { user, loading } = useAuthContext();
 
   const { userData, isLoadingUserData } = useFirebaseData();
 
-  const [latestLegalDocumentsVersion, setLatestLegalDocumentsVersion] =
-    useState<number | undefined>();
+  const { latestLegalDocumentsVersion, isLoadingLatestLegalDocumentsVersion } =
+    useLatestLegalDocumentsVersion();
 
-  useEffect(() => {
-    fetchAndActivate(remoteConfig).then(() => {
-      const version = getValue(
-        remoteConfig,
-        "latestLegalDocumentsVersion",
-      ).asNumber();
-      setLatestLegalDocumentsVersion(version);
-    });
-  }, [remoteConfig]);
-
-  if (!user || loading || isLoadingUserData) {
+  if (
+    !user ||
+    loading ||
+    isLoadingUserData ||
+    isLoadingLatestLegalDocumentsVersion
+  ) {
     return <LoadingSpinner />;
   }
 

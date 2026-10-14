@@ -1,8 +1,8 @@
 import { Flex, Heading } from "@radix-ui/themes";
-import { BarChart } from "@tremor/react";
 import { useTranslations } from "next-intl";
 import { ReactNode, useEffect, useState } from "react";
 import { PlaceholderCard } from "@/components/app/common/placeholderCard";
+import { CategoryBarChart } from "@/components/charts/categoryCharts";
 import {
   Select,
   SelectContent,
@@ -15,7 +15,6 @@ import {
   genderMappings,
 } from "@/lib/constants/common-constants";
 import {
-  cn,
   valueFormatterAbsolute,
   valueFormatterPercentage,
 } from "@/lib/utilities";
@@ -79,13 +78,13 @@ const GenderByCountryChart = ({
       return {
         country: t(countryName),
         key: countryName,
-        [t(genderMappings.find((e) => e.key === "male")?.label)]:
+        [t(genderMappings.find((e) => e.key === "male")?.label ?? "")]:
           calculateOutput(country.genders.male),
-        [t(genderMappings.find((e) => e.key === "female")?.label)]:
+        [t(genderMappings.find((e) => e.key === "female")?.label ?? "")]:
           calculateOutput(country.genders.female),
-        [t(genderMappings.find((e) => e.key === "nonBinary")?.label)]:
+        [t(genderMappings.find((e) => e.key === "nonBinary")?.label ?? "")]:
           calculateOutput(country.genders.nonBinary),
-        [t(genderMappings.find((e) => e.key === "other")?.label)]:
+        [t(genderMappings.find((e) => e.key === "other")?.label ?? "")]:
           calculateOutput(country.genders.other),
       };
     });
@@ -129,11 +128,10 @@ const GenderByCountryChart = ({
           </SelectContent>
         </Select>
       </Flex>
-      <BarChart
-        className={cn("mt-4")}
-        style={{ height: `${genderData.length * 50}px` }}
-        yAxisWidth={80}
-        showAnimation={true}
+      <CategoryBarChart
+        className="mt-4"
+        style={{ height: `${genderData.length * 50 + 80}px` }}
+        yAxisWidth={110}
         data={genderData ?? []}
         index="country"
         categories={genderMappings.map((gender) => t(gender.label))}
@@ -143,11 +141,9 @@ const GenderByCountryChart = ({
             ? valueFormatterAbsolute
             : valueFormatterPercentage
         }
-        maxValue={calculationMode === "absolute" ? undefined : 1}
-        stack={true}
-        relative={true}
+        stacked
+        relative={calculationMode === "relative"}
         layout="vertical"
-        showLegend={true}
       />
     </>
   );

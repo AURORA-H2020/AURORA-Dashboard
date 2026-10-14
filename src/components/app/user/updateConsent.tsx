@@ -59,7 +59,7 @@ const UpdateConsent = ({
                 {t("app.legal.privacyPolicy")}
               </Link>
             </Button>
-            <Button variant="outline">
+            <Button variant="outline" asChild>
               <Link
                 target="_blank"
                 rel="noopener"

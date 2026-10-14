@@ -31,6 +31,7 @@ import {
   citiesMappings,
   countriesMapping,
 } from "@/lib/constants/common-constants";
+import { isHttpUrl } from "@/lib/utilities";
 import { useFirebaseData } from "@/providers/context/firebaseContext";
 
 const PvPanelDetails = ({ site }: { site: string }) => {
@@ -38,7 +39,7 @@ const PvPanelDetails = ({ site }: { site: string }) => {
   const t = useTranslations();
   const { pvPlants, isLoadingPvPlants } = useFirebaseData();
 
-  if (!pvPlants && isLoadingPvPlants) return <LoadingSpinner />;
+  if (isLoadingPvPlants) return <LoadingSpinner />;
 
   const siteDetails = pvPlants && pvPlants.find((s) => s.plantId === site);
 
@@ -46,7 +47,9 @@ const PvPanelDetails = ({ site }: { site: string }) => {
 
   const country = countriesMapping.find((c) => c.ID === siteDetails.country);
   const city = citiesMappings.find((c) => c.ID === siteDetails.city);
-  const location = [t(city?.name), t(country?.name)].join(", ");
+  const location = [city && t(city.name), country && t(country.name)]
+    .filter(Boolean)
+    .join(", ");
 
   const details: Array<{
     icon: LucideIcon;
@@ -114,7 +117,7 @@ const PvPanelDetails = ({ site }: { site: string }) => {
           })}
         </div>
       </CardContent>
-      {siteDetails.infoURL && (
+      {isHttpUrl(siteDetails.infoURL) && (
         <CardFooter className="p-4">
           <Button className="flex w-full" variant="default" asChild>
             <Link target="_blank" rel="noopener" href={siteDetails.infoURL}>

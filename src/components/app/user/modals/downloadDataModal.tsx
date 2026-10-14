@@ -93,7 +93,7 @@ const DownloadDataModal = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>{t("app.account.changeEmail")}</DialogTitle>
+          <DialogTitle>{t("app.account.downloadMyData.button")}</DialogTitle>
         </DialogHeader>
         <Flex direction="column" className="gap-6">
           <Flex direction="column" className="gap-2">

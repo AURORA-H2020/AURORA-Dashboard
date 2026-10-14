@@ -43,15 +43,11 @@ const NavigationBar = (): ReactElement => {
   const { userCityData } = useFirebaseData();
 
   /**
-   * Logs the user out and redirects them to the home page.
-   *
-   * @return {Promise<void>} A promise that resolves when the user is logged out and redirected.
+   * Logs the user out. On success the page reloads, so only failures are shown.
    */
   const handleLogout = () => {
     logout().then((success) => {
-      if (success) {
-        toast.success(t("toast.auth.logout.success"));
-      } else {
+      if (!success) {
         toast.error(t("toast.auth.logout.error"));
       }
     });
@@ -63,13 +59,13 @@ const NavigationBar = (): ReactElement => {
         <Link href="/" className="w-max">
           <Logo />
         </Link>
-        {navigationLinks.map((item, idx) => {
+        {navigationLinks.map((item) => {
           const isActive =
             pathname === item.path || pathname.startsWith(`${item.path}/`);
 
           return (
             <Link
-              key={`${idx}`}
+              key={item.path}
               href={item.path}
               className={`${isActive ? "text-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground`}
             >
@@ -92,12 +88,12 @@ const NavigationBar = (): ReactElement => {
             >
               <Logo />
             </Link>
-            {navigationLinks.map((item, idx) => {
+            {navigationLinks.map((item) => {
               const isActive =
                 pathname === item.path || pathname.startsWith(`${item.path}/`);
 
               return (
-                <SheetClose key={`${idx}`} asChild>
+                <SheetClose key={item.path} asChild>
                   <Link
                     href={item.path}
                     className={`${isActive ? "text-foreground" : "text-muted-foreground"} transition-colors hover:text-foreground`}
@@ -120,7 +116,7 @@ const NavigationBar = (): ReactElement => {
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              {userMenuLinks.map((item, idx) => {
+              {userMenuLinks.map((item) => {
                 if (item.isAdmin && !isAdmin) return;
                 if (
                   userCityData &&
@@ -129,7 +125,7 @@ const NavigationBar = (): ReactElement => {
                 )
                   return;
                 return (
-                  <Link href={item.path} key={`${idx}`}>
+                  <Link href={item.path} key={item.path}>
                     <DropdownMenuItem>{t(item.title)}</DropdownMenuItem>
                   </Link>
                 );
@@ -142,7 +138,12 @@ const NavigationBar = (): ReactElement => {
             </DropdownMenuContent>
           </DropdownMenu>
         ) : (
-          <Button variant="secondary" size="icon" className="rounded-full">
+          <Button
+            variant="secondary"
+            size="icon"
+            className="rounded-full"
+            asChild
+          >
             <Link href={"/account"}>
               <CircleUserIcon className="h-5 w-5" />
             </Link>

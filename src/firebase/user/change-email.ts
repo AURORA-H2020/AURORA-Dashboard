@@ -1,8 +1,9 @@
-import { User, updateEmail } from "firebase/auth";
+import { User, verifyBeforeUpdateEmail } from "firebase/auth";
 import { reauthenticateUser } from "@/firebase/auth/reauthenticate";
 
 /**
- * Updates the user's email address after reauthentication with current password.
+ * Sends a verification link to the new email address after reauthentication
+ * with the current password. The email address changes once the link is opened.
  *
  * @param {User | null} user - The user object or null if user is not logged in.
  * @param {string} currentPassword - The current password of the user.
@@ -20,9 +21,8 @@ export const changeEmail = async (
   if (user) {
     await reauthenticateUser(user, currentPassword).then(async (reauth) => {
       if (reauth.success && reauth.reauthUser) {
-        await updateEmail(reauth.reauthUser, newEmail)
+        await verifyBeforeUpdateEmail(reauth.reauthUser, newEmail)
           .then(() => {
-            console.log("Email updated successfully");
             success = true;
           })
           .catch((error) => {

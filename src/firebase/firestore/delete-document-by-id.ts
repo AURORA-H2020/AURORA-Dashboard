@@ -35,7 +35,6 @@ export const deleteDocumentById = async (
       const docRef = doc(consumptionRef, documentId);
       await deleteDoc(docRef);
       success = true;
-      console.log(`Document at ${collectionName}/${documentId} deleted`);
     } catch (error) {
       console.error("Error deleting document: ", error);
     }

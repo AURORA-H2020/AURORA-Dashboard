@@ -4,7 +4,6 @@ import {
   DocumentData,
   doc,
   endBefore,
-  getCountFromServer,
   getFirestore,
   limit,
   limitToLast,
@@ -17,66 +16,12 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firebaseApp } from "@/firebase/config";
+import { useUserSubcollectionCount } from "@/firebase/hooks/collection-count-hooks";
 import { RecommendationWithId } from "@/models/extensions";
 import { Recommendation } from "@/models/firestore/recommendation/recommendation";
 import { FirebaseConstants } from "../firebase-constants";
 
 const firestore = getFirestore(firebaseApp);
-
-/**
- * Custom hook to fetch a single recommendation by ID
- */
-export const useRecommendation = (
-  user: User | null,
-  recommendationId: string,
-) => {
-  const [recommendation, setRecommendation] =
-    useState<RecommendationWithId | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
-
-  useEffect(() => {
-    if (!user || !recommendationId) {
-      setIsLoading(false);
-      return;
-    }
-
-    setIsLoading(true);
-    const recommendationRef = doc(
-      firestore,
-      "users",
-      user.uid,
-      "recommendations",
-      recommendationId,
-    );
-
-    const unsubscribe = onSnapshot(
-      recommendationRef,
-      (docSnap) => {
-        if (docSnap.exists()) {
-          const recommendationData = docSnap.data() as Recommendation;
-          setRecommendation({
-            ...recommendationData,
-            id: docSnap.id,
-          });
-        } else {
-          setError(new Error("Recommendation not found"));
-          setRecommendation(null);
-        }
-        setIsLoading(false);
-      },
-      (err) => {
-        console.error("Error fetching recommendation:", err);
-        setError(err);
-        setIsLoading(false);
-      },
-    );
-
-    return () => unsubscribe();
-  }, [user, recommendationId]);
-
-  return { recommendation, isLoading, error };
-};
 
 export const useFetchUserRecommendations = ({
   user,
@@ -154,22 +99,6 @@ export const usePaginatedRecommendations = ({
     "createdAt",
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalRecommendations, setTotalRecommendations] = useState<number>(0);
-  const maxPage = Math.ceil(totalRecommendations / pageSize);
-
-  useEffect(() => {
-    if (!user) return;
-    // getCountFromServer seems broken with firebase emulator, but working in production
-    if (process.env.NODE_ENV === "development") return;
-    getCountFromServer(
-      collection(
-        firestore,
-        FirebaseConstants.collections.users.name,
-        user.uid,
-        FirebaseConstants.collections.users.recommendations.name,
-      ),
-    ).then((snapshot) => setTotalRecommendations(snapshot.data().count));
-  }, [user]);
 
   const onOrderChange = (order: "createdAt" | "value") => {
     setLastDoc(undefined);
@@ -185,6 +114,13 @@ export const usePaginatedRecommendations = ({
     lastDoc: lastDoc,
     firstDoc: firstDoc,
   });
+
+  const totalRecommendations = useUserSubcollectionCount(
+    user,
+    FirebaseConstants.collections.users.recommendations.name,
+    querySnapshot,
+  );
+  const maxPage = Math.ceil(totalRecommendations / pageSize);
 
   const fetchNextPage = () => {
     setCurrentPage((prev) => prev + 1);
