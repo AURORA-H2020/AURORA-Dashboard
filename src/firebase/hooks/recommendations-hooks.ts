@@ -4,7 +4,6 @@ import {
   DocumentData,
   doc,
   endBefore,
-  getCountFromServer,
   getFirestore,
   limit,
   limitToLast,
@@ -17,6 +16,7 @@ import {
 } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import { firebaseApp } from "@/firebase/config";
+import { useUserSubcollectionCount } from "@/firebase/hooks/collection-count-hooks";
 import { RecommendationWithId } from "@/models/extensions";
 import { Recommendation } from "@/models/firestore/recommendation/recommendation";
 import { FirebaseConstants } from "../firebase-constants";
@@ -99,22 +99,6 @@ export const usePaginatedRecommendations = ({
     "createdAt",
   );
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [totalRecommendations, setTotalRecommendations] = useState<number>(0);
-  const maxPage = Math.ceil(totalRecommendations / pageSize);
-
-  useEffect(() => {
-    if (!user) return;
-    // getCountFromServer seems broken with firebase emulator, but working in production
-    if (process.env.NODE_ENV === "development") return;
-    getCountFromServer(
-      collection(
-        firestore,
-        FirebaseConstants.collections.users.name,
-        user.uid,
-        FirebaseConstants.collections.users.recommendations.name,
-      ),
-    ).then((snapshot) => setTotalRecommendations(snapshot.data().count));
-  }, [user]);
 
   const onOrderChange = (order: "createdAt" | "value") => {
     setLastDoc(undefined);
@@ -130,6 +114,13 @@ export const usePaginatedRecommendations = ({
     lastDoc: lastDoc,
     firstDoc: firstDoc,
   });
+
+  const totalRecommendations = useUserSubcollectionCount(
+    user,
+    FirebaseConstants.collections.users.recommendations.name,
+    querySnapshot,
+  );
+  const maxPage = Math.ceil(totalRecommendations / pageSize);
 
   const fetchNextPage = () => {
     setCurrentPage((prev) => prev + 1);
